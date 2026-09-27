@@ -5211,7 +5211,6 @@ function honraBadgeHtml(key){
 // Backend opcional — ver o comentário HTML acima do <script type="module"> do Supabase pra
 // configurar. Sem isso preenchido, a Aliança Z inteira roda só em window.storage (local),
 // exatamente como antes; o botão "Entrar com Discord" some sozinho.
-const ADMIN_DISCORD_ID = window.ADMIN_DISCORD_ID || 'COLE_AQUI';
 let supabaseAvailable = false;
 function isSupabaseConfigured(){ return supabaseAvailable && !!window.__sb; }
 function newDonorId(){ return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : uid(); }
@@ -5371,7 +5370,7 @@ function renderDiscordLoginNote(){
 // pra qualquer um (igual já era) — com Supabase + Discord, só libera pro ADMIN_DISCORD_ID.
 function isDonorAdmin(){
   if(!isSupabaseConfigured()) return true;
-  return !!(state.discordUser && state.discordUser.id === ADMIN_DISCORD_ID);
+  return !!(state.discordUser && state.discordUser.id === window.ADMIN_DISCORD_ID);
 }
 
 function renderDoarTab(){

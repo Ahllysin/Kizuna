@@ -292,7 +292,7 @@ async function main(){
       const withoutLogin = { admin: isDonorAdmin(), hasPanel: renderDoarTab().includes('id="addDonorBtn"') };
       state.discordUser = { id: 'outro-uid', username: 'Fulano' };
       const wrongUser = { admin: isDonorAdmin(), hasPanel: renderDoarTab().includes('id="addDonorBtn"') };
-      state.discordUser = { id: ADMIN_DISCORD_ID, username: 'Dono' };
+      state.discordUser = { id: window.ADMIN_DISCORD_ID, username: 'Dono' };
       const rightUser = { admin: isDonorAdmin(), hasPanel: renderDoarTab().includes('id="addDonorBtn"') };
       state.discordUser = null;
       supabaseAvailable = false;
