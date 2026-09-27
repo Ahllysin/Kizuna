@@ -511,37 +511,34 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-sim-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .kz-sim-head .glyph{font-family:'Shippori Mincho',serif;font-weight:800;font-size:30px;color:#ff7a1a;text-shadow:0 0 14px rgba(255,120,30,.7);}
 .kz-sim-head h2{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:36px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;white-space:nowrap;}
-.kz-hits{margin-left:auto;padding:8px 16px;border-radius:999px;background:var(--grad-primary);color:#fff;font-weight:900;font-size:16px;white-space:nowrap;box-shadow:0 0 16px rgba(255,90,30,.5);}
-.kz-starters{display:flex;flex-wrap:wrap;gap:8px;}
-.kz-starter{
-  display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:10px;border:1.5px solid rgba(255,255,255,.14);
-  background:rgba(16,14,26,.85);color:var(--text);font-size:13px;font-weight:700;
+/* Roleta de 6 personagens do time (escolhe quem inspecionar) */
+.kz-sim-roster{display:flex;flex-wrap:wrap;gap:10px;}
+.kz-sim-char{
+  display:flex;flex-direction:column;align-items:center;gap:6px;width:76px;padding:8px 4px;border-radius:10px;
+  border:1.5px solid rgba(255,255,255,.14);background:rgba(16,14,26,.85);
 }
-.kz-starter:hover{border-color:rgba(255,170,70,.5);}
-.kz-starter.active{border-color:var(--gold);background:linear-gradient(180deg, rgba(255,110,20,.3), rgba(255,110,20,.08));}
-.kz-starter-art{width:30px;height:40px;flex-shrink:0;position:relative;}
-.kz-starter-art img{width:100%;height:100%;object-fit:contain;display:block;}
-.kz-starter-art .avatar-fallback{font-size:10px;border-radius:5px;}
-.kz-starter-txt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;}
-.kz-starter-txt .kind{font-size:11px;color:var(--text-dim);font-weight:500;}
-.kz-chain{display:flex;flex-direction:column;}
-.kz-chain-trigger{display:flex;align-items:center;gap:10px;padding:6px 0 6px 38px;font-size:13px;color:var(--text-dim);}
-.kz-chain-trigger .arrow{font-size:18px;color:#ff8a2a;}
-.kz-chain-step{display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);}
-.kz-chain-step.first{border-color:var(--gold);background:linear-gradient(90deg, rgba(255,110,20,.22), rgba(16,14,26,.85));}
-.kz-chain-ball{width:34px;height:34px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));}
-.kz-chain-num{width:34px;height:34px;border-radius:50%;flex-shrink:0;border:1.5px solid var(--gold);color:var(--gold-light);font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;}
-.kz-chain-art{width:46px;height:62px;flex-shrink:0;position:relative;}
-.kz-chain-art img{width:100%;height:100%;object-fit:contain;display:block;}
-.kz-chain-art .avatar-fallback{font-size:13px;border-radius:6px;}
-.kz-chain-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;}
-.kz-chain-info .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
-.kz-chain-info .nm{font-size:16px;font-weight:900;color:var(--text-strong);}
-.kz-chain-info .role{font-size:13px;color:var(--gold);font-weight:700;}
-.kz-chain-info .ab{font-size:13px;color:var(--text-dim);}
-.kz-chain-effects{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-.kz-chain-effects .lbl{font-size:12px;color:var(--text-muted);}
-.kz-chain-effects .none{font-size:12px;color:var(--text-faint);}
+.kz-sim-char:hover{border-color:rgba(255,170,70,.5);}
+.kz-sim-char.active{border-color:var(--gold);background:linear-gradient(180deg, rgba(255,110,20,.3), rgba(255,110,20,.08));box-shadow:0 0 14px rgba(255,120,30,.3);}
+.kz-sim-char-art{width:52px;aspect-ratio:3/4;position:relative;}
+.kz-sim-char-art img{width:100%;height:100%;object-fit:contain;display:block;}
+.kz-sim-char-art .avatar-fallback{font-size:12px;border-radius:6px;}
+.kz-sim-char-name{font-size:11px;font-weight:700;color:var(--text);text-align:center;line-height:1.2;}
+
+/* Detalhe do Ataque Comb. — igual ao pop-up do jogo: a habilidade/suprema escolhida à
+   esquerda, e quem no time continua a partir dela, um passo só (sem tentar montar a
+   cadeia inteira sozinho). */
+.kz-atk-section{display:flex;flex-direction:column;gap:10px;}
+.kz-atk-row{display:flex;flex-wrap:wrap;gap:10px;}
+.kz-atk-card{
+  display:flex;flex-direction:column;align-items:center;gap:4px;width:104px;padding:10px 8px;border-radius:12px;
+  border:1.5px solid rgba(255,150,50,.35);background:rgba(16,14,26,.85);text-align:center;
+}
+.kz-atk-card.start{border-color:var(--gold);background:linear-gradient(180deg, rgba(255,110,20,.28), rgba(16,14,26,.85));box-shadow:0 0 16px rgba(255,120,30,.3);}
+.kz-atk-art{width:58px;aspect-ratio:3/4;position:relative;}
+.kz-atk-art img{width:100%;height:100%;object-fit:contain;display:block;}
+.kz-atk-art .avatar-fallback{font-size:13px;border-radius:6px;}
+.kz-atk-name{font-size:12px;font-weight:900;color:var(--text-strong);line-height:1.2;}
+.kz-atk-kind{font-size:11px;color:var(--text-dim);}
 
 /* ======================= TIER LIST ======================= */
 .kz-tier-rows{border-radius:14px;overflow:hidden;border:1.5px solid rgba(255,150,50,.5);box-shadow:0 0 26px rgba(255,120,30,.15);display:flex;flex-direction:column;}
@@ -842,8 +839,6 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-slot-remove{width:24px;height:24px;font-size:11px;}
   .kz-sim{padding:16px 12px 18px;}
   .kz-sim-head h2{font-size:30px;}
-  .kz-chain-step{flex-wrap:wrap;gap:10px;}
-  .kz-chain-effects{width:100%;padding-left:48px;}
   .kz-guide-effects{grid-template-columns:1fr;}
   .tier-label{width:76px;}
   .tier-item{width:60px;}
@@ -3396,7 +3391,7 @@ let state = {
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
   pickerSlot: null,                 // slot index currently choosing a warrior for, or null
-  simStarter: null,                 // {charId, abilityKey} for combo simulation
+  simCharId: null,                  // personagem selecionado no Simulador de combo (aba Combos)
   formations: [],                   // [{name, team}]
   collection: {},                   // {characterId: {owned:bool, level:0-10}} — sincroniza com a conta Discord quando logado
   collectionSearch: '',
@@ -3800,52 +3795,22 @@ const STARTER_KEYS = ['skill','supreme'];
 const ABILITY_ICON = {skill:'H', supreme:'S', combo:'C'};
 const ABILITY_LABEL = {skill:'Habilidade', supreme:'Suprema', combo:'Ataque Combinado'};
 
-function simulateCombo(charId, abilityKey){
-  const order = priorityOrder();
-  const startChar = getChar(charId);
-  if(!startChar) return [];
-  const startAbility = startChar[abilityKey];
-  const chain = [{ charId, abilityKey, ability: startAbility, char: startChar }];
-  const used = new Set([charId]);
-  let queue = [...(startAbility.effects||[])];
-
-  let guard = 0;
-  while(queue.length && guard < 30){
-    guard++;
-    const eff = queue.shift();
-    let found = null;
-    for(const idx of order){
-      const tid = state.team[idx];
-      if(!tid || used.has(tid)) continue;
-      const tc = getChar(tid);
-      if(!tc) continue;
-      if(tc.combo.triggers && tc.combo.triggers.includes(eff)){
-        found = tc; break;
-      }
-    }
-    if(found){
-      used.add(found.id);
-      chain.push({ charId: found.id, abilityKey:'combo', ability: found.combo, char: found, triggeredBy: eff });
-      if(found.combo.effects && found.combo.effects.length){
-        queue.push(...found.combo.effects);
-      }
-    }
-  }
-  return chain;
-}
-
-function possibleStarters(){
-  // team members with any initiating move (skill, supreme) that produces at least one effect
-  const list = [];
-  state.team.forEach((cid, idx)=>{
-    if(!cid) return;
-    const c = getChar(cid);
-    if(!c) return;
-    STARTER_KEYS.forEach(key=>{
-      if(c[key] && c[key].effects && c[key].effects.length) list.push({charId:c.id, abilityKey:key});
-    });
+// Quem, no time, tem o Ataque Combinado ativado por algum efeito que essa habilidade causa —
+// igual ao "Detalhes do Ataque Comb." do jogo: um passo só, não a cadeia inteira.
+function comboContinuations(sourceCharId, abilityKey){
+  const c = getChar(sourceCharId);
+  const ability = c && c[abilityKey];
+  const effects = (ability && ability.effects) || [];
+  if(!effects.length) return [];
+  const out = [];
+  state.team.forEach(tid=>{
+    if(!tid || tid === sourceCharId) return;
+    const tc = getChar(tid);
+    if(!tc) return;
+    const trig = (tc.combo.triggers||[]).find(t=>effects.includes(t));
+    if(trig) out.push({ char: tc, triggeredBy: trig });
   });
-  return list;
+  return out;
 }
 
 /* ======================= VISUAL HELPERS (layout Kizuna) ======================= */
@@ -3907,10 +3872,6 @@ function tipoColor(tipo){ return /despertar/i.test(tipo) ? '#ffb13b' : '#6fb6ff'
 function effPillHtml(eff){
   const s = EFF_STYLE[eff];
   return s ? `<span class="kz-eff-pill" style="background:${s.bg};color:${s.fg};">${EFFECT_LABELS[eff]}</span>` : '';
-}
-function effDotHtml(eff){
-  const s = EFF_STYLE[eff];
-  return s ? `<span class="kz-eff-dot" title="${EFFECT_LABELS[eff]}" style="background:${s.bg};color:${s.fg};">${EFFECT_ABBR[eff]}</span>` : '';
 }
 function ballSrc(n){ return `assets/balls/esfera-${n}.webp`; }
 function portraitSrc(c){ return `portraits/${slug(c.name)}.png`; }
@@ -4001,7 +3962,7 @@ function buildWithChar(id){
     t[i > -1 ? i : t.length - 1] = id;
   }
   state.team = t;
-  state.simStarter = null;
+  state.simCharId = null;
   saveTeamState();
   goTab('combos');
 }
@@ -4794,7 +4755,7 @@ function placeChar(id){
 }
 function commitTeam(team){
   state.team = team;
-  state.simStarter = null;
+  state.simCharId = null;
   saveTeamState();
   render();
 }
@@ -4871,49 +4832,53 @@ function renderSlot(idx){
   </div>`;
 }
 
-// Sem escolha manual, simula a partir do golpe inicial que gera a maior cadeia.
-function renderSimPanel(){
-  const starters = possibleStarters().map(s=>({...s, len: simulateCombo(s.charId, s.abilityKey).length}));
-  let sel = state.simStarter && starters.find(s=>s.charId===state.simStarter.charId && s.abilityKey===state.simStarter.abilityKey);
-  if(!sel) sel = starters.reduce((best, s)=> (!best || s.len > best.len) ? s : best, null);
-  const chain = sel ? simulateCombo(sel.charId, sel.abilityKey) : [];
-
-  let html = `<div class="kz-sim-head"><span class="glyph">連</span><h2>Simular combo</h2>${chain.length > 1 ? `<span class="kz-hits">Combo de ${chain.length} hits</span>` : ''}</div>`;
-  if(!starters.length){
-    return html + `<div class="kz-muted">Posicione personagens com habilidades que causam efeitos (Derrubada, Empurrão, Elevação) para simular um combo.</div>`;
-  }
-  html += `<div class="kz-starters">${starters.map(s=>{
-    const c = getChar(s.charId);
-    const ab = c[s.abilityKey];
-    const active = sel && s.charId===sel.charId && s.abilityKey===sel.abilityKey;
-    return `
-    <button class="kz-starter ${active?'active':''}" data-starter-char="${s.charId}" data-starter-ability="${s.abilityKey}" title="${escapeAttr(ab.name||'')}">
-      <span class="kz-starter-art">${portraitInner(c)}</span>
-      <span class="kz-starter-txt"><span>${escapeHtml(c.name)}</span><span class="kind">${ABILITY_LABEL[s.abilityKey]} · ${s.len} ${s.len===1?'golpe':'golpes'}</span></span>
-      ${(ab.effects||[]).map(effDotHtml).join('')}
-    </button>`;
-  }).join('')}</div>`;
-
-  html += `<div class="kz-chain">${chain.map((step, i)=>{
-    const effs = step.ability.effects || [];
-    return `
-    <div>
-      ${step.triggeredBy ? `<div class="kz-chain-trigger"><span class="arrow">↓</span><span>ativado por</span>${effPillHtml(step.triggeredBy)}</div>` : ''}
-      <div class="kz-chain-step ${i===0?'first':''}">
-        ${i < 7 ? `<img class="kz-chain-ball" src="${ballSrc(i+1)}" alt="${i+1}">` : `<span class="kz-chain-num">${i+1}</span>`}
-        <div class="kz-chain-art">${portraitInner(step.char)}</div>
-        <div class="kz-chain-info">
-          <div class="top"><span class="nm">${escapeHtml(step.char.name)}</span><span class="role">${ABILITY_LABEL[step.abilityKey]}</span></div>
-          <div class="ab">${escapeHtml(step.ability.name) || ABILITY_LABEL[step.abilityKey]}</div>
-        </div>
-        <div class="kz-chain-effects"><span class="lbl">causa</span>${effs.length ? effs.map(effPillHtml).join('') : '<span class="none">—</span>'}</div>
-      </div>
+// Igual ao "Det. ATQ Comb." do jogo: escolhe um guerreiro do time e vê, lado a lado, quem
+// no time entra depois da Habilidade dele e quem entra depois da Suprema — um passo por vez,
+// em vez de tentar adivinhar a "melhor" cadeia inteira sozinho.
+function renderAtkSection(charId, abilityKey){
+  const c = getChar(charId);
+  const ability = c[abilityKey];
+  const label = ABILITY_LABEL[abilityKey];
+  const continuations = comboContinuations(charId, abilityKey);
+  const startCard = `
+    <div class="kz-atk-card start">
+      <div class="kz-atk-art">${portraitInner(c)}</div>
+      <div class="kz-atk-name">${escapeHtml(ability.name) || label}</div>
+      <div class="kz-atk-kind">${label}</div>
     </div>`;
-  }).join('')}</div>`;
-  if(chain.length === 1){
-    html += `<div class="kz-muted" style="font-size:14px;">Nenhum aliado em campo possui um Ataque Combinado que ative com este efeito.</div>`;
+  const contCards = continuations.map(({char:tc, triggeredBy})=>`
+    <div class="kz-atk-card">
+      <div class="kz-atk-art">${portraitInner(tc)}</div>
+      <div class="kz-atk-name">${escapeHtml(tc.combo.name) || 'Ataque Comb.'}</div>
+      <div class="kz-atk-kind">${escapeHtml(tc.name)}</div>
+      ${effPillHtml(triggeredBy)}
+    </div>`).join('');
+  const note = !(ability.effects||[]).length
+    ? `Essa ${label.toLowerCase()} não causa efeito de combo.`
+    : (!continuations.length ? 'Nenhum aliado em campo tem o gatilho certo pra continuar daqui.' : '');
+  return `
+  <div class="kz-atk-section">
+    <div class="kz-label">Ataque Comb. de ${label}</div>
+    <div class="kz-atk-row">${startCard}${contCards}</div>
+    ${note ? `<div class="kz-muted" style="font-size:13px;">${note}</div>` : ''}
+  </div>`;
+}
+
+function renderSimPanel(){
+  const teamChars = state.team.map(id=> id ? getChar(id) : null).filter(Boolean);
+  const head = `<div class="kz-sim-head"><span class="glyph">連</span><h2>Simular combo</h2></div>`;
+  if(!teamChars.length){
+    return head + `<div class="kz-muted">Monte a equipe pra ver o que o Ataque Combinado de cada um ativa.</div>`;
   }
-  return html;
+  const sel = (state.simCharId && teamChars.find(c=>c.id===state.simCharId)) ? state.simCharId : teamChars[0].id;
+  return `
+  ${head}
+  <div class="kz-sim-roster">${teamChars.map(c=>`
+    <button class="kz-sim-char ${c.id===sel?'active':''}" data-sim-char="${c.id}" title="${escapeAttr(c.name)}">
+      <span class="kz-sim-char-art">${portraitInner(c)}</span>
+      <span class="kz-sim-char-name">${escapeHtml(c.name)}</span>
+    </button>`).join('')}</div>
+  ${STARTER_KEYS.map(key=>renderAtkSection(sel, key)).join('')}`;
 }
 
 function attachRosterItemHandlers(root){
@@ -4995,7 +4960,7 @@ function attachCombosHandlers(){
         const tmp = state.team[toIdx];
         state.team[toIdx] = state.team[fromIdx];
         state.team[fromIdx] = tmp;
-        state.simStarter = null;
+        state.simCharId = null;
         saveTeamState();
       }
     });
@@ -5003,7 +4968,7 @@ function attachCombosHandlers(){
       if(!dragWasDropped && dragSlotIdx !== null){
         // soltou fora de qualquer casa -> tira da equipe
         state.team[dragSlotIdx] = null;
-        state.simStarter = null;
+        state.simCharId = null;
         saveTeamState();
       }
       dragSlotIdx = null;
@@ -5047,7 +5012,7 @@ function attachCombosHandlers(){
       const f = state.formations[parseInt(b.dataset.loadFormation, 10)];
       if(!f) return;
       state.team = [...f.team];
-      state.simStarter = null;
+      state.simCharId = null;
       state.slotSel = null;
       saveTeamState();
       render();
@@ -5067,9 +5032,9 @@ function attachCombosHandlers(){
     });
   });
 
-  view.querySelectorAll('[data-starter-char]').forEach(b=>{
+  view.querySelectorAll('[data-sim-char]').forEach(b=>{
     b.addEventListener('click', ()=>{
-      state.simStarter = {charId: b.dataset.starterChar, abilityKey: b.dataset.starterAbility};
+      state.simCharId = b.dataset.simChar;
       render();
     });
   });

@@ -202,6 +202,46 @@ async function main(){
     assert.deepStrictEqual(r, [], 'personagens com efeito descrito na Suprema mas não marcado em supreme.effects: ' + r.join(', '));
   });
 
+  console.log('\n[Simulador de combo: Ataque Comb. de Habilidade/Suprema]');
+
+  await test('comboContinuations acha só quem tem o gatilho certo, ignora quem já é a própria origem e quem não bate', () => {
+    const r = evalIn(sandbox, `(() => {
+      const backupChars = state.characters, backupTeam = state.team;
+      state.characters = [
+        { id:'a', name:'A', tags:[], skill:{name:'Golpe A', effects:['derrubada']}, supreme:{name:'Supremo A', effects:[]}, combo:{name:'Comb A', triggers:[], effects:[]} },
+        { id:'b', name:'B', tags:[], skill:{name:'Golpe B', effects:[]}, supreme:{name:'Supremo B', effects:[]}, combo:{name:'Comb B', triggers:['derrubada'], effects:[]} },
+        { id:'c', name:'C', tags:[], skill:{name:'Golpe C', effects:[]}, supreme:{name:'Supremo C', effects:[]}, combo:{name:'Comb C', triggers:['empurrao'], effects:[]} },
+      ];
+      state.team = ['a','b','c',null,null,null];
+      const skillCont = comboContinuations('a','skill').map(x=>x.char.id);
+      const supremeCont = comboContinuations('a','supreme'); // supreme não causa efeito nenhum
+      state.characters = backupChars; state.team = backupTeam;
+      return { skillCont, supremeCont };
+    })()`);
+    assert.deepStrictEqual(r.skillCont, ['b'], 'só "b" tem o gatilho certo (derrubada); "c" pede empurrao e não deveria entrar');
+    assert.deepStrictEqual(r.supremeCont, [], 'suprema sem efeitos não deveria continuar em ninguém');
+  });
+
+  await test('renderSimPanel(): time vazio avisa; com time, mostra os 6 cards e as duas seções (Habilidade/Suprema) de quem está selecionado', () => {
+    const r = evalIn(sandbox, `(() => {
+      const backupChars = state.characters, backupTeam = state.team, backupSel = state.simCharId;
+      const semTime = renderSimPanel();
+      state.characters = [
+        { id:'a', name:'A', tags:[], skill:{name:'Golpe A', effects:['derrubada']}, supreme:{name:'Supremo A', effects:[]}, combo:{name:'Comb A', triggers:[], effects:[]} },
+        { id:'b', name:'B', tags:[], skill:{name:'Golpe B', effects:[]}, supreme:{name:'Supremo B', effects:[]}, combo:{name:'Comb B', triggers:['derrubada'], effects:[]} },
+      ];
+      state.team = ['a','b',null,null,null,null];
+      state.simCharId = 'a';
+      const comTime = renderSimPanel();
+      state.characters = backupChars; state.team = backupTeam; state.simCharId = backupSel;
+      return { semTime, comTime };
+    })()`);
+    assert.ok(!r.semTime.includes('kz-sim-roster'), 'sem ninguém no time não deveria mostrar a roleta de personagens');
+    assert.ok(r.comTime.includes('data-sim-char="a"') && r.comTime.includes('data-sim-char="b"'), 'deveria listar os 2 do time como cards clicáveis');
+    assert.ok(r.comTime.includes('Golpe A') && r.comTime.includes('Comb B'), 'seção de Habilidade de A deveria mostrar A e o Ataque Comb. de B que ela ativa');
+    assert.ok(r.comTime.includes('não causa efeito de combo'), 'seção de Suprema de A (sem efeitos) deveria avisar que não continua em nada');
+  });
+
   console.log('\n[Doar / ranking de apoiadores]');
 
   await test('elenco padrão de doadores começa vazio (nunca inventar apoiador)', () => {
