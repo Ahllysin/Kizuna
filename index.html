@@ -525,20 +525,31 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-sim-char-name{font-size:11px;font-weight:700;color:var(--text);text-align:center;line-height:1.2;}
 
 /* Detalhe do Ataque Comb. — igual ao pop-up do jogo: a habilidade/suprema escolhida à
-   esquerda, e quem no time continua a partir dela, um passo só (sem tentar montar a
-   cadeia inteira sozinho). */
+   esquerda, e quem no time reage a ela (com o de menor casa marcado como prioridade),
+   mais a cadeia completa que realmente aconteceria a partir daqui. */
 .kz-atk-section{display:flex;flex-direction:column;gap:10px;}
 .kz-atk-row{display:flex;flex-wrap:wrap;gap:10px;}
 .kz-atk-card{
-  display:flex;flex-direction:column;align-items:center;gap:4px;width:104px;padding:10px 8px;border-radius:12px;
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;width:104px;padding:10px 8px;border-radius:12px;
   border:1.5px solid rgba(255,150,50,.35);background:rgba(16,14,26,.85);text-align:center;
 }
 .kz-atk-card.start{border-color:var(--gold);background:linear-gradient(180deg, rgba(255,110,20,.28), rgba(16,14,26,.85));box-shadow:0 0 16px rgba(255,120,30,.3);}
+.kz-atk-card.priority{border-color:#6fd66f;box-shadow:0 0 14px rgba(90,220,90,.35);}
+.kz-atk-priority-tag{position:absolute;top:-9px;left:50%;transform:translateX(-50%);padding:2px 8px;border-radius:999px;background:#2f9e4f;color:#fff;font-size:9px;font-weight:900;white-space:nowrap;box-shadow:0 0 8px rgba(50,180,80,.6);}
 .kz-atk-art{width:58px;aspect-ratio:3/4;position:relative;}
 .kz-atk-art img{width:100%;height:100%;object-fit:contain;display:block;}
 .kz-atk-art .avatar-fallback{font-size:13px;border-radius:6px;}
 .kz-atk-name{font-size:12px;font-weight:900;color:var(--text-strong);line-height:1.2;}
 .kz-atk-kind{font-size:11px;color:var(--text-dim);}
+
+.kz-atk-chain-wrap{display:flex;flex-direction:column;gap:8px;padding-top:4px;border-top:1px dashed rgba(255,255,255,.12);}
+.kz-atk-chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;}
+.kz-atk-chain-arrow{color:#ff8a2a;font-size:15px;flex-shrink:0;}
+.kz-atk-chain-step{display:flex;align-items:center;gap:6px;padding:5px 10px 5px 5px;border-radius:999px;border:1px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);}
+.kz-atk-chain-step .nm{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;}
+.kz-atk-chain-art{width:28px;height:38px;flex-shrink:0;position:relative;border-radius:6px;overflow:hidden;}
+.kz-atk-chain-art img{width:100%;height:100%;object-fit:contain;display:block;}
+.kz-atk-chain-art .avatar-fallback{font-size:9px;}
 
 /* ======================= TIER LIST ======================= */
 .kz-tier-rows{border-radius:14px;overflow:hidden;border:1.5px solid rgba(255,150,50,.5);box-shadow:0 0 26px rgba(255,120,30,.15);display:flex;flex-direction:column;}
@@ -3813,6 +3824,42 @@ function comboContinuations(sourceCharId, abilityKey){
   return out;
 }
 
+// Cadeia completa de verdade: a cada efeito pendente, só UM aliado continua — o de menor
+// número de casa entre quem tem o gatilho certo (prioridade de casa, igual no jogo).
+function simulateCombo(charId, abilityKey){
+  const order = priorityOrder();
+  const startChar = getChar(charId);
+  if(!startChar) return [];
+  const startAbility = startChar[abilityKey];
+  const chain = [{ charId, abilityKey, ability: startAbility, char: startChar }];
+  const used = new Set([charId]);
+  let queue = [...(startAbility.effects||[])];
+
+  let guard = 0;
+  while(queue.length && guard < 30){
+    guard++;
+    const eff = queue.shift();
+    let found = null;
+    for(const idx of order){
+      const tid = state.team[idx];
+      if(!tid || used.has(tid)) continue;
+      const tc = getChar(tid);
+      if(!tc) continue;
+      if(tc.combo.triggers && tc.combo.triggers.includes(eff)){
+        found = tc; break;
+      }
+    }
+    if(found){
+      used.add(found.id);
+      chain.push({ charId: found.id, abilityKey:'combo', ability: found.combo, char: found, triggeredBy: eff });
+      if(found.combo.effects && found.combo.effects.length){
+        queue.push(...found.combo.effects);
+      }
+    }
+  }
+  return chain;
+}
+
 /* ======================= VISUAL HELPERS (layout Kizuna) ======================= */
 const EFF_STYLE = {
   derrubada:{bg:'#b3402f',fg:'#fff'},
@@ -4840,27 +4887,45 @@ function renderAtkSection(charId, abilityKey){
   const ability = c[abilityKey];
   const label = ABILITY_LABEL[abilityKey];
   const continuations = comboContinuations(charId, abilityKey);
+  const chain = simulateCombo(charId, abilityKey);
+  const priorityId = chain[1] && chain[1].charId; // quem a cadeia de verdade escolheria (menor casa)
   const startCard = `
     <div class="kz-atk-card start">
       <div class="kz-atk-art">${portraitInner(c)}</div>
       <div class="kz-atk-name">${escapeHtml(ability.name) || label}</div>
       <div class="kz-atk-kind">${label}</div>
     </div>`;
-  const contCards = continuations.map(({char:tc, triggeredBy})=>`
-    <div class="kz-atk-card">
+  const contCards = continuations.map(({char:tc, triggeredBy})=>{
+    const isPriority = tc.id === priorityId;
+    return `
+    <div class="kz-atk-card ${isPriority?'priority':''}">
+      ${isPriority ? `<span class="kz-atk-priority-tag">Prioridade</span>` : ''}
       <div class="kz-atk-art">${portraitInner(tc)}</div>
       <div class="kz-atk-name">${escapeHtml(tc.combo.name) || 'Ataque Comb.'}</div>
       <div class="kz-atk-kind">${escapeHtml(tc.name)}</div>
       ${effPillHtml(triggeredBy)}
-    </div>`).join('');
+    </div>`;
+  }).join('');
   const note = !(ability.effects||[]).length
     ? `Essa ${label.toLowerCase()} não causa efeito de combo.`
     : (!continuations.length ? 'Nenhum aliado em campo tem o gatilho certo pra continuar daqui.' : '');
+  const chainHtml = chain.length > 1 ? `
+    <div class="kz-atk-chain-wrap">
+      <div class="kz-label" style="font-size:12px;">Cadeia completa (por prioridade de casa) · ${chain.length} hits</div>
+      <div class="kz-atk-chain">${chain.map((step,i)=>`
+        ${i>0 ? '<span class="kz-atk-chain-arrow">→</span>' : ''}
+        <div class="kz-atk-chain-step">
+          <div class="kz-atk-chain-art">${portraitInner(step.char)}</div>
+          <span class="nm">${escapeHtml(step.char.name)}</span>
+          ${step.triggeredBy ? effPillHtml(step.triggeredBy) : ''}
+        </div>`).join('')}</div>
+    </div>` : '';
   return `
   <div class="kz-atk-section">
     <div class="kz-label">Ataque Comb. de ${label}</div>
     <div class="kz-atk-row">${startCard}${contCards}</div>
     ${note ? `<div class="kz-muted" style="font-size:13px;">${note}</div>` : ''}
+    ${chainHtml}
   </div>`;
 }
 

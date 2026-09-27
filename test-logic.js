@@ -242,6 +242,34 @@ async function main(){
     assert.ok(r.comTime.includes('não causa efeito de combo'), 'seção de Suprema de A (sem efeitos) deveria avisar que não continua em nada');
   });
 
+  await test('simulateCombo() segue a prioridade de casa (menor número primeiro) e encadeia até onde der', () => {
+    const r = evalIn(sandbox, `(() => {
+      const backupChars = state.characters, backupTeam = state.team;
+      state.characters = [
+        { id:'a', name:'A', tags:[], skill:{name:'Golpe A', effects:['derrubada']}, supreme:{name:'Supremo A', effects:[]}, combo:{name:'Comb A', triggers:[], effects:[]} },
+        { id:'b', name:'B', tags:[], skill:{name:'Golpe B', effects:[]}, supreme:{name:'Supremo B', effects:[]}, combo:{name:'Comb B', triggers:['derrubada'], effects:[]} },
+        { id:'c', name:'C', tags:[], skill:{name:'Golpe C', effects:[]}, supreme:{name:'Supremo C', effects:[]}, combo:{name:'Comb C', triggers:['derrubada'], effects:['empurrao']} },
+        { id:'d', name:'D', tags:[], skill:{name:'Golpe D', effects:[]}, supreme:{name:'Supremo D', effects:[]}, combo:{name:'Comb D', triggers:['empurrao'], effects:[]} },
+      ];
+      // casas: 1=a, 2=c, 3=d, 4=b — tanto b (casa4) quanto c (casa2) reagem a "derrubada",
+      // mas c deveria ganhar por estar numa casa de número menor.
+      state.team = ['a','c','d','b',null,null];
+      const chain = simulateCombo('a','skill').map(step => step.charId);
+      const html = renderAtkSection('a','skill');
+      state.characters = backupChars; state.team = backupTeam;
+      return { chain, html };
+    })()`);
+    assert.deepStrictEqual(r.chain, ['a','c','d'], 'c (casa 2) deveria entrar antes de b (casa 4), e d deveria continuar a cadeia depois de c');
+    assert.ok(r.html.includes('3 hits'), 'deveria anunciar a cadeia completa de 3 hits');
+    const tagCount = (r.html.match(/kz-atk-priority-tag/g) || []).length;
+    assert.strictEqual(tagCount, 1, 'só um card deveria ganhar o selo de prioridade');
+    const cCardIdx = r.html.indexOf('Comb C');
+    const bCardIdx = r.html.indexOf('Comb B');
+    const tagIdx = r.html.indexOf('kz-atk-priority-tag');
+    assert.ok(tagIdx > -1 && cCardIdx > -1 && bCardIdx > -1 && tagIdx < cCardIdx && Math.abs(tagIdx - cCardIdx) < Math.abs(tagIdx - bCardIdx),
+      'o selo de prioridade deveria estar no card de C (casa menor), não no de B');
+  });
+
   console.log('\n[Doar / ranking de apoiadores]');
 
   await test('elenco padrão de doadores começa vazio (nunca inventar apoiador)', () => {
