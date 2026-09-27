@@ -1,4 +1,4 @@
-// Testes leves para a lógica pura de dragon-ball-combos.html (sem dependências
+// Testes leves para a lógica pura de index.html (sem dependências
 // externas — nada de jsdom). Usa o harness em sandbox-harness.js, que roda o próprio
 // <script> do site dentro de um vm.Context do Node com um "stub silencioso" no lugar
 // de document/window, só pra deixar o carregamento inicial (loadState -> render)
@@ -27,7 +27,7 @@ async function test(name, fn){
 }
 
 async function main(){
-  console.log('Carregando dragon-ball-combos.html num sandbox isolado...');
+  console.log('Carregando index.html num sandbox isolado...');
   const sandbox = await loadApp();
 
   console.log('\n[ability progression / getAbilityUnlocks]');

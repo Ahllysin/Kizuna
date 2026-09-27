@@ -1,9 +1,10 @@
-// Harness compartilhado pra rodar o <script> principal de dragon-ball-combos.html
-// dentro de um vm.Context isolado do Node, sem precisar de jsdom ou de um navegador
-// de verdade. Usado tanto por test-logic.js (testes automatizados) quanto por
-// validate-data.js (checagem de dados) — assim os dois sempre leem a MESMA lógica
-// (slug(), ABILITY_PROGRESSION, state.characters) que o site de verdade usa, em vez
-// de reimplementar essas regras separadamente e correr o risco de desalinhar.
+// Harness compartilhado pra rodar o <script> principal de index.html (o site, arquivo
+// renomeado de dragon-ball-combos.html pra virar a raiz do GitHub Pages) dentro de um
+// vm.Context isolado do Node, sem precisar de jsdom ou de um navegador de verdade. Usado
+// tanto por test-logic.js (testes automatizados) quanto por validate-data.js (checagem
+// de dados) — assim os dois sempre leem a MESMA lógica (slug(), ABILITY_PROGRESSION,
+// state.characters) que o site de verdade usa, em vez de reimplementar essas regras
+// separadamente e correr o risco de desalinhar.
 //
 // Veja o comentário no topo de test-logic.js pra entender o truque do "stub
 // silencioso" no lugar de document/window.
@@ -12,7 +13,7 @@ const fs = require('fs');
 const vm = require('vm');
 const path = require('path');
 
-const HTML_PATH = path.join(__dirname, 'dragon-ball-combos.html');
+const HTML_PATH = path.join(__dirname, 'index.html');
 
 function extractMainScript(html){
   const marker = '<script>';
@@ -69,7 +70,7 @@ async function loadApp(preexistingStorage){
   const html = fs.readFileSync(HTML_PATH, 'utf8');
   const script = extractMainScript(html);
   const sandbox = buildSandbox(preexistingStorage);
-  vm.runInContext(script, sandbox, { filename: 'dragon-ball-combos.html' });
+  vm.runInContext(script, sandbox, { filename: 'index.html' });
   // loadState() dispara no fim do arquivo e é assíncrono — dá um respiro pro event
   // loop antes de qualquer leitura de estado.
   await new Promise(r => setTimeout(r, 50));
