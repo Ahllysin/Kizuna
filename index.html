@@ -541,12 +541,16 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-atk-art .avatar-fallback{font-size:13px;border-radius:6px;}
 .kz-atk-name{font-size:12px;font-weight:900;color:var(--text-strong);line-height:1.2;}
 .kz-atk-kind{font-size:11px;color:var(--text-dim);}
+.kz-atk-effline{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:2px;}
+.kz-atk-effline .lbl{font-size:9px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--text-faint);}
 
 .kz-atk-chain-wrap{display:flex;flex-direction:column;gap:8px;padding-top:4px;border-top:1px dashed rgba(255,255,255,.12);}
 .kz-atk-chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;}
 .kz-atk-chain-arrow{color:#ff8a2a;font-size:15px;flex-shrink:0;}
-.kz-atk-chain-step{display:flex;align-items:center;gap:6px;padding:5px 10px 5px 5px;border-radius:999px;border:1px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);}
+.kz-atk-chain-step{display:flex;align-items:center;gap:8px;padding:8px 12px 8px 6px;border-radius:14px;border:1px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);}
+.kz-atk-chain-info{display:flex;flex-direction:column;align-items:flex-start;gap:2px;}
 .kz-atk-chain-step .nm{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;}
+.kz-atk-chain-step .kz-atk-effline{align-items:flex-start;margin-top:0;}
 .kz-atk-chain-art{width:28px;height:38px;flex-shrink:0;position:relative;border-radius:6px;overflow:hidden;}
 .kz-atk-chain-art img{width:100%;height:100%;object-fit:contain;display:block;}
 .kz-atk-chain-art .avatar-fallback{font-size:9px;}
@@ -4882,6 +4886,13 @@ function renderSlot(idx){
 // Igual ao "Det. ATQ Comb." do jogo: escolhe um guerreiro do time e vê, lado a lado, quem
 // no time entra depois da Habilidade dele e quem entra depois da Suprema — um passo por vez,
 // em vez de tentar adivinhar a "melhor" cadeia inteira sozinho.
+// Toda linha de efeito deixa explícito se é o que ATIVA o golpe (persegue) ou o que ele
+// CAUSA — sem isso, o chip sozinho não deixa claro qual das duas pontas ele representa.
+function effLineHtml(label, effs){
+  if(!effs || !effs.length) return '';
+  return `<div class="kz-atk-effline"><span class="lbl">${label}</span>${effs.map(effPillHtml).join('')}</div>`;
+}
+
 function renderAtkSection(charId, abilityKey){
   const c = getChar(charId);
   const ability = c[abilityKey];
@@ -4894,6 +4905,7 @@ function renderAtkSection(charId, abilityKey){
       <div class="kz-atk-art">${portraitInner(c)}</div>
       <div class="kz-atk-name">${escapeHtml(ability.name) || label}</div>
       <div class="kz-atk-kind">${label}</div>
+      ${effLineHtml('Causa', ability.effects)}
     </div>`;
   const contCards = continuations.map(({char:tc, triggeredBy})=>{
     const isPriority = tc.id === priorityId;
@@ -4903,7 +4915,8 @@ function renderAtkSection(charId, abilityKey){
       <div class="kz-atk-art">${portraitInner(tc)}</div>
       <div class="kz-atk-name">${escapeHtml(tc.combo.name) || 'Ataque Comb.'}</div>
       <div class="kz-atk-kind">${escapeHtml(tc.name)}</div>
-      ${effPillHtml(triggeredBy)}
+      ${effLineHtml('Persegue', [triggeredBy])}
+      ${effLineHtml('Causa', tc.combo.effects)}
     </div>`;
   }).join('');
   const note = !(ability.effects||[]).length
@@ -4912,13 +4925,19 @@ function renderAtkSection(charId, abilityKey){
   const chainHtml = chain.length > 1 ? `
     <div class="kz-atk-chain-wrap">
       <div class="kz-label" style="font-size:12px;">Cadeia completa (por prioridade de casa) · ${chain.length} hits</div>
-      <div class="kz-atk-chain">${chain.map((step,i)=>`
+      <div class="kz-atk-chain">${chain.map((step,i)=>{
+        const causes = step.ability.effects || [];
+        return `
         ${i>0 ? '<span class="kz-atk-chain-arrow">→</span>' : ''}
         <div class="kz-atk-chain-step">
           <div class="kz-atk-chain-art">${portraitInner(step.char)}</div>
-          <span class="nm">${escapeHtml(step.char.name)}</span>
-          ${step.triggeredBy ? effPillHtml(step.triggeredBy) : ''}
-        </div>`).join('')}</div>
+          <div class="kz-atk-chain-info">
+            <span class="nm">${escapeHtml(step.char.name)}</span>
+            ${effLineHtml('Persegue', step.triggeredBy ? [step.triggeredBy] : null)}
+            ${effLineHtml('Causa', causes)}
+          </div>
+        </div>`;
+      }).join('')}</div>
     </div>` : '';
   return `
   <div class="kz-atk-section">
