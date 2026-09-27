@@ -1,0 +1,2181 @@
+[
+  {
+    "name": "Cooler Dourado",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro Dourado",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "Golpe Impiedoso MAX.",
+      "desc": "[ATQ Físico] Ataca um único alvo, com 30% de chance de atordoar o alvo. A chance de atordoar [Saiyajins] aumenta para 50%. Recupera 200 pontos de raiva própria e causa [Empurrão] com 60% de chance. Causa 180.5%+448 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "Supernova MÁX.",
+      "desc": "[Explosão de Ki] Aumenta o próprio Ataque e Defesa em 15%, ataca todos os inimigos com uma esfera gigante de energia, causando 25% de Dano Extra a [Saiyajins]; aumenta a própria Taxa de Crít. em 20%; restaura 100 de Fúria a todos os [Guerreiros Malignos] aliados. Causa 166%+840 de dano ao alvo.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], causando [Elevação Alta]. Causa 88.75%+448 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Vegetto SSGSS",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "SSG",
+      "Guerreiro S",
+      "Guerreiro de Fusão",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR [Limitado]",
+    "type": "Ataque",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Ataque da Grande Explosão",
+      "desc": "[ATQ Físico/ATQ Especial] O ataque de Vegetto em um único alvo causa 10% de dano adicional com base na Vida Máxima do alvo, recupera 5% da própria Vida Máxima, reduz em 20% a Intensidade de Crítico e a Intensidade de Bloqueio da retaguarda inimiga (por 2 turnos). Cada vez que Vegetto libera uma habilidade pequena, ganha permanentemente 10% de Ataque e 10% de chance de habilidade pequena, acumulável até 3 vezes. Com 60% de chance, causa [Elevação Baixa]. Causa 185.5%+840 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "Kamehameha Final MÁX.",
+      "desc": "[Explosão de Ki] Aumenta a própria Taxa de Redução de Dano e Taxa de Dano em 15% por 2 rodadas, ataca uma coluna de inimigos, o alvo principal sofre 30% de Dano Extra, os ataques ignoram 35% da Defesa do alvo neste turno, remove Buffs do alvo na coluna do alvo. Aprimora o efeito de contra-ataque da [Habilidade Passiva], aumentando as ativações de revide para 3 vezes. Causa 311%+1400 de dano ao alvo.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão], aumenta a própria Taxa de Perfuração em 10% por 1 rodada.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Vegeta SSGSS",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "SSG",
+      "Guerreiro S",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Defesa",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Ataque da Grande Explosão",
+      "desc": "[Ataque Físico] Ataca um único inimigo, absorve 20% da taxa de bloqueio do alvo, causa 35% de dano adicional a Guerreiros do tipo [Técnica], absorve 200 pontos de raiva do alvo e tem 60% de chance de causar [Derrubada]. Causa 180.4%+440 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "Lampejo Explosivo Gamma MÁX.",
+      "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, aumenta a própria DEF em 30%; para cada ocorrência de Resistir ou Bloquear durante esta Suprema, causa Dano Extra igual a 4% do próprio PV Máx. (até 20%); reinicia a contagem após usar o Supremo. Causa 285.8%+660 de dano a unidades inimigas em uma coluna.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Elevação Alta], causando [Empurrão], com 30% de chance de ganhar 100 de Ki. Causa 88.5%+440 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Super Syn Shenlong",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Rolamento e Golpe Pesado",
+      "desc": "[ATK Especial] Ataca um único inimigo. Se o alvo estiver com [Envenenamento], recupera 8% da Vida Máxima e aplica [Envenenamento] ao alvo (causa dano equivalente a 4% da Vida Máxima no início de cada turno, dura 2 turnos, máximo de 5 acúmulos). Recupera 150 de Fúria. Causa 40% de dano extra em alvos sob Controle. 60% de chance de causar [Derrubada]. Causa 165.4%+440 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "Super Rajada de Energia Maligna MÁX.",
+      "desc": "[Explosão de Ki] Ataca todos os inimigos, 60% de chance de aplicar [Veneno] em cada alvo, causa 15% de Dano Extra a alvos envenenados, converte 15% do dano causado em PV para a Fileira da Frente; para cada efeito negativo que o alvo tiver (Queimadura, Queima da Alma, Veneno, Sangramento), o dano aumenta em 7%, até 28%. Causa 180.8%+825 de dano a todas as unidades inimigas.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Empurrão], inflige [Derrubada], 30% de chance de aplicar 1 acúmulo de [Veneno]. Causa 88.5%+440 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Goku Instinto",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR [Limitado]",
+    "type": "Ataque",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Golpe Rápido",
+      "desc": "[ATQ Física] Ataca um único inimigo, absorvendo 10% da vida do alvo e 200 pontos de raiva; a unidade atingida sofre redução de 20% no dano de golpe especial e 60% no dano de habilidade pequena por 2 turnos, com 60% de chance de causar [Derrubada]. Causa 180.5%+840 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "Choque da Tempestade Suprema MÁX.",
+      "desc": "[Explosão de Ki] Ataca um único inimigo e absorve 20% do Ataque, Defesa, Taxa de Dano e Taxa de Redução de Dano do alvo. Alvos mortos por esta habilidade têm 70% de chance de não poder [Reviver]. Causa 467.5%+1344 de dano ao alvo.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], causando [Empurrão], aumenta a contagem de sequência em 1 por rodada. [Ninjutsu] Ataca um único inimigo, repele [Elevação Baixa] para causar [Empurrão], pode ser ativado duas vezes por rodada.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Bardock Quebrador do Tempo",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Golpe Sombrio",
+      "desc": "[ATQ Físico] Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno), recupera PV igual a 100% do ATQ próprio; recupera 150 de Fúria; após este ataque, aumenta a Fúria em 60% do ATQ e converte 30% do ATQ em DEF por 1 rodada, com 60% de chance de causar [Derrubada]. Causa 180.4%+550 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Golpe Explosivo",
+      "desc": "[ATQ Físico] Ao sofrer dano, Bardock armazena 50% do dano direto recebido (dano contínuo não é contabilizado, máximo de 7 vezes o ATQ, não é reiniciado ao morrer, dano excedente não é armazenado). Ataca um único inimigo, causa 15% de dano adicional contra não [Saiyajins], inflige Ferimento Grave (reduz 70% da taxa de cura por 1 turno). Prioriza o inimigo que o atacou por último, libera 120% do dano absorvido como dano extra, causando [Elevação Baixa]. Causa 427%+1100 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Empurrão], causando [Derrubada]. Causa 88.5%+440 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Jiren",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Tropa do Orgulho",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Super Soco de Ar",
+      "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria probabilidade de ativação de habilidades em 25% (2 turnos), possui 70% de bônus de dano contra Guerreiros do [Atributo Ataque]. A cada uso, aumenta permanentemente a taxa de crítico em 10% (máximo de 30%). Se estiver em campo há menos de 3 turnos, aumenta a resistência a crítico em 30% e a redução de dano em 10% (2 turnos), com 60% de chance de causar [Empurrão]. Causa 180.2%+795 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Impacto da Destruição",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos, absorvendo 70% da defesa deles por 1 turno (total distribuído igualmente entre cada alvo). Cada vez que é usado, aumenta permanentemente o ataque em 15% (máximo de 45%). Quando apenas ele próprio restar na linha de frente aliada, muda para o golpe definitivo, atacando um único inimigo, absorvendo 70% da defesa do alvo e convertendo 30% de sua própria vida perdida em dano, causando [Elevação Baixa]. Causa 240.4%+954 de dano a unidades inimigas em uma Fileira.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], inflige [Empurrão]. Causa 88%+424 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku SSJ Deus",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "SSG",
+      "Guerreiro S",
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Ataque do Super Saiyajin Deus",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Contra alvos com [Queimadura], causa 60% de dano adicional. Absorve o efeito de [Queimadura] de um aliado aleatório, convertendo-o em 12% da própria vida e aumentando o ATQ em 20% (2 turnos). Causa [Elevação Alta]. Causa 180.1%+416 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Super Kamehameha",
+      "desc": "[ATK Especial] Ataca uma fileira de inimigos, com 100% de chance de aplicar [Queimadura de Chamas] (considerada queimadura, dano aumentado, no início de cada turno sofre dano igual a 75% do ATQ do aplicador e perde 100 de Fúria). Se o inimigo já estiver com [Queimadura], causa dano adicional de <100% ATQ + 60% ATQ * número de camadas de [Queimadura]>, causando [Derrubada]. Causa 310.2%+936 de dano a todas as unidades inimigas.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], infligindo [Empurrão], com 35% de chance de aplicar 1 acúmulo de [Queimadura]. Causa 87.75%+416 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Android 18",
+    "element": "Androide",
+    "gender": "Feminino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Ataque em Conjunto",
+      "desc": "[ATQ Físico] Ataca um único inimigo e aumenta aleatoriamente a Fúria de 1 guerreiro aliado em 150 pontos. Causa 30% de dano adicional contra guerreiros do tipo [Defesa]. Recupera 100 pontos de própria Fúria e, com 60% de chance, causa [Elevação Baixa]. Causa 170.4%+440 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Super Onda de Energia",
+      "desc": "[Ataque Especial] Ataca todos os inimigos, reduz 15% da defesa dos alvos, aumenta aleatoriamente 300 de raiva de 1 guerreiro aliado, causa 15% de dano adicional e causa [Derrubada]. Causa 165.4%+440 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Empurrão], inflige [Elevação Alta]. Causa 88.5%+440 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Goku Black (Rose)",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro S",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Ataque Instantâneo",
+      "desc": "[Ataque Físico] Ataca um único inimigo e aumenta aleatoriamente o Ataque de 3 [Guerreiros das Trevas] aliados em 10% (1 turno); a partir do 3º uso, o dano da habilidade aumenta em 60%. Causa 180.3%+432 de dano ao alvo.",
+      "effects": []
+    },
+    "supreme": {
+      "name": "SMAX. Gás Combinado",
+      "desc": "[Ataque Especial] Ataca a retaguarda inimiga, causando [Queimadura] no alvo (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, com duração de 2 turnos), e tem 40% de chance de [Silenciar] o alvo (impede o uso de habilidades definitivas, com duração de 1 turno). Aumenta em 8% o dano de habilidade definitiva de todos os [Guerreiros das Trevas] da sua equipe (exceto o próprio; +3% por guerreiro adicional das trevas, até 20%, por 1 turno), causando [Derrubada]. Causa 240.6%+972 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], inflige [Elevação Baixa]. Causa 88.25%+432 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "elevacao_baixa"
+      ]
+    }
+  },
+  {
+    "name": "Janemba",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Ataque do Buraco Negro Dimensional",
+      "desc": "[ATQ Físico] Ataca um único inimigo, aumenta o ATQ em 30%, causa [Sangramento] no alvo (no início de cada turno, sofre dano igual a 25% do ATQ do aplicador; cada camada reduz 5% da DEF, máximo de 10 camadas acumuláveis), e converte 30% do dano causado em PV; se houver apenas 1 alvo na mesma fileira do inimigo, aumenta o dano em 30%; este ataque não recupera a raiva do alvo atingido; se este ataque não for crítico, recupera 100 de raiva adicional para si mesmo. Causa 164.7%+720 de dano ao alvo.",
+      "effects": []
+    },
+    "supreme": {
+      "name": "SMAX. Lâmina de Raksha",
+      "desc": "[Ataque Físico] Ataca um único inimigo, com 90% de chance de causar [Sangramento] e [Laceração] no alvo e ao redor (causa dano equivalente a 4% da vida máxima por turno, acumulável, dura até o fim da batalha, e a vida perdida não recupera raiva). Para cada inimigo no campo com [Sangramento], a taxa de acerto crítico deste ataque aumenta em 4%. Aumenta sua própria intensidade de crítico em 13%. Para cada [Guerreiro Sombrio] aliado, aumenta adicionalmente 3% de intensidade de crítico, até no máximo 25%. Causa [Derrubada]. Causa 438.8%+1152 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único alvo inimigo, segue com [Elevação Baixa], causa [Derrubada]. Causa 86.75%+384 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Goku SSGSS",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "SSG",
+      "Guerreiro S",
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Defesa",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Onda de Choque Contínua",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta sua própria taxa de roubo de vida em 20% (2 turnos), causa 60% de dano extra em Guerreiros com efeito de [Queimadura], 20% de chance de causar [Atordoamento] no alvo (incapacidade de agir, dura 1 turno; se o alvo estiver com [Queimadura], a chance aumenta para 40%). Quando a vida estiver abaixo de 50%, aumenta a taxa de redução de dano em 15% (2 turnos), com 60% de chance de causar [Elevação Baixa]. Causa 175%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Kamehameha Super - Nove-Caudas",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta sua própria taxa de crítico em 40%, causa dano adicional equivalente a 35% da própria vida perdida ao alvo, e converte 45% do dano total em cura para si mesmo. Se não causar crítico, aumenta seu próprio ataque em 25% (por 2 turnos) e causa [Elevação Alta]. Se eliminar o alvo, pode liberar imediatamente uma habilidade extra. Causa 420%+24 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Elevação Alta], causando [Empurrão], causa 50% de Dano Extra a alvos [Queimados]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Vegeta SSG",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "SSG",
+      "Guerreiro S",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Golpe de Chamas Contínuas",
+      "desc": "[ATK Especial] Ataca uma fileira de inimigos. Obtém efeitos de bônus com base na própria vida atual: se a vida estiver abaixo de 80%, ganha 10% de taxa de dano e taxa de redução de dano. Para cada 20% adicionais de vida máxima perdida, ganha mais 5% de taxa de dano e taxa de redução de dano. Quando a vida estiver abaixo de 50%, ganha adicionalmente 30% de velocidade de recuperação de raiva. Se o ataque acertar apenas um alvo, o dano aumenta em 40%. Causa 170%+10 de dano ao alvo.",
+      "effects": []
+    },
+    "supreme": {
+      "name": "SMAX. Explosão de Sacrifício",
+      "desc": "[Ataque Especial] Aumenta o próprio Ataque e Defesa em 15% (2 turnos) e aumenta a Taxa de Crítico da retaguarda aliada em 12% (1 turno). Ataca um único inimigo. Se for o primeiro golpe especial de Vegeta após [Imortalidade], causa Crítico garantido. Se eliminar o alvo, recupera 12% da própria Vida Máxima e causa [Elevação Baixa]. Causa 400%+20 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Energia Ki] Ataca um único inimigo, segue com [Derrubada], causando [Elevação Alta]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Broly",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro Lendário",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Golpe Lendário",
+      "desc": "[ATQ Físico] Ataca um único inimigo, causando 60% de dano adicional contra Guerreiros do tipo Defesa. Se a própria vida estiver abaixo de 50%, recupera PV igual a 70% do ATQ. Se houver apenas 1 inimigo, o dano aumenta em 50%, com 60% de chance de causar [Empurrão]. Causa 179.8%+735 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Explosão de Impacto",
+      "desc": "[Ataque Especial] Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 30% de chance de reduzir 300 de raiva de cada inimigo e 20% de chance de causar [Imobilização] (incapacidade de agir por 1 turno). Para cada guerreiro [Saiyajin] presente no time inimigo, o dano deste golpe especial aumenta em 6%. O próprio tem 30% de chance de reviver e herdar a raiva. Quando houver apenas 1 inimigo, o golpe especial é alterado: reduz 500 de raiva do alvo, tem 35% de chance de causar [Imobilização], e o próprio tem 30% de chance de reviver e herdar a raiva, causando [Elevação Baixa]. Causa 179.6%+735 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], infligindo [Empurrão]. Causa 87%+392 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Baby",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Dança do Canhão de Ki",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único alvo, aplicando [Queimadura Sombria] (causa dano equivalente a 6% da Vida Máxima por turno, duração até o fim da batalha, efeito acumulável); reduz 20% da Redução de Dano do alvo e aumenta 50% da Taxa de Perfuração do próprio (2 turnos). Se o alvo tiver 2 ou mais acúmulos de [Queimadura Sombria], recupera 10% da própria Vida e 200 de Fúria, com 60% de chance de causar [Derrubada]. Causa 179.2%+344 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Super Flash Cannon",
+      "desc": "[Golpe Especial] Ataca uma fileira de inimigos, com 65% de chance de aplicar [Queimadura Sombria] no alvo. Causa 35% de dano adicional a alvos que já possuem [Queimadura Sombria] ou [Queimadura]. Aumenta a intensidade de bloqueio da linha de frente aliada em 25%. A partir do terceiro turno, troca para o golpe definitivo, atacando o inimigo com maior HP na linha de frente, ignorando bloqueio, aplicando 100% de [Queimadura Sombria], causando 35% de dano adicional a alvos com [Queimadura Sombria], e aumentando a intensidade de bloqueio da linha de frente aliada em 35% e a taxa de bloqueio em 10%. Causa [Derrubada]. Causa 308.4%+774 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Empurrão], causa [Derrubada]. Causa 85.5%+344 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Freeza Dourado",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro S",
+      "Guerreiro Dourado",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Onda de Punição",
+      "desc": "[ATQ Físico] Ataca um único inimigo. Se a própria raiva estiver acima de 30%, causa 50% de dano extra ao alvo. Se a própria raiva estiver abaixo de 60%, drena 150 pontos de raiva do alvo, com 60% de chance de causar [Elevação Alta]. Causa 175%+15 de dano ao alvo.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Lança-foguetes Infernal",
+      "desc": "[ATK Especial] Ataca uma fileira de inimigos, [Suprimir] o alvo principal (reduz a taxa de dano, taxa de redução de dano e ataque do alvo em 15%, encolhe o alvo, dura 2 turnos, não pode ser [Suprimido] em estado de fúria), e tem 50% de chance de [Suprimir] os alvos da fileira traseira; se o próprio personagem estiver em campo por 2 ou mais turnos, o dano se expande para todos os inimigos, [Suprimir] o alvo principal, com 70% de chance de [Suprimir] outros dois inimigos aleatórios, causando [Empurrão]. Restaura PV para 2 aliados com menor PV: ATQ*100%+12. Causa 180%+12 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], inflige [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Zamasu Fundido",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro S",
+      "Guerreiro de Fusão",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Lâmina do Julgamento",
+      "desc": "[Ataque Especial] Ataca um único inimigo, priorizando alvos com [Julgamento], causando 60% de dano adicional. 2 Guerreiros aliados têm 50% de chance de recuperar 200 de raiva. Há 40% de chance de aplicar [Julgamento] no alvo (sem acerto crítico, duração de 1 turno), causando [Elevação Alta]. Causa 175%+15 de dano ao alvo.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Trovão Absoluto",
+      "desc": "[Ataque Especial] Ataca 4 unidades aleatórias do inimigo, com 40% de chance de aplicar [Julgamento] (não pode causar dano crítico, não pode ser bloqueado, pode ser dissipado, dura 1 turno) no alvo. Contra [Saiyajins], a chance aumenta para 60%. Se o alvo já estiver sob efeito de [Julgamento], causa dano adicional equivalente a 12% da vida máxima do alvo, causando [Elevação Baixa]. Causa 230%+18 de dano a 4 alvos aleatórios.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], causando [Empurrão], reduz 100 de Fúria de alvos com [Julgamento]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku Black",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro S",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Ataque",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Super Espada de Ar",
+      "desc": "[ATQ Físico] Ataca o inimigo com a menor vida, aplicando 1 camada de [Sangramento] (no início de cada turno, sofre dano igual a 25% do ATQ do aplicador; cada camada reduz a DEF em 5%, máximo de 10 camadas). Quando a própria vida estiver abaixo de 50%, o dano é aumentado em 30%, com 60% de chance de causar [Empurrão]. Causa 165%+8 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Corte Infinito",
+      "desc": "[ATQ Físico] Ataca o inimigo com a menor vida, aplica 1 camada de [Sangramento] (sofre dano igual a 25% do ATQ do aplicador no início de cada turno, cada camada reduz 5% da DEF, máximo de 10 camadas). Causa 30% de dano extra contra Guerreiros [Ofensivos] e concede o efeito Aniquilação aos Guerreiros [Ofensivos] aliados (quando a vida do inimigo for inferior a 45%, o dano aumenta em 20% por 2 turnos). Causa [Elevação Alta]. Causa 380%+26 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Derrubada], infligindo [Elevação Baixa]. Se o PV do alvo estiver abaixo de 30%, aumenta o dano em 50%. Causa 30%+${factor3} de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_baixa"
+      ]
+    }
+  },
+  {
+    "name": "Beerus",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Deus da Destruição",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Ataque violento da Aliança dos Guerreiros",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Durante a batalha, quanto menos pessoas houver em ambos os lados, maior será o dano; este ataque ignora bloqueio, aumenta o dano contra Guerreiros do tipo Defesa em 60%, aumenta sua própria resistência a anomalias em 50% (1 turno) e causa [Derrubada] com 60% de chance. Causa 175%+12 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Julgamento da Aliança dos Guerreiros",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca o inimigo da linha de frente com a menor porcentagem de vida. Este ataque ignora bloqueio e resistência a dano, e aumenta a taxa de crítico em 30%. Para cada Saiyajin aliado, a intensidade de crítico aumenta em 7%. Se o alvo for eliminado, 70% do dano excedente é espalhado para todos os inimigos (máximo de 2,5x o próprio ATQ). A eliminação causada por este ataque impede o alvo de reviver, causando [Empurrão]. Causa 420%+20 de dano a todas as unidades inimigas.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, persegue [Elevação Baixa], causando [Derrubada], este ataque ignora 30% da DEF do alvo. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Toppo",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Tropa do Orgulho",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Tornado da Justiça",
+      "desc": "[ATQ Físico] Toppo ataca um único alvo, causando 40% de dano extra em alvos com menos de 50% de HP. Por 2 turnos, tem 60% de chance de reduzir o dano recebido em 40%. Aumenta em 20% a probabilidade de suas próprias habilidades menores, sendo que quanto menor o HP, maior a probabilidade, podendo chegar a até 100%. Tem 60% de chance de causar [Elevação Baixa]. Causa 160%+15 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Esfera de Energia Destrutiva",
+      "desc": "[Golpe Especial] Ataca um único inimigo, causando 20% de dano em área ao redor (podendo chegar a 30% conforme mais inimigos são atingidos). Se acertar 2 ou mais inimigos, este ataque não pode ser bloqueado ou resistido. Aumenta sua própria intensidade de crítico em 35% por 2 turnos. Causa dano adicional equivalente a 12% da vida perdida de cada alvo; 30% do dano é convertido em própria vida. Se houver apenas 1 inimigo no campo adversário, causa dano adicional equivalente a 15% da maior vida perdida entre ambos os lados, reduz a taxa de redução de dano do alvo em 20% por 2 turnos e causa [Derrubada]. Causa 420%+20 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], causando [Elevação Baixa]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "elevacao_baixa"
+      ]
+    }
+  },
+  {
+    "name": "Vegeta SS4",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "SS4",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpe Acelerado",
+      "desc": "[Ataque Físico/Especial] Ataca um único inimigo, reduzindo o Ataque do alvo em 20% e a Taxa de Resistência a Críticos em 20%, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno); considera o alvo do ataque da habilidade anterior de [Super Saiyajin 4 Goku] como [Alvo de Ataque Comb.]. Se acertar o [Alvo de Ataque Comb.], a chance de causar [Atordoamento] aumenta para 60%. Se esta habilidade causar Atordoamento, aumenta o próprio Ataque em 15% (2 turnos), com 60% de chance de causar [Elevação Baixa]. Causa 175%+15 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Propagação Infinita",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca o inimigo com o maior ATQ, remove os efeitos negativos de [Goku Super Saiyajin 4], reduz a taxa de dano da linha frontal inimiga em 10%, aumenta sua própria taxa de redução de dano em 20% (1 turno) e reduz a Fúria do alvo em 200. Quando [Goku Super Saiyajin 4] estiver presente em seu lado do campo, libera o Golpe Especial Combinado, mantendo os efeitos originais, com a taxa de redução de dano aumentada para 30%, reduzindo a taxa de dano da linha do alvo em 15%, aumentando adicionalmente a taxa de redução de dano de [Goku Super Saiyajin 4] em 15% (2 turnos). No próximo turno, a habilidade será liberada com certeza. Causa 400%+24 de dano a unidades inimigas em uma Fileira.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], causa [Empurrão]; se o alvo for [Alvo de Combo], aumenta o dano em 50%. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku SS4",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "SS4",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Golpe Selvagem",
+      "desc": "[ATQ Física/ATQ Especial] Ataca um único inimigo, reduzindo sua DEF em 30% e sua Resistência a Anomalias em 20%, além de aumentar a Taxa de Crítico em 20%. Considera o alvo do último golpe de [Vegeta Super 4] como [Alvo do Ataque Comb.]. Se acertar o [Alvo do Ataque Comb.], este ataque causará crítico garantido. Se este golpe causar crítico, recupera 6% da própria vida e tem 60% de chance de causar [Derrubada]. Causa 175%+15 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Super Soco do Dragão",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, remove os efeitos negativos de [Vegeta Super 4], reduz a taxa de redução de dano da linha frontal inimiga em 10%, aumenta sua própria taxa de dano em 20% (1 turno) e causa dano adicional equivalente a 10% da vida máxima do alvo. Se [Vegeta Super 4] estiver presente no seu lado do campo, libera o golpe especial combinado, mantendo os efeitos originais, com a taxa de dano aumentada para 30%, reduz a taxa de redução de dano da linha do alvo em 15%, aumenta adicionalmente a taxa de dano de [Vegeta Super 4] em 15% (2 turnos) e garante a liberação de habilidade no próximo turno. Causa 400%+24 de dano ao alvo.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único alvo inimigo, segue com [Elevação Baixa], causa [Empurrão], se o alvo for [Alvo de Combo], aumenta o dano em 50%. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku (GT)",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Super Soco de Ar",
+      "desc": "[Físico/Especial] Coeficiente de dano aumenta em 40%. Ataca um único inimigo, recupera 150 de raiva própria e tem 60% de chance de causar [Empurrão]. Causa 252%+15 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Golpe do Dragão",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, reduz a Resistência a Anomalias do alvo em 30% (1 turno), reduz a Taxa de Dano do alvo em 15% (2 turnos), 50% de chance de causar [Imobilização] (incapacidade de agir, dura 1 turno), aumenta a Taxa de Bloqueio dos aliados [Saiyajin] em 20% (2 turnos) e causa [Empurrão]. Causa 400%+24 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], causa [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Gohan Místico",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Ondas de Energia com as Mãos",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, com 70% de chance de ativar novamente, no máximo 1 vez por turno. Se a vida do alvo for maior que 50%, o dano aumenta em 30%, com 60% de chance de causar [Empurrão]. Causa 165%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Kamehameha",
+      "desc": "[Ataque Especial] Ataca um único inimigo, causando 30% de dano adicional contra Guerreiros do tipo [Defesa]. Este ataque ignora 30% da defesa, ativa imediatamente uma habilidade extra e, no próximo turno, certamente liberará a habilidade, causando [Empurrão]. Causa 420%+26 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Alta], inflige [Empurrão]. Em um Acerto Crít., 35% de chance de infligir [Enraizamento]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Kale",
+    "element": "Saiyajin",
+    "gender": "Feminino",
+    "tags": [
+      "Guerreiro S",
+      "Guerreiro Lendário",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SSR",
+    "type": "Habilidade",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpe de Esmagamento",
+      "desc": "[ATQ Físico] Ataca um único inimigo, com 25% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno). Causa 60% de dano adicional a Guerreiros do tipo [Ataque]. Quando houver mais de 4 inimigos, aumenta a taxa de dano em 15% e causa [Empurrão] com 60% de chance. Causa 175%+10 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Explosão de Ki",
+      "desc": "[Ataque Especial] Ataca todos os inimigos. Quanto menos inimigos, maior o dano, com aumento máximo de 120%. Além disso, concede o efeito Fúria (aumenta o tamanho, recupera 20% da vida, aumenta 20% de defesa e 20% de redução de dano; durante o efeito, aumenta 90% de resistência a anomalias e garante que a habilidade pequena seja ativada no próximo turno), causando [Elevação Baixa]. Se houver apenas 1 inimigo, o dano é multiplicado por 3. Causa 170%+15 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], causa [Elevação Alta], causa 50% de Dano Extra a Guerreiros masculinos. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Gohan",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Ataque",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Explosão Mágica",
+      "desc": "[Ataque Físico] Ataca um único inimigo, causando 60% de dano extra a Guerreiros do [Mal]. Se houver menos de 3 inimigos, aplica 30% de chance de [Atordoamento] (incapacidade de agir por 1 turno), causando [Elevação Alta]. Recupera PV: ATQ x100%+10.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Soco Perfurante do Céu e da Terra",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos. Para cada [Guerreiro das Trevas] presente na fileira alvo, o dano deste ataque aumenta em 12%. Se causar uma eliminação, pode liberar novamente a habilidade definitiva, com coeficiente de dano de 70%. Quanto mais habilidades definitivas o inimigo liberar no mesmo turno, maior será o aumento de ataque e defesa desta habilidade definitiva (máximo de 30%, com duração de 1 turno), causando [Elevação Alta]. Causa 280%+18 de dano ao alvo.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Empurrão], infligindo [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Hit",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Golpe Crítico",
+      "desc": "[ATQ Físico] Causa dano a um único inimigo. Este ataque não pode ser esquivado, ignora 40% da DEF do inimigo e aumenta sua própria Taxa de Roubo de Vida em 10% (2 turnos). Em caso de Acerto Crítico, causa 40% de dano adicional. 60% de chance de causar [Empurrão]. Causa 175%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Ataque Relâmpago",
+      "desc": "[Aumento de ATQ Físico] Aumenta o próprio dano de ATQ Físico em 25%, absorve 20% do ATQ e 40% da DEF do alvo, ataca o inimigo com a menor quantidade de HP, com 35% de chance de causar [Imobilização] (incapacidade de agir por 1 turno) no inimigo; este ataque não pode ser esquivado e causa [Empurrão]. Causa 440%+20 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Alta], inflige [Empurrão]. Acerto Crít. garantido contra alvos com [Escudo]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Majin Vegeta",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Ataque",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "GOLPE DE RAIVA MÁX.",
+      "desc": "[ATQ Físico] Ataca um único inimigo. Esta ação aumenta a taxa de crítico em 45%. Causa 30% de dano adicional contra alvos com [Paralisia]. Tem 30% de chance de causar [Imobilização] (incapacidade de agir por 1 turno) e 60% de chance de causar [Empurrão]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Impacto Sombrio",
+      "desc": "[Ataque Especial] Perde 8% da vida, aumenta temporariamente a taxa de crítico em 30% neste ataque. Quanto menor a vida do próprio personagem, maior o dano, com aumento máximo de 30%. Ataca todos os inimigos, com 60% de chance de causar [Paralisia] (impede o uso de perseguições e habilidades por 1 turno). A probabilidade de ativação da habilidade aumenta em 80% (2 turnos). Causa [Derrubada]. Causa 160%+12 de dano à unidade inimiga com menor PV na fileira de trás.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Alta], inflige [Empurrão]. Causa +50% de dano a alvos [Paralisados]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Trunks do Futuro",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Defesa",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Corte Relâmpago",
+      "desc": "[ATQ Físico] Ataca um único inimigo, com 100% de chance de causar [Sangramento] no alvo (no início de cada turno, sofre dano equivalente a 25% do ATQ do aplicador; cada camada reduz 5% da DEF, podendo acumular até 10 camadas). Quando a vida do inimigo estiver acima de 40%, o dano é aumentado em 35%, com 60% de chance de causar [Elevação Baixa]. Causa 175%+8 de dano a unidades inimigas em uma Fileira.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Flash Mágico",
+      "desc": "[Ataque Especial] Ataca o inimigo com o maior HP, causando 40% de dano extra a Guerreiros do tipo [Defesa]. Além disso, concede efeito Letal a si mesmo e aos Guerreiros da retaguarda aliados (quando o HP do inimigo estiver acima de 50%, o dano é aumentado em 25%). Também remove quaisquer efeitos negativos de qualquer Vegeta em campo aliado e recupera 200 de sua Fúria, causando [Empurrão].",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue contra com [Empurrão], causa [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Android 21",
+    "element": "Androide",
+    "gender": "Feminino",
+    "tags": [
+      "Guerreiro Maligno",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Habilidade",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Flash da Morte",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, com 30% de chance de aplicar [Queimadura Espiritual] (no início de cada turno, sofre dano equivalente a 50% do ATQ do aplicador, perde 200 de raiva no início de cada turno, dura 2 turnos, não acumulável). Se o alvo já estiver com [Queimadura Espiritual], causa 45% de dano adicional e causa [Elevação Alta]. Causa 165%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Chamas do Inferno",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 65% de chance de causar [Queimadura da Alma] em cada alvo (sofre dano igual a 50% do ATQ do aplicador no início de cada turno, perde 200 de raiva no início de cada turno, dura 2 turnos, não acumulável), e 40% de chance de causar [Silêncio] (impede o uso de habilidades especiais, dura 1 turno). Causa 25% de dano adicional contra alvos com [Queimadura da Alma] e reduz sua resistência a críticos em 20% (2 turnos), causando [Empurrão]. Causa 300%+15 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Baixa], infligindo [Empurrão]. Alvos com [Queima da Alma] sofrem 50% de dano adicional. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Cell",
+    "element": "Androide",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpe Explosivo",
+      "desc": "[ATQ Físico] Ataca um único inimigo e adiciona a si mesmo [Escudo] com intensidade de 8% da Vida Máxima. Para [Guerreiros de Ataque], reduz 200 pontos de Raiva e causa [Empurrão] com 60% de chance. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Sistema Solar — Kamehameha",
+      "desc": "[ATK Especial] Ataca uma fileira de inimigos, sacrifica 10% da própria vida para causar dano equivalente a 10% da vida máxima do alvo, com 100% de chance de causar [Queimadura]. Quando a vida estiver abaixo de 50%, aumenta adicionalmente sua própria taxa de redução de dano em 15%, taxa de bloqueio em 15% e resistência a anomalias em 30% (2 turnos), causando [Empurrão]. Causa 280%+18 de dano a todas as unidades inimigas.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Elevação Baixa], causando [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Bardock",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Onda de Choque Suprema",
+      "desc": "[Ataque Físico] Ataca um único inimigo e aumenta a intensidade de bloqueio dos Guerreiros [Defensivos] em 40% e a taxa de bloqueio em 10%, com 60% de chance de causar [Empurrão]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Projétil de Destruição Suprema",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Para cada 1% de HP, aumenta o dano em 0,8%. Causa 30% de dano em área nos inimigos da retaguarda. Sempre causa [Derrubada]. Se o próprio HP estiver abaixo de 40%, aumenta adicionalmente sua própria taxa de redução de dano em 15% e taxa de bloqueio em 15% (por 1 turno). No próximo turno, sempre usará a habilidade, causando [Derrubada]. Causa 380%+26 de dano a todas as unidades inimigas.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Baixa], infligindo [Empurrão]. Quanto maior o PV do lançador, maior o dano. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku SS3",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Rajada de Projéteis de Energia",
+      "desc": "[ATQ Físico] Ataca um único inimigo. Quando a vida do alvo estiver abaixo de 60%, causa 40% de dano adicional e aumenta a taxa de penetração de todos os [Saiyajins] em 20%, com 60% de chance de causar [Elevação Baixa]. Causa 165%+8 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Golpe do Dragão",
+      "desc": "[ATQ Físico] Ataca um único inimigo. Na primeira vez que é usado, garante um Acerto Crítico, aumenta a Taxa de Crítico em 50% e a Intensidade de Crítico em 60% (por 2 turnos), causando [Derrubada]. Causa 400%+20 de dano a unidades inimigas em uma Fileira.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Derrubada], infligindo [Elevação Alta]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Boo Puro",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Habilidade",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Raio de Transformação",
+      "desc": "[Ataque Especial] Ataca um único inimigo, com 35% de chance de causar [Queimadura Espiritual], 35% de chance de causar [Imobilização] (incapacidade de agir por 1 turno), 40% de chance de causar [Paralisia] (incapacidade de usar golpes de perseguição e habilidades por 1 turno) e 60% de chance de causar [Elevação Baixa]. Causa 165%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Super Bomba de Aniquilação",
+      "desc": "[ATK Especial] Ataca a retaguarda inimiga, com 65% de chance de causar [Queimadura Espiritual] em cada alvo e [Queimadura]. Causa dano igual a 20% da vida perdida do próprio personagem ao alvo com [Queimadura Espiritual] e reduz sua taxa de resistência a crítico em 20%, causando [Elevação Baixa]. Causa 230%+15 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], causa [Elevação Baixa]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_baixa"
+      ]
+    }
+  },
+  {
+    "name": "Caulifla",
+    "element": "Saiyajin",
+    "gender": "Feminino",
+    "tags": [
+      "Guerreiro S",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Canhão Esmagador",
+      "desc": "[Ataque Especial] Ataca um único inimigo, causando 40% de dano adicional a Guerreiros do tipo [Técnica], reduzindo a velocidade de recuperação de Raiva do alvo em 30% (por 1 turno), com 80% de chance de recuperar adicionalmente 100 pontos de Raiva própria e 60% de chance de causar [Empurrão]. Causa 160%+12 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Rajada Contínua",
+      "desc": "[Ataque Especial] Causa dano a todos os inimigos, reduz aleatoriamente 200 de raiva de 3 inimigos e adiciona 50% da raiva reduzida a si mesma. Causa 60% de dano adicional a guerreiros do tipo [Ataque] e provoca [Empurrão]. Causa 170%+10 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Elevação Baixa], causando [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Gotenks",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro de Fusão",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Ataque",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Ataque Espiral",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 70% de chance de causar [Queimadura] no alvo (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas); recupera 150 pontos de raiva própria, aumenta o dano contra alvos da linha frontal em 30%, com 60% de chance de causar [Elevação Baixa]. Causa 165%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Ataque Fantasma Supremo",
+      "desc": "[ATK Especial] Aumenta o próprio ATQ e DEF em 15%. Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 70% de chance de causar [Queimadura] (no início de cada turno, sofre dano igual a 25% do ATQ do aplicador; cada camada reduz 10% do efeito de cura, máximo de 10 camadas). Causa 25% de dano extra em alvos com [Queimadura]. Em seguida, aumenta a própria taxa de crítico em 15% (2 turnos). Causa [Elevação Baixa]. Causa 160%+15 de dano a todas as unidades inimigas na fileira de trás.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Alta], infligindo [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Zamasu",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Corte de Vento",
+      "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria Força Crítica em 15%. Quando a vida do inimigo estiver acima de 50%, o dano aumenta em 25%; a partir do início do terceiro turno, muda para: quando a vida do inimigo estiver abaixo de 50%, o dano aumenta em 25%, com 60% de chance de causar [Empurrão]. Causa 145%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Espada de Qi",
+      "desc": "[ATQ Físico] Ataca um único inimigo, ignorando 30% da DEF e reduzindo seu ATQ em 25%; no início do 3º turno, Zamasu ataca o inimigo com menor PV, e este golpe especial ganha 30% de taxa de crítico. Se Goku Black estiver em campo, há 30% de chance de causar [Atordoamento] (incapacidade de agir, por 1 turno) no alvo. Causa 400% + 25 de dano ao alvo com maior Ataque.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Derrubada], causa [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Android 17",
+    "element": "Androide",
+    "gender": "Masculino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Habilidade",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpes Rápidos",
+      "desc": "[Ataque Físico] Ataca um único inimigo e recupera a vida do guerreiro aliado com menor HP. Se o alvo possuir [Escudo], recupera 50% a mais. 60% de chance de causar [Derrubada]. Causa 180%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Grande Onda de Energia",
+      "desc": "[ATQ Físico] Ataca a unidade com menos PV na retaguarda, enquanto adiciona um [Escudo] com intensidade igual a 120% do ATQ ao Guerreiro aliado com menor PV. Se o PV do alvo estiver abaixo de 30%, a intensidade do [Escudo] aumenta para 180% do ATQ. Além disso, aplica [Ferimento Grave] no alvo (reduz em 70% o efeito de cura recebido pelo alvo por 1 turno) e causa [Elevação Baixa]. Causa 380%+20 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Empurrão], causando [Elevação Alta]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Otta Magetta",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "DEF de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Defesa",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Erupção de Lava",
+      "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria DEF em 30% e taxa de bloqueio em 12% (2 turnos), com 60% de chance de causar [Derrubada]. Causa 140%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Cuspe de Lava",
+      "desc": "[ATQ Físico] Ataca uma fileira de inimigos. Se a própria vida estiver abaixo de 50%, aumenta adicionalmente sua própria taxa de redução de dano em 20% e taxa de bloqueio em 20% (2 turnos), causando [Empurrão]. Causa 280%+12 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue contra com [Empurrão], causa [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Dabura",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Lâmina de Vento",
+      "desc": "[Ataque Especial] Ataca um único inimigo, aplicando 1 camada de [Sangramento] (no início de cada turno, sofre dano igual a 25% do ataque do lançador; cada acúmulo reduz a DEF em 5%, até 10 acúmulos) e [Envenenamento] (no início de cada turno, causa dano igual a 4% da vida máxima, dura 2 turnos, máximo de 5 camadas), com 60% de chance de causar [Derrubada]. Causa 145%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Ataque de Fogos de Artifício",
+      "desc": "[Ataque Especial] Ataca uma fileira inimiga, reduzindo em 50% a intensidade de crítico dos alvos na retaguarda. Com 30% de chance, causa [Imobilização] (incapacidade de agir por 1 turno) nos alvos da retaguarda. Se não houver alvos na retaguarda, o dano aumenta em 30%. Com 50% de chance, faz com que 1 [Guerreiro das Trevas] aleatório da equipe renasça após ser derrotado, causando [Elevação Baixa]. Causa 280%+12 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], inflige [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Ribrianne",
+    "element": "Nenhum",
+    "gender": "Feminino",
+    "tags": [
+      "Guerreiro S",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Cajado de Carga",
+      "desc": "[Ataque Especial] Ataca uma fileira de alvos, converte 15% do dano em vida para a própria fileira e recupera 5% da vida do Guerreiro aliado com a menor vida. Com 60% de chance, causa [Elevação Baixa]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Feijão Mágico da Chuva",
+      "desc": "[ATQ Especial] Ataca uma fileira de inimigos. Se a própria vida for maior ou igual a 50%, causa 40% de dano adicional; se a própria vida for inferior a 50%, recupera uma grande quantidade de vida e causa [Empurrão]. Cura todos os ninjas aliados em: ATQ x100%+15.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], inflige [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "R",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Técnica do Nove-Caudas",
+      "desc": "[ATQ Físico] Ataca um único inimigo. Quanto maior a própria Fúria, maior o dano, com aumento máximo de 70%. Além disso, recupera 150 pontos de Fúria adicionais e tem 60% de chance de causar [Derrubada]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Kamehameha",
+      "desc": "[ATK Especial] Ataca uma fileira de inimigos, reduzindo 200 de raiva do alvo, com 100% de chance de causar [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, durando 2 turnos), e causa 30% de dano adicional à linha frontal, causando [Empurrão]. Causa 300%+15 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Baixa], inflige [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Majin Boo",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Explosão em Cadeia",
+      "desc": "[ATQ Físico] Ataca um único inimigo, recupera 10% da própria vida. Se a própria vida estiver abaixo de 50%, recupera 15% e aumenta a própria taxa de dano reverso em 15% (2 turnos). 60% de chance de causar [Elevação Baixa]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Onda de Explosão",
+      "desc": "[Ataque Especial] Ataca todos os inimigos, com 25% de chance de causar [Atordoamento] (não pode agir por 1 turno). Se a própria vida estiver abaixo de 50%, aumenta adicionalmente 30% de resistência a [Ataque Especial] (dura 2 turnos), causando [Elevação Alta]. Causa 160%+10 de dano a unidades inimigas em uma Fileira.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Derrubada], inflige [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Vegeta Base",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Defesa",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Fogos de Artifício Sujos",
+      "desc": "[ATQ Físico] Ataca um único inimigo, causando 45% de dano adicional ao alvo do [Duelo], reduzindo sua Fúria em 200 pontos e com 60% de chance de causar [Elevação Baixa]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Tiro Brilhante",
+      "desc": "[Ataque Especial] Ataca um único inimigo, causando 35% de dano adicional a alvos em [Duelo], reduzindo 30% de resistência a anomalias, com 70% de chance de aplicar [Cegueira] no alvo (impede o uso de habilidades por 1 turno), causando [Derrubada]. Causa 360%+20 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], causa [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Xeno Goku",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SR",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpe Rápido",
+      "desc": "[ATQ Físico] Ataca um único inimigo, com 25% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno) no alvo. Se o alvo for um Guerreiro do tipo [Ataque], causa 60% de dano adicional e tem 60% de chance de causar [Derrubada]. Causa 165%+15 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Impacto Explosivo do Patrulheiro",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um alvo aleatório na retaguarda, aumenta a absorção de vida em 40% e, contra Guerreiros do tipo [Ataque], aumenta o efeito de vantagem em 40%. Ao morrer, reduz imediatamente 200 de raiva da retaguarda inimiga e diminui a taxa de dano em 10% (2 turnos), causando [Empurrão]. Causa 440%+24 de dano a uma unidade aliada aleatória na fileira de trás.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], inflige [Derrubada]. Se o alvo estiver [Atordoado], restaura 3% do próprio PV. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Dyspo",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Tropa do Orgulho",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MÁX. Projétil de Energia",
+      "desc": "[Ataque Especial] Ataca um único inimigo, reduzindo sua taxa de resistência a críticos em 12% e o dano crítico em 20% (por 2 turnos), com 60% de chance de causar [Derrubada]. Inflige 165%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Justiça Esmagada",
+      "desc": "[Ataque Especial] Ataca um único inimigo. Este ataque adiciona 30% de Ataque e 30% de Taxa de Penetração, além de aumentar a Taxa de Dano dos Guerreiros do [Esquadrão Orgulho] em 12% (1 turno), causando [Derrubada]. Inflige 280%+12 de dano a uma fileira de alvos.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], infligindo [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Mestre Kame",
+    "element": "Humano",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Bêbado em Kung Fu",
+      "desc": "[ATQ Físico] Ataca um único inimigo, aumenta a taxa de bloqueio do próprio e dos Guerreiros na mesma coluna em 15%, com 60% de chance de causar [Empurrão]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Golpe de Múltiplas Imagens Residuais",
+      "desc": "[Ataque Físico] Ataca uma fileira de inimigos, em seguida aumenta em 25% a Defesa própria e dos Guerreiros da mesma fileira, e adiciona um [Escudo] equivalente a 12% da Vida perdida do Mestre Kame, causando [Empurrão]. Causa 280%+18 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Baixa], infligindo [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Goku (Criança)",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Golpe Rápido",
+      "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aplica 1 camada de [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ATQ do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, com duração de 2 turnos), e tem 40% de chance de reduzir 200 de raiva do alvo, com 60% de chance de causar [Elevação Baixa]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Kamehameha",
+      "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo o Ataque do alvo e dos alvos ao redor em 10%. Causa 30% de dano extra contra [Guerreiros das Trevas]. Para cada personagem maligno no lado inimigo, o dano aumenta em 5%, até no máximo 20%. Tem 16% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno) e causa [Elevação Alta]. Causa 380%+16 de dano ao alvo.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Empurrão], causando [Elevação Alta]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Vegeta",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "R",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MÁX. Rajada Contínua",
+      "desc": "[Ataque Especial] Ataca um único inimigo, recupera 150 de Fúria própria. Se o número de aliados não for superior ao de inimigos, aumenta o dano em 25% e causa [Derrubada] com 60% de chance. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Clarão Supremo",
+      "desc": "[ATQ Especial] Ataca um único inimigo. Este ataque aumenta temporariamente a Taxa de Crítico em 15% e a Taxa de Penetração em 25%. Causa 40% de Dano de Respingo nos inimigos ao redor, sem gerar Fúria. A partir do 2º turno em campo, a própria Velocidade de Recuperação de Fúria aumenta em 30%, causando [Empurrão]. Causa 400%+26 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Derrubada], inflige [Elevação Baixa]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_baixa"
+      ]
+    }
+  },
+  {
+    "name": "Bergamo",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "R",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Choque Térmico",
+      "desc": "[Ataque Físico] Ataca um único inimigo. Se o alvo for um guerreiro do tipo [Técnica], causa 45% de dano adicional, com 60% de chance de causar [Elevação Baixa]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Raio Perigoso da Formação Triangular",
+      "desc": "[Ataque Especial] Ataca a retaguarda inimiga, com aumento de 25% na taxa de dano deste ataque. Além disso, causa 60% mais dano contra Guerreiros do tipo [Técnica]. Se o número de aliados for inferior a 3, a velocidade de recuperação de Fúria aumenta em 30%, causando [Derrubada]. Causa 230%+12 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Elevação Alta], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Tenshinhan",
+    "element": "Humano",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Ataque de Energia",
+      "desc": "[ATQ Físico] Ataca um único inimigo, com 34% de chance de causar [Silêncio] (incapacidade de agir, 1 turno), aumenta sua própria taxa de redução de dano em 8% (2 turnos) e, com 60% de chance, causa [Derrubada]. Causa 140%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Ataque de Ki",
+      "desc": "[Golpe Especial] Ataca um único inimigo, causando 40% de dano em área ao redor do alvo. Com 70% de chance, aplica [Cegueira] no alvo principal (impede o uso de habilidades por 1 turno), remove os estados negativos dos [Artistas Marciais] aliados e causa [Derrubada]. Causa 380%+20 de dano ao alvo e a inimigos próximos.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Empurrão], infligindo [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Bulma",
+    "element": "Humano",
+    "gender": "Feminino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MÁX. Primeiros Socorros",
+      "desc": "Aplica cura ao Guerreiro com a menor vida dentro da própria equipe, com efeito de cura aumentado em 30% para [Guerreira].",
+      "effects": []
+    },
+    "supreme": {
+      "name": "SMAX. Recuperação de Vida",
+      "desc": "Cura todos os Guerreiros aliados e remove todos os efeitos negativos dos Guerreiros da linha de frente. O Guerreiro com menos pontos de vida recebe 30% de cura adicional.",
+      "effects": []
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Derrubada], causando [Elevação Alta]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "derrubada"
+      ],
+      "effects": [
+        "elevacao_alta"
+      ]
+    }
+  },
+  {
+    "name": "Freeza",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Disco de Corte",
+      "desc": "[Ataque Especial] Ataca um único inimigo, causando 30% de dano adicional contra Guerreiros do tipo ataque, com 50% de chance de recuperar 200 de própria Fúria, 30% de chance de silenciar o alvo e 60% de chance de causar [Derrubada]. Causa 160%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Esfera de Energia Mortal",
+      "desc": "[Ataque Especial] Ataca a fileira frontal inimiga, reduzindo 150 pontos de raiva de cada alvo. Se houver apenas 1 inimigo na fileira, reduz 300 pontos de raiva, com 30% de chance de causar [Silêncio] (impede o uso de golpes especiais por 1 turno) e causa [Elevação Baixa]. Causa 230%+18 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Baixa], inflige [Derrubada]. Causa +50% de dano a alvos [Silenciados]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Frost",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro S",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Onda de Explosão",
+      "desc": "[Ataque Especial] Ataca um único inimigo. Causa 30% de dano adicional em alvos já com [Envenenamento] e reduz a velocidade de recuperação de raiva em 40%. Tem 60% de chance de causar [Elevação Baixa]. Causa 160%+8 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Rajada Contínua",
+      "desc": "[Ataque Especial] Ataca todos os inimigos. Se o alvo tiver 2 ou mais camadas de [Envenenamento], causa dano adicional equivalente a 15% da vida perdida do alvo. Se tiver 3 ou mais camadas, reduz a taxa de redução de dano do alvo em 15% e 200 de raiva, causando [Derrubada]. Causa 160%+8 de dano a todas as unidades inimigas.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo e persegue [Empurrão], causando [Elevação Baixa]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "empurrao"
+      ],
+      "effects": [
+        "elevacao_baixa"
+      ]
+    }
+  },
+  {
+    "name": "Piccolo",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "TEC de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Golpe Veloz",
+      "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo sua taxa de bloqueio em 25% e a probabilidade de ativação de habilidades em 25%, além de aumentar a taxa de penetração de defesa dos aliados na mesma fileira em 20%. Com 60% de chance, causa [Empurrão]. Causa 140%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Canhão de Feixe de Energia Demoníaca",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos, ignorando bloqueio e resistência a dano, reduzindo a defesa do alvo principal em 30% e a redução de dano em 20% (por 1 turno), causando [Elevação Baixa]. Causa 280%+18 de dano a unidades inimigas em uma coluna.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Alta], infligindo [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Kuririn",
+    "element": "Humano",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "R",
+    "type": "Ataque",
+    "affinity": "Raio",
+    "skill": {
+      "name": "MAX. Ataque de Chi Circular",
+      "desc": "[Ataque Especial] Ataca um único inimigo e aumenta a taxa de quebra de defesa da linha de frente aliada em 25% (por 2 turnos), com 60% de chance de causar [Derrubada]. Causa 140%+8 de dano a unidades inimigas em uma Fileira.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Explosão Aérea",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos, aumenta o ataque e a defesa da linha de frente aliada em 12% (por 1 turno), com 10% de chance de causar [Imobilização] (impede ação, por 1 turno) no alvo, causando [Elevação Baixa]. Causa 230%+18 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Alta], infligindo [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Yamcha",
+    "element": "Humano",
+    "gender": "Masculino",
+    "tags": [
+      "Artista Marcial",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "R",
+    "type": "Habilidade",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpe Ciclone",
+      "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo o dano crítico do alvo em 20% e a taxa de crítico em 15% (2 turnos), com 60% de chance de causar [Derrubada]. Causa 140%+8 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Golpe do Lobo Uivante",
+      "desc": "[ATQ Físico] Ataca o guerreiro com maior raiva inimiga, causando [Interrupção] (se a raiva do oponente estiver cheia, reduz 300 pontos de raiva, sem efeito em chefes). Se não houver [Interrupção], reduz 20% do ataque e 10% da taxa de dano do inimigo, causando [Derrubada]. Causa 400%+20 de dano ao alvo.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Baixa], inflige [Derrubada]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "derrubada"
+      ]
+    }
+  },
+  {
+    "name": "Android 16",
+    "element": "Androide",
+    "gender": "Masculino",
+    "tags": [
+      "DEF de Guerreiro"
+    ],
+    "rarity": "R",
+    "type": "Defesa",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Golpe Infernal",
+      "desc": "[ATQ Físico] Ataca um único inimigo e aumenta a taxa de bloqueio da própria coluna em 20% e a taxa de redução de dano em 10%, com 60% de chance de causar [Empurrão]. Causa 140%+8 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Canhão de Flash Infernal",
+      "desc": "[Ataque Especial] Ataca um único inimigo, aplica um escudo de vida equivalente a 3 vezes a própria defesa em todos os aliados, remove todos os estados negativos dos Guerreiros na mesma fileira e causa [Derrubada]. Causa 380%+22 de dano ao alvo e a inimigos próximos.",
+      "effects": [
+        "derrubada"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, persegue [Elevação Baixa], inflige [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Jiren Poder Máximo",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro S",
+      "Tropa do Orgulho",
+      "DEF de Guerreiro"
+    ],
+    "rarity": "SSR [Limitado]",
+    "type": "Defesa",
+    "affinity": "Fogo",
+    "skill": {
+      "name": "MAX. Impacto Infinito",
+      "desc": "[ATQ Físico] Ataca uma fileira de inimigos, reduzindo a velocidade de recuperação de raiva de todos os alvos em 50% (1 turno) e convertendo 30% do dano causado em vida própria. Obtém [Escudo de Energia] (50% de chance de reduzir em 30% o dano direto recebido, pode ser removido, 1 turno). Se o alvo for um [Saiyajin], o dano aumenta em 40% e a velocidade de recuperação de raiva própria aumenta em 25% (1 turno). Causa 175%+15 de dano a 3 unidades inimigas aleatórias.",
+      "effects": []
+    },
+    "supreme": {
+      "name": "SMAX. Super Soco Poderoso",
+      "desc": "[Aumento de ATQ Físico] Aumenta o próprio Ataque e Defesa. Quanto mais Golpes Especiais o inimigo usar neste turno, maior será o bônus (base de 25%, máximo de 45%, dura 2 turnos). Ataca um único inimigo, priorizando o [Saiyajin] com a menor vida. 30% de chance de causar [Atordoamento] e causa [Empurrão]. Se o alvo for um [Saiyajin], causa dano adicional equivalente a 300% da própria Defesa (este dano adicional não recupera Fúria). Causa 420%+24 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], inflige [Empurrão]; o dano aumenta em 20% para cada acúmulo de [Parede de Energia] em si. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Cumber",
+    "element": "Saiyajin",
+    "gender": "Masculino",
+    "tags": [
+      "Guerreiro Maligno",
+      "Guerreiro de ATQ"
+    ],
+    "rarity": "SSR [Limitado]",
+    "type": "Ataque",
+    "affinity": "Pedra",
+    "skill": {
+      "name": "MAX. Garras Múltiplas da Energia Maligna",
+      "desc": "[Golpe Especial] Cumber usa energia maligna para atacar uma fileira de inimigos. Para cada camada de [Força da Vingança], este ataque aumenta sua própria taxa de crítico em 6%. Se o [alvo] já estiver com [Paralisia], o efeito muda para [Atordoamento]. Aumenta sua própria taxa de roubo de vida em 40%. Causa 40% de dano extra a todos os alvos com [Pesadelo] e 20% de dano extra a alvos com [Vingança]. Após Cumber acumular 4 camadas de [Força da Vingança], a habilidade é ativada automaticamente. Quando Cumber sofre um golpe pesado (dano único superior a 30% da vida máxima), ele ganha 1 camada de [Força da Vingança] e marca o atacante como alvo de [Vingança]. Causa 175%+15 de dano a unidades inimigas em uma coluna.",
+      "effects": []
+    },
+    "supreme": {
+      "name": "SMAX. Super Corte Maligno",
+      "desc": "[ATQ Físico] Cumber ataca primeiro o alvo com [Vingança]. Para cada camada de [Força da Vingança], aumenta sua própria taxa de crítico em 6% neste ataque; no máximo, aumenta adicionalmente a intensidade de crítico em 20%. Se o alvo for um [Saiyajin], recupera 8% de sua própria vida. Se causar uma eliminação, recupera 300 de sua própria raiva. Absorve 25% do ataque e defesa do alvo principal; contra guerreiros do tipo [Defesa], ignora 35% da defesa. Guerreiros ao redor do alvo sofrem 30% de dano extra (sem recuperar raiva extra), causando [Elevação Baixa]. Se não eliminar o alvo principal, o alvo entra em estado de Pesadelo (dano de golpe especial reduzido em 25%, defesa reduzida em 25%, dura 1 turno). [Efeito Passivo]: pode reviver após a morte, recuperando imediatamente 20% de sua própria vida (uma vez por batalha). Causa 450%+24 de dano ao alvo.",
+      "effects": [
+        "elevacao_baixa"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], causando [Empurrão].",
+      "triggers": [
+        "elevacao_alta"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  },
+  {
+    "name": "Whis",
+    "element": "Nenhum",
+    "gender": "Masculino",
+    "tags": [
+      "Anjo",
+      "TEC de Guerreiro"
+    ],
+    "rarity": "SSR [Limitado]",
+    "type": "Habilidade",
+    "affinity": "Luz",
+    "skill": {
+      "name": "MAX. Energia Luminosa",
+      "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 60% de chance de causar [Empurrão]. Aumenta permanentemente o dano de habilidade em 15%, até no máximo 60%. Recupera 150 de raiva para si mesmo e para os Guerreiros que possuem [Artes Marciais]. Converte 30% do dano causado em cura para si mesmo. Se [Beerus] estiver presente, também cura [Beerus]. Causa 170%+15 de dano ao alvo.",
+      "effects": [
+        "empurrao"
+      ]
+    },
+    "supreme": {
+      "name": "SMAX. Prelúdio da Destruição",
+      "desc": "Aumenta sua própria Taxa de Dano e Taxa de Redução de Dano em 25% (1 turno), ataca todos os inimigos. Quanto menos alvos atingir, maior será o dano, podendo chegar a até 150%. Além disso, recupera para todos os aliados uma quantidade de PV igual a 90% do Ataque do usuário. Dentro de 1 turno após usar a habilidade definitiva, ativa [Proteção do Chifre Dourado] (dentro de 1 turno, o dano recebido por ataque único não excede 30%, aumenta a Taxa de Esquiva, com 30% de chance de esquivar de habilidades e habilidades definitivas, ativando no máximo 3 vezes por turno), causando [Elevação Alta]. [Aprimoramento Passivo]: Se Whis estiver em campo, os Guerreiros que possuírem [Artes Marciais] também ativarão o efeito de [Retorno no Tempo], mas o efeito de retorno não recupera Raiva, ativando 1 vez por batalha. Causa 180%+15 de dano a todas as unidades inimigas.",
+      "effects": [
+        "elevacao_alta"
+      ]
+    },
+    "combo": {
+      "name": "Ataque de Perseguição",
+      "desc": "[Explosão de Ki] Ataca um único inimigo, segue com [Elevação Baixa], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+      "triggers": [
+        "elevacao_baixa"
+      ],
+      "effects": [
+        "empurrao"
+      ]
+    }
+  }
+]

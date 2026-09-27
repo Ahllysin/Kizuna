@@ -1,0 +1,310 @@
+{
+  "_readme": "Dados de Comida de Afinidade (pratos favoritos que aumentam vinculo/afinidade mais rapido) e Vinculos (bonus de dupla com outro personagem) de cada personagem. Ainda vazios - preencher conforme for capturado do jogo. comidaAfinidade: array de {nome, raridade} (raridade = cor da carta do prato, ex: Azul/Roxo/Dourado). vinculos: array de {parceiro, requisito, bonus, habilidadeNome, habilidadeDesc, ativo}.",
+  "personagens": {
+    "0": {
+      "nome": "Cooler Dourado",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "1": {
+      "nome": "Vegetto SSGSS",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "2": {
+      "nome": "Vegeta SSGSS",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "3": {
+      "nome": "Super Syn Shenlong",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "4": {
+      "nome": "Goku Instinto",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "5": {
+      "nome": "Bardock Quebrador do Tempo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "6": {
+      "nome": "Jiren",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "7": {
+      "nome": "Goku SSJ Deus",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "8": {
+      "nome": "Android 18",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "9": {
+      "nome": "Goku Black (Rose)",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "10": {
+      "nome": "Janemba",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "11": {
+      "nome": "Goku SSGSS",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "12": {
+      "nome": "Vegeta SSG",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "13": {
+      "nome": "Broly",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "14": {
+      "nome": "Baby",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "15": {
+      "nome": "Freeza Dourado",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "16": {
+      "nome": "Zamasu Fundido",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "17": {
+      "nome": "Goku Black",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "18": {
+      "nome": "Beerus",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "19": {
+      "nome": "Toppo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "20": {
+      "nome": "Vegeta SS4",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "21": {
+      "nome": "Goku SS4",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "22": {
+      "nome": "Goku (GT)",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "23": {
+      "nome": "Gohan Místico",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "24": {
+      "nome": "Kale",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "25": {
+      "nome": "Gohan",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "26": {
+      "nome": "Hit",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "27": {
+      "nome": "Majin Vegeta",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "28": {
+      "nome": "Trunks do Futuro",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "29": {
+      "nome": "Android 21",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "30": {
+      "nome": "Cell",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "31": {
+      "nome": "Bardock",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "32": {
+      "nome": "Goku SS3",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "33": {
+      "nome": "Boo Puro",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "34": {
+      "nome": "Caulifla",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "35": {
+      "nome": "Gotenks",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "36": {
+      "nome": "Zamasu",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "37": {
+      "nome": "Android 17",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "38": {
+      "nome": "Otta Magetta",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "39": {
+      "nome": "Dabura",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "40": {
+      "nome": "Ribrianne",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "41": {
+      "nome": "Goku",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "42": {
+      "nome": "Majin Boo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "43": {
+      "nome": "Vegeta Base",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "44": {
+      "nome": "Xeno Goku",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "45": {
+      "nome": "Dyspo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "46": {
+      "nome": "Mestre Kame",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "47": {
+      "nome": "Goku (Criança)",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "48": {
+      "nome": "Vegeta",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "49": {
+      "nome": "Bergamo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "50": {
+      "nome": "Tenshinhan",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "51": {
+      "nome": "Bulma",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "52": {
+      "nome": "Freeza",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "53": {
+      "nome": "Frost",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "54": {
+      "nome": "Piccolo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "55": {
+      "nome": "Kuririn",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "56": {
+      "nome": "Yamcha",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "57": {
+      "nome": "Android 16",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "58": {
+      "nome": "Jiren Poder Máximo",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "59": {
+      "nome": "Cumber",
+      "comidaAfinidade": [],
+      "vinculos": []
+    },
+    "60": {
+      "nome": "Whis",
+      "comidaAfinidade": [],
+      "vinculos": []
+    }
+  }
+}
