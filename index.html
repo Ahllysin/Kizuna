@@ -474,6 +474,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-roster-item{position:relative;cursor:pointer;display:flex;flex-direction:column;gap:4px;}
 .kz-roster-item:hover{filter:drop-shadow(0 0 8px rgba(255,160,40,.8));}
 .kz-roster-item.placed{opacity:.55;}
+.kz-roster-item.dragging{opacity:.35;}
 .kz-roster-art{width:100%;aspect-ratio:3/4;position:relative;}
 .kz-roster-art img{width:100%;height:100%;object-fit:contain;display:block;}
 .kz-roster-art .avatar-fallback{font-size:18px;border-radius:8px;}
@@ -3408,6 +3409,7 @@ let state = {
   tierList: null,                    // {tiers:[{id,label,color,items:[charId,...]}], unranked:[charId,...]} — preenchido em loadState(); só local, sem conta
 };
 let dragSlotIdx = null;             // slot index currently being dragged (team reorder)
+let dragRosterId = null;            // character id being dragged from the Elenco panel into a slot
 let charsListScrollY = 0;           // posição de scroll da lista de Personagens antes de abrir a ficha, pra restaurar ao voltar
 let dragWasDropped = false;         // set by the 'drop' handler so dragend knows not to treat it as "dropped outside"
 let dragTierItemId = null;          // character id currently being dragged in the tier list
@@ -4847,7 +4849,7 @@ function renderRosterList(filterText){
   return chars.map(c=>{
     const at = state.team.indexOf(c.id);
     return `
-    <div class="kz-roster-item ${at>-1?'placed':''}" data-id="${c.id}" title="${escapeAttr(c.name)}">
+    <div class="kz-roster-item ${at>-1?'placed':''}" data-id="${c.id}" title="${escapeAttr(c.name)}" draggable="true">
       <div class="kz-roster-art">${portraitInner(c)}</div>
       <div class="kz-roster-name">${escapeHtml(c.name)}</div>
       ${at>-1 ? `<span class="kz-roster-casa">Casa ${at+1}</span>` : ''}
@@ -4915,7 +4917,21 @@ function renderSimPanel(){
 }
 
 function attachRosterItemHandlers(root){
-  root.querySelectorAll('.kz-roster-item').forEach(item=> item.addEventListener('click', ()=> placeChar(item.dataset.id)));
+  root.querySelectorAll('.kz-roster-item').forEach(item=>{
+    item.addEventListener('click', ()=>{ if(dragRosterId !== null) return; placeChar(item.dataset.id); });
+    item.addEventListener('dragstart', e=>{
+      dragRosterId = item.dataset.id;
+      dragWasDropped = false;
+      e.dataTransfer.effectAllowed = 'copy';
+      e.dataTransfer.setData('text/plain', dragRosterId);
+      requestAnimationFrame(()=>item.classList.add('dragging'));
+    });
+    item.addEventListener('dragend', ()=>{
+      item.classList.remove('dragging');
+      dragRosterId = null;
+      dragWasDropped = false;
+    });
+  });
 }
 
 function attachCombosHandlers(){
@@ -4954,18 +4970,27 @@ function attachCombosHandlers(){
       requestAnimationFrame(()=>slot.classList.add('dragging'));
     });
     slot.addEventListener('dragover', e=>{
-      if(dragSlotIdx === null) return;
+      if(dragSlotIdx === null && dragRosterId === null) return;
       e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
+      e.dataTransfer.dropEffect = dragRosterId !== null ? 'copy' : 'move';
       slot.classList.add('drag-over');
     });
     slot.addEventListener('dragleave', ()=> slot.classList.remove('drag-over'));
     slot.addEventListener('drop', e=>{
       e.preventDefault();
       slot.classList.remove('drag-over');
+      const toIdx = parseInt(slot.dataset.slot, 10);
+      if(dragRosterId !== null){
+        dragWasDropped = true;
+        state.slotSel = toIdx;
+        const id = dragRosterId;
+        dragRosterId = null;
+        placeChar(id);
+        return;
+      }
       if(dragSlotIdx === null) return;
       dragWasDropped = true;
-      const toIdx = parseInt(slot.dataset.slot, 10), fromIdx = dragSlotIdx;
+      const fromIdx = dragSlotIdx;
       if(fromIdx !== toIdx){
         const tmp = state.team[toIdx];
         state.team[toIdx] = state.team[fromIdx];
