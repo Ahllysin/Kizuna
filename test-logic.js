@@ -429,6 +429,107 @@ async function main(){
     assert.ok(!keys.includes('donors') && !keys.includes('next_donor_number'), 'donors é dado público, não deveria ir na mesma tabela privada por usuário');
   });
 
+  console.log('\n[Perfil pessoal e link com apoiador na Aliança Z]');
+
+  await test('renderPerfilTab() não estoura erro logado, deslogado ou sem Supabase configurado', () => {
+    const r = evalIn(sandbox, `(() => {
+      const semSupabase = renderPerfilTab();
+      supabaseAvailable = true;
+      window.__sb = { client: {} };
+      const deslogado = renderPerfilTab();
+      state.discordUser = { id:'u1', username:'Fulano' };
+      state.myProfile = { nickname:'Fulaninho', servidor:'S12', bio:'Oi!', instagram:'', twitch:'', youtube:'', avatarCharId:'', showSocials:false, public:false };
+      const logado = renderPerfilTab();
+      state.discordUser = null; state.myProfile = null; supabaseAvailable = false; window.__sb = undefined;
+      return { semSupabase, deslogado, logado };
+    })()`);
+    assert.ok(!r.semSupabase.includes('perfilNickInput'));
+    assert.ok(!r.deslogado.includes('perfilNickInput'), 'sem login não deveria mostrar o formulário');
+    assert.ok(r.logado.includes('perfilNickInput') && r.logado.includes('Fulaninho'));
+  });
+
+  await test('linkedProfileFor só usa o perfil linkado se a própria pessoa marcou "público"', () => {
+    const r = evalIn(sandbox, `(() => {
+      state.profiles = [
+        { id:'dono-privado', nickname:'Escondido', public:false },
+        { id:'dono-publico', nickname:'Visível', servidor:'S5', public:true },
+      ];
+      const semLink = linkedProfileFor({ linkedUserId:null });
+      const linkadoPrivado = linkedProfileFor({ linkedUserId:'dono-privado' });
+      const linkadoPublico = linkedProfileFor({ linkedUserId:'dono-publico' });
+      const linkadoInexistente = linkedProfileFor({ linkedUserId:'nao-existe' });
+      state.profiles = [];
+      return {
+        semLink, linkadoPrivado, linkadoInexistente,
+        linkadoPublicoNick: linkadoPublico && linkadoPublico.nickname,
+      };
+    })()`);
+    assert.strictEqual(r.semLink, null);
+    assert.strictEqual(r.linkadoPrivado, null, 'perfil marcado como não-público nunca deveria aparecer, mesmo linkado');
+    assert.strictEqual(r.linkadoInexistente, null);
+    assert.strictEqual(r.linkadoPublicoNick, 'Visível');
+  });
+
+  await test('renderDonorCard e o popup usam o nick/servidor do perfil linkado (público) no lugar do que o admin digitou', () => {
+    const r = evalIn(sandbox, `(() => {
+      state.profiles = [{ id:'dono-publico', nickname:'Apelido Público', servidor:'S7', bio:'Minha bio', avatarCharId:'', showSocials:false, public:true }];
+      const donor = { id:'d1', number:1, name:'Nome Digitado Pelo Admin', amount:30, quote:'Frase do admin', honras:[], active:true, linkedUserId:'dono-publico' };
+      const card = renderDonorCard(donor, 0);
+      const modal = donorProfileModalHtml(donor);
+      state.profiles = [];
+      return { card, modal };
+    })()`);
+    assert.ok(r.card.includes('Apelido Público') && !r.card.includes('Nome Digitado Pelo Admin'));
+    assert.ok(r.card.includes('S7'));
+    assert.ok(r.modal.includes('Apelido Público') && r.modal.includes('Minha bio'), 'bio do perfil deveria substituir a frase digitada pelo admin');
+  });
+
+  await test('logado (Supabase simulado), saveMyProfile() manda um upsert pra tabela profiles com o próprio id', async () => {
+    runIn(sandbox, `
+      window.__upsertCalls = [];
+      window.__sb = { client: { from: (table) => ({
+        upsert: (row) => { window.__upsertCalls.push({table, row}); return Promise.resolve({error:null}); },
+        select: () => ({ eq: () => Promise.resolve({error:null, data:[]}) }),
+      }) } };
+      supabaseAvailable = true;
+      state.discordUser = { id:'user-uid-789', username:'Fulano' };
+      state.myProfile = { nickname:'Nick', servidor:'S1', bio:'Bio', instagram:'insta', twitch:'', youtube:'', avatarCharId:'char1', showSocials:true, public:true };
+    `);
+    runIn(sandbox, "saveMyProfile()");
+    await new Promise(res => setTimeout(res, 20));
+    const calls = evalIn(sandbox, 'window.__upsertCalls');
+    runIn(sandbox, "supabaseAvailable = false; state.discordUser = null; state.myProfile = null; window.__sb = undefined; window.__upsertCalls = undefined;");
+    assert.strictEqual(calls.length, 1);
+    assert.strictEqual(calls[0].table, 'profiles');
+    assert.deepStrictEqual(calls[0].row, {
+      id:'user-uid-789', nickname:'Nick', servidor:'S1', bio:'Bio', instagram:'insta', twitch:null, youtube:null,
+      avatar_char_id:'char1', show_socials:true, is_public:true,
+    });
+  });
+
+  await test('logado (Supabase simulado), refreshMyProfile() aplica a linha existente ou volta um rascunho em branco', async () => {
+    runIn(sandbox, `
+      window.__sb = { client: { from: () => ({ select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ error:null, data: {
+        nickname:'Servidor', servidor:'S9', bio:'', instagram:'', twitch:'', youtube:'', avatar_char_id:null, show_socials:false, is_public:false,
+      } }) }) }) }) } };
+      supabaseAvailable = true;
+      state.discordUser = { id:'user-uid-000', username:'Ciclana' };
+    `);
+    runIn(sandbox, "refreshMyProfile()");
+    await new Promise(res => setTimeout(res, 20));
+    const comPerfil = evalIn(sandbox, 'state.myProfile');
+    runIn(sandbox, `
+      window.__sb = { client: { from: () => ({ select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ error:null, data: null }) }) }) }) } };
+    `);
+    runIn(sandbox, "refreshMyProfile()");
+    await new Promise(res => setTimeout(res, 20));
+    const semPerfil = evalIn(sandbox, 'state.myProfile');
+    runIn(sandbox, "supabaseAvailable = false; state.discordUser = null; state.myProfile = null; window.__sb = undefined;");
+    assert.strictEqual(comPerfil.nickname, 'Servidor');
+    assert.strictEqual(comPerfil.servidor, 'S9');
+    assert.deepStrictEqual(semPerfil, { nickname:'', servidor:'', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', showSocials:false, public:false }, 'sem linha no servidor deveria voltar um rascunho em branco, não null/erro');
+  });
+
   console.log('\n[layout Kizuna: lógica nova]');
 
   await test('filtro de raridade "SSR" inclui os SSR [Limitado] e exclui SR/R', () => {

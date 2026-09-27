@@ -95,6 +95,12 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
   filter:drop-shadow(0 3px 0 #3a1200) drop-shadow(0 0 12px rgba(255,160,40,.5));
 }
 .kz-header-discord-btn{width:auto;flex-shrink:0;padding:11px 20px;font-size:15px;box-shadow:0 0 14px rgba(88,101,242,.45);}
+.kz-header-discord-btn svg{flex-shrink:0;}
+.kz-header-donate-btn{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;padding:11px 18px;border-radius:8px;border:1.5px solid var(--gold);
+  background:var(--grad-primary);color:#fff;font-weight:700;font-size:15px;box-shadow:0 0 14px rgba(255,90,30,.4);
+}
+.kz-header-donate-btn:hover{filter:brightness(1.1);}
 .kz-lbl-short{display:none;}
 .kz-account{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 14px;border-radius:10px;background:rgba(8,6,12,.78);border:1px solid rgba(255,170,70,.4);}
 .kz-account-email{font-size:13px;color:var(--text);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -811,6 +817,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-brand-seal{width:48px;height:48px;font-size:26px;border-width:2px;}
   .kz-brand-name{font-size:40px;}
   .kz-header-discord-btn{padding:9px 12px;font-size:14px;}
+  .kz-header-donate-btn{padding:9px 12px;font-size:14px;}
   .kz-lbl-full{display:none;}
   .kz-lbl-short{display:inline;}
   .kz-account-email{display:none;}
@@ -881,6 +888,9 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
         <div class="kz-brand-seal">絆</div>
         <div class="kz-brand-name">Kizuna</div>
       </div>
+      <button class="kz-header-donate-btn" id="headerDonateBtn" title="Doar">
+        <span aria-hidden="true">援</span><span class="kz-lbl-full">Doar</span>
+      </button>
       <div id="accountArea"></div>
     </div>
   </header>
@@ -894,6 +904,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
         <button class="kz-nav-btn" data-tab="guias" title="Guias"><span class="kz-nav-glyph">書</span><span class="kz-nav-label">Guias</span></button>
         <button class="kz-nav-btn" data-tab="tierlist" title="Tier List"><span class="kz-nav-glyph">番</span><span class="kz-nav-label">Tier List</span></button>
         <button class="kz-nav-btn" data-tab="favs" title="Favoritos"><span class="kz-nav-glyph">★</span><span class="kz-nav-label">Favoritos</span></button>
+        <button class="kz-nav-btn" data-tab="perfil" title="Perfil"><span class="kz-nav-glyph">印</span><span class="kz-nav-label">Perfil</span></button>
         <button class="kz-nav-btn" data-tab="doar" title="Doar"><span class="kz-nav-glyph">援</span><span class="kz-nav-label">Doar</span></button>
         <div class="kz-sidebar-spacer"></div>
         <div class="kz-sidebar-watermark" aria-hidden="true">龍</div>
@@ -969,6 +980,29 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
            for all using (auth.uid() = 'SEU-UID-AQUI'::uuid)
            with check (auth.uid() = 'SEU-UID-AQUI'::uuid);
     9. Cole esse mesmo UID no ADMIN_DISCORD_ID abaixo, no lugar de "COLE_AQUI".
+    10. (Aba Perfil) Volte no SQL Editor e rode isso — cria a tabela de perfil público
+        (cada pessoa só edita o próprio: nick, servidor, bio, redes) e adiciona a coluna
+        que liga um apoiador da Aliança Z a um perfil:
+          create table public.profiles (
+            id uuid primary key references auth.users(id) on delete cascade,
+            nickname text, servidor text, bio text,
+            instagram text, twitch text, youtube text,
+            avatar_char_id text,
+            show_socials boolean not null default false,
+            is_public boolean not null default false,
+            updated_at timestamptz not null default now()
+          );
+          alter table public.profiles enable row level security;
+          create policy "leitura publica dos perfis publicos" on public.profiles
+            for select using (is_public = true or auth.uid() = id);
+          create policy "cada um so mexe no proprio perfil" on public.profiles
+            for all using (auth.uid() = id) with check (auth.uid() = id);
+
+          alter table public.donations add column user_id uuid references auth.users(id);
+        No painel admin da Aliança Z, o campo "Vincular perfil (User UID)" aceita o
+        "User UID" de quem apoiou (Authentication > Users) — se a pessoa marcar o próprio
+        perfil como público (aba Perfil), o mural passa a mostrar os dados dela em vez do
+        que foi digitado à mão.
 -->
 <script type="module">
   const SUPABASE_CONFIG = {
@@ -3373,6 +3407,8 @@ let state = {
   donorWidgetCollapsed: false,      // widget flutuante "Top 3 apoiadores" recolhido pro canto
   donorProfileId: null,             // id do apoiador com o perfil aberto no popup, ou null
   discordUser: null,                // {id, username, avatarUrl} — sessão Supabase/Discord da Aliança Z, ou null
+  myProfile: null,                  // rascunho do próprio perfil (aba Perfil), carregado após login
+  profiles: [],                     // cache dos perfis públicos (pra enriquecer o mural da Aliança Z)
   navCompact: false,                // barra lateral recolhida (só ícones)
   heroCharId: null,                 // personagem em destaque no topo da lista (troca no hover)
   slotSel: null,                    // casa do Montador selecionada, esperando um guerreiro do elenco
@@ -3430,7 +3466,7 @@ async function loadState(){
   loaded = true;
   render();
 }
-const NAV_TABS = ['chars','collection','combos','guias','tierlist','favs','doar'];
+const NAV_TABS = ['chars','collection','combos','guias','tierlist','favs','perfil','doar'];
 async function saveFavs(){ await persist('favs', JSON.stringify(state.favs)); }
 async function saveDonorWidgetCollapsed(){ await persist('donor_widget_collapsed', state.donorWidgetCollapsed ? '1' : '0'); }
 async function saveUiTab(){ await persist('ui_tab', state.tab); }
@@ -3580,6 +3616,7 @@ function renderAccountArea(){
       </div>`;
   }
   return `<button class="kz-discord-btn kz-header-discord-btn" id="loginBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
     <span class="kz-lbl-full">Entrar com Discord</span><span class="kz-lbl-short">Entrar</span>
   </button>`;
 }
@@ -3919,6 +3956,7 @@ function render(){
     : tab === 'tierlist' ? renderTierListTab()
     : tab === 'guias' ? renderGuiasTab()
     : tab === 'favs' ? renderFavsTab()
+    : tab === 'perfil' ? renderPerfilTab()
     : tab === 'doar' ? renderDoarTab()
     : renderCombosTab();
   attachCharsHandlers();
@@ -3926,6 +3964,7 @@ function render(){
   attachTierListHandlers();
   attachCombosHandlers();
   attachFavsHandlers();
+  attachPerfilHandlers();
   attachDoarHandlers();
   document.getElementById('accountArea').innerHTML = renderAccountArea();
   attachAccountHandlers();
@@ -5222,15 +5261,16 @@ window.addEventListener('supabase-ready', async ()=>{
   try{
     const { data:{ session } } = await client.auth.getSession();
     applyDiscordSession(session);
-    if(session) await pullUserDataFromRemote();
+    if(session){ await pullUserDataFromRemote(); await refreshMyProfile(); }
   }catch(e){ console.error(e); }
   client.auth.onAuthStateChange(async (_event, session)=>{
     const hadUser = !!state.discordUser;
     applyDiscordSession(session);
-    if(session && (!hadUser || _event === 'SIGNED_IN')) await pullUserDataFromRemote();
+    if(session && (!hadUser || _event === 'SIGNED_IN')){ await pullUserDataFromRemote(); await refreshMyProfile(); }
     render();
   });
   await refreshDonorsRemote();
+  await refreshProfilesRemote();
   if(loaded) render();
 });
 
@@ -5316,12 +5356,165 @@ async function refreshDonorsRemote(){
     state.donors = (data||[]).map(row=>({
       id: row.id, number: row.number, name: row.name, amount: Number(row.amount)||0,
       quote: row.quote||'', discord: row.discord||'', link: row.link||'',
-      honras: row.honras||[], active: row.active !== false,
+      honras: row.honras||[], active: row.active !== false, linkedUserId: row.user_id||null,
     }));
     state.nextDonorNumber = state.donors.reduce((m,d)=>Math.max(m, d.number||0), 0) + 1;
   }catch(e){
     console.error('Não consegui carregar a Aliança Z do Supabase', e);
   }
+}
+
+/* ======================= PERFIL (identidade pública, Discord) ======================= */
+// Cada pessoa loga com Discord e edita o próprio "cartão de identidade" (nick, servidor,
+// bio, redes) na aba Perfil. O dono do site pode linkar esse perfil a um apoiador da
+// Aliança Z (campo "Vincular perfil" no painel admin) — se a pessoa marcou o perfil como
+// público, o mural passa a mostrar esses dados em vez do que foi digitado à mão.
+const PROFILE_BIO_MAX = 220;
+function blankProfile(){
+  return { nickname:'', servidor:'', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', showSocials:false, public:false };
+}
+function profileFromRow(row){
+  return {
+    nickname: row.nickname||'', servidor: row.servidor||'', bio: row.bio||'',
+    instagram: row.instagram||'', twitch: row.twitch||'', youtube: row.youtube||'',
+    avatarCharId: row.avatar_char_id||'', showSocials: !!row.show_socials, public: !!row.is_public,
+  };
+}
+async function refreshMyProfile(){
+  if(!isSupabaseConfigured() || !state.discordUser){ state.myProfile = null; return; }
+  try{
+    const { data, error } = await window.__sb.client.from('profiles').select('*').eq('id', state.discordUser.id).maybeSingle();
+    if(error) throw error;
+    state.myProfile = data ? profileFromRow(data) : blankProfile();
+  }catch(e){
+    console.error('Não consegui carregar seu perfil', e);
+    state.myProfile = blankProfile();
+  }
+}
+async function refreshProfilesRemote(){
+  if(!isSupabaseConfigured()){ state.profiles = []; return; }
+  try{
+    const { data, error } = await window.__sb.client.from('profiles').select('*').eq('is_public', true);
+    if(error) throw error;
+    state.profiles = (data||[]).map(row=>({ id: row.id, ...profileFromRow(row) }));
+  }catch(e){
+    console.error('Não consegui carregar os perfis públicos', e);
+  }
+}
+async function saveMyProfile(){
+  if(!isSupabaseConfigured() || !state.discordUser) return;
+  const p = state.myProfile;
+  try{
+    const { error } = await window.__sb.client.from('profiles').upsert({
+      id: state.discordUser.id, nickname: p.nickname||null, servidor: p.servidor||null, bio: p.bio||null,
+      instagram: p.instagram||null, twitch: p.twitch||null, youtube: p.youtube||null,
+      avatar_char_id: p.avatarCharId||null, show_socials: !!p.showSocials, is_public: !!p.public,
+    });
+    if(error) throw error;
+    await refreshProfilesRemote();
+    showToast('Perfil salvo');
+  }catch(e){
+    console.error('Não consegui salvar seu perfil', e);
+    showToast('Salvo neste aparelho — não consegui sincronizar com a nuvem');
+  }
+}
+// Só usa o perfil linkado se a própria pessoa marcou "público" — nunca mostra dado de
+// quem não autorizou, mesmo que o admin tenha linkado o UID errado.
+function linkedProfileFor(d){
+  if(!d || !d.linkedUserId) return null;
+  const p = (state.profiles||[]).find(x=>x.id===d.linkedUserId);
+  return (p && p.public) ? p : null;
+}
+
+function renderPerfilTab(){
+  if(!isSupabaseConfigured()){
+    return `<section class="kz-page"><h1 class="kz-title">Perfil</h1><div class="kz-subtitle">O login com Discord ainda não foi configurado neste site.</div></section>`;
+  }
+  if(!state.discordUser){
+    return `<section class="kz-page">
+      <h1 class="kz-title">Perfil</h1>
+      <div class="kz-subtitle">Entre com Discord (topo da página) pra montar seu perfil: apelido, servidor, bio e redes.</div>
+    </section>`;
+  }
+  const p = state.myProfile || blankProfile();
+  const avatarChar = state.characters.find(c=>c.id===p.avatarCharId);
+  const bioLen = (p.bio||'').length;
+  return `
+  <section class="kz-page">
+    <div>
+      <h1 class="kz-title">Perfil</h1>
+      <div class="kz-subtitle">Monte como você aparece na Aliança Z: apelido, servidor, bio e redes. Patente e Honras vêm do seu apoio — ninguém digita isso aqui.</div>
+    </div>
+    <div class="kz-donate-layout">
+      <div class="kz-panel" style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label class="field-label">Apelido</label>
+          <input type="text" id="perfilNickInput" value="${escapeAttr(p.nickname)}" placeholder="Como quer aparecer" maxlength="40">
+        </div>
+        <div>
+          <label class="field-label">Servidor</label>
+          <input type="text" id="perfilServidorInput" value="${escapeAttr(p.servidor)}" placeholder="Ex: S12" maxlength="20">
+        </div>
+        <div>
+          <label class="field-label">Apresentação (<span id="perfilBioCount">${bioLen}</span>/${PROFILE_BIO_MAX})</label>
+          <textarea id="perfilBioInput" maxlength="${PROFILE_BIO_MAX}" rows="3" placeholder="Uma frase sobre você">${escapeHtml(p.bio)}</textarea>
+        </div>
+        <div class="grid-2">
+          <div><label class="field-label">Instagram</label><input type="text" id="perfilInstaInput" value="${escapeAttr(p.instagram)}" placeholder="@usuario"></div>
+          <div><label class="field-label">Twitch</label><input type="text" id="perfilTwitchInput" value="${escapeAttr(p.twitch)}" placeholder="twitch.tv/..."></div>
+        </div>
+        <div>
+          <label class="field-label">YouTube</label>
+          <input type="text" id="perfilYoutubeInput" value="${escapeAttr(p.youtube)}" placeholder="Link do canal">
+        </div>
+        <div>
+          <label class="field-label">Avatar</label>
+          <select id="perfilAvatarSelect">
+            <option value="">Foto do Discord</option>
+            ${state.characters.map(c=>`<option value="${c.id}" ${c.id===p.avatarCharId?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}
+          </select>
+        </div>
+        <label class="kz-honor-check"><input type="checkbox" id="perfilShowSocialsInput" ${p.showSocials?'checked':''}> Mostrar minhas redes no perfil público</label>
+        <label class="kz-honor-check"><input type="checkbox" id="perfilPublicInput" ${p.public?'checked':''}> Aparecer na Aliança Z com esses dados (se eu já apoiar)</label>
+        <button class="kz-btn kz-btn-primary kz-btn-sm" id="savePerfilBtn">Salvar perfil</button>
+      </div>
+      <div class="kz-panel kz-donor-list">
+        <span class="kz-label">Prévia</span>
+        <div class="kz-donor-card patente-terraqueo" style="pointer-events:none;">
+          <span class="kz-donor-avatar">${avatarChar ? portraitInner(avatarChar) : donorAvatarInner(p.nickname||state.discordUser.username)}</span>
+          <span class="kz-donor-name">${escapeHtml(p.nickname || state.discordUser.username)}</span>
+          ${p.servidor ? `<span class="kz-donate-note" style="margin:0;">${escapeHtml(p.servidor)}</span>` : ''}
+        </div>
+        ${p.bio ? `<div class="kz-profile-quote">"${escapeHtml(p.bio)}"</div>` : ''}
+        ${p.showSocials && (p.instagram||p.twitch||p.youtube) ? `<div class="kz-donate-note">${[p.instagram,p.twitch,p.youtube].filter(Boolean).map(escapeHtml).join(' · ')}</div>` : ''}
+      </div>
+    </div>
+  </section>`;
+}
+
+function attachPerfilHandlers(){
+  const view = document.getElementById('view');
+  if(!view || state.tab !== 'perfil') return;
+  const bioInput = document.getElementById('perfilBioInput');
+  const bioCount = document.getElementById('perfilBioCount');
+  if(bioInput && bioCount) bioInput.addEventListener('input', ()=>{ bioCount.textContent = bioInput.value.length; });
+  const save = document.getElementById('savePerfilBtn');
+  if(!save) return;
+  save.addEventListener('click', async ()=>{
+    state.myProfile = {
+      nickname: document.getElementById('perfilNickInput').value.trim(),
+      servidor: document.getElementById('perfilServidorInput').value.trim(),
+      bio: document.getElementById('perfilBioInput').value.trim().slice(0, PROFILE_BIO_MAX),
+      instagram: document.getElementById('perfilInstaInput').value.trim(),
+      twitch: document.getElementById('perfilTwitchInput').value.trim(),
+      youtube: document.getElementById('perfilYoutubeInput').value.trim(),
+      avatarCharId: document.getElementById('perfilAvatarSelect').value,
+      showSocials: document.getElementById('perfilShowSocialsInput').checked,
+      public: document.getElementById('perfilPublicInput').checked,
+    };
+    await saveMyProfile();
+    render();
+  });
 }
 
 // Espelha local (window.storage) E manda pro Supabase quando configurado — sempre salva
@@ -5337,7 +5530,7 @@ async function syncDonorRemote(entryOrId, action){
       const { error } = await window.__sb.client.from('donations').upsert({
         id: d.id, number: d.number, name: d.name, amount: d.amount,
         quote: d.quote || null, discord: d.discord || null, link: d.link || null,
-        honras: d.honras || [], active: d.active !== false,
+        honras: d.honras || [], active: d.active !== false, user_id: d.linkedUserId || null,
       });
       if(error) throw error;
     }
@@ -5414,6 +5607,9 @@ function renderDoarTab(){
             <input type="text" id="donorDiscordInput" placeholder="Discord (opcional)">
             <input type="text" id="donorLinkInput" placeholder="Link de rede social (opcional)">
           </div>
+          <div class="kz-donor-admin-row">
+            <input type="text" id="donorLinkedUidInput" placeholder="Vincular perfil (User UID, opcional)">
+          </div>
           <div class="kz-donor-admin-row kz-honor-checks">
             ${Object.entries(HONOR_BADGES).map(([key,h])=>`
             <label class="kz-honor-check"><input type="checkbox" data-honor-key="${key}"><span class="glyph">${h.glyph}</span>${escapeHtml(h.label)}</label>`).join('')}
@@ -5453,11 +5649,15 @@ function renderDoarTab(){
 
 function renderDonorCard(d, i){
   const p = patenteFor(d.amount);
+  const prof = linkedProfileFor(d);
+  const name = (prof && prof.nickname) || d.name;
+  const avatarChar = prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
   return `
   <button class="kz-donor-card patente-${p.key}" data-open-donor="${d.id}">
     <span class="kz-donor-number">Nº ${d.number != null ? d.number : (i+1)}</span>
-    <span class="kz-donor-avatar">${donorAvatarInner(d.name)}</span>
-    <span class="kz-donor-name">${escapeHtml(d.name)}</span>
+    <span class="kz-donor-avatar">${avatarChar ? portraitInner(avatarChar) : donorAvatarInner(name)}</span>
+    <span class="kz-donor-name">${escapeHtml(name)}</span>
+    ${prof && prof.servidor ? `<span class="kz-donate-note" style="margin:0;">${escapeHtml(prof.servidor)}</span>` : ''}
     ${patenteBadgeHtml(d.amount)}
     ${(d.honras||[]).length ? `<span class="kz-donor-honras">${d.honras.map(k=>HORRA_GLYPH(k)).join('')}</span>` : ''}
   </button>`;
@@ -5471,21 +5671,28 @@ function HORRA_GLYPH(key){
 // (sandbox de teste não tem document de verdade) e reusar se precisar em outro lugar.
 function donorProfileModalHtml(d){
   const p = patenteFor(d.amount);
+  const prof = linkedProfileFor(d);
+  const name = (prof && prof.nickname) || d.name;
+  const avatarChar = prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
+  const quote = (prof && prof.bio) || d.quote;
+  const socials = prof && prof.showSocials ? [prof.instagram, prof.twitch, prof.youtube].filter(Boolean) : [];
   return `
   <div class="modal-overlay" id="donorProfileOverlay">
     <div class="modal" style="max-width:460px;">
       <div class="modal-header">
-        <h2>${escapeHtml(d.name)}</h2>
+        <h2>${escapeHtml(name)}</h2>
         <button class="kz-close-btn" id="closeDonorProfileBtn" aria-label="Fechar">✕</button>
       </div>
       <div class="modal-body" style="align-items:center;text-align:center;">
-        <span class="kz-donor-avatar" style="width:72px;height:72px;font-size:24px;">${donorAvatarInner(d.name)}</span>
+        <span class="kz-donor-avatar" style="width:72px;height:72px;font-size:24px;">${avatarChar ? portraitInner(avatarChar) : donorAvatarInner(name)}</span>
         <span class="kz-donor-number">Nº ${d.number}</span>
+        ${prof && prof.servidor ? `<div class="kz-donate-note">${escapeHtml(prof.servidor)}</div>` : ''}
         ${patenteBadgeHtml(d.amount)}
         <div class="kz-donate-note" style="max-width:320px;">${escapeHtml(p.desc)}</div>
-        ${d.quote ? `<div class="kz-profile-quote">"${escapeHtml(d.quote)}"</div>` : ''}
+        ${quote ? `<div class="kz-profile-quote">"${escapeHtml(quote)}"</div>` : ''}
         ${(d.honras||[]).length ? `<div class="kz-pill-row" style="justify-content:center;">${d.honras.map(honraBadgeHtml).join('')}</div>` : ''}
         ${d.discord ? `<div class="kz-donate-note">Discord: ${escapeHtml(d.discord)}</div>` : ''}
+        ${socials.length ? `<div class="kz-donate-note">${socials.map(escapeHtml).join(' · ')}</div>` : ''}
         ${d.link ? `<a class="kz-donate-note" href="${escapeAttr(d.link)}" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light);">${escapeHtml(d.link)}</a>` : ''}
         ${!d.active ? `<div class="kz-locked-tag" style="align-self:center;">Histórico preservado</div>` : ''}
       </div>
@@ -5530,10 +5737,11 @@ function attachDoarHandlers(){
     const quote = document.getElementById('donorQuoteInput').value.trim();
     const discord = document.getElementById('donorDiscordInput').value.trim();
     const link = document.getElementById('donorLinkInput').value.trim();
+    const linkedUserId = document.getElementById('donorLinkedUidInput').value.trim() || null;
     const honras = [...view.querySelectorAll('[data-honor-key]:checked')].map(c=>c.dataset.honorKey);
     if(!name){ showToast('Digite o nome do apoiador.'); return; }
     if(amount <= 0 && !honras.length){ showToast('Digite um valor ou marque pelo menos uma Honra.'); return; }
-    const entry = { id: newDonorId(), number: state.nextDonorNumber, name, amount, quote, discord, link, honras, active: true };
+    const entry = { id: newDonorId(), number: state.nextDonorNumber, name, amount, quote, discord, link, honras, active: true, linkedUserId };
     state.donors.push(entry);
     state.nextDonorNumber++;
     saveDonors();
@@ -5946,6 +6154,7 @@ document.getElementById('navBackdrop').addEventListener('click', ()=>{
   applyNavState();
 });
 document.getElementById('brandHome').addEventListener('click', ()=> goTab('chars'));
+document.getElementById('headerDonateBtn').addEventListener('click', ()=> goTab('doar'));
 
 // Arrasta a partir da borda esquerda da tela pra abrir a barra lateral (recolhida ela
 // some por completo); arrasta pra esquerda com ela aberta pra fechar. Só no celular
