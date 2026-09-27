@@ -356,18 +356,17 @@ async function main(){
 
   await test('applyStoredValue aplica cada chave certinho em cima do state ao vivo', () => {
     const r = evalIn(sandbox, `(() => {
-      const backup = JSON.parse(JSON.stringify({team:state.team, frontRow:state.frontRow, tab:state.tab, favs:state.favs, collapsed:state.donorWidgetCollapsed}));
-      applyStoredValue('team_state', JSON.stringify({team:['a','b',null,null,null,null], frontRow:'row1'}));
+      const backup = JSON.parse(JSON.stringify({team:state.team, tab:state.tab, favs:state.favs, collapsed:state.donorWidgetCollapsed}));
+      applyStoredValue('team_state', JSON.stringify({team:['a','b',null,null,null,null]}));
       applyStoredValue('favs', JSON.stringify(['x','y']));
       applyStoredValue('donor_widget_collapsed', '1');
       applyStoredValue('ui_tab', 'guias');
       applyStoredValue('ui_tab', 'aba-que-nao-existe'); // chave inválida não deveria mudar nada
-      const out = {team: state.team, frontRow: state.frontRow, favs: state.favs, collapsed: state.donorWidgetCollapsed, tab: state.tab};
-      state.team = backup.team; state.frontRow = backup.frontRow; state.tab = backup.tab; state.favs = backup.favs; state.donorWidgetCollapsed = backup.collapsed;
+      const out = {team: state.team, favs: state.favs, collapsed: state.donorWidgetCollapsed, tab: state.tab};
+      state.team = backup.team; state.tab = backup.tab; state.favs = backup.favs; state.donorWidgetCollapsed = backup.collapsed;
       return out;
     })()`);
     assert.deepStrictEqual(r.team, ['a','b',null,null,null,null]);
-    assert.strictEqual(r.frontRow, 'row1');
     assert.deepStrictEqual(r.favs, ['x','y']);
     assert.strictEqual(r.collapsed, true);
     assert.strictEqual(r.tab, 'guias', 'aba inválida não deveria ter sido aplicada, deveria continuar na última válida (guias)');

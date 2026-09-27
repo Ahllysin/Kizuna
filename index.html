@@ -486,10 +486,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
   padding:20px 22px 24px;display:flex;flex-direction:column;gap:16px;
 }
 .kz-field-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.kz-seg{display:flex;border-radius:999px;border:1.5px solid rgba(255,170,70,.5);overflow:hidden;}
-.kz-seg button{padding:7px 16px;border:none;background:transparent;color:#c9c3b3;font-size:13px;font-weight:700;}
-.kz-seg button.active{background:var(--grad-primary);color:#fff;}
-.kz-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:12px;}
+.kz-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
 .kz-slot{
   position:relative;min-height:120px;border-radius:12px;border:2px dashed rgba(140,150,190,.35);background:rgba(16,14,26,.85);
   cursor:pointer;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:12px;padding:10px 40px 10px 46px;
@@ -497,7 +494,6 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-slot:hover{filter:brightness(1.12);}
 .kz-slot.filled{border-style:solid;}
-.kz-slot.front{border-color:#ff8a2a;background:radial-gradient(ellipse at 50% 100%, rgba(255,120,30,.22), rgba(16,12,20,.9) 70%);box-shadow:0 0 14px rgba(255,120,30,.25);}
 .kz-slot.selected{border-color:var(--gold-light);border-style:solid;box-shadow:0 0 22px rgba(255,210,100,.6);}
 .kz-slot.dragging{opacity:.35;}
 .kz-slot.drag-over{border-color:var(--gold-light);border-style:solid;}
@@ -582,11 +578,8 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-guide-eff .n{font-size:15px;font-weight:900;color:var(--text-strong);}
 .kz-guide-eff .c{font-size:12px;color:var(--text-dim);}
 .kz-guide-formation{display:flex;flex-direction:column;gap:8px;}
-.kz-guide-frow{display:grid;grid-template-columns:90px repeat(3,minmax(0,1fr));gap:8px;align-items:center;}
-.kz-guide-frow .lbl{font-size:13px;font-weight:700;color:var(--text-muted);}
-.kz-guide-frow .cell{padding:12px 0;border-radius:10px;text-align:center;font-weight:900;background:rgba(20,20,34,.8);border:1px solid rgba(120,130,170,.3);color:var(--text-soft);}
-.kz-guide-frow.front .lbl{color:var(--gold);}
-.kz-guide-frow.front .cell{background:rgba(255,120,30,.16);border:1.5px solid #ff8a2a;color:var(--gold-light);}
+.kz-guide-slots{display:grid;grid-template-columns:repeat(2,72px);gap:8px;}
+.kz-guide-slots .cell{padding:12px 0;border-radius:10px;text-align:center;font-weight:900;background:rgba(20,20,34,.8);border:1px solid rgba(120,130,170,.3);color:var(--text-soft);}
 .kz-guide-note{font-size:13px;color:var(--text-dim);}
 .kz-guide-prog{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid var(--line-soft);}
 .kz-guide-prog-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center;padding:9px 14px;background:rgba(20,20,34,.85);}
@@ -3385,8 +3378,7 @@ function makeCharFromData(item){
 let state = {
   tab: 'chars',                     // 'chars' | 'collection' | 'combos' | 'guias' | 'tierlist' | 'favs'
   characters: [],
-  team: Array(6).fill(null),        // character id or null, index 0..5 = position 1..6
-  frontRow: 'row2',                 // 'row1' or 'row2' -> which row has combo priority
+  team: Array(6).fill(null),        // character id or null, index 0..5 = position 1..6 (Casa 1..6)
   filters: { search:'', rarity:null, type:null, affinity:null, element:null },
   favs: [],                         // ids dos personagens favoritados (aba Favoritos)
   donors: [],                       // [{id, number, name, amount, quote, discord, link, honras:[], active}] — Aliança Z (aba Doar + widget flutuante)
@@ -3404,7 +3396,7 @@ let state = {
   ioModalOpen: false,               // import/export JSON modal
   pickerSlot: null,                 // slot index currently choosing a warrior for, or null
   simStarter: null,                 // {charId, abilityKey} for combo simulation
-  formations: [],                   // [{name, team, frontRow}]
+  formations: [],                   // [{name, team}]
   collection: {},                   // {characterId: {owned:bool, level:0-10}} — sincroniza com a conta Discord quando logado
   collectionSearch: '',
   collectionOnlyOwned: false,
@@ -3543,7 +3535,7 @@ function renameTier(tierId, newLabel){
 async function saveCharacters(){
   try{ await persist('characters', JSON.stringify(state.characters)); }catch(e){ showToast('Erro ao salvar personagens'); }
 }
-async function saveTeamState(){ await persist('team_state', JSON.stringify({team:state.team, frontRow:state.frontRow})); }
+async function saveTeamState(){ await persist('team_state', JSON.stringify({team:state.team})); }
 async function saveFormations(){ await persist('formations', JSON.stringify(state.formations)); }
 
 /* ======================= CONTA (Discord + Supabase) ======================= */
@@ -3799,11 +3791,8 @@ function allTags(){
 }
 
 /* ======================= COMBO ENGINE ======================= */
-// priority order of team indices (0..5) based on frontRow setting
-function priorityOrder(){
-  const row1 = [0,1,2], row2 = [3,4,5];
-  return state.frontRow === 'row2' ? [...row2, ...row1] : [...row1, ...row2];
-}
+// Varre a equipe sempre na mesma ordem, da Casa 1 até a Casa 6 — sem prioridade de fileira.
+function priorityOrder(){ return [0,1,2,3,4,5]; }
 
 const STARTER_KEYS = ['skill','supreme'];
 const ABILITY_ICON = {skill:'H', supreme:'S', combo:'C'};
@@ -4785,8 +4774,6 @@ async function exportTierListImage(){
 }
 
 /* ======================= COMBOS (MONTADOR) ======================= */
-function frontIdxs(){ return state.frontRow === 'row2' ? [3,4,5] : [0,1,2]; }
-
 // Coloca um guerreiro do elenco: na casa selecionada (trocando de lugar se ele já estava em
 // campo) ou na primeira casa vazia. Sem casa selecionada, clicar em quem já está em campo tira.
 function placeChar(id){
@@ -4810,15 +4797,13 @@ function commitTeam(team){
   render();
 }
 
+// Ordem visual fixa das 6 casas no grid de 2 colunas (sem noção de fileira/frente):
+// coluna esquerda = 4,5,6 · coluna direita = 1,2,3.
+const SLOT_VISUAL_ORDER = [3,0,4,1,5,2];
+
 function renderCombosTab(){
   const filledCount = state.team.filter(Boolean).length;
   const hint = state.slotSel !== null ? `→ Casa ${state.slotSel+1}` : `${filledCount}/6 em campo`;
-  // Um time só de 6 — o toggle abaixo só escolhe quais 3 casas (destacadas) contam como
-  // linha de frente na varredura do combo, sem separar em duas colunas/times diferentes.
-  const rows = [
-    {key:'row1', label:'Casas 1-3'},
-    {key:'row2', label:'Casas 4-6'},
-  ];
   return `
   <section class="kz-page">
     <div class="kz-page-head">
@@ -4845,10 +4830,9 @@ function renderCombosTab(){
       <div class="kz-combos-main">
         <div class="kz-field">
           <div class="kz-field-head">
-            <span class="kz-label">Equipe · casas douradas = linha de frente</span>
-            <div class="kz-seg">${rows.map(r=>`<button class="${state.frontRow===r.key?'active':''}" data-front="${r.key}">${r.label}</button>`).join('')}</div>
+            <span class="kz-label">Equipe</span>
           </div>
-          <div class="kz-slots">${[0,1,2,3,4,5].map(renderSlot).join('')}</div>
+          <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
         </div>
         <div class="kz-panel kz-sim">${renderSimPanel()}</div>
       </div>
@@ -4873,9 +4857,9 @@ function renderRosterList(filterText){
 
 function renderSlot(idx){
   const c = state.team[idx] ? getChar(state.team[idx]) : null;
-  const front = frontIdxs().includes(idx), sel = state.slotSel === idx;
+  const sel = state.slotSel === idx;
   return `
-  <div class="kz-slot ${c?'filled':''} ${front?'front':''} ${sel?'selected':''}" data-slot="${idx}" ${c?'draggable="true"':''} title="Casa ${idx+1}">
+  <div class="kz-slot ${c?'filled':''} ${sel?'selected':''}" data-slot="${idx}" ${c?'draggable="true"':''} title="Casa ${idx+1}">
     <img class="kz-slot-ball" src="${ballSrc(idx+1)}" alt="Casa ${idx+1}" draggable="false">
     ${c ? `
     <button class="kz-slot-remove" data-remove-slot="${idx}" title="Remover">✕</button>
@@ -5014,15 +4998,6 @@ function attachCombosHandlers(){
     });
   });
 
-  view.querySelectorAll('.kz-seg [data-front]').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      state.frontRow = b.dataset.front;
-      state.simStarter = null;
-      saveTeamState();
-      render();
-    });
-  });
-
   const clearBtn = document.getElementById('clearTeamBtn');
   if(clearBtn) clearBtn.addEventListener('click', ()=>{
     customConfirm('Limpar a equipe atual do campo de batalha?', ()=>{
@@ -5035,7 +5010,7 @@ function attachCombosHandlers(){
   if(saveFormBtn) saveFormBtn.addEventListener('click', ()=>{
     if(state.team.every(t=>!t)){ showToast('Monte uma equipe antes de salvar.'); return; }
     customPrompt('Nome desta formação:', name=>{
-      state.formations.push({name, team:[...state.team], frontRow: state.frontRow});
+      state.formations.push({name, team:[...state.team]});
       saveFormations();
       render();
       showToast('Formação salva');
@@ -5047,7 +5022,6 @@ function attachCombosHandlers(){
       const f = state.formations[parseInt(b.dataset.loadFormation, 10)];
       if(!f) return;
       state.team = [...f.team];
-      state.frontRow = f.frontRow || 'row2';
       state.simStarter = null;
       state.slotSel = null;
       saveTeamState();
@@ -5093,11 +5067,6 @@ function renderGuiasTab(){
       <span class="txt"><span class="n">${EFFECT_LABELS[k]}</span><span class="c">${n} ${n===1?'combinado reage':'combinados reagem'} a este efeito</span></span>
     </div>`;
   }).join('');
-  const frow = (key, label, cells) => {
-    const front = state.frontRow === key;
-    return `<div class="kz-guide-frow ${front?'front':''}"><span class="lbl">${label}${front?' · frente':''}</span>${cells.map(n=>`<span class="cell">${n}</span>`).join('')}</div>`;
-  };
-  const frontLabel = state.frontRow === 'row2' ? 'Fileira 2' : 'Fileira 1';
   const scan = priorityOrder().map(i=>i+1).join(' → ');
   const stat = (title, vals, field) => `
     <div class="kz-guide-stat">
@@ -5121,13 +5090,12 @@ function renderGuiasTab(){
         <div class="kz-guide-effects">${effCards}</div>
       </article>
       <article class="kz-guide-card">
-        <div class="kz-guide-head"><span class="glyph">陣</span><h2>Formação 2×3</h2></div>
-        <p>A equipe tem 6 casas em duas fileiras. Ao surgir um efeito, o montador procura, entre os guerreiros ainda não usados, o primeiro com o gatilho certo, começando pela fileira da frente.</p>
+        <div class="kz-guide-head"><span class="glyph">陣</span><h2>Formação</h2></div>
+        <p>A equipe tem 6 casas. Ao surgir um efeito, o montador procura, entre os guerreiros ainda não usados, o primeiro com o gatilho certo, sempre na mesma ordem — da Casa 1 até a Casa 6.</p>
         <div class="kz-guide-formation">
-          ${frow('row1', 'Fileira 1', [1,2,3])}
-          ${frow('row2', 'Fileira 2', [4,5,6])}
+          <div class="kz-guide-slots">${SLOT_VISUAL_ORDER.map(i=>`<span class="cell">${i+1}</span>`).join('')}</div>
         </div>
-        <div class="kz-guide-note">Ordem de varredura com a ${frontLabel} na frente: ${scan}.</div>
+        <div class="kz-guide-note">Ordem de varredura: ${scan}.</div>
       </article>
       <article class="kz-guide-card">
         <div class="kz-guide-head"><span class="glyph">星</span><h2>Progressão por estrelas</h2></div>
@@ -5276,7 +5244,7 @@ function applyStoredValue(key, raw){
   try{
     switch(key){
       case 'characters': state.characters = JSON.parse(raw); break;
-      case 'team_state': { const p = JSON.parse(raw); state.team = p.team || Array(6).fill(null); state.frontRow = p.frontRow || 'row2'; break; }
+      case 'team_state': { const p = JSON.parse(raw); state.team = p.team || Array(6).fill(null); break; }
       case 'formations': state.formations = JSON.parse(raw); break;
       case 'collection': state.collection = JSON.parse(raw); break;
       case 'tier_list': state.tierList = JSON.parse(raw); break;
