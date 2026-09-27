@@ -40,8 +40,6 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 ::-webkit-scrollbar{width:10px;height:10px;}
 ::-webkit-scrollbar-thumb{background:#2a2438;border-radius:6px;}
 ::-webkit-scrollbar-track{background:#0a0b14;}
-@keyframes kzDragonFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-6px,-10px)}}
-@keyframes kzDragonFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,8px)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 @keyframes awakenFlicker{0%,100%{filter:none;}50%{filter:brightness(1.6) saturate(1.3);}}
 
@@ -63,7 +61,8 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 /* header */
 .kz-header{
   position:relative;height:128px;overflow:hidden;z-index:5;
-  background:linear-gradient(180deg,#1d1238 0%,#4a1f4a 26%,#9a3a3a 52%,#e2692a 76%,#ffb24d 100%);
+  background-image:url('assets/bg-header-space.png');
+  background-size:cover;background-position:center 30%;background-repeat:no-repeat;
   box-shadow:0 2px 0 #ff8a2a, 0 6px 28px rgba(255,120,30,.45);
 }
 .kz-header-sun{position:absolute;right:16%;top:18px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle, #fff3c4 0%, #ffd46b 45%, rgba(255,170,60,0) 72%);}
@@ -154,24 +153,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 #view{position:relative;z-index:1;animation:fadeUp .35s ease both;}
 .kz-loading{padding:80px 0;text-align:center;color:var(--text-dim);}
 
-/* decoração: Shenlong nos cantos + esfera flutuante */
-.kz-dragon{position:fixed;overflow:hidden;pointer-events:none;z-index:1;-webkit-mask-composite:source-in;mask-composite:intersect;}
-.kz-dragon-inner{position:absolute;width:720px;}
-.kz-dragon img{width:720px;display:block;filter:drop-shadow(0 0 16px rgba(90,255,140,.25)) drop-shadow(0 10px 16px rgba(0,0,0,.65));}
-.kz-dragon-head{
-  top:128px;right:0;width:360px;height:440px;
-  -webkit-mask-image:linear-gradient(180deg, #000 60%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 25%);
-  mask-image:linear-gradient(180deg, #000 60%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 25%);
-}
-.kz-dragon-head .kz-dragon-inner{left:-270px;top:-63px;animation:kzDragonFloat 8s ease-in-out infinite;}
-.kz-dragon-head img{transform:scaleX(-1);}
-.kz-dragon-tail{
-  bottom:0;left:212px;width:300px;height:300px;transition:left .2s ease;
-  -webkit-mask-image:linear-gradient(0deg, #000 55%, transparent 100%), linear-gradient(270deg, transparent 0%, #000 30%);
-  mask-image:linear-gradient(0deg, #000 55%, transparent 100%), linear-gradient(270deg, transparent 0%, #000 30%);
-}
-.kz-app.nav-compact .kz-dragon-tail{left:0;}
-.kz-dragon-tail .kz-dragon-inner{left:-168px;top:-492px;animation:kzDragonFloat2 9s ease-in-out infinite;}
+/* decoração: esfera flutuante */
 .kz-float-ball{position:fixed;right:-44px;top:58%;width:110px;height:110px;display:block;pointer-events:none;z-index:4;transform:rotate(-18deg);filter:drop-shadow(0 0 28px rgba(255,140,30,.55));}
 
 /* ======================= COMPONENTES ======================= */
@@ -839,7 +821,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-app:not(.nav-compact) .kz-nav-backdrop{display:block;position:fixed;inset:0;z-index:29;background:rgba(3,2,8,.55);}
   .kz-main{padding:20px 14px 60px;}
   .kz-main-watermark{font-size:200px;}
-  .kz-dragon,.kz-float-ball{display:none;}
+  .kz-float-ball{display:none;}
   .kz-title{font-size:44px;}
   .kz-hero-title{font-size:48px;}
   .kz-hero-content{padding:22px 18px;}
@@ -931,8 +913,6 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
     </main>
   </div>
 
-  <div class="kz-dragon kz-dragon-head" aria-hidden="true"><div class="kz-dragon-inner"><img src="assets/shenlong.webp" alt=""></div></div>
-  <div class="kz-dragon kz-dragon-tail" aria-hidden="true"><div class="kz-dragon-inner"><img src="assets/shenlong.webp" alt=""></div></div>
   <img class="kz-float-ball" src="assets/balls/esfera-3.webp" alt="" aria-hidden="true">
 </div>
 <div id="modalRoot"></div>
