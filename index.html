@@ -614,7 +614,11 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-donate-layout{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:22px;align-items:start;}
 .kz-donate-card{padding:24px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
 .kz-donate-card img{width:100%;max-width:220px;border-radius:12px;display:block;background:#fff;padding:10px;}
-.kz-donate-card iframe{width:100%;max-width:220px;height:280px;border:none;border-radius:12px;display:block;background:#fff;}
+/* O embed da LivePix vem com uma faixa de texto em cima e embaixo do QR (fixas, 220x280) —
+   corta essas faixas escondendo o iframe atrás de uma janela do tamanho só do QR (220x220)
+   e deslocando ele pra cima, em vez de mostrar o widget inteiro. */
+.kz-qr-crop{width:100%;max-width:220px;height:220px;overflow:hidden;border-radius:12px;position:relative;background:#fff;}
+.kz-qr-crop iframe{position:absolute;top:-24px;left:0;width:100%;height:280px;border:none;}
 .kz-donate-cta{
   display:flex;align-items:center;gap:10px;padding:13px 26px;border-radius:8px;border:1.5px solid var(--gold);
   background:var(--grad-primary);color:#fff;font-size:16px;font-weight:700;box-shadow:0 0 16px rgba(255,90,30,.4);width:100%;justify-content:center;
@@ -5601,7 +5605,7 @@ function renderDoarTab(){
     </div>
     <div class="kz-donate-layout">
       <div class="kz-panel kz-donate-card">
-        <iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy"></iframe>
+        <div class="kz-qr-crop"><iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy"></iframe></div>
         <a class="kz-donate-cta" href="${LIVEPIX_DONATE_URL}" target="_blank" rel="noopener noreferrer">
           <span>気</span><span>Doar agora</span>
         </a>
