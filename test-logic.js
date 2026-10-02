@@ -611,7 +611,7 @@ async function main(){
     assert.ok(r.some(x => x.includes('Limitado')), 'SSR [Limitado] deveria entrar no filtro SSR');
   });
 
-  await test('"Sugestão por raridade" põe Limitado no 1º rank, SSR no 2º, SR no 3º, R no 4º', () => {
+  await test('"Sugestão por raridade" põe Ultimate/Lendário/Limitado no 1º rank, SSR no 2º, SR no 3º, R no 4º', () => {
     const r = evalIn(sandbox, `(() => {
       const backup = JSON.stringify(state.tierList);
       suggestTierListByRarity();
@@ -621,7 +621,7 @@ async function main(){
       return {byTier, unranked};
     })()`);
     assert.strictEqual(r.unranked, 0);
-    assert.ok(r.byTier[0].length && r.byTier[0].every(x => x.includes('Limitado')));
+    assert.ok(r.byTier[0].length && r.byTier[0].every(x => x.includes('Limitado') || x.includes('Lendário') || x.includes('Ultimate')));
     assert.ok(r.byTier[1].length && r.byTier[1].every(x => x === 'SSR'));
     assert.ok(r.byTier[2].length && r.byTier[2].every(x => x === 'SR'));
     assert.ok(r.byTier[3].length && r.byTier[3].every(x => x === 'R'));
