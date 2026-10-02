@@ -112,22 +112,22 @@
           "nome": "Impacto Ilimitado",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca uma coluna de inimigos, reduz a Velocidade de Recuperação de Ki do alvo em 50% (1 turno), ganha [Escudo de Energia] (40% de chance de reduzir o dano direto sofrido em 25%, removível, dura 1 turno); se o alvo for um [Saiyajin], o dano aumenta em 30%; aumenta a própria Velocidade de Recuperação de Ki em 15% (1 turno).",
-          "dano": "160%+15 a 3 unidades inimigas aleatórias",
+          "desc": "[Artes Marciais] Ataca uma coluna de inimigos, reduz a Velocidade de Recuperação de Ki do alvo em 50% (1 turno), ganha [Escudo de Energia] (40% de chance de reduzir o dano direto recebido em 25%, removível, dura 1 turno); se o alvo for [Saiyajin], o dano aumenta em 30%; aumenta a própria Velocidade de Recuperação de Ki em 15% (1 turno).",
+          "dano": "160%+15",
           "icone": "ability-icons/impacto-ilimitado.png"
         },
         "max": {
-          "nome": "MAX. Impacto Infinito",
+          "nome": "MAX. Impacto Ilimitado",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca uma fileira de inimigos, reduzindo a velocidade de recuperação de raiva de todos os alvos em 50% (1 turno) e convertendo 30% do dano causado em vida própria. Obtém [Escudo de Energia] (50% de chance de reduzir em 30% o dano direto recebido, pode ser removido, 1 turno). Se o alvo for um [Saiyajin], o dano aumenta em 40% e a velocidade de recuperação de raiva própria aumenta em 25% (1 turno).",
-          "dano": "175%+15 a 3 unidades inimigas aleatórias",
+          "desc": "[Artes Marciais] : mesma estrutura reforçada — maior redução de Velocidade de Recuperação de Ki, [Escudo de Energia] com chance maior, bônus de dano contra Saiyajin aumentado.",
+          "dano": "175%+15",
           "icone": "ability-icons/impacto-ilimitado.png"
         }
       },
       "suprema": {
         "base": {
-          "nome": "Punhos de Super Força",
+          "nome": "Punhos de Força Suprema",
           "estrelas": 1,
           "tipo": "Ativar",
           "desc": "[Artes Marciais] Aumenta o próprio ATQ e DEF; quanto mais Supremos inimigos forem usados neste turno, maior o bônus (base 10%, até 30%, dura 2 turnos); ataca um único inimigo, 30% de chance de infligir [Atordoamento] (não pode agir, dura 1 turno).",
@@ -135,18 +135,18 @@
           "icone": "ability-icons/punhos-de-super-forca.png"
         },
         "max": {
-          "nome": "Punhos de Super Força MÁX.",
+          "nome": "MAX. Despertar do Potencial",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta o próprio ATQ e DEF; quanto mais Supremos inimigos forem usados neste turno, maior o bônus (base 15%, até 35%, dura 2 turnos); ataca um único inimigo, 30% de chance de infligir [Atordoamento]; se o alvo for um [Saiyajin], causa Dano Extra igual a... (texto continua, ver jogo).",
+          "desc": "[Artes Marciais] : mesmo gatilho, cura maior (30% do PV Máx.) e ganha também +15% de Taxa de Redução de Dano por 1 turno junto com a imunidade a [Controle].",
           "dano": "420%+24",
           "icone": "ability-icons/punhos-de-super-forca.png"
         },
         "smax": {
-          "nome": "SMAX. Super Soco Poderoso",
+          "nome": "SMAX. Punhos de Força Suprema",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Aumento de ATQ Físico] Aumenta o próprio Ataque e Defesa. Quanto mais Golpes Especiais o inimigo usar neste turno, maior será o bônus (base de 25%, máximo de 45%, dura 2 turnos). Ataca um único inimigo, priorizando o [Saiyajin] com a menor vida. Quanto mais Golpes Especiais o inimigo usar neste turno, maior será o dano, com aumento máximo de 45%. 30% de chance de causar [Atordoamento] (incapacidade de agir, dura 1 turno) e causa [Empurrão]. Se o alvo for um [Saiyajin], causa dano adicional equivalente a 300% da própria Defesa (este dano adicional não recupera Fúria). [Efeito Passivo]: Após reviver, ganha imediatamente 1 camada de [Parede de Energia] e aumenta sua própria [Resistência a ATQ Especial] em 15% (2 turnos).",
+          "desc": "[Artes Marciais] : bônus de ATQ/DEF ainda maior (base 20%, até 60%), 50% de chance de [Atordoamento], ganha efeito passivo extra ligado a Supremos inimigos usados na rodada.",
           "dano": "440%+24",
           "icone": "ability-icons/super-soco-poderoso.png"
         }
@@ -216,41 +216,41 @@
           "nome": "Golpe Veloz",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, absorve 8% de PV e 200 de Fúria do alvo, 60% de chance de causar [Derrubada].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, absorve 8% do PV e 200 de Fúria do alvo, 60% de chance de causar [Derrubar].",
           "dano": "160%+15",
           "icone": "ability-icons/golpe-veloz.png"
         },
         "max": {
-          "nome": "MAX. Golpe Rápido",
+          "nome": "MAX. Golpe Veloz",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Física] Ataca um único inimigo, absorvendo 10% da vida do alvo e 200 pontos de raiva; a unidade atingida sofre redução de 20% no dano de golpe especial e 60% no dano de habilidade pequena por 2 turnos, com 60% de chance de causar [Derrubada].",
+          "desc": "[Artes Marciais] : absorve 12% de PV e 250 de Fúria, 70% de [Derrubar], e ganha uma chance de repetir o golpe se o alvo cair abaixo de 50% de PV.",
           "dano": "175%+15",
           "icone": "ability-icons/golpe-veloz.png"
         }
       },
       "suprema": {
         "base": {
-          "nome": "Choque da Tempestade Suprema",
+          "nome": "Choque de Tempestade Supremo",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo e absorve 15% do Ataque, Defesa, Taxa de Dano e Taxa de Redução de Dano do alvo.",
+          "desc": "[Ki] Ataca um único inimigo e absorve 15% do Ataque, Defesa, Taxa de Dano e Taxa de Redução de Dano do alvo.",
           "dano": "400%+24",
           "icone": "ability-icons/choque-da-tempestade-suprema.png"
         },
         "max": {
-          "nome": "Choque da Tempestade Suprema MÁX.",
+          "nome": "MAX. Força da Origem",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Ataca um único inimigo e absorve 20% do Ataque, Defesa, Taxa de Dano e Taxa de Redução de Dano do alvo. Alvos mortos por esta habilidade têm 70% de chance de não poder [Reviver].",
+          "desc": "[Ki] *(a tela mostrou o título \"MAX.Choque de Tempestade Supremo\" por um bug de sobreposição de texto do próprio jogo — o conteúdo é claramente a versão MAX da passiva \"Força da Origem\")*: Taxa de Esquiva maior, o bônus de Taxa de Dano com PV cheio é maior e decai mais devagar conforme perde PV.",
           "dano": "440%+24",
           "icone": "ability-icons/choque-da-tempestade-suprema.png"
         },
         "smax": {
-          "nome": "SMAX. Tempestade Suprema Impacto",
+          "nome": "SMAX. Choque de Tempestade Supremo",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca um inimigo individual e absorve 25% do ataque, defesa, taxa de dano e taxa de redução de dano do alvo. Inimigos mortos por esta habilidade têm 100% de chance de não poderem ser [Ressuscitados]. Em turnos ímpares, aumenta a intensidade de crítico em 15% (1 turno); em turnos pares, recupera 12% da vida máxima e causa [Derrubada]. [Efeito Passivo]: Ao obter [Fortalecimento de Equipe], aumenta adicionalmente em 50% (no início da batalha, se houver mais de 2 [Saiyajins] na equipe, aumenta a velocidade de recuperação de raiva em 30% por 2 turnos; se houver mais de 2 [Guerreiros do Mal], aumenta a taxa de crítico em 30% por 2 turnos; se houver mais de 2 [Guerreiros Orgulhosos], ganha [Inabalável] com dano máximo de 45% quanto menor a vida, por 2 turnos; se houver mais de 2 [Guerreiros Fundidos], a probabilidade de habilidade aumenta em 30% e cada habilidade absorve 5% adicional da vida do alvo, por 2 turnos); se obteve [Fortalecimento de Equipe], aumenta a taxa de redução de dano em 30%, a taxa de roubo de vida em 15% e a recuperação de raiva em 15% (1 turno).",
+          "desc": "[Ki] : absorve 25% dos 4 atributos, converte mais Fúria, e aplica uma marca no alvo que aumenta o dano do próximo Supremo contra ele.",
           "dano": "440%+24",
           "icone": "ability-icons/tempestade-suprema-impacto.png"
         }
@@ -317,45 +317,45 @@
       "nome": "Cumber",
       "habilidade": {
         "base": {
-          "nome": "Garras Múltiplas Malignas",
+          "nome": "Garra Maligna Múltipla",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Cumber controla a Garra Maligna para atacar uma coluna de inimigos, aumenta a própria Taxa de Roubo de Vida em 30%; causa 40% de Dano Extra a todos os alvos com [Pesadelo]; após Cumber obter todo o [Poder da Vingança], com certeza lançará uma habilidade no próximo turno.",
-          "dano": "160%+15 a unidades inimigas em uma coluna",
+          "desc": "[Ki] Cumber controla a Garra Maligna para atacar uma coluna de inimigos, aumenta a própria Taxa de Roubo de Vida em 30%; causa 40% de dano extra a todos os alvos com [Pesadelo]; depois que Cumber obtém todo o [Poder de Vingança], certamente liberará uma habilidade no próximo turno.",
+          "dano": "160%+15",
           "icone": "ability-icons/garras-multiplas-malignas.png"
         },
         "max": {
-          "nome": "MAX. Garras Múltiplas da Energia Maligna",
+          "nome": "MAX. Garra Maligna Múltipla",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Golpe Especial] Cumber usa energia maligna para atacar uma fileira de inimigos. Para cada camada de [Força da Vingança], este ataque aumenta sua própria taxa de crítico em 6%, com 40% de chance de causar [Paralisia] no alvo principal. A chance aumenta para 60% contra alvos com [Pesadelo]. Se o [alvo] já estiver com [Paralisia], o efeito muda para [Atordoamento]. Aumenta sua própria taxa de roubo de vida em 40%. Causa 40% de dano extra a todos os alvos com [Pesadelo] e 20% de dano extra a alvos com [Vingança]. Após Cumber acumular 4 camadas de [Força da Vingança], a habilidade é ativada automaticamente. Quando Cumber sofre um golpe pesado (dano único superior a 30% da vida máxima), ele ganha 1 camada de [Força da Vingança] e marca o atacante como alvo de [Vingança]. [Paralisia]: Impossibilita perseguição, dura 1 turno.",
-          "dano": "175%+15 a unidades inimigas em uma coluna",
+          "desc": "[Ki] : +40% de Roubo de Vida, +50% de dano extra contra [Pesadelo], e a próxima habilidade garantida também ganha dano bônus.",
+          "dano": "175%+15",
           "icone": "ability-icons/garras-multiplas-malignas.png"
         }
       },
       "suprema": {
         "base": {
-          "nome": "Apagador Maligno Brutal",
+          "nome": "Apagador Maligno Duro",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Cumber usa Energia Maligna para rasgar o alvo, absorvendo 15% do Ataque e Defesa do alvo; ignora 20% da Defesa contra Guerreiros do [Tipo Defesa]; se o alvo for [Saiyajin], recupera 6% do PV e os inimigos ao redor do alvo sofrem 30% de Dano Extra (não restaura Fúria); recupera 200 de Fúria se conseguir abate.",
+          "desc": "[Artes Marciais] Cumber usa Energia Maligna para rasgar o alvo, absorvendo 15% do Ataque e Defesa do alvo; ignora 20% de Defesa contra guerreiros do [Tipo Defesa]; se o alvo for [Saiyajin], recupera 6% de PV e os inimigos ao redor do alvo sofrem 30% de dano extra (não restaura Fúria); recupera 200 de Fúria se conseguir um abate.",
           "dano": "400%+24",
           "icone": "ability-icons/apagador-maligno-brutal.png"
         },
         "max": {
-          "nome": "Apagador Maligno Brutal MÁX.",
+          "nome": "MAX. Poder da Vingança",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Cumber usa Energia Maligna para rasgar o alvo, absorvendo 20% do Ataque e Defesa do alvo; ignora 30% da Defesa contra Guerreiros do [Tipo Defesa]; se o alvo for [Saiyajin], recupera 6% do PV; recupera 200 de Fúria se conseguir abate; os inimigos ao redor do alvo sofrem 30% de Dano Extra (não restaura Fúria); se não matar o alvo principal, o alvo entra no estado [Pesadelo] (dano supremo reduzido em 20%, Defesa reduzida em 20%, dura 1 rodada), o próximo dano supremo aumenta em 15%.",
+          "desc": "[Artes Marciais] Aumenta a própria Resistência Crítica em batalha. No início de cada turno, Cumber ganha 1 acúmulo de [Poder de Vingança] (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%). Começa a batalha com 2 acúmulos, ganha 1 acúmulo no início de cada turno, máx. 5 acúmulos. No máximo de acúmulos, seu tamanho aumenta. Se Cumber matar um guerreiro inimigo com uma habilidade ou Supremo, ele se torna potencializado: restaura 15% do próprio PV Máx., remove seus próprios efeitos anormais, e se torna imune a efeitos de [Controle] por 1 turno. Quando um [Guerreiro Maligno] aliado consegue seu primeiro abate na batalha, Cumber ganha imediatamente o máximo de acúmulos de [Poder de Vingança]. Cumber é imune ao status de [Pesadelo]. Ao ser revivido, todos os acúmulos de [Poder de Vingança] são perdidos e a contagem recomeça.",
           "dano": "420%+24",
           "icone": "ability-icons/apagador-maligno-brutal.png"
         },
         "smax": {
-          "nome": "SMAX. Super Corte Maligno",
+          "nome": "SMAX. Apagador Maligno Duro",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Cumber ataca primeiro o alvo com [Vingança]. Para cada camada de [Força da Vingança], aumenta sua própria taxa de crítico em 6% neste ataque. Se tiver o máximo de camadas de [Força da Vingança], aumenta adicionalmente sua própria intensidade de crítico em 20%. Se o alvo for [Saiyajin], recupera 8% de sua própria vida. Se causar uma eliminação, recupera 300 de sua própria raiva. Absorve 25% do ataque e defesa do alvo principal. Contra guerreiros do tipo [Defesa], ignora 35% da defesa. Guerreiros ao redor do alvo sofrem 30% de dano extra (sem recuperar raiva extra), causando [Elevação Baixa]. Se não eliminar o alvo principal, o alvo entra em estado de Pesadelo (dano de golpe especial reduzido em 25%, defesa reduzida em 25%, dura 1 turno). No próximo golpe especial, aumenta o dano em 20%. [Efeito Passivo]: Pode reviver após a morte, recuperando imediatamente 20% de sua própria vida. Este efeito ativa uma vez por batalha.",
-          "dano": "450%+24",
+          "desc": "[Artes Marciais] : absorve 25% ATQ/DEF, ignora 40% de Defesa, cura 10% de PV, dano em área sobe para 50%, e ganha [Poder de Vingança] extra ao matar.",
+          "dano": "440%+24",
           "icone": "ability-icons/super-corte-maligno.png"
         }
       },
@@ -424,15 +424,15 @@
           "nome": "Espada de Ki",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais / Explosão de Ki] Vegetto ataca um único inimigo, causa Dano Extra igual a 8% do PV Máx.; Vegetto ganha permanentemente 8% de Ataque e 10% de chance de habilidade menor por cada uso de habilidade menor, acumulando 3 vezes; 60% de chance de causar [Elevação Baixa].",
+          "desc": "[Artes Marciais/Ki] Vegetto ataca um único inimigo, causa dano extra igual a 8% do PV Máx.; Vegetto ganha permanentemente 8% de Ataque e 10% de chance de habilidade pequena por uso de habilidade pequena, acumula até 3 vezes; 60% de chance de causar [Pequeno Lançamento].",
           "dano": "160%+15",
           "icone": "ability-icons/espada-de-ki.png"
         },
         "max": {
-          "nome": "MAX. Ataque da Grande Explosão",
+          "nome": "MAX. Ataque Explosivo Enorme",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] O ataque de Vegetto em um único alvo causa 10% de dano adicional com base na Vida Máxima do alvo, recupera 5% da própria Vida Máxima, reduz em 20% a Intensidade de Crítico e a Intensidade de Bloqueio da retaguarda inimiga (por 2 turnos). Cada vez que Vegetto libera uma habilidade pequena, ganha permanentemente 10% de Ataque e 10% de chance de habilidade pequena, acumulável até 3 vezes. Com 60% de chance, causa [Elevação Baixa].",
+          "desc": "[Corpo a Corpo/Ki] Vegetto ataca um único alvo. +10% de dano (PV Máx.). Cura 5% do PV Máx. Reduz o Dano Crítico/Intensidade de Bloqueio da retaguarda em 20% (2 turnos). Ganha permanentemente +10% de ATQ/Chance de Ativação de Habilidade por uso (máx. 3 acúmulos). 60% de chance de [Lançamento Leve].",
           "dano": "180%+15",
           "icone": "ability-icons/espada-de-ki.png"
         }
@@ -442,24 +442,24 @@
           "nome": "Kamehameha Final",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Aumenta a própria Taxa de Redução de Dano e Taxa de Dano em 10% por 2 rodadas, ataca uma coluna de inimigos, o alvo principal sofre 20% de Dano Extra, os ataques ignoram 25% da Defesa do alvo neste turno.",
+          "desc": "[Ki] Aumenta a própria Taxa de Redução de Dano e Taxa de Dano em 10% por 2 rodadas, ataca uma coluna de inimigos, o alvo principal sofre 20% de dano extra, os ataques ignoram 25% da Defesa do alvo neste turno.",
           "dano": "280%+25",
           "icone": "ability-icons/kamehameha-final.png"
         },
         "max": {
-          "nome": "Kamehameha Final MÁX.",
+          "nome": "MAX. Força dos Brincos Potara",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria Taxa de Redução de Dano e Taxa de Dano em 15% por 2 rodadas, ataca uma coluna de inimigos, o alvo principal sofre 30% de Dano Extra, os ataques ignoram 35% da Defesa do alvo neste turno, remove Buffs da coluna do alvo. Aprimora o efeito de contra-ataque da [Habilidade Passiva], aumentando as ativações de revide para 3 vezes.",
+          "desc": "[Ki] Aumenta a Redução de Dano. Quando o dano cumulativo recebido ultrapassa 20% do PV Máx.: ataca o inimigo com maior ATQ (180% de dano do ATQ), cura 10% de PV +200 de Fúria (máx. 3x por batalha). Após 3 ativações: +20% de Roubo de Vida permanente. Pode dissipar Controle (2x por batalha).",
           "dano": "300%+25",
           "icone": "ability-icons/kamehameha-final.png"
         },
         "smax": {
-          "nome": "SMAX. Kamehameha Definitivo",
+          "nome": "SMAX. Kamehameha Final",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Aumenta sua própria taxa de redução de dano e taxa de dano em 20% (2 turnos). Ataca uma fileira de inimigos, com o alvo principal recebendo 30% de dano adicional. Neste turno, o ataque ignora 35% da defesa do alvo. Remove os efeitos positivos da fileira do alvo e remove seus próprios efeitos negativos, causando [Empurrão]. Se houver apenas um alvo na fileira, causa dano igual a 400% do ataque. Neste turno, a capacidade de ignorar a defesa do alvo aumenta para 50%.",
-          "dano": "320%+25 (fileira) / 400%+25 (se apenas 1 alvo)",
+          "desc": "[Ki] +20% de Redução de Dano/Dano (2 turnos). Ataca coluna: o alvo principal sofre +30% de dano. Ignora 35% de DEF. Remove buffs da coluna/debuffs próprios. Alvo único: dano de 400% do ATQ (ignora 50% de DEF).",
+          "dano": "320%+25",
           "icone": "ability-icons/kamehameha-final.png"
         }
       },
@@ -528,15 +528,15 @@
           "nome": "Feixe de Energia",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, 60% de chance de causar [Empurrão], aumenta permanentemente o dano de habilidade em 15%, até 45%; restaura 150 de Fúria para Guerreiros com [Artes Marciais], converte 20% do dano causado em cura de PV para si; se [Beerus] estiver presente, também cura [Beerus].",
+          "desc": "[Ki] Ataca uma coluna de inimigos, 60% de chance de causar [Empurrão], aumenta permanentemente o dano de habilidade em 15% (até 45%); restaura 150 de Fúria a guerreiros com [Artes Marciais], converte 20% do dano causado em cura de PV para si; se [Beerus] estiver presente, também cura [Beerus].",
           "dano": "160%+15",
           "icone": "ability-icons/feixe-de-energia.png"
         },
         "max": {
-          "nome": "MAX. Energia Luminosa",
+          "nome": "MAX. Feixe de Energia",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 60% de chance de causar [Empurrão]. Aumenta permanentemente o dano de habilidade em 15%, até no máximo 60%. Recupera 150 de raiva para si mesmo e para os Guerreiros que possuem [Artes Marciais]. Converte 30% do dano causado em cura para si mesmo. Se [Beerus] estiver presente, também cura [Beerus], e [Beerus] recebe o efeito [Retrocesso Temporal].",
+          "desc": "[Ki] Ataca coluna. 60% de chance de [Empurrão]. Ganha permanentemente +15% de Dano de Habilidade (máx. +60%). Cura a si e aliados de [Artes Marciais] em 150 de Fúria. 30% do dano→PV. Se Beerus presente: também cura Beerus e concede [Retrocesso Temporal].",
           "dano": "170%+15",
           "icone": "ability-icons/feixe-de-energia.png"
         }
@@ -546,15 +546,15 @@
           "nome": "Prelúdio da Destruição",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "Aumenta as próprias Taxas de Dano e de Redução de Dano em 10% (1 turno), ataca todos os inimigos; quanto menos alvos atingir, maior o dano, até 120%, e cura todos os aliados em 50% do próprio Ataque.",
-          "dano": "155%+15 (todas as unidades inimigas)",
+          "desc": "Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 10% (1 turno), ataca todos os inimigos; quanto menos alvos atingidos, maior o dano (até 120%), e cura todos os aliados em 50% do próprio Ataque.",
+          "dano": "155%+15",
           "icone": "ability-icons/preludio-da-destruicao.png"
         },
         "max": {
-          "nome": "Prelúdio da Destruição MÁX.",
+          "nome": "MAX. Deus e Assistente",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "Aumenta as próprias Taxas de Dano e de Redução de Dano em 15% (1 turno), ataca todos os inimigos; quanto menos alvos atingir, maior o dano, até 120%, e cura todos os aliados em 70% do próprio Ataque; após lançar a Supremo, ganha [Bênção Angelical] por 1 turno (o dano único recebido não excede 30%, aumenta a Taxa de Esquiva, 30% de chance de esquivar de Supremos, pode ativar até 2 vezes por turno).",
+          "desc": "Reduz o ATQ de todos os inimigos. Primeira vez com PV <60%: registra PV/Fúria. Com PV <30%: [Retrocesso Temporal] (restaura valores registrados, dissipa, uma vez por batalha). Início de batalha: concede [Artes Marciais] a 1 aliado (+12% de Dano/Redução de Dano, exclui certos SSR). Se Beerus presente: também recebe [Artes Marciais]. Quando aliado com [Artes Marciais] sofre Supremo: +100 de Fúria (máx. 300 por turno). Se sozinho: +20% de Dano/Redução de Dano permanente. Aumenta o poder de ataque de ninjas [Sábios] em 5%.",
           "dano": "170%+15 (todas as unidades inimigas)",
           "icone": "ability-icons/preludio-da-destruicao.png"
         },
@@ -562,8 +562,8 @@
           "nome": "SMAX. Prelúdio da Destruição",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "Aumenta sua própria Taxa de Dano e Taxa de Redução de Dano em 25% (1 turno), ataca todos os inimigos. Quanto menos alvos atingir, maior será o dano, podendo chegar a até 150%. Além disso, recupera para todos os aliados uma quantidade de PV igual a 90% do Ataque do usuário. Dentro de 1 turno após usar a habilidade definitiva, ativa [Proteção do Chifre Dourado] (dentro de 1 turno, o dano recebido por ataque único não excede 30%, aumenta a Taxa de Esquiva, com 30% de chance de esquivar de habilidades e habilidades definitivas, ativando no máximo 3 vezes por turno), causando [Elevação Alta]. [Aprimoramento Passivo]: Se Whis estiver em campo, os Guerreiros que possuírem [Artes Marciais] também ativarão o efeito de [Retorno no Tempo], mas o efeito de retorno não recupera Raiva, ativando 1 vez por batalha.",
-          "dano": "180%+15 (todas as unidades inimigas)",
+          "desc": "+25% de Dano/Redução de Dano (1 turno). Ataca todos: o dano escala com menos acertos (máx. +150%). Cura todos os aliados em 90% do ATQ. Pós-Supremo: [Bênção Angelical] (1 turno — máx. 30% de PV por acerto, +30% de Taxa de Esquiva (máx. 3 habilidades/Supremos)). [Passiva]: Se Vados estiver presente, [Artistas Marciais] ativam [Retrocesso Temporal] (sem ganho de Fúria, uma vez por batalha).",
+          "dano": "180%+15",
           "icone": "ability-icons/preludio-da-destruicao.png"
         }
       },
