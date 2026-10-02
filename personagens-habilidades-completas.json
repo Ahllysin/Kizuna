@@ -31,10 +31,10 @@
           "icone": "ability-icons/kamehameha.png"
         },
         "max": {
-          "nome": "MAX. Poder Super Saiyajin",
+          "nome": "Kamehameha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. No primeiro turno, aumenta em 200 a própria raiva. Se Vegeta estiver em campo (independente de aliado ou inimigo), aumenta em 15% a própria taxa de dano. Aumenta o ATQ em 5%.",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, 100% de chance de infligir [Queimadura] (mesmo efeito acima), e causa 20% de dano adicional à Fileira da Frente.",
           "dano": "250%+12",
           "icone": "ability-icons/kamehameha.png"
         },
@@ -89,13 +89,13 @@
           "nome": "Poder do Super Saiyajin",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. No primeiro turno, ganha +200 de Fúria.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ATQ. No primeiro turno, ganha +200 de Fúria. Aumenta o ATQ em 5%."
         },
         "max": {
           "nome": "MAX. Poder Super Saiyajin",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. No primeiro turno, aumenta em 200 a própria raiva. Se Vegeta estiver em campo (independente de aliado ou inimigo), aumenta em 15% a própria taxa de dano.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ataque. No primeiro turno, aumenta em 200 a própria raiva. Se Vegeta estiver em campo (independente de aliado ou inimigo), aumenta em 15% a própria taxa de dano. Aumenta o ATQ em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -135,10 +135,10 @@
           "icone": "ability-icons/punhos-de-super-forca.png"
         },
         "max": {
-          "nome": "MAX. Despertar do Potencial",
+          "nome": "MAX. Punhos de Força Suprema",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] : mesmo gatilho, cura maior (30% do PV Máx.) e ganha também +15% de Taxa de Redução de Dano por 1 turno junto com a imunidade a [Controle].",
+          "desc": "[Artes Marciais] : bônus de ATQ/DEF maior (base 15%, até 45%), 40% de chance de [Atordoamento].",
           "dano": "420%+24",
           "icone": "ability-icons/punhos-de-super-forca.png"
         },
@@ -184,22 +184,22 @@
         {
           "nome": "Sedento de Sangue",
           "nivel_visto": 0,
-          "desc": "No início da batalha, todos os Guerreiros [Esquadrão do Orgulho] ganham 6% de resistência a [Explosão de Ki].",
+          "desc": "No início da batalha, todos os guerreiros da [Tropa do Orgulho] ganham 6% de resistência a [Explosão de Ki].",
           "icone": "ability-icons/sedento-de-sangue.png"
         }
       ],
       "passivaUnica": {
         "base": {
-          "nome": "Despertar de Potencial",
+          "nome": "Despertar do Potencial",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Ganha o efeito [Imortal], o dano aumenta conforme o PV diminui. Quando cai pela primeira vez abaixo de 50% e 30% de PV, ganha 1 acúmulo de [Parede de Energia] (se o dano sofrido exceder 150% do próprio ATQ, [Parede de Energia] pode reduzir 70% desse dano). Ao sofrer KO, revive com 40% de PV e 100% de Ki uma vez por batalha.\nQuanto menor o PV, maior o dano (+30% no máximo)"
+          "desc": "Aumenta a própria Resistência Crítica. Quando o próprio PV cai abaixo de 50% pela primeira vez, restaura imediatamente 20% do próprio PV Máx. e ganha Imunidade a efeitos de [Controle] por 1 turno (uma vez por batalha)."
         },
         "max": {
-          "nome": "DESPERTAR MÁX. de Potencial",
+          "nome": "MAX. Despertar do Potencial",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Obtém o efeito de Inabalável: quanto menor a vida, maior o dano causado. Aumenta a própria Defesa em 30%; após sofrer um ataque, quando a vida cair abaixo de 70%, 50% e 30% pela primeira vez, ganha 1 camada de [Muralha de Energia] (se o dano recebido exceder 150% do próprio Ataque, pode usar [Muralha de Energia] para reduzir 70% do dano). Pode reviver após ser derrotado, recuperando 50% da vida e herdando 100% da Fúria, com efeito ativado uma vez por batalha. Libera obrigatoriamente no primeiro turno.\nQuanto menor o PV, maior o dano (+30% no máximo)"
+          "desc": ": mesmo gatilho, cura maior (30% do PV Máx.) e ganha também +15% de Taxa de Redução de Dano por 1 turno junto com a imunidade a [Controle]."
         }
       },
       "passivaQuatroEstrelas": {
@@ -239,11 +239,11 @@
           "icone": "ability-icons/choque-da-tempestade-suprema.png"
         },
         "max": {
-          "nome": "MAX. Força da Origem",
+          "nome": "MAX. Choque de Tempestade Supremo",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ki] *(a tela mostrou o título \"MAX.Choque de Tempestade Supremo\" por um bug de sobreposição de texto do próprio jogo — o conteúdo é claramente a versão MAX da passiva \"Força da Origem\")*: Taxa de Esquiva maior, o bônus de Taxa de Dano com PV cheio é maior e decai mais devagar conforme perde PV.",
-          "dano": "440%+24",
+          "desc": "[Ki] : absorve 20% dos 4 atributos, e converte parte do que foi absorvido em Fúria própria.",
+          "dano": "420%+24",
           "icone": "ability-icons/choque-da-tempestade-suprema.png"
         },
         "smax": {
@@ -297,13 +297,13 @@
           "nome": "Força da Origem",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o Ataque da Fileira da Frente aliada e a Defesa da Fileira de Trás aliada (o efeito dobra se houver apenas 1 aliado presente no campo ao entrar). Quando o PV está abaixo de 50%, aumenta a própria Taxa de Evasão para 100% (desvia de Supremos e habilidades); cada evasão reduz a taxa de evasão em 50%, ao desviar restaura 15% de PV e remove efeitos de Controle, a evasão pode ativar até 3 vezes, apenas uma vez por batalha.\nAumenta o Dano de Habilidade dos Guerreiros na mesma Fileira em 6%.\nAumenta o Dano de Habilidade dos Guerreiros na mesma Fileira em 4%."
+          "desc": "Aumenta a própria Taxa de Esquiva. Quando o próprio PV está cheio, aumenta a própria Taxa de Dano; este bônus diminui gradualmente conforme o PV cai."
         },
         "max": {
-          "nome": "MAX. Ultimate Storm Impact",
+          "nome": "MAX. Força da Origem",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o ataque da linha de frente aliada e a defesa da linha de trás (quando apenas 1 personagem entra em campo, os efeitos são aplicados simultaneamente e dobrados). Quando a vida estiver abaixo de 50%, aumenta sua própria taxa de esquiva em 100% (esquiva de golpes especiais e habilidades). A cada esquiva, a taxa de esquiva é reduzida em 50%. Após esquivar com sucesso, recupera 20% da vida e remove efeitos de controle. A esquiva pode ser ativada no máximo 3 vezes, e só pode ser efetivada uma vez por batalha. Ao entrar em campo, se houver mais de 2 [Saiyajins] aliados, obtém [Fortalecimento de Equipe], aumentando sua própria velocidade de recuperação de raiva e a de 1 [Saiyajin] aleatório em 20% (2 turnos); se houver mais de 2 [Guerreiros do Mal], obtém [Fortalecimento de Equipe], aumentando sua própria taxa de crítico e a de 1 [Guerreiro do Mal] aleatório em 20% (2 turnos); se houver mais de 2 [Guerreiros Orgulhosos], obtém [Fortalecimento de Equipe], concedendo a si mesmo e a 1 [Guerreiro Orgulhoso] aleatório [Inabalável] (quanto menor sua vida, maior o dano, com aumento máximo de 30%, 2 turnos); se houver mais de 2 [Guerreiros Fundidos], obtém [Fortalecimento de Equipe], aumentando sua própria probabilidade de habilidade e a de 1 [Guerreiro Fundido] aleatório em 20% (2 turnos), e cada habilidade adicionalmente absorve 5% da vida do alvo; se obtiver [Fortalecimento de Equipe], aumenta sua própria taxa de redução de dano em 25% (1 turno).\nAumenta o Dano de Habilidade dos Guerreiros na mesma Fileira em 6%.\nAumenta o Dano de Habilidade dos Guerreiros na mesma Fileira em 4%."
+          "desc": ": Taxa de Esquiva maior, o bônus de Taxa de Dano com PV cheio é maior e decai mais devagar conforme perde PV."
         }
       },
       "passivaQuatroEstrelas": {
@@ -343,10 +343,10 @@
           "icone": "ability-icons/apagador-maligno-brutal.png"
         },
         "max": {
-          "nome": "MAX. Poder da Vingança",
+          "nome": "MAX. Apagador Maligno Duro",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta a própria Resistência Crítica em batalha. No início de cada turno, Cumber ganha 1 acúmulo de [Poder de Vingança] (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%). Começa a batalha com 2 acúmulos, ganha 1 acúmulo no início de cada turno, máx. 5 acúmulos. No máximo de acúmulos, seu tamanho aumenta. Se Cumber matar um guerreiro inimigo com uma habilidade ou Supremo, ele se torna potencializado: restaura 15% do próprio PV Máx., remove seus próprios efeitos anormais, e se torna imune a efeitos de [Controle] por 1 turno. Quando um [Guerreiro Maligno] aliado consegue seu primeiro abate na batalha, Cumber ganha imediatamente o máximo de acúmulos de [Poder de Vingança]. Cumber é imune ao status de [Pesadelo]. Ao ser revivido, todos os acúmulos de [Poder de Vingança] são perdidos e a contagem recomeça.",
+          "desc": "[Artes Marciais] : absorve 20% ATQ/DEF, ignora 30% de Defesa em alvos do tipo Defesa, cura 8% de PV contra Saiyajin, dano extra em área sobe para 40%.",
           "dano": "420%+24",
           "icone": "ability-icons/apagador-maligno-brutal.png"
         },
@@ -401,13 +401,13 @@
           "nome": "Poder da Vingança",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Durante a batalha aumenta a própria Taxa Anti-Crít.; Cumber ganha [Poder da Vingança] no início de cada turno (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%), começa com 1 acúmulo, ganha 1 acúmulo por turno, máximo de 4 acúmulos; com acúmulos máximos, aumenta de tamanho; Cumber mata Guerreiros inimigos com habilidades ou Supremos para ganhar aprimoramentos, restaurando 15% do PV Máx., removendo status anormais, ficando imune a Controle por 1 rodada; quando um aliado [Guerreiro Maligno] fizer o primeiro abate, Cumber ganha instantaneamente o máximo de [Poder da Vingança]; Cumber é imune ao estado [Pesadelo]; perde e recalcula o [Poder da Vingança] após reviver.\nAumenta sua Taxa de Não-Crít. em 10%"
+          "desc": "Durante a batalha aumenta a própria Taxa Anti-Crítico; Cumber ganha [Poder de Vingança] a cada início de turno (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%), começa com 1 acúmulo, ganha 1 acúmulo por turno, máx. 4 acúmulos; no máximo de acúmulos, aumenta de tamanho; Cumber mata guerreiros inimigos com habilidades ou Supremos para ganhar aprimoramentos, restaurando 15% do PV Máx., removendo status anormais, imune a controle por 1 rodada; quando um [Guerreiro Maligno] aliado consegue o primeiro abate, Cumber instantaneamente ganha o [Poder de Vingança] máximo; Cumber é imune ao estado de [Pesadelo]; perde e recalcula o [Poder de Vingança] após reviver."
         },
         "max": {
-          "nome": "MÁX. Poder de Vingança",
+          "nome": "MAX. Poder da Vingança",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Durante o combate, aumenta a própria taxa de resistência a críticos; Cumber ganha [Força da Vingança] no início de cada turno (cada camada aumenta a taxa de dano e a taxa de redução de dano em 6%), começando com 2 camadas, ganhando 1 camada no início de cada turno, máximo de 5 camadas. Ao atingir o máximo de camadas, seu tamanho aumenta. Quando Cumber derrota um Guerreiro inimigo com uma habilidade ou golpe especial, ele ganha um fortalecimento, recupera 15% de sua vida máxima, remove seus próprios estados anormais e fica imune a estados de controle por 1 turno. Quando um [Guerreiro das Trevas] aliado causa a primeira morte, Cumber ganha diretamente o máximo de camadas de [Força da Vingança]. Cumber é imune ao estado [Pesadelo]. Após ser revivido, ele perde a [Força da Vingança] e recomeça o cálculo.\nAumenta sua Taxa de Não-Crít. em 10%"
+          "desc": "Aumenta a própria Resistência Crítica em batalha. No início de cada turno, Cumber ganha 1 acúmulo de [Poder de Vingança] (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%). Começa a batalha com 2 acúmulos, ganha 1 acúmulo no início de cada turno, máx. 5 acúmulos. No máximo de acúmulos, seu tamanho aumenta. Se Cumber matar um guerreiro inimigo com uma habilidade ou Supremo, ele se torna potencializado: restaura 15% do próprio PV Máx., remove seus próprios efeitos anormais, e se torna imune a efeitos de [Controle] por 1 turno. Quando um [Guerreiro Maligno] aliado consegue seu primeiro abate na batalha, Cumber ganha imediatamente o máximo de acúmulos de [Poder de Vingança]. Cumber é imune ao status de [Pesadelo]. Ao ser revivido, todos os acúmulos de [Poder de Vingança] são perdidos e a contagem recomeça."
         }
       },
       "passivaQuatroEstrelas": {
@@ -447,10 +447,10 @@
           "icone": "ability-icons/kamehameha-final.png"
         },
         "max": {
-          "nome": "MAX. Força dos Brincos Potara",
+          "nome": "MAX. Kamehameha Final",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ki] Aumenta a Redução de Dano. Quando o dano cumulativo recebido ultrapassa 20% do PV Máx.: ataca o inimigo com maior ATQ (180% de dano do ATQ), cura 10% de PV +200 de Fúria (máx. 3x por batalha). Após 3 ativações: +20% de Roubo de Vida permanente. Pode dissipar Controle (2x por batalha).",
+          "desc": "[Ki] Aumenta a própria Taxa de Redução de Dano e Taxa de Dano em 15% por 2 rodadas, ataca uma coluna de inimigos, o alvo principal sofre 30% de dano extra, os ataques ignoram 35% da Defesa do alvo neste turno, remove buffs da coluna do alvo. Aprimora o contra-ataque da [Habilidade Passiva], aumentando as ativações de contra-ataque para 3 vezes.",
           "dano": "300%+25",
           "icone": "ability-icons/kamehameha-final.png"
         },
@@ -502,16 +502,16 @@
       ],
       "passivaUnica": {
         "base": {
-          "nome": "Poder dos Brincos Potara",
+          "nome": "Força dos Brincos Potara",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Redução de Dano; quando Vegetto recebe dano acumulado superior a 25% do PV Máx., ataca imediatamente o inimigo com maior Ataque causando dano igual a 150% do Ataque, restaura 8% de PV e 200 de Fúria; o dano acumulado é redefinido após ativar; pode ativar duas vezes por batalha.\nAumenta a própria Redução de Dano em 5%."
+          "desc": "Aumenta a própria Taxa de Redução de Dano; quando Vegetto recebe dano cumulativo superior a 25% do PV Máx., ataca imediatamente o inimigo com maior Ataque causando 150% de dano do Ataque, restaura 8% de PV e 200 de Fúria; o dano cumulativo reinicia após o gatilho; pode ativar duas vezes por batalha."
         },
         "max": {
-          "nome": "MAX. Poder do Brinco Potara",
+          "nome": "MAX. Força dos Brincos Potara",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumentar a própria taxa de redução de dano; sempre que o dano acumulado recebido por Vegetto exceder 20% de sua própria vida máxima, ele imediatamente realiza um ataque contra o inimigo com o maior ataque, causando dano igual a 180% do ataque, e recupera 10% de sua vida e 200 de raiva. Após o disparo, o dano acumulado é zerado. Isso pode ocorrer no máximo 3 vezes por batalha. Após disparar 3 vezes, aumenta permanentemente a taxa de roubo de vida em 20%. Se Vegetto estiver sob controle, ele pode se libertar em tempo real, com no máximo 2 disparos por batalha.\nAumenta a própria Redução de Dano em 5%."
+          "desc": "Aumenta a Redução de Dano. Quando o dano cumulativo recebido ultrapassa 20% do PV Máx.: ataca o inimigo com maior ATQ (180% de dano do ATQ), cura 10% de PV +200 de Fúria (máx. 3x por batalha). Após 3 ativações: +20% de Roubo de Vida permanente. Pode dissipar Controle (2x por batalha)."
         }
       },
       "passivaQuatroEstrelas": {
@@ -551,11 +551,11 @@
           "icone": "ability-icons/preludio-da-destruicao.png"
         },
         "max": {
-          "nome": "MAX. Deus e Assistente",
+          "nome": "MAX. Prelúdio da Destruição",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "Reduz o ATQ de todos os inimigos. Primeira vez com PV <60%: registra PV/Fúria. Com PV <30%: [Retrocesso Temporal] (restaura valores registrados, dissipa, uma vez por batalha). Início de batalha: concede [Artes Marciais] a 1 aliado (+12% de Dano/Redução de Dano, exclui certos SSR). Se Beerus presente: também recebe [Artes Marciais]. Quando aliado com [Artes Marciais] sofre Supremo: +100 de Fúria (máx. 300 por turno). Se sozinho: +20% de Dano/Redução de Dano permanente. Aumenta o poder de ataque de ninjas [Sábios] em 5%.",
-          "dano": "170%+15 (todas as unidades inimigas)",
+          "desc": "+15% de Taxa de Dano/Redução (1 turno), ataca todos os inimigos (máx. +120% por menos acertos), cura todos os aliados em 70% do próprio Ataque; após usar o Supremo, ganha [Bênção Angelical] por 1 turno (o dano único recebido não ultrapassa 30%, aumenta a Taxa de Esquiva, 30% de chance de esquivar de Supremos, pode ativar até 2 vezes por turno).",
+          "dano": "170%+15",
           "icone": "ability-icons/preludio-da-destruicao.png"
         },
         "smax": {
@@ -609,13 +609,13 @@
           "nome": "Deus e Assistente",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Reduz o Ataque de todos os inimigos. Whis registra o próprio PV e valor de Fúria na primeira vez que o PV cai abaixo de 60%; quando o PV cai abaixo de 30%, ativa o efeito [Reversão do Tempo], dissipa os próprios estados anormais, restaura para o PV registrado; ativa uma vez por batalha. No início da batalha, concede [Artes Marciais] a um aliado, exceto ele mesmo (aumenta a Taxa de Dano e a Taxa de Redução de Dano em 10%, excluindo SSR ou superior); se [Beerus] estiver presente, ele também ganha [Artes Marciais]. Quando Guerreiros com [Artes Marciais] são atacados por Supremos, Whis ganha 100 de Fúria, máximo de 200 de Fúria por turno. Se estiver sozinho do próprio lado, aumenta permanentemente a Taxa de Dano e a Taxa de Redução de Dano em 15%.\nAumenta o poder de ataque de Guerreiros [Sábio] em 5%"
+          "desc": "Reduz o Ataque de todos os inimigos. Whis registra o próprio PV e valor de Fúria na primeira vez que o PV cai abaixo de 60%; quando o PV cai abaixo de 30%, ativa o efeito [Retrocesso Temporal], dissipa os próprios estados anormais, restaura ao PV registrado; ativa uma vez por batalha. No início da batalha, concede [Artes Marciais] a um aliado além de si mesmo (aumenta a Taxa de Dano e a Taxa de Redução de Dano em 10%, excluindo SSR ou superior); se [Beerus] estiver presente, ele também ganha [Artes Marciais]. Quando guerreiros com [Artes Marciais] são atingidos por Supremos, Whis ganha 100 de Fúria, máx. 200 de Fúria por turno. Se estiver sozinho no próprio lado, aumenta permanentemente a Taxa de Dano e a Taxa de Redução de Dano em 15%. Aumenta o poder de ataque de Guerreiros [Sábios] em 5%."
         },
         "max": {
-          "nome": "MAX. Deus e Seguidores",
+          "nome": "MAX. Deus e Assistente",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Reduz o ataque de todos os inimigos. Quando a vida de Whis cair abaixo de 60% pela primeira vez, ele registra esse valor de vida e de raiva. Se a vida cair abaixo de 30%, ativa o efeito [Retorno no Tempo], removendo seus próprios estados anormais e restaurando a vida e a raiva para os valores registrados (não inferior aos atuais), ativando apenas uma vez por batalha. No início da batalha, concede [Artes Marciais] a 1 guerreiro além de si mesmo (aumenta 12% de taxa de dano e 12% de taxa de redução de dano, exceto para SSR limitado ou superior). Se Beerus estiver em campo, Beerus também recebe [Artes Marciais]. Quando um guerreiro com [Artes Marciais] é atacado por um golpe especial, Whis ganha 100 de raiva, até no máximo 300 de raiva por turno. Se apenas ele próprio estiver em campo no lado aliado, aumenta permanentemente 20% de taxa de dano e 20% de taxa de redução de dano.\nAumenta o poder de ataque de Guerreiros [Sábio] em 5%"
+          "desc": "Reduz o ATQ de todos os inimigos. Primeira vez com PV <60%: registra PV/Fúria. Com PV <30%: [Retrocesso Temporal] (restaura valores registrados, dissipa, uma vez por batalha). Início de batalha: concede [Artes Marciais] a 1 aliado (+12% de Dano/Redução de Dano, exclui certos SSR). Se Beerus presente: também recebe [Artes Marciais]. Quando aliado com [Artes Marciais] sofre Supremo: +100 de Fúria (máx. 300 por turno). Se sozinho: +20% de Dano/Redução de Dano permanente. Aumenta o poder de ataque de Guerreiros [Sábios] em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -655,10 +655,10 @@
           "icone": "ability-icons/ataque-relampago.png"
         },
         "max": {
-          "nome": "MAX. Instinto Assassino",
+          "nome": "Ataque Relâmpago MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta o dano de ataque físico dos Guerreiros da [linha frontal] aliada. 30% de chance de [Esquiva] de habilidades, 2 vezes por turno; após ativar [Esquiva], a próxima habilidade ganha 10% de taxa de crítico e 10% de dano crítico, acumulável. Aumenta o ATQ de ninjas aliados bestificados em 5%.",
+          "desc": "[Artes Marciais] Aumenta o próprio Dano de Artes Marciais em 20%, ataca o inimigo com menos PV, 35% de chance de infligir [Enraizamento] (incapaz de agir por 1 turno). Este ataque não pode ser evitado.",
           "dano": "400%+20",
           "icone": "ability-icons/ataque-relampago.png"
         },
@@ -713,13 +713,13 @@
           "nome": "Instinto Assassino",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o Dano de Artes Marciais dos aliados da [Fileira de Frente]. 25% de chance de [Esquivar] de habilidades (até 2 vezes por turno).\nAumenta o ATQ de Guerreiros aliados bestificados em 5%"
+          "desc": "Aumenta o Dano de Artes Marciais dos aliados da [Fileira de Frente]. 25% de chance de [Esquivar] de habilidades (até 2 vezes por turno). Aumenta o ATQ de Guerreiros aliados bestificados em 5%."
         },
         "max": {
           "nome": "MAX. Instinto Assassino",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o dano de ataque físico dos Guerreiros da [linha frontal] aliada. 30% de chance de [Esquiva] de habilidades, 2 vezes por turno; após ativar [Esquiva], a próxima habilidade ganha 10% de taxa de crítico e 10% de dano crítico, acumulável.\nAumenta o ATQ de Guerreiros aliados bestificados em 5%"
+          "desc": "Aumenta o dano de ataque físico dos Guerreiros da [linha frontal] aliada. 30% de chance de [Esquiva] de habilidades, 2 vezes por turno; após ativar [Esquiva], a próxima habilidade ganha 10% de taxa de crítico e 10% de dano crítico, acumulável. Aumenta o ATQ de Guerreiros aliados bestificados em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -759,10 +759,10 @@
           "icone": "ability-icons/kamehameha-gohan-mistico.png"
         },
         "max": {
-          "nome": "MÁX. Potencial infinito",
+          "nome": "Kamehameha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. Para cada 1% de vida perdida, aumenta a taxa de crítico em 0,4%. Aumenta o ATQ em 5%.",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, causa +30% de dano a inimigos do [Tipo Defesa], ignora 30% da DEF neste ataque, 70% de chance de liberar imediatamente 1 habilidade extra.",
           "dano": "380%+26",
           "icone": "ability-icons/kamehameha-gohan-mistico.png"
         },
@@ -808,7 +808,7 @@
         {
           "nome": "Superar o Eu de Ontem",
           "nivel_visto": 0,
-          "desc": "Habilidade aprimorada. A habilidade ignora 30% da DEF do alvo",
+          "desc": "Habilidade aprimorada. A habilidade ignora 30% da DEF do alvo.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -817,13 +817,13 @@
           "nome": "Potencial Ilimitado",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. A cada 1% de PV perdido, ganha +0,3% de Taxa de Crit..\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ATQ. A cada 1% de PV perdido, ganha +0,3% de Taxa de Crít.. Aumenta o ATQ em 5%."
         },
         "max": {
           "nome": "MÁX. Potencial infinito",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Para cada 1% de vida perdida, aumenta a taxa de crítico em 0,4%.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ataque. Para cada 1% de vida perdida, aumenta a taxa de crítico em 0,4%. Aumenta o ATQ em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -863,11 +863,11 @@
           "icone": "ability-icons/punicao-do-deus-da-destruicao.png"
         },
         "max": {
-          "nome": "MAX. Poder do Deus da Destruição",
+          "nome": "Punição do Deus da Destruição MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Aumenta a taxa de dano de todos os aliados. Cada vez que um alvo (não sendo uma unidade clone) é eliminado com sucesso, aumenta permanentemente o ataque e a defesa em 15% (máximo de 3 acúmulos), recupera uma pequena quantidade de vida própria e remove estados anormais de si mesmo. Reduz o poder de ataque de ninjas inimigos do tipo ataque em 2%.",
-          "dano": "380%+20 (todas as unidades inimigas)",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca o inimigo da Fileira da Frente com menos PV, ignora Bloqueio e Resistência a Dano; se matar, espalha 60% do dano excedente para todos os inimigos (até 2× o próprio ATQ); eliminações causadas por isso não podem ser revividas.",
+          "dano": "380%+20",
           "icone": "ability-icons/punicao-do-deus-da-destruicao.png"
         },
         "smax": {
@@ -921,13 +921,13 @@
           "nome": "Poder do Deus da Destruição",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a Taxa de Dano da equipe. Cada vez que você elimina um alvo (não clone), aumenta permanentemente o ATQ e a DEF em 10% (até 3 acúmulos) e restaura um pouco do próprio PV.\nReduz o poder de ataque de Guerreiros inimigos do tipo ataque em 2%"
+          "desc": "Aumenta a Taxa de Dano da equipe. Cada vez que você elimina um alvo (não clone), aumenta permanentemente o ATQ e a DEF em 10% (até 3 acúmulos) e restaura um pouco do próprio PV. Reduz o poder de ataque de Guerreiros inimigos do tipo ataque em 2%."
         },
         "max": {
           "nome": "MAX. Poder do Deus da Destruição",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a taxa de dano de todos os aliados. Cada vez que um alvo (não sendo uma unidade clone) é eliminado com sucesso, aumenta permanentemente o ataque e a defesa em 15% (máximo de 3 acúmulos), recupera uma pequena quantidade de vida própria e remove estados anormais de si mesmo.\nReduz o poder de ataque de Guerreiros inimigos do tipo ataque em 2%"
+          "desc": "Aumenta a taxa de dano de todos os aliados. Cada vez que um alvo (não sendo uma unidade clone) é eliminado com sucesso, aumenta permanentemente o ataque e a defesa em 15% (máximo de 3 acúmulos), recupera uma pequena quantidade de vida própria e remove estados anormais de si mesmo. Reduz o poder de ataque de Guerreiros inimigos do tipo ataque em 2%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -967,11 +967,11 @@
           "icone": "ability-icons/lampejo-explosivo-gamma.png"
         },
         "max": {
-          "nome": "MAX. Super Saiyan God Despertado",
+          "nome": "Lampejo Explosivo Gamma MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta sua própria taxa de bloqueio. Se sua própria raiva exceder 400, fica imune a golpes críticos. Tem 40% de chance de resistir a 35% de dano. Se Goku SSGSS estiver presente, ganha uma habilidade extra no primeiro turno. Após Goku SSGSS liberar o Ougi, ele ganha 200 de raiva. Aumenta o poder de ataque de ninjas de [Anbu] em 5%.",
-          "dano": "275%+12 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, aumenta a própria DEF em 30%; para cada ocorrência de Resistir ou Bloquear durante esta Suprema, causa Dano Extra igual a 4% do próprio PV Máx. (até 20%); reinicia a contagem.",
+          "dano": "300%+18",
           "icone": "ability-icons/lampejo-explosivo-gamma.png"
         },
         "smax": {
@@ -1025,13 +1025,13 @@
           "nome": "Despertar do Super Saiyajin Deus",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Bloqueio. Se o Ki exceder 400, fica imune a Acertos Crít. 40% de chance de Resistir a 25% do dano. Quando Son Goku SSGSS usa um Supremo, ganha 150 de Ki.\nAumenta o poder de ataque de Guerreiros de [Anbu] em 5%"
+          "desc": "Aumenta a própria Taxa de Bloqueio. Se o Ki exceder 400, fica imune a Acertos Crít. 40% de chance de Resistir a 25% do dano. Quando Son Goku SSGSS usa um Supremo, ganha 150 de Ki. Aumenta o poder de ataque de Guerreiros de [Anbu] em 5%."
         },
         "max": {
           "nome": "MAX. Super Saiyan God Despertado",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de bloqueio. Se sua própria raiva exceder 400, fica imune a golpes críticos. Tem 40% de chance de resistir a 35% de dano. Se Goku SSGSS estiver presente, ganha uma habilidade extra no primeiro turno. Após Goku SSGSS liberar o Ougi, ele ganha 200 de raiva.\nAumenta o poder de ataque de Guerreiros de [Anbu] em 5%"
+          "desc": "Aumenta sua própria taxa de bloqueio. Se sua própria raiva exceder 400, fica imune a golpes críticos. Tem 40% de chance de resistir a 35% de dano. Se Goku SSGSS estiver presente, ganha uma habilidade extra no primeiro turno. Após Goku SSGSS liberar o Ougi, ele ganha 200 de raiva. Aumenta o poder de ataque de Guerreiros de [Anbu] em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1071,11 +1071,11 @@
           "icone": "ability-icons/kamehameha-kaioken.png"
         },
         "max": {
-          "nome": "MAX. Super Saiyan God Despertado",
+          "nome": "Kamehameha Kaio-ken MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Quanto menor a própria vida, maior o dano; todos os ataques (exceto perseguições) têm 100% de chance de aplicar o efeito [Queimadura] (considerado [Combustão], perde 10% da vida máxima por turno, reduz 20% de defesa e redução de dano, não acumulável, dura 2 turnos). Se o Vegeta SSGSS estiver presente, ganha uma habilidade extra no primeiro turno. Após o Vegeta SSGSS liberar o Ougi, ele pode ganhar 200 de raiva. Causa 30% de dano adicional a alvos com menos de 30% de PV.",
-          "dano": "400%+24 (unidades inimigas em uma coluna)",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, aumenta a própria Taxa de Crít. em 35% (1 turno), causa Dano Extra igual a 30% do PV perdido, e converte 35% do dano total causado em PV. Se não ativar acerto crítico, aumenta o próprio ATQ em 15% (2 turnos).",
+          "dano": "400%+24",
           "icone": "ability-icons/kamehameha-kaioken.png"
         },
         "smax": {
@@ -1129,13 +1129,13 @@
           "nome": "Despertar do Super Saiyajin Deus",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Quanto menor o PV do usuário, maior o dano causado. O Supremo tem 100% de chance de infligir [Queimadura] (tratada como [Chamuscado], causa dano igual a 8% do PV Máx. por turno, reduz DEF e Redução de Dano em 15%, não acumula, dura 2 turnos). Se Vegeta SSGSS estiver presente, todos os ataques (exceto Ataque de Sequência) também infligem [Queimadura]. Quando Vegeta SSGSS usa suo Supremo, o usuário ganha 150 de Ki.\nCausa 30% de dano adicional a alvos com menos de 30% de PV."
+          "desc": "Quanto menor o PV do usuário, maior o dano causado. O Supremo tem 100% de chance de infligir [Queimadura] (tratada como [Chamuscado], causa dano igual a 8% do PV Máx. por turno, reduz DEF e Redução de Dano em 15%, não acumula, dura 2 turnos). Se Vegeta SSGSS estiver presente, todos os ataques (exceto Ataque de Sequência) também infligem [Queimadura]. Quando Vegeta SSGSS usa seu Supremo, o usuário ganha 150 de Ki. Causa 30% de dano adicional a alvos com menos de 30% de PV."
         },
         "max": {
           "nome": "MAX. Super Saiyan God Despertado",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Quanto menor a própria vida, maior o dano causado; todos os ataques (exceto perseguições) têm 100% de chance de aplicar o efeito [Queimadura] (considerado [Combustão], perde 10% da vida máxima por turno, reduz 20% de defesa e redução de dano, não acumulável, dura 2 turnos). Se o Vegeta SSGSS estiver presente, ganha uma habilidade extra no primeiro turno. Após o Vegeta SSGSS liberar o Ougi, ele pode ganhar 200 de raiva.\nCausa 30% de dano adicional a alvos com menos de 30% de PV."
+          "desc": "Quanto menor a própria vida, maior o dano; todos os ataques (exceto perseguições) têm 100% de chance de aplicar o efeito [Queimadura] (considerado [Combustão], perde 10% da vida máxima por turno, reduz 20% de defesa e redução de dano, não acumulável, dura 2 turnos). Se o Vegeta SSGSS estiver presente, ganha uma habilidade extra no primeiro turno. Após o Vegeta SSGSS liberar o Ougi, ele pode ganhar 200 de raiva. Causa 30% de dano adicional a alvos com menos de 30% de PV."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1175,11 +1175,11 @@
           "icone": "ability-icons/surto-de-explosao-de-ki.png"
         },
         "max": {
-          "nome": "MAX. Fúria Sanguinária",
+          "nome": "Surto de Explosão de Ki MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria resistência à técnica definitiva. Guerreiros [Lenda] aliados (exceto o próprio) ganham 10% adicional de resistência à técnica definitiva. Quando houver 2 ou mais [Guerreiros Lenda] aliados, o próprio ganha 10% de taxa de dano. Aumenta sua Resistência a Secreto em 5%.",
-          "dano": "160%+15 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos; quanto menos inimigos restarem, maior o dano (até +120%), e ganha Forma da Fúria (+15% de PV, +15% de DEF e Redução de Dano, +90% de resistência a status anormais durante o efeito).",
+          "dano": "160%+15",
           "icone": "ability-icons/surto-de-explosao-de-ki.png"
         },
         "smax": {
@@ -1233,13 +1233,13 @@
           "nome": "Berserker Sanguinário",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Resistência a Supremo. Guerreiros aliados [Lendários] (exceto ele mesmo) ganham +10% de Resistência a Supremo.\nAumenta sua Resistência a Secreto em 5%"
+          "desc": "Aumenta a própria Resistência a Supremo. Guerreiros aliados [Lendários] (exceto ele mesmo) ganham +10% de Resistência a Supremo. Aumenta sua Resistência a Secreto em 5%."
         },
         "max": {
           "nome": "MAX. Fúria Sanguinária",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria resistência à técnica definitiva. Guerreiros [Lenda] aliados (exceto o próprio) ganham 10% adicional de resistência à técnica definitiva. Quando houver 2 ou mais [Guerreiros Lenda] aliados, o próprio ganha 10% de taxa de dano.\nAumenta sua Resistência a Secreto em 5%"
+          "desc": "Aumenta a própria resistência à técnica definitiva. Guerreiros [Lenda] aliados (exceto o próprio) ganham 10% adicional de resistência à técnica definitiva. Quando houver 2 ou mais [Guerreiros Lenda] aliados, o próprio ganha 10% de taxa de dano. Aumenta sua Resistência a Secreto em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1279,11 +1279,11 @@
           "icone": "ability-icons/bombardeio-explosivo.png"
         },
         "max": {
-          "nome": "MAX. Poder do Super Saiyajin Lendário",
+          "nome": "Bombardeio Explosivo MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta sua própria taxa de redução de dano. Possui a habilidade de [Guerreiros Furiosos] (ao acumular mais de 20% da vida máxima recebida como dano, aumenta permanentemente a taxa de dano em 5%, com um máximo de 25%, e ganha um escudo de 4% da vida máxima, podendo ser obtido até 5 vezes). Aumenta o Acerto Anormal de ninjas aliados de Habilidade em 5%.",
-          "dano": "170%+15 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos; o dano aumenta quanto menos inimigos restarem. Cada alvo tem 30% de chance de perder 300 de Ki e 20% de chance de receber [Imobilização] (não pode agir, dura 1 turno). Para cada inimigo [Saiyajin] presente, o dano aumenta ainda mais.",
+          "dano": "170%+15",
           "icone": "ability-icons/bombardeio-explosivo.png"
         },
         "smax": {
@@ -1337,13 +1337,13 @@
           "nome": "Poder Lendário",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Redução de Dano; ganha o efeito [Berserker] (sempre que o dano sofrido exceder cumulativamente 25% do PV Máx., aumenta permanentemente a Taxa de Dano em 5%, até 20%).\nAumenta o Acerto Anormal de Guerreiros aliados de Habilidade em 5%"
+          "desc": "Aumenta a própria Taxa de Redução de Dano; ganha o efeito [Berserker] (sempre que o dano sofrido exceder cumulativamente 25% do PV Máx., aumenta permanentemente a Taxa de Dano em 5%, até 20%). Aumenta o Acerto Anormal de Guerreiros aliados de Habilidade em 5%."
         },
         "max": {
           "nome": "MAX. Poder do Super Saiyajin Lendário",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de redução de dano. Possui a habilidade de [Guerreiros Furiosos] (ao acumular mais de 20% da vida máxima recebida como dano, aumenta permanentemente a taxa de dano em 5%, com um máximo de 25%, e ganha um escudo de 4% da vida máxima, podendo ser obtido até 5 vezes).\nAumenta o Acerto Anormal de Guerreiros aliados de Habilidade em 5%"
+          "desc": "Aumenta sua própria taxa de redução de dano. Possui a habilidade de [Guerreiros Furiosos] (ao acumular mais de 20% da vida máxima recebida como dano, aumenta permanentemente a taxa de dano em 5%, com um máximo de 25%, e ganha um escudo de 4% da vida máxima, podendo ser obtido até 5 vezes). Aumenta o Acerto Anormal de Guerreiros aliados de Habilidade em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1383,11 +1383,11 @@
           "icone": "ability-icons/super-kamehameha.png"
         },
         "max": {
-          "nome": "MAX. Poder do Deus Super Saiyajin",
+          "nome": "Super Kamehameha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o dano de golpe especial próprio. Ao entrar em campo, ganha [Escudo de Chamas] (aumenta a taxa de redução de dano em 12% e a taxa de contra-ataque em 12%; ao sofrer um ataque individual, 35% de chance de aplicar 1 camada de [Queimadura] no atacante por 2 turnos); próprio fica imune ao efeito de [Queimadura]. Reduz o dano de golpe especial dos [Guerreiros Sombrios] inimigos em 10%. Aumenta o Dano de Fogo de todos os aliados em 5%.",
-          "dano": "275%+12 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos; 60% de chance de aplicar [Queimadura]. Se o alvo já tiver [Queimadura], causa dano adicional igual a (80% do ATQ + 50% do ATQ × acúmulos de Queimadura).",
+          "dano": "275%+12",
           "icone": "ability-icons/super-kamehameha.png"
         },
         "smax": {
@@ -1441,13 +1441,13 @@
           "nome": "Poder do SSG",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o dano do próprio Supremo; ao entrar em batalha, ganha [Escudo de Chama] (aumenta a Taxa de Redução de Dano e a Taxa de Reflexo em 10%; ao ser atingido por um ataque de alvo único, 25% de chance de aplicar 1 acúmulo de [Queimadura] ao atacante, dura 2 turnos). Imune a [Queimadura].\nAumenta o Dano de Fogo de todos os aliados em 5%"
+          "desc": "Aumenta o dano do próprio Supremo; ao entrar em batalha, ganha [Escudo de Chama] (aumenta a Taxa de Redução de Dano e a Taxa de Reflexo em 10%; ao ser atingido por um ataque de alvo único, 25% de chance de aplicar 1 acúmulo de [Queimadura] ao atacante, dura 2 turnos). Imune a [Queimadura]. Aumenta o Dano de Fogo de todos os aliados em 5%."
         },
         "max": {
           "nome": "MAX. Poder do Deus Super Saiyajin",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o dano de golpe especial próprio. Ao entrar em campo, ganha [Escudo de Chamas] (aumenta a taxa de redução de dano em 12% e a taxa de contra-ataque em 12%; ao sofrer um ataque individual, 35% de chance de aplicar 1 camada de [Queimadura] no atacante por 2 turnos); próprio fica imune ao efeito de [Queimadura]. Reduz o dano de golpe especial dos [Guerreiros Sombrios] inimigos em 10%.\nAumenta o Dano de Fogo de todos os aliados em 5%"
+          "desc": "Aumenta o dano de golpe especial próprio. Ao entrar em campo, ganha [Escudo de Chamas] (aumenta a taxa de redução de dano em 12% e a taxa de contra-ataque em 12%; ao sofrer um ataque individual, 35% de chance de aplicar 1 camada de [Queimadura] no atacante por 2 turnos); próprio fica imune ao efeito de [Queimadura]. Reduz o dano de golpe especial dos [Guerreiros Sombrios] inimigos em 10%. Aumenta o Dano de Fogo de todos os aliados em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1487,11 +1487,11 @@
           "icone": "ability-icons/super-rajada-de-energia-maligna.png"
         },
         "max": {
-          "nome": "MAX. Fusão Sombria",
+          "nome": "Super Rajada de Energia Maligna MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. Ao entrar em campo, se houver mais de 2 [Guerreiros das Trevas] em seu time, aumenta sua própria resistência a golpes especiais em 20% por 2 turnos. A partir do segundo turno em campo, a cada turno, há 40% de chance de [Silenciar] 1 guerreiro inimigo, e a probabilidade contra [Saiyajins] aumenta para 60% (priorizando Saiyajins). Aumenta seu Acerto Anormal em 5%.",
-          "dano": "170%+15 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos, 60% de chance de aplicar [Veneno] em cada alvo, causa 15% de Dano Extra a alvos envenenados, converte 15% do dano causado em PV para a Fileira da Frente; para cada efeito negativo que o alvo tiver (Queimadura, etc.), o dano aumenta.",
+          "dano": "Causa dano adicional conforme os debuffs presentes no alvo.",
           "icone": "ability-icons/super-rajada-de-energia-maligna.png"
         },
         "smax": {
@@ -1545,13 +1545,13 @@
           "nome": "Fusão Sombria",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Ao entrar em campo, se houver mais de 2 [Guerreiros Malignos] aliados presentes, aumenta a própria Res. a Supremo em 20% por 2 turnos.\nAumenta seu Acerto Anormal em 5%"
+          "desc": "Aumenta o próprio ATQ. Ao entrar em campo, se houver mais de 2 [Guerreiros Malignos] aliados presentes, aumenta a própria Res. a Supremo em 20% por 2 turnos. Aumenta seu Acerto Anormal em 5%."
         },
         "max": {
           "nome": "MAX. Fusão Sombria",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Ao entrar em campo, se houver mais de 2 [Guerreiros das Trevas] em seu time, aumenta sua própria resistência a golpes especiais em 20% por 2 turnos. A partir do segundo turno em campo, a cada turno, há 40% de chance de [Silenciar] 1 guerreiro inimigo, e a probabilidade contra [Saiyajins] aumenta para 60% (priorizando Saiyajins).\nAumenta seu Acerto Anormal em 5%"
+          "desc": "Aumenta o próprio ataque. Ao entrar em campo, se houver mais de 2 [Guerreiros das Trevas] em seu time, aumenta sua própria resistência a golpes especiais em 20% por 2 turnos. A partir do segundo turno em campo, a cada turno, há 40% de chance de [Silenciar] 1 guerreiro inimigo, e a probabilidade contra [Saiyajins] aumenta para 60% (priorizando Saiyajins). Aumenta seu Acerto Anormal em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1591,11 +1591,11 @@
           "icone": "ability-icons/mega-esmagamento.png"
         },
         "max": {
-          "nome": "MAX. Poder do Orgulho",
+          "nome": "Mega Esmagamento MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Tem probabilidade de ativar um campo de força que reduz o dano direto recebido. No início de cada turno, recupera 120 de fúria e 8% da vida máxima. Quando um Guerreiro aliado é derrotado, recupera 8% da vida e remove estados negativos. Se o Guerreiro derrotado for o Toppo, a recuperação é dobrada. Tem chance de reduzir o Dano Direto Sofrido em 30%.",
-          "dano": "220%+18 (unidades inimigas em uma Fileira)",
+          "desc": "[Explosão de Ki] Ataca uma Fileira de inimigos, absorve DEF por 1 turno (total de 60%, dividido igualmente entre os alvos); a cada conjuração, aumenta permanentemente o ATQ em 15% (até 45%).",
+          "dano": "220%+18",
           "icone": "ability-icons/mega-esmagamento.png"
         },
         "smax": {
@@ -1649,13 +1649,13 @@
           "nome": "Poder do Orgulho",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Tem chance de ativar um campo de força para reduzir o dano direto sofrido. No início de cada turno, restaura 100 de Ki e 6% do PV Máx..\nTem chance de reduzir o Dano Direto Sofrido em 30%"
+          "desc": "Tem chance de ativar um campo de força para reduzir o dano direto sofrido. No início de cada turno, restaura 100 de Ki e 6% do PV Máx.. Tem chance de reduzir o Dano Direto Sofrido em 30%."
         },
         "max": {
           "nome": "MAX. Poder do Orgulho",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Tem probabilidade de ativar um campo de força que reduz o dano direto recebido. No início de cada turno, recupera 120 de fúria e 8% da vida máxima. Quando um Guerreiro aliado é derrotado, recupera 8% da vida e remove estados negativos. Se o Guerreiro derrotado for o Toppo, a recuperação é dobrada.\nTem chance de reduzir o Dano Direto Sofrido em 30%"
+          "desc": "Tem probabilidade de ativar um campo de força que reduz o dano direto recebido. No início de cada turno, recupera 120 de fúria e 8% da vida máxima. Quando um Guerreiro aliado é derrotado, recupera 8% da vida e remove estados negativos. Se o Guerreiro derrotado for o Toppo, a recuperação é dobrada. Tem chance de reduzir o Dano Direto Sofrido em 30%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1695,10 +1695,10 @@
           "icone": "ability-icons/balas-de-energia-combinadas.png"
         },
         "max": {
-          "nome": "MAX. Explosão de Vontade de Lutar",
+          "nome": "Balas de Energia Combinadas MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque; aumenta a probabilidade de habilidade própria (para cada [Guerreiro das Trevas] em campo, a probabilidade aumenta em 10%, até no máximo 30%). Quando houver 4 [Guerreiros das Trevas], todos os [Guerreiros das Trevas] aliados recebem metade do aumento de probabilidade de habilidade. Aumenta o ATQ em 10%.",
+          "desc": "[Explosão de Ki] Ataca a Fileira de Trás inimiga, aplica [Queimadura] (mesmo efeito acima), 35% de chance de infligir [Silêncio]; aumenta o Dano de Supremo de 2 [Guerreiros Malignos] aliados em 8% adicional, até 14%, dura 1 turno.",
           "dano": "210%+18",
           "icone": "ability-icons/balas-de-energia-combinadas.png"
         },
@@ -1753,13 +1753,13 @@
           "nome": "Erupção de Guerra",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ; aumenta a Taxa de Ativação de Habilidade em 10% para cada [Guerreiro Maligno] aliado no campo (até 30%).\nAumenta o ATQ em 10%"
+          "desc": "Aumenta o próprio ATQ; aumenta a Taxa de Ativação de Habilidade em 10% para cada [Guerreiro Maligno] aliado no campo (até 30%). Aumenta o ATQ em 10%."
         },
         "max": {
           "nome": "MAX. Explosão de Vontade de Lutar",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque; aumenta a probabilidade de habilidade própria (para cada [Guerreiro das Trevas] em campo, a probabilidade aumenta em 10%, até no máximo 30%). Quando houver 4 [Guerreiros das Trevas], todos os [Guerreiros das Trevas] aliados recebem metade do aumento de probabilidade de habilidade.\nAumenta o ATQ em 10%"
+          "desc": "Aumenta o próprio ataque; aumenta a probabilidade de habilidade própria (para cada [Guerreiro das Trevas] em campo, a probabilidade aumenta em 10%, até no máximo 30%). Quando houver 4 [Guerreiros das Trevas], todos os [Guerreiros das Trevas] aliados recebem metade do aumento de probabilidade de habilidade. Aumenta o ATQ em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1799,10 +1799,10 @@
           "icone": "ability-icons/foguete-infernal.png"
         },
         "max": {
-          "nome": "MAX. Poder Dourado",
+          "nome": "Foguete Infernal MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta sua própria taxa de bloqueio. Contra todos os alvos [Suprimidos], aumenta o dano causado em 25% e reduz o dano recebido em 25%. Com base na posição em campo, concede a si mesmo um efeito de bônus (se estiver na linha da frente, aumenta a taxa de bloqueio em 8% e a intensidade de bloqueio em 8%; se estiver na linha de trás, aumenta a taxa de crítico em 8% e a intensidade de crítico em 8%). Aumenta a própria Redução de Dano em 10%.",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, [Suprime] o alvo principal (reduz ATQ, Taxa de Dano e Taxa de Redução de Dano em 12%, encolhe o alvo, dura 2 turnos); se ele mesmo estiver no campo há ≥ 2 turnos, o dano se expande para todos os inimigos e tem 70% de chance de [Suprimir] outros dois inimigos aleatórios. Restaura PV para 2 aliados com menor PV: ATQ *100%+12.",
           "dano": "150%+12",
           "icone": "ability-icons/foguete-infernal.png"
         },
@@ -1857,13 +1857,13 @@
           "nome": "Poder Dourado",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Bloqueio. Causa 25% mais dano a alvos [Suprimidos] e reduz em 25% o dano sofrido deles.\nAumenta a própria Redução de Dano em 10%."
+          "desc": "Aumenta a própria Taxa de Bloqueio. Causa 25% mais dano a alvos [Suprimidos] e reduz em 25% o dano sofrido deles. Aumenta a própria Redução de Dano em 10%."
         },
         "max": {
           "nome": "MAX. Poder Dourado",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de bloqueio. Contra todos os alvos [Suprimidos], aumenta o dano causado em 25% e reduz o dano recebido em 25%. Com base na posição em campo, concede a si mesmo um efeito de bônus (se estiver na linha da frente, aumenta a taxa de bloqueio em 8% e a intensidade de bloqueio em 8%; se estiver na linha de trás, aumenta a taxa de crítico em 8% e a intensidade de crítico em 8%).\nAumenta a própria Redução de Dano em 10%."
+          "desc": "Aumenta sua própria taxa de bloqueio. Contra todos os alvos [Suprimidos], aumenta o dano causado em 25% e reduz o dano recebido em 25%. Com base na posição em campo, concede a si mesmo um efeito de bônus (se estiver na linha da frente, aumenta a taxa de bloqueio em 8% e a intensidade de bloqueio em 8%; se estiver na linha de trás, aumenta a taxa de crítico em 8% e a intensidade de crítico em 8%). Aumenta a própria Redução de Dano em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -1903,10 +1903,10 @@
           "icone": "ability-icons/libertar-se.png"
         },
         "max": {
-          "nome": "MAX. Poder do Deus Super Saiyajin",
+          "nome": "Libertar-se MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Energia Ki] Obtém o efeito [Inabalável]: quanto menor a vida, maior o dano causado. Vegeta perde 10% da vida atual a cada ataque. Obtém um efeito de imunidade à morte uma vez. Ao ativar a imunidade à morte, recupera imediatamente 15% da vida, remove estados anormais e recupera 300 de fúria. Quanto menor o PV, maior o dano (+30% no máximo).",
+          "desc": "[Energia Ki] Aumenta o próprio Ataque e Defesa em 15% (2 turnos), aumenta a Taxa de Crít. dos [Saiyajins] aliados da Fileira de Trás em 8% (1 turno), ataca um único inimigo. Se esta for o primeiro Supremo de Vegeta após [Imortalidade], ela sempre será um acerto crítico.",
           "dano": "380%+20",
           "icone": "ability-icons/libertar-se.png"
         },
@@ -1961,13 +1961,13 @@
           "nome": "Poder do SSG",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Concede o efeito [Inabalável], o dano aumenta conforme a vida diminui; Vegeta perde 10% da Vida atual a cada ataque; ganha um efeito de Imortalidade, que ao ativar restaura instantaneamente 12% da Vida e remove efeitos de status anormais.\nQuanto menor o PV, maior o dano (+30% no máximo)"
+          "desc": "Concede o efeito [Inabalável], o dano aumenta conforme a vida diminui; Vegeta perde 10% da Vida atual a cada ataque; ganha um efeito de Imortalidade, que ao ativar restaura instantaneamente 12% da Vida e remove efeitos de status anormais. Quanto menor o PV, maior o dano (+30% no máximo)."
         },
         "max": {
           "nome": "MAX. Poder do Deus Super Saiyajin",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Obtém o efeito [Inabalável]: quanto menor a vida, maior o dano causado. Vegeta perde 10% da vida atual a cada ataque. Obtém um efeito de imunidade à morte uma vez. Ao ativar a imunidade à morte, recupera imediatamente 15% da vida, remove estados anormais e recupera 300 de fúria.\nQuanto menor o PV, maior o dano (+30% no máximo)"
+          "desc": "Obtém o efeito [Inabalável]: quanto menor a vida, maior o dano causado. Vegeta perde 10% da vida atual a cada ataque. Obtém um efeito de imunidade à morte uma vez. Ao ativar a imunidade à morte, recupera imediatamente 15% da vida, remove estados anormais e recupera 300 de fúria. Quanto menor o PV, maior o dano (+30% no máximo)."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2007,10 +2007,10 @@
           "icone": "ability-icons/super-punho-do-dragao.png"
         },
         "max": {
-          "nome": "MAX. Evolução Suprema",
+          "nome": "Super Punho do Dragão MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Aumenta sua própria taxa de roubo de vida. Ao entrar em campo, se houver apenas 1 aliado, aumenta adicionalmente 10% da taxa de roubo de vida. Durante esta batalha, aumenta permanentemente 7,5% do ataque próprio. Se houver [Vegeta Super 4] no mesmo lado, aumenta permanentemente 15% do ataque próprio durante esta batalha. Quando [Vegeta Super 4] aliado morre, recupera 12% da vida, herda 100% de sua fúria, remove seus próprios estados negativos e ganha permanentemente 10% de redução de dano. Aumenta sua Taxa de Crít. em 10%.",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único alvo inimigo, aumenta a própria taxa de dano em 20% (1 turno), e causa dano adicional igual a 10% do PV Máx. do alvo; se [Vegeta SS4] também estiver na própria equipe, libera [Vegeta SS4] em 15% (2 turnos).",
           "dano": "380%+24",
           "icone": "ability-icons/super-punho-do-dragao.png"
         },
@@ -2065,13 +2065,13 @@
           "nome": "Evolução de Supremo",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria taxa de roubo de vida; ao entrar em batalha sozinho, ganha 10% adicional de roubo de vida; aumenta permanentemente o próprio ataque em 7,5% nesta batalha; se [Vegeta SS4] estiver na equipe, o aumento permanente de ataque será 15%.\nAumenta sua Taxa de Crít. em 10%"
+          "desc": "Aumenta a própria taxa de roubo de vida; ao entrar em batalha sozinho, ganha 10% adicional de roubo de vida; aumenta permanentemente o próprio ataque em 7,5% nesta batalha; se [Vegeta SS4] estiver na equipe, o aumento permanente de ataque será 15%. Aumenta sua Taxa de Crít. em 10%."
         },
         "max": {
           "nome": "MAX. Evolução Suprema",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de roubo de vida. Ao entrar em campo, se houver apenas 1 aliado, aumenta adicionalmente 10% da taxa de roubo de vida. Durante esta batalha, aumenta permanentemente 7,5% do ataque próprio. Se houver [Vegeta Super 4] no mesmo lado, aumenta permanentemente 15% do ataque próprio durante esta batalha. Quando [Vegeta Super 4] aliado morre, recupera 12% da vida, herda 100% de sua fúria, remove seus próprios estados negativos e ganha permanentemente 10% de redução de dano.\nAumenta sua Taxa de Crít. em 10%"
+          "desc": "Aumenta sua própria taxa de roubo de vida. Ao entrar em campo, se houver apenas 1 aliado, aumenta adicionalmente 10% da taxa de roubo de vida. Durante esta batalha, aumenta permanentemente 7,5% do ataque próprio. Se houver [Vegeta Super 4] no mesmo lado, aumenta permanentemente 15% do ataque próprio durante esta batalha. Quando [Vegeta Super 4] aliado morre, recupera 12% da vida, herda 100% de sua fúria, remove seus próprios estados negativos e ganha permanentemente 10% de redução de dano. Aumenta sua Taxa de Crít. em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2111,10 +2111,10 @@
           "icone": "ability-icons/lamina-demoniaca.png"
         },
         "max": {
-          "nome": "MAX. Demônio do Submundo",
+          "nome": "Lâmina Demoníaca MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta a própria taxa de acerto crítico; para cada [Guerreiro Sombrio] aliado que morrer, aumenta permanentemente seus atributos de ataque e defesa em 12% (acumulável), recupera uma pequena quantidade de vida, herda parte da fúria do guerreiro morto e remove o próprio estado de controle. Aumenta a Redução de Dano de kunoichis aliadas em 10%.",
+          "desc": "[Artes Marciais] Ataca um único alvo inimigo, 70% de chance de causar [Sangramento] no alvo e em inimigos próximos, aumenta o próprio Dano de Crít. em 13%; para cada aliado [Guerreiro Maligno], aumenta o Dano de Crít. em mais 3%, máximo de 25%.",
           "dano": "400%+24",
           "icone": "ability-icons/lamina-demoniaca.png"
         },
@@ -2169,13 +2169,13 @@
           "nome": "Diabo do Inferno",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria taxa de acerto crítico; para cada aliado [Guerreiro Maligno] que morrer, aumenta permanentemente o próprio ataque e defesa em 10% (acumulável), restaura uma pequena quantidade de PV, e herda parte da Fúria do aliado falecido.\nAumenta a Redução de Dano de Guerreiras aliadas em 10%"
+          "desc": "Aumenta a própria taxa de acerto crítico; para cada aliado [Guerreiro Maligno] que morrer, aumenta permanentemente o próprio ataque e defesa em 10% (acumulável), restaura uma pequena quantidade de PV, e herda parte da Fúria do aliado falecido. Aumenta a Redução de Dano de kunoichis aliadas em 10%."
         },
         "max": {
           "nome": "MAX. Demônio do Submundo",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria taxa de acerto crítico; para cada [Guerreiro Sombrio] aliado que morrer, aumenta permanentemente seus atributos de ataque e defesa em 12% (acumulável), recupera uma pequena quantidade de vida, herda parte da fúria do guerreiro morto e remove o próprio estado de controle.\nAumenta a Redução de Dano de Guerreiras aliadas em 10%"
+          "desc": "Aumenta a própria taxa de acerto crítico; para cada [Guerreiro Sombrio] aliado que morrer, aumenta permanentemente seus atributos de ataque e defesa em 12% (acumulável), recupera uma pequena quantidade de vida, herda parte da fúria do guerreiro morto e remove o próprio estado de controle. Aumenta a Redução de Dano de kunoichis aliadas em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2215,11 +2215,11 @@
           "icone": "ability-icons/difusao-sem-fim.png"
         },
         "max": {
-          "nome": "MAX. Vontade Inabalável",
+          "nome": "Difusão Sem Fim MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Aumenta sua própria taxa de contra-ataque. Ao entrar em campo, se houver apenas 1 aliado, aumenta adicionalmente 10% da taxa de contra-ataque. Nesta batalha, a partir do segundo turno, Vegeta recupera 5% de vida por turno. Se [Super Saiyajin 4 Goku] estiver presente no lado aliado, recupera 10% de vida por turno. Quando [Super Saiyajin 4 Goku] do lado aliado for derrotado, recupera 12% de vida, herda 100% de sua fúria, remove seus próprios efeitos negativos e ganha permanentemente 10% de taxa de dano. Tem chance de reduzir o dano direto sofrido em 10%.",
-          "dano": "400%+24 (unidades inimigas em uma Fileira)",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca o inimigo com o maior ataque, aumenta a própria Redução de Dano em 20% (1 turno), e reduz a Fúria do alvo em 200; se [Son Goku SS4] estiver na própria equipe, libera um Supremo de [Son Goku SS4] em 15% (2 turnos).",
+          "dano": "400%+24",
           "icone": "ability-icons/difusao-sem-fim.png"
         },
         "smax": {
@@ -2273,13 +2273,13 @@
           "nome": "Vontade Inabalável",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria taxa de dano de contra-ataque; se a própria equipe tiver apenas 1 membro ao entrar, aumenta adicionalmente o dano de contra-ataque em 10%; a partir da segunda rodada de batalha, Vegeta recupera 5% de PV a cada rodada; se [Son Goku SS4] estiver presente, recupera 8% de PV a cada rodada.\nTem chance de reduzir o dano direto sofrido em 10%"
+          "desc": "Aumenta a própria taxa de dano de contra-ataque; se a própria equipe tiver apenas 1 membro ao entrar, aumenta adicionalmente o dano de contra-ataque em 10%; a partir da segunda rodada de batalha, Vegeta recupera 5% de PV a cada rodada; se [Son Goku SS4] estiver presente, recupera 8% de PV a cada rodada. Tem chance de reduzir o dano direto sofrido em 10%."
         },
         "max": {
-          "nome": "MÁX. Vontade Inabalável",
+          "nome": "MAX. Vontade Inabalável",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de contra-ataque. Ao entrar em campo, se houver apenas 1 aliado, aumenta adicionalmente 10% da taxa de contra-ataque. Nesta batalha, a partir do segundo turno, Vegeta recupera 5% de vida por turno. Se [Super Saiyajin 4 Goku] estiver presente no lado aliado, recupera 10% de vida por turno. Quando [Super Saiyajin 4 Goku] do lado aliado for derrotado, recupera 12% de vida, herda 100% de sua fúria, remove seus próprios efeitos negativos e ganha permanentemente 10% de taxa de dano.\nTem chance de reduzir o dano direto sofrido em 10%"
+          "desc": "Aumenta sua própria taxa de contra-ataque. Ao entrar em campo, se houver apenas 1 aliado, aumenta adicionalmente 10% da taxa de contra-ataque. Nesta batalha, a partir do segundo turno, Vegeta recupera 5% de vida por turno. Se [Super Saiyajin 4 Goku] estiver presente no lado aliado, recupera 10% de vida por turno. Quando [Super Saiyajin 4 Goku] do lado aliado for derrotado, recupera 12% de vida, herda 100% de sua fúria, remove seus próprios efeitos negativos e ganha permanentemente 10% de taxa de dano. Tem chance de reduzir o dano direto sofrido em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2319,11 +2319,11 @@
           "icone": "ability-icons/lampejo-final.png"
         },
         "max": {
-          "nome": "MAX. Vontade Inabalável",
+          "nome": "Lampejo Final MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Obtém o efeito de Inabalável: quanto menor a vida, maior o dano causado. Ao receber um ataque, há 80% de chance de reduzir 10% do dano. Quanto menor a vida, maior a redução de dano, não ultrapassando 70%. Quanto menor o PV, maior o dano (+30% no máximo).",
-          "dano": "280%+12 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, 65% de chance de aplicar [Queimadura Sombria] aos alvos; causa 35% de Dano Extra a alvos com [Queimadura Sombria] ou [Queimadura]; aumenta o próprio bloqueio da Fileira da Frente em 25%.",
+          "dano": "280%+12",
           "icone": "ability-icons/lampejo-final.png"
         },
         "smax": {
@@ -2377,13 +2377,13 @@
           "nome": "Vontade Inabalável",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Ganha efeito Inabalável, o dano aumenta quanto menor for o próprio PV. Quando atacado, 70% de chance de reduzir o dano em 10%, a Redução de Dano aumenta conforme o PV diminui, máximo de 60%.\nQuanto menor o PV, maior o dano (+30% no máximo)"
+          "desc": "Ganha efeito Inabalável, o dano aumenta quanto menor for o próprio PV. Quando atacado, 70% de chance de reduzir o dano em 10%, a Redução de Dano aumenta conforme o PV diminui, máximo de 60%. Quanto menor o PV, maior o dano (+30% no máximo)."
         },
         "max": {
-          "nome": "MÁX. Vontade Inabalável",
+          "nome": "MAX. Vontade Inabalável",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Obtém o efeito de Inabalável: quanto menor a vida, maior o dano causado. Ao receber um ataque, há 80% de chance de reduzir 10% do dano. Quanto menor a vida, maior a redução de dano, não ultrapassando 70%.\nQuanto menor o PV, maior o dano (+30% no máximo)"
+          "desc": "Obtém o efeito de Inabalável: quanto menor a vida, maior o dano causado. Ao receber um ataque, há 80% de chance de reduzir 10% do dano. Quanto menor a vida, maior a redução de dano, não ultrapassando 70%. Quanto menor o PV, maior o dano (+30% no máximo)."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2423,11 +2423,11 @@
           "icone": "ability-icons/pancada-explosiva.png"
         },
         "max": {
-          "nome": "MAX. Vontade de Vingança",
+          "nome": "Pancada Explosiva MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta a própria defesa. No início de cada turno, concede [Guardião] ao aliado da linha de frente com maior ataque, exceto ele mesmo. A unidade com esse estado, ao sofrer um ataque, fará com que Bardock assuma 70% do dano, reduzindo em 30% o dano sofrido por si mesmo, com duração de 1 turno, podendo ser dissipado. Para cada 3% de vida perdida, a redução de dano aumenta em 1%. Aumenta seu Acerto Anormal em 10%.",
-          "dano": "380%+20 (todas as unidades inimigas)",
+          "desc": "[Artes Marciais] Mesmo mecanismo de armazenamento de dano (50%, máximo 7x ATQ), libera 70% do dano armazenado como dano extra ao atacar o último inimigo que o atingiu.",
+          "dano": "380%+20",
           "icone": "ability-icons/pancada-explosiva.png"
         },
         "smax": {
@@ -2481,13 +2481,13 @@
           "nome": "Vontade de Vingança",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Defesa. No início de cada rodada, aplica [Guarda] ao aliado da Fileira da Frente com maior Ataque, exceto ele mesmo; quando a unidade protegida é atacada, Bardock sofre 70% do dano e reduz o dano sofrido em 30%, durando 1 rodada, pode ser dissipado.\nAumenta seu Acerto Anormal em 10%"
+          "desc": "Aumenta a própria Defesa. No início de cada rodada, aplica [Guarda] ao aliado da Fileira da Frente com maior Ataque, exceto ele mesmo; quando a unidade protegida é atacada, Bardock sofre 70% do dano e reduz o dano sofrido em 30%, durando 1 rodada, pode ser dissipado. Aumenta seu Acerto Anormal em 10%."
         },
         "max": {
           "nome": "MAX. Vontade de Vingança",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. No início de cada turno, concede [Guardião] ao aliado da linha de frente com maior ataque, exceto ele mesmo. A unidade com esse estado, ao sofrer um ataque, Bardock assumirá 70% do dano, reduzindo em 30% o dano sofrido por si mesmo, com duração de 1 turno, podendo ser dissipado. Para cada 3% de vida perdida, a redução de dano aumenta em 1%.\nAumenta seu Acerto Anormal em 10%"
+          "desc": "Aumenta a própria defesa. No início de cada turno, concede [Guardião] ao aliado da linha de frente com maior ataque, exceto ele mesmo. A unidade com esse estado, ao sofrer um ataque, fará com que Bardock assuma 70% do dano, reduzindo em 30% o dano sofrido por si mesmo, com duração de 1 turno, podendo ser dissipado. Para cada 3% de vida perdida, a redução de dano aumenta em 1%. Aumenta seu Acerto Anormal em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2527,10 +2527,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Poder Dourado",
+          "nome": "Supernova MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. A velocidade de recuperação de raiva própria aumenta em 30%; para cada [Saiyajin] morto entre aliados e inimigos, recupera 100 de raiva própria. Aumenta sua Taxa de Imunidade a Dano em 10%.",
+          "desc": "[Explosão de Ki] Aumenta o próprio Ataque e Defesa em 15%, ataca todos os inimigos com uma esfera gigante de energia, causando 25% de Dano Extra a [Saiyajins]; aumenta a própria Taxa de Crít. em 20%; restaura 100 de Fúria a todos os [Guerreiros Malignos] aliados.",
           "dano": "155%+15",
           "icone": "ability-icons/supernova.png"
         },
@@ -2585,13 +2585,13 @@
           "nome": "Poder Dourado",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio Ataque. Recupera 100 de Fúria toda vez que um [Saiyajin] morre de qualquer lado.\nAumenta sua Taxa de Imunidade a Dano em 10%"
+          "desc": "Aumenta o próprio Ataque. Recupera 100 de Fúria toda vez que um [Saiyajin] morre de qualquer lado. Aumenta sua Taxa de Imunidade a Dano em 10%."
         },
         "max": {
-          "nome": "MÁX. Poder Dourado",
+          "nome": "MAX. Poder Dourado",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. A velocidade de recuperação de raiva própria aumenta em 30%; para cada [Saiyajin] morto entre aliados e inimigos, recupera 100 de raiva própria.\nAumenta sua Taxa de Imunidade a Dano em 10%"
+          "desc": "Aumenta o próprio ataque. A velocidade de recuperação de raiva própria aumenta em 30%; para cada [Saiyajin] morto entre aliados e inimigos, recupera 100 de raiva própria. Aumenta sua Taxa de Imunidade a Dano em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2631,10 +2631,10 @@
           "icone": "ability-icons/trovao-absoluto.png"
         },
         "max": {
-          "nome": "MAX. O Desejo Primordial da Criação",
+          "nome": "Trovão Absoluto MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Reduz a taxa de crítico da linha de frente inimiga; Zamasu Fundido é imune a [Selamento] e [Silêncio], e após ser derrotado, revive como Goku Rosé, recuperando 30% de vida e restaurando toda a raiva. Aumenta sua Taxa de Quebra em 5%.",
+          "desc": "[Explosão de Ki] Ataca 3 inimigos aleatórios, 40% de chance de aplicar [Julgamento] (aumentado para 60% contra [Saiyajins]); se o alvo tiver [Julgamento], causa Dano Extra igual a 10% do PV Máx..",
           "dano": "220%+18",
           "icone": "ability-icons/trovao-absoluto.png"
         },
@@ -2680,7 +2680,7 @@
         {
           "nome": "Kamui: Intangibilidade",
           "nivel_visto": 0,
-          "desc": "Se houver um espaço vazio no campo, invoca Zamasu herdando de você 70% de ATQ e DEF, e 10% de PV.",
+          "desc": "Se houver um espaço vazio no campo, invoca Zamasu herdando 70% de ATQ e DEF, e 10% de PV.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -2689,13 +2689,13 @@
           "nome": "Desejo do Criador",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Reduz a Taxa de Crít. da Fileira da Frente inimiga; Zamasu Fundido é imune a [Selo] e [Silêncio], revive como Goku Black ao morrer, restaurando 30% de PV e Fúria total.\nAumenta sua Taxa de Quebra em 5%"
+          "desc": "Reduz a Taxa de Crít. da Fileira da Frente inimiga; Zamasu Fundido é imune a [Selo] e [Silêncio], revive como Goku Black ao morrer, restaurando 30% de PV e Fúria total. Aumenta sua Taxa de Quebra em 5%."
         },
         "max": {
           "nome": "MAX. O Desejo Primordial da Criação",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Reduz a taxa de crítico da linha de frente inimiga; Zamasu Fundido é imune a [Selamento] e [Silêncio], e após ser derrotado, revive como Goku Rosé, recuperando 30% de vida e restaurando toda a raiva.\nAumenta sua Taxa de Quebra em 5%"
+          "desc": "Reduz a taxa de crítico da linha de frente inimiga; Zamasu Fundido é imune a [Selamento] e [Silêncio], e após ser derrotado, revive como Goku Rosé, recuperando 30% de vida e restaurando toda a raiva. Aumenta sua Taxa de Quebra em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2735,11 +2735,11 @@
           "icone": "ability-icons/ondas-destrutivas.png"
         },
         "max": {
-          "nome": "MAX. Aliança dos Guerreiros",
+          "nome": "Ondas Destrutivas MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta sua própria taxa de acerto crítico. Cada vez que Toppo libera uma habilidade ou golpe especial, aumenta seu ataque e defesa em 10%, até o máximo de 30%. Se, ao entrar em campo, houver apenas um personagem de cada lado, Toppo obtém imediatamente todos os efeitos. Quando um Guerreiro aliado é derrotado, Toppo recupera 8% de sua vida máxima. Se o Guerreiro derrotado for Jiren, a recuperação é dobrada. Aumenta em 10% a Taxa de Imbloqueável de todos os fantoches aliados.",
-          "dano": "400%+20 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, aumenta a própria Força Crít. em 20%, causa 20% de dano em área ao redor; o dano em área aumenta conforme a quantidade atingida (mais que a versão base); causa dano adicional igual a 8% do PV perdido de cada alvo; 25% do dano causado é convertido em PV próprio.",
+          "dano": "400%+20",
           "icone": "ability-icons/ondas-destrutivas.png"
         },
         "smax": {
@@ -2793,13 +2793,13 @@
           "nome": "Poder do Deus da Destruição",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Crit.; cada vez que Toppo usa uma habilidade ou Supremo, aumenta o próprio Ataque e Defesa em 10%, até 30%; se houver apenas um aliado e um inimigo em campo ao entrar, ganha o efeito total imediatamente.\nAumenta em 10% a Taxa de Imbloqueável de todos os fantoches aliados"
+          "desc": "Aumenta a própria Taxa de Crít.; cada vez que Toppo usa uma habilidade ou Supremo, aumenta o próprio Ataque e Defesa em 10%, até 30%; se houver apenas um aliado e um inimigo em campo ao entrar, ganha o efeito total imediatamente. Aumenta em 10% a Taxa de Imbloqueável de todos os fantoches aliados."
         },
         "max": {
           "nome": "MAX. Aliança dos Guerreiros",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de acerto crítico. Cada vez que Toppo libera uma habilidade ou golpe especial, Toppo aumenta seu ataque e defesa em 10%, até o máximo de 30%. Se, ao entrar em campo, houver apenas um personagem de cada lado, Toppo obtém imediatamente todos os efeitos. Quando um Guerreiro aliado é derrotado, Toppo recupera 8% de sua vida máxima. Se o Guerreiro derrotado for Jiren, a recuperação é dobrada.\nAumenta em 10% a Taxa de Imbloqueável de todos os fantoches aliados"
+          "desc": "Aumenta sua própria taxa de acerto crítico. Cada vez que Toppo libera uma habilidade ou golpe especial, aumenta seu ataque e defesa em 10%, até o máximo de 30%. Se, ao entrar em campo, houver apenas um personagem de cada lado, Toppo obtém imediatamente todos os efeitos. Quando um Guerreiro aliado é derrotado, Toppo recupera 8% de sua vida máxima. Se o Guerreiro derrotado for Jiren, a recuperação é dobrada. Aumenta em 10% a Taxa de Imbloqueável de todos os fantoches aliados."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2839,11 +2839,11 @@
           "icone": "ability-icons/onda-explosiva.png"
         },
         "max": {
-          "nome": "MAX. Regeneração Supercelular",
+          "nome": "Onda Explosiva MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Boo pode se regenerar rapidamente para um corpo completo enquanto houver pelo menos uma célula, permitindo que ele reviva em batalha, recupere uma certa quantidade de HP e herde 50% de raiva. A probabilidade de reviver é de 100%, 75% e 50%, respectivamente, com um máximo de 3 ativações por batalha. Aumenta a DEF em 10%.",
-          "dano": "220%+12 (unidades inimigas em uma Fileira)",
+          "desc": "[Explosão de Ki] Ataca a Fileira da Frente inimiga, 25% de chance de infligir [Atordoamento]. Se o próprio PV estiver abaixo de 50%, ganha adicionalmente +25% de Resistência a [Explosão de Ki] (dura 2 turnos).",
+          "dano": "220%+12",
           "icone": "ability-icons/onda-explosiva.png"
         },
         "smax": {
@@ -2888,7 +2888,7 @@
         {
           "nome": "Soco Pesado Multiplicado",
           "nivel_visto": 0,
-          "desc": "Aumenta a Reflexo de Dano própria em 4%",
+          "desc": "Aumenta a Reflexo de Dano própria em 4%.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -2897,13 +2897,13 @@
           "nome": "Super Regeneração do Cell",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Contanto que Boo ainda tenha uma única célula restante, ele pode se regenerar rapidamente em um corpo completo, permitindo reviver em batalha, restaurar certa quantidade de PV e manter 50% de Fúria. Taxa de sucesso de Reviver: 100%, 50%, 25% (nessa ordem). Pode ser ativado até 3 vezes por batalha.\nAumenta a DEF em 10%"
+          "desc": "Contanto que Boo ainda tenha uma única célula restante, ele pode se regenerar rapidamente em um corpo completo, permitindo reviver em batalha, restaurar certa quantidade de PV e manter 50% de Fúria. Taxa de sucesso de Reviver: 100%, 50%, 25% (nessa ordem). Pode ser ativado até 3 vezes por batalha. Aumenta a DEF em 10%."
         },
         "max": {
           "nome": "MAX. Regeneração Supercelular",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Boo pode se regenerar rapidamente para um corpo completo enquanto houver pelo menos uma célula, permitindo que ele reviva em batalha, recupere uma certa quantidade de HP e herde 50% de raiva. A probabilidade de reviver é de 100%, 75% e 50%, respectivamente, com um máximo de 3 ativações por batalha.\nAumenta a DEF em 10%"
+          "desc": "Boo pode se regenerar rapidamente para um corpo completo enquanto houver pelo menos uma célula, permitindo que ele reviva em batalha, recupere uma certa quantidade de HP e herde 50% de raiva. A probabilidade de reviver é de 100%, 75% e 50%, respectivamente, com um máximo de 3 ativações por batalha. Aumenta a DEF em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -2943,11 +2943,11 @@
           "icone": "ability-icons/lampejo-sombrio.png"
         },
         "max": {
-          "nome": "MAX. Fúria Ardente",
+          "nome": "Lampejo Sombrio MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. Se houver [Goku] na formação inimiga, a velocidade de recuperação de raiva aumenta em 25% e a taxa de crítico em 10%. Aumenta o ATQ em 5%.",
-          "dano": "145%+10 (à unidade inimiga com menor PV na fileira de trás)",
+          "desc": "[Explosão de Ki] Perde 8% do PV. Este ataque ganha +20% de Taxa de Crít.. Quanto menor o próprio PV, maior o dano (até +30%). Ataca todos os inimigos, 50% de chance de infligir [Paralisia] (mesmo efeito acima).",
+          "dano": "145%+10",
           "icone": "ability-icons/lampejo-sombrio.png"
         },
         "smax": {
@@ -3001,13 +3001,13 @@
           "nome": "Fúria",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Se a escalação inimiga incluir [Goku], a Velocidade de Recuperação de Fúria aumenta em 25%.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ATQ. Se a escalação inimiga incluir [Goku], a Velocidade de Recuperação de Fúria aumenta em 25%. Aumenta o ATQ em 5%."
         },
         "max": {
-          "nome": "MÁX. Fúria Ardente",
+          "nome": "MAX. Fúria Ardente",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Se houver [Goku] na formação inimiga, a velocidade de recuperação de raiva aumenta em 25% e a taxa de crítico em 10%.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ataque. Se houver [Goku] na formação inimiga, a velocidade de recuperação de raiva aumenta em 25% e a taxa de crítico em 10%. Aumenta o ATQ em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3047,11 +3047,11 @@
           "icone": "ability-icons/super-rajada-de-energia.png"
         },
         "max": {
-          "nome": "MAX. Poder da Deusa",
+          "nome": "Super Rajada de Energia MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. Aumenta permanentemente em 30% a velocidade de recuperação de raiva própria e reduz em 20% o dano recebido de Guerreiros masculinos. Aumenta o ATQ em 5%.",
-          "dano": "140%+8 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos, reduz a DEF deles em 15% e restaura aleatoriamente 200 de Fúria para 1 aliado.",
+          "dano": "140%+8",
           "icone": "ability-icons/super-rajada-de-energia.png"
         },
         "smax": {
@@ -3105,13 +3105,13 @@
           "nome": "Força da Deusa",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Aumenta permanentemente a própria Velocidade de Recuperação de Fúria em 25%.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ATQ. Aumenta permanentemente a própria Velocidade de Recuperação de Fúria em 25%. Aumenta o ATQ em 5%."
         },
         "max": {
-          "nome": "MÁX. Poder da Deusa",
+          "nome": "MAX. Poder da Deusa",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Aumenta permanentemente em 30% a velocidade de recuperação de raiva própria e reduz em 20% o dano recebido de Guerreiros masculinos.\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ataque. Aumenta permanentemente em 30% a velocidade de recuperação de raiva própria e reduz em 20% o dano recebido de Guerreiros masculinos. Aumenta o ATQ em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3151,11 +3151,11 @@
           "icone": "ability-icons/fogo-do-inferno.png"
         },
         "max": {
-          "nome": "MAX. Domínio das Trevas",
+          "nome": "Fogo do Inferno MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o ataque dos [Androides] aliados. Ao entrar em campo, para cada [Androide] Guerreiro aliado, aumenta o ataque e a defesa em 12%. O próprio é imune a [Silêncio] e [Atordoamento]. Aumenta o ATQ de ninjas aliados na fileira de trás em 5%.",
-          "dano": "280%+15 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca uma coluna inimiga. Cada alvo tem 65% de chance de infligir [Queima da Alma], 40% de chance de infligir [Silêncio] (impede o uso de Supremo, dura 1 turno).",
+          "dano": "280%+15",
           "icone": "ability-icons/fogo-do-inferno.png"
         },
         "smax": {
@@ -3197,13 +3197,13 @@
           "nome": "Regra Sombria",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o ATQ de todas as unidades aliadas [Androide]. Ao entrar na batalha, para cada lutador [Androide] aliado, aumenta o ATQ e a DEF em 10%.\nAumenta o ATQ de Guerreiros aliados na fileira de trás em 5%"
+          "desc": "Aumenta o ATQ de todas as unidades aliadas [Androide]. Ao entrar na batalha, para cada lutador [Androide] aliado, aumenta o ATQ e a DEF em 10%. Aumenta o ATQ de Guerreiros aliados na fileira de trás em 5%."
         },
         "max": {
           "nome": "MAX. Domínio das Trevas",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o ataque dos [Androides] aliados. Ao entrar em campo, para cada [Androide] Guerreiro aliado, aumenta o ataque e a defesa em 12%. O próprio é imune a [Silêncio] e [Atordoamento].\nAumenta o ATQ de Guerreiros aliados na fileira de trás em 5%"
+          "desc": "Aumenta o ataque dos [Androides] aliados. Ao entrar em campo, para cada [Androide] Guerreiro aliado, aumenta o ataque e a defesa em 12%. O próprio é imune a [Silêncio] e [Atordoamento]. Aumenta o ATQ de Guerreiros aliados na fileira de trás em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3243,11 +3243,11 @@
           "icone": "ability-icons/super-ataque-fantasma.png"
         },
         "max": {
-          "nome": "MAX. Poder de Fusão",
+          "nome": "Super Ataque Fantasma MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio poder de ataque. Quando um Guerreiro inimigo é derrotado, um [Fantasma] imóvel é invocado naquela posição. O [Fantasma] herda 10% da vida máxima de Gotenks. Quando derrotado, o [Fantasma] explode, causando dano equivalente a 7% da vida máxima dos inimigos ao redor. Se o responsável pela explosão for o Gotenks, o dano é dobrado. No máximo 2 [Fantasmas] podem ser invocados por batalha. Aumenta o Roubo de Vida de Taijutsu de ninjas aliados em 5%.",
-          "dano": "160%+15 (todas as unidades inimigas na fileira de trás)",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos; quanto menos inimigos houver, maior será o dano. Tem 70% de chance de infligir [Queimadura] (mesmo efeito).",
+          "dano": "160%+15",
           "icone": "ability-icons/super-ataque-fantasma.png"
         },
         "smax": {
@@ -3301,13 +3301,13 @@
           "nome": "Força da Fusão",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Quando um lutador inimigo é derrotado, invoca um [Fantasma] imóvel naquela posição. O [Fantasma] herda 8% do PV Máx. de Gotenks. Quando derrotado, o [Fantasma] explode, causando dano equivalente a 5% do seu PV Máx. aos inimigos próximos; se detonado por Gotenks, o dano é dobrado. [Fantasma] conta como uma [Unidade Invocada] (não afeta as condições de vitória/derrota, não conta como unidade sobrevivente, pode ser alvo). Até 2 [Fantasmas] podem ser invocados por batalha.\nAumenta o Roubo de Vida de Taijutsu de Guerreiros aliados em 5%"
+          "desc": "Aumenta o próprio ATQ. Quando um lutador inimigo é derrotado, invoca um [Fantasma] imóvel naquela posição. O [Fantasma] herda 8% do PV Máx. de Gotenks. Quando derrotado, o [Fantasma] explode, causando dano equivalente a 5% do seu PV Máx. aos inimigos próximos; se detonado por Gotenks, o dano é dobrado. [Fantasma] conta como uma [Unidade Invocada]. Até 2 [Fantasmas] podem ser invocados por batalha. Aumenta o Roubo de Vida de Taijutsu de Guerreiros aliados em 5%."
         },
         "max": {
-          "nome": "Máx. Poder de Fusão",
+          "nome": "MAX. Poder de Fusão",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio poder de ataque. Quando um Guerreiro inimigo é derrotado, um [Fantasma] imóvel é invocado naquela posição. O [Fantasma] herda 10% da vida máxima do Gotenks. Quando derrotado, o [Fantasma] explode, causando dano equivalente a 7% da vida máxima dos inimigos ao redor. Se o responsável pela explosão for o Gotenks, o dano é dobrado. O [Fantasma] é uma [Unidade Invocada] (não afeta o resultado da batalha, não conta como sobrevivente, mas pode se tornar alvo de ataques). No máximo 2 [Fantasmas] podem ser invocados por batalha.\nAumenta o Roubo de Vida de Taijutsu de Guerreiros aliados em 5%"
+          "desc": "Aumenta o próprio poder de ataque. Quando um Guerreiro inimigo é derrotado, um [Fantasma] imóvel é invocado naquela posição. O [Fantasma] herda 10% da vida máxima de Gotenks. Quando derrotado, o [Fantasma] explode, causando dano equivalente a 7% da vida máxima dos inimigos ao redor. Se o responsável pela explosão for o Gotenks, o dano é dobrado. No máximo 2 [Fantasmas] podem ser invocados por batalha. Aumenta o Roubo de Vida de Taijutsu de Guerreiros aliados em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3347,11 +3347,11 @@
           "icone": "ability-icons/rajada-suprema-de-destruicao.png"
         },
         "max": {
-          "nome": "MAX. Inquebrável",
+          "nome": "Rajada Suprema de Destruição MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Aumenta a própria DEF. No início da batalha, converte 90% da vida atual em um [Escudo] de valor equivalente. A cada 4 danos sofridos, recupera 12% da vida máxima (unidades do tipo CHEFE têm a recuperação reduzida). Aumenta a DEF de ninjas aliados na fileira da frente em 0,1.",
-          "dano": "360%+26 (todas as unidades inimigas)",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo. Ganha 0,6% de dano para cada 1% de PV restante, e causa 30% de dano em área à Fileira de Trás do alvo.",
+          "dano": "360%+26",
           "icone": "ability-icons/rajada-suprema-de-destruicao.png"
         },
         "smax": {
@@ -3405,13 +3405,13 @@
           "nome": "Fortemente Fortificado",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. No início da batalha, converte 90% do PV atual em um Escudo de valor equivalente. Cada vez que o lançador sofre dano 4 vezes, restaura PV equivalente a 8% do PV Máx. (reduzido contra unidades Chefe).\nAumenta a DEF de Guerreiros aliados na fileira da frente em 0.1"
+          "desc": "Aumenta a própria DEF. No início da batalha, converte 90% do PV atual em um Escudo de valor equivalente. Cada vez que o lançador sofre dano 4 vezes, restaura PV equivalente a 8% do PV Máx. (reduzido contra unidades Chefe). Aumenta a DEF de Guerreiros aliados na fileira da frente em 0,1."
         },
         "max": {
-          "nome": "MÁX. Inquebrável",
+          "nome": "MAX. Inquebrável",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria DEF. No início da batalha, converte 90% da vida atual em um [Escudo] de valor equivalente. A cada 4 danos sofridos, recupera 12% da vida máxima (unidades do tipo CHEFE têm a recuperação reduzida).\nAumenta a DEF de Guerreiros aliados na fileira da frente em 0.1"
+          "desc": "Aumenta a própria DEF. No início da batalha, converte 90% da vida atual em um [Escudo] de valor equivalente. A cada 4 danos sofridos, recupera 12% da vida máxima (unidades do tipo CHEFE têm a recuperação reduzida). Aumenta a DEF de Guerreiros aliados na fileira da frente em 0,1."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3451,11 +3451,11 @@
           "icone": "ability-icons/punho-do-dragao.png"
         },
         "max": {
-          "nome": "MAX. Super Saiyajin 3",
+          "nome": "Punho do Dragão MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta o próprio ataque. No início dos turnos ímpares, concede 1 habilidade extra a 1 [Guerreiro] [Saiyajin] aleatório da sua equipe e aumenta o dano de habilidade em 30% (1 turno). Aumenta o Acerto Anormal próprio em 0,05.",
-          "dano": "380%+20 (unidades inimigas em uma Fileira)",
+          "desc": "[Artes Marciais] Ataca um único inimigo. No primeiro uso, aumenta a Taxa de Crít. em 50% e o Dano Crít. em 30% (1 turno).",
+          "dano": "380%+20",
           "icone": "ability-icons/punho-do-dragao.png"
         },
         "smax": {
@@ -3500,7 +3500,7 @@
         {
           "nome": "Selo da Maldição de Orochimaru",
           "nivel_visto": 0,
-          "desc": "Aprimoramento de habilidade: No primeiro uso, ganha temporariamente 10% de Taxa de Crít. e 10% de Dano Crít..",
+          "desc": "Aprimoramento de habilidade: No primeiro uso, ganha temporariamente 10% de Taxa de Crít. e 10% de Dano Crít.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -3509,13 +3509,13 @@
           "nome": "Super Saiyajin 3",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. No início dos turnos ímpares, concede 1 ativação extra de habilidade a 1 lutador [Saiyajin] aliado aleatório.\nAumenta o Acerto Anormal próprio em 0.05"
+          "desc": "Aumenta o próprio ATQ. No início dos turnos ímpares, concede 1 ativação extra de habilidade a 1 lutador [Saiyajin] aliado aleatório. Aumenta o Acerto Anormal próprio em 0,05."
         },
         "max": {
           "nome": "MAX. Super Saiyajin 3",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. No início dos turnos ímpares, concede 1 habilidade extra a 1 [Guerreiro] [Saiyajin] aleatório da sua equipe e aumenta o dano de habilidade em 30% (1 turno).\nAumenta o Acerto Anormal próprio em 0.05"
+          "desc": "Aumenta o próprio ataque. No início dos turnos ímpares, concede 1 habilidade extra a 1 [Guerreiro] [Saiyajin] aleatório da sua equipe e aumenta o dano de habilidade em 30% (1 turno). Aumenta o Acerto Anormal próprio em 0,05."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3555,10 +3555,10 @@
           "icone": "ability-icons/kamehameha-gohan.png"
         },
         "max": {
-          "nome": "MAX. Invencível",
+          "nome": "Kamehameha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. Reduz em 25% o dano recebido de [Guerreiros das Trevas] e aumenta em 20% a taxa de acerto crítico contra [Guerreiros das Trevas]. Aumenta a Resistência Anormal de aliadas em 5%.",
+          "desc": "[Explosão de Ki] Ataca uma coluna inimiga. Para cada lutador [Maligno] na coluna alvo, o dano aumenta em 10%. Se conseguir uma eliminação, pode lançar imediatamente o Supremo novamente (dano reduzido para 70%).",
           "dano": "270%+18",
           "icone": "ability-icons/kamehameha-gohan.png"
         },
@@ -3613,13 +3613,13 @@
           "nome": "O Sempre Vitorioso",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Reduz o dano sofrido de lutadores [Malignos] em 20%.\nAumenta a Res. Anormal de aliadas em 5%"
+          "desc": "Aumenta o próprio ATQ. Reduz o dano sofrido de lutadores [Malignos] em 20%. Aumenta a Resistência Anormal de aliadas em 5%."
         },
         "max": {
-          "nome": "MÁX. Invencível",
+          "nome": "MAX. Invencível",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Reduz em 25% o dano recebido de [Guerreiros das Trevas] e aumenta em 20% a taxa de acerto crítico contra [Guerreiros das Trevas].\nAumenta a Res. Anormal de aliadas em 5%"
+          "desc": "Aumenta o próprio ataque. Reduz em 25% o dano recebido de [Guerreiros das Trevas] e aumenta em 20% a taxa de acerto crítico contra [Guerreiros das Trevas]. Aumenta a Resistência Anormal de aliadas em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3659,11 +3659,11 @@
           "icone": "ability-icons/corte-infinito.png"
         },
         "max": {
-          "nome": "MAX. Explosão de Intenção Mortal",
+          "nome": "Corte Infinito MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta sua própria taxa de crítico. Ao derrotar um inimigo, recupera 200 pontos adicionais de raiva. Se o Goku Rosé estiver presente ao mesmo tempo, a velocidade de recuperação de raiva própria aumenta em 30%. Aumenta sua Taxa de Crít. em 5%.",
-          "dano": "380%+26 (unidades inimigas em uma coluna)",
+          "desc": "[Artes Marciais] Mesma mecânica; quando o PV do inimigo estiver abaixo de 45%, aumenta o dano em 20%, dura 2 turnos.",
+          "dano": "380%+26",
           "icone": "ability-icons/corte-infinito.png"
         },
         "smax": {
@@ -3717,13 +3717,13 @@
           "nome": "Explosão de Ki",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Crit.. Ao matar um inimigo, restaura 200 de Ki.\nAumenta sua Taxa de Crit. em 5%"
+          "desc": "Aumenta a própria Taxa de Crít. Ao matar um inimigo, restaura 200 de Ki. Aumenta sua Taxa de Crít. em 5%."
         },
         "max": {
           "nome": "MAX. Explosão de Intenção Mortal",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de crítico. Ao derrotar um inimigo, recupera 200 pontos adicionais de raiva. Se o Goku Rosé estiver presente ao mesmo tempo, a velocidade de recuperação de raiva própria aumenta em 30%.\nAumenta sua Taxa de Crit. em 5%"
+          "desc": "Aumenta sua própria taxa de crítico. Ao derrotar um inimigo, recupera 200 pontos adicionais de raiva. Se o Goku Rosé estiver presente ao mesmo tempo, a velocidade de recuperação de raiva própria aumenta em 30%. Aumenta sua Taxa de Crít. em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3763,11 +3763,11 @@
           "icone": "ability-icons/kamehameha-solar.png"
         },
         "max": {
-          "nome": "MAX. Ataque Poderoso",
+          "nome": "Kamehameha Solar MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria DEF. Ao entrar em campo, concede um [Escudo] igual a 180% da própria DEF para os [Guerreiros das Trevas] aliados. Aumenta o próprio Reflexo de DANO em 10%.",
-          "dano": "250%+18 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, sacrifica 10% do próprio PV para causar dano equivalente a 10% do PV Máx. do alvo, com 70% de chance de infligir [Queimadura]; se o próprio PV estiver abaixo de 50%, aumenta adicionalmente a própria Taxa de Redução de Dano e Taxa de Bloqueio em 15% (dura 2 turnos).",
+          "dano": "250%+18",
           "icone": "ability-icons/kamehameha-solar.png"
         },
         "smax": {
@@ -3821,13 +3821,13 @@
           "nome": "Tempestade",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Ao entrar em batalha, concede aos aliados do [Tipo Maligno] um [Escudo] equivalente a 150% da própria DEF.\nAumenta o próprio Reflexo de DANO em 10%."
+          "desc": "Aumenta a própria DEF. Ao entrar em batalha, concede aos aliados do [Tipo Maligno] um [Escudo] equivalente a 150% da própria DEF. Aumenta o próprio Reflexo de DANO em 10%."
         },
         "max": {
           "nome": "MAX. Ataque Poderoso",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria DEF. Ao entrar em campo, concede um [Escudo] igual a 180% da própria DEF para os [Guerreiros das Trevas] aliados.\nAumenta o próprio Reflexo de DANO em 10%."
+          "desc": "Aumenta a própria DEF. Ao entrar em campo, concede um [Escudo] igual a 180% da própria DEF para os [Guerreiros das Trevas] aliados. Aumenta o próprio Reflexo de DANO em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3867,11 +3867,11 @@
           "icone": "ability-icons/mega-onda-de-energia.png"
         },
         "max": {
-          "nome": "MAX. Energia Infinita Max.",
+          "nome": "Super Onda de Energia MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta o próprio ataque. Android 18, após liberar o golpe supremo, pode liberar imediatamente um ataque de habilidade, com efeito de 1 vez por batalha. Ao entrar em campo, se houver um [Androide] em campo, aumenta sua própria taxa de crítico em 10% e ataque em 15% (por 2 turnos). Aumenta o ATQ em 5%.",
-          "dano": "380%+20 (todas as unidades inimigas)",
+          "desc": "[Artes Marciais] Ataca o inimigo da Fileira de Trás com menos PV, concede ao aliado com menos PV um [Escudo] equivalente a 90% do próprio ATQ, e inflige [Ferida Grave] (reduz a cura recebida em 70%, dura 1 turno).",
+          "dano": "380%+20",
           "icone": "ability-icons/mega-onda-de-energia.png"
         },
         "smax": {
@@ -3925,13 +3925,13 @@
           "nome": "Energia Infinita",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. A Androide 18, após usar um Supremo, pode lançar imediatamente um Ataque de Habilidade (uma vez por batalha).\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ATQ. A Androide 18, após usar um Supremo, pode lançar imediatamente um Ataque de Habilidade (uma vez por batalha). Aumenta o ATQ em 5%."
         },
         "max": {
-          "nome": "ENERGIA INFINITA MAX.",
+          "nome": "MAX. Energia Infinita Max.",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Android 18, após liberar o golpe supremo, pode liberar imediatamente um ataque de habilidade, com efeito de 1 vez por batalha. Ao entrar em campo, se houver um [Androide] em campo, aumenta sua própria taxa de crítico em 10% e ataque em 15% (por 2 turnos).\nAumenta o ATQ em 5%"
+          "desc": "Aumenta o próprio ataque. Android 18, após liberar o golpe supremo, pode liberar imediatamente um ataque de habilidade, com efeito de 1 vez por batalha. Ao entrar em campo, se houver um [Androide] em campo, aumenta sua própria taxa de crítico em 10% e ataque em 15% (por 2 turnos). Aumenta o ATQ em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -3971,11 +3971,11 @@
           "icone": "ability-icons/balas-de-energia-continuas.png"
         },
         "max": {
-          "nome": "MAX. Kale, você não pode morrer.",
+          "nome": "Balas de Energia Contínuas MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a velocidade de recuperação de Fúria das [Guerreiras]. Tem 100% de chance de reviver Kale caída (ainda ativo mesmo após sua própria morte). Após a morte de Kale, recupera 10% de Vida e 100 de Fúria para si mesma. Quando a Vida estiver abaixo de 30% pela primeira vez, recupera imediatamente 300 de Fúria para si mesma. Aumenta sua Taxa de Bloqueio em 5%.",
-          "dano": "160%+10 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Causa dano a todos os inimigos, reduzindo aleatoriamente 200 de Ki de 2 inimigos, e causa 40% de Dano Extra a lutadores do [Tipo Ataque].",
+          "dano": "160%+10",
           "icone": "ability-icons/balas-de-energia-continuas.png"
         },
         "smax": {
@@ -4029,13 +4029,13 @@
           "nome": "Não Morra, Kale",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a Velocidade de Recuperação de Ki das lutadoras [femininas]. 40% de chance de reviver Kale quando derrotada (funciona mesmo após a própria morte). Na primeira vez que o PV cair abaixo de 30%, restaura instantaneamente 300 de Ki.\nAumenta sua Taxa de Bloqueio em 5%"
+          "desc": "Aumenta a Velocidade de Recuperação de Ki das lutadoras [femininas]. 40% de chance de reviver Kale quando derrotada (funciona mesmo após a própria morte). Na primeira vez que o PV cair abaixo de 30%, restaura instantaneamente 300 de Ki. Aumenta sua Taxa de Bloqueio em 5%."
         },
         "max": {
           "nome": "MAX. Kale, você não pode morrer.",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a velocidade de recuperação de Fúria das [Guerreiras]. Tem 100% de chance de reviver Kale caída (ainda ativo mesmo após sua própria morte). Após a morte de Kale, recupera 10% de Vida e 100 de Fúria para si mesma. Quando a Vida estiver abaixo de 30% pela primeira vez, recupera imediatamente 300 de Fúria para si mesma.\nAumenta sua Taxa de Bloqueio em 5%"
+          "desc": "Aumenta a velocidade de recuperação de Fúria das [Guerreiras]. Tem 100% de chance de reviver Kale caída (ainda ativo mesmo após sua própria morte). Após a morte de Kale, recupera 10% de Vida e 100 de Fúria para si mesma. Quando a Vida estiver abaixo de 30% pela primeira vez, recupera imediatamente 300 de Fúria para si mesma. Aumenta sua Taxa de Bloqueio em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4075,10 +4075,10 @@
           "icone": "ability-icons/super-explosao-estilhacante.png"
         },
         "max": {
-          "nome": "MAX. Despertar Sombrio",
+          "nome": "Super Explosão Estilhaçante MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria vida após reviver. Possui 100% de chance de reviver, herdando 100% da raiva antes da derrota. Pode absorver estados negativos sobre si, aumentando o próprio ataque em 10% (1 turno) após a absorção, até 3 vezes por turno. Aumenta o ATQ em 20%.",
+          "desc": "[Explosão de Ki] Ataca a Fileira de Trás inimiga, cada alvo tem 50% de chance de sofrer [Queimadura da Alma], e alvos com [Queimadura da Alma] sofrem Dano Extra igual a 15% do PV perdido.",
           "dano": "220%+15",
           "icone": "ability-icons/super-explosao-estilhacante.png"
         },
@@ -4124,7 +4124,7 @@
         {
           "nome": "Estrategista de Campo de Batalha",
           "nivel_visto": 0,
-          "desc": "Sempre que um personagem aliado for afetado por [Incêndio], absorve imediatamente o efeito [Incêndio] dele; ativa duas vezes por turno.",
+          "desc": "Sempre que um aliado é afetado por [Queimadura], absorve imediatamente o efeito de [Queimadura] dele; ativa 2 vezes por turno.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -4133,13 +4133,13 @@
           "nome": "Despertar das Trevas",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio PV ao reviver. Tem 70% de chance de reviver, mantendo 50% do Ki de antes da derrota.\nAumenta o ATQ em 20%"
+          "desc": "Aumenta o próprio PV ao reviver. Tem 70% de chance de reviver, mantendo 50% do Ki de antes da derrota. Aumenta o ATQ em 20%."
         },
         "max": {
           "nome": "MAX. Despertar Sombrio",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria vida após reviver. Possui 100% de chance de reviver, herdando 100% da raiva antes da derrota. Pode absorver estados negativos sobre si, aumentando o próprio ataque em 10% (1 turno) após a absorção, até 3 vezes por turno.\nAumenta o ATQ em 20%"
+          "desc": "Aumenta a própria vida após reviver. Possui 100% de chance de reviver, herdando 100% da raiva antes da derrota. Pode absorver estados negativos sobre si, aumentando o próprio ataque em 10% (1 turno) após a absorção, até 3 vezes por turno. Aumenta o ATQ em 20%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4179,11 +4179,11 @@
           "icone": "ability-icons/espada-de-ki-zamasu.png"
         },
         "max": {
-          "nome": "MAX. Poder do Guerreiro de Inteligência",
+          "nome": "Espada de Ki MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta o próprio ataque; no início do terceiro turno, remove os efeitos negativos de si mesmo e recupera 1000 de raiva. Aumenta a Taxa de Crít. em 3%.",
-          "dano": "360%+25 (ao alvo com maior Ataque)",
+          "desc": "[Artes Marciais] Ataca um único inimigo, ignora 30% da DEF; a partir do turno 3, Zamasu alveja o inimigo com menos PV, o Supremo ganha +30% de Taxa de Crít..",
+          "dano": "360%+25",
           "icone": "ability-icons/espada-de-ki-zamasu.png"
         },
         "smax": {
@@ -4225,13 +4225,13 @@
           "nome": "Poder do Kaioh Supremo",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ; a partir do turno 3, dissipa os próprios debuffs e restaura 500 de Ki.\nAumenta a Taxa de Crit. em 3%"
+          "desc": "Aumenta o próprio ATQ; a partir do turno 3, dissipa os próprios debuffs e restaura 500 de Ki. Aumenta a Taxa de Crít. em 3%."
         },
         "max": {
           "nome": "MAX. Poder do Guerreiro de Inteligência",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque; no início do terceiro turno, remove os efeitos negativos de si mesmo e recupera 1000 de raiva.\nAumenta a Taxa de Crit. em 3%"
+          "desc": "Aumenta o próprio ataque; no início do terceiro turno, remove os efeitos negativos de si mesmo e recupera 1000 de raiva. Aumenta a Taxa de Crít. em 3%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4271,11 +4271,11 @@
           "icone": "ability-icons/explosao-da-patrulha.png"
         },
         "max": {
-          "nome": "MAX. Poder Temporal",
+          "nome": "Explosão da Patrulha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Aumenta a própria defesa. No início de cada turno, obtém sequencialmente: +10% de Ataque, +12% de Taxa de Crítico, +15% de Defesa. Cada efeito pode ser obtido no máximo uma vez. Aumenta adicionalmente em 20% a própria Taxa de Bloqueio e 20% a Intensidade de Bloqueio (2 turnos). Aumenta a Taxa de Imunidade a Controle própria em 10%.",
-          "dano": "440%+24 (a uma unidade aliada aleatória na fileira de trás)",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um inimigo aleatório da Fileira de Trás, aumenta o Roubo de Vida em 40%, e aumenta em 40% a eficácia de revide contra Guerreiros do [Tipo Ofensivo].",
+          "dano": "440%+24",
           "icone": "ability-icons/explosao-da-patrulha.png"
         },
         "smax": {
@@ -4320,7 +4320,7 @@
         {
           "nome": "Pantera Negra Dupla",
           "nivel_visto": 0,
-          "desc": "Aprimoramento de Passiva: Na primeira vez que o PV cair abaixo de 30%, ganha um escudo equivalente a 5% do PV Máx..",
+          "desc": "Aprimoramento de Passiva: Na primeira vez em que o PV cair abaixo de 30%, ganha um escudo equivalente a 5% do PV Máx.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -4329,13 +4329,13 @@
           "nome": "Poder do Espaço-Tempo",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. No início de cada turno, ganha: +10% de ATQ, +12% de Taxa de Crít., +15% de DEF — cada efeito só pode ser ganho uma vez.\nAumenta a Taxa de Imunidade a Controle própria em 10%"
+          "desc": "Aumenta a própria DEF. No início de cada turno, ganha: +10% de ATQ, +12% de Taxa de Crít., +15% de DEF — cada efeito só pode ser ganho uma vez. Aumenta a Taxa de Imunidade a Controle própria em 10%."
         },
         "max": {
           "nome": "MAX. Poder Temporal",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. No início de cada turno, obtém sequencialmente: +10% de Ataque, +12% de Taxa de Crítico, +15% de Defesa. Cada efeito pode ser obtido no máximo uma vez. Aumenta adicionalmente em 20% a própria Taxa de Bloqueio e 20% a Intensidade de Bloqueio (2 turnos).\nAumenta a Taxa de Imunidade a Controle própria em 10%"
+          "desc": "Aumenta a própria defesa. No início de cada turno, obtém sequencialmente: +10% de Ataque, +12% de Taxa de Crítico, +15% de Defesa. Cada efeito pode ser obtido no máximo uma vez. Aumenta adicionalmente em 20% a própria Taxa de Bloqueio e 20% a Intensidade de Bloqueio (2 turnos). Aumenta a Taxa de Imunidade a Controle própria em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4375,10 +4375,10 @@
           "icone": "ability-icons/fogo-demoniaco.png"
         },
         "max": {
-          "nome": "MAX. Rei do Mundo Demoníaco",
+          "nome": "Fogo Demoníaco MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria defesa. Quanto menor a vida durante a batalha, maior a taxa de bloqueio, podendo chegar a até 30%. Quando Dabura morre, 1 [Guerreiro das Trevas] aleatório do seu lado recupera 10% da vida, além de ganhar 20% de redução de dano e 10% de taxa de dano (por 2 turnos). Também aumenta a Redução de Dano em 10%.",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, reduz o Dano Crít. dos alvos da Fileira de Trás em 40%, 30% de chance de infligir [Enraizamento] (não pode agir, dura 1 turno) nos alvos da Fileira de Trás. Se não houver alvo na Fileira de Trás, o dano aumenta em 30%.",
           "dano": "280%+12",
           "icone": "ability-icons/fogo-demoniaco.png"
         },
@@ -4421,13 +4421,13 @@
           "nome": "Rei do Reino dos Demônios",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Quanto menor o PV em batalha, maior a Taxa de Bloqueio, até 30%.\nAumenta sua DEF em 10%"
+          "desc": "Aumenta a própria DEF. Quanto menor o PV em batalha, maior a Taxa de Bloqueio, até 30%. Aumenta sua DEF em 10%."
         },
         "max": {
           "nome": "MAX. Rei do Mundo Demoníaco",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. Quanto menor a vida durante a batalha, maior a taxa de bloqueio, podendo chegar a até 30%. Quando Dabura morre, 1 [Guerreiro das Trevas] aleatório do seu lado recupera 10% da vida, além de ganhar 20% de redução de dano e 10% de taxa de dano (por 2 turnos).\nTambém aumenta a Redução de Dano em 10%"
+          "desc": "Aumenta a própria defesa. Quanto menor a vida durante a batalha, maior a taxa de bloqueio, podendo chegar a até 30%. Quando Dabura morre, 1 [Guerreiro das Trevas] aleatório do seu lado recupera 10% da vida, além de ganhar 20% de redução de dano e 10% de taxa de dano (por 2 turnos). Também aumenta a Redução de Dano em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4467,10 +4467,10 @@
           "icone": "ability-icons/metralhadora-do-amor-fofo.png"
         },
         "max": {
-          "nome": "MAX. Transmissão de Conhecimento",
+          "nome": "Metralhadora do Amor Fofo MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque; se houver mais de 2 Guerreiras, toda a equipe aliada ganha 20% de taxa de cura; para cada Guerreira feminina em campo, ganha 5% de taxa de dano e 5% de taxa de redução de dano. Aumenta sua taxa de cura em 5%.",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, se o próprio PV for ≥ 50%, causa 35% de Dano Extra; se o próprio PV for < 50%, recupera uma grande quantidade de PV. Cura todos os ninjas aliados em: ATQ x100%+15.",
           "dano": "Cura todos os ninjas aliados em: ATQ x100%+15",
           "icone": "ability-icons/metralhadora-do-amor-fofo.png"
         },
@@ -4525,13 +4525,13 @@
           "nome": "Asas de Borboleta",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ; se houver mais de 2 Guerreiras, todos os aliados ganham +20% de Taxa de Cura.\nAumenta sua taxa de cura em 5%"
+          "desc": "Aumenta o próprio ATQ; se houver mais de 2 Guerreiras, todos os aliados ganham +20% de Taxa de Cura. Aumenta sua taxa de cura em 5%."
         },
         "max": {
           "nome": "MAX. Transmissão de Conhecimento",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque; se houver mais de 2 Guerreiras, toda a equipe aliada ganha 20% de taxa de cura; para cada Guerreira feminina em campo, ganha 5% de taxa de dano e 5% de taxa de redução de dano.\nAumenta sua taxa de cura em 5%"
+          "desc": "Aumenta o próprio ataque; se houver mais de 2 Guerreiras, toda a equipe aliada ganha 20% de taxa de cura; para cada Guerreira feminina em campo, ganha 5% de taxa de dano e 5% de taxa de redução de dano. Aumenta sua taxa de cura em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4571,10 +4571,10 @@
           "icone": "ability-icons/punho-do-dragao-gt.png"
         },
         "max": {
-          "nome": "MAX. Espírito Saiyajin",
+          "nome": "Punho do Dragão MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Explosão de Ki] Aumenta a própria taxa de bloqueio. Ao bloquear, há 50% de chance de recuperar 120 de fúria. Aumenta sua Taxa de Quebra em 5%.",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, reduz a resistência a status anormais do alvo em 30% (1 turno), 30% de chance de causar [Enraizamento] (incapaz de agir, dura 1 turno), aumenta o próprio bloqueio de [Saiyajin] em 15% (2 turnos).",
           "dano": "360%+24",
           "icone": "ability-icons/punho-do-dragao-gt.png"
         },
@@ -4629,13 +4629,13 @@
           "nome": "Alma dos Saiyajins",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Bloqueio. Ao bloquear, tem 45% de chance de recuperar 100 de Fúria.\nAumenta sua Taxa de Quebra em 5%"
+          "desc": "Aumenta a própria Taxa de Bloqueio. Ao bloquear, tem 45% de chance de recuperar 100 de Fúria. Aumenta sua Taxa de Quebra em 5%."
         },
         "max": {
           "nome": "MAX. Espírito Saiyajin",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria taxa de bloqueio. Ao bloquear, há 50% de chance de recuperar 120 de fúria.\nAumenta sua Taxa de Quebra em 5%"
+          "desc": "Aumenta a própria taxa de bloqueio. Ao bloquear, há 50% de chance de recuperar 120 de fúria. Aumenta sua Taxa de Quebra em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4675,11 +4675,11 @@
           "icone": "ability-icons/lampejo-final-vegeta.png"
         },
         "max": {
-          "nome": "MAX. Orgulho Saiyajin",
+          "nome": "Lampejo Final MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio poder de ataque. A cada 4 golpes especiais desferidos por aliados [Saiyajin], ganha 1 habilidade extra. Reduz o ATQ de todos os ninjas inimigos em 5%.",
-          "dano": "380%+26 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, +15% de Taxa de Crít. para este ataque, causa 40% de dano em área (sem ganho de Fúria) às unidades ao redor.",
+          "dano": "380%+26",
           "icone": "ability-icons/lampejo-final-vegeta.png"
         },
         "smax": {
@@ -4733,13 +4733,13 @@
           "nome": "Orgulho Saiyajin",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. A cada 5 Supremos lançadas por aliados [Saiyajin], ganha 1 ativação de habilidade extra.\nReduz o ATQ de todos os Guerreiros inimigos em 5%"
+          "desc": "Aumenta o próprio ATQ. A cada 5 Supremos lançados por aliados [Saiyajin], ganha 1 ativação de habilidade extra. Reduz o ATQ de todos os Guerreiros inimigos em 5%."
         },
         "max": {
           "nome": "MAX. Orgulho Saiyajin",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio poder de ataque. A cada 4 golpes especiais desferidos por aliados [Saiyajin], ganha 1 habilidade extra.\nReduz o ATQ de todos os Guerreiros inimigos em 5%"
+          "desc": "Aumenta o próprio poder de ataque. A cada 4 golpes especiais desferidos por aliados [Saiyajin], ganha 1 habilidade extra. Reduz o ATQ de todos os Guerreiros inimigos em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4779,10 +4779,10 @@
           "icone": "ability-icons/explosao-da-morte.png"
         },
         "max": {
-          "nome": "MAX. A Ira do Imperador",
+          "nome": "Explosão da Morte MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria chance de acerto de anomalias. 40% de chance de esquivar de habilidades, uma vez por turno; se houver mais de 2 [Guerreiros das Trevas] aliados, a própria chance de acerto de anomalias aumenta em 20%. Aumenta sua Res. Anormal em 5%.",
+          "desc": "[Explosão de Ki] Ataca a Fileira da Frente inimiga, reduz a Fúria de cada alvo em 150.",
           "dano": "220%+18",
           "icone": "ability-icons/explosao-da-morte.png"
         },
@@ -4837,13 +4837,13 @@
           "nome": "Fúria do Imperador",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Acerto de Status. 40% de chance de esquivar de habilidades (uma vez por turno).\nAumenta sua Res. Anormal em 5%"
+          "desc": "Aumenta a própria Taxa de Acerto de Status. 40% de chance de esquivar de habilidades (uma vez por turno). Aumenta sua Res. Anormal em 5%."
         },
         "max": {
-          "nome": "MÁX. A Ira do Imperador",
+          "nome": "MAX. A Ira do Imperador",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria chance de acerto de anomalias. 40% de chance de esquivar de habilidades, uma vez por turno; se houver mais de 2 [Guerreiros das Trevas] aliados, a própria chance de acerto de anomalias aumenta em 20%.\nAumenta sua Res. Anormal em 5%"
+          "desc": "Aumenta a própria chance de acerto de anomalias. 40% de chance de esquivar de habilidades, uma vez por turno; se houver mais de 2 [Guerreiros das Trevas] aliados, a própria chance de acerto de anomalias aumenta em 20%. Aumenta sua Res. Anormal em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4883,11 +4883,11 @@
           "icone": "ability-icons/lampejo-do-inferno.png"
         },
         "max": {
-          "nome": "MAX. Reflexo de Dano",
+          "nome": "Lampejo do Inferno MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria defesa. O Android 16 não pode reviver. Após ser derrotado, ele explode, causando dano elevado ao seu algoz, igual a 30% do dano total que ele recebeu nesta batalha. Aumenta sua Taxa de Ricochete em 10%.",
-          "dano": "320%+22 (ao alvo e a inimigos próximos)",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, concede aos aliados da [Fileira de Frente] um Escudo equivalente a 250% da própria DEF e dissipa todos os próprios debuffs.",
+          "dano": "320%+22",
           "icone": "ability-icons/lampejo-do-inferno.png"
         },
         "smax": {
@@ -4941,13 +4941,13 @@
           "nome": "Ricochete",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Androide 16 não pode ser revivido. Ao morrer, autodestrói-se, causando ao assassino dano equivalente a 20% do dano total recebido nesta batalha.\nAumenta sua Taxa de Ricochete em 10%"
+          "desc": "Aumenta a própria DEF. Android 16 não pode ser revivido. Ao morrer, autodestrói-se, causando ao assassino dano equivalente a 20% do dano total recebido nesta batalha. Aumenta sua Taxa de Ricochete em 10%."
         },
         "max": {
-          "nome": "MÁX. Reflexo de Dano",
+          "nome": "MAX. Reflexo de Dano",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. O Androide 16 não pode reviver. Após ser derrotado, ele explode, causando dano elevado ao seu algoz, igual a 30% do dano total que ele recebeu nesta batalha.\nAumenta sua Taxa de Ricochete em 10%"
+          "desc": "Aumenta a própria defesa. O Android 16 não pode reviver. Após ser derrotado, ele explode, causando dano elevado ao seu algoz, igual a 30% do dano total que ele recebeu nesta batalha. Aumenta sua Taxa de Ricochete em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -4987,10 +4987,10 @@
           "icone": "ability-icons/rogafufuken.png"
         },
         "max": {
-          "nome": "MAX. Investigação de Fraquezas",
+          "nome": "Rogafufuken MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta a própria DEF. Ao entrar em campo, para cada [Artista Marcial] presente no campo, aumenta a própria DEF em 12%, até no máximo 60%. Aumenta o ATQ de kunoichis aliadas em 10%.",
+          "desc": "[Artes Marciais] Ataca o inimigo com mais Fúria, inflige [Interrupção] (se a Fúria do alvo estiver cheia, reduz em 200; ineficaz contra Chefes).",
           "dano": "360%+20",
           "icone": "ability-icons/rogafufuken.png"
         },
@@ -5045,13 +5045,13 @@
           "nome": "Detecção de Fraqueza",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Ao ser colocado em campo, ganha +10% de DEF para cada [Artista Marcial] no campo (máximo de +40%).\nAumenta o ATQ de Guerreiras aliadas em 5%"
+          "desc": "Aumenta a própria DEF. Ao ser colocado em campo, ganha +10% de DEF para cada [Artista Marcial] no campo (máximo de +40%). Aumenta o ATQ de kunoichis aliadas em 5%."
         },
         "max": {
           "nome": "MAX. Investigação de Fraquezas",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria DEF. Ao entrar em campo, para cada [Artista Marcial] presente no campo, aumenta a própria DEF em 12%, até no máximo 60%.\nAumenta o ATQ de Guerreiras aliadas em 10%"
+          "desc": "Aumenta a própria DEF. Ao entrar em campo, para cada [Artista Marcial] presente no campo, aumenta a própria DEF em 12%, até no máximo 60%. Aumenta o ATQ de kunoichis aliadas em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5091,11 +5091,11 @@
           "icone": "ability-icons/makankosappo.png"
         },
         "max": {
-          "nome": "MAX. Investigação de Fraquezas",
+          "nome": "Makankosappo MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta sua própria taxa de acerto crítico. Todos os ataques de Piccolo ignoram 20% da defesa do oponente. Quando Gohan estiver em campo, aumenta sua própria taxa de dano em 12% e taxa de redução de dano em 12%. Aumenta o dano causado a ninjas inimigos do tipo defesa em 5%.",
-          "dano": "270%+18 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca uma coluna inimiga, reduzindo a DEF do alvo principal em 30% e a Redução de Dano em 15% (1 turno).",
+          "dano": "270%+18",
           "icone": "ability-icons/makankosappo.png"
         },
         "smax": {
@@ -5149,13 +5149,13 @@
           "nome": "Detecção de Fraqueza",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Penetração. Os ataques de Piccolo ignoram 20% da DEF do alvo.\nAumenta o dano causado a Guerreiros inimigos do tipo defesa em 5%"
+          "desc": "Aumenta a própria Taxa de Penetração. Os ataques de Piccolo ignoram 20% da DEF do alvo. Aumenta o dano causado a Guerreiros inimigos do tipo defesa em 5%."
         },
         "max": {
           "nome": "MAX. Investigação de Fraquezas",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta sua própria taxa de acerto crítico. Todos os ataques de Piccolo ignoram 20% da defesa do oponente. Quando Gohan estiver em campo, aumenta sua própria taxa de dano em 12% e taxa de redução de dano em 12%.\nAumenta o dano causado a Guerreiros inimigos do tipo defesa em 5%"
+          "desc": "Aumenta sua própria taxa de acerto crítico. Todos os ataques de Piccolo ignoram 20% da defesa do oponente. Quando Gohan estiver em campo, aumenta sua própria taxa de dano em 12% e taxa de redução de dano em 12%. Aumenta o dano causado a Guerreiros inimigos do tipo defesa em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5195,11 +5195,11 @@
           "icone": "ability-icons/kikoho.png"
         },
         "max": {
-          "nome": "MAX. Inquebrável",
+          "nome": "Kikoho MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria defesa. Quando houver uma posição vazia no campo, invoca 1 clone com 20% da vida, 70% do ataque e 70% da defesa (só pode ser ativado uma vez por batalha), que possui ataque básico e habilidades. Se Yamcha e Mestre Kame estiverem ambos em campo, aumenta adicionalmente o ataque dos 3 em 15% (por 2 turnos) e recupera 120 de raiva própria por turno. Aumenta a DEF em 0,1.",
-          "dano": "360%+20 (ao alvo e a inimigos próximos)",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, causando 40% de dano em área aos inimigos ao redor, com 70% de chance de infligir [Cegueira] (incapaz de usar habilidades, dura 1 turno) no alvo principal.",
+          "dano": "360%+20",
           "icone": "ability-icons/kikoho.png"
         },
         "smax": {
@@ -5253,13 +5253,13 @@
           "nome": "Fortemente Fortificado",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Se houver um espaço vazio no campo, invoca um clone com 20% de PV, 70% de ATQ e 70% de DEF (apenas uma vez por batalha) que possui Ataque Normal e Habilidades.\nAumenta a DEF em 0.1"
+          "desc": "Aumenta a própria DEF. Se houver um espaço vazio no campo, invoca um clone com 20% de PV, 70% de ATQ e 70% de DEF (apenas uma vez por batalha) que possui Ataque Normal e Habilidades. Aumenta a DEF em 0,1."
         },
         "max": {
-          "nome": "MÁX. Inquebrável",
+          "nome": "MAX. Inquebrável",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. Quando houver uma posição vazia no campo, invoca 1 clone com 20% da vida, 70% do ataque e 70% da defesa (só pode ser ativado uma vez por batalha), que possui ataque básico e habilidades. Se Yamcha e Mestre Kame estiverem ambos em campo, aumenta adicionalmente o ataque dos 3 em 15% (por 2 turnos) e recupera 120 de raiva própria por turno.\nAumenta a DEF em 0.1"
+          "desc": "Aumenta a própria defesa. Quando houver uma posição vazia no campo, invoca 1 clone com 20% da vida, 70% do ataque e 70% da defesa (só pode ser ativado uma vez por batalha), que possui ataque básico e habilidades. Se Yamcha e Mestre Kame estiverem ambos em campo, aumenta adicionalmente o ataque dos 3 em 15% (por 2 turnos) e recupera 120 de raiva própria por turno. Aumenta a DEF em 0,1."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5299,11 +5299,11 @@
           "icone": "ability-icons/kamehameha-mestre-kame.png"
         },
         "max": {
-          "nome": "MAX. Corpo de Aço",
+          "nome": "Kamehameha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta a própria defesa. Aumenta a taxa de dano dos [Artistas Marciais] aliados em 10%. Aumenta a DEF em 0,1.",
-          "dano": "280%+18 (unidades inimigas em uma coluna)",
+          "desc": "[Artes Marciais] Ataca uma coluna inimiga, depois aumenta a DEF própria e a dos aliados da mesma coluna em 25% (2 turnos).",
+          "dano": "280%+18",
           "icone": "ability-icons/kamehameha-mestre-kame.png"
         },
         "smax": {
@@ -5348,7 +5348,7 @@
         {
           "nome": "Palma Abala-Mundo",
           "nivel_visto": 0,
-          "desc": "Aumenta a própria Taxa de Reflexo de Dano em 5w% (bug de exibição no jogo — valor real provavelmente 5%).",
+          "desc": "Aumenta a própria Taxa de Reflexo de Dano em 5%.",
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png"
         }
       ],
@@ -5357,13 +5357,13 @@
           "nome": "Torso de Aço",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Aumenta a Taxa de Dano de todos os lutadores aliados [Artista Marcial] em 8%.\nAumenta a DEF em 0.1"
+          "desc": "Aumenta a própria DEF. Aumenta a Taxa de Dano de todos os lutadores aliados [Artista Marcial] em 8%. Aumenta a DEF em 0,1."
         },
         "max": {
           "nome": "MAX. Corpo de Aço",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. Aumenta a taxa de dano dos [Artistas Marciais] aliados em 10%.\nAumenta a DEF em 0.1"
+          "desc": "Aumenta a própria defesa. Aumenta a taxa de dano dos [Artistas Marciais] aliados em 10%. Aumenta a DEF em 0,1."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5403,11 +5403,11 @@
           "icone": "ability-icons/rajada-de-energia-de-poder-maximo.png"
         },
         "max": {
-          "nome": "MAX. O chamado da justiça",
+          "nome": "Rajada de Energia de Poder Máximo MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria defesa. Após ser derrotado, o [Goku] aliado ganha imediatamente 1000 de raiva, podendo ser ativado apenas uma vez por batalha. Além disso, aumenta em 10% a intensidade de crítico dos [Artistas Marciais] aliados. Aumenta sua Taxa de Roubo de Vida em 10%.",
-          "dano": "220%+12 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca uma Fileira de inimigos e aumenta o ATQ da Fileira da Frente da sua equipe em 8% (dura 1 turno), com 10% de chance de infligir [Imobilizar] (incapaz de agir, dura 1 turno).",
+          "dano": "220%+12",
           "icone": "ability-icons/rajada-de-energia-de-poder-maximo.png"
         },
         "smax": {
@@ -5461,13 +5461,13 @@
           "nome": "Grito por Justiça",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Ao sofrer nocaute, o [Son Goku] da sua equipe ganha imediatamente 1.000 de Ki. Só pode ser ativado uma vez por batalha.\nAumenta sua Taxa de Roubo de Vida em 10%"
+          "desc": "Aumenta a própria DEF. Ao sofrer nocaute, o [Son Goku] da sua equipe ganha imediatamente 1.000 de Ki. Só pode ser ativado uma vez por batalha. Aumenta sua Taxa de Roubo de Vida em 10%."
         },
         "max": {
-          "nome": "MÁX. O chamado da justiça",
+          "nome": "MAX. O chamado da justiça",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. Após ser derrotado, o [Goku] aliado ganha imediatamente 1000 de raiva, podendo ser ativado apenas uma vez por batalha. Além disso, aumenta em 10% a intensidade de crítico dos [Artistas Marciais] aliados.\nAumenta sua Taxa de Roubo de Vida em 10%"
+          "desc": "Aumenta a própria defesa. Após ser derrotado, o [Goku] aliado ganha imediatamente 1000 de raiva, podendo ser ativado apenas uma vez por batalha. Além disso, aumenta em 10% a intensidade de crítico dos [Artistas Marciais] aliados. Aumenta sua Taxa de Roubo de Vida em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5507,10 +5507,10 @@
           "icone": "ability-icons/regeneracao-de-vida.png"
         },
         "max": {
-          "nome": "MAX. Beleza natural",
+          "nome": "Regeneração de Vida MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "Aumenta a própria Defesa. Guerreiros na mesma coluna que a Bulma recebem 25% a mais de cura e ganham 25% de Resistência a Anomalias. Aumenta sua Taxa de Quebra em 10%.",
+          "desc": "Cura todos os aliados e remove o status [Controle] dos lutadores da Fileira da Frente. Cura em: 0%+15.",
           "dano": "0%+15 (cura, unidades inimigas em uma coluna)",
           "icone": "ability-icons/regeneracao-de-vida.png"
         },
@@ -5565,13 +5565,13 @@
           "nome": "Beleza Natural",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Lutadores na mesma coluna que Bulma recebem 25% mais cura.\nAumenta sua Taxa de Quebra em 10%"
+          "desc": "Aumenta a própria DEF. Lutadores na mesma coluna que Bulma recebem 25% mais cura. Aumenta sua Taxa de Quebra em 10%."
         },
         "max": {
-          "nome": "MÁX. Beleza natural",
+          "nome": "MAX. Beleza natural",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria Defesa. Guerreiros na mesma coluna que a Bulma recebem 25% a mais de cura e ganham 25% de Resistência a Anomalias.\nAumenta sua Taxa de Quebra em 10%"
+          "desc": "Aumenta a própria Defesa. Guerreiros na mesma coluna que a Bulma recebem 25% a mais de cura e ganham 25% de Resistência a Anomalias. Aumenta sua Taxa de Quebra em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5611,11 +5611,11 @@
           "icone": "ability-icons/raio-perigoso-da-piramide.png"
         },
         "max": {
-          "nome": "MAX. Esmagamento de Bergamo",
+          "nome": "Raio Perigoso da Pirâmide MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. Quando a vida estiver abaixo de 40% pela primeira vez, aumenta o próprio tamanho (por 2 turnos), aumenta a defesa em 20% e o ataque em 20%, e recupera 10% da vida. Aumenta sua Taxa de Res. a Crít. em 5%.",
-          "dano": "220%+12 (unidades inimigas em uma coluna)",
+          "desc": "[Explosão de Ki] Ataca a Fileira de Trás inimiga, aumenta o dano deste ataque em 20%, e causa 40% de Dano Extra a lutadores do [Tipo Técnica].",
+          "dano": "220%+12",
           "icone": "ability-icons/raio-perigoso-da-piramide.png"
         },
         "smax": {
@@ -5669,13 +5669,13 @@
           "nome": "Bergamo, o Esmagador",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Na primeira vez que o PV cair abaixo de 30%, transforma-se em Forma Gigante por 2 turnos, aumentando DEF e ATQ em 15%, e restaurando 10% do PV.\nAumenta sua Taxa de Res. a Crit. em 5%"
+          "desc": "Aumenta o próprio ATQ. Na primeira vez que o PV cair abaixo de 30%, transforma-se em Forma Gigante por 2 turnos, aumentando DEF e ATQ em 15%, e restaurando 10% do PV. Aumenta sua Taxa de Res. a Crít. em 5%."
         },
         "max": {
           "nome": "MAX. Esmagamento de Bergamo",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. Quando a vida estiver abaixo de 40% pela primeira vez, aumenta o próprio tamanho (por 2 turnos), aumenta a defesa em 20% e o ataque em 20%, e recupera 10% da vida.\nAumenta sua Taxa de Res. a Crit. em 5%"
+          "desc": "Aumenta o próprio ataque. Quando a vida estiver abaixo de 40% pela primeira vez, aumenta o próprio tamanho (por 2 turnos), aumenta a defesa em 20% e o ataque em 20%, e recupera 10% da vida. Aumenta sua Taxa de Res. a Crít. em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5715,10 +5715,10 @@
           "icone": "ability-icons/kamehameha-goku-crianca.png"
         },
         "max": {
-          "nome": "MAX. Sem medo",
+          "nome": "Kamehameha MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta o próprio ataque. A partir do segundo turno, entra no estado [Valente], aumentando a taxa de dano e a taxa de redução de dano em 20%, até o final da batalha. Aumenta o dano da habilidade suprema de aliados Saiyajin em 5%.",
+          "desc": "[Artes Marciais] Ataca um único inimigo e os alvos ao redor, reduzindo o ATQ deles em 10%, com 16% de chance de infligir [Atordoamento] (incapaz de agir, dura 1 turno).",
           "dano": "360%+20",
           "icone": "ability-icons/kamehameha-goku-crianca.png"
         },
@@ -5761,13 +5761,13 @@
           "nome": "Sem Medo",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. A partir do Turno 3, entra no estado [Corajoso], aumentando a Taxa de Dano e a Taxa de Redução de Dano em 20% até o fim da batalha.\nAumenta o dano da habilidade suprema de aliados Saiyajin em 5%"
+          "desc": "Aumenta o próprio ATQ. A partir do Turno 3, entra no estado [Corajoso], aumentando a Taxa de Dano e a Taxa de Redução de Dano em 20% até o fim da batalha. Aumenta o dano da habilidade suprema de aliados Saiyajin em 5%."
         },
         "max": {
-          "nome": "MÁX. Sem medo",
+          "nome": "MAX. Sem medo",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. A partir do segundo turno, entra no estado [Valente], aumentando a taxa de dano e a taxa de redução de dano em 20%, até o final da batalha.\nAumenta o dano da habilidade suprema de aliados Saiyajin em 5%"
+          "desc": "Aumenta o próprio ataque. A partir do segundo turno, entra no estado [Valente], aumentando a taxa de dano e a taxa de redução de dano em 20%, até o final da batalha. Aumenta o dano da habilidade suprema de aliados Saiyajin em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5807,11 +5807,11 @@
           "icone": "ability-icons/balas-de-energia-continuas-frost.png"
         },
         "max": {
-          "nome": "MAX. Provocação",
+          "nome": "Balas de Energia Contínuas MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ATQ. Ataques básicos e habilidades adicionam 1 camada de [Envenenamento] (causa dano equivalente a 4% da Vida máxima no início de cada turno, dura 2 turnos, máximo de 5 camadas acumuladas). Ao morrer, adiciona 2 camadas de [Envenenamento] ao inimigo que o derrotou. Aumenta o PV de ninjas Uchiha em 5%.",
-          "dano": "140%+8 (todas as unidades inimigas)",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos; se o alvo tiver 2+ acúmulos de [Veneno], causa Dano Extra igual a 15% do PV perdido; se o alvo tiver 3+ acúmulos, reduz a Taxa de Redução de Dano em 15%.",
+          "dano": "140%+8",
           "icone": "ability-icons/balas-de-energia-continuas-frost.png"
         },
         "smax": {
@@ -5865,13 +5865,13 @@
           "nome": "Semear Discórdia",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. Ataques básicos e habilidades aplicam 1 acúmulo de [Veneno] (causa dano igual a 4% do PV Máx. do alvo por turno, dura 2 turnos, acumula até 5 vezes).\nAumenta o PV de Guerreiros Uchiha em 5%"
+          "desc": "Aumenta o próprio ATQ. Ataques básicos e habilidades aplicam 1 acúmulo de [Veneno] (causa dano igual a 4% do PV Máx. do alvo por turno, dura 2 turnos, acumula até 5 vezes). Aumenta o PV de Guerreiros Uchiha em 5%."
         },
         "max": {
           "nome": "MAX. Provocação",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ATQ. Ataques básicos e habilidades adicionam 1 camada de [Envenenamento] (causa dano equivalente a 4% da Vida máxima no início de cada turno, dura 2 turnos, máximo de 5 camadas acumuladas). Ao morrer, adiciona 2 camadas de [Envenenamento] ao inimigo que o derrotou.\nAumenta o PV de Guerreiros Uchiha em 5%"
+          "desc": "Aumenta o próprio ATQ. Ataques básicos e habilidades adicionam 1 camada de [Envenenamento] (causa dano equivalente a 4% da Vida máxima no início de cada turno, dura 2 turnos, máximo de 5 camadas acumuladas). Ao morrer, adiciona 2 camadas de [Envenenamento] ao inimigo que o derrotou. Aumenta o PV de Guerreiros Uchiha em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -5911,10 +5911,10 @@
           "icone": "ability-icons/lampejo-de-luz-demoniaco.png"
         },
         "max": {
-          "nome": "MAX. Invencível",
+          "nome": "Lampejo de Luz Demoníaco MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ataque. No início do primeiro turno, os outros Guerreiros na mesma coluna ganham 1 habilidade extra. Se Vegeta estiver presente no seu lado, aumenta em 10% o dano do golpe especial próprio e do Vegeta. Aumenta seu Dano de Repulsão em 5%.",
+          "desc": "[Explosão de Ki] Ataca o inimigo com mais PV, causa 30% de Dano Extra a Guerreiros do Tipo Defesa, e concede aos aliados da Fileira de Trás o Efeito Letal (quando o PV do inimigo > 50%, dano aumentado em 25%).",
           "dano": "390%+20",
           "icone": "ability-icons/lampejo-de-luz-demoniaco.png"
         },
@@ -5969,13 +5969,13 @@
           "nome": "O Sempre Vitorioso",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ. No início do primeiro turno, os outros Guerreiros da mesma coluna ganham 1 uso extra de habilidade.\nAumenta seu Dano de Repulsão em 5%"
+          "desc": "Aumenta o próprio ATQ. No início do primeiro turno, os outros Guerreiros da mesma coluna ganham 1 uso extra de habilidade. Aumenta seu Dano de Repulsão em 5%."
         },
         "max": {
-          "nome": "MÁX. Invencível",
+          "nome": "MAX. Invencível",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ataque. No início do primeiro turno, os outros Guerreiros na mesma coluna ganham 1 habilidade extra. Se Vegeta estiver presente no seu lado, aumenta em 10% o dano do golpe especial próprio e do Vegeta.\nAumenta seu Dano de Repulsão em 5%"
+          "desc": "Aumenta o próprio ataque. No início do primeiro turno, os outros Guerreiros na mesma coluna ganham 1 habilidade extra. Se Vegeta estiver presente no seu lado, aumenta em 10% o dano do golpe especial próprio e do Vegeta. Aumenta seu Dano de Repulsão em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -6015,10 +6015,10 @@
           "icone": "ability-icons/lampejo-final-vegeta-base.png"
         },
         "max": {
-          "nome": "MAX. Orgulho do Príncipe",
+          "nome": "Lampejo Final MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a própria defesa. Vegeta seleciona um Guerreiro em campo como alvo de [Duelo]. As habilidades e golpes especiais de Vegeta priorizam atacar o alvo de [Duelo]; quando o próprio Vegeta sofre dano do alvo marcado com [Duelo], reduz o dano em 20%. Aumenta o ATQ em 10%.",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, causa 30% de Dano Extra a alvos [Duelo], reduz a resistência a status anormais em 20%, 50% de chance de infligir [Cegueira] (não pode usar habilidades, 1 turno).",
           "dano": "360%+20",
           "icone": "ability-icons/lampejo-final-vegeta-base.png"
         },
@@ -6073,13 +6073,13 @@
           "nome": "Orgulho do Príncipe",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Vegeta marca um inimigo como alvo de [Duelo]; as habilidades e o Supremo de Vegeta priorizam atacar o alvo de [Duelo].\nAumenta o ATQ em 10%"
+          "desc": "Aumenta a própria DEF. Vegeta marca um inimigo como alvo de [Duelo]; as habilidades e o Supremo de Vegeta priorizam atacar o alvo de [Duelo]. Aumenta o ATQ em 10%."
         },
         "max": {
           "nome": "MAX. Orgulho do Príncipe",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. Vegeta seleciona um Guerreiro em campo como alvo de [Duelo]. As habilidades e golpes especiais de Vegeta priorizam atacar o alvo de [Duelo]; quando o próprio Vegeta sofre dano do alvo marcado com [Duelo], reduz o dano em 20%.\nAumenta o ATQ em 10%"
+          "desc": "Aumenta a própria defesa. Vegeta seleciona um Guerreiro em campo como alvo de [Duelo]. As habilidades e golpes especiais de Vegeta priorizam atacar o alvo de [Duelo]; quando o próprio Vegeta sofre dano do alvo marcado com [Duelo], reduz o dano em 20%. Aumenta o ATQ em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -6119,10 +6119,10 @@
           "icone": "ability-icons/cuspe-de-lava.png"
         },
         "max": {
-          "nome": "MAX. Vantagem Inata",
+          "nome": "Cuspe de Lava MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais] Aumenta a própria defesa. Quanto menor a vida, maior a chance de ativar a habilidade pequena, podendo chegar até 50%. Quando estiver sozinho na linha de frente, no início de cada turno, ganha um [Escudo] de 8% da vida. Aumenta a DEF em 10%.",
+          "desc": "[Artes Marciais] Ataca uma coluna de inimigos; se o próprio PV < 50%, aumenta adicionalmente a Redução de Dano em 15% (2 turnos).",
           "dano": "240%+12",
           "icone": "ability-icons/cuspe-de-lava.png"
         },
@@ -6177,13 +6177,13 @@
           "nome": "Vantagem Inata",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria DEF. Quanto menor o PV, maior a chance de ativar habilidades, até +50%.\nAumenta a DEF em 10%"
+          "desc": "Aumenta a própria DEF. Quanto menor o PV, maior a chance de ativar habilidades, até +50%. Aumenta a DEF em 10%."
         },
         "max": {
           "nome": "MAX. Vantagem Inata",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a própria defesa. Quanto menor a vida, maior a chance de ativar a habilidade pequena, podendo chegar até 50%. Quando estiver sozinho na linha de frente, no início de cada turno, ganha um [Escudo] de 8% da vida.\nAumenta a DEF em 10%"
+          "desc": "Aumenta a própria defesa. Quanto menor a vida, maior a chance de ativar a habilidade pequena, podendo chegar até 50%. Quando estiver sozinho na linha de frente, no início de cada turno, ganha um [Escudo] de 8% da vida. Aumenta a DEF em 10%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -6223,10 +6223,10 @@
           "icone": "ability-icons/estilhaco-da-justica.png"
         },
         "max": {
-          "nome": "MAX. Equipe da Justiça",
+          "nome": "Estilhaço da Justiça MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta o próprio ATQ; no início dos turnos pares, gera 2 Resquícios que herdam 7% dos PV, 100% do ATQ e DEF do próprio, e que podem realizar Ataques Normais e Habilidades. Aumenta a Taxa de Crít. em 5%.",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, este ataque ganha +30% de ATQ e +30% de Penetração de Armadura. Inflige 280%+12 de dano a uma fileira de alvos.",
           "dano": "280%+12 (uma fileira de alvos)",
           "icone": "ability-icons/estilhaco-da-justica.png"
         },
@@ -6269,13 +6269,13 @@
           "nome": "Equipe da Justiça",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta o próprio ATQ; no início dos turnos pares, cria 2 Pós-imagens herdando 5% do próprio PV, 100% de ATQ e 100% de DEF, capazes de executar ataques normais.\nAumenta seu próprio ataque em 5%"
+          "desc": "Aumenta o próprio ATQ; no início dos turnos pares, cria 2 Pós-imagens herdando 5% do próprio PV, 100% de ATQ e 100% de DEF, capazes de executar ataques normais. Aumenta seu próprio ataque em 5%."
         },
         "max": {
           "nome": "MAX. Equipe da Justiça",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta o próprio ATQ; no início dos turnos pares, gera 2 Resquícios que herdam 7% dos PV, 100% do ATQ e DEF do próprio, e que podem realizar Ataques Normais e Habilidades.\nAumenta a Taxa de Crit. em 5%"
+          "desc": "Aumenta o próprio ATQ; no início dos turnos pares, gera 2 Resquícios que herdam 7% dos PV, 100% do ATQ e DEF do próprio, e que podem realizar Ataques Normais e Habilidades. Aumenta a Taxa de Crít. em 5%."
         }
       },
       "passivaQuatroEstrelas": {
@@ -6319,7 +6319,7 @@
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
           "desc": "[ATQ Especial] Igual à base, mas aumenta a própria Taxa de Dano em 25%, Redução de Dano em 15% e Taxa de Crít. em 15%; dano em área na Fileira de Trás sobe para 30%; ganha 15 de [Poder Limite] adicional; se [Crítico Limite] não ativar, reduz 200 de Fúria do alvo e reduz seu ATQ e Taxa de Crít. em 20% (1 turno). [Poder Limite]: 0,5% de ATQ por ponto. [Crítico Limite]: +50% de dano.",
-          "dano": "ATQ x100%+25",
+          "dano": "ATQ x100%+25 (mesma linha final da base)",
           "icone": "ability-icons/supernova.png"
         },
         "smax": {
@@ -6353,7 +6353,7 @@
           "nome": "Power Limit Break",
           "estrelas": 4,
           "tipo": "Despertar",
-          "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 10 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 1 vez por turno, 3 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 4 de [Poder Limite] (até 20 por turno). Ao sofrer dano fatal, não morre e ganha 10 de [Poder Limite] adicional, dissipando (pequeno trecho de transição não capturado) e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5% por acúmulo. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial] (do contra-ataque): [ATQ Físico] ataca um único inimigo, ganha 5 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 10% do próprio PV. [Crítico Limite]: aumenta este dano em 40%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 70%. Aumenta a Chance de Habilidade em 100%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Bônus final da passiva: aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
+          "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 10 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 1 vez por turno, 3 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 4 de [Poder Limite] (até 20 por turno). Ao sofrer dano fatal, não morre e ganha 10 de [Poder Limite] adicional, dissipando os próprios debuffs, restaurando 200 de Fúria e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5% por acúmulo. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial] (do contra-ataque): [ATQ Físico] ataca um único inimigo, ganha 5 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 10% do próprio PV. [Crítico Limite]: aumenta este dano em 40%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 70%. Aumenta a Chance de Habilidade em 100%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Bônus final da passiva: aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
         }
       },
       "passivasSupremo": [
@@ -6407,10 +6407,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Legendary Giant Ape",
+          "nome": "MAX. Super Burst Meteor",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[ATQ Especial] Aumenta o próprio Dano Crítico e a Taxa de Resistência a Crítico. Cada [Saiyajin] aliado aumenta a Taxa de Crít. de Broly em 7% (até 28%). Cada guerreiro [Maligno] aliado aumenta a Taxa de Bloqueio de Broly em 7% (até 28%). Toda vez que Broly usa um Supremo, ganha [Resistência Limite] (até uma vez por turno, 4 vezes por batalha). Ao sofrer dano fatal, não morre; ao reviver, restaura 40% do PV e rouba todos os buffs (por 1 turno) e 300 de Fúria do guerreiro que o atacou por último (só ativa uma vez por batalha). Garante o uso de uma Habilidade no primeiro turno e aumenta a Resistência a Efeitos Anormais em 100% (1 turno). [Resistência Limite]: o PV não pode cair abaixo de 15%. Quando esse limite é ativado, remove os próprios debuffs, restaura imediatamente 200 de Fúria, restaura 8% do próprio PV, e aumenta a própria Redução de Dano de Habilidade e Redução de Dano de Supremo em 20% (1 turno). Aumenta a própria Intensidade de Crítico em 5%. Aumenta a própria Resistência a Crítico em 5%.",
+          "desc": "[ATQ Especial] Broly ataca uma fileira de alvos, aumenta a própria Taxa de Dano e Redução de Dano em 25%, reduz a Taxa de Dano e Redução de Dano da fileira-alvo em 25%, restaura 40% do dano total causado como PV para si e mais 20% do dano total causado como PV para o aliado com menor % de PV. 90% de chance de aplicar [Blast]. Se este Supremo não garantir um abate, [Meteoro Gigante] é ativado garantidamente (máx. uma vez por turno). No início de cada turno, Broly causa dano igual a 10% do PV Máx. ao alvo com [Blast].",
           "dano": "280%+25",
           "icone": "ability-icons/supernova.png"
         },
@@ -6448,7 +6448,7 @@
           "desc": "Aumenta o próprio Dano Crítico e a Taxa de Resistência a Crítico. Cada [Saiyajin] aliado aumenta a Taxa de Crít. de Broly em 6% (até 24%). Cada guerreiro [Maligno] aliado aumenta a Taxa de Bloqueio de Broly em 6% (até 24%). Toda vez que Broly usa um Supremo, ganha [Resistência Limite] (até uma vez por turno, 3 vezes por batalha). Ao sofrer dano fatal, não morre; ao reviver, restaura 30% do PV e drena 300 de Fúria do guerreiro que o atacou por último (efeito ativa apenas uma vez por batalha). [Resistência Limite]: o PV não pode cair abaixo de 15%. Quando esse limite é ativado, remove os próprios debuffs, restaura imediatamente 150 de Fúria, restaura 8% do próprio PV, e aumenta a própria Redução de Dano de Habilidade e Redução de Dano de Supremo em 15% (1 turno). Aumenta a própria Intensidade de Crítico em 5%. Aumenta a própria Resistência a Crítico em 5%."
         },
         "max": {
-          "nome": "Legendary Giant Ape",
+          "nome": "MAX. Legendary Giant Ape",
           "estrelas": 6,
           "tipo": "Despertar",
           "desc": "Aumenta o próprio Dano Crítico e a Taxa de Resistência a Crítico. Cada [Saiyajin] aliado aumenta a Taxa de Crít. de Broly em 7% (até 28%). Cada guerreiro [Maligno] aliado aumenta a Taxa de Bloqueio de Broly em 7% (até 28%). Toda vez que Broly usa um Supremo, ganha [Resistência Limite] (até uma vez por turno, 4 vezes por batalha). Ao sofrer dano fatal, não morre; ao reviver, restaura 40% do PV e rouba todos os buffs (por 1 turno) e 300 de Fúria do guerreiro que o atacou por último (só ativa uma vez por batalha). Garante o uso de uma Habilidade no primeiro turno e aumenta a Resistência a Efeitos Anormais em 100% (1 turno). [Resistência Limite]: o PV não pode cair abaixo de 15%. Quando esse limite é ativado, remove os próprios debuffs, restaura imediatamente 200 de Fúria, restaura 8% do próprio PV, e aumenta a própria Redução de Dano de Habilidade e Redução de Dano de Supremo em 20% (1 turno). Aumenta a própria Intensidade de Crítico em 5%. Aumenta a própria Resistência a Crítico em 5%."
@@ -6505,10 +6505,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Domínio do Deus da Destruição",
+          "nome": "MAX. Onda Explosiva Total",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ataque Especial] Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira. Quando na Fileira da Frente, aumenta adicionalmente a Resistência a Supremo em 10%; quando na Fileira de Trás, aumenta adicionalmente o Dano de Supremo em 10%. Quando o dano cumulativo recebido pelo próprio no turno atual ultrapassa 20% do PV Máx., ganha imediatamente [Autodomínio]. Se em [Autodomínio], ativa Contra-ataque de Supremo ao ser atingido por Supremo inimigo, até uma vez por turno. Fora de [Autodomínio], o dano máximo recebido não pode ultrapassar 35% do PV. Ao sofrer dano fatal, dissipa os próprios debuffs e restaura 30% do PV e 300 de Fúria. [Autodomínio]: remove os próprios efeitos de [Controle], restaura 30% do próprio PV, e aumenta Resistência a Efeitos Anormais, Taxa de Roubo de Vida, Taxa de Crít., Resistência a Habilidade e Resistência a Supremo em 20% cada. Dura 1 turno, no máximo uma vez por turno e 3 vezes por batalha. Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira em 5%.",
+          "desc": "[Ataque Especial] Ataca um único inimigo, drenando 15% de sua Taxa de Dano, 15% de Redução de Dano e 15% de Taxa de Crít. (não acumula, dura 1 turno). 40% de chance de infligir [Enraizamento]. Se Acerto Crítico, dano em área igual a 40% do dano deste ataque. Cada vez que um Supremo (Ultimate Skill) é usado, ganha 1 acúmulo de [Espírito de Luta Indomável] (máx. 6 acúmulos). Se este ataque for um Contra-ataque, aumenta seu dano em 20%. [Espírito de Luta Indomável]: aumenta ATQ e DEF em 5%.",
           "dano": "420%+24",
           "icone": "ability-icons/supernova.png"
         },
@@ -6546,7 +6546,7 @@
           "desc": "Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira. Quando o dano cumulativo recebido pelo próprio no turno atual ultrapassa 20% do PV Máx., ganha imediatamente [Autodomínio]. Se o próprio estiver em estado de [Autodomínio], ativa um Contra-ataque de Supremo ao ser atingido por um Supremo inimigo, até uma vez por turno. Enquanto não estiver em [Autodomínio], o dano máximo recebido não pode ultrapassar 35% do PV. Ao sofrer dano fatal, dissipa todos os próprios debuffs e restaura 30% do próprio PV e 300 de Fúria (uma vez por batalha). [Autodomínio]: remove os próprios efeitos de [Controle], restaura 20% do próprio PV, e aumenta Resistência a Efeitos Anormais, Taxa de Roubo de Vida, Taxa de Crít., Resistência a Habilidade e Resistência a Supremo em [valores da base] cada. Dura 1 turno, uma vez por turno e 3 vezes por batalha. Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira em 5%."
         },
         "max": {
-          "nome": "Domínio do Deus da Destruição",
+          "nome": "MAX. Domínio do Deus da Destruição",
           "estrelas": 6,
           "tipo": "Despertar",
           "desc": "Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira. Quando na Fileira da Frente, aumenta adicionalmente a Resistência a Supremo em 10%; quando na Fileira de Trás, aumenta adicionalmente o Dano de Supremo em 10%. Quando o dano cumulativo recebido pelo próprio no turno atual ultrapassa 20% do PV Máx., ganha imediatamente [Autodomínio]. Se em [Autodomínio], ativa Contra-ataque de Supremo ao ser atingido por Supremo inimigo, até uma vez por turno. Fora de [Autodomínio], o dano máximo recebido não pode ultrapassar 35% do PV. Ao sofrer dano fatal, dissipa os próprios debuffs e restaura 30% do PV e 300 de Fúria. [Autodomínio]: remove os próprios efeitos de [Controle], restaura 30% do próprio PV, e aumenta Resistência a Efeitos Anormais, Taxa de Roubo de Vida, Taxa de Crít., Resistência a Habilidade e Resistência a Supremo em 20% cada. Dura 1 turno, no máximo uma vez por turno e 3 vezes por batalha. Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira em 5%."
@@ -6603,10 +6603,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Vida Eterna",
+          "nome": "MAX. Onda de Energia Bucal",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Aumenta a DEF de guerreiros [Lendários]. Quando Broly morre, entra em estado de [Adormecimento] (cura 40% do PV, mantém 100% da Fúria). Após 1 turno, [Desperta] com PV e Fúria completos. No primeiro turno: +25% de Taxa de Acerto de Debuff (removido ao [Adormecer]). Enquanto [Adormecido], Broly ganha +70% de Redução de Dano/DEF, drena 150 de Fúria ao ser atingido (exceto ataques de perseguição). Ao [Despertar]: recupera 300 de Fúria, ganha permanentemente +30% de Roubo de Vida. Imune a [Petrificação]. Se houver apenas 1v1 no início: +30% de Dano de Ki (permanente). *(a mesma linha residual \"ninjas do elemento Terra +5%\" aparece aqui também.)*",
+          "desc": "[Explosão de Ki] Aumenta o próprio Ataque e Defesa em 25%, ataca todos os inimigos (máx. +120% por menos alvos); todos os alvos têm 70% de chance de sofrer [Queimadura]; reduz em 25% o dano causado por alvos com Fúria acima de 500 (1 turno); 50% de chance de petrificar 2 alvos aleatórios; alvos petrificados têm Resistência Crítica e eficácia de cura reduzidas em 15%; causa dano igual a 8% do PV Máx. a alvos com status de [Controle]. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
           "dano": "170%+15",
           "icone": "ability-icons/supernova.png"
         },
@@ -6644,7 +6644,7 @@
           "desc": "Melhora a defesa de guerreiros [Lendários]. Após Broly morrer, ele entra em estado de [Adormecimento], restaurando 40% do PV e herdando 100% da Fúria. Após um turno, ele [Desperta] novamente, herdando 100% do PV e 100% da Fúria do estado adormecido; no primeiro turno, aumenta a Taxa de Acerto Anormal em 20%, que é removida ao entrar em [Adormecimento]. Enquanto [Adormecido], Broly ganha uma Redução de Dano adicional de 50% e 50% de Defesa. Ao ser atacado (exceto contra-ataques), reduz a Fúria do atacante em 150. Ao [Despertar]: restaura 200 de Fúria para si e ganha permanentemente 15% de Roubo de Vida; Broly fica imune a [Petrificação]. Se houver apenas um aliado e um inimigo em campo ao entrar na batalha, aumenta o próprio dano de [Explosão de Ki]."
         },
         "max": {
-          "nome": "Vida Eterna",
+          "nome": "MAX. Vida Eterna",
           "estrelas": 6,
           "tipo": "Despertar",
           "desc": "Aumenta a DEF de guerreiros [Lendários]. Quando Broly morre, entra em estado de [Adormecimento] (cura 40% do PV, mantém 100% da Fúria). Após 1 turno, [Desperta] com PV e Fúria completos. No primeiro turno: +25% de Taxa de Acerto de Debuff (removido ao [Adormecer]). Enquanto [Adormecido], Broly ganha +70% de Redução de Dano/DEF, drena 150 de Fúria ao ser atingido (exceto ataques de perseguição). Ao [Despertar]: recupera 300 de Fúria, ganha permanentemente +30% de Roubo de Vida. Imune a [Petrificação]. Se houver apenas 1v1 no início: +30% de Dano de Ki (permanente)."
@@ -7252,10 +7252,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Transferência de Vida",
+          "nome": "MAX. Barreira Sombria",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ataque Especial] Aumenta ainda mais o próprio Dano de Supremo. Quando o próprio está prestes a sofrer dano fatal, suporta o golpe (deixa 1 PV, uma vez por batalha), restaura 40% do próprio PV Máx., dissipa os próprios debuffs, e concede a si mesmo um [Escudo] equivalente a 15% do PV Máx. por 1 turno.",
+          "desc": "[Ataque Especial] Aumenta o próprio ATQ e DEF em 30%. Ataca uma fileira inimiga, com 70% de chance de infligir [Encanto] em todos os alvos atingidos (2 turnos). Se um alvo já tiver [Encanto], a Taxa de Crít. deste ataque aumenta em 40%. Se [Encanto] estiver presente em 3 ou mais inimigos em campo, a chance aumenta para 100%.",
           "dano": "300%+25",
           "icone": "ability-icons/supernova.png"
         },
@@ -7350,10 +7350,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Domínio do Caos",
+          "nome": "MAX. Desastre Descendente",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ataque Especial] : Taxa de Bloqueio maior, chance de contra-ataque maior, cura mais PV no contra-ataque, e o contra-ataque passa a reduzir a Fúria do alvo.",
+          "desc": "[Ataque Especial] : +30% de Taxa de Bloqueio, -15% de Taxa de Dano de todos os inimigos, cura uma parte do próprio PV baseada no número de inimigos atingidos.",
           "dano": "170%+15",
           "icone": "ability-icons/supernova.png"
         },
@@ -7394,7 +7394,7 @@
           "nome": "MAX. Domínio do Caos",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Taxa de Bloqueio maior, chance de contra-ataque maior, cura mais PV no contra-ataque, e o contra-ataque passa a reduzir a Fúria do alvo."
+          "desc": ": Taxa de Bloqueio maior, chance de contra-ataque maior, cura mais PV no contra-ataque, e o contra-ataque passa a reduzir a Fúria do alvo."
         }
       },
       "passivasSupremo": [
@@ -7448,10 +7448,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Explosão de Ki",
+          "nome": "MAX. Bombardeio Pesado",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ataque Especial] : Taxa de Crít. maior, o gatilho de dano em área passa a ativar com apenas 1 inimigo com [Chamas Azuis], e o dano em área é maior.",
+          "desc": "[Ataque Especial] : +20% ATQ/DEF, 80% de [Chamas Azuis], o bônus de dano por [Chamas Azuis] em campo sobe até +30%.",
           "dano": "170%+15",
           "icone": "ability-icons/supernova.png"
         },
@@ -7492,7 +7492,7 @@
           "nome": "MAX. Explosão de Ki",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Taxa de Crít. maior, o gatilho de dano em área passa a ativar com apenas 1 inimigo com [Chamas Azuis], e o dano em área é maior."
+          "desc": ": Taxa de Crít. maior, o gatilho de dano em área passa a ativar com apenas 1 inimigo com [Chamas Azuis], e o dano em área é maior."
         }
       },
       "passivasSupremo": [
@@ -7546,10 +7546,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Fúria Interior da Nuvem de Trovão: Machado do Trovão",
+          "nome": "MAX. Redemoinho das Trevas",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ki] : bônus de redução de dano inicial maior (15%), e a redução por acerto de Supremo sofrido é menor (3% em vez de 5%, durando mais).",
+          "desc": "[Ki] : +20% ATQ/DEF, dano de [Vórtice] sobe para 70% do próprio ATQ, acúmulo de [Energia das Trevas] até 16.",
           "dano": "170%+15",
           "icone": "ability-icons/supernova.png"
         },
@@ -7590,7 +7590,7 @@
           "nome": "MAX. Fúria Interior da Nuvem de Trovão: Machado do Trovão",
           "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "bônus de redução de dano inicial maior (15%), e a redução por acerto de Supremo sofrido é menor (3% em vez de 5%, durando mais)."
+          "desc": ": bônus de redução de dano inicial maior (15%), e a redução por acerto de Supremo sofrido é menor (3% em vez de 5%, durando mais)."
         }
       },
       "passivasSupremo": [
@@ -7644,10 +7644,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Barreira Angelical",
+          "nome": "MAX. Chama de Partículas",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ki] Aumenta a Redução de Dano. Ao entrar: [Escudo Angelical] (30% do PV Máx., sem dano excedente). Com escudo: +20% de Redução de Dano/reflexo. Protege aliados da mesma coluna (absorve 35% do dano, -40% do dano recebido). Reduz o ATQ de inimigos da fileira da frente em 5%. *(o jogo usa \"Bardos\"/\"Bardock\" pra se referir à própria Vados — parece resíduo de tradução/template, mantive como está no texto original.)*",
+          "desc": "[Ki] Ataca uma coluna de inimigos, +20% ATQ/DEF (2 turnos), [Escudo Angelical] com força igual a 20% do PV Máx. de Vados, se não puder aplicar ganha [Escudo] de 7% do PV Máx. e causa 7% do PV Máx. de dano ao alvo principal; se o alvo for do [Tipo Defesa], aplica [Julgamento Angelical] (reduz a Redução de Dano em 15%, o efeito de cura em 30%, dura 2 turnos).",
           "dano": "300%+25",
           "icone": "ability-icons/supernova.png"
         },
@@ -7742,10 +7742,10 @@
           "icone": "ability-icons/supernova.png"
         },
         "max": {
-          "nome": "MAX. Retaliação Desesperada",
+          "nome": "MAX. Dança Explosiva",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[ATQ Físico/ATQ Especial] Aumenta o Dano de Habilidade dos guerreiros na mesma fileira. No início de cada turno, ganha 1 uso extra de habilidade. Aumenta o número de usos extras de habilidade em 1 a cada turno (máx. 3 usos adicionais). A primeira habilidade usada a cada turno é garantidamente um Acerto Crítico. Aumenta o Dano de Habilidade dos guerreiros na mesma fileira em 5%.",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aplica [Inabalável] em si mesmo (quanto menor o próprio PV, maior o dano, até um aumento de 30%). Aumenta a própria Taxa de Roubo de Vida em 15%, Taxa de Dano em 15%, e Taxa de Precisão em 30% (2 turnos). 70% de chance de ganhar 1 uso extra de habilidade imediato, e causa [Empurrão].",
           "dano": "380%+20",
           "icone": "ability-icons/supernova.png"
         },
