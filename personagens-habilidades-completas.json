@@ -6355,7 +6355,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 10 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 1 vez por turno, 3 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 4 de [Poder Limite] (até 20 por turno). Ao sofrer dano fatal, não morre e ganha 10 de [Poder Limite] adicional, dissipando (pequeno trecho de transição não capturado) e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5% por acúmulo. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial] (do contra-ataque): [ATQ Físico] ataca um único inimigo, ganha 5 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 10% do próprio PV. [Crítico Limite]: aumenta este dano em 40%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 70%. Aumenta a Chance de Habilidade em 100%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Bônus final da passiva: aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Sand Shower",
+          "desc": "Texto não capturado.",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Sand Binding Coffin",
+          "desc": "Texto não capturado.",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Sand's Protection",
+          "desc": "Quando o [Poder Limite] ultrapassa 50 pontos, ganha [Aura Selvagem] (\"Beastly Aura\") imediatamente. [Aura Selvagem]: aumenta a Taxa de Penetração em 15%.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Broly SS4",
@@ -6433,7 +6453,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta o próprio Dano Crítico e a Taxa de Resistência a Crítico. Cada [Saiyajin] aliado aumenta a Taxa de Crít. de Broly em 7% (até 28%). Cada guerreiro [Maligno] aliado aumenta a Taxa de Bloqueio de Broly em 7% (até 28%). Toda vez que Broly usa um Supremo, ganha [Resistência Limite] (até uma vez por turno, 4 vezes por batalha). Ao sofrer dano fatal, não morre; ao reviver, restaura 40% do PV e rouba todos os buffs (por 1 turno) e 300 de Fúria do guerreiro que o atacou por último (só ativa uma vez por batalha). Garante o uso de uma Habilidade no primeiro turno e aumenta a Resistência a Efeitos Anormais em 100% (1 turno). [Resistência Limite]: o PV não pode cair abaixo de 15%. Quando esse limite é ativado, remove os próprios debuffs, restaura imediatamente 200 de Fúria, restaura 8% do próprio PV, e aumenta a própria Redução de Dano de Habilidade e Redução de Dano de Supremo em 20% (1 turno). Aumenta a própria Intensidade de Crítico em 5%. Aumenta a própria Resistência a Crítico em 5%."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Blast Meteor",
+          "desc": "Texto não capturado.",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Energy Beam",
+          "desc": "Texto não capturado.",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Eye Beam",
+          "desc": "Após [Resistência Limite], ganha um [Escudo] com intensidade igual a 20% do próprio PV perdido.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Vegeta Ultra Ego",
@@ -6511,7 +6551,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira. Quando na Fileira da Frente, aumenta adicionalmente a Resistência a Supremo em 10%; quando na Fileira de Trás, aumenta adicionalmente o Dano de Supremo em 10%. Quando o dano cumulativo recebido pelo próprio no turno atual ultrapassa 20% do PV Máx., ganha imediatamente [Autodomínio]. Se em [Autodomínio], ativa Contra-ataque de Supremo ao ser atingido por Supremo inimigo, até uma vez por turno. Fora de [Autodomínio], o dano máximo recebido não pode ultrapassar 35% do PV. Ao sofrer dano fatal, dissipa os próprios debuffs e restaura 30% do PV e 300 de Fúria. [Autodomínio]: remove os próprios efeitos de [Controle], restaura 30% do próprio PV, e aumenta Resistência a Efeitos Anormais, Taxa de Roubo de Vida, Taxa de Crít., Resistência a Habilidade e Resistência a Supremo em 20% cada. Dura 1 turno, no máximo uma vez por turno e 3 vezes por batalha. Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira em 5%."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Treinamento de Manipulação: União de Corações",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Lâmina de Assalto Manipuladora",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Treinamento: Condicionamento Corporal",
+          "desc": "Enquanto tiver um [Escudo], o Supremo causa 15% de dano adicional.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Broly (DBS)",
@@ -6589,7 +6649,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta a DEF de guerreiros [Lendários]. Quando Broly morre, entra em estado de [Adormecimento] (cura 40% do PV, mantém 100% da Fúria). Após 1 turno, [Desperta] com PV e Fúria completos. No primeiro turno: +25% de Taxa de Acerto de Debuff (removido ao [Adormecer]). Enquanto [Adormecido], Broly ganha +70% de Redução de Dano/DEF, drena 150 de Fúria ao ser atingido (exceto ataques de perseguição). Ao [Despertar]: recupera 300 de Fúria, ganha permanentemente +30% de Roubo de Vida. Imune a [Petrificação]. Se houver apenas 1v1 no início: +30% de Dano de Ki (permanente)."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Cura Inútil",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Punho Celestial",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Estilo Madeira: Técnica do Clone de Madeira",
+          "desc": "Ao entrar em campo, ganha um escudo equivalente a 5% do PV Máx.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "SSG Trunks",
@@ -6660,7 +6740,27 @@
           "tipo": "Ativar",
           "desc": "Ganha [Marcas de Chamas] e [Energia de Chamas] ao entrar em campo, cura aliados com PV baixo, e ganha [Contra-ataque Flamejante] e [Renascimento Flamejante] ao sofrer dano fatal."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Força Monstruosa",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Renascimento Vivo",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Selo Yin",
+          "desc": "Cada vez que o próprio consome 1 [Marca de Chamas], restaura 40 de Fúria.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Gogeta SS4",
@@ -6732,7 +6832,27 @@
           "tipo": "Ativar",
           "desc": "Ganha [Enrijecimento Carmesim] e [Poder Carmesim] ao entrar em batalha; concede imunidade à morte uma vez."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Ambição",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Renascimento Inorgânico",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Assalto Demoníaco Duplo",
+          "desc": "No início da batalha, adiciona [Guarda Carmesim] a guerreiros [Fundidos] e [Super Saiyajin 4] aliados (+5% de redução de dano, +5% de PV restaurado ao ser atingido por Supremo, some após 1 acerto).",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "SSGSS Gogeta",
@@ -6804,7 +6924,27 @@
           "tipo": "Ativar",
           "desc": "Aumenta a própria Taxa de Roubo de Vida; concede +10% de Crítico contra guerreiros do Tipo Defesa; ganha 5 acúmulos de [Espírito de Luta] ao entrar em campo; sobrevive com 1 PV uma vez."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Técnica de Voo",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Teletransporte",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Intenção de Batalha",
+          "desc": "Para cada acúmulo de [Espírito de Luta] consumido, restaura 50 de Fúria.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Goku SS3 (Rose)",
@@ -6876,7 +7016,27 @@
           "tipo": "Ativar",
           "desc": "Imune a [Chama Extintora da Alma]; ganha [Vontade Indomável]; revive quando um aliado [Maligno] usa Supremo, até 2 vezes por batalha."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Liberação · Montaria na Onda",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Clone das Sombras · Corte do Deus Trovão Voador",
+          "desc": "Aumenta a própria Resistência a Debuff em 8%.",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Técnica do Deus Trovão Voador",
+          "desc": "Após reviver, aumenta permanentemente o ATQ em 10% (acumula até 3x).",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Goku Instinto Superior",
@@ -6948,7 +7108,27 @@
           "tipo": "Ativar",
           "desc": "+Resistência Crítica ao entrar, cura 8% PV + Resistência a Supremo/Habilidade quando PV<50%, +100 de Fúria por turno, herda a vontade de aliados derrotados."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Rasengan Gigante Super-Definitivo",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Arte Sábia: Agulha de Cabelo Senbon",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Arte Sábia: Goemon",
+          "desc": "Quando o próprio PV cai abaixo de 30%, ganha 50% de Esquiva de Habilidade (até 2 vezes).",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Moro",
@@ -7020,7 +7200,27 @@
           "tipo": "Ativar",
           "desc": "+Redução de Dano para [Guerreiros Malignos] da retaguarda; copia aleatoriamente 1 efeito (Vegeta/Gohan/Piccolo/Merus) ao entrar em campo, efeitos variam conforme a cópia (Explosão de Fúria, Amplificação de Poder, Regeneração, Poder Angelical)."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Susanoo: Dominância",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Susanoo: Defesa",
+          "desc": "Aumenta o Acerto Anormal próprio em 4%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Susanoo: Dança da Lâmina Dupla Flamejante",
+          "desc": "Ao ganhar [Habilidade Copiada], aplica um efeito especial em 1 aliado [Guerreiro Maligno] aleatório (2 turnos, empilhável, até 1x por rodada, máx. 2x por batalha): Vegeta +150 de Fúria; Gohan +20% de Taxa de Dano; Piccolo +20% de Resistência Crítica; Merus +10% de PV e dissipa controle.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Towa",
@@ -7098,7 +7298,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta ainda mais o próprio Dano de Supremo. Quando o próprio está prestes a sofrer dano fatal, suporta o golpe (deixa 1 PV, uma vez por batalha), restaura 40% do próprio PV Máx., dissipa os próprios debuffs, e concede a si mesmo um [Escudo] equivalente a 15% do PV Máx. por 1 turno."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Técnica da Efêmera",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Nepentes",
+          "desc": "Aumenta o Acerto Anormal próprio em 4%",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Jutsu de Transformação",
+          "desc": "Quando o próprio inflige [Encanto], tem 30% de chance de reduzir a Taxa de Redução de Dano do alvo em 8% (1 turno).",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Demigra Demoníaco",
@@ -7176,7 +7396,27 @@
           "tipo": "Despertar",
           "desc": "Taxa de Bloqueio maior, chance de contra-ataque maior, cura mais PV no contra-ataque, e o contra-ataque passa a reduzir a Fúria do alvo."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Imbatível",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Penetração dos Quatro Livros",
+          "desc": "Aumenta a Res. Anormal própria",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Estocada Infernal",
+          "desc": "Demigra pode absorver os próprios efeitos de [Controle], eficaz 2 vezes por batalha.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Kefla",
@@ -7254,7 +7494,27 @@
           "tipo": "Despertar",
           "desc": "Taxa de Crít. maior, o gatilho de dano em área passa a ativar com apenas 1 inimigo com [Chamas Azuis], e o dano em área é maior."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Genjutsu: Execução",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "",
+          "desc": "Aumenta a Res. Anormal própria",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Técnica do Clone de Corvo",
+          "desc": "O dano recebido de alvos com [Chamas Azuis] é reduzido em 6%.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Super Mira",
@@ -7332,7 +7592,27 @@
           "tipo": "Despertar",
           "desc": "bônus de redução de dano inicial maior (15%), e a redução por acerto de Supremo sofrido é menor (3% em vez de 5%, durando mais)."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Físico Forte",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Estilo Raikage: Queda do Raio",
+          "desc": "Aumenta a Res. Anormal própria",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Fúria Interior da Nuvem de Trovão: Machado do Trovão",
+          "desc": "Mesma passiva única do personagem.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Vados",
@@ -7410,7 +7690,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta a Redução de Dano. Ao entrar: [Escudo Angelical] (30% do PV Máx., sem dano excedente). Com escudo: +20% de Redução de Dano/reflexo. Protege aliados da mesma coluna (absorve 35% do dano, -40% do dano recebido). Reduz o ATQ de inimigos da fileira da frente em 5%."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Chuvisco de Areia",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Caixão de Amarração de Areia",
+          "desc": "Aumenta a Res. Anormal própria",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Funeral da Cachoeira de Areia",
+          "desc": "Alvos que quebram o [Escudo Angelical] são considerados [Quebradores de Escudo]; causa dano adicional igual a 3% do PV Máx. do alvo a [Quebradores de Escudo] a cada ataque (excluindo ataques de perseguição), durando a batalha inteira.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     },
     {
       "nome": "Gohan do Futuro",
@@ -7488,7 +7788,27 @@
           "tipo": "Despertar",
           "desc": "Aumenta o Dano de Habilidade dos guerreiros na mesma fileira. No início de cada turno, ganha 1 uso extra de habilidade. Aumenta o número de usos extras de habilidade em 1 a cada turno (máx. 3 usos adicionais). A primeira habilidade usada a cada turno é garantidamente um Acerto Crítico. Aumenta o Dano de Habilidade dos guerreiros na mesma fileira em 5%."
         }
-      }
+      },
+      "passivasSupremo": [
+        {
+          "nome": "Chute de Metralhadora",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
+          "icone": "ability-icons/chakra-suficiente.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Ataque Traseiro Supremo",
+          "desc": "Aumenta a Res. Anormal própria",
+          "icone": "ability-icons/ataque-de-taijutsu.png",
+          "nivel_visto": 0
+        },
+        {
+          "nome": "Liberar Poder",
+          "desc": "No início de cada turno, ganha 8% de Taxa de Redução de Dano. A partir do turno 2, essa redução diminui 4% a cada turno.",
+          "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
+          "nivel_visto": 0
+        }
+      ]
     }
   ]
 }
