@@ -6284,6 +6284,1211 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio ATQ.\nAumenta seu próprio ataque em 5%"
       }
+    },
+    {
+      "nome": "Gohan BEAST",
+      "habilidade": {
+        "base": {
+          "nome": "Double Impact Wave",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, 60% de chance de causar [Empurrão], ganha 10 de [Poder Limite], restaura 200 de Fúria própria, e drena 10% do PV Máx. do alvo (se o PV do inimigo for maior que 50%, esse dreno aumenta em mais 40%). [Poder Limite]: máximo de 100 pontos; cada ponto concede 0,5% de ATQ.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Double Shockwave",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca um único inimigo, 60% de chance de [Empurrão], ganha 15 de [Poder Limite], restaura 250 de Fúria própria (se a própria Fúria for menor que a do alvo, drena 200 de Fúria do alvo em vez disso). Drena 10% do PV Máx. do alvo (dreno +70% se o PV do inimigo > 50%). [Poder Limite]: cada ponto concede 0,6% de ATQ.",
+          "dano": "175%+8",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Super Energy Blast Cannon",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Especial] Ataca um único inimigo, aumenta a própria Taxa de Dano em 25% e Taxa de Redução de Dano em 15%. Se o alvo principal estiver na Fileira da Frente, causa 25% de dano em área aos alvos da Fileira de Trás. Ganha 10 de [Poder Limite] adicional. Tem chance de consumir todo o [Poder Limite] (1% por ponto) para ativar [Crítico Limite]; se não ativar, reduz 200 de Fúria do alvo e sua Taxa de Crít. em 20% (1 turno). [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Crítico Limite]: aumenta o dano deste ataque em 40%.",
+          "dano": "ATQ x100%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Super Energy Blast Cannon",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Igual à base, mas aumenta a própria Taxa de Dano em 25%, Redução de Dano em 15% e Taxa de Crít. em 15%; dano em área na Fileira de Trás sobe para 30%; ganha 15 de [Poder Limite] adicional; se [Crítico Limite] não ativar, reduz 200 de Fúria do alvo e reduz seu ATQ e Taxa de Crít. em 20% (1 turno). [Poder Limite]: 0,5% de ATQ por ponto. [Crítico Limite]: +50% de dano.",
+          "dano": "ATQ x100%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Hyper Special Beam Cannon",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Ataca um único inimigo, aumenta a própria Taxa de Dano em 35%, Redução de Dano em 25% e Taxa de Crít. em 25% (1 turno). Se o alvo principal estiver na Fileira da Frente, causa 30% de dano em área à Fileira de Trás. Ganha 15 de [Poder Limite] adicional; cada ponto de [Poder Limite] concede 0,3% de Taxa de Roubo de Vida neste ataque. Tem chance de consumir todo o [Poder Limite] (1% por ponto) para ativar [Crítico Limite]; se não ativar, reduz 200 de Fúria do alvo, reduz seu ATQ e Taxa de Crít. em 25% (1 turno), e ganha 10 de [Poder Limite] adicional. [Poder Limite]: 0,6% de ATQ por ponto. [Crítico Limite]: +70% de dano. [Efeito Passivo]: o número de usos de [Habilidade Especial] por turno aumenta para 3, até 6 vezes por batalha.",
+          "dano": "ATQ x100%+25",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Power Limit Break",
+          "estrelas": 4,
+          "tipo": "Despertar",
+          "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 10 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 1 vez por turno, 3 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 4 de [Poder Limite] (até 20 por turno). Ao sofrer dano fatal, não morre e ganha 10 de [Poder Limite] adicional, dissipando (pequeno trecho de transição não capturado) e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5% por acúmulo. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial] (do contra-ataque): [ATQ Físico] ataca um único inimigo, ganha 5 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 10% do próprio PV. [Crítico Limite]: aumenta este dano em 40%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 70%. Aumenta a Chance de Habilidade em 100%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Bônus final da passiva: aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
+        }
+      }
+    },
+    {
+      "nome": "Broly SS4",
+      "habilidade": {
+        "base": {
+          "nome": "Energy Burst",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico] Broly ataca um único inimigo (prioriza alvos com [Blast]), 60% de chance de causar [Empurrão], reduz a Fúria do alvo em 200. Se acertar um Saiyajin, o dano aumenta em mais 40%.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Energy Burst",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Broly ataca um único inimigo (prioriza alvos com [Blast]), 60% de chance de causar [Empurrão], drena 200 de Fúria do alvo. Se acertar um [Saiyajin], o dano aumenta em mais 60%. [Efeito Passivo]: após [Resistência Limite], aplica [Blast] no atacante.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Super Burst Meteor",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Especial] Broly ataca uma fileira de alvos, aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 20%, reduz a Taxa de Dano e Taxa de Redução de Dano da fileira-alvo em 20%, restaura 30% do dano total causado como PV para si. Tem 90% de chance de aplicar [Blast] nos alvos. Se este Supremo não garantir um abate, tem 50% de chance de ativar [Meteoro Gigante] (máx. uma vez por turno). [Meteoro Gigante]: aumenta o próprio ATQ e DEF em 20%, ataca um alvo aleatório (prioriza alvos atingidos pelo Supremo anterior), causando 280% do ATQ como dano de [Ataque Especial], mais dano adicional igual a 12% do PV Máx. do alvo.",
+          "dano": "280%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Super Burst Meteor",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Broly ataca uma fileira de alvos, aumenta a própria Taxa de Dano e Redução de Dano em 25%, reduz a Taxa de Dano e Redução de Dano da fileira-alvo em 25%, restaura 40% do dano total causado como PV para si e mais 20% do dano total causado como PV para o aliado com menor % de PV. 90% de chance de aplicar [Blast]. Se este Supremo não garantir um abate, [Meteoro Gigante] é ativado garantidamente (máx. uma vez por turno). No início de cada turno, Broly causa dano igual a 10% do PV Máx. ao alvo com [Blast].",
+          "dano": "280%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Super Burst Meteor",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Broly ataca uma fileira de alvos, aumenta a própria Taxa de Dano e Redução de Dano em 30%, reduz a Taxa de Dano e Redução de Dano da fileira-alvo em 30%, restaura 50% do dano total causado como PV para si e mais 25% do dano total causado como PV para o aliado com menor % de PV. 90% de chance de aplicar [Blast]. Se este Supremo não garantir um abate, [Meteoro Gigante] é ativado garantidamente (máx. uma vez por turno). [Meteoro Gigante] tem 70% de chance de ser aprimorado para [Meteoro Gigante Supremo], que, além dos efeitos do [Meteoro Gigante], causa dano adicional igual a 80% do ATQ ao alvo e mais 20% de dano em área (sem gerar Fúria) aos inimigos ao redor. [Meteoro Gigante]: aumenta o próprio ATQ e DEF em 30%, ataca um alvo aleatório (prioriza alvos atingidos pelo Supremo anterior), causando 320% do ATQ como dano de [Ataque Especial]. Aumenta o Dano Crítico em 30% contra alvos com [Blast], e causa dano adicional igual a 15% do PV Máx. do alvo. [Blast]: reduz toda cura recebida em 30% e a Velocidade de Recuperação de Fúria em 15%, dura 2 turnos. No início de cada turno, causa dano igual a 15% do PV Máx. ao alvo com [Blast].",
+          "dano": "320%+25",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Legendary Giant Ape",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta o próprio Dano Crítico e a Taxa de Resistência a Crítico. Cada [Saiyajin] aliado aumenta a Taxa de Crít. de Broly em 6% (até 24%). Cada guerreiro [Maligno] aliado aumenta a Taxa de Bloqueio de Broly em 6% (até 24%). Toda vez que Broly usa um Supremo, ganha [Resistência Limite] (até uma vez por turno, 3 vezes por batalha). Ao sofrer dano fatal, não morre; ao reviver, restaura 30% do PV e drena 300 de Fúria do guerreiro que o atacou por último (efeito ativa apenas uma vez por batalha). [Resistência Limite]: o PV não pode cair abaixo de 15%. Quando esse limite é ativado, remove os próprios debuffs, restaura imediatamente 150 de Fúria, restaura 8% do próprio PV, e aumenta a própria Redução de Dano de Habilidade e Redução de Dano de Supremo em 15% (1 turno). Aumenta a própria Intensidade de Crítico em 5%. Aumenta a própria Resistência a Crítico em 5%."
+        },
+        "max": {
+          "nome": "Legendary Giant Ape",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta o próprio Dano Crítico e a Taxa de Resistência a Crítico. Cada [Saiyajin] aliado aumenta a Taxa de Crít. de Broly em 7% (até 28%). Cada guerreiro [Maligno] aliado aumenta a Taxa de Bloqueio de Broly em 7% (até 28%). Toda vez que Broly usa um Supremo, ganha [Resistência Limite] (até uma vez por turno, 4 vezes por batalha). Ao sofrer dano fatal, não morre; ao reviver, restaura 40% do PV e rouba todos os buffs (por 1 turno) e 300 de Fúria do guerreiro que o atacou por último (só ativa uma vez por batalha). Garante o uso de uma Habilidade no primeiro turno e aumenta a Resistência a Efeitos Anormais em 100% (1 turno). [Resistência Limite]: o PV não pode cair abaixo de 15%. Quando esse limite é ativado, remove os próprios debuffs, restaura imediatamente 200 de Fúria, restaura 8% do próprio PV, e aumenta a própria Redução de Dano de Habilidade e Redução de Dano de Supremo em 20% (1 turno). Aumenta a própria Intensidade de Crítico em 5%. Aumenta a própria Resistência a Crítico em 5%."
+        }
+      }
+    },
+    {
+      "nome": "Vegeta Ultra Ego",
+      "habilidade": {
+        "base": {
+          "nome": "Lampejo Absoluto",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca uma fileira de alvos, aumenta a própria Taxa de Bloqueio em 25%, com 40% de chance de infligir [Repressão] em 1 alvo aleatório da fileira; dano recebido de guerreiros do tipo [Técnica] é reduzido em 15% (1 turno); aplica um efeito conforme o tipo do alvo: guerreiro do tipo [Ataque] tem a Taxa de Dano reduzida em 10% (1 turno); tipo [Defesa] tem a Taxa de Redução de Dano reduzida em 10% (1 turno); tipo [Técnica] tem o Dano de Supremo reduzido em 10% (1 turno); o próprio ganha um [Escudo] equivalente a 7% do PV Máx. e 60 de Fúria. Se este ataque não infligir [Repressão], o efeito é dobrado.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Canhão de Lampejo Supremo",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca uma fileira de alvos, aumenta a própria Taxa de Bloqueio em 25%, com 50% de chance de infligir [Repressão] em 1 alvo aleatório da fileira. Dano recebido de guerreiros dos tipos [Técnica] e [Ataque] é reduzido em 20% (2 turnos). Aplica um efeito conforme o tipo do alvo: [Ataque] tem a Taxa de Dano reduzida em 15% (1 turno); [Defesa] tem a Redução de Dano reduzida em 15% (1 turno); [Técnica] tem o Dano de Supremo reduzido em 15% (1 turno). O próprio ganha um [Escudo] equivalente a 10% do PV Máx. e 100 de Fúria. Se este ataque não infligir [Repressão], o efeito é dobrado. [Repressão]: reduz em 30% o dano que o alvo causa ao próprio e reduz sua Recuperação de Fúria em 30%, dura 1 turno.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Onda Explosiva Total",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca um único inimigo, drenando 10% de sua Taxa de Dano, 10% de sua Taxa de Redução de Dano e 10% de sua Taxa de Crít. (não acumula, dura 1 turno). Tem 40% de chance de infligir [Enraizamento] no alvo (não ativa em Contra-ataques). Se este ataque for um Acerto Crítico, causa dano em área ao redor do alvo principal igual a 30% do dano deste ataque (o dano em área não restaura Fúria extra). Se este ataque for um Contra-ataque, aumenta seu dano em 15%.",
+          "dano": "400%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Onda Explosiva Total",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Ataca um único inimigo, drenando 15% de sua Taxa de Dano, 15% de Redução de Dano e 15% de Taxa de Crít. (não acumula, dura 1 turno). 40% de chance de infligir [Enraizamento]. Se Acerto Crítico, dano em área igual a 40% do dano deste ataque. Cada vez que um Supremo (Ultimate Skill) é usado, ganha 1 acúmulo de [Espírito de Luta Indomável] (máx. 6 acúmulos). Se este ataque for um Contra-ataque, aumenta seu dano em 20%. [Espírito de Luta Indomável]: aumenta ATQ e DEF em 5%.",
+          "dano": "420%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Onda Explosiva Total",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Ataca um único inimigo, drenando 20% de sua Taxa de Dano, Redução de Dano e Taxa de Crít. (1 turno). 40% de chance de infligir [Enraizamento]. Se Acerto Crítico, dano em área igual a 40% do dano deste ataque. Cada vez que um Supremo é usado, ganha 1 acúmulo de [Espírito de Luta Indomável] (máx. 8 acúmulos). Se este ataque for um Contra-ataque, aumenta a Taxa de Dano em 30% e a Taxa de Crít. em 15%. Se estiver em estado de [Autodomínio], ganha 1 acúmulo extra de [Espírito de Luta Indomável]. Se garantir um abate, ganha 200 de Fúria adicional, e o número de Contra-ataques possíveis neste turno aumenta em 1 (uma vez por batalha). [Espírito de Luta Indomável]: aumenta ATQ e DEF em 5%. [Efeito Passivo]: Na primeira vez que entrar em estado de [Autodomínio], realiza imediatamente uma habilidade extra.",
+          "dano": "440%+24",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Domínio do Deus da Destruição",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira. Quando o dano cumulativo recebido pelo próprio no turno atual ultrapassa 20% do PV Máx., ganha imediatamente [Autodomínio]. Se o próprio estiver em estado de [Autodomínio], ativa um Contra-ataque de Supremo ao ser atingido por um Supremo inimigo, até uma vez por turno. Enquanto não estiver em [Autodomínio], o dano máximo recebido não pode ultrapassar 35% do PV. Ao sofrer dano fatal, dissipa todos os próprios debuffs e restaura 30% do próprio PV e 300 de Fúria (uma vez por batalha). [Autodomínio]: remove os próprios efeitos de [Controle], restaura 20% do próprio PV, e aumenta Resistência a Efeitos Anormais, Taxa de Roubo de Vida, Taxa de Crít., Resistência a Habilidade e Resistência a Supremo em [valores da base] cada. Dura 1 turno, uma vez por turno e 3 vezes por batalha. Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira em 5%."
+        },
+        "max": {
+          "nome": "Domínio do Deus da Destruição",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira. Quando na Fileira da Frente, aumenta adicionalmente a Resistência a Supremo em 10%; quando na Fileira de Trás, aumenta adicionalmente o Dano de Supremo em 10%. Quando o dano cumulativo recebido pelo próprio no turno atual ultrapassa 20% do PV Máx., ganha imediatamente [Autodomínio]. Se em [Autodomínio], ativa Contra-ataque de Supremo ao ser atingido por Supremo inimigo, até uma vez por turno. Fora de [Autodomínio], o dano máximo recebido não pode ultrapassar 35% do PV. Ao sofrer dano fatal, dissipa os próprios debuffs e restaura 30% do PV e 300 de Fúria. [Autodomínio]: remove os próprios efeitos de [Controle], restaura 30% do próprio PV, e aumenta Resistência a Efeitos Anormais, Taxa de Roubo de Vida, Taxa de Crít., Resistência a Habilidade e Resistência a Supremo em 20% cada. Dura 1 turno, no máximo uma vez por turno e 3 vezes por batalha. Aumenta a Taxa de Resistência a Crítico dos guerreiros na mesma fileira em 5%."
+        }
+      }
+    },
+    {
+      "nome": "Broly (DBS)",
+      "habilidade": {
+        "base": {
+          "nome": "Explosão Devastadora",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo com 60% de chance de causar [Empurrão], aumenta a própria Taxa de Bloqueio e Tenacidade em 20%, ganha um escudo equivalente a 8% do PV Máx., e aumenta o dano de Ki em 8% de um guerreiro [Lendário] aleatório além de si mesmo (não acumula, 1 turno); 30% de chance de infligir [Petrificação] no alvo, chance dobrada contra Saiyajins, e causa 40% de dano extra a alvos afetados por [Petrificação]. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Bombardeio Devastador",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca um único inimigo com 70% de chance de causar [Empurrão], aumenta a própria Taxa de Bloqueio e Tenacidade em 30%, ganha um escudo equivalente a 10% do PV Máx., e aumenta o dano de Ki em 12% de um guerreiro [Lendário] aleatório além de si mesmo (1 turno); 40% de chance de infligir [Petrificação] no alvo (dobrada contra Saiyajins), +50% de dano a alvos com [Petrificação]. [Despertado]: uso garantido de habilidade uma vez por turno. [Passiva]: Enquanto tiver um Escudo, aumenta a Resistência a Habilidade/Supremo em 10%. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Onda de Energia Bucal",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Explosão de Ki] Aumenta o próprio Ataque e Defesa em 15%, ataca todos os inimigos; quanto menos inimigos, maior o dano, até um aumento máximo de 120%. 50% de chance de aplicar [Queimadura] em todos os alvos; reduz em 20% o dano causado por alvos com mais de 500 de Fúria (1 turno); 50% de chance de petrificar 2 alvos aleatórios; causa dano igual a 5% do PV Máx. a alvos afetados por [Controle]. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
+          "dano": "155%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Onda de Energia Bucal",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Aumenta o próprio Ataque e Defesa em 25%, ataca todos os inimigos (máx. +120% por menos alvos); todos os alvos têm 70% de chance de sofrer [Queimadura]; reduz em 25% o dano causado por alvos com Fúria acima de 500 (1 turno); 50% de chance de petrificar 2 alvos aleatórios; alvos petrificados têm Resistência Crítica e eficácia de cura reduzidas em 15%; causa dano igual a 8% do PV Máx. a alvos com status de [Controle]. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
+          "dano": "170%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Onda de Energia Bucal",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "[Ki] +35% ATQ/DEF. Ataca todos: dano escala com menos inimigos (máx. +120%). +25% ATQ por acúmulo de [Queimadura]. 100% de infligir [Queimadura]. -30% de dano a alvos com mais de 500 de Fúria. 50% de chance de [Petrificar] 2 alvos (-25% Resistência Crítica/cura). +8% de dano (PV Máx.) a alvos sob Controle. Primeiro uso: -25% de recuperação de Fúria para todos (1 turno). Pós-[Adormecimento]: o primeiro Supremo tem 70% de chance de [Petrificar] o alvo principal +50% de chance em outro. [Petrificação]: não pode agir (1 turno). Se dissipada: -200 de Fúria.",
+          "dano": "180%+15",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Vida Eterna",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Melhora a defesa de guerreiros [Lendários]. Após Broly morrer, ele entra em estado de [Adormecimento], restaurando 40% do PV e herdando 100% da Fúria. Após um turno, ele [Desperta] novamente, herdando 100% do PV e 100% da Fúria do estado adormecido; no primeiro turno, aumenta a Taxa de Acerto Anormal em 20%, que é removida ao entrar em [Adormecimento]. Enquanto [Adormecido], Broly ganha uma Redução de Dano adicional de 50% e 50% de Defesa. Ao ser atacado (exceto contra-ataques), reduz a Fúria do atacante em 150. Ao [Despertar]: restaura 200 de Fúria para si e ganha permanentemente 15% de Roubo de Vida; Broly fica imune a [Petrificação]. Se houver apenas um aliado e um inimigo em campo ao entrar na batalha, aumenta o próprio dano de [Explosão de Ki]."
+        },
+        "max": {
+          "nome": "Vida Eterna",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta a DEF de guerreiros [Lendários]. Quando Broly morre, entra em estado de [Adormecimento] (cura 40% do PV, mantém 100% da Fúria). Após 1 turno, [Desperta] com PV e Fúria completos. No primeiro turno: +25% de Taxa de Acerto de Debuff (removido ao [Adormecer]). Enquanto [Adormecido], Broly ganha +70% de Redução de Dano/DEF, drena 150 de Fúria ao ser atingido (exceto ataques de perseguição). Ao [Despertar]: recupera 300 de Fúria, ganha permanentemente +30% de Roubo de Vida. Imune a [Petrificação]. Se houver apenas 1v1 no início: +30% de Dano de Ki (permanente)."
+        }
+      }
+    },
+    {
+      "nome": "SSG Trunks",
+      "habilidade": {
+        "base": {
+          "nome": "Corte de Fogo",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico] Ataca uma fileira inimiga, 60% de chance de causar [Empurrão], +15% de Dano Crítico. Se existir alvo com [Queimadura], +30% de Taxa de Crít. Consome [Marca de Chamas] pra drenar 10% do PV do alvo + 200 de Fúria.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Golpe da Espada Flamejante",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "[ATQ Físico] Ataca uma fileira inimiga, 60% de chance de causar [Empurrão], +20% de Dano Crítico; se houver [Queimadura], +40% de Taxa de Crít.; consome [Marca de Chamas] pra dano extra igual a <Taxa de Crít.>×ATQ (máx. 50% do ATQ) contra alvos queimados; consome [Marca de Chamas] pra drenar 10% do PV + 200 de Fúria do alvo principal. [Guarda de Chamas]: +7% de Redução de Dano/Resistência Crítica por inimigo em campo, -7% a cada Supremo sofrido.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Corte de Fogo Flamejante",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico] Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 20%. Ataca uma fileira inimiga, com 70% de chance de aplicar [Queimadura]. Se o próprio tiver uma [Marca de Chamas], consome 1 para causar dano adicional igual a 10% do PV Máx. do alvo. Se a [Energia de Chamas] ultrapassar 30%, consome 30% dela para causar dano adicional igual a 30% da [Energia de Chamas] consumida (dividido entre todos os alvos). Armazena 15% do dano total não excedente causado por este Supremo como [Energia de Chamas]. [Queimadura]: sofre dano igual a 25% do ATQ do lançador no início de cada turno. Cada acúmulo reduz os efeitos de cura em 10%, máx. 10 acúmulos, dura 2 turnos.",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Corte de Fogo Flamejante",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 25%. Ataca uma fileira inimiga, 70% de chance de aplicar [Queimadura]. Causa dano adicional igual a <Taxa de Crít. do próprio>×ATQ (máx. 50% do ATQ) a alvos com [Queimadura]. Se o próprio tiver uma [Marca de Chamas], consome 1 para dano adicional igual a 10% do PV Máx. do alvo. Se a [Energia de Chamas] ultrapassar 30%, consome 30% dela para dano adicional (30% da Energia consumida, dividido entre alvos). Armazena 15% do dano total não excedente como [Energia de Chamas]. [Queimadura]: 25% do ATQ do lançador por turno, -10% de cura por acúmulo, máx. 10 acúmulos, 2 turnos. [Efeito Passivo]: Aumenta em 1 o número de usos de [Contra-ataque Flamejante] por turno. Cada [Contra-ataque Flamejante] aumenta a Taxa de Crít. deste ataque em 80% e causa dano adicional igual a 12% do próprio PV Máx.",
+          "dano": "240%+16",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Explosão Infernal Cortante",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 30%. Ataca uma fileira inimiga, 70% de chance de aplicar [Queimadura]. Causa dano adicional igual a <150%×Taxa de Crít. do próprio>×ATQ (máx. 80% do ATQ) a alvos com [Queimadura]. Se o próprio tiver [Marca de Chamas], consome 1 para dano adicional igual a 12% do PV Máx. do inimigo. Se a [Energia de Chamas] ultrapassar 30%, consome 30% dela para dano adicional (30% da Energia consumida, dividido entre alvos). Armazena 20% do dano total não excedente como [Energia de Chamas]. [Queimadura]: 25% do ATQ do lançador por turno, -10% de cura por acúmulo, máx. 10 acúmulos, 2 turnos. [Efeito Passivo]: Aumenta em 1 o número de usos de [Contra-ataque Flamejante] por turno. Cada [Contra-ataque Flamejante] aumenta a Taxa de Crít. deste ataque em 80% e causa dano adicional igual a 12% do próprio PV Máx.",
+          "dano": "240%+18",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Poder do Caçador de Demônios",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Ganha [Marcas de Chamas] e [Energia de Chamas] ao entrar em campo, cura aliados com PV baixo, e ganha [Contra-ataque Flamejante] e [Renascimento Flamejante] ao sofrer dano fatal."
+        }
+      }
+    },
+    {
+      "nome": "Gogeta SS4",
+      "habilidade": {
+        "base": {
+          "nome": "Explosão Ressonante",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Pequeno Flutuar]. Aumenta a própria Taxa de Roubo de Vida em 20% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo (o dano em área não restaura Fúria extra). Se este ataque for um Acerto Crítico, aumenta o dano desta habilidade em 30%.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Explosão Ressonante",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Pequeno Flutuar], e reduz a Taxa de Redução de Dano do alvo em 15% (2 turnos). Aumenta a própria Taxa de Roubo de Vida em 25% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo. Se Acerto Crítico, aumenta o dano desta habilidade em 40%.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Golpe Supremo",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ki] Aumenta o próprio ATQ e Dano Crítico em 20%, ataca uma fileira inimiga, reduz a Fúria do alvo principal em 200, 70% de chance de aplicar [Marca Carmesim] nos alvos atingidos. Se o alvo principal tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 10% do seu PV Máx., inflige [Empurrão]. [Marca Carmesim]: reduz a cura recebida pelo alvo em 15% e a Taxa de Crít. em 15%. A Taxa de Crít. de Gogeta SS4 contra alvos com [Marca Carmesim] aumenta em 50%. Dura 2 turnos, pode ser dissipada.",
+          "dano": "280%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Golpe Supremo",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "[Ki] Aumenta o próprio ATQ e Dano Crítico em 20%, ataca uma fileira inimiga, reduz a Fúria do alvo principal em 200, 70% de chance de aplicar [Marca Carmesim] nos alvos atingidos. Se o alvo principal tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 10% do seu PV Máx., inflige [Empurrão]. Se qualquer inimigo em campo tiver [Marca Carmesim], troca o Supremo para [Investida Suprema]. [Investida Suprema]: [Artes Marciais/Ki] mira um inimigo com [Marca Carmesim], aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 25%, ataca um único inimigo, reduz a Fúria do alvo principal em 200, ignora 30% da DEF, restaura PV igual a 30% do dano causado e restaura 200 de Fúria. Se o alvo tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 12% do seu PV Máx. [Marca Carmesim]: -15% de cura recebida/-15% de Taxa de Crít., Taxa de Crít. de Gogeta SS4 contra marcados +50% (2 turnos).",
+          "dano": "400%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Golpe Supremo",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "[Ki] Aumenta o próprio ATQ e Dano Crítico em 30%, ataca uma fileira inimiga, reduz a Fúria de todos os alvos em 200, 90% de chance de aplicar [Marca Carmesim] nos alvos atingidos. Se um alvo da fileira tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 15% do seu PV Máx., inflige [Empurrão]. Ganha 1 acúmulo de [Poder Carmesim]. Se qualquer inimigo em campo tiver [Marca Carmesim], troca o Supremo para [Investida Suprema]. [Investida Suprema] (SMAX): [Artes Marciais/Ki] mira um inimigo com [Marca Carmesim], contra guerreiros do [Tipo Defesa] ignora Bloqueio e Resistência a Dano, restaura PV igual a 40% do dano causado e 200 de Fúria. Se o alvo tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 15% do seu PV Máx. Se esta habilidade garantir um abate, ganha 1 efeito extra de Imunidade à Morte (não acumula), e no início do próximo turno, restaura 300 de Fúria (ativa uma vez por batalha). [Marca Carmesim]: -25% de cura/-25% de Taxa de Crít., Taxa de Crít. de Gogeta SS4 contra marcados +50% (2 turnos).",
+          "dano": "440%+24",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Força do Macaco Dourado",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Ganha [Enrijecimento Carmesim] e [Poder Carmesim] ao entrar em batalha; concede imunidade à morte uma vez."
+        }
+      }
+    },
+    {
+      "nome": "SSGSS Gogeta",
+      "habilidade": {
+        "base": {
+          "nome": "Impacto Explosivo Contínuo",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo com 60% de chance de infligir [Empurrão], aumentando o próprio Dano Crítico e Taxa de Penetração em 20% por 2 turnos. Se o ataque for Acerto Crítico, causa dano adicional igual a 4% do PV Máx. do alvo (dobrado se o alvo for guerreiro do [Tipo Defesa]).",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Impacto Explosivo Contínuo",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca um único inimigo com um golpe de [Artes Marciais/Ki], com 60% de chance de causar [Derrubar]. Aumenta o próprio Dano Crítico e Taxa de Penetração em 30% por 2 turnos. Se Acerto Crítico, causa dano adicional igual a 5% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Restaura PV igual a 40% do dano causado.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Punidor de Almas",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Pequeno Flutuar], aumentando a própria Taxa de Dano e Taxa de Redução de Dano em 20%, reduzindo a Fúria do alvo principal em 150, e causando dano adicional igual a 4% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se o alvo for [Tipo Defesa], também reduz a cura recebida em 20%. Se o ataque for Acerto Crítico, causa dano adicional aos inimigos atrás do alvo igual a 30% do dano deste ataque (não gera Fúria adicional). Se o ataque não for Acerto Crítico, restaura PV igual a 6% do próprio PV Máx.",
+          "dano": "400%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Punidor de Almas",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Ataca um único inimigo, infligindo [Pequeno Flutuar], aumentando a própria Taxa de Dano e Taxa de Redução de Dano em 25%, reduzindo a Fúria do alvo principal em 200 e a Resistência a Supremo em 15% por 1 turno, e causando dano adicional igual a 5% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se [Tipo Defesa], também reduz a cura recebida em 30%. Se Acerto Crítico, causa dano adicional aos inimigos atrás do alvo igual a 30% do dano deste ataque. Se o ataque não for Acerto Crítico, ganha 1 acúmulo de [Espírito de Luta], restaura PV igual a 8% do próprio PV Máx., e restaura 150 de Fúria.",
+          "dano": "420%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Punidor de Almas",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Ataca um único inimigo, infligindo [Pequeno Flutuar]. Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 30%. Reduz a Fúria do alvo principal em 300 e a Resistência a Supremo em 20% por 1 turno. Causa dano adicional igual a 8% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se [Tipo Defesa], também reduz a cura recebida em 40%. Se Acerto Crítico, causa dano adicional aos inimigos adjacentes ao alvo igual a 30% do dano deste ataque (não gera Fúria adicional). Se o ataque não for Acerto Crítico, ganha 1 acúmulo de [Espírito de Luta], restaura PV igual a 10% do próprio PV Máx., e restaura 200 de Fúria. [Efeito Passivo]: Aprimora o [Espírito de Luta]; cada acúmulo aumenta a Taxa de Crít. em 10% e a Taxa de Bloqueio em 5%.",
+          "dano": "440%+24",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Força da Estrela",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta a própria Taxa de Roubo de Vida; concede +10% de Crítico contra guerreiros do Tipo Defesa; ganha 5 acúmulos de [Espírito de Luta] ao entrar em campo; sobrevive com 1 PV uma vez."
+        }
+      }
+    },
+    {
+      "nome": "Goku SS3 (Rose)",
+      "habilidade": {
+        "base": {
+          "nome": "Foice de Ki",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 60% de chance de causar [Grande Elevação] e 40% de chance de infligir [Silêncio] em alvos da retaguarda. 80% de chance de aplicar [Chama Extintora da Alma] nos alvos. Restaura PV igual a 100% do próprio ATQ e 100 de Fúria. Se o próprio possuir [Escudo Extintor da Alma], o PV e a Fúria restaurados aumentam em 50%. [Silêncio]: não pode usar Supremos (Ultimate Skills), dura 1 turno. [Chama Extintora da Alma]: reduz o ATQ em 10%, causa dano igual a 60% do ATQ do lançador a cada turno, dura 2 turnos, não acumula.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "Foice de Ki",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "[Explosão de Ki] Ataca uma fileira inimiga aleatória, com 60% de chance de causar [Grande Elevação] e 40% de chance de infligir [Silêncio] em alvos da retaguarda. 90% de chance de aplicar [Chama Extintora da Alma] nos alvos. Antes de atacar, para cada [Chama Extintora da Alma] em campo inimigo, a Taxa de Crít. deste ataque aumenta em 20%. Restaura PV igual a 100% do próprio ATQ e 100 de Fúria. Se o próprio possuir [Escudo Extintor da Alma], o PV e a Fúria restaurados aumentam em 100%. [Silêncio]: não pode usar Supremos, 1 turno. [Chama Extintora da Alma]: -10% ATQ, dano igual a 60% do ATQ do lançador por turno, 2 turnos, não acumula. [Escudo Extintor da Alma] Aprimorado: Quando o [Escudo Extintor da Alma] absorve dano, há 45% de chance de aplicar [Chama Extintora da Alma] no atacante.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Kamehameha Negro",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 15% (2 turnos). No primeiro uso, ignora Bloqueio. Ataca uma fileira de inimigos. Reduz a DEF de guerreiros do tipo [Defesa] em 15% (2 turnos). Se houver [Chama Extintora da Alma] em um alvo, causa dano adicional igual a 120% do próprio ATQ. Ao reviver, causa imediatamente dano de [Ataque Especial] igual a 150% do próprio ATQ a todos os alvos. Este dano não permite que os alvos recuperem Fúria extra. Pode ser ativado até 3 vezes por batalha. O próximo Supremo usado após reviver ignora Bloqueio. Este efeito é ativo 1 vez por batalha.",
+          "dano": "280%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "Kamehameha Negro",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 20% (2 turnos). No primeiro uso, ignora Bloqueio. Ataca uma fileira de inimigos. Reduz a DEF de guerreiros do tipo [Defesa] em 20% (2 turnos). Se houver [Chama Extintora da Alma] em um alvo, causa dano adicional igual a 120% do próprio ATQ. Se houver [Queimadura], causa dano adicional igual a 60% do próprio ATQ. Ao reviver, causa imediatamente dano de [Ataque Especial] igual a 150% do próprio ATQ a todos os alvos. Contra alvos afligidos com [Chama Extintora da Alma], aumenta o dano em 35%. Este dano não permite recuperar Fúria extra. Pode ser ativado até 3 vezes por batalha. O próximo Supremo usado após reviver ignora Bloqueio. Este efeito é ativo 2 vezes por batalha.",
+          "dano": "300%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "Kamehameha Negro",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Aumenta a própria Taxa de Dano, Taxa de Redução de Dano e Taxa de Roubo de Vida em 15% (2 turnos). No primeiro uso, ignora Bloqueio. Ataca uma fileira de inimigos. Reduz a DEF de guerreiros do tipo [Defesa] em 30% e a Taxa de Cura em 15% (2 turnos). Se houver [Chama Extintora da Alma] em um alvo, causa dano igual a <10% do PV Máx. do alvo + 180% do próprio ATQ>. Se houver [Queimadura], causa dano adicional igual a 90% do próprio ATQ. Ao reviver, causa imediatamente dano de [Ataque Especial] igual a <5% do PV Máx. do alvo + 180% do próprio ATQ> a todos os alvos. Contra alvos afligidos com [Chama Extintora da Alma], aumenta a Taxa de Crít. e o Dano em 35%. Este dano não permite recuperar Fúria extra. Pode ser ativado até 3 vezes por batalha. Se as tentativas de revivificação se esgotarem, concede ao próprio 1 instância de [Imunidade à Morte] (ao sofrer um golpe fatal, não morre, restaura imediatamente 30% do próprio PV, remove debuffs, aumenta permanentemente a própria Resistência a Supremo e Taxa de Roubo de Vida em 25% cada). O efeito de [Imunidade à Morte] só pode ser concedido uma vez por batalha. O próximo Supremo usado após reviver ignora Bloqueio. Este efeito é ativo 3 vezes por batalha. [Efeito Passivo]: Cada vez que revive, aplica [Chama Extintora da Alma] em 1 inimigo aleatório. [Chama Extintora da Alma] Aprimorada: reduz o ATQ em 15%, causa dano igual a 90% do ATQ do lançador a cada turno, dura 2 turnos, não acumula.",
+          "dano": "320%+25",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Crescimento Doloroso",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Imune a [Chama Extintora da Alma]; ganha [Vontade Indomável]; revive quando um aliado [Maligno] usa Supremo, até 2 vezes por batalha."
+        }
+      }
+    },
+    {
+      "nome": "Goku Instinto Superior",
+      "habilidade": {
+        "base": {
+          "nome": "Punho Definitivo",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único alvo, priorizando a unidade da fileira da frente com maior porcentagem de PV. Tem 60% de chance de causar [Derrubar]. Se o PV do alvo estiver acima de 50%, o dano aumenta em 30%. Esta habilidade aumenta permanentemente a própria Taxa de Crít. e Dano Crítico em 15% cada (até 30% cada). Restaura 150 de Fúria para si. Causa 40% de dano em área aos alvos da retaguarda (o dano em área não restaura Fúria extra).",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Punho Definitivo",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca um único alvo, priorizando a unidade da fileira da frente com maior porcentagem de PV. Tem 60% de chance de causar [Derrubar]. Se o PV do alvo estiver acima de 50%, o dano aumenta em 40%. Esta habilidade aumenta permanentemente a própria Taxa de Crít. e Dano Crítico em 15% cada (até 45% cada). Restaura 150 de Fúria para si. Se a própria Fúria estiver abaixo de 300, restaura 150 de Fúria adicional. Causa 40% de dano em área aos alvos da retaguarda (o dano em área não restaura Fúria extra).",
+          "dano": "170%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Impacto de Calor Explosivo",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Drena 15% do ATQ e DEF do alvo principal (2 turnos), aumenta o próprio Dano de Supremo em 15%, e aplica [Supressão de Supremo] no alvo principal. Ataca todos os inimigos. Quanto menos alvos atingidos, maior o dano (até um aumento de 120%). Causa 30% de dano extra a guerreiros do tipo [Ataque]. Reduz a Taxa de Crít. de todos os inimigos em 8% (1 turno). [Supressão de Supremo]: reduz a Taxa de Dano do alvo contra o próprio em 15% e sua Taxa de Resistência Crítica em 30%, dura 1 turno. Só pode existir 1 alvo com [Supressão de Supremo] em campo por vez.",
+          "dano": "155%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Impacto de Calor Explosivo",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Drena 20% do ATQ e DEF do alvo principal (2 turnos), aumenta o próprio Dano de Supremo em 20%, e aplica [Supressão de Supremo] no alvo principal. Ataca todos os inimigos (máx. +120% por menos alvos). Causa 30% de dano extra a guerreiros do tipo [Ataque]. Reduz a Taxa de Crít. de todos os inimigos em 10% (1 turno). Se houver um alvo na fileira da frente inimiga com Proporção de PV abaixo de 50%, libera [Impacto de Energia Estelar Explosivo]. [Impacto de Energia Estelar Explosivo]: [Ataque Especial] drena 20% do ATQ e DEF do alvo principal, e aumenta o próprio Dano de Supremo em 30%. Ataca o inimigo da fileira da frente com menor Proporção de PV, aplica [Supressão de Supremo] no alvo, ignora o limite de dano do alvo, e causa dano adicional igual a (15% do PV perdido do alvo + 10% do PV Máx. do alvo). Causa 30% de dano em área aos inimigos ao redor do alvo. Se garantir um abate, restaura 10% do próprio PV e 150 de Fúria. [Supressão de Supremo]: reduz a Taxa de Dano do alvo contra o próprio em 15% e a Taxa de Resistência Crítica em 30%, dura 1 turno; só 1 alvo por vez.",
+          "dano": "170%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Impacto de Calor Explosivo",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Drena 30% do ATQ e DEF do alvo principal, aumenta o próprio Dano de Supremo em 30%. Ataca todos os inimigos (máx. +120% por menos alvos). Causa 40% de dano extra a guerreiros do tipo [Ataque]. Reduz a Taxa de Crít. de todos os inimigos em 12%, aumentado para 24% contra guerreiros do tipo [Ataque] (1 turno). Se houver um alvo na fileira da frente inimiga com Proporção de PV abaixo de 50%, libera [Impacto de Energia Estelar Explosivo]. [Impacto de Energia Estelar Explosivo] (SMAX): drena 30% do ATQ e DEF do alvo principal, aumenta o próprio Dano de Supremo em 30%. Ataca o inimigo da fileira da frente com menor Proporção de PV, aplica [Supressão de Supremo] no alvo, ignora o limite de dano do alvo, e causa dano adicional igual a (25% do PV perdido do alvo + 12% do PV Máx. do alvo). Causa 40% de dano em área aos inimigos ao redor do alvo. Se o alvo principal for eliminado, o dano em área aumenta para 60%, e restaura 15% do próprio PV e 200 de Fúria. [Supressão de Supremo]: reduz a Taxa de Dano do alvo contra o próprio em 20% e a Taxa de Resistência Crítica em 40%, dura 1 turno; só 1 alvo por vez.",
+          "dano": "180%+15",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Ruptura de Energia",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "+Resistência Crítica ao entrar, cura 8% PV + Resistência a Supremo/Habilidade quando PV<50%, +100 de Fúria por turno, herda a vontade de aliados derrotados."
+        }
+      }
+    },
+    {
+      "nome": "Moro",
+      "habilidade": {
+        "base": {
+          "nome": "Absorção Rápida",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca um único inimigo, 40% de dano em área (sem Fúria extra) nos arredores. Efeito extra por [Habilidade Copiada]: Vegeta +100 de Fúria (próprio +1 aliado); Gohan +40% de dano; Piccolo +5% de PV Máx. (próprio +1 aliado); Merus 30%/15% de chance de atordoar.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Absorção Rápida",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "dano em área 50%, Vegeta +120 de Fúria; Gohan +50% de dano; Piccolo +8% de PV Máx.; Merus 40%/20% de chance de atordoar; ganha 1 [Habilidade Copiada] extra ao entrar.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Energia Planetária",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] +20% ATQ/DEF, ganha 1 [Habilidade Copiada] não possuída. Efeito extra: Vegeta drena 150 de Fúria; Gohan ativa [Canhão de Feixe Especial] (até 2x por turno); Piccolo drena 8% de PV Máx.; Merus dissipa debuffs de 1 aliado.",
+          "dano": "400%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Energia Planetária",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "+25% ATQ/DEF, Vegeta drena 200 de Fúria.",
+          "dano": "420%+24",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Energia Planetária",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "+35% ATQ/DEF (2 turnos), concede +10% de Resistência a Efeitos Anormais a 1 aliado, inclui \"Canhão de Feixe Especial\" reforçado (ignora Bloqueio, +35% de Taxa de Dano, dano extra de 12% do PV Máx.).",
+          "dano": "420%+24",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Habilidade Copiada",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "+Redução de Dano para [Guerreiros Malignos] da retaguarda; copia aleatoriamente 1 efeito (Vegeta/Gohan/Piccolo/Merus) ao entrar em campo, efeitos variam conforme a cópia (Explosão de Fúria, Amplificação de Poder, Regeneração, Poder Angelical)."
+        }
+      }
+    },
+    {
+      "nome": "Towa",
+      "habilidade": {
+        "base": {
+          "nome": "Esfera de Impacto",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca um único inimigo. 60% de chance de infligir [Encanto] (o alvo tem 50% de chance de atacar um aliado aleatório em vez de um inimigo ao agir, dura 1 turno, não acumula). Se o alvo já tiver [Encanto], este ataque causa 30% de dano adicional.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Esfera de Impacto",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "[Especial] Ataca um único inimigo. 70% de chance de [Encanto] (1 turno). Se o alvo tiver [Encanto]: +40% de dano e 30% de chance de infligir [Prisão] (não pode agir, não acumula, 1 turno). Se o alvo tiver [Prisão] ou status de [Grande Lançamento], a duração de [Encanto] é renovada para 2 turnos.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Barreira Sombria",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Aumenta o próprio ATQ e DEF em 20%, ataca uma fileira inimiga, 60% de chance de infligir [Encanto] em todos os alvos atingidos. Se um alvo já tiver [Encanto], a Taxa de Crít. deste ataque aumenta em 30%.",
+          "dano": "280%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Barreira Sombria",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Aumenta o próprio ATQ e DEF em 30%. Ataca uma fileira inimiga, com 70% de chance de infligir [Encanto] em todos os alvos atingidos (2 turnos). Se um alvo já tiver [Encanto], a Taxa de Crít. deste ataque aumenta em 40%. Se [Encanto] estiver presente em 3 ou mais inimigos em campo, a chance aumenta para 100%.",
+          "dano": "300%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Barreira Sombria",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Aumenta o próprio ATQ e DEF em 35%. Ataca uma fileira inimiga, aplicando [Encanto] em todos os alvos atingidos (2 turnos, não acumula). Alvos enfeitiçados têm 50% de chance de atacar um aliado aleatório em vez de um inimigo em seu turno. Se o campo inimigo tiver 3+ alvos com [Encanto], muda para atacar um único alvo, causando dano adicional massivo e ignorando 30% da Defesa do alvo.",
+          "dano": "320%+25",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Transferência de Vida",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta o próprio Dano de Supremo. Quando o próprio está prestes a sofrer dano fatal, pode suportar um golpe fatal (deixa 1 PV, uma vez por batalha), então restaura 30% do próprio PV Máx. e dissipa os próprios debuffs."
+        },
+        "max": {
+          "nome": "MAX. Transferência de Vida",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta ainda mais o próprio Dano de Supremo. Quando o próprio está prestes a sofrer dano fatal, suporta o golpe (deixa 1 PV, uma vez por batalha), restaura 40% do próprio PV Máx., dissipa os próprios debuffs, e concede a si mesmo um [Escudo] equivalente a 15% do PV Máx. por 1 turno."
+        }
+      }
+    },
+    {
+      "nome": "Demigra Demoníaco",
+      "habilidade": {
+        "base": {
+          "nome": "Impacto do Dragão",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca um único inimigo, aumenta a própria Taxa de Redução de Dano em 15% (2 turnos), 50% de chance de infligir [Medo] (reduz a Taxa de Acerto do alvo, 1 turno).",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Impacto do Dragão",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "+25% de Taxa de Redução de Dano, 60% de chance de [Medo] com efeito reforçado, ganha também redução no próprio dano recebido enquanto [Medo] estiver ativo em algum inimigo.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Desastre Descendente",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca todos os inimigos, aumenta a própria Taxa de Bloqueio em 20% (2 turnos), reduz a Taxa de Dano de todos os inimigos em 10% (1 turno).",
+          "dano": "155%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Desastre Descendente",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "+30% de Taxa de Bloqueio, -15% de Taxa de Dano de todos os inimigos, cura uma parte do próprio PV baseada no número de inimigos atingidos.",
+          "dano": "170%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Desastre Descendente",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "+35% de Taxa de Bloqueio, -20% de Taxa de Dano de todos, cura reforçada, e aplica um debuff adicional de redução de Fúria em todos os inimigos atingidos.",
+          "dano": "180%+15",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Domínio do Caos",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta a própria Taxa de Bloqueio. Quando o próprio bloqueia um ataque, tem uma chance de contra-atacar com dano de [Ataque Especial] contra o atacante, restaurando uma parte do próprio PV."
+        },
+        "max": {
+          "nome": "MAX. Domínio do Caos",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Taxa de Bloqueio maior, chance de contra-ataque maior, cura mais PV no contra-ataque, e o contra-ataque passa a reduzir a Fúria do alvo."
+        }
+      }
+    },
+    {
+      "nome": "Kefla",
+      "habilidade": {
+        "base": {
+          "nome": "Explosão de Ki Verde",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Ataca um único inimigo, 70% de chance de aplicar [Chamas Azuis], causa 50% de dano extra a unidades já afetadas por [Chamas Azuis], 60% de chance de infligir [Derrubar]. [Chamas Azuis]: reduz o dano de Supremo recebido em 15%; no início do turno, causa dano igual a 50% do ATQ do lançador; toda vez que o alvo realiza uma ação (exceto perseguições), restaura uma pequena quantidade de Fúria para Kefla (dura 2 turnos); enquanto sob [Chamas Azuis], todos os efeitos de [Queimadura] são aprimorados para [Chama Kármica] (tratada como [Queimadura]), causando dano igual a 4% do PV Máx. do alvo no início de cada turno.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Explosão de Ki Verde",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "80% de chance de [Chamas Azuis], +70% de dano extra contra alvos já marcados, 70% de [Derrubar]. A Fúria restaurada para Kefla aumenta.",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Bombardeio Pesado",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ataque Especial] Aumenta o próprio ATQ e DEF em 15%, ataca uma fileira inimiga aleatória, 70% de chance de aplicar [Chamas Azuis] no(s) alvo(s) e renovar a duração de todas as [Chamas Azuis] em inimigos para 2 turnos. O dano aumenta com base no número de [Chamas Azuis] em campo (até +20%), inflige [Derrubar].",
+          "dano": "155%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Bombardeio Pesado",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "+20% ATQ/DEF, 80% de [Chamas Azuis], o bônus de dano por [Chamas Azuis] em campo sobe até +30%.",
+          "dano": "170%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Bombardeio Pesado",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "+25% ATQ/DEF, 90% de [Chamas Azuis], bônus por [Chamas Azuis] em campo até +40%, e cada [Chamas Azuis] ativa também reduz a Redução de Dano do alvo.",
+          "dano": "180%+15",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Explosão de Ki",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta a própria Taxa de Crít. Quando há 2 ou mais inimigos com [Chamas Azuis] em campo, os ataques de Kefla têm uma chance de causar dano de [Ataque Especial] em área aos inimigos ao redor."
+        },
+        "max": {
+          "nome": "MAX. Explosão de Ki",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Taxa de Crít. maior, o gatilho de dano em área passa a ativar com apenas 1 inimigo com [Chamas Azuis], e o dano em área é maior."
+        }
+      }
+    },
+    {
+      "nome": "Super Mira",
+      "habilidade": {
+        "base": {
+          "nome": "Corte Maligno",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ki] Ataca uma coluna de alvos, absorve 15% da chance de habilidade pequena de cada alvo atingido, e restaura 8% do próprio PV. Se atingir um alvo sob [Vórtice das Trevas], a [Energia das Trevas] aumenta em 1 camada e tem 70% de chance de ativar imediatamente 1 instância de dano de [Vórtice]. [Energia das Trevas]: cada camada aumenta em 3% o dano contínuo recebido pelo alvo.",
+          "dano": "150%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Corte Maligno",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "absorve mais chance de habilidade pequena, restaura mais PV, a chance de [Vórtice] instantâneo sobe para 90%.",
+          "dano": "165%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Redemoinho das Trevas",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ki] Aumenta o próprio Ataque e Defesa em 15%, ataca todos os inimigos; se nenhum inimigo estiver sob [Vórtice das Trevas], 100% de chance de aplicá-lo no inimigo com maior Ataque (não pode ser dissipado, dura 2 rodadas, causa dano de [Vórtice] igual a 60% do próprio Ataque no início de cada rodada, também restaura Fúria ao alvo); para unidades sob [Vórtice das Trevas], cada Supremo de um aliado [Guerreiro Maligno] adiciona 1 acúmulo de [Energia das Trevas] (até 12, +20% de dano de Vórtice cada, removido ao morrer).",
+          "dano": "155%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Redemoinho das Trevas",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "+20% ATQ/DEF, dano de [Vórtice] sobe para 70% do próprio ATQ, acúmulo de [Energia das Trevas] até 16.",
+          "dano": "170%+15",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Redemoinho das Trevas",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "+25% ATQ/DEF, dano de [Vórtice] sobe para 80% do ATQ, acúmulo até 20, e cada [Energia das Trevas] também reduz a Redução de Dano do alvo.",
+          "dano": "180%+15",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Fúria Interior da Nuvem de Trovão: Machado do Trovão",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Ao entrar em campo, aumenta a redução de dano dos [Guerreiros Malignos] na mesma fileira em 10% (reduz 5% a cada vez que sofrem dano de Supremo)."
+        },
+        "max": {
+          "nome": "MAX. Fúria Interior da Nuvem de Trovão: Machado do Trovão",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "bônus de redução de dano inicial maior (15%), e a redução por acerto de Supremo sofrido é menor (3% em vez de 5%, durando mais)."
+        }
+      }
+    },
+    {
+      "nome": "Vados",
+      "habilidade": {
+        "base": {
+          "nome": "Bolas Explosivas Múltiplas",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ki] Ataca um único inimigo, 60% de chance de causar [Pequeno Lançamento]; se o próprio tiver [Escudo], absorve 100 de Fúria do alvo; se não tiver [Escudo], o dano da habilidade aumenta em 30%, e restaura 6% do próprio PV.",
+          "dano": "160%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Bolas Explosivas Múltiplas",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "[Ki] Ataca um único inimigo. 60% de chance de [Lançamento Leve]. +15% de ATQ para Guerreiras (2 turnos). Com Escudo: rouba 200 de Fúria. Sem Escudo: +40% de dano + ganha Escudo (10% do PV Máx.).",
+          "dano": "175%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Chama de Partículas",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[Ki] Ataca uma coluna de inimigos, aumenta o próprio Ataque e Defesa em 15% (2 turnos), aplica [Escudo Angelical] em um guerreiro aleatório da retaguarda além de si mesma (escudo = 15% do PV Máx. de Vados; não absorve dano excedente ao ser quebrado; máx. 1 escudo por pessoa, máx. 2 por batalha); se não puder aplicar o escudo, ganha [Escudo] equivalente a 5% do PV Máx. e causa 5% do PV Máx. de dano ao alvo principal.",
+          "dano": "280%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Chama de Partículas",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Ataca uma coluna de inimigos, +20% ATQ/DEF (2 turnos), [Escudo Angelical] com força igual a 20% do PV Máx. de Vados, se não puder aplicar ganha [Escudo] de 7% do PV Máx. e causa 7% do PV Máx. de dano ao alvo principal; se o alvo for do [Tipo Defesa], aplica [Julgamento Angelical] (reduz a Redução de Dano em 15%, o efeito de cura em 30%, dura 2 turnos).",
+          "dano": "300%+25",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Chama de Partículas",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "[Ki] Ataca coluna: +30% ATQ/DEF (2 turnos). Concede a um aliado aleatório da retaguarda [Escudo Angelical] (25% do PV Máx. de Vados, sem dano excedente, máx. 1 escudo por aliado, 3 por batalha). Caso contrário: Escudo próprio (10% do PV Máx.) +10% do PV Máx. de dano ao alvo principal. Inflige [Julgamento Angelical] (-20% de Redução de Dano/-40% de cura, 2 turnos). +100 de Fúria/+10% de Dano de Supremo a um aliado aleatório (dobrado para [Anjos]/[Deuses da Destruição]).",
+          "dano": "320%+25",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Barreira Angelical",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta a própria Taxa de Redução de Dano. Ao entrar, aplica [Escudo Angelical] em si mesma (força do escudo é 20% do PV Máx.; o escudo não absorve dano excedente ao ser quebrado); enquanto Vados tiver [Escudo], a Redução de Dano aumenta em 15%; Vados protege guerreiros na mesma coluna, compartilhando 25% do dano que eles recebem, e reduz o dano compartilhado recebido em 30%. Reduz o ATQ de inimigos da fileira da frente em 5%."
+        },
+        "max": {
+          "nome": "MAX. Barreira Angelical",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta a Redução de Dano. Ao entrar: [Escudo Angelical] (30% do PV Máx., sem dano excedente). Com escudo: +20% de Redução de Dano/reflexo. Protege aliados da mesma coluna (absorve 35% do dano, -40% do dano recebido). Reduz o ATQ de inimigos da fileira da frente em 5%."
+        }
+      }
+    },
+    {
+      "nome": "Gohan do Futuro",
+      "habilidade": {
+        "base": {
+          "nome": "Masenko",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico] Ataca um único inimigo aleatório da retaguarda, causando [Derrubar]. Este ataque ignora 20% da DEF do inimigo e o inimigo não recupera Fúria extra. Concede a si mesmo 1 acúmulo de [Destemido] (cada acúmulo aumenta o ATQ em 3%, máx. 6 acúmulos; herda metade dos acúmulos ao reviver).",
+          "dano": "145%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        },
+        "max": {
+          "nome": "MAX. Lampejo de Luz Demoníaco",
+          "estrelas": 3,
+          "tipo": "Despertar",
+          "desc": "Ataca um único inimigo aleatório da retaguarda, causando [Derrubar]. Este ataque ignora 30% da DEF do inimigo e o inimigo não recupera Fúria extra. Concede a si mesmo 1 acúmulo de [Destemido] (cada acúmulo aumenta o ATQ em 4%, máx. 6 acúmulos. Herda metade dos acúmulos ao reviver). No 3º ataque, torna-se aprimorado, aumentando temporariamente o ATQ em 30%, e restaura 150 de Fúria para si.",
+          "dano": "155%+15",
+          "icone": "ability-icons/golpe-implacavel.png"
+        }
+      },
+      "suprema": {
+        "base": {
+          "nome": "Dança Explosiva",
+          "estrelas": 1,
+          "tipo": "Ativar",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta a própria Taxa de Roubo de Vida e Taxa de Dano em 15% (2 turnos). 70% de chance de ganhar 1 uso extra de habilidade imediato, causando [Empurrão].",
+          "dano": "360%+20",
+          "icone": "ability-icons/supernova.png"
+        },
+        "max": {
+          "nome": "MAX. Dança Explosiva",
+          "estrelas": 5,
+          "tipo": "Despertar (dourada)",
+          "desc": "Ataca um único inimigo, aplica [Inabalável] em si mesmo (quanto menor o próprio PV, maior o dano, até um aumento de 30%). Aumenta a própria Taxa de Roubo de Vida em 15%, Taxa de Dano em 15%, e Taxa de Precisão em 30% (2 turnos). 70% de chance de ganhar 1 uso extra de habilidade imediato, e causa [Empurrão].",
+          "dano": "380%+20",
+          "icone": "ability-icons/supernova.png"
+        },
+        "smax": {
+          "nome": "SMAX. Dança Explosiva",
+          "estrelas": 5,
+          "tipo": "Despertar (azul)",
+          "desc": "Ataca um único inimigo, aplica [Inabalável] em si mesmo (quanto menor o próprio PV, maior o dano, até um aumento de 40%). Aumenta a Taxa de Roubo de Vida em 25%, Taxa de Dano em 25%, e Taxa de Precisão em 50% (2 turnos). 100% de chance de ganhar 1 uso extra de habilidade imediato, e aumenta a Chance de Habilidade em 30% (2 turnos). Causa [Empurrão]. [Efeito Passivo]: Aprimora o efeito [Destemido]. Cada acúmulo aumenta adicionalmente o ATQ em 5%, e o número máximo de acúmulos aumenta para 8.",
+          "dano": "420%+24",
+          "icone": "ability-icons/supernova.png"
+        }
+      },
+      "combinado": {
+        "nome": "Ataque de Perseguição",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "estrelas": 1,
+        "tipo": "Ativar",
+        "icone": "ability-icons/ataque-de-perseguicao.png",
+        "dano": "75%+8"
+      },
+      "passivasHabilidade": [
+        {
+          "nome": "Ataque de Sequência Aprimorado",
+          "desc": "O dano do ataque de sequência do Guerreiro é aumentado, causando mais dano ao alvo. Aumento do dano de sequência: 25%",
+          "estrelas": 2,
+          "tipo": "Ativar",
+          "icone": "ability-icons/ataque-de-sequencia-aprimorado.png"
+        }
+      ],
+      "passivaUnica": {
+        "base": {
+          "nome": "Retaliação Desesperada",
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta o Dano de Habilidade dos guerreiros na mesma fileira. No início de cada turno, ganha 1 uso extra de habilidade. Aumenta o número de usos extras de habilidade em 1 a cada turno (máx. 2 usos adicionais). Aumenta o Dano de Habilidade dos guerreiros na mesma fileira em 5%."
+        },
+        "max": {
+          "nome": "MAX. Retaliação Desesperada",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta o Dano de Habilidade dos guerreiros na mesma fileira. No início de cada turno, ganha 1 uso extra de habilidade. Aumenta o número de usos extras de habilidade em 1 a cada turno (máx. 3 usos adicionais). A primeira habilidade usada a cada turno é garantidamente um Acerto Crítico. Aumenta o Dano de Habilidade dos guerreiros na mesma fileira em 5%."
+        }
+      }
     }
   ]
 }
