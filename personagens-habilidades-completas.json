@@ -6359,13 +6359,13 @@
       "passivasSupremo": [
         {
           "nome": "Sand Shower",
-          "desc": "Texto não capturado.",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
           "icone": "ability-icons/chakra-suficiente.png",
           "nivel_visto": 0
         },
         {
           "nome": "Sand Binding Coffin",
-          "desc": "Texto não capturado.",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
           "icone": "ability-icons/ataque-de-taijutsu.png",
           "nivel_visto": 0
         },
@@ -6457,13 +6457,13 @@
       "passivasSupremo": [
         {
           "nome": "Blast Meteor",
-          "desc": "Texto não capturado.",
+          "desc": "Aumenta o PV e o próprio ATQs em 5%",
           "icone": "ability-icons/chakra-suficiente.png",
           "nivel_visto": 0
         },
         {
-          "nome": "Energy Beam",
-          "desc": "Texto não capturado.",
+          "nome": "Fluorescent Energy Barrier",
+          "desc": "Aumenta a Res. Anormal própria em 8%",
           "icone": "ability-icons/ataque-de-taijutsu.png",
           "nivel_visto": 0
         },
