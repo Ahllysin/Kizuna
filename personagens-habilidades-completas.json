@@ -6351,9 +6351,15 @@
       "passivaUnica": {
         "base": {
           "nome": "Power Limit Break",
-          "estrelas": 4,
+          "estrelas": 3,
+          "tipo": "Ativar",
+          "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 10 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 1 vez por turno, 3 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 4 de [Poder Limite] (até 20 por turno). Ao sofrer dano fatal, não morre e ganha 10 de [Poder Limite] adicionais, dissipando os próprios debuffs, restaurando 200 de Fúria e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5%. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial]: [ATQ Físico] ataca um único inimigo, ganha 5 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 10% do próprio PV. [Crítico Limite]: aumenta o dano deste ataque em 40%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 80%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
+        },
+        "max": {
+          "nome": "MAX. Limit Power",
+          "estrelas": 6,
           "tipo": "Despertar",
-          "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 10 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 1 vez por turno, 3 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 4 de [Poder Limite] (até 20 por turno). Ao sofrer dano fatal, não morre e ganha 10 de [Poder Limite] adicional, dissipando os próprios debuffs, restaurando 200 de Fúria e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5% por acúmulo. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial] (do contra-ataque): [ATQ Físico] ataca um único inimigo, ganha 5 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 10% do próprio PV. [Crítico Limite]: aumenta este dano em 40%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 70%. Aumenta a Chance de Habilidade em 100%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Bônus final da passiva: aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
+          "desc": "Aumenta a Redução de Dano contra ataques Especiais para guerreiros na própria fileira. Ganha inicialmente 20 de [Poder Limite]. Aumenta a própria Taxa de Redução de Dano em 20%. Ao sofrer um ataque de Habilidade ou Supremo, se bloquear com sucesso, ganha 1 acúmulo de [Aprimoramento Muscular] (máx. 6 acúmulos; os acúmulos são reduzidos à metade quando o próprio usa uma Habilidade Suprema). Se o dano acumulado sofrido ultrapassar 30% do PV Máx., remove efeitos de controle e contra-ataca imediatamente com uma [Habilidade Especial] (até 2 vezes por turno, 4 vezes por batalha). Quando outro guerreiro aliado usa um Supremo, o próprio ganha 5 de [Poder Limite] (até 30 por turno). Ao sofrer dano fatal, não morre e ganha 20 de [Poder Limite] adicionais, dissipando os próprios debuffs, restaurando 300 de Fúria e ativando [Super Limit Will]. [Aprimoramento Muscular]: aumenta a Taxa de Redução de Dano em 5%. [Poder Limite]: máx. 100 pontos, 0,5% de ATQ por ponto. [Habilidade Especial]: [ATQ Físico] ataca um único inimigo, ganha 15 de [Poder Limite]; cada ponto de [Poder Limite] concede 1% de chance de ativar [Crítico Limite] neste ataque. Restaura 15% do próprio PV. [Crítico Limite]: aumenta o dano deste ataque em 50%. [Super Limit Will]: imune a todo dano fatal e a debuffs durante sua duração, mas a cura recebida é reduzida em 70%. Aumenta a Chance de Habilidade em 100%. O efeito termina quando a imunidade à morte se esgota ou quando o próprio realiza um ataque (excluindo ataques de sequência). Restaura 30% do PV ao terminar. Este efeito só ativa uma vez por batalha. Aumenta a Redução de Dano contra Ataques Especiais em 5% para si e para os aliados na mesma fileira."
         }
       },
       "passivasSupremo": [
@@ -6375,7 +6381,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Broly SS4",
@@ -6473,7 +6485,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Vegeta Ultra Ego",
@@ -6571,7 +6589,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%"
+      }
     },
     {
       "nome": "Broly (DBS)",
@@ -6669,7 +6693,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "SSG Trunks",
@@ -6738,7 +6768,13 @@
           "nome": "Poder do Caçador de Demônios",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Ganha [Marcas de Chamas] e [Energia de Chamas] ao entrar em campo, cura aliados com PV baixo, e ganha [Contra-ataque Flamejante] e [Renascimento Flamejante] ao sofrer dano fatal."
+          "desc": "Aumenta a própria Taxa de Dano e Taxa de Redução de Dano. Ao entrar em campo, ganha 2 [Marcas de Chamas] (máx. 4 simultâneas) e 30% do PV Máx. próprio como [Energia de Chamas] ([Energia de Chamas] não pode exceder 100% do PV Máx. próprio). Tem 50% de chance de ganhar 1 [Marca de Chamas] a cada turno (100% após [Renascimento Flamejante]). No início do turno, se um guerreiro aliado tiver PV abaixo de 50%, consome [Energia de Chamas] para restaurar até 20% do PV Máx. ao aliado com menor proporção de PV (falha se o próprio estiver sob controle), até 2 vezes por turno. Quando a [Energia de Chamas] estiver abaixo de 50% ou o PV próprio estiver abaixo de 70%, ao ser atacado por um inimigo (exceto ataques de sequência) ativa [Contra-ataque Flamejante], até 2 vezes por turno. Ao entrar em campo, ganha [Guarda de Chamas]. Quando estiver sob controle, pode consumir 1 [Marca de Chamas] para remover estados anormais (incluindo estados avançados como [Confusão]), até 1 vez por turno e 1 vez por batalha. Ao sofrer dano fatal, consome 2 [Marcas de Chamas] para ativar [Renascimento Flamejante], até 1 vez por batalha. [Guarda de Chamas]: aumenta a Taxa de Redução de Dano e a Intensidade de Resistência a Crítico em 5% * <número de inimigos em campo>. A cada Supremo sofrido, esse bônus diminui em 5%. [Contra-ataque Flamejante]: contra-ataca com um ataque normal. Este ataque não permite que o inimigo recupere Fúria extra, aumenta a Taxa de Crít. em 40%, causa dano adicional igual a 10% do PV Máx. próprio, ganha 15% de [Energia de Chamas] e ganha 1 [Marca de Chamas]. [Renascimento Flamejante]: remove estados anormais. No início do turno do próprio, restaura 30% do PV e 300 de Fúria, depois ganha 1 [Marca de Chamas] e reinicia a [Guarda de Chamas]. Prioriza guardar [Marcas de Chamas] para o [Renascimento Flamejante]. Se a quantidade de [Marcas de Chamas] for insuficiente, considera-se que não as possui. Aumenta o PV de Guerreiras aliadas em 2,5%."
+        },
+        "max": {
+          "nome": "MAX. Poder Quebra-Demônios",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta a própria Taxa de Dano e Taxa de Redução de Dano. Ao entrar em campo, ganha 3 [Marcas de Chamas] (máx. 4 simultâneas) e 40% do PV Máx. próprio como [Energia de Chamas] ([Energia de Chamas] não pode exceder 100% do PV Máx. próprio). Tem 100% de chance de ganhar 1 [Marca de Chamas] a cada turno. No início do turno, se um guerreiro aliado tiver PV abaixo de 50%, consome [Energia de Chamas] para restaurar até 20% do PV Máx. ao aliado com menor proporção de PV (falha se o próprio estiver sob controle), até 2 vezes por turno. Quando a [Energia de Chamas] estiver abaixo de 50% ou o PV próprio estiver abaixo de 70%, ao ser atacado por um inimigo (exceto ataques de sequência) ativa [Contra-ataque Flamejante], até 2 vezes por turno. Ao entrar em campo, ganha [Guarda de Chamas]. Quando estiver sob controle, pode consumir 1 [Marca de Chamas] para remover estados anormais (incluindo estados avançados como [Confusão]), até 1 vez por turno e 2 vezes por batalha. Ao sofrer dano fatal, consome 2 [Marcas de Chamas] para ativar [Renascimento Flamejante], até 1 vez por batalha. [Guarda de Chamas]: aumenta a Taxa de Redução de Dano e a Intensidade de Resistência a Crítico em 6% * <número de inimigos em campo>. A cada Supremo sofrido, esse bônus diminui em 6%. [Contra-ataque Flamejante]: contra-ataca com um ataque normal. Este ataque não permite que o inimigo recupere Fúria extra, aumenta a Taxa de Crít. em 50%, causa dano adicional igual a 10% do PV Máx. próprio, ganha 15% de [Energia de Chamas] e ganha 1 [Marca de Chamas]. [Renascimento Flamejante]: remove estados anormais. No início do turno do próprio, restaura 40% do PV e 400 de Fúria, depois ganha 1 [Marca de Chamas] e reinicia a [Guarda de Chamas]. Prioriza guardar [Marcas de Chamas] para o [Renascimento Flamejante]. Se a quantidade de [Marcas de Chamas] for insuficiente, considera-se que não as possui. Aumenta o PV de Guerreiras aliadas em 2,5%."
         }
       },
       "passivasSupremo": [
@@ -6760,7 +6796,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Gogeta SS4",
@@ -6830,7 +6872,13 @@
           "nome": "Força do Macaco Dourado",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Ganha [Enrijecimento Carmesim] e [Poder Carmesim] ao entrar em batalha; concede imunidade à morte uma vez."
+          "desc": "Aumenta o ATQ dos guerreiros [de Fusão] aliados. Ao entrar em batalha, ganha 2 acúmulos de [Enrijecimento Carmesim] e 1 acúmulo de [Poder Carmesim]. Ataques normais ou Habilidades concedem 1 acúmulo de [Poder Carmesim]. No início do turno 2, converte 1 acúmulo de [Enrijecimento Carmesim] em 1 acúmulo de [Poder Carmesim]. Após receber 2 ataques de Supremo em uma rodada, converte 1 acúmulo de [Enrijecimento Carmesim] em 1 acúmulo de [Poder Carmesim] (ativa uma vez por rodada). Ao receber dano fatal, torna-se imune à morte, dissipa os próprios debuffs, restaura 30% do PV Máx. e 200 de Fúria. [Enrijecimento Carmesim]: aumenta a Taxa de Redução de Dano e a Resistência a Crítico em 7% por acúmulo. Máx. 4 acúmulos. [Poder Carmesim]: aumenta a Taxa de Dano e o Dano de Supremo em 7% por acúmulo. Ao atingir 3 acúmulos, todos os acúmulos de [Poder Carmesim] são consumidos para entrar no estado [Despertar Carmesim]: restaura imediatamente 15% do PV Máx., remove efeitos de [Controle], restaura 150 de Fúria e aumenta a Taxa de Dano e o Dano de Supremo em 21% por 2 turnos. Durante este estado, ganhar [Poder Carmesim] concede [Enrijecimento Carmesim] em vez disso. Aumenta o dano de contra-ataque dos Guerreiros aliados do elemento [Água] em 5%."
+        },
+        "max": {
+          "nome": "MAX. Força do Macaco Dourado",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta o ATQ dos guerreiros [de Fusão] aliados. Ao entrar em batalha, ganha 2 acúmulos de [Enrijecimento Carmesim] e 1 acúmulo de [Poder Carmesim]. Ataques normais ou Habilidades concedem 1 acúmulo de [Poder Carmesim]. Usar um Supremo concede 1 acúmulo de [Enrijecimento Carmesim]. No início do turno 2, converte 1 acúmulo de [Enrijecimento Carmesim] em 1 acúmulo de [Poder Carmesim]. Após receber 2 ataques de Supremo em uma rodada, converte 1 acúmulo de [Enrijecimento Carmesim] em 1 acúmulo de [Poder Carmesim] (ativa até 2 vezes por rodada). Ao receber dano fatal, torna-se imune à morte, dissipa os próprios debuffs, restaura 40% do PV Máx. e 300 de Fúria. [Enrijecimento Carmesim]: aumenta a Taxa de Redução de Dano e a Resistência a Crítico em 8% por acúmulo. Máx. 4 acúmulos. [Poder Carmesim]: aumenta a Taxa de Dano e o Dano de Supremo em 8% por acúmulo. Ao atingir 4 acúmulos, todos os acúmulos de [Poder Carmesim] são consumidos para entrar no estado [Despertar Carmesim]: restaura imediatamente 25% do PV Máx., remove efeitos de [Controle], restaura 250 de Fúria e aumenta a Taxa de Dano e o Dano de Supremo em 24% por 2 turnos. Durante este estado, ganhar [Poder Carmesim] concede [Enrijecimento Carmesim] em vez disso, e os ataques de Supremo ignoram o limite de dano de PV Máx. do inimigo. Aumenta o dano de contra-ataque dos Guerreiros aliados do elemento [Água] em 5%."
         }
       },
       "passivasSupremo": [
@@ -6852,7 +6900,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "SSGSS Gogeta",
@@ -6922,7 +6976,13 @@
           "nome": "Força da Estrela",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Aumenta a própria Taxa de Roubo de Vida; concede +10% de Crítico contra guerreiros do Tipo Defesa; ganha 5 acúmulos de [Espírito de Luta] ao entrar em campo; sobrevive com 1 PV uma vez."
+          "desc": "Aumenta a própria Taxa de Roubo de Vida. A Taxa de Crítico contra guerreiros do [Tipo Defesa] aumenta em 10%. Ao entrar em batalha, ganha 5 acúmulos de [Espírito de Luta] (cada acúmulo concede 10% de Taxa de Crít. e 5% de Taxa de Bloqueio, máx. 7 acúmulos; consome 1 acúmulo quando uma Habilidade ou Supremo acerta crítico, consome 1 acúmulo adicional se o Supremo for crítico). No início de cada turno, ganha 1 acúmulo de [Espírito de Luta]. Ao derrotar o alvo principal, ganha 1 acúmulo de [Espírito de Luta]. Ao receber um golpe fatal pela primeira vez, sobrevive com 1 PV, remove imediatamente todos os debuffs de si, restaura PV igual a 30% do PV Máx. e 200 de Fúria, ganha 20 de Resistência a Supremo por 2 turnos e ganha 1 acúmulo de [Espírito de Luta]. Quando um [Guerreiro de Fusão] aliado usa o Supremo, pode remover efeitos de [Controle] do Gogeta (até 1 vez por rodada). Aumenta a própria Taxa de Roubo de Vida em 5%."
+        },
+        "max": {
+          "nome": "MAX. Força da Estrela",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta a própria Taxa de Roubo de Vida. Garante o uso de uma Habilidade no primeiro turno. A Taxa de Crítico contra guerreiros do [Tipo Defesa] aumenta em 15%. Ao entrar em batalha, ganha 6 acúmulos de [Espírito de Luta] (cada acúmulo concede 10% de Taxa de Crít. e 5% de Taxa de Bloqueio, máx. 7 acúmulos). Quando uma Habilidade ou Supremo acerta crítico, consome 1 acúmulo (consome 1 acúmulo adicional se o Supremo for crítico). No início de cada turno, ganha 1 acúmulo de [Espírito de Luta]. Ao derrotar o alvo principal, ganha 1 acúmulo de [Espírito de Luta] e restaura PV igual a 8% do PV Máx. Quando um guerreiro [de Fusão] aliado é derrotado, ganha 1 acúmulo de [Espírito de Luta]. Ao receber um golpe fatal pela primeira vez, sobrevive com 1 PV, remove imediatamente todos os debuffs de si, restaura PV igual a 40% do PV Máx. e 300 de Fúria, ganha 30 de Resistência a Supremo por 2 turnos e ganha 2 acúmulos de [Espírito de Luta]. Quando um [Guerreiro de Fusão] aliado usa o Supremo, pode remover efeitos de [Controle] do Gogeta (até 2 vezes por rodada). Aumenta a própria Taxa de Roubo de Vida em 5%."
         }
       },
       "passivasSupremo": [
@@ -6944,7 +7004,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Goku SS3 (Rose)",
@@ -7014,7 +7080,13 @@
           "nome": "Crescimento Doloroso",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Imune a [Chama Extintora da Alma]; ganha [Vontade Indomável]; revive quando um aliado [Maligno] usa Supremo, até 2 vezes por batalha."
+          "desc": "Aumenta o próprio Dano de Supremo. Ataques normais têm 70% de chance de aplicar [Chama Extintora da Alma]. O próprio é imune a [Chama Extintora da Alma]. Ganha [Vontade Indomável]. Quando um guerreiro [Maligno] aliado usa um Supremo (cada guerreiro [Maligno] pode ativar isto uma vez), o próprio é ressuscitado imediatamente. Ao ressuscitar, ganha [Escudo Extintor da Alma], restaura 25% do PV e toda a Fúria que tinha antes de morrer. Pode ser ativado até 2 vezes por batalha. Se o próprio for a única unidade em campo ao aparecer, ganha uma ressurreição extra, restaurando 30% do PV e toda a Fúria que tinha antes de morrer ao ressuscitar. Os Supremos usados após ressuscitar aumentam a Taxa de Crítico em 60% e ignoram 30% da DEF do alvo. Se o alvo estiver apenas na fileira da frente, a DEF ignorada sobe para 60% (dura 2 turnos). [Ressurreição]: os buffs temporários são perdidos. Herda todos os atributos e a maioria dos efeitos de habilidade (incluindo efeitos de equipamentos ao redor). [Vontade Indomável]: trava o PV; o PV não pode cair abaixo de 5%. Quando a trava de PV é ativada, remove [Vontade Indomável]. Pode ser recuperada após ressuscitar. Este efeito pode estar ativo até 2 vezes por batalha. [Chama Extintora da Alma]: reduz o ATQ em 10%, causa dano igual a 60% do ATQ do lançador a cada turno, dura 2 turnos, não acumula. [Escudo Extintor da Alma]: ao receber dano de [Ataque Especial], o dano é reduzido em 70%. Efetivo 4 vezes. O estado não pode ser acumulado, dura 1 turno e tem efeito uma vez por turno. Aumenta o próprio Dano de Supremo em 10%."
+        },
+        "max": {
+          "nome": "MAX. Crescimento Doloroso",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta o próprio Dano de Supremo. Ataques normais têm 70% de chance de aplicar [Chama Extintora da Alma]. O próprio é imune a [Chama Extintora da Alma]. Quando um guerreiro [Maligno] aliado usa um Supremo (cada guerreiro [Maligno] pode ativar isto apenas uma vez), o próprio é ressuscitado imediatamente. Ao ressuscitar, ganha [Escudo Extintor da Alma], restaura 30% do PV e toda a Fúria que tinha antes de morrer. Pode ser ativado no máximo 3 vezes por batalha. Se o próprio for a única unidade em campo ao aparecer, ganha uma ressurreição extra, restaurando 30% do PV e toda a Fúria que tinha antes de morrer ao ressuscitar. Os Supremos usados após ressuscitar aumentam a Taxa de Crítico em 80% e ignoram 40% da DEF do alvo. Se o alvo estiver apenas na fileira da frente, a DEF ignorada sobe para 80% (dura 2 turnos). Ao ser derrotado, aplica [Chama Extintora da Alma] ao atacante. [Ressurreição]: os buffs temporários são perdidos. Herda todos os atributos e a maioria dos efeitos de habilidade (incluindo efeitos de equipamentos ao redor). [Vontade Indomável]: trava o PV; o PV não pode cair abaixo de 5%. Quando a trava de PV é ativada, remove [Vontade Indomável]. Pode ser recuperada após ressuscitar. Este efeito pode estar ativo até 3 vezes por batalha. [Chama Extintora da Alma]: reduz o ATQ em 10%, causa dano igual a 60% do ATQ do lançador a cada turno, dura 2 turnos, não acumula. [Escudo Extintor da Alma]: ao receber dano de [Ataque Especial], o dano é reduzido em 70%. Efetivo 4 vezes. O estado não pode ser acumulado, dura 1 turno e tem efeito uma vez por turno. Aumenta o próprio Dano de Supremo em 10%."
         }
       },
       "passivasSupremo": [
@@ -7036,7 +7108,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Goku Instinto Superior",
@@ -7106,7 +7184,13 @@
           "nome": "Ruptura de Energia",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "+Resistência Crítica ao entrar, cura 8% PV + Resistência a Supremo/Habilidade quando PV<50%, +100 de Fúria por turno, herda a vontade de aliados derrotados."
+          "desc": "Ao aparecer, aumenta a Taxa de Resistência a Crítico do próprio e dos guerreiros ao redor. Quando o próprio PV cai abaixo de 50%, restaura imediatamente 8% do PV e ganha 15% de Resistência a Supremo e Resistência a Habilidade (dura 1 turno). Este efeito pode ser ativado no máximo uma vez por turno. No início de cada turno, restaura 100 de Fúria ao próprio e a 1 guerreiro aleatório ao redor. A primeira vez que um guerreiro ao redor é derrotado, herda a vontade dele (aumenta a Taxa de Dano e a Taxa de Redução de Dano em 5%, acumulável) e restaura 10% do PV. Ao sofrer dano fatal, restaura imediatamente 30% do próprio PV e 150 de Fúria, e aumenta a Resistência a Efeitos Anormais em 70% por 1 turno. Aumenta a própria Taxa Anti-Crít. em 5%."
+        },
+        "max": {
+          "nome": "MAX. Ruptura de Energia",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Ao aparecer, aumenta a Taxa de Resistência a Crítico do próprio e dos guerreiros ao redor. Quando o próprio PV cai abaixo de 50%, restaura imediatamente 10% do PV e ganha 20% de Resistência a Supremo e Resistência a Habilidade (dura 1 turno). Simultaneamente, restaura metade deste efeito a 1 guerreiro aleatório ao redor. Este efeito pode ser ativado no máximo uma vez por turno. No início de cada turno, restaura 120 de Fúria ao próprio e a 1 guerreiro aleatório ao redor. A primeira vez que um guerreiro ao redor é derrotado, herda a vontade dele (aumenta a Taxa de Dano e a Taxa de Redução de Dano em 5%, acumulável e herda 50% da Fúria dele) e restaura 12% do PV. Ao sofrer dano fatal, restaura imediatamente 30% do próprio PV e 300 de Fúria, e aumenta a Resistência a Efeitos Anormais em 70% por 1 turno. Aumenta a própria Taxa Anti-Crít. em 5%."
         }
       },
       "passivasSupremo": [
@@ -7128,7 +7212,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Moro",
@@ -7198,7 +7288,13 @@
           "nome": "Habilidade Copiada",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "+Redução de Dano para [Guerreiros Malignos] da retaguarda; copia aleatoriamente 1 efeito (Vegeta/Gohan/Piccolo/Merus) ao entrar em campo, efeitos variam conforme a cópia (Explosão de Fúria, Amplificação de Poder, Regeneração, Poder Angelical)."
+          "desc": "Aumenta a Taxa de Redução de Dano dos guerreiros [Malignos] da retaguarda. Ao entrar em campo, copia aleatoriamente 1 das seguintes Habilidades Copiadas (dura até o fim da batalha): Vegeta (Explosão de Fúria), Gohan (Amplificação de Poder), Piccolo (Regeneração) ou Merus (Poder Angelical). Ganha efeitos diferentes conforme a habilidade copiada: Vegeta (Explosão de Fúria): no início de cada turno, restaura 150 de Fúria. Sempre que a Fúria é reduzida, restaura imediatamente 150 de Fúria. Gohan (Amplificação de Poder): aumenta a própria Taxa de Dano em 25%. Piccolo (Regeneração): ganha 25% de Taxa de Resistência a Crítico. No início de cada turno, restaura 10% do próprio PV Máx. Merus (Poder Angelical): no início de cada turno, dissipa o próprio estado de [Controle]. Durante o primeiro turno, ganha 25% adicionais de Resistência a Supremo. Se o próprio tiver 2 ou mais [Habilidades Copiadas], ao sofrer dano fatal, pode perder aleatoriamente 2 [Habilidades Copiadas] para ganhar um efeito de [Imunidade à Morte], dissipando os próprios debuffs. Depois disso, restaura 30% do PV e 200 de Fúria. Pode ser ativado uma vez por batalha. Aumenta a Redução de Dano dos aliados [Guerreiros Malignos] da retaguarda em 5%."
+        },
+        "max": {
+          "nome": "MAX. Habilidade Copiada",
+          "estrelas": 6,
+          "tipo": "Despertar",
+          "desc": "Aumenta a Taxa de Redução de Dano dos guerreiros [Malignos] da retaguarda. Ao entrar em campo, copia aleatoriamente 1 das seguintes Habilidades Copiadas (dura até o fim da batalha): Vegeta (Explosão de Fúria), Gohan (Amplificação de Poder), Piccolo (Regeneração) ou Merus (Poder Angelical). Ganha efeitos diferentes conforme a habilidade copiada: Vegeta (Explosão de Fúria): no início de cada turno, restaura 200 de Fúria. Sempre que a Fúria é reduzida, restaura imediatamente 200 de Fúria. Gohan (Amplificação de Poder): aumenta a própria Taxa de Dano em 30% e a Chance de Habilidade em 25%. Piccolo (Regeneração): ganha 30% de Taxa de Resistência a Crítico. No início de cada turno, restaura 12% do próprio PV Máx. Merus (Poder Angelical): no início de cada turno, dissipa o próprio estado de [Controle] e aumenta a Resistência a Efeitos Anormais em 20%. Durante o primeiro turno, ganha 30% adicionais de Resistência a Supremo. Se o próprio tiver 2 ou mais [Habilidades Copiadas], ao sofrer dano fatal, pode perder aleatoriamente 1 [Habilidade Copiada] para ganhar um efeito de [Imunidade à Morte], dissipando os próprios debuffs. Depois disso, restaura 30% do PV e 300 de Fúria. Pode ser ativado uma vez por batalha. Aumenta a Redução de Dano dos aliados [Guerreiros Malignos] da retaguarda em 5%."
         }
       },
       "passivasSupremo": [
@@ -7220,7 +7316,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Towa",
@@ -7318,7 +7420,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ e o PV próprios em 5%"
+      }
     },
     {
       "nome": "Demigra Demoníaco",
@@ -7416,7 +7524,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Kefla",
@@ -7503,8 +7617,8 @@
           "nivel_visto": 0
         },
         {
-          "nome": "",
-          "desc": "Aumenta a Res. Anormal própria",
+          "nome": "Mudança Espelhada do Céu e da Terra",
+          "desc": "Aumenta o Acerto Anormal próprio em 4%",
           "icone": "ability-icons/ataque-de-taijutsu.png",
           "nivel_visto": 0
         },
@@ -7514,7 +7628,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e o PV Máx. próprios.\nAumenta o ATQ próprio em 5%.\nAumenta o PV Máx. próprio em 5%."
+      }
     },
     {
       "nome": "Super Mira",
@@ -7612,7 +7732,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Vados",
@@ -7710,7 +7836,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o PV próprio.\nAumenta a Taxa de Redução de Dano em 5%\nAumenta o PV em 5%"
+      }
     },
     {
       "nome": "Gohan do Futuro",
@@ -7808,7 +7940,13 @@
           "icone": "ability-icons/tecnica-dos-clones-das-sombras.png",
           "nivel_visto": 0
         }
-      ]
+      ],
+      "passivaQuatroEstrelas": {
+        "nome": "Aprimoramento de PV e Ataque",
+        "estrelas": 4,
+        "tipo": "Ativar",
+        "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%"
+      }
     }
   ]
 }
