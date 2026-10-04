@@ -192,6 +192,20 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-fchip:hover{border-color:rgba(255,170,70,.6);}
 .kz-fchip.active{background:var(--grad-primary);color:#fff;border-color:var(--gold);}
+.kz-sf{display:flex;flex-direction:column;gap:10px;}
+.kz-sf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.kz-sf-toggle{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,.2);background:rgba(8,7,14,.75);color:#dcd6c6;font-size:14px;font-weight:800;}
+.kz-sf-toggle:hover{border-color:rgba(255,170,70,.6);}
+.kz-sf-toggle.has{border-color:var(--gold);color:var(--gold-light);}
+.kz-sf-toggle .n{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--grad-primary);color:#fff;font-size:12px;line-height:20px;text-align:center;}
+.kz-sf-toggle .caret{font-size:11px;opacity:.8;}
+.kz-sf-body{display:flex;flex-direction:column;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(8,7,14,.55);}
+.kz-sf-group{display:flex;flex-direction:column;gap:6px;}
+.kz-sf-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+.kz-sf-label small{margin-left:6px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--text-dim);}
+.kz-sf-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.kz-sf-chips .kz-fchip{padding:5px 11px;font-size:13px;}
+.kz-sf-chips .kz-fchip .c{margin-left:5px;opacity:.65;font-weight:600;}
 .kz-link-btn{align-self:flex-start;padding:6px 0;border:none;background:none;color:var(--gold);font-size:14px;font-weight:700;text-decoration:underline;}
 .kz-empty{padding:60px 0;text-align:center;color:var(--text-dim);font-size:16px;}
 .kz-muted{font-size:15px;color:var(--text-dim);line-height:1.6;}
@@ -3418,7 +3432,7 @@ const DEFAULT_CHARACTERS = [
       "Guerreiro Maligno",
       "Guerreiro Lendário",
       "SS4",
-      "Guerreiro TEC"
+      "TEC de Guerreiro"
     ],
     "rarity": "SSR [Ultimate]",
     "type": "Habilidade",
@@ -3486,7 +3500,7 @@ const DEFAULT_CHARACTERS = [
       "Guerreiro Maligno",
       "Guerreiro S",
       "Guerreiro Lendário",
-      "Guerreiro de DEF"
+      "DEF de Guerreiro"
     ],
     "rarity": "SSR [Lendário]",
     "type": "Defesa",
@@ -3697,7 +3711,7 @@ const DEFAULT_CHARACTERS = [
     "gender": "Masculino",
     "tags": [
       "Guerreiro Maligno",
-      "Guerreiro de DEF"
+      "DEF de Guerreiro"
     ],
     "rarity": "SSR [Lendário]",
     "type": "Defesa",
@@ -3763,7 +3777,7 @@ const DEFAULT_CHARACTERS = [
     "gender": "Masculino",
     "tags": [
       "Guerreiro Maligno",
-      "Guerreiro de DEF"
+      "DEF de Guerreiro"
     ],
     "rarity": "SSR [Limitado]",
     "type": "Defesa",
@@ -3867,7 +3881,7 @@ const DEFAULT_CHARACTERS = [
     "gender": "Feminino",
     "tags": [
       "Anjo",
-      "Guerreiro de DEF"
+      "DEF de Guerreiro"
     ],
     "rarity": "SSR [Limitado]",
     "type": "Defesa",
@@ -3966,6 +3980,7 @@ let state = {
   heroCharId: null,                 // personagem em destaque no topo da lista (troca no hover)
   slotSel: null,                    // casa do Montador selecionada, esperando um guerreiro do elenco
   rosterSearch: '',
+  sf: { chars:{tags:[],trig:[],eff:[]}, coll:{tags:[],trig:[],eff:[]}, roster:{tags:[],trig:[],eff:[]}, open:{} },   // filtro de pesquisa por tags + o que o Ataque Combinado persegue/causa, um por aba
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
   pickerSlot: null,                 // slot index currently choosing a warrior for, or null
@@ -4344,18 +4359,19 @@ function matchesFilters(c){
     const s = f.search.toLowerCase();
     const p = ABILITY_PROGRESSION[c.name];
     const baseNames = p ? [p.habilidade && p.habilidade.base && p.habilidade.base.nome, p.suprema && p.suprema.base && p.suprema.base.nome] : [];
-    const hay = [c.name, ...c.tags, c.skill.name, c.supreme.name, c.combo.name, ...baseNames].filter(Boolean).join(' ').toLowerCase();
+    const hay = [c.name, ...c.tags, c.skill.name, c.supreme.name, c.combo.name, ...baseNames, ...((c.combo.triggers||[]).concat(c.combo.effects||[])).map(e=>EFFECT_LABELS[e])].filter(Boolean).join(' ').toLowerCase();
     if(!hay.includes(s)) return false;
   }
   if(f.rarity && rarityLabel(c.rarity) !== f.rarity) return false;
   if(f.type && c.type !== f.type) return false;
   if(f.affinity && c.affinity !== f.affinity) return false;
   if(f.element && c.element !== f.element) return false;
+  if(!matchSF(c, state.sf.chars)) return false;
   return true;
 }
 function hasActiveFilters(){
   const f = state.filters;
-  return !!(f.search || f.rarity || f.type || f.affinity || f.element);
+  return !!(f.search || f.rarity || f.type || f.affinity || f.element || sfCount(state.sf.chars));
 }
 function getFilteredChars(){
   return sortByRarity(state.characters.filter(matchesFilters));
@@ -4364,6 +4380,63 @@ function allTags(){
   const s = new Set();
   state.characters.forEach(c=>c.tags.forEach(t=>s.add(t)));
   return [...s].sort();
+}
+
+/* ---------- Filtro de pesquisa: tags + o que o Ataque Combinado persegue / causa ---------- */
+const SF_EFFECTS = ['derrubada','empurrao','elevacao_alta','elevacao_baixa'];
+function sfOf(scope){ return state.sf[scope]; }
+function sfCount(sf){ return (sf.tags.length||0) + (sf.trig.length||0) + (sf.eff.length||0); }
+// tags: precisa ter TODAS as marcadas; persegue / causa: basta bater QUALQUER uma das marcadas.
+function matchSF(c, sf){
+  if(!sf) return true;
+  if(sf.tags.length && !sf.tags.every(t=>(c.tags||[]).includes(t))) return false;
+  const k = c.combo || {};
+  if(sf.trig.length && !sf.trig.some(e=>(k.triggers||[]).includes(e))) return false;
+  if(sf.eff.length && !sf.eff.some(e=>(k.effects||[]).includes(e))) return false;
+  return true;
+}
+function renderSF(scope){
+  const sf = sfOf(scope), n = sfCount(sf), open = !!state.sf.open[scope];
+  const tagCounts = {};
+  state.characters.forEach(c=>(c.tags||[]).forEach(t=>{ tagCounts[t] = (tagCounts[t]||0)+1; }));
+  const tags = Object.keys(tagCounts).sort((a,b)=>tagCounts[b]-tagCounts[a] || a.localeCompare(b));
+  const chip = (grp, val, label, extra) => `<button class="kz-fchip ${sf[grp].includes(val)?'active':''}" data-sf="${scope}" data-grp="${grp}" data-val="${escapeAttr(val)}">${escapeHtml(label)}${extra!=null?`<span class="c">${extra}</span>`:''}</button>`;
+  const effChips = grp => SF_EFFECTS.map(e=>chip(grp, e, EFFECT_LABELS[e])).join('');
+  return `
+  <div class="kz-sf" data-sf-root="${scope}">
+    <div class="kz-sf-head">
+      <button type="button" class="kz-sf-toggle ${n?'has':''}" data-sf-toggle="${scope}" aria-expanded="${open}">
+        <span>Filtro de pesquisa</span>${n?`<span class="n">${n}</span>`:''}<span class="caret">${open?'▲':'▼'}</span>
+      </button>
+      ${n?`<button type="button" class="kz-link-btn" data-sf-clear="${scope}">Limpar filtro</button>`:''}
+    </div>
+    ${open?`
+    <div class="kz-sf-body">
+      <div class="kz-sf-group">
+        <div class="kz-sf-label">Tags<small>precisa ter todas as marcadas</small></div>
+        <div class="kz-sf-chips">${tags.map(t=>chip('tags', t, t, tagCounts[t])).join('')}</div>
+      </div>
+      <div class="kz-sf-group">
+        <div class="kz-sf-label">Persegue<small>efeito que ativa o Ataque Combinado</small></div>
+        <div class="kz-sf-chips">${effChips('trig')}</div>
+      </div>
+      <div class="kz-sf-group">
+        <div class="kz-sf-label">Causa<small>efeito que o Ataque Combinado causa</small></div>
+        <div class="kz-sf-chips">${effChips('eff')}</div>
+      </div>
+    </div>`:''}
+  </div>`;
+}
+// Liga o painel de um escopo; onChange() deve refazer a lista da aba.
+function attachSF(scope, root, onChange){
+  const q = sel => root.querySelectorAll(sel);
+  q(`[data-sf-toggle="${scope}"]`).forEach(b=>b.addEventListener('click', ()=>{ state.sf.open[scope] = !state.sf.open[scope]; onChange(); }));
+  q(`[data-sf-clear="${scope}"]`).forEach(b=>b.addEventListener('click', ()=>{ state.sf[scope] = {tags:[],trig:[],eff:[]}; onChange(); }));
+  q(`.kz-fchip[data-sf="${scope}"]`).forEach(b=>b.addEventListener('click', ()=>{
+    const arr = state.sf[scope][b.dataset.grp], v = b.dataset.val, i = arr.indexOf(v);
+    if(i>-1) arr.splice(i,1); else arr.push(v);
+    onChange();
+  }));
 }
 
 /* ======================= COMBO ENGINE ======================= */
@@ -4627,6 +4700,7 @@ function renderCharsTab(){
             ${vals.map(v=>`<button class="kz-fchip ${f[key]===v?'active':''}" data-filter="${key}" data-val="${escapeAttr(v)}">${escapeHtml(v)}</button>`).join('')}
           </div>`).join('')}
         </div>
+        ${renderSF('chars')}
         <button class="kz-link-btn" id="clearFilters" ${hasActiveFilters()?'':'hidden'}>Limpar filtros</button>
       </div>
     </div>
@@ -4703,8 +4777,10 @@ function attachCharsHandlers(){
   const clearBtn = document.getElementById('clearFilters');
   if(clearBtn) clearBtn.addEventListener('click', ()=>{
     state.filters = {search:'', rarity:null, type:null, affinity:null, element:null};
+    state.sf.chars = {tags:[],trig:[],eff:[]};
     render();
   });
+  attachSF('chars', view, render);
   const addBtn = document.getElementById('addCharBtn');
   if(addBtn) addBtn.addEventListener('click', ()=>{ state.editingChar = blankChar(); state.editingIsNew = true; render(); });
   const ioBtn = document.getElementById('ioBtn');
@@ -4931,6 +5007,7 @@ function renderCollectionTab(){
         <span class="kz-filter-label">${label}</span>
         ${vals.map(v=>`<button class="kz-fchip ${state[key]===v?'active':''}" data-cfilter="${key}" data-val="${escapeAttr(v)}">${escapeHtml(v)}</button>`).join('')}
       </div>`).join('')}
+      ${renderSF('coll')}
     </div>
     <div id="collGridWrap">${renderCollectionGrid(chars)}</div>
   </section>`;
@@ -4982,6 +5059,7 @@ function getFilteredCollectionChars(){
   if(state.collectionOnlyOwned) chars = chars.filter(c => getEntry(c.id).owned);
   if(state.collectionType) chars = chars.filter(c => c.type === state.collectionType);
   if(state.collectionAffinity) chars = chars.filter(c => c.affinity === state.collectionAffinity);
+  chars = chars.filter(c => matchSF(c, state.sf.coll));
   return sortByRarity(chars);
 }
 
@@ -5039,6 +5117,7 @@ function attachCollectionHandlers(){
   if(!view || state.tab !== 'collection') return;
   const search = document.getElementById('collSearch');
   if(search) search.addEventListener('input', e=>{ state.collectionSearch = e.target.value; softRerenderCollection(); });
+  attachSF('coll', view, render);
   const onlyOwned = document.getElementById('collOnlyOwned');
   if(onlyOwned) onlyOwned.addEventListener('click', ()=>{ state.collectionOnlyOwned = !state.collectionOnlyOwned; render(); });
   view.querySelectorAll('.kz-fchip[data-cfilter]').forEach(chip=>{
@@ -5403,6 +5482,7 @@ function renderCombosTab(){
       <aside class="kz-panel kz-roster">
         <div class="kz-roster-head"><span class="kz-label">Elenco</span><span class="kz-roster-hint">${hint}</span></div>
         <input type="text" class="kz-input" id="rosterSearch" placeholder="Buscar personagem…" value="${escapeAttr(state.rosterSearch)}">
+        ${renderSF('roster')}
         <div class="kz-roster-grid" id="rosterList">${renderRosterList(state.rosterSearch)}</div>
       </aside>
       <div class="kz-combos-main">
@@ -5420,7 +5500,7 @@ function renderCombosTab(){
 
 function renderRosterList(filterText){
   const q = (filterText||'').toLowerCase();
-  const chars = sortByRarity(state.characters.filter(c=>!q || c.name.toLowerCase().includes(q) || c.tags.some(t=>t.toLowerCase().includes(q))));
+  const chars = sortByRarity(state.characters.filter(c=>(!q || c.name.toLowerCase().includes(q) || c.tags.some(t=>t.toLowerCase().includes(q))) && matchSF(c, state.sf.roster)));
   if(!chars.length) return `<div class="kz-muted" style="grid-column:1/-1;font-size:13px;">Nenhum guerreiro encontrado.</div>`;
   return chars.map(c=>{
     const at = state.team.indexOf(c.id);
@@ -5559,6 +5639,7 @@ function attachCombosHandlers(){
     attachRosterItemHandlers(list);
   });
   attachRosterItemHandlers(view);
+  attachSF('roster', view, render);
 
   view.querySelectorAll('.kz-slot').forEach(slot=>{
     slot.addEventListener('click', e=>{

@@ -222,6 +222,31 @@ async function main(){
     assert.deepStrictEqual(r.supremeCont, [], 'suprema sem efeitos não deveria continuar em ninguém');
   });
 
+  console.log('\n[Filtro de pesquisa: tags + persegue/causa]');
+
+  await test('matchSF: tags exigem todas as marcadas; persegue/causa aceitam qualquer uma; vazio deixa todos passarem', () => {
+    const r = evalIn(sandbox, `(() => {
+      const c = (tags, trig, eff) => ({ tags, combo:{ triggers:trig, effects:eff } });
+      const A = c(['Guerreiro S','Artista Marcial'], ['derrubada'], ['empurrao']);
+      const B = c(['Guerreiro S'], ['elevacao_baixa'], ['derrubada']);
+      const f = (tags, trig, eff) => ({ tags, trig, eff });
+      return {
+        vazio: matchSF(A, f([],[],[])) && matchSF(B, f([],[],[])),
+        duasTags: [matchSF(A, f(['Guerreiro S','Artista Marcial'],[],[])), matchSF(B, f(['Guerreiro S','Artista Marcial'],[],[]))],
+        persegueQualquer: [matchSF(A, f([],['derrubada','empurrao'],[])), matchSF(B, f([],['derrubada','empurrao'],[]))],
+        causa: [matchSF(A, f([],[],['derrubada'])), matchSF(B, f([],[],['derrubada']))],
+        combinado: [matchSF(A, f(['Guerreiro S'],['derrubada'],['empurrao'])), matchSF(B, f(['Guerreiro S'],['derrubada'],['empurrao']))],
+        contagem: sfCount(f(['a','b'],['x'],[])),
+      };
+    })()`);
+    assert.strictEqual(r.vazio, true);
+    assert.deepStrictEqual(r.duasTags, [true, false]);
+    assert.deepStrictEqual(r.persegueQualquer, [true, false]);
+    assert.deepStrictEqual(r.causa, [false, true]);
+    assert.deepStrictEqual(r.combinado, [true, false]);
+    assert.strictEqual(r.contagem, 3);
+  });
+
   await test('renderSimPanel(): time vazio avisa; com time, mostra os 6 cards e as duas seções (Habilidade/Suprema) de quem está selecionado', () => {
     const r = evalIn(sandbox, `(() => {
       const backupChars = state.characters, backupTeam = state.team, backupSel = state.simCharId;
