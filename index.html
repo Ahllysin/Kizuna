@@ -5528,6 +5528,7 @@ function renderCombosTab(){
             <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
           </div>
           <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
+          ${renderRecommendations()}
         </div>
       </div>
     </div>
@@ -5778,6 +5779,11 @@ function attachCombosHandlers(){
   });
   attachRosterItemHandlers(view);
   attachSF('roster', view, render);
+  view.querySelectorAll('[data-rec-place]').forEach(b=>b.addEventListener('click', ()=>{
+    state.slotSel = parseInt(b.dataset.recSlot, 10);
+    placeChar(b.dataset.recPlace);
+    showToast('Guerreiro posicionado');
+  }));
   const openSim = document.getElementById('openSimBtn');
   if(openSim) openSim.addEventListener('click', openSimModal);
 
@@ -6958,7 +6964,7 @@ function renderSimModal(){
         <span class="kz-roster-hint">${n}/6 em campo</span>
         <button class="kz-close-btn" id="closeSimBtn" aria-label="Fechar">✕</button>
       </div>
-      <div class="modal-body"><div class="kz-sim"><div id="simModalBody">${renderSimPanel(true)}</div>${renderRecommendations()}</div></div>
+      <div class="modal-body"><div class="kz-sim"><div id="simModalBody">${renderSimPanel(true)}</div></div></div>
     </div>
   </div>`;
   const wire = ()=>{
@@ -6966,11 +6972,6 @@ function renderSimModal(){
       state.simCharId = b.dataset.simChar;
       const body = document.getElementById('simModalBody');
       if(body){ body.innerHTML = renderSimPanel(true); wire(); }
-    }));
-    root.querySelectorAll('[data-rec-place]').forEach(b=>b.addEventListener('click', ()=>{
-      state.slotSel = parseInt(b.dataset.recSlot, 10);
-      placeChar(b.dataset.recPlace);
-      showToast('Guerreiro posicionado');
     }));
   };
   wire();
