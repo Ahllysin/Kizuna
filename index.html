@@ -522,11 +522,37 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-slot-art{width:74px;aspect-ratio:3/4;flex-shrink:0;position:relative;}
 .kz-slot-art img{width:100%;height:100%;object-fit:contain;display:block;}
 .kz-slot-art .avatar-fallback{font-size:18px;border-radius:8px;}
-.kz-slot-name{flex:1;min-width:0;font-size:14px;font-weight:900;color:var(--text-strong);line-height:1.2;}
+.kz-slot-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px;}
+.kz-slot-name{font-size:14px;font-weight:900;color:var(--text-strong);line-height:1.2;}
+.kz-slot.filled{flex-wrap:wrap;row-gap:8px;}
+.kz-slot-eff{flex-basis:100%;display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start;padding-top:8px;border-top:1px dashed rgba(255,255,255,.12);}
+.kz-slot-eff .col{display:flex;flex-direction:column;gap:4px;align-items:flex-start;}
+.kz-slot-eff .lbl{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--text-faint);}
+.kz-slot-eff .pills{display:flex;gap:4px;flex-wrap:wrap;}
+.kz-slot-eff .kz-eff-pill{padding:2px 9px;font-size:11px;}
+.kz-slot-eff .none{font-size:11px;color:var(--text-faint);}
 .kz-slot-plus{font-size:40px;line-height:1;color:var(--gold);opacity:.7;}
 .kz-slot-hint{font-size:13px;color:var(--text-dim);text-align:center;}
 .kz-sim-modal{max-width:900px!important;}
 .kz-sim-modal .modal-body{max-height:78vh;}
+.kz-rec{display:flex;flex-direction:column;gap:12px;margin-top:6px;padding-top:18px;border-top:1.5px solid rgba(255,150,50,.3);}
+.kz-rec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.kz-rec-head h3{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:28px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;}
+.kz-rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.kz-rec-card{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;border:1.5px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);}
+.kz-rec-card.top{border-color:var(--gold);box-shadow:0 0 16px rgba(255,120,30,.3);}
+.kz-rec-top{display:flex;gap:12px;align-items:center;}
+.kz-rec-art{width:54px;aspect-ratio:3/4;flex-shrink:0;position:relative;}
+.kz-rec-art img{width:100%;height:100%;object-fit:contain;display:block;}
+.kz-rec-art .avatar-fallback{font-size:13px;border-radius:6px;}
+.kz-rec-name{font-size:15px;font-weight:900;color:var(--text-strong);line-height:1.2;}
+.kz-rec-gain{display:inline-block;margin-top:3px;padding:2px 9px;border-radius:999px;background:#2f9e4f;color:#fff;font-size:11px;font-weight:900;}
+.kz-rec-eff{display:flex;gap:14px;flex-wrap:wrap;}
+.kz-rec-eff .kz-atk-effline{align-items:flex-start;margin-top:0;}
+.kz-rec-chain{font-size:12.5px;line-height:1.5;color:var(--text-dim);}
+.kz-rec-chain b{color:var(--text);}
+.kz-rec-chain .arr{color:#ff8a2a;margin:0 4px;}
+.kz-rec-card .kz-btn{align-self:flex-start;}
 .kz-sim-open{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;font-size:16px;}
 .kz-sim-open .glyph{font-family:'Shippori Mincho',serif;font-weight:800;font-size:20px;}
 .kz-sim-open .cnt{padding:2px 9px;border-radius:999px;background:rgba(0,0,0,.28);font-size:12px;font-weight:800;}
@@ -877,7 +903,10 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-slot{flex-direction:column;gap:4px;min-height:110px;padding:30px 8px 10px;}
   .kz-slot-art{width:56px;}
   .kz-slot-ball{width:28px;height:28px;}
-  .kz-slot-name{font-size:12px;text-align:center;flex:none;}
+  .kz-slot-info{flex:none;align-items:center;}
+  .kz-slot-name{font-size:12px;text-align:center;}
+  .kz-slot-eff{justify-content:center;gap:10px;}
+  .kz-slot-eff .col{align-items:center;}
   .kz-slot-remove{width:24px;height:24px;font-size:11px;}
   .kz-sim{padding:16px 12px 18px;}
   .kz-sim-head h2{font-size:30px;}
@@ -5520,6 +5549,17 @@ function renderRosterList(filterText){
   }).join('');
 }
 
+// Persegue / Causa do Ataque Combinado (e o que a Habilidade e a Suprema causam) direto na casa,
+// pra reconhecer rápido o encaixe de cada guerreiro.
+function slotEffectsHtml(c){
+  const k = c.combo || {};
+  const pills = arr => (arr && arr.length) ? `<span class="pills">${arr.map(effPillHtml).join('')}</span>` : '<span class="none">—</span>';
+  return `<div class="kz-slot-eff">
+    <div class="col"><span class="lbl">Persegue</span>${pills(k.triggers)}</div>
+    <div class="col"><span class="lbl">Causa</span>${pills(k.effects)}</div>
+  </div>`;
+}
+
 function renderSlot(idx){
   const c = state.team[idx] ? getChar(state.team[idx]) : null;
   const sel = state.slotSel === idx;
@@ -5529,7 +5569,7 @@ function renderSlot(idx){
     ${c ? `
     <button class="kz-slot-remove" data-remove-slot="${idx}" title="Remover">✕</button>
     <div class="kz-slot-art">${portraitInner(c)}</div>
-    <div class="kz-slot-name">${escapeHtml(c.name)}</div>`
+    <div class="kz-slot-info"><div class="kz-slot-name">${escapeHtml(c.name)}</div></div>${slotEffectsHtml(c)}`
     : `<span class="kz-slot-plus">+</span><span class="kz-slot-hint">${sel ? 'Escolha no elenco' : 'Escolha um guerreiro'}</span>`}
   </div>`;
 }
@@ -5597,6 +5637,97 @@ function renderAtkSection(charId, abilityKey){
     ${note ? `<div class="kz-muted" style="font-size:13px;">${note}</div>` : ''}
     ${chainHtml}
   </div>`;
+}
+
+/* ---------- Recomendações: quem encaixa na equipe pra render mais combos ---------- */
+// Soma, pra cada guerreiro em campo e cada início (Habilidade/Suprema), quantos aliados a cadeia
+// consegue puxar. É a nota que a recomendação tenta aumentar.
+function comboScoreFor(team){
+  const bak = state.team;
+  state.team = team;
+  let total = 0;
+  try{
+    team.forEach(id=>{
+      if(!id) return;
+      STARTER_KEYS.forEach(k=>{ total += Math.max(0, simulateCombo(id, k).length - 1); });
+    });
+  } finally { state.team = bak; }
+  return total;
+}
+// Cadeias (da equipe 'team') em que o guerreiro 'cid' participa, da mais longa pra mais curta.
+function chainsWithChar(team, cid){
+  const bak = state.team;
+  state.team = team;
+  const out = [];
+  try{
+    team.forEach(id=>{
+      if(!id) return;
+      STARTER_KEYS.forEach(k=>{
+        const ch = simulateCombo(id, k);
+        if(ch.length > 1 && ch.some(s=>s.charId === cid)) out.push({ abilityKey:k, chain:ch });
+      });
+    });
+  } finally { state.team = bak; }
+  return out.sort((a,b)=>b.chain.length - a.chain.length);
+}
+// Candidatos fora da equipe, ordenados pelo quanto aumentam os encadeamentos. Com casa livre,
+// testa cada casa vazia (casa menor tem prioridade na cadeia); equipe cheia, testa trocar por cada
+// membro. Só entra quem melhora a nota.
+function recommendForTeam(limit){
+  const team = [...state.team];
+  if(!team.some(Boolean)) return [];
+  const base = comboScoreFor(team);
+  const empties = team.map((id,i)=>id ? -1 : i).filter(i=>i>-1);
+  const slots = empties.length ? empties : team.map((_,i)=>i);
+  const inTeam = new Set(team.filter(Boolean));
+  const res = [];
+  state.characters.forEach(c=>{
+    if(inTeam.has(c.id)) return;
+    let best = null;
+    slots.forEach(s=>{
+      const t = [...team];
+      const replaced = t[s];
+      t[s] = c.id;
+      const gain = comboScoreFor(t) - base;
+      if(!best || gain > best.gain) best = { gain, slot:s, replaced, team:t };
+    });
+    if(best && best.gain > 0) res.push({ char:c, slot:best.slot, replacedId:best.replaced, gain:best.gain, team:best.team });
+  });
+  res.sort((a,b)=> b.gain - a.gain || rarityRank(a.char.rarity) - rarityRank(b.char.rarity) || a.char.name.localeCompare(b.char.name));
+  return res.slice(0, limit || 8);
+}
+function renderRecommendations(){
+  const filled = state.team.filter(Boolean).length;
+  if(!filled) return '';
+  const full = filled === 6;
+  const recs = recommendForTeam(8);
+  const head = `<div class="kz-rec-head"><h3>Quem encaixa na sua equipe</h3><span class="kz-muted" style="font-size:13px;">Ordenado pelo quanto aumenta os encadeamentos da equipe (soma das cadeias de Habilidade e Suprema de todos). Considera o que cada um persegue e causa e a casa onde entraria.</span></div>`;
+  if(!recs.length){
+    return `<div class="kz-rec">${head}<div class="kz-muted">${full ? 'Nenhuma troca melhora os combos dessa equipe — ela já está bem encaixada.' : 'Nenhum guerreiro do elenco aumenta os combos dessa equipe.'}</div></div>`;
+  }
+  const cards = recs.map((r,i)=>{
+    const c = r.char, rep = r.replacedId ? getChar(r.replacedId) : null;
+    const best = chainsWithChar(r.team, c.id)[0];
+    const chainTxt = best ? best.chain.map((s,j)=>{
+      const nm = escapeHtml(s.char.name);
+      const tag = j === 0 ? ` <small>(${ABILITY_LABEL[best.abilityKey]})</small>` : '';
+      return s.charId === c.id ? `<b>${nm}</b>${tag}` : `${nm}${tag}`;
+    }).join('<span class="arr">→</span>') : '';
+    return `
+    <div class="kz-rec-card ${i===0?'top':''}">
+      <div class="kz-rec-top">
+        <div class="kz-rec-art">${portraitInner(c)}</div>
+        <div>
+          <div class="kz-rec-name">${escapeHtml(c.name)}</div>
+          <span class="kz-rec-gain">+${r.gain} encadeamento${r.gain>1?'s':''} · Casa ${r.slot+1}</span>
+        </div>
+      </div>
+      <div class="kz-rec-eff">${effLineHtml('Persegue', c.combo.triggers)}${effLineHtml('Causa', c.combo.effects)}</div>
+      ${chainTxt ? `<div class="kz-rec-chain">Melhor cadeia: ${chainTxt} <small>(${best.chain.length} hits)</small></div>` : ''}
+      <button type="button" class="kz-btn kz-btn-sm" data-rec-place="${c.id}" data-rec-slot="${r.slot}">${rep ? `Trocar com ${escapeHtml(rep.name)} (Casa ${r.slot+1})` : `Colocar na Casa ${r.slot+1}`}</button>
+    </div>`;
+  }).join('');
+  return `<div class="kz-rec">${head}<div class="kz-rec-grid">${cards}</div></div>`;
 }
 
 function renderSimPanel(noHead){
@@ -6827,7 +6958,7 @@ function renderSimModal(){
         <span class="kz-roster-hint">${n}/6 em campo</span>
         <button class="kz-close-btn" id="closeSimBtn" aria-label="Fechar">✕</button>
       </div>
-      <div class="modal-body"><div class="kz-sim" id="simModalBody">${renderSimPanel(true)}</div></div>
+      <div class="modal-body"><div class="kz-sim"><div id="simModalBody">${renderSimPanel(true)}</div>${renderRecommendations()}</div></div>
     </div>
   </div>`;
   const wire = ()=>{
@@ -6835,6 +6966,11 @@ function renderSimModal(){
       state.simCharId = b.dataset.simChar;
       const body = document.getElementById('simModalBody');
       if(body){ body.innerHTML = renderSimPanel(true); wire(); }
+    }));
+    root.querySelectorAll('[data-rec-place]').forEach(b=>b.addEventListener('click', ()=>{
+      state.slotSel = parseInt(b.dataset.recSlot, 10);
+      placeChar(b.dataset.recPlace);
+      showToast('Guerreiro posicionado');
     }));
   };
   wire();

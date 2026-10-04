@@ -247,6 +247,54 @@ async function main(){
     assert.strictEqual(r.contagem, 3);
   });
 
+  console.log('\n[Recomendações de combo]');
+
+  await test('recommendForTeam: sugere quem puxa a cadeia, respeita a casa livre e não sugere quem não ajuda', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, skillEff, trig, eff) => ({ id, name:id.toUpperCase(), tags:[], rarity:'R', skill:{name:'S'+id, effects:skillEff}, supreme:{name:'U'+id, effects:[]}, combo:{name:'C'+id, triggers:trig, effects:eff} });
+      state.characters = [
+        mk('a', ['derrubada'], [], []),            // time: A causa derrubada
+        mk('b', [], ['derrubada'], ['empurrao']),  // B persegue derrubada, causa empurrão
+        mk('c', [], ['empurrao'], []),             // C persegue empurrão (continua depois de B)
+        mk('z', [], ['elevacao_alta'], []),        // Z não encaixa em nada
+      ];
+      state.team = ['a', null, null, null, null, null];
+      const rec = recommendForTeam(5).map(x => ({ id:x.char.id, gain:x.gain, slot:x.slot }));
+      const score = comboScoreFor(state.team);
+      state.team = ['a','b', null, null, null, null];
+      const rec2 = recommendForTeam(5).map(x => x.char.id);
+      state.characters = bk[0]; state.team = bk[1];
+      return { rec, score, rec2 };
+    })()`);
+    assert.strictEqual(r.score, 0, 'sozinho, A não puxa ninguém');
+    assert.deepStrictEqual(r.rec.map(x=>x.id), ['b'], 'só B ajuda de cara (C só serve depois de B; Z nunca)');
+    assert.strictEqual(r.rec[0].gain, 1);
+    assert.strictEqual(r.rec[0].slot, 1, 'primeira casa livre testada (empate) — a menor');
+    assert.deepStrictEqual(r.rec2, ['c'], 'com A+B em campo, C estende a cadeia e Z continua de fora');
+  });
+
+  await test('recommendForTeam com equipe cheia sugere trocas e equipe vazia não sugere nada', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, skillEff, trig, eff) => ({ id, name:id.toUpperCase(), tags:[], rarity:'R', skill:{name:'S'+id, effects:skillEff}, supreme:{name:'U'+id, effects:[]}, combo:{name:'C'+id, triggers:trig, effects:eff} });
+      state.characters = [
+        mk('a', ['derrubada'], [], []), mk('f1', [], [], []), mk('f2', [], [], []), mk('f3', [], [], []), mk('f4', [], [], []), mk('f5', [], [], []),
+        mk('b', [], ['derrubada'], []),
+      ];
+      state.team = [];
+      const vazio = recommendForTeam(5).length;
+      state.team = ['a','f1','f2','f3','f4','f5'];
+      const rec = recommendForTeam(5).map(x => ({ id:x.char.id, replaced:x.replacedId }));
+      state.characters = bk[0]; state.team = bk[1];
+      return { vazio, rec };
+    })()`);
+    assert.strictEqual(r.vazio, 0);
+    assert.strictEqual(r.rec.length, 1);
+    assert.strictEqual(r.rec[0].id, 'b');
+    assert.notStrictEqual(r.rec[0].replaced, 'a', 'não troca o guerreiro que inicia a cadeia');
+  });
+
   await test('renderSimPanel(): time vazio avisa; com time, mostra os 6 cards e as duas seções (Habilidade/Suprema) de quem está selecionado', () => {
     const r = evalIn(sandbox, `(() => {
       const backupChars = state.characters, backupTeam = state.team, backupSel = state.simCharId;
