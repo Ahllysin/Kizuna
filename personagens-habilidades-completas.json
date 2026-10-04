@@ -6516,7 +6516,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Empurrão], causando [Elevação Baixa]. Acerto Crítico garantido contra guerreiros [Malignos], e ganha 3 de [Poder Limite].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -6623,7 +6623,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Elevação Alta], causando [Elevação Baixa]. Acerto Crítico garantido contra alvos com [Blast].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -6730,7 +6730,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Empurrão], causando [Elevação Alta].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -6837,7 +6837,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico / Ki] Ataca um único inimigo, segue com [Elevação Baixa], causando [Elevação Alta].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -6943,7 +6943,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Elevação Baixa], causando [Empurrão]. Causa 40% de dano adicional a alvos com [Queimadura].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7050,7 +7050,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[Ki] Ataca um único inimigo, persegue com [Derrubada], causando [Elevação Alta].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7157,7 +7157,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[Artes Marciais / Ki] Ataca um único inimigo, persegue com [Elevação Baixa], causando [Empurrão]. Cada acúmulo de [Espírito de Luta] aumenta o Dano Crítico em 6%.",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7264,7 +7264,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Elevação Baixa], causando [Derrubada]. Se o alvo estiver afetado por [Chama Extintora da Alma], o dano deste ataque de sequência aumenta em 50%.",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7371,7 +7371,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Empurrão], causando [Elevação Alta].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7478,7 +7478,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico / Ki] Ataca um único inimigo, segue com [Empurrão], causando [Derrubada].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7585,7 +7585,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Elevação Baixa], causando [Derrubada].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7692,7 +7692,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico / Ataque Especial] Ataca um único inimigo, segue com [Elevação Alta], causando [Empurrão].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7799,7 +7799,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico / Ataque Especial] Ataca um único inimigo, persegue com [Derrubada], causando [Elevação Baixa].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -7906,7 +7906,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Empurrão], causando [Derrubada].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -8013,7 +8013,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, segue com [Elevação Alta], causando [Derrubada].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
@@ -8120,7 +8120,7 @@
       },
       "combinado": {
         "nome": "Ataque de Perseguição",
-        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Empurrão]. Causa 75%+8 de dano ao alvo.",
+        "desc": "[ATQ Físico] Ataca um único inimigo, segue com [Derrubada], causando [Elevação Alta]. Causa 50% de dano aumentado a guerreiros [Malignos].",
         "estrelas": 1,
         "tipo": "Ativar",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png",
