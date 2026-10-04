@@ -96,6 +96,8 @@ async function main(){
         if(p.combinado) icons.push(p.combinado.icone);
         (p.passivasHabilidade||[]).forEach(x => icons.push(x.icone));
         (p.passivasSupremo||[]).forEach(x => icons.push(x.icone));
+        if(p.passivaUnica){ ['base','max'].forEach(k => { if(p.passivaUnica[k]) icons.push(p.passivaUnica[k].icone); }); }
+        if(p.passivaQuatroEstrelas) icons.push(p.passivaQuatroEstrelas.icone);
         return icons.filter(Boolean);
       };
       rawNames.forEach(name => {
