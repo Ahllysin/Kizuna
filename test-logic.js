@@ -295,6 +295,24 @@ async function main(){
     assert.notStrictEqual(r.rec[0].replaced, 'a', 'não troca o guerreiro que inicia a cadeia');
   });
 
+  await test('quem inicia a cadeia também persegue (uma vez): o Ataque Combinado dele entra na própria cadeia', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, skillEff, trig, eff) => ({ id, name:id.toUpperCase(), tags:[], skill:{name:'S'+id, effects:skillEff}, supreme:{name:'U'+id, effects:[]}, combo:{name:'C'+id, triggers:trig, effects:eff} });
+      state.characters = [
+        mk('a', ['derrubada'], ['derrubada'], ['empurrao']),  // A causa derrubada e também persegue derrubada
+        mk('b', [], ['empurrao'], ['derrubada']),              // B persegue empurrão e causa derrubada (devolveria pra A)
+      ];
+      state.team = ['a','b',null,null,null,null];
+      const chain = simulateCombo('a','skill').map(s => s.charId + ':' + s.abilityKey);
+      const cont = comboContinuations('a','skill').map(x => x.char.id);
+      state.characters = bk[0]; state.team = bk[1];
+      return { chain, cont };
+    })()`);
+    assert.deepStrictEqual(r.chain, ['a:skill','a:combo','b:combo'], 'A inicia, persegue a própria Derrubada uma vez e B continua; A não repete o combo');
+    assert.deepStrictEqual(r.cont, ['a'], 'a lista de um passo também inclui o próprio A');
+  });
+
   await test('renderSimPanel(): time vazio avisa; com time, mostra os 6 cards e as duas seções (Habilidade/Suprema) de quem está selecionado', () => {
     const r = evalIn(sandbox, `(() => {
       const backupChars = state.characters, backupTeam = state.team, backupSel = state.simCharId;

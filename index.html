@@ -4482,7 +4482,7 @@ const STARTER_KEYS = ['skill','supreme'];
 const ABILITY_ICON = {skill:'H', supreme:'S', combo:'C'};
 const ABILITY_LABEL = {skill:'Habilidade', supreme:'Suprema', combo:'Ataque Combinado'};
 
-// Quem, no time, tem o Ataque Combinado ativado por algum efeito que essa habilidade causa —
+// Quem, no time (inclusive o próprio que usou a habilidade), tem o Ataque Combinado ativado por algum efeito que essa habilidade causa —
 // igual ao "Detalhes do Ataque Comb." do jogo: um passo só, não a cadeia inteira.
 function comboContinuations(sourceCharId, abilityKey){
   const c = getChar(sourceCharId);
@@ -4491,7 +4491,7 @@ function comboContinuations(sourceCharId, abilityKey){
   if(!effects.length) return [];
   const out = [];
   state.team.forEach(tid=>{
-    if(!tid || tid === sourceCharId) return;
+    if(!tid) return;   // quem iniciou também pode perseguir (uma vez), então a própria origem entra
     const tc = getChar(tid);
     if(!tc) return;
     const trig = (tc.combo.triggers||[]).find(t=>effects.includes(t));
@@ -4508,7 +4508,7 @@ function simulateCombo(charId, abilityKey){
   if(!startChar) return [];
   const startAbility = startChar[abilityKey];
   const chain = [{ charId, abilityKey, ability: startAbility, char: startChar }];
-  const used = new Set([charId]);
+  const used = new Set();   // quem já usou o Ataque Combinado (cada um só uma vez) — o que iniciou a cadeia ainda não usou o dele
   let queue = [...(startAbility.effects||[])];
 
   let guard = 0;
