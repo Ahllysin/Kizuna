@@ -525,6 +525,11 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-slot-name{flex:1;min-width:0;font-size:14px;font-weight:900;color:var(--text-strong);line-height:1.2;}
 .kz-slot-plus{font-size:40px;line-height:1;color:var(--gold);opacity:.7;}
 .kz-slot-hint{font-size:13px;color:var(--text-dim);text-align:center;}
+.kz-sim-modal{max-width:900px!important;}
+.kz-sim-modal .modal-body{max-height:78vh;}
+.kz-sim-open{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;font-size:16px;}
+.kz-sim-open .glyph{font-family:'Shippori Mincho',serif;font-weight:800;font-size:20px;}
+.kz-sim-open .cnt{padding:2px 9px;border-radius:999px;background:rgba(0,0,0,.28);font-size:12px;font-weight:800;}
 .kz-sim{padding:20px 22px 24px;display:flex;flex-direction:column;gap:18px;}
 .kz-sim-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .kz-sim-head .glyph{font-family:'Shippori Mincho',serif;font-weight:800;font-size:30px;color:#ff7a1a;text-shadow:0 0 14px rgba(255,120,30,.7);}
@@ -3984,6 +3989,7 @@ let state = {
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
   pickerSlot: null,                 // slot index currently choosing a warrior for, or null
+  simModalOpen: false,              // popup com o Simulador de combo aberto (aba Combos)
   simCharId: null,                  // personagem selecionado no Simulador de combo (aba Combos)
   formations: [],                   // [{name, team}]
   collection: {},                   // {characterId: {owned:bool, level:0-10}} — sincroniza com a conta Discord quando logado
@@ -4604,6 +4610,7 @@ function render(){
   if(state.editingChar) renderModal();
   else if(state.ioModalOpen) renderIOModal();
   else if(state.pickerSlot!==null) renderPickerModal();
+  else if(state.simModalOpen) renderSimModal();
   else if(state.abilityPopupCharId) renderAbilityPopup(state.abilityPopupCharId);
   else if(state.donorProfileId) renderDonorProfileModal();
   else closeModalDOM();
@@ -5489,10 +5496,10 @@ function renderCombosTab(){
         <div class="kz-field">
           <div class="kz-field-head">
             <span class="kz-label">Equipe</span>
+            <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
           </div>
           <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
         </div>
-        <div class="kz-panel kz-sim">${renderSimPanel()}</div>
       </div>
     </div>
   </section>`;
@@ -5592,9 +5599,9 @@ function renderAtkSection(charId, abilityKey){
   </div>`;
 }
 
-function renderSimPanel(){
+function renderSimPanel(noHead){
   const teamChars = state.team.map(id=> id ? getChar(id) : null).filter(Boolean);
-  const head = `<div class="kz-sim-head"><span class="glyph">連</span><h2>Simular combo</h2></div>`;
+  const head = noHead ? '' : `<div class="kz-sim-head"><span class="glyph">連</span><h2>Simular combo</h2></div>`;
   if(!teamChars.length){
     return head + `<div class="kz-muted">Monte a equipe pra ver o que o Ataque Combinado de cada um ativa.</div>`;
   }
@@ -5640,6 +5647,8 @@ function attachCombosHandlers(){
   });
   attachRosterItemHandlers(view);
   attachSF('roster', view, render);
+  const openSim = document.getElementById('openSimBtn');
+  if(openSim) openSim.addEventListener('click', openSimModal);
 
   view.querySelectorAll('.kz-slot').forEach(slot=>{
     slot.addEventListener('click', e=>{
@@ -6803,6 +6812,36 @@ function renderPickerModal(){
 }
 function closePickerModal(){ state.pickerSlot = null; render(); }
 
+// Popup com o Simulador de combo: assim dá pra ver as cadeias sem rolar a página.
+function openSimModal(){ state.simModalOpen = true; render(); }
+function closeSimModal(){ state.simModalOpen = false; render(); }
+function renderSimModal(){
+  const root = document.getElementById('modalRoot');
+  if(!root) return;
+  const n = state.team.filter(Boolean).length;
+  root.innerHTML = `
+  <div class="modal-overlay" id="simOverlay">
+    <div class="modal kz-sim-modal" role="dialog" aria-label="Simular combo">
+      <div class="modal-header">
+        <h2>Simular combo</h2>
+        <span class="kz-roster-hint">${n}/6 em campo</span>
+        <button class="kz-close-btn" id="closeSimBtn" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-body"><div class="kz-sim" id="simModalBody">${renderSimPanel(true)}</div></div>
+    </div>
+  </div>`;
+  const wire = ()=>{
+    root.querySelectorAll('[data-sim-char]').forEach(b=>b.addEventListener('click', ()=>{
+      state.simCharId = b.dataset.simChar;
+      const body = document.getElementById('simModalBody');
+      if(body){ body.innerHTML = renderSimPanel(true); wire(); }
+    }));
+  };
+  wire();
+  document.getElementById('closeSimBtn').addEventListener('click', closeSimModal);
+  document.getElementById('simOverlay').addEventListener('click', e=>{ if(e.target.id==='simOverlay') closeSimModal(); });
+}
+
 /* ======================= UTIL ======================= */
 function escapeHtml(str){
   if(str==null) return '';
@@ -6861,6 +6900,7 @@ document.addEventListener('keydown', e=>{
   if(bodyOverlay){ bodyOverlay.remove(); restoreFocusAfterModal(); return; }
   if(state.abilityPopupCharId !== null){ closeAbilityPopup(); return; }
   if(state.donorProfileId !== null){ closeDonorProfile(); return; }
+  if(state.simModalOpen){ closeSimModal(); return; }
   if(state.pickerSlot !== null){ closePickerModal(); return; }
   if(state.ioModalOpen){ closeIOModal(); return; }
   if(state.editingChar){ closeModal(); return; }
