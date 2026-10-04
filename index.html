@@ -330,7 +330,10 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-ab-name{font-size:17px;font-weight:900;color:var(--text-strong);}
 .kz-ab-desc{font-size:14px;line-height:1.6;color:var(--text-soft);text-wrap:pretty;white-space:pre-line;}
 .kz-supremo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
-.kz-supremo-card{padding:14px 16px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(20,20,34,.6);display:flex;flex-direction:column;gap:4px;}
+.kz-supremo-card{padding:14px 16px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(20,20,34,.6);display:flex;gap:14px;align-items:flex-start;}
+.kz-supremo-card .ico{width:52px;height:52px;flex-shrink:0;}
+.kz-supremo-card .ico img{width:100%;height:100%;object-fit:cover;display:block;}
+.kz-supremo-card .t{min-width:0;display:flex;flex-direction:column;gap:4px;}
 .kz-supremo-card .n{font-size:15px;font-weight:900;color:var(--text-strong);}
 .kz-supremo-card .d{font-size:14px;line-height:1.55;color:var(--text-soft);text-wrap:pretty;}
 .kz-empty-ball{display:flex;align-items:center;gap:22px;padding:30px 10px;}
@@ -4818,7 +4821,7 @@ function renderDetailAbilities(c){
     <div class="kz-ab-group">
       <div class="kz-ab-group-head"><span class="kz-ab-group-title">Passivas do Supremo</span></div>
       <div class="kz-supremo-grid">
-        ${sup.map(ps=>`<div class="kz-supremo-card"><div class="n">${escapeHtml(ps.nome)||'—'}</div><div class="d">${escapeHtml(ps.desc||'')}</div></div>`).join('')}
+        ${sup.map(ps=>`<div class="kz-supremo-card">${(SHOW_ABILITY_ICONS && ps.icone) ? `<div class="ico"><img src="${escapeAttr(encodeURI(ps.icone))}" alt="" onerror="this.parentNode.remove()"></div>` : ''}<div class="t"><div class="n">${escapeHtml(ps.nome)||'—'}</div><div class="d">${escapeHtml(ps.desc||'')}</div></div></div>`).join('')}
       </div>
     </div>` : '';
   return `<div class="kz-ab-groups">${groups}${supHtml}</div>`;
