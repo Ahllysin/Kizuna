@@ -276,16 +276,6 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
   border:1.5px solid var(--gold);background:rgba(8,7,14,.8);color:var(--text);font-size:15px;font-weight:500;
 }
 .kz-back-btn:hover{background:#1a1220;}
-.kz-hero-drag{position:absolute;inset:0;z-index:3;cursor:grab;touch-action:none;}
-.kz-hero-drag.drag{cursor:grabbing;}
-.kz-hero-adjust{position:absolute;left:16px;right:16px;bottom:14px;z-index:4;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-radius:12px;border:1.5px solid var(--gold);background:rgba(8,7,14,.92);box-shadow:0 8px 30px rgba(0,0,0,.6);}
-.kz-hero-adjust .tip{flex:1 1 220px;font-size:13px;color:var(--text-dim);line-height:1.4;}
-.kz-hero-adjust .ctl{display:flex;flex-direction:column;gap:3px;min-width:120px;}
-.kz-hero-adjust .ctl label{display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);}
-.kz-hero-adjust .ctl label span{color:var(--text-dim);font-weight:600;}
-.kz-hero-adjust input[type=range]{width:100%;accent-color:#ff8a2a;}
-.kz-hero-adjust .btns{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}
-.kz-detail-hero.editing .kz-detail-content{opacity:.35;pointer-events:none;}
 .kz-detail-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .kz-step-btn{display:inline-flex;align-items:center;gap:10px;max-width:260px;padding:10px 16px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);background:rgba(8,7,14,.8);color:var(--text);font-size:14px;font-weight:600;}
 .kz-step-btn:hover{border-color:var(--gold);background:#1a1220;}
@@ -4037,7 +4027,6 @@ let state = {
   ioModalOpen: false,               // import/export JSON modal
   pickerSlot: null,                 // slot index currently choosing a warrior for, or null
   heroAdjust: {},                   // {charId: {x,y,z}} enquadramento do retrato de fundo da ficha (sincroniza com a conta)
-  heroEdit: null,                   // rascunho {id,x,y,z} enquanto o ajuste do retrato está aberto, ou null
   simModalOpen: false,              // popup com o Simulador de combo aberto (aba Combos)
   simCharId: null,                  // personagem selecionado no Simulador de combo (aba Combos)
   formations: [],                   // [{name, team}]
@@ -4680,7 +4669,6 @@ function openCharDetail(id){
   charsListScrollY = (state.tab === 'chars' && !state.viewingCharId) ? window.scrollY : 0;
   state.tab = 'chars';
   state.viewingCharId = id;
-  state.heroEdit = null;
   state.charDetailTab = 'habilidades';
   saveUiTab();
   render();
@@ -4885,78 +4873,15 @@ function stepCharDetail(dir){
   const t = charStepTarget(state.viewingCharId, dir);
   if(!t) return;
   state.viewingCharId = t.id;
-  state.heroEdit = null;
   render();
   window.scrollTo(0, 0);
 }
 
-/* ---------- Ajuste do retrato de fundo da ficha ---------- */
+/* ---------- Enquadramento do retrato de fundo da ficha (valor salvo; o editor foi removido) ---------- */
 const HERO_DEFAULT = { x:50, y:35, z:2.1 };
-function heroAdj(id){
-  const e = state.heroEdit && state.heroEdit.id === id ? state.heroEdit : null;
-  const a = e || state.heroAdjust[id] || HERO_DEFAULT;
-  return { x:+a.x, y:+a.y, z:+a.z };
-}
 function heroArtStyle(id){
-  const a = heroAdj(id);
-  return `object-position:${a.x}% ${a.y}%;transform-origin:${a.x}% ${a.y}%;transform:scale(${a.z});`;
-}
-function saveHeroAdjust(){ persist('hero_adjust', JSON.stringify(state.heroAdjust)); }
-function startHeroEdit(id){ const a = heroAdj(id); state.heroEdit = { id, x:a.x, y:a.y, z:a.z }; render(); }
-function applyHeroEdit(){
-  const e = state.heroEdit, img = document.getElementById('detailHeroImg');
-  if(img && e) img.setAttribute('style', heroArtStyle(e.id));
-  document.querySelectorAll('[data-hero-val]').forEach(s=>{ const k = s.dataset.heroVal; s.textContent = k === 'z' ? e.z.toFixed(2)+'×' : Math.round(e[k])+'%'; });
-  document.querySelectorAll('input[data-hero]').forEach(r=>{ if(+r.value !== e[r.dataset.hero]) r.value = e[r.dataset.hero]; });
-}
-function closeHeroEdit(save){
-  const e = state.heroEdit;
-  if(e && save){
-    const same = Math.abs(e.x-HERO_DEFAULT.x)<.01 && Math.abs(e.y-HERO_DEFAULT.y)<.01 && Math.abs(e.z-HERO_DEFAULT.z)<.01;
-    if(same) delete state.heroAdjust[e.id]; else state.heroAdjust[e.id] = { x:+e.x.toFixed(1), y:+e.y.toFixed(1), z:+e.z.toFixed(2) };
-    saveHeroAdjust();
-    showToast(same ? 'Retrato voltou ao padrão' : 'Enquadramento do retrato salvo');
-  }
-  state.heroEdit = null;
-  render();
-}
-function heroAdjustBarHtml(){
-  const e = state.heroEdit;
-  const ctl = (k, label, min, max, step, val) => `<div class="ctl"><label>${label}<span data-hero-val="${k}">${k==='z'?e.z.toFixed(2)+'×':Math.round(e[k])+'%'}</span></label><input type="range" data-hero="${k}" min="${min}" max="${max}" step="${step}" value="${val}"></div>`;
-  return `
-  <div class="kz-hero-adjust" id="heroAdjustBar">
-    <div class="tip"><b>Ajustar retrato:</b> arraste a imagem de fundo para mover e use a roda do mouse (ou o controle) para dar zoom.</div>
-    ${ctl('z','Zoom',1,4,0.05,e.z)}${ctl('x','Horizontal',0,100,1,e.x)}${ctl('y','Vertical',0,100,1,e.y)}
-    <div class="btns">
-      <button class="kz-btn kz-btn-sm" id="heroResetBtn">Padrão</button>
-      <button class="kz-btn kz-btn-sm" id="heroCancelBtn">Cancelar</button>
-      <button class="kz-btn kz-btn-primary kz-btn-sm" id="heroSaveBtn">Salvar</button>
-    </div>
-  </div>`;
-}
-function attachHeroAdjust(){
-  const e = state.heroEdit; if(!e) return;
-  const drag = document.getElementById('heroDrag'), hero = document.querySelector('.kz-detail-hero .kz-hero-art');
-  const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
-  document.querySelectorAll('input[data-hero]').forEach(r=>r.addEventListener('input', ()=>{ e[r.dataset.hero] = parseFloat(r.value); applyHeroEdit(); }));
-  document.getElementById('heroResetBtn').addEventListener('click', ()=>{ Object.assign(e, HERO_DEFAULT); applyHeroEdit(); });
-  document.getElementById('heroCancelBtn').addEventListener('click', ()=> closeHeroEdit(false));
-  document.getElementById('heroSaveBtn').addEventListener('click', ()=> closeHeroEdit(true));
-  if(!drag || !hero) return;
-  let last = null;
-  drag.addEventListener('pointerdown', ev=>{ last = { x:ev.clientX, y:ev.clientY }; drag.classList.add('drag'); drag.setPointerCapture(ev.pointerId); });
-  drag.addEventListener('pointermove', ev=>{
-    if(!last) return;
-    const r = hero.getBoundingClientRect(), k = Math.max(0.05, e.z - 1);
-    // o ponto de origem do zoom é o que "anda": mover o mouse para a direita arrasta a imagem junto
-    e.x = clamp(e.x - (ev.clientX - last.x) / (k * r.width) * 100, 0, 100);
-    e.y = clamp(e.y - (ev.clientY - last.y) / (k * r.height) * 100, 0, 100);
-    last = { x:ev.clientX, y:ev.clientY };
-    applyHeroEdit();
-  });
-  const end = ()=>{ last = null; drag.classList.remove('drag'); };
-  drag.addEventListener('pointerup', end); drag.addEventListener('pointercancel', end);
-  drag.addEventListener('wheel', ev=>{ ev.preventDefault(); e.z = clamp(+(e.z + (ev.deltaY < 0 ? 0.1 : -0.1)).toFixed(2), 1, 4); applyHeroEdit(); }, { passive:false });
+  const a = state.heroAdjust[id] || HERO_DEFAULT;
+  return `object-position:${+a.x}% ${+a.y}%;transform-origin:${+a.x}% ${+a.y}%;transform:scale(${+a.z});`;
 }
 
 function renderCharDetailPage(charId){
@@ -4969,12 +4894,11 @@ function renderCharDetailPage(charId){
     : renderCharBondsSection(c);
   return `
   <section class="kz-page">
-    <div class="kz-hero kz-detail-hero ${state.heroEdit && state.heroEdit.id === c.id ? 'editing' : ''}">
+    <div class="kz-hero kz-detail-hero">
       <div class="kz-hero-art"><div class="kz-hero-art-mask">
         <img id="detailHeroImg" src="${portraitSrc(c)}" alt="" style="${heroArtStyle(c.id)}" onerror="this.style.visibility='hidden'">
       </div></div>
       <div class="kz-hero-scrim"></div>
-      ${state.heroEdit && state.heroEdit.id === c.id ? '<div class="kz-hero-drag" id="heroDrag" title="Arraste para mover"></div>' + heroAdjustBarHtml() : ''}
       <div class="kz-detail-content">
         <div class="kz-detail-top">
           <button class="kz-back-btn" id="charDetailBackBtn"><span class="arr">←</span><span>Voltar aos Personagens</span></button>
@@ -4993,7 +4917,6 @@ function renderCharDetailPage(charId){
               <button class="kz-build-btn" id="buildWithCharBtn" data-id="${c.id}"><span class="glyph">連</span><span>Montar combo com este guerreiro</span></button>
               <button class="kz-fav-toggle ${fav?'on':''}" data-fav="${c.id}"><span class="star">★</span><span class="lbl">${fav?'Favoritado':'Favoritar'}</span></button>
               <button class="kz-edit-btn edit-char" data-id="${c.id}" title="Editar os dados usados no Montador de Combos">Editar dados de combo</button>
-              <button class="kz-edit-btn" id="heroAdjustBtn" data-id="${c.id}" title="Mover e dar zoom no retrato de fundo">Ajustar retrato</button>
             </div>
           </div>
         </div>
@@ -5113,10 +5036,7 @@ function renderCharBondsSection(c){
 function attachCharDetailHandlers(){
   const view = document.getElementById('view');
   const backBtn = document.getElementById('charDetailBackBtn');
-  if(backBtn) backBtn.addEventListener('click', ()=>{ state.viewingCharId = null; state.heroEdit = null; render(); window.scrollTo(0, charsListScrollY); });
-  const adjBtn = document.getElementById('heroAdjustBtn');
-  if(adjBtn) adjBtn.addEventListener('click', ()=> startHeroEdit(adjBtn.dataset.id));
-  attachHeroAdjust();
+  if(backBtn) backBtn.addEventListener('click', ()=>{ state.viewingCharId = null; render(); window.scrollTo(0, charsListScrollY); });
   view.querySelectorAll('.kz-step-btn[data-step]').forEach(b=> b.addEventListener('click', ()=> stepCharDetail(parseInt(b.dataset.step, 10))));
   view.querySelectorAll('.edit-char').forEach(b=> b.addEventListener('click', ()=> openCharEditor(b.dataset.id)));
   view.querySelectorAll('.kz-tab[data-cdptab]').forEach(b=> b.addEventListener('click', ()=>{
