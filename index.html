@@ -276,6 +276,14 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
   border:1.5px solid var(--gold);background:rgba(8,7,14,.8);color:var(--text);font-size:15px;font-weight:500;
 }
 .kz-back-btn:hover{background:#1a1220;}
+.kz-detail-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.kz-step-btn{display:inline-flex;align-items:center;gap:10px;max-width:260px;padding:10px 16px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);background:rgba(8,7,14,.8);color:var(--text);font-size:14px;font-weight:600;}
+.kz-step-btn:hover{border-color:var(--gold);background:#1a1220;}
+.kz-step-btn .arr{font-size:20px;line-height:1;color:var(--gold);}
+.kz-step-btn .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.kz-step-btn .lbl{display:block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);}
+.kz-step-btn .col{min-width:0;display:flex;flex-direction:column;align-items:flex-start;}
+.kz-step-btn.next .col{align-items:flex-end;text-align:right;}
 .kz-back-btn .arr{font-size:18px;}
 .kz-detail-main{display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap;}
 .kz-detail-card{width:270px;flex-shrink:0;aspect-ratio:3/4;position:relative;filter:drop-shadow(0 0 18px rgba(255,190,40,.75)) drop-shadow(0 0 4px rgba(255,220,120,.9));}
@@ -4839,6 +4847,35 @@ function softRerenderChars(){
 /* ======================= PERSONAGENS: FICHA ======================= */
 const DETAIL_TABS = [['habilidades','技','Habilidades'],['comida','食','Comida de Afinidade'],['vinculos','絆','Vínculos']];
 
+// Ordem usada pra passar de um guerreiro pro outro: a mesma da lista (respeita os filtros ativos).
+function charStepList(currentId){
+  let list = getFilteredChars();
+  if(!list.some(c=>c.id===currentId)) list = sortByRarity([...state.characters]);
+  return list;
+}
+function charStepTarget(currentId, dir){
+  const list = charStepList(currentId);
+  if(list.length < 2) return null;
+  const i = list.findIndex(c=>c.id===currentId);
+  return list[((i < 0 ? 0 : i) + dir + list.length) % list.length];
+}
+function charStepButtonsHtml(currentId){
+  const prev = charStepTarget(currentId, -1), next = charStepTarget(currentId, 1);
+  if(!prev || !next) return '';
+  return `
+  <button class="kz-step-btn prev" data-step="-1" title="${escapeAttr(prev.name)}"><span class="arr">‹</span><span class="col"><span class="lbl">Anterior</span><span class="nm">${escapeHtml(prev.name)}</span></span></button>
+  <button class="kz-step-btn next" data-step="1" title="${escapeAttr(next.name)}"><span class="col"><span class="lbl">Próximo</span><span class="nm">${escapeHtml(next.name)}</span></span><span class="arr">›</span></button>`;
+}
+// Troca o personagem aberto mantendo a aba da ficha (Habilidades/Comida/Vínculos).
+function stepCharDetail(dir){
+  if(state.tab !== 'chars' || !state.viewingCharId) return;
+  const t = charStepTarget(state.viewingCharId, dir);
+  if(!t) return;
+  state.viewingCharId = t.id;
+  render();
+  window.scrollTo(0, 0);
+}
+
 function renderCharDetailPage(charId){
   const c = getChar(charId);
   if(!c) return `<div class="kz-empty">Personagem não encontrado.</div>`;
@@ -4855,7 +4892,10 @@ function renderCharDetailPage(charId){
       </div></div>
       <div class="kz-hero-scrim"></div>
       <div class="kz-detail-content">
-        <button class="kz-back-btn" id="charDetailBackBtn"><span class="arr">←</span><span>Voltar aos Personagens</span></button>
+        <div class="kz-detail-top">
+          <button class="kz-back-btn" id="charDetailBackBtn"><span class="arr">←</span><span>Voltar aos Personagens</span></button>
+          ${charStepButtonsHtml(c.id)}
+        </div>
         <div class="kz-detail-main">
           <div class="kz-detail-card">${portraitInner(c)}</div>
           <div class="kz-detail-info">
@@ -4989,6 +5029,7 @@ function attachCharDetailHandlers(){
   const view = document.getElementById('view');
   const backBtn = document.getElementById('charDetailBackBtn');
   if(backBtn) backBtn.addEventListener('click', ()=>{ state.viewingCharId = null; render(); window.scrollTo(0, charsListScrollY); });
+  view.querySelectorAll('.kz-step-btn[data-step]').forEach(b=> b.addEventListener('click', ()=> stepCharDetail(parseInt(b.dataset.step, 10))));
   view.querySelectorAll('.edit-char').forEach(b=> b.addEventListener('click', ()=> openCharEditor(b.dataset.id)));
   view.querySelectorAll('.kz-tab[data-cdptab]').forEach(b=> b.addEventListener('click', ()=>{
     state.charDetailTab = b.dataset.cdptab;
@@ -7031,6 +7072,13 @@ applyNavState();
 
 /* ======================= ACESSIBILIDADE: FECHAR COM ESC ======================= */
 document.addEventListener('keydown', e=>{
+  if((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey){
+    const el = document.activeElement, tag = el && el.tagName;
+    const typing = el && (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable);
+    const modalOpen = document.querySelector('#modalRoot .modal, body > .modal-overlay');
+    if(!typing && !modalOpen && state.tab === 'chars' && state.viewingCharId){ e.preventDefault(); stepCharDetail(e.key === 'ArrowRight' ? 1 : -1); }
+    return;
+  }
   if(e.key !== 'Escape') return;
   // overlays de customConfirm/customPrompt ficam soltos direto em <body> — têm prioridade.
   const bodyOverlay = document.querySelector('body > .modal-overlay');
