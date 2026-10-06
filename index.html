@@ -276,6 +276,20 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
   border:1.5px solid var(--gold);background:rgba(8,7,14,.8);color:var(--text);font-size:15px;font-weight:500;
 }
 .kz-back-btn:hover{background:#1a1220;}
+.kz-hero-nav{position:absolute;right:28px;top:66px;z-index:2;display:flex;gap:8px;align-items:center;}
+.kz-hero-navbtn{min-width:40px;height:40px;padding:0 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.25);background:rgba(8,7,14,.82);color:var(--text);font-size:22px;line-height:1;font-weight:700;}
+.kz-hero-navbtn:hover{border-color:var(--gold);color:var(--gold-light);}
+.kz-hero-navbtn.txt{font-size:13px;font-weight:700;}
+.kz-hero-drag{position:absolute;inset:0;z-index:3;cursor:grab;touch-action:none;}
+.kz-hero-drag.drag{cursor:grabbing;}
+.kz-hero-adjust{position:absolute;left:16px;right:16px;bottom:14px;z-index:4;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-radius:12px;border:1.5px solid var(--gold);background:rgba(8,7,14,.92);box-shadow:0 8px 30px rgba(0,0,0,.6);}
+.kz-hero-adjust .tip{flex:1 1 220px;font-size:13px;color:var(--text-dim);line-height:1.4;}
+.kz-hero-adjust .ctl{display:flex;flex-direction:column;gap:3px;min-width:120px;}
+.kz-hero-adjust .ctl label{display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);}
+.kz-hero-adjust .ctl label span{color:var(--text-dim);font-weight:600;}
+.kz-hero-adjust input[type=range]{width:100%;accent-color:#ff8a2a;}
+.kz-hero-adjust .btns{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}
+.kz-hero.editing .kz-hero-content,.kz-hero.editing .kz-hero-nav{opacity:.3;pointer-events:none;}
 .kz-detail-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .kz-step-btn{display:inline-flex;align-items:center;gap:10px;max-width:260px;padding:10px 16px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);background:rgba(8,7,14,.8);color:var(--text);font-size:14px;font-weight:600;}
 .kz-step-btn:hover{border-color:var(--gold);background:#1a1220;}
@@ -4026,6 +4040,7 @@ let state = {
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
   pickerSlot: null,                 // slot index currently choosing a warrior for, or null
+  heroEdit: null,                   // rascunho {scope,id,x,y,z} enquanto o ajuste do retrato de topo está aberto, ou null
   simModalOpen: false,              // popup com o Simulador de combo aberto (aba Combos)
   simCharId: null,                  // personagem selecionado no Simulador de combo (aba Combos)
   formations: [],                   // [{name, team}]
@@ -4075,6 +4090,7 @@ async function loadState(){
   const allIds = new Set(state.characters.map(c=>c.id));
   state.favs = (Array.isArray(state.favs) ? state.favs : []).filter(id=>allIds.has(id));
   ensureTierListIntegrity();
+  await loadHeroFrames();
   loaded = true;
   render();
 }
@@ -4725,12 +4741,18 @@ function renderCharsTab(){
   const f = state.filters;
   return `
   <section class="kz-page">
-    <div class="kz-hero">
+    <div class="kz-hero ${state.heroEdit && state.heroEdit.scope === 'list' ? 'editing' : ''}">
       <div class="kz-hero-art"><div class="kz-hero-art-mask">
-        ${hero ? `<img id="heroImg" src="${portraitSrc(hero)}" alt="" onload="this.style.visibility=''" onerror="this.style.visibility='hidden'">` : ''}
+        ${hero ? `<img id="heroImg" src="${portraitSrc(hero)}" alt="" style="${heroStyleOf(heroFrameLive('list', hero.id))}" onload="this.style.visibility=''" onerror="this.style.visibility='hidden'">` : ''}
       </div></div>
       <div class="kz-hero-scrim"></div>
       <div class="kz-hero-name" id="heroName">${hero ? escapeHtml(hero.name) : ''}</div>
+      <div class="kz-hero-nav">
+        <button type="button" class="kz-hero-navbtn" data-hero-step="-1" title="Personagem anterior" aria-label="Personagem anterior">‹</button>
+        <button type="button" class="kz-hero-navbtn" data-hero-step="1" title="Próximo personagem" aria-label="Próximo personagem">›</button>
+        <button type="button" class="kz-hero-navbtn txt" id="heroAdjustBtn" title="Mover e dar zoom no retrato do topo">Ajustar retrato</button>
+      </div>
+      ${state.heroEdit && state.heroEdit.scope === 'list' ? '<div class="kz-hero-drag" id="heroDrag" title="Arraste para mover"></div>' + heroAdjustBarHtml() : ''}
       <div class="kz-hero-content">
         <div class="kz-hero-titlerow">
           <h1 class="kz-title kz-hero-title">Personagens</h1>
@@ -4780,13 +4802,13 @@ function renderCharCard(c){
 
 // Troca a arte do topo pro personagem em hover — só mexe na <img>, sem re-render.
 function setHeroChar(id){
-  if(state.heroCharId === id) return;
+  if(state.heroCharId === id || state.heroEdit) return;
   state.heroCharId = id;
   const c = getChar(id);
   const img = document.getElementById('heroImg');
   const nm = document.getElementById('heroName');
   if(!c) return;
-  if(img){ img.style.visibility = ''; img.src = portraitSrc(c); }
+  if(img){ img.style.visibility = ''; img.src = portraitSrc(c); img.setAttribute('style', heroStyleOf(heroFrame('list', c.id))); }
   if(nm) nm.textContent = c.name;
 }
 
@@ -4825,6 +4847,10 @@ function attachCharsHandlers(){
     render();
   });
   attachSF('chars', view, render);
+  view.querySelectorAll('[data-hero-step]').forEach(b=>b.addEventListener('click', ()=> stepHeroChar(parseInt(b.dataset.heroStep, 10))));
+  const heroAdj = document.getElementById('heroAdjustBtn');
+  if(heroAdj) heroAdj.addEventListener('click', ()=>{ const hc = getChar(state.heroCharId) || defaultHeroChar(); if(hc) startHeroEdit('list', hc.id); });
+  attachHeroAdjust();
   const addBtn = document.getElementById('addCharBtn');
   if(addBtn) addBtn.addEventListener('click', ()=>{ state.editingChar = blankChar(); state.editingIsNew = true; render(); });
   const ioBtn = document.getElementById('ioBtn');
@@ -4949,9 +4975,116 @@ const HERO_FRAMES = {
   "c_yamcha":{x:37.7,y:34.7,z:2.1},
   "c_android-16":{x:41.1,y:39.1,z:2.1}
 };
-function heroArtStyle(id){
-  const a = HERO_FRAMES[id] || HERO_DEFAULT;
-  return `object-position:${a.x}% ${a.y}%;transform-origin:${a.x}% ${a.y}%;transform:scale(${a.z});`;
+// Enquadramentos salvos no arquivo hero-frames.json (ao lado do index.html): {detail:{id:{x,y,z}}, list:{...}}.
+// "detail" = retrato atrás do nome na ficha; "list" = retrato grande do topo da aba Personagens.
+let heroFramesData = { detail:{}, list:{} };
+function heroFrame(scope, id){
+  const d = heroFramesData;
+  if(scope === 'list') return (d.list && d.list[id]) || (d.detail && d.detail[id]) || HERO_FRAMES[id] || HERO_DEFAULT;
+  return (d.detail && d.detail[id]) || HERO_FRAMES[id] || HERO_DEFAULT;
+}
+function heroFrameLive(scope, id){
+  const e = state.heroEdit;
+  return (e && e.scope === scope && e.id === id) ? e : heroFrame(scope, id);
+}
+function heroStyleOf(a){
+  return `object-position:${+a.x}% ${+a.y}%;transform-origin:${+a.x}% ${+a.y}%;transform:scale(${+a.z});`;
+}
+function heroArtStyle(id){ return heroStyleOf(heroFrame('detail', id)); }
+async function loadHeroFrames(){
+  try{
+    if(typeof fetch === 'function'){
+      const r = await fetch('hero-frames.json', { cache:'no-store' });
+      if(r.ok){ const j = await r.json(); heroFramesData = { detail:j.detail||{}, list:j.list||{} }; }
+    }
+  }catch(e){}
+  try{ // salvo só neste navegador quando o servidor local não estava ativo
+    const l = await window.storage.get('hero_frames_local');
+    if(l && l.value){ const j = JSON.parse(l.value); heroFramesData = { detail:{...heroFramesData.detail, ...(j.detail||{})}, list:{...heroFramesData.list, ...(j.list||{})} }; }
+  }catch(e){}
+}
+// Grava no arquivo pelo servidor local (iniciar-local.bat). Sem ele, guarda só neste navegador.
+async function saveHeroFrames(){
+  const body = JSON.stringify(heroFramesData);
+  try{
+    const r = await fetch('/api/hero-frames', { method:'POST', headers:{ 'Content-Type':'application/json' }, body });
+    if(!r.ok) throw new Error('http ' + r.status);
+    try{ await window.storage.set('hero_frames_local', ''); }catch(e){}
+    return 'arquivo';
+  }catch(e){
+    try{ await window.storage.set('hero_frames_local', body); }catch(_){}
+    return 'local';
+  }
+}
+function startHeroEdit(scope, id){ const a = heroFrame(scope, id); state.heroEdit = { scope, id, x:+a.x, y:+a.y, z:+a.z }; render(); }
+function applyHeroEdit(){
+  const e = state.heroEdit; if(!e) return;
+  const img = document.getElementById(e.scope === 'list' ? 'heroImg' : 'detailHeroImg');
+  if(img) img.setAttribute('style', heroStyleOf(e));
+  document.querySelectorAll('[data-hero-val]').forEach(s=>{ const k = s.dataset.heroVal; s.textContent = k === 'z' ? e.z.toFixed(2)+'×' : Math.round(e[k])+'%'; });
+  document.querySelectorAll('input[data-hero]').forEach(r=>{ if(+r.value !== e[r.dataset.hero]) r.value = e[r.dataset.hero]; });
+}
+async function closeHeroEdit(save){
+  const e = state.heroEdit;
+  state.heroEdit = null;
+  if(e && save){
+    const base = (e.scope === 'list' ? HERO_FRAMES[e.id] : HERO_FRAMES[e.id]) || HERO_DEFAULT;
+    const same = Math.abs(e.x-base.x)<.01 && Math.abs(e.y-base.y)<.01 && Math.abs(e.z-base.z)<.01;
+    const map = heroFramesData[e.scope] = heroFramesData[e.scope] || {};
+    if(same && e.scope === 'list') delete map[e.id]; else map[e.id] = { x:+e.x.toFixed(1), y:+e.y.toFixed(1), z:+e.z.toFixed(2) };
+    render();
+    const how = await saveHeroFrames();
+    showToast(how === 'arquivo' ? 'Enquadramento salvo no site (hero-frames.json)' : 'Salvo só neste navegador — abra pelo iniciar-local.bat para gravar no arquivo do site');
+    return;
+  }
+  render();
+}
+function heroAdjustBarHtml(){
+  const e = state.heroEdit;
+  const ctl = (k, label, min, max, step, val) => `<div class="ctl"><label>${label}<span data-hero-val="${k}">${k==='z'?e.z.toFixed(2)+'×':Math.round(e[k])+'%'}</span></label><input type="range" data-hero="${k}" min="${min}" max="${max}" step="${step}" value="${val}"></div>`;
+  return `
+  <div class="kz-hero-adjust" id="heroAdjustBar">
+    <div class="tip"><b>Ajustar retrato:</b> arraste a imagem de fundo para mover e use a roda do mouse (ou o controle) para dar zoom.</div>
+    ${ctl('z','Zoom',1,4,0.05,e.z)}${ctl('x','Horizontal',0,100,1,e.x)}${ctl('y','Vertical',0,100,1,e.y)}
+    <div class="btns">
+      <button class="kz-btn kz-btn-sm" id="heroResetBtn">Padrão</button>
+      <button class="kz-btn kz-btn-sm" id="heroCancelBtn">Cancelar</button>
+      <button class="kz-btn kz-btn-primary kz-btn-sm" id="heroSaveBtn">Salvar</button>
+    </div>
+  </div>`;
+}
+function attachHeroAdjust(){
+  const e = state.heroEdit; if(!e) return;
+  const drag = document.getElementById('heroDrag'), art = document.querySelector('.kz-hero .kz-hero-art');
+  const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+  document.querySelectorAll('input[data-hero]').forEach(r=>r.addEventListener('input', ()=>{ e[r.dataset.hero] = parseFloat(r.value); applyHeroEdit(); }));
+  document.getElementById('heroResetBtn').addEventListener('click', ()=>{ const b = HERO_FRAMES[e.id] || HERO_DEFAULT; e.x = b.x; e.y = b.y; e.z = b.z; applyHeroEdit(); });
+  document.getElementById('heroCancelBtn').addEventListener('click', ()=> closeHeroEdit(false));
+  document.getElementById('heroSaveBtn').addEventListener('click', ()=> closeHeroEdit(true));
+  if(!drag || !art) return;
+  let last = null;
+  drag.addEventListener('pointerdown', ev=>{ last = { x:ev.clientX, y:ev.clientY }; drag.classList.add('drag'); drag.setPointerCapture(ev.pointerId); });
+  drag.addEventListener('pointermove', ev=>{
+    if(!last) return;
+    const r = art.getBoundingClientRect(), k = Math.max(0.05, e.z - 1);
+    e.x = clamp(e.x - (ev.clientX - last.x) / (k * r.width) * 100, 0, 100);
+    e.y = clamp(e.y - (ev.clientY - last.y) / (k * r.height) * 100, 0, 100);
+    last = { x:ev.clientX, y:ev.clientY };
+    applyHeroEdit();
+  });
+  const end = ()=>{ last = null; drag.classList.remove('drag'); };
+  drag.addEventListener('pointerup', end); drag.addEventListener('pointercancel', end);
+  drag.addEventListener('wheel', ev=>{ ev.preventDefault(); e.z = clamp(+(e.z + (ev.deltaY < 0 ? 0.1 : -0.1)).toFixed(2), 1, 4); applyHeroEdit(); }, { passive:false });
+}
+// Passa o retrato do topo da aba Personagens pro anterior/próximo da lista (respeita os filtros).
+function stepHeroChar(dir){
+  if(state.heroEdit) return;
+  const list = getFilteredChars();
+  if(!list.length) return;
+  const cur = state.heroCharId || (defaultHeroChar() || {}).id;
+  const i = list.findIndex(c=>c.id === cur);
+  const next = i < 0 ? (dir > 0 ? list[0] : list[list.length-1]) : list[(i + dir + list.length) % list.length];
+  setHeroChar(next.id);
 }
 
 function renderCharDetailPage(charId){
