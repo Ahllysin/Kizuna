@@ -5651,9 +5651,10 @@ function wrapCanvasText(ctx, text, cx, cy, maxWidth, lineHeight){
 
 // Escolhe o maior tamanho de fonte (12–40px) em que o nome do rank cabe sem cortar palavra:
 // quebra só entre palavras e confere largura e altura. Devolve a fonte e as linhas.
-function fitCanvasLabel(ctx, text, maxW, maxH){
-  const words = String(text).split(/\s+/).filter(Boolean);
-  for(let size = 40; size >= 12; size--){
+function fitCanvasLabel(ctx, text, maxW, maxH, maxSize, minSize){
+  maxSize = maxSize || 40; minSize = minSize || 12;
+  const words = String(text).split(/s+/).filter(Boolean);
+  for(let size = maxSize; size >= minSize; size--){
     ctx.font = `${size}px 'Kaushan Script', cursive`;
     const lines = []; let line = '';
     words.forEach(w=>{
@@ -5665,16 +5666,39 @@ function fitCanvasLabel(ctx, text, maxW, maxH){
     const widest = Math.max(...lines.map(l=>ctx.measureText(l).width), 0);
     if(widest <= maxW && lines.length * lh <= maxH) return { font: ctx.font, lines, lineHeight: lh };
   }
-  ctx.font = "12px 'Kaushan Script', cursive";
-  return { font: ctx.font, lines: words.length ? words : ['?'], lineHeight: 14 };
+  ctx.font = `${minSize}px 'Kaushan Script', cursive`;
+  return { font: ctx.font, lines: words.length ? words : ['?'], lineHeight: Math.round(minSize * 1.15) };
 }
 
 // Exporta a tier list como PNG. Abrindo o arquivo direto do disco o navegador pode bloquear
 // a leitura das artes (canvas "tainted") — aí avisa em vez de falhar quieto.
+// Reduz a arte em etapas (metade por vez) antes do desenho final: os retratos têm ~1000px e vão
+// pra ~190px, e um único passo grande fica serrilhado/borrado.
+function downscaleImage(img, w, h){
+  let cur = img, cw = img.naturalWidth || img.width, ch = img.naturalHeight || img.height;
+  while(cw / 2 > w && ch / 2 > h){
+    const step = document.createElement('canvas');
+    cw = Math.max(w, Math.round(cw / 2)); ch = Math.max(h, Math.round(ch / 2));
+    step.width = cw; step.height = ch;
+    const sctx = step.getContext('2d');
+    sctx.imageSmoothingEnabled = true; sctx.imageSmoothingQuality = 'high';
+    sctx.drawImage(cur, 0, 0, cw, ch);
+    cur = step;
+  }
+  return cur;
+}
+
+// Exporta a tier list como PNG em alta resolução (3×: 3000px de largura, retratos reamostrados com
+// qualidade). Abrindo o arquivo direto do disco o navegador pode bloquear a leitura das artes
+// (canvas "tainted") — aí avisa em vez de falhar quieto.
 async function exportTierListImage(){
-  const ITEM_W = 64, ITEM_H = Math.round(ITEM_W * 4/3), GAP = 6, LABEL_W = 96, PADDING = 14;
-  const canvasWidth = 1000;
+  const S = 3;                                   // fator de resolução
+  const ITEM_W = 64*S, ITEM_H = Math.round(ITEM_W * 4/3), GAP = 6*S, LABEL_W = 110*S, PADDING = 14*S;
+  const canvasWidth = 1000*S;
   const itemsPerRow = Math.max(1, Math.floor((canvasWidth - LABEL_W - PADDING*2 - GAP) / (ITEM_W + GAP)));
+  showToast('Gerando a imagem em alta resolução…');
+
+  try{ if(document.fonts && document.fonts.load) await document.fonts.load("40px 'Kaushan Script'"); }catch(e){}
 
   const usedIds = state.tierList.tiers.flatMap(t=>t.items);
   const chars = usedIds.map(getChar).filter(Boolean);
@@ -5696,8 +5720,10 @@ async function exportTierListImage(){
 
   const canvas = document.createElement('canvas');
   canvas.width = canvasWidth;
-  canvas.height = Math.max(totalHeight, 120);
+  canvas.height = Math.max(totalHeight, 120*S);
   const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
   ctx.fillStyle = '#07080f';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -5709,14 +5735,16 @@ async function exportTierListImage(){
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    const fit = fitCanvasLabel(ctx, t.label || '?', LABEL_W - 14, h - 10);
+    const fit = fitCanvasLabel(ctx, t.label || '?', LABEL_W - 14*S, h - 10*S, 54*S, 12*S);
     ctx.font = fit.font;
+    ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowOffsetY = 2*S; ctx.shadowBlur = 0;
     fit.lines.forEach((l, li)=> ctx.fillText(l, PADDING + LABEL_W/2, y + h/2 - ((fit.lines.length - 1) * fit.lineHeight) / 2 + li * fit.lineHeight));
+    ctx.shadowColor = 'transparent'; ctx.shadowOffsetY = 0;
 
     ctx.fillStyle = '#0e0c16';
     ctx.fillRect(PADDING + LABEL_W, y, canvasWidth - PADDING*2 - LABEL_W, h);
     ctx.fillStyle = 'rgba(255,150,50,.25)';
-    ctx.fillRect(PADDING, y + h - 1, canvasWidth - PADDING*2, 1);
+    ctx.fillRect(PADDING, y + h - S, canvasWidth - PADDING*2, S);
 
     t.items.forEach((id, i)=>{
       const col = i % itemsPerRow, row = Math.floor(i / itemsPerRow);
@@ -5725,12 +5753,16 @@ async function exportTierListImage(){
       const img = imgCache[id];
       const c = getChar(id);
       if(img){
-        ctx.drawImage(img, x, iy, ITEM_W, ITEM_H);
+        // mantém a proporção da arte dentro do quadro do card
+        const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+        const k = Math.min(ITEM_W / iw, ITEM_H / ih);
+        const dw = Math.round(iw * k), dh = Math.round(ih * k);
+        ctx.drawImage(downscaleImage(img, dw, dh), x + Math.round((ITEM_W - dw) / 2), iy + Math.round((ITEM_H - dh) / 2), dw, dh);
       } else {
         ctx.fillStyle = '#2a1d3a';
         ctx.fillRect(x, iy, ITEM_W, ITEM_H);
         ctx.fillStyle = '#fff3da';
-        ctx.font = '13px sans-serif';
+        ctx.font = `${13*S}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(initials(c ? c.name : '?'), x + ITEM_W/2, iy + ITEM_H/2);
@@ -5740,13 +5772,16 @@ async function exportTierListImage(){
   });
 
   try{
-    const url = canvas.toDataURL('image/png');
+    const blob = await new Promise((res, rej)=> canvas.toBlob(b=> b ? res(b) : rej(new Error('sem blob')), 'image/png'));
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = 'tier-list-kizuna.png';
     document.body.appendChild(a);
     a.click();
     a.remove();
+    setTimeout(()=> URL.revokeObjectURL(url), 10000);
+    showToast('Imagem salva (' + canvas.width + '×' + canvas.height + ')');
   }catch(e){
     showToast('Não foi possível gerar a imagem — o navegador bloqueou a leitura das artes por segurança (comum abrindo o arquivo direto do disco). Deve funcionar quando o site estiver hospedado.');
   }
