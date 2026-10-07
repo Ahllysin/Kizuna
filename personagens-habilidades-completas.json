@@ -8,7 +8,7 @@
           "nome": "Kaioh-ken",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo. Quanto maior a própria Fúria, maior o dano (até +50%). 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo. Quanto maior a própria Fúria, maior o dano (até +50%). 60% de chance de infligir [Derrubada].",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/R_01_Goku/Skill.png"
         },
@@ -16,7 +16,7 @@
           "nome": "MAX. Técnica do Nove-Caudas",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo. Quanto maior a própria Fúria, maior o dano, com aumento máximo de 70%. Além disso, recupera 150 pontos de Fúria adicionais e tem 60% de chance de causar [Derrubado].",
+          "desc": "[ATQ Físico] Ataca um único inimigo. Quanto maior a própria Fúria, maior o dano, com aumento máximo de 70%. Além disso, recupera 150 pontos de Fúria adicionais e tem 60% de chance de causar [Derrubada].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_01_Goku/Skill.png"
         }
@@ -42,7 +42,7 @@
           "nome": "SMAX. Kamehameha",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATK Especial] Ataca uma fileira de inimigos, reduzindo 200 de raiva do alvo, com 100% de chance de causar [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, durando 2 turnos), e causa 30% de dano adicional à linha frontal, causando [Recuo].",
+          "desc": "[ATK Especial] Ataca uma fileira de inimigos, reduzindo 200 de raiva do alvo, com 100% de chance de causar [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, durando 2 turnos), e causa 30% de dano adicional à linha frontal, causando [Empurrão].",
           "dano": "300%+15",
           "icone": "ability-icons/SSR,SR e R/R_01_Goku/Ultimate.png"
         }
@@ -436,7 +436,7 @@
           "nome": "Espada de Ki",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Ki] Vegetto ataca um único inimigo, causa dano extra igual a 8% do PV Máx.; Vegetto ganha permanentemente 8% de Ataque e 10% de chance de habilidade pequena por uso de habilidade pequena, acumula até 3 vezes; 60% de chance de causar [Pequeno Lançamento].",
+          "desc": "[Artes Marciais/Ki] Vegetto ataca um único inimigo, causa dano extra igual a 8% do PV Máx.; Vegetto ganha permanentemente 8% de Ataque e 10% de chance de habilidade pequena por uso de habilidade pequena, acumula até 3 vezes; 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+15",
           "icone": "ability-icons/Limitado e Lenda/SSGSS_Vegetto/Skill.png"
         },
@@ -444,7 +444,7 @@
           "nome": "MAX. Ataque Explosivo Enorme",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Corpo a Corpo/Ki] Vegetto ataca um único alvo. +10% de dano (PV Máx.). Cura 5% do PV Máx. Reduz o Dano Crítico/Intensidade de Bloqueio da retaguarda em 20% (2 turnos). Ganha permanentemente +10% de ATQ/Chance de Ativação de Habilidade por uso (máx. 3 acúmulos). 60% de chance de [Lançamento Leve].",
+          "desc": "[Corpo a Corpo/Ki] Vegetto ataca um único alvo. +10% de dano (PV Máx.). Cura 5% do PV Máx. Reduz o Dano Crítico/Intensidade de Bloqueio da retaguarda em 20% (2 turnos). Ganha permanentemente +10% de ATQ/Chance de Ativação de Habilidade por uso (máx. 3 acúmulos). 60% de chance de [Elevação Baixa].",
           "dano": "180%+15",
           "icone": "ability-icons/Limitado e Lenda/SSGSS_Vegetto/Skill.png"
         }
@@ -658,7 +658,7 @@
           "nome": "MÁX. Golpe Crítico",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Causa dano a um único inimigo. Este ataque não pode ser esquivado, ignora 40% da DEF do inimigo e aumenta sua própria Taxa de Roubo de Vida em 10% (2 turnos). Em caso de Acerto Crítico, causa 40% de dano adicional. 60% de chance de causar [Recuo].",
+          "desc": "[ATQ Físico] Causa dano a um único inimigo. Este ataque não pode ser esquivado, ignora 40% da DEF do inimigo e aumenta sua própria Taxa de Roubo de Vida em 10% (2 turnos). Em caso de Acerto Crítico, causa 40% de dano adicional. 60% de chance de causar [Empurrão].",
           "dano": "175%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_01_Hit/Skill.png"
         }
@@ -684,7 +684,7 @@
           "nome": "SMAX. Ataque Relâmpago",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Aumento de ATQ Físico] Aumenta o próprio dano de ATQ Físico em 25%, absorve 20% do ATQ e 40% da DEF do alvo, ataca o inimigo com a menor quantidade de HP, com 35% de chance de causar [Imobilização] (incapacidade de agir por 1 turno) no inimigo; este ataque não pode ser esquivado e causa [Repulsão].",
+          "desc": "[Aumento de ATQ Físico] Aumenta o próprio dano de ATQ Físico em 25%, absorve 20% do ATQ e 40% da DEF do alvo, ataca o inimigo com a menor quantidade de HP, com 35% de chance de causar [Imobilização] (incapacidade de agir por 1 turno) no inimigo; este ataque não pode ser esquivado e causa [Empurrão].",
           "dano": "440%+20",
           "icone": "ability-icons/SSR,SR e R/SSR_01_Hit/Ultimate.png"
         }
@@ -765,7 +765,7 @@
           "nome": "MAX. Ondas de Energia com as Mãos",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, com 70% de chance de ativar novamente, no máximo 1 vez por turno. Se a vida do alvo for maior que 50%, o dano aumenta em 30%, com 60% de chance de causar [Repulsão].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, com 70% de chance de ativar novamente, no máximo 1 vez por turno. Se a vida do alvo for maior que 50%, o dano aumenta em 30%, com 60% de chance de causar [Empurrão].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_02_Gohan_Mistico/Skill.png"
         }
@@ -791,7 +791,7 @@
           "nome": "SMAX. Kamehameha",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca um único inimigo, causando 30% de dano adicional contra Guerreiros do tipo [Defesa]. Este ataque ignora 30% da defesa, ativa imediatamente uma habilidade extra e, no próximo turno, certamente liberará a habilidade, causando [Recuo].",
+          "desc": "[Ataque Especial] Ataca um único inimigo, causando 30% de dano adicional contra Guerreiros do tipo [Defesa]. Este ataque ignora 30% da defesa, ativa imediatamente uma habilidade extra e, no próximo turno, certamente liberará a habilidade, causando [Empurrão].",
           "dano": "420%+26",
           "icone": "ability-icons/SSR,SR e R/SSR_02_Gohan_Mistico/Ultimate.png"
         }
@@ -864,7 +864,7 @@
           "nome": "Ataque Feroz do Deus da Destruição",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, este ataque ignora Bloqueio, causa 60% mais dano a lutadores do [Tipo Defesa], 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, este ataque ignora Bloqueio, causa 60% mais dano a lutadores do [Tipo Defesa], 60% de chance de infligir [Derrubada].",
           "dano": "150%+12",
           "icone": "ability-icons/SSR,SR e R/SSR_03_Beerus/Skill.png"
         },
@@ -872,7 +872,7 @@
           "nome": "MAX. Ataque violento da Aliança dos Guerreiros",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Durante a batalha, quanto menos pessoas houver em ambos os lados, maior será o dano; este ataque ignora bloqueio, aumenta o dano contra Guerreiros do tipo Defesa em 60%, aumenta sua própria resistência a anomalias em 50% (1 turno) e causa [Caído] com 60% de chance.",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Durante a batalha, quanto menos pessoas houver em ambos os lados, maior será o dano; este ataque ignora bloqueio, aumenta o dano contra Guerreiros do tipo Defesa em 60%, aumenta sua própria resistência a anomalias em 50% (1 turno) e causa [Derrubada] com 60% de chance.",
           "dano": "175%+12",
           "icone": "ability-icons/SSR,SR e R/SSR_03_Beerus/Skill.png"
         }
@@ -898,7 +898,7 @@
           "nome": "SMAX. Julgamento da Aliança dos Guerreiros",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca o inimigo da linha de frente com a menor porcentagem de vida. Este ataque ignora bloqueio e resistência a dano, e aumenta a taxa de crítico em 30%. Para cada Saiyajin aliado, a intensidade de crítico aumenta em 7%. Se o alvo for eliminado, 70% do dano excedente é espalhado para todos os inimigos (máximo de 2,5x o próprio ATQ). A eliminação causada por este ataque impede o alvo de reviver, causando [Repulsão].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca o inimigo da linha de frente com a menor porcentagem de vida. Este ataque ignora bloqueio e resistência a dano, e aumenta a taxa de crítico em 30%. Para cada Saiyajin aliado, a intensidade de crítico aumenta em 7%. Se o alvo for eliminado, 70% do dano excedente é espalhado para todos os inimigos (máximo de 2,5x o próprio ATQ). A eliminação causada por este ataque impede o alvo de reviver, causando [Empurrão].",
           "dano": "420%+20",
           "icone": "ability-icons/SSR,SR e R/SSR_03_Beerus/Ultimate.png"
         }
@@ -971,7 +971,7 @@
           "nome": "Ataque Explosivo Gigante",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, absorve 20% da Taxa de Bloqueio do alvo, causa 35% de Dano Extra a lutadores do [Tipo Técnica], 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, absorve 20% da Taxa de Bloqueio do alvo, causa 35% de Dano Extra a lutadores do [Tipo Técnica], 60% de chance de infligir [Derrubada].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_04_Vegeta_SSGSS/Skill.png"
         },
@@ -979,7 +979,7 @@
           "nome": "MAX. Ataque da Grande Explosão",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Físico] Ataca um único inimigo, absorve 20% da taxa de bloqueio do alvo, causa 35% de dano adicional a Guerreiros do tipo [Técnica], absorve 200 pontos de raiva do alvo e tem 60% de chance de causar [Queda].",
+          "desc": "[Ataque Físico] Ataca um único inimigo, absorve 20% da taxa de bloqueio do alvo, causa 35% de dano adicional a Guerreiros do tipo [Técnica], absorve 200 pontos de raiva do alvo e tem 60% de chance de causar [Derrubada].",
           "dano": "175%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_04_Vegeta_SSGSS/Skill.png"
         }
@@ -1005,7 +1005,7 @@
           "nome": "SMAX. Clarão Explosivo Gama",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Golpe Especial] Ataca uma fileira inimiga, aumenta o próprio ATQ em 15% e a DEF em 15% (1 turno). Cada vez que resiste ou bloqueia um dano, o golpe especial causa dano extra ao alvo principal equivalente a 4% da própria vida máxima, até no máximo 20%. O contador é resetado após usar a habilidade definitiva. Quando a vida estiver abaixo de 35%, aumenta temporariamente a taxa de absorção de vida em 80%, muda o golpe especial para \"Punho Explosivo\", causando grande dano a um único inimigo, absorvendo 20% da taxa de redução de dano e 20% da taxa de dano (1 turno), e aplica o efeito [Ferimento Interno] no alvo (reduz 6% da vida por turno e diminui a velocidade de recuperação de raiva em 10%, durando 2 turnos). Este efeito só pode ser ativado uma vez por batalha, causando [Pequena Elevação].",
+          "desc": "[Golpe Especial] Ataca uma fileira inimiga, aumenta o próprio ATQ em 15% e a DEF em 15% (1 turno). Cada vez que resiste ou bloqueia um dano, o golpe especial causa dano extra ao alvo principal equivalente a 4% da própria vida máxima, até no máximo 20%. O contador é resetado após usar a habilidade definitiva. Quando a vida estiver abaixo de 35%, aumenta temporariamente a taxa de absorção de vida em 80%, muda o golpe especial para \"Punho Explosivo\", causando grande dano a um único inimigo, absorvendo 20% da taxa de redução de dano e 20% da taxa de dano (1 turno), e aplica o efeito [Ferimento Interno] no alvo (reduz 6% da vida por turno e diminui a velocidade de recuperação de raiva em 10%, durando 2 turnos). Este efeito só pode ser ativado uma vez por batalha, causando [Elevação Baixa].",
           "dano": "300%+18",
           "icone": "ability-icons/SSR,SR e R/SSR_04_Vegeta_SSGSS/Ultimate.png"
         }
@@ -1078,7 +1078,7 @@
           "nome": "Onda de Impacto Contínuo",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, aumenta a própria Taxa de Roubo de Vida em 20% (2 turnos), 20% de chance de infligir [Atordoamento] (incapaz de agir, dura 1 turno), causa 45% de Dano Extra a alvos [Queimados], 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, aumenta a própria Taxa de Roubo de Vida em 20% (2 turnos), 20% de chance de infligir [Atordoamento] (incapaz de agir, dura 1 turno), causa 45% de Dano Extra a alvos [Queimados], 60% de chance de infligir [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_05_Goku_SSGSS/Skill.png"
         },
@@ -1086,7 +1086,7 @@
           "nome": "MÁX. Onda de Choque Contínua",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta sua própria taxa de roubo de vida em 20% (2 turnos), causa 60% de dano extra em Guerreiros com efeito de [Queimadura], 20% de chance de causar [Atordoamento] no alvo (incapacidade de agir, dura 1 turno). Se o alvo estiver com [Queimadura], a chance aumenta para 40%. Quando a vida estiver abaixo de 50%, aumenta a taxa de redução de dano em 15% (2 turnos), 60% de chance de causar [Pequeno Flutuação].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta sua própria taxa de roubo de vida em 20% (2 turnos), causa 60% de dano extra em Guerreiros com efeito de [Queimadura], 20% de chance de causar [Atordoamento] no alvo (incapacidade de agir, dura 1 turno). Se o alvo estiver com [Queimadura], a chance aumenta para 40%. Quando a vida estiver abaixo de 50%, aumenta a taxa de redução de dano em 15% (2 turnos), 60% de chance de causar [Elevação Baixa].",
           "dano": "175%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_05_Goku_SSGSS/Skill.png"
         }
@@ -1112,7 +1112,7 @@
           "nome": "SMAX. Kamehameha Super - Nove-Caudas",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta sua própria taxa de crítico em 40%, causa dano adicional equivalente a 35% da própria vida perdida ao alvo, e converte 45% do dano total em cura para si mesmo. Se não causar crítico, aumenta seu próprio ataque em 25% (por 2 turnos) e causa [Grande Flutuação]. Se eliminar o alvo, pode liberar imediatamente uma habilidade extra.",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aumenta sua própria taxa de crítico em 40%, causa dano adicional equivalente a 35% da própria vida perdida ao alvo, e converte 45% do dano total em cura para si mesmo. Se não causar crítico, aumenta seu próprio ataque em 25% (por 2 turnos) e causa [Elevação Alta]. Se eliminar o alvo, pode liberar imediatamente uma habilidade extra.",
           "dano": "420%+24",
           "icone": "ability-icons/SSR,SR e R/SSR_05_Goku_SSGSS/Ultimate.png"
         }
@@ -1193,7 +1193,7 @@
           "nome": "MÁX. Golpe de Esmagamento",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, com 25% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno). Causa 60% de dano adicional a Guerreiros do tipo [Ataque]. Quando houver mais de 4 inimigos, aumenta a taxa de dano em 15% e causa [Repulsão] com 60% de chance.",
+          "desc": "[ATQ Físico] Ataca um único inimigo, com 25% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno). Causa 60% de dano adicional a Guerreiros do tipo [Ataque]. Quando houver mais de 4 inimigos, aumenta a taxa de dano em 15% e causa [Empurrão] com 60% de chance.",
           "dano": "175%+10",
           "icone": "ability-icons/SSR,SR e R/SSR_06_Kale/Skill.png"
         }
@@ -1219,7 +1219,7 @@
           "nome": "SMAX. Explosão de Ki",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca todos os inimigos. Quanto menos inimigos, maior o dano, com aumento máximo de 120%. Além disso, concede o efeito Fúria (aumenta o tamanho, recupera 20% da vida, aumenta 20% de defesa e 20% de redução de dano. Durante o efeito, aumenta 90% de resistência a anomalias e garante que a habilidade pequena seja ativada no próximo turno), causando [Pequena Elevação]. Se houver apenas 1 inimigo, o dano é multiplicado por 3.",
+          "desc": "[Ataque Especial] Ataca todos os inimigos. Quanto menos inimigos, maior o dano, com aumento máximo de 120%. Além disso, concede o efeito Fúria (aumenta o tamanho, recupera 20% da vida, aumenta 20% de defesa e 20% de redução de dano. Durante o efeito, aumenta 90% de resistência a anomalias e garante que a habilidade pequena seja ativada no próximo turno), causando [Elevação Baixa]. Se houver apenas 1 inimigo, o dano é multiplicado por 3.",
           "dano": "170%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_06_Kale/Ultimate.png"
         }
@@ -1292,7 +1292,7 @@
           "nome": "Golpe Lendário",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, causa +45% de dano a lutadores do [Tipo Defesa]; se o próprio PV estiver abaixo de 50%, recupera PV igual a 70% do ATQ. 60% de chance de infligir [Repulsão].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, causa +45% de dano a lutadores do [Tipo Defesa]; se o próprio PV estiver abaixo de 50%, recupera PV igual a 70% do ATQ. 60% de chance de infligir [Empurrão].",
           "dano": "165%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_07_Broly/Skill.png"
         },
@@ -1300,7 +1300,7 @@
           "nome": "MÁX. Golpe Lendário",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, causando 60% de dano adicional contra Guerreiros do tipo Defesa. Se a própria vida estiver abaixo de 50%, recupera PV igual a 70% do ATQ. Se houver apenas 1 inimigo, o dano aumenta em 50%, com 60% de chance de causar [Recuo].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, causando 60% de dano adicional contra Guerreiros do tipo Defesa. Se a própria vida estiver abaixo de 50%, recupera PV igual a 70% do ATQ. Se houver apenas 1 inimigo, o dano aumenta em 50%, com 60% de chance de causar [Empurrão].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_07_Broly/Skill.png"
         }
@@ -1326,7 +1326,7 @@
           "nome": "SMAX. Explosão de Impacto",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 30% de chance de reduzir 300 de raiva de cada inimigo e 20% de chance de causar [Imobilização] (incapacidade de agir por 1 turno). Para cada guerreiro [Saiyajin] presente no time inimigo, o dano deste golpe especial aumenta em 6%. O próprio tem 30% de chance de reviver e herdar a raiva. Quando houver apenas 1 inimigo, o golpe especial é alterado: reduz 500 de raiva do alvo, tem 35% de chance de causar [Imobilização], e o próprio tem 30% de chance de reviver e herdar a raiva, causando [Elevação Leve].",
+          "desc": "[Ataque Especial] Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 30% de chance de reduzir 300 de raiva de cada inimigo e 20% de chance de causar [Imobilização] (incapacidade de agir por 1 turno). Para cada guerreiro [Saiyajin] presente no time inimigo, o dano deste golpe especial aumenta em 6%. O próprio tem 30% de chance de reviver e herdar a raiva. Quando houver apenas 1 inimigo, o golpe especial é alterado: reduz 500 de raiva do alvo, tem 35% de chance de causar [Imobilização], e o próprio tem 30% de chance de reviver e herdar a raiva, causando [Elevação Baixa].",
           "dano": "170%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_07_Broly/Ultimate.png"
         }
@@ -1399,7 +1399,7 @@
           "nome": "Golpe do SSG",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo; contra alvos com [Queimadura], causa +45% de dano, absorve o efeito [Queimadura] aleatório de um aliado, restaurando 10% do PV, com 60% de chance de infligir [Grande Malabarismo].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo; contra alvos com [Queimadura], causa +45% de dano, absorve o efeito [Queimadura] aleatório de um aliado, restaurando 10% do PV, com 60% de chance de infligir [Elevação Alta].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_08_Goku_SSJ_Deus/Skill.png"
         },
@@ -1407,7 +1407,7 @@
           "nome": "MAX. Ataque do Super Saiyajin Deus",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Contra alvos com [Queimadura], causa 60% de dano adicional. Absorve o efeito de [Queimadura] de um aliado aleatório, convertendo-o em 12% da própria vida e aumentando o ATQ em 20% (2 turnos). Causa [Grande Elevação].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo. Contra alvos com [Queimadura], causa 60% de dano adicional. Absorve o efeito de [Queimadura] de um aliado aleatório, convertendo-o em 12% da própria vida e aumentando o ATQ em 20% (2 turnos). Causa [Elevação Alta].",
           "dano": "175%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_08_Goku_SSJ_Deus/Skill.png"
         }
@@ -1506,7 +1506,7 @@
           "nome": "Golpe Rolante",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, inflige [Veneno] no alvo principal (no início de cada turno, perde 4% do PV Máx., dura 2 turnos, até 5 acúmulos), 60% de chance de infligir [Derrubar].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, inflige [Veneno] no alvo principal (no início de cada turno, perde 4% do PV Máx., dura 2 turnos, até 5 acúmulos), 60% de chance de infligir [Derrubada].",
           "dano": "150%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_09_Super_Syn_Shenlong/Skill.png"
         },
@@ -1540,7 +1540,7 @@
           "nome": "SMAX. Super Bola de Energia Negativa",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca todos os inimigos, aumenta o Ataque e a Defesa dos [Guerreiros das Trevas] na linha de frente em 7% (por 2 turnos), com 70% de chance de aplicar [Envenenamento] em cada alvo. Causa 25% de dano adicional a todas as unidades já [Envenenadas], e 20% do dano é convertido em vida para a linha de frente. Neste ataque, para cada estado negativo (Queimadura, Queimadura da Alma, Envenenamento, Sangramento, Combustão) que o alvo carregar, o dano aumenta em 8%, com um aumento máximo de 32%. Causa [Grande Elevação].",
+          "desc": "[Ataque Especial] Ataca todos os inimigos, aumenta o Ataque e a Defesa dos [Guerreiros das Trevas] na linha de frente em 7% (por 2 turnos), com 70% de chance de aplicar [Envenenamento] em cada alvo. Causa 25% de dano adicional a todas as unidades já [Envenenadas], e 20% do dano é convertido em vida para a linha de frente. Neste ataque, para cada estado negativo (Queimadura, Queimadura da Alma, Envenenamento, Sangramento, Combustão) que o alvo carregar, o dano aumenta em 8%, com um aumento máximo de 32%. Causa [Elevação Alta].",
           "dano": "182%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_09_Super_Syn_Shenlong/Ultimate.png"
         }
@@ -1613,7 +1613,7 @@
           "nome": "Super Punho de Ki",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, aumenta a própria Taxa de Ativação de Habilidade em 15% (2 turnos), causa 60% de Dano Extra a Guerreiros do [Tipo Ofensivo]; a cada conjuração, aumenta permanentemente a Taxa de Crít. em 10% (até 30%), 60% de chance de infligir [Repulsão].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, aumenta a própria Taxa de Ativação de Habilidade em 15% (2 turnos), causa 60% de Dano Extra a Guerreiros do [Tipo Ofensivo]; a cada conjuração, aumenta permanentemente a Taxa de Crít. em 10% (até 30%), 60% de chance de infligir [Empurrão].",
           "dano": "155%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_10_Jiren/Skill.png"
         },
@@ -1621,7 +1621,7 @@
           "nome": "MAX. Super Soco de Ar",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria probabilidade de ativação de habilidades em 25% (2 turnos), possui 70% de bônus de dano contra Guerreiros do [Atributo Ataque]. A cada uso, aumenta permanentemente a taxa de crítico em 10% (máximo de 30%). Se estiver em campo há menos de 3 turnos, aumenta a resistência a crítico em 30% e a redução de dano em 10% (2 turnos), com 60% de chance de causar [Recuo].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria probabilidade de ativação de habilidades em 25% (2 turnos), possui 70% de bônus de dano contra Guerreiros do [Atributo Ataque]. A cada uso, aumenta permanentemente a taxa de crítico em 10% (máximo de 30%). Se estiver em campo há menos de 3 turnos, aumenta a resistência a crítico em 30% e a redução de dano em 10% (2 turnos), com 60% de chance de causar [Empurrão].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_10_Jiren/Skill.png"
         }
@@ -1647,7 +1647,7 @@
           "nome": "SMAX. Impacto da Destruição",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, absorvendo 70% da defesa deles por 1 turno (total distribuído igualmente entre cada alvo). Cada vez que é usado, aumenta permanentemente o ataque em 15% (máximo de 45%). Quando apenas ele próprio restar na linha de frente aliada, muda para o golpe definitivo, atacando um único inimigo, absorvendo 70% da defesa do alvo e convertendo 30% de sua própria vida perdida em dano, causando [Pequeno Flutuar].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, absorvendo 70% da defesa deles por 1 turno (total distribuído igualmente entre cada alvo). Cada vez que é usado, aumenta permanentemente o ataque em 15% (máximo de 45%). Quando apenas ele próprio restar na linha de frente aliada, muda para o golpe definitivo, atacando um único inimigo, absorvendo 70% da defesa do alvo e convertendo 30% de sua própria vida perdida em dano, causando [Elevação Baixa].",
           "dano": "230%+18",
           "icone": "ability-icons/SSR,SR e R/SSR_10_Jiren/Ultimate.png"
         }
@@ -1754,7 +1754,7 @@
           "nome": "SMAX. Gás Combinado",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca a retaguarda inimiga, causando [Queimadura] no alvo (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, com duração de 2 turnos), e tem 40% de chance de [Silenciar] o alvo (impede o uso de habilidades definitivas, com duração de 1 turno). Aumenta em 8% o dano de habilidade definitiva de todos os [Guerreiros das Trevas] da sua equipe (exceto o próprio; para cada [Guerreiro das Trevas] adicional na equipe, o dano de habilidade definitiva aumenta em mais 3%, até um máximo de 20%, com duração de 1 turno), causando [Queda].",
+          "desc": "[Ataque Especial] Ataca a retaguarda inimiga, causando [Queimadura] no alvo (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, com duração de 2 turnos), e tem 40% de chance de [Silenciar] o alvo (impede o uso de habilidades definitivas, com duração de 1 turno). Aumenta em 8% o dano de habilidade definitiva de todos os [Guerreiros das Trevas] da sua equipe (exceto o próprio; para cada [Guerreiro das Trevas] adicional na equipe, o dano de habilidade definitiva aumenta em mais 3%, até um máximo de 20%, com duração de 1 turno), causando [Derrubada].",
           "dano": "230%+18",
           "icone": "ability-icons/SSR,SR e R/SSR_11_Goku_Black_Rose/Ultimate.png"
         }
@@ -1827,7 +1827,7 @@
           "nome": "Onda de Choque Punitiva",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo; se o próprio Ki ≥ 50%, causa 40% de Dano Extra; se o próprio Ki < 50%, drena 150 de Ki do alvo, 60% de chance de infligir [Malabarismo Maior].",
+          "desc": "[Artes Marciais] Ataca um único inimigo; se o próprio Ki ≥ 50%, causa 40% de Dano Extra; se o próprio Ki < 50%, drena 150 de Ki do alvo, 60% de chance de infligir [Elevação Alta].",
           "dano": "155%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_12_Freeza_Dourado/Skill.png"
         },
@@ -1835,7 +1835,7 @@
           "nome": "MAX. Onda de Punição",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo. Se a própria raiva estiver acima de 30%, causa 50% de dano extra ao alvo. Se a própria raiva estiver abaixo de 60%, drena 150 pontos de raiva do alvo, com 60% de chance de causar [Grande Elevação].",
+          "desc": "[ATQ Físico] Ataca um único inimigo. Se a própria raiva estiver acima de 30%, causa 50% de dano extra ao alvo. Se a própria raiva estiver abaixo de 60%, drena 150 pontos de raiva do alvo, com 60% de chance de causar [Elevação Alta].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_12_Freeza_Dourado/Skill.png"
         }
@@ -1861,7 +1861,7 @@
           "nome": "SMAX. Lança-foguetes Infernal",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATK Especial] Ataca uma fileira de inimigos, [Suprimir] o alvo principal (reduz a taxa de dano, taxa de redução de dano e ataque do alvo em 15%, encolhe o alvo, dura 2 turnos, não pode ser [Suprimido] em estado de fúria), e tem 50% de chance de [Suprimir] os alvos da fileira traseira; se o próprio personagem estiver em campo por 2 ou mais turnos, o dano se expande para todos os inimigos, [Suprimir] o alvo principal, com 70% de chance de [Suprimir] outros dois inimigos aleatórios, causando [Repulsão]. Restaura PV para 2 aliados com menor PV: ATQ *100%+12.",
+          "desc": "[ATK Especial] Ataca uma fileira de inimigos, [Suprimir] o alvo principal (reduz a taxa de dano, taxa de redução de dano e ataque do alvo em 15%, encolhe o alvo, dura 2 turnos, não pode ser [Suprimido] em estado de fúria), e tem 50% de chance de [Suprimir] os alvos da fileira traseira; se o próprio personagem estiver em campo por 2 ou mais turnos, o dano se expande para todos os inimigos, [Suprimir] o alvo principal, com 70% de chance de [Suprimir] outros dois inimigos aleatórios, causando [Empurrão]. Restaura PV para 2 aliados com menor PV: ATQ *100%+12.",
           "dano": "180%+12",
           "icone": "ability-icons/SSR,SR e R/SSR_12_Freeza_Dourado/Ultimate.png"
         }
@@ -1968,7 +1968,7 @@
           "nome": "SMAX. Explosão de Sacrifício",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Aumenta o próprio Ataque e Defesa em 15% (2 turnos) e aumenta a Taxa de Crítico da retaguarda aliada em 12% (1 turno). Ataca um único inimigo. Se for o primeiro golpe especial de Vegeta após [Imortalidade], causa Crítico garantido. Se eliminar o alvo, recupera 12% da própria Vida Máxima e causa [Pequeno Elevação].",
+          "desc": "[Ataque Especial] Aumenta o próprio Ataque e Defesa em 15% (2 turnos) e aumenta a Taxa de Crítico da retaguarda aliada em 12% (1 turno). Ataca um único inimigo. Se for o primeiro golpe especial de Vegeta após [Imortalidade], causa Crítico garantido. Se eliminar o alvo, recupera 12% da própria Vida Máxima e causa [Elevação Baixa].",
           "dano": "400%+20",
           "icone": "ability-icons/SSR,SR e R/SSR_13_Vegeta_SSG/Ultimate.png"
         }
@@ -2041,7 +2041,7 @@
           "nome": "Pancada Selvagem",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único alvo inimigo, reduz a defesa do alvo em 20%, aumenta a própria Taxa de Crít. em 20%; trata o último alvo da habilidade de [Vegeta SS4] como [Alvo de Combo], se atingir o [Alvo de Combo], este ataque será crítico garantido, 60% de chance de causar [Derrubar].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único alvo inimigo, reduz a defesa do alvo em 20%, aumenta a própria Taxa de Crít. em 20%; trata o último alvo da habilidade de [Vegeta SS4] como [Alvo de Combo], se atingir o [Alvo de Combo], este ataque será crítico garantido, 60% de chance de causar [Derrubada].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_14_Goku_SS4/Skill.png"
         },
@@ -2049,7 +2049,7 @@
           "nome": "MAX. Golpe Selvagem",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Física/ATQ Especial] Ataca um único inimigo, reduzindo sua DEF em 30% e sua Resistência a Anomalias em 20%, além de aumentar a Taxa de Crítico em 20%. Considera o alvo do último golpe de [Vegeta Super 4] como [Alvo do Ataque Comb.]. Se acertar o [Alvo do Ataque Comb.], este ataque causará crítico garantido. Se este golpe causar crítico, recupera 6% da própria vida e tem 60% de chance de causar [Queda].",
+          "desc": "[ATQ Física/ATQ Especial] Ataca um único inimigo, reduzindo sua DEF em 30% e sua Resistência a Anomalias em 20%, além de aumentar a Taxa de Crítico em 20%. Considera o alvo do último golpe de [Vegeta Super 4] como [Alvo do Ataque Comb.]. Se acertar o [Alvo do Ataque Comb.], este ataque causará crítico garantido. Se este golpe causar crítico, recupera 6% da própria vida e tem 60% de chance de causar [Derrubada].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_14_Goku_SS4/Skill.png"
         }
@@ -2255,7 +2255,7 @@
           "nome": "Golpe de Velocidade",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, reduz o ataque do alvo em 15%, 30% de chance de causar [Tontura] (incapaz de agir, dura 1 turno); trata o último alvo de habilidade de [Son Goku SS4] como [Alvo de Combo]; se atingir o [Alvo de Combo], a chance de causar [Tontura] aumenta para 60%, 60% de chance de causar [Pequeno Lançamento ao Ar].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, reduz o ataque do alvo em 15%, 30% de chance de causar [Tontura] (incapaz de agir, dura 1 turno); trata o último alvo de habilidade de [Son Goku SS4] como [Alvo de Combo]; se atingir o [Alvo de Combo], a chance de causar [Tontura] aumenta para 60%, 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_16_Vegeta_SS4/Skill.png"
         },
@@ -2263,7 +2263,7 @@
           "nome": "MAX. Golpe Acelerado",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Físico/Especial] Ataca um único inimigo, reduzindo o Ataque do alvo em 20% e a Taxa de Resistência a Críticos em 20%, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno); considera o alvo do ataque da habilidade anterior de [Super Saiyajin 4 Goku] como [Alvo de Ataque Comb.]. Se acertar o [Alvo de Ataque Comb.], a chance de causar [Atordoamento] aumenta para 60%. Se esta habilidade causar Atordoamento, aumenta o próprio Ataque em 15% (2 turnos), com 60% de chance de causar [Pequena Elevação].",
+          "desc": "[Ataque Físico/Especial] Ataca um único inimigo, reduzindo o Ataque do alvo em 20% e a Taxa de Resistência a Críticos em 20%, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno); considera o alvo do ataque da habilidade anterior de [Super Saiyajin 4 Goku] como [Alvo de Ataque Comb.]. Se acertar o [Alvo de Ataque Comb.], a chance de causar [Atordoamento] aumenta para 60%. Se esta habilidade causar Atordoamento, aumenta o próprio Ataque em 15% (2 turnos), com 60% de chance de causar [Elevação Baixa].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_16_Vegeta_SS4/Skill.png"
         }
@@ -2362,7 +2362,7 @@
           "nome": "Dança do Kiaiho",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, aplica [Queimadura Sombria] (causa 6% de dano do PV Máx. por turno, dura até o fim da batalha, acumulável); aumenta a própria penetração de armadura em 40% (2 turnos), 60% de chance de causar [Derrubar].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, aplica [Queimadura Sombria] (causa 6% de dano do PV Máx. por turno, dura até o fim da batalha, acumulável); aumenta a própria penetração de armadura em 40% (2 turnos), 60% de chance de causar [Derrubada].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_17_Baby/Skill.png"
         },
@@ -2469,7 +2469,7 @@
           "nome": "Super Bomba de Ki",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, 25% de chance de causar [Atordoamento] (incapaz de agir, dura 1 rodada); após este ataque, aumenta a Fúria em 45% do Ataque e converte 20% do próprio Ataque em Defesa por 1 rodada; restaura 100 de Fúria, 60% de chance de causar [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, 25% de chance de causar [Atordoamento] (incapaz de agir, dura 1 rodada); após este ataque, aumenta a Fúria em 45% do Ataque e converte 20% do próprio Ataque em Defesa por 1 rodada; restaura 100 de Fúria, 60% de chance de causar [Derrubada].",
           "dano": "160%+10",
           "icone": "ability-icons/SSR,SR e R/SSR_18_Bardock_Quebrador_do_Tempo/Skill.png"
         },
@@ -2477,7 +2477,7 @@
           "nome": "MAX. Golpe Sombrio",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno), recupera PV igual a 100% do ATQ próprio; recupera 150 de Fúria; após este ataque, aumenta a Fúria em 60% do ATQ e converte 30% do ATQ em DEF por 1 turno, com 60% de chance de causar [Caído].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno), recupera PV igual a 100% do ATQ próprio; recupera 150 de Fúria; após este ataque, aumenta a Fúria em 60% do ATQ e converte 30% do ATQ em DEF por 1 turno, com 60% de chance de causar [Derrubada].",
           "dano": "175%+10",
           "icone": "ability-icons/SSR,SR e R/SSR_18_Bardock_Quebrador_do_Tempo/Skill.png"
         }
@@ -2584,7 +2584,7 @@
           "nome": "MAX. Golpe Impiedoso",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único alvo, com 30% de chance de atordoar o alvo. A chance de atordoar [Saiyajins] aumenta para 50%. Recupera 200 pontos de raiva própria e causa [Repulsão] com 60% de chance.",
+          "desc": "[ATQ Físico] Ataca um único alvo, com 30% de chance de atordoar o alvo. A chance de atordoar [Saiyajins] aumenta para 50%. Recupera 200 pontos de raiva própria e causa [Empurrão] com 60% de chance.",
           "dano": "175%+8",
           "icone": "ability-icons/SSR,SR e R/SSR_19_Cooler_Dourado/Skill.png"
         }
@@ -2610,7 +2610,7 @@
           "nome": "SMAX. Supernova",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Aumenta o próprio Ataque e Defesa em 20% e ataca todos os inimigos com uma gigantesca esfera de energia, causando 35% de dano extra contra [Saiyajins]; aumenta a própria Taxa de Crítico em 30%; recupera 200 de Raiva para todos os aliados [Guerreiros do Mal], causando [Grande Elevação].",
+          "desc": "[Ataque Especial] Aumenta o próprio Ataque e Defesa em 20% e ataca todos os inimigos com uma gigantesca esfera de energia, causando 35% de dano extra contra [Saiyajins]; aumenta a própria Taxa de Crítico em 30%; recupera 200 de Raiva para todos os aliados [Guerreiros do Mal], causando [Elevação Alta].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_19_Cooler_Dourado/Ultimate.png"
         }
@@ -2683,7 +2683,7 @@
           "nome": "Lâmina do Julgamento",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, priorizando aqueles com [Julgamento], causa 45% de Dano Extra, 30% de chance de aplicar [Julgamento] (não pode causar crítico, dura 1 rodada), 60% de chance de causar [Grande Lançamento].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, priorizando aqueles com [Julgamento], causa 45% de Dano Extra, 30% de chance de aplicar [Julgamento] (não pode causar crítico, dura 1 rodada), 60% de chance de causar [Elevação Alta].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_20_Zamasu_Fundido/Skill.png"
         },
@@ -2691,7 +2691,7 @@
           "nome": "MAX. Lâmina do Julgamento",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo, priorizando alvos com [Julgamento], causando 60% de dano adicional. 2 Guerreiros aliados têm 50% de chance de recuperar 200 de raiva. Há 40% de chance de aplicar [Julgamento] no alvo (sem acerto crítico, duração de 1 turno), causando [Grande Elevação].",
+          "desc": "[Ataque Especial] Ataca um único inimigo, priorizando alvos com [Julgamento], causando 60% de dano adicional. 2 Guerreiros aliados têm 50% de chance de recuperar 200 de raiva. Há 40% de chance de aplicar [Julgamento] no alvo (sem acerto crítico, duração de 1 turno), causando [Elevação Alta].",
           "dano": "175%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_20_Zamasu_Fundido/Skill.png"
         }
@@ -2717,7 +2717,7 @@
           "nome": "SMAX. Trovão Absoluto",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca 4 unidades aleatórias do inimigo, com 40% de chance de aplicar [Julgamento] (não pode causar dano crítico, não pode ser bloqueado, pode ser dissipado, dura 1 turno) no alvo. Contra [Saiyajins], a chance aumenta para 60%. Se o alvo já estiver sob efeito de [Julgamento], causa dano adicional equivalente a 12% da vida máxima do alvo, causando [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca 4 unidades aleatórias do inimigo, com 40% de chance de aplicar [Julgamento] (não pode causar dano crítico, não pode ser bloqueado, pode ser dissipado, dura 1 turno) no alvo. Contra [Saiyajins], a chance aumenta para 60%. Se o alvo já estiver sob efeito de [Julgamento], causa dano adicional equivalente a 12% da vida máxima do alvo, causando [Elevação Baixa].",
           "dano": "230%+18",
           "icone": "ability-icons/SSR,SR e R/SSR_20_Zamasu_Fundido/Ultimate.png"
         }
@@ -2790,7 +2790,7 @@
           "nome": "Tornado da Justiça",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Toppo ataca um único inimigo, causa 30% de Dano Extra a alvos com menos de 50% de PV; 50% de chance por 2 turnos de reduzir o dano sofrido em 30%, 60% de chance de causar [Pequeno Lançamento].",
+          "desc": "[Artes Marciais] Toppo ataca um único inimigo, causa 30% de Dano Extra a alvos com menos de 50% de PV; 50% de chance por 2 turnos de reduzir o dano sofrido em 30%, 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_21_Toppo/Skill.png"
         },
@@ -2798,7 +2798,7 @@
           "nome": "MAX. Tornado da Justiça",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Toppo ataca um único alvo, causando 40% de dano extra em alvos com menos de 50% de HP; por 2 turnos, tem 60% de chance de reduzir o dano recebido em 40%. Aumenta em 20% a probabilidade de suas próprias habilidades menores, sendo que quanto menor o HP, maior a probabilidade, podendo chegar a até 100%. Tem 60% de chance de causar [Pequena Elevação].",
+          "desc": "[ATQ Físico] Toppo ataca um único alvo, causando 40% de dano extra em alvos com menos de 50% de HP; por 2 turnos, tem 60% de chance de reduzir o dano recebido em 40%. Aumenta em 20% a probabilidade de suas próprias habilidades menores, sendo que quanto menor o HP, maior a probabilidade, podendo chegar a até 100%. Tem 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SSR_21_Toppo/Skill.png"
         }
@@ -2824,7 +2824,7 @@
           "nome": "SMAX. Esfera de Energia Destrutiva",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Golpe Especial] Ataca um único inimigo, causando 20% de dano em área ao redor. Quanto mais inimigos acertar, maior será o coeficiente de dano em área, podendo chegar até 30%. Se acertar 2 ou mais inimigos, este ataque não pode ser bloqueado ou resistido. Aumenta sua própria intensidade de crítico em 35% por 2 turnos. Causa dano adicional equivalente a 12% da vida perdida de cada alvo. 30% do dano é convertido em sua própria vida. Se houver apenas 1 inimigo no campo adversário, causa dano adicional equivalente a 15% da maior vida perdida entre ambos os lados, reduz a taxa de redução de dano do alvo em 20% por 2 turnos e causa [Caído].",
+          "desc": "[Golpe Especial] Ataca um único inimigo, causando 20% de dano em área ao redor. Quanto mais inimigos acertar, maior será o coeficiente de dano em área, podendo chegar até 30%. Se acertar 2 ou mais inimigos, este ataque não pode ser bloqueado ou resistido. Aumenta sua própria intensidade de crítico em 35% por 2 turnos. Causa dano adicional equivalente a 12% da vida perdida de cada alvo. 30% do dano é convertido em sua própria vida. Se houver apenas 1 inimigo no campo adversário, causa dano adicional equivalente a 15% da maior vida perdida entre ambos os lados, reduz a taxa de redução de dano do alvo em 20% por 2 turnos e causa [Derrubada].",
           "dano": "420%+20",
           "icone": "ability-icons/SSR,SR e R/SSR_21_Toppo/Ultimate.png"
         }
@@ -2897,7 +2897,7 @@
           "nome": "Golpe em Cadeia Explosivo",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo e restaura 8% do próprio PV. Se o próprio PV estiver abaixo de 50%, restaura 12% em vez disso. 60% de chance de infligir [Pequeno Arremesso].",
+          "desc": "[Artes Marciais] Ataca um único inimigo e restaura 8% do próprio PV. Se o próprio PV estiver abaixo de 50%, restaura 12% em vez disso. 60% de chance de infligir [Elevação Baixa].",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/SR_01_Majin_Boo/Skill.png"
         },
@@ -2905,7 +2905,7 @@
           "nome": "MAX. Explosão em Cadeia",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, recupera 10% da própria vida. Se a própria vida estiver abaixo de 50%, recupera 15% e aumenta a própria taxa de dano reverso em 15% (2 turnos). 60% de chance de causar [Pequeno Elevação].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, recupera 10% da própria vida. Se a própria vida estiver abaixo de 50%, recupera 15% e aumenta a própria taxa de dano reverso em 15% (2 turnos). 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SR_01_Majin_Boo/Skill.png"
         }
@@ -2931,7 +2931,7 @@
           "nome": "SMAX. Onda de Explosão",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca todos os inimigos, com 25% de chance de causar [Atordoamento] (não pode agir por 1 turno). Se a própria vida estiver abaixo de 50%, aumenta adicionalmente 30% de resistência a [Ataque Especial] (dura 2 turnos), causando [Grande Elevação].",
+          "desc": "[Ataque Especial] Ataca todos os inimigos, com 25% de chance de causar [Atordoamento] (não pode agir por 1 turno). Se a própria vida estiver abaixo de 50%, aumenta adicionalmente 30% de resistência a [Ataque Especial] (dura 2 turnos), causando [Elevação Alta].",
           "dano": "160%+10",
           "icone": "ability-icons/SSR,SR e R/SR_01_Majin_Boo/Ultimate.png"
         }
@@ -3012,7 +3012,7 @@
           "nome": "GOLPE DE RAIVA MÁX.",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo. Esta ação aumenta a taxa de crítico em 45%. Causa 30% de dano adicional contra alvos com [Paralisia]. Tem 30% de chance de causar [Imobilização] (incapacidade de agir por 1 turno) e 60% de chance de causar [Repulsão].",
+          "desc": "[ATQ Físico] Ataca um único inimigo. Esta ação aumenta a taxa de crítico em 45%. Causa 30% de dano adicional contra alvos com [Paralisia]. Tem 30% de chance de causar [Imobilização] (incapacidade de agir por 1 turno) e 60% de chance de causar [Empurrão].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SR_02_Majin_Vegeta/Skill.png"
         }
@@ -3038,7 +3038,7 @@
           "nome": "SMAX. Impacto Sombrio",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Perde 8% da vida, aumenta temporariamente a taxa de crítico em 30% neste ataque. Quanto menor a vida do próprio personagem, maior o dano, com aumento máximo de 30%. Ataca todos os inimigos, com 60% de chance de causar [Paralisia] (impede o uso de perseguições e habilidades por 1 turno). A probabilidade de ativação da habilidade aumenta em 80% (2 turnos). Causa [Queda].",
+          "desc": "[Ataque Especial] Perde 8% da vida, aumenta temporariamente a taxa de crítico em 30% neste ataque. Quanto menor a vida do próprio personagem, maior o dano, com aumento máximo de 30%. Ataca todos os inimigos, com 60% de chance de causar [Paralisia] (impede o uso de perseguições e habilidades por 1 turno). A probabilidade de ativação da habilidade aumenta em 80% (2 turnos). Causa [Derrubada].",
           "dano": "160%+12",
           "icone": "ability-icons/SSR,SR e R/SR_02_Majin_Vegeta/Ultimate.png"
         }
@@ -3111,7 +3111,7 @@
           "nome": "Investida Androide",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, restaura aleatoriamente 150 de Fúria para 1 aliado, 60% de chance de infligir [Pequeno Arremesso].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, restaura aleatoriamente 150 de Fúria para 1 aliado, 60% de chance de infligir [Elevação Baixa].",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/SR_03_Android_18/Skill.png"
         },
@@ -3119,7 +3119,7 @@
           "nome": "MAX. Ataque em Conjunto",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo e aumenta aleatoriamente a Fúria de 1 guerreiro aliado em 150 pontos. Causa 30% de dano adicional contra guerreiros do tipo [Defesa]. Recupera 100 pontos de própria Fúria e, com 60% de chance, causa [Pequeno Elevação].",
+          "desc": "[ATQ Físico] Ataca um único inimigo e aumenta aleatoriamente a Fúria de 1 guerreiro aliado em 150 pontos. Causa 30% de dano adicional contra guerreiros do tipo [Defesa]. Recupera 100 pontos de própria Fúria e, com 60% de chance, causa [Elevação Baixa].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SR_03_Android_18/Skill.png"
         }
@@ -3145,7 +3145,7 @@
           "nome": "SMAX. Super Onda de Energia",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca todos os inimigos, reduz 15% da defesa dos alvos, aumenta aleatoriamente 300 de raiva de 1 guerreiro aliado, causa 15% de dano adicional e causa [Caído].",
+          "desc": "[Ataque Especial] Ataca todos os inimigos, reduz 15% da defesa dos alvos, aumenta aleatoriamente 300 de raiva de 1 guerreiro aliado, causa 15% de dano adicional e causa [Derrubada].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SR_03_Android_18/Ultimate.png"
         }
@@ -3218,7 +3218,7 @@
           "nome": "Lampejo da Morte",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo. Se o alvo estiver afetado por [Queima da Alma], causa 45% de dano adicional, com 60% de chance de infligir [Malabarismo Maior].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo. Se o alvo estiver afetado por [Queima da Alma], causa 45% de dano adicional, com 60% de chance de infligir [Elevação Alta].",
           "dano": "150%+8",
           "icone": "ability-icons/SSR,SR e R/SR_04_Android_21/Skill.png"
         },
@@ -3226,7 +3226,7 @@
           "nome": "MAX. Flash da Morte",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, com 30% de chance de aplicar [Queimadura Espiritual] (no início de cada turno, sofre dano equivalente a 50% do ATQ do aplicador, perde 200 de raiva no início de cada turno, dura 2 turnos, não acumulável). Se o alvo já estiver com [Queimadura Espiritual], causa 45% de dano adicional e causa [Grande Elevação].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, com 30% de chance de aplicar [Queimadura Espiritual] (no início de cada turno, sofre dano equivalente a 50% do ATQ do aplicador, perde 200 de raiva no início de cada turno, dura 2 turnos, não acumulável). Se o alvo já estiver com [Queimadura Espiritual], causa 45% de dano adicional e causa [Elevação Alta].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SR_04_Android_21/Skill.png"
         }
@@ -3252,7 +3252,7 @@
           "nome": "SMAX. Chamas do Inferno",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 65% de chance de causar [Queimadura da Alma] em cada alvo (sofre dano igual a 50% do ataque do aplicador no início de cada turno, perde 200 de raiva no início de cada turno, dura 2 turnos, não acumulável), e 40% de chance de causar [Silêncio] (impede o uso de habilidades especiais, dura 1 turno). Causa 25% de dano adicional contra alvos com [Queimadura da Alma] e reduz sua resistência a críticos em 20% (2 turnos), causando [Repulsão].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 65% de chance de causar [Queimadura da Alma] em cada alvo (sofre dano igual a 50% do ataque do aplicador no início de cada turno, perde 200 de raiva no início de cada turno, dura 2 turnos, não acumulável), e 40% de chance de causar [Silêncio] (impede o uso de habilidades especiais, dura 1 turno). Causa 25% de dano adicional contra alvos com [Queimadura da Alma] e reduz sua resistência a críticos em 20% (2 turnos), causando [Empurrão].",
           "dano": "300%+15",
           "icone": "ability-icons/SSR,SR e R/SR_04_Android_21/Ultimate.png"
         }
@@ -3261,7 +3261,7 @@
         "nome": "Ataque de Perseguição",
         "estrelas": 1,
         "tipo": "Ativar",
-        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo Malabarismo Menor, infligindo [Empurrão]. Alvos com [Queima da Alma] sofrem 50% de dano adicional.",
+        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Baixa], infligindo [Empurrão]. Alvos com [Queima da Alma] sofrem 50% de dano adicional.",
         "dano": "75%+8",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png"
       },
@@ -3313,7 +3313,7 @@
           "nome": "Ataque Perfurante",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca uma coluna inimiga, com 50% de chance de infligir [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ATQ do lançador; cada acúmulo reduz a cura recebida em 10%, até 10 acúmulos). Restaura 100 de Ki para si, com 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Explosão de Ki] Ataca uma coluna inimiga, com 50% de chance de infligir [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ATQ do lançador; cada acúmulo reduz a cura recebida em 10%, até 10 acúmulos). Restaura 100 de Ki para si, com 60% de chance de infligir [Elevação Baixa].",
           "dano": "150%+8",
           "icone": "ability-icons/SSR,SR e R/SR_05_Gotenks/Skill.png"
         },
@@ -3321,7 +3321,7 @@
           "nome": "MAX. Ataque Espiral",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 70% de chance de causar [Queimadura] no alvo (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas). Recupera 150 pontos de própria raiva, aumenta o dano contra alvos da linha frontal em 30%, e com 60% de chance causa [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 70% de chance de causar [Queimadura] no alvo (no início de cada turno, sofre dano equivalente a 25% do ataque do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas). Recupera 150 pontos de própria raiva, aumenta o dano contra alvos da linha frontal em 30%, e com 60% de chance causa [Elevação Baixa].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SR_05_Gotenks/Skill.png"
         }
@@ -3347,7 +3347,7 @@
           "nome": "SMAX. Ataque Fantasma Supremo",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATK Especial] Aumenta o próprio ATQ e DEF em 15%. Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 70% de chance de causar [Queimadura] (mesmo efeito). Causa 25% de dano extra em alvos com [Queimadura]. Em seguida, aumenta a própria taxa de crítico em 15% (2 turnos). Causa [Flutuação Leve].",
+          "desc": "[ATK Especial] Aumenta o próprio ATQ e DEF em 15%. Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 70% de chance de causar [Queimadura] (mesmo efeito). Causa 25% de dano extra em alvos com [Queimadura]. Em seguida, aumenta a própria taxa de crítico em 15% (2 turnos). Causa [Elevação Baixa].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SR_05_Gotenks/Ultimate.png"
         }
@@ -3428,7 +3428,7 @@
           "nome": "MAX. Onda de Choque Suprema",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Físico] Ataca um único inimigo e aumenta a intensidade de bloqueio dos Guerreiros [Defensivos] em 40% e a taxa de bloqueio em 10%, com 60% de chance de causar [Repulsão].",
+          "desc": "[Ataque Físico] Ataca um único inimigo e aumenta a intensidade de bloqueio dos Guerreiros [Defensivos] em 40% e a taxa de bloqueio em 10%, com 60% de chance de causar [Empurrão].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SR_06_Bardock/Skill.png"
         }
@@ -3463,7 +3463,7 @@
         "nome": "Ataque de Perseguição",
         "estrelas": 1,
         "tipo": "Ativar",
-        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo Malabarismo Menor, infligindo [Empurrão]. Quanto maior o PV do lançador, maior o dano.",
+        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Baixa], infligindo [Empurrão]. Quanto maior o PV do lançador, maior o dano.",
         "dano": "75%+8",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png"
       },
@@ -3527,7 +3527,7 @@
           "nome": "Combo de Esfera de Energia",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo. Se o PV do alvo estiver abaixo de 50%, causa 30% de dano adicional, com 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Artes Marciais] Ataca um único inimigo. Se o PV do alvo estiver abaixo de 50%, causa 30% de dano adicional, com 60% de chance de infligir [Elevação Baixa].",
           "dano": "150%+8",
           "icone": "ability-icons/SSR,SR e R/SR_07_Goku_SS3/Skill.png"
         },
@@ -3535,7 +3535,7 @@
           "nome": "MAX. Rajada de Projéteis de Energia",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo. Quando a vida do alvo estiver abaixo de 60%, causa 40% de dano adicional e aumenta a taxa de penetração de todos os [Saiyajins] em 20%, com 60% de chance de causar [Pequeno Lançamento].",
+          "desc": "[ATQ Físico] Ataca um único inimigo. Quando a vida do alvo estiver abaixo de 60%, causa 40% de dano adicional e aumenta a taxa de penetração de todos os [Saiyajins] em 20%, com 60% de chance de causar [Elevação Baixa].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SR_07_Goku_SS3/Skill.png"
         }
@@ -3561,7 +3561,7 @@
           "nome": "SMAX. Golpe do Dragão",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Ataca um único inimigo. Na primeira vez que é usado, garante um Acerto Crítico, aumenta a Taxa de Crítico em 50% e a Intensidade de Crítico em 60% (por 2 turnos), causando [Derrubado].",
+          "desc": "[ATQ Físico] Ataca um único inimigo. Na primeira vez que é usado, garante um Acerto Crítico, aumenta a Taxa de Crítico em 50% e a Intensidade de Crítico em 60% (por 2 turnos), causando [Derrubada].",
           "dano": "400%+20",
           "icone": "ability-icons/SSR,SR e R/SR_07_Goku_SS3/Ultimate.png"
         }
@@ -3634,7 +3634,7 @@
           "nome": "Onda Explosiva Demoníaca",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, causando 45% de dano adicional a lutadores [Malignos], com 60% de chance de infligir [Malabarismo Maior].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, causando 45% de dano adicional a lutadores [Malignos], com 60% de chance de infligir [Elevação Alta].",
           "dano": "100%+10",
           "icone": "ability-icons/SSR,SR e R/SR_08_Gohan/Skill.png"
         },
@@ -3642,7 +3642,7 @@
           "nome": "MAX. Explosão Mágica",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, causando 60% de dano extra a Guerreiros do [Mal]. Se houver menos de 3 inimigos, aplica 30% de chance de [Atordoamento] (incapacidade de agir por 1 turno), causando [Grande Lançamento ao Ar].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, causando 60% de dano extra a Guerreiros do [Mal]. Se houver menos de 3 inimigos, aplica 30% de chance de [Atordoamento] (incapacidade de agir por 1 turno), causando [Elevação Alta].",
           "dano": "100%+10",
           "icone": "ability-icons/SSR,SR e R/SR_08_Gohan/Skill.png"
         }
@@ -3668,7 +3668,7 @@
           "nome": "SMAX. Soco Perfurante do Céu e da Terra",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos. Para cada [Guerreiro das Trevas] presente na fileira alvo, o dano aumenta em 12%. Se causar uma eliminação, pode liberar novamente a habilidade definitiva (coeficiente de dano de 70%). Quanto mais habilidades definitivas o inimigo liberar no mesmo turno, maior será o aumento de ataque e defesa desta habilidade definitiva (máximo de 30%, duração de 1 turno), causando [Grande Flutuação Aérea].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos. Para cada [Guerreiro das Trevas] presente na fileira alvo, o dano aumenta em 12%. Se causar uma eliminação, pode liberar novamente a habilidade definitiva (coeficiente de dano de 70%). Quanto mais habilidades definitivas o inimigo liberar no mesmo turno, maior será o aumento de ataque e defesa desta habilidade definitiva (máximo de 30%, duração de 1 turno), causando [Elevação Alta].",
           "dano": "280%+18",
           "icone": "ability-icons/SSR,SR e R/SR_08_Gohan/Ultimate.png"
         }
@@ -3749,7 +3749,7 @@
           "nome": "MAX. Super Espada de Ar",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca o inimigo com a menor vida, aplicando 1 camada de [Sangramento] (mesmo efeito acima). Quando a própria vida estiver abaixo de 50%, o dano é aumentado em 30%, com 60% de chance de causar [Recuo].",
+          "desc": "[ATQ Físico] Ataca o inimigo com a menor vida, aplicando 1 camada de [Sangramento] (mesmo efeito acima). Quando a própria vida estiver abaixo de 50%, o dano é aumentado em 30%, com 60% de chance de causar [Empurrão].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SR_09_Goku_Black/Skill.png"
         }
@@ -3775,7 +3775,7 @@
           "nome": "SMAX. Corte Infinito",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Ataca o inimigo com a menor vida, aplica 1 camada de [Sangramento] (sofre dano igual a 25% do ATQ do aplicador no início de cada turno, cada camada reduz 5% da DEF, máximo de 10 camadas). Causa 30% de dano extra contra Guerreiros [Ofensivos] e concede o efeito Aniquilação aos Guerreiros [Ofensivos] aliados (quando a vida do inimigo for inferior a 45%, o dano aumenta em 20% por 2 turnos). Causa [Grande Flutuação].",
+          "desc": "[ATQ Físico] Ataca o inimigo com a menor vida, aplica 1 camada de [Sangramento] (sofre dano igual a 25% do ATQ do aplicador no início de cada turno, cada camada reduz 5% da DEF, máximo de 10 camadas). Causa 30% de dano extra contra Guerreiros [Ofensivos] e concede o efeito Aniquilação aos Guerreiros [Ofensivos] aliados (quando a vida do inimigo for inferior a 45%, o dano aumenta em 20% por 2 turnos). Causa [Elevação Alta].",
           "dano": "380%+26",
           "icone": "ability-icons/SSR,SR e R/SR_09_Goku_Black/Ultimate.png"
         }
@@ -3856,7 +3856,7 @@
           "nome": "MAX. Golpe Explosivo",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo e adiciona [Escudo] a si mesmo, com intensidade de 8% da Vida Máxima. Para [Guerreiros de Ataque], reduz 200 pontos de Raiva e causa [Repulsão] com 60% de chance.",
+          "desc": "[ATQ Físico] Ataca um único inimigo e adiciona [Escudo] a si mesmo, com intensidade de 8% da Vida Máxima. Para [Guerreiros de Ataque], reduz 200 pontos de Raiva e causa [Empurrão] com 60% de chance.",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SR_10_Cell/Skill.png"
         }
@@ -3882,7 +3882,7 @@
           "nome": "SMAX. Sistema Solar — Kamehameha",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, sacrifica 10% da própria vida para causar dano equivalente a 10% da vida máxima do alvo, com 100% de chance de causar [Queimadura]. Quando a vida estiver abaixo de 50%, aumenta adicionalmente sua própria taxa de redução de dano em 15%, taxa de bloqueio em 15% e resistência a anomalias em 30% (2 turnos), causando [Repulsão].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, sacrifica 10% da própria vida para causar dano equivalente a 10% da vida máxima do alvo, com 100% de chance de causar [Queimadura]. Quando a vida estiver abaixo de 50%, aumenta adicionalmente sua própria taxa de redução de dano em 15%, taxa de bloqueio em 15% e resistência a anomalias em 30% (2 turnos), causando [Empurrão].",
           "dano": "280%+18",
           "icone": "ability-icons/SSR,SR e R/SR_10_Cell/Ultimate.png"
         }
@@ -3955,7 +3955,7 @@
           "nome": "Combo Rápido",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, cura o aliado com menos PV, com 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, cura o aliado com menos PV, com 60% de chance de infligir [Derrubada].",
           "dano": "150%+8",
           "icone": "ability-icons/SSR,SR e R/SR_11_Android_17/Skill.png"
         },
@@ -3963,7 +3963,7 @@
           "nome": "MAX. Golpes Rápidos",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo e recupera a vida do guerreiro aliado com menor HP. Se o alvo possuir [Escudo], recupera 50% a mais. 60% de chance de causar [Queda].",
+          "desc": "[ATQ Físico] Ataca um único inimigo e recupera a vida do guerreiro aliado com menor HP. Se o alvo possuir [Escudo], recupera 50% a mais. 60% de chance de causar [Derrubada].",
           "dano": "180%+8",
           "icone": "ability-icons/SSR,SR e R/SR_11_Android_17/Skill.png"
         }
@@ -3989,7 +3989,7 @@
           "nome": "SMAX. Grande Onda de Energia",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Ataca a unidade com menos PV na retaguarda, enquanto adiciona um [Escudo] com intensidade igual a 120% do ATQ ao Guerreiro aliado com menor PV. Se o PV do alvo estiver abaixo de 30%, a intensidade do [Escudo] aumenta para 180% do ATQ. Além disso, aplica [Ferimento Grave] no alvo (reduz em 70% o efeito de cura recebido pelo alvo por 1 turno) e causa [Pequena Elevação].",
+          "desc": "[ATQ Físico] Ataca a unidade com menos PV na retaguarda, enquanto adiciona um [Escudo] com intensidade igual a 120% do ATQ ao Guerreiro aliado com menor PV. Se o PV do alvo estiver abaixo de 30%, a intensidade do [Escudo] aumenta para 180% do ATQ. Além disso, aplica [Ferimento Grave] no alvo (reduz em 70% o efeito de cura recebido pelo alvo por 1 turno) e causa [Elevação Baixa].",
           "dano": "380%+20",
           "icone": "ability-icons/SSR,SR e R/SR_11_Android_17/Ultimate.png"
         }
@@ -4070,7 +4070,7 @@
           "nome": "MAX. Canhão Esmagador",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo, causando 40% de dano adicional a Guerreiros do tipo [Técnica], reduzindo a velocidade de recuperação de Raiva do alvo em 30% (por 1 turno), com 80% de chance de recuperar adicionalmente 100 pontos de Raiva própria e 60% de chance de causar [Repulsão].",
+          "desc": "[Ataque Especial] Ataca um único inimigo, causando 40% de dano adicional a Guerreiros do tipo [Técnica], reduzindo a velocidade de recuperação de Raiva do alvo em 30% (por 1 turno), com 80% de chance de recuperar adicionalmente 100 pontos de Raiva própria e 60% de chance de causar [Empurrão].",
           "dano": "160%+12",
           "icone": "ability-icons/SSR,SR e R/SR_12_Caulifla/Skill.png"
         }
@@ -4096,7 +4096,7 @@
           "nome": "SMAX. Rajada Contínua",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Causa dano a todos os inimigos, reduz aleatoriamente 200 de raiva de 3 inimigos e adiciona 50% da raiva reduzida a si mesma. Causa 60% de dano adicional a guerreiros do tipo [Ataque] e provoca [Recuo].",
+          "desc": "[Ataque Especial] Causa dano a todos os inimigos, reduz aleatoriamente 200 de raiva de 3 inimigos e adiciona 50% da raiva reduzida a si mesma. Causa 60% de dano adicional a guerreiros do tipo [Ataque] e provoca [Empurrão].",
           "dano": "170%+10",
           "icone": "ability-icons/SSR,SR e R/SR_12_Caulifla/Ultimate.png"
         }
@@ -4169,7 +4169,7 @@
           "nome": "Luz Distorcida",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, 35% de chance de infligir [Ligação] (não pode agir, dura 1 turno), 40% de chance de infligir [Paralisia] (não pode usar ataques de sequência nem habilidades, dura 1 turno), 60% de chance de causar [Pequeno Malabarismo].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, 35% de chance de infligir [Ligação] (não pode agir, dura 1 turno), 40% de chance de infligir [Paralisia] (não pode usar ataques de sequência nem habilidades, dura 1 turno), 60% de chance de causar [Elevação Baixa].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/SR_13_Boo_Puro/Skill.png"
         },
@@ -4177,7 +4177,7 @@
           "nome": "MAX. Raio de Transformação",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo, com 35% de chance de causar [Queimadura Espiritual], 35% de chance de causar [Imobilização] (incapacidade de agir por 1 turno), 40% de chance de causar [Paralisia] (incapacidade de usar golpes de perseguição e habilidades por 1 turno) e 60% de chance de causar [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca um único inimigo, com 35% de chance de causar [Queimadura Espiritual], 35% de chance de causar [Imobilização] (incapacidade de agir por 1 turno), 40% de chance de causar [Paralisia] (incapacidade de usar golpes de perseguição e habilidades por 1 turno) e 60% de chance de causar [Elevação Baixa].",
           "dano": "165%+8",
           "icone": "ability-icons/SSR,SR e R/SR_13_Boo_Puro/Skill.png"
         }
@@ -4203,7 +4203,7 @@
           "nome": "SMAX. Super Bomba de Aniquilação",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATK Especial] Ataca a retaguarda inimiga, com 65% de chance de causar [Queimadura Espiritual] em cada alvo (no início de cada turno, sofre dano igual a 50% do ATQ do aplicador, perde 200 de Raiva no início de cada turno, dura 2 turnos, não acumulável) e [Queimadura]. Causa dano igual a 20% da vida perdida do próprio personagem ao alvo com [Queimadura Espiritual] e reduz sua taxa de resistência a crítico em 20%, causando [Pequena Flutuação].",
+          "desc": "[ATK Especial] Ataca a retaguarda inimiga, com 65% de chance de causar [Queimadura Espiritual] em cada alvo (no início de cada turno, sofre dano igual a 50% do ATQ do aplicador, perde 200 de Raiva no início de cada turno, dura 2 turnos, não acumulável) e [Queimadura]. Causa dano igual a 20% da vida perdida do próprio personagem ao alvo com [Queimadura Espiritual] e reduz sua taxa de resistência a crítico em 20%, causando [Elevação Baixa].",
           "dano": "230%+15",
           "icone": "ability-icons/SSR,SR e R/SR_13_Boo_Puro/Ultimate.png"
         }
@@ -4284,7 +4284,7 @@
           "nome": "MAX. Corte de Vento",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria Força Crítica em 15%. Quando a vida do inimigo estiver acima de 50%, o dano aumenta em 25%; a partir do início do terceiro turno, muda para: quando a vida do inimigo estiver abaixo de 50%, o dano aumenta em 25%, com 60% de chance de causar [Recuo].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria Força Crítica em 15%. Quando a vida do inimigo estiver acima de 50%, o dano aumenta em 25%; a partir do início do terceiro turno, muda para: quando a vida do inimigo estiver abaixo de 50%, o dano aumenta em 25%, com 60% de chance de causar [Empurrão].",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/SR_14_Zamasu/Skill.png"
         }
@@ -4371,7 +4371,7 @@
           "nome": "Golpe Rápido",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, 25% de chance de infligir [Atordoamento] (incapaz de agir, dura 1 turno); se o alvo for do [Tipo Ataque], causa +40% de dano. 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, 25% de chance de infligir [Atordoamento] (incapaz de agir, dura 1 turno); se o alvo for do [Tipo Ataque], causa +40% de dano. 60% de chance de infligir [Derrubada].",
           "dano": "155%+15",
           "icone": "ability-icons/SSR,SR e R/SR_15_Xeno_Goku/Skill.png"
         },
@@ -4379,7 +4379,7 @@
           "nome": "MAX. Golpe Rápido",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, com 25% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno) no alvo. Se o alvo for um Guerreiro do tipo [Ataque], causa 60% de dano adicional e tem 60% de chance de causar [Derrubado].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, com 25% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno) no alvo. Se o alvo for um Guerreiro do tipo [Ataque], causa 60% de dano adicional e tem 60% de chance de causar [Derrubada].",
           "dano": "165%+15",
           "icone": "ability-icons/SSR,SR e R/SR_15_Xeno_Goku/Skill.png"
         }
@@ -4405,7 +4405,7 @@
           "nome": "SMAX. Impacto Explosivo do Patrulheiro",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um alvo aleatório na retaguarda, aumenta a absorção de vida em 40% e, contra Guerreiros do tipo [Ataque], aumenta o efeito de vantagem em 40%. Ao morrer, reduz imediatamente 200 de raiva da retaguarda inimiga e diminui a taxa de dano em 10% (2 turnos), causando [Repulsão].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um alvo aleatório na retaguarda, aumenta a absorção de vida em 40% e, contra Guerreiros do tipo [Ataque], aumenta o efeito de vantagem em 40%. Ao morrer, reduz imediatamente 200 de raiva da retaguarda inimiga e diminui a taxa de dano em 10% (2 turnos), causando [Empurrão].",
           "dano": "440%+24",
           "icone": "ability-icons/SSR,SR e R/SR_15_Xeno_Goku/Ultimate.png"
         }
@@ -4478,7 +4478,7 @@
           "nome": "Lâmina de Vento",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, inflige 1 acúmulo de [Sangramento] (no início de cada turno, o alvo sofre dano igual a 25% do ATQ do lançador; cada acúmulo reduz a DEF em 5%, até 10 acúmulos), 60% de chance de infligir [Derrubar].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, inflige 1 acúmulo de [Sangramento] (no início de cada turno, o alvo sofre dano igual a 25% do ATQ do lançador; cada acúmulo reduz a DEF em 5%, até 10 acúmulos), 60% de chance de infligir [Derrubada].",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/SR_16_Dabura/Skill.png"
         },
@@ -4512,7 +4512,7 @@
           "nome": "SMAX. Ataque de Fogos de Artifício",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira inimiga, reduzindo em 50% a intensidade de crítico dos alvos na retaguarda. Com 30% de chance, causa [Imobilização] (incapacidade de agir por 1 turno) nos alvos da retaguarda. Se não houver alvos na retaguarda, o dano aumenta em 30%. Com 50% de chance, faz com que 1 [Guerreiro das Trevas] aleatório da equipe renasça após ser derrotado! O guerreiro renascido possui 40% de seus próprios PVs e herda a raiva acumulada antes da morte. Este efeito só pode ser ativado uma vez por batalha, causando [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca uma fileira inimiga, reduzindo em 50% a intensidade de crítico dos alvos na retaguarda. Com 30% de chance, causa [Imobilização] (incapacidade de agir por 1 turno) nos alvos da retaguarda. Se não houver alvos na retaguarda, o dano aumenta em 30%. Com 50% de chance, faz com que 1 [Guerreiro das Trevas] aleatório da equipe renasça após ser derrotado! O guerreiro renascido possui 40% de seus próprios PVs e herda a raiva acumulada antes da morte. Este efeito só pode ser ativado uma vez por batalha, causando [Elevação Baixa].",
           "dano": "280%+12",
           "icone": "ability-icons/SSR,SR e R/SR_16_Dabura/Ultimate.png"
         }
@@ -4573,7 +4573,7 @@
           "nome": "Tempestade do Amor",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, converte 10% do dano causado em PV para a própria Fileira, 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, converte 10% do dano causado em PV para a própria Fileira, 60% de chance de infligir [Elevação Baixa].",
           "dano": "135%+8",
           "icone": "ability-icons/SSR,SR e R/SR_17_Ribrianne/Skill.png"
         },
@@ -4581,7 +4581,7 @@
           "nome": "MAX. Cajado de Carga",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca uma fileira de alvos, converte 15% do dano em vida para a própria fileira e recupera 5% da vida do Guerreiro aliado com a menor vida. Com 60% de chance, causa [Pequeno Elevação].",
+          "desc": "[Ataque Especial] Ataca uma fileira de alvos, converte 15% do dano em vida para a própria fileira e recupera 5% da vida do Guerreiro aliado com a menor vida. Com 60% de chance, causa [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/SR_17_Ribrianne/Skill.png"
         }
@@ -4607,7 +4607,7 @@
           "nome": "SMAX. Feijão Mágico da Chuva",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos. Se a própria vida for maior ou igual a 50%, causa 40% de dano adicional; se a própria vida for inferior a 50%, recupera uma grande quantidade de vida e causa [Repulsão]. Cura todos os ninjas aliados em: ATQ x100%+15.",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos. Se a própria vida for maior ou igual a 50%, causa 40% de dano adicional; se a própria vida for inferior a 50%, recupera uma grande quantidade de vida e causa [Empurrão]. Cura todos os ninjas aliados em: ATQ x100%+15.",
           "dano": "Cura todos os ninjas aliados em: ATQ x100%+15",
           "icone": "ability-icons/SSR,SR e R/SR_17_Ribrianne/Ultimate.png"
         }
@@ -4688,7 +4688,7 @@
           "nome": "MAX. Super Soco de Ar",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Físico/Especial] Coeficiente de dano aumenta em 40%. Ataca um único inimigo, recupera 150 de raiva própria e tem 60% de chance de causar [Repulsão].",
+          "desc": "[Físico/Especial] Coeficiente de dano aumenta em 40%. Ataca um único inimigo, recupera 150 de raiva própria e tem 60% de chance de causar [Empurrão].",
           "dano": "252%+15",
           "icone": "ability-icons/SSR,SR e R/SR_18_Goku_GT/Skill.png"
         }
@@ -4714,7 +4714,7 @@
           "nome": "SMAX. Golpe do Dragão",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, reduz a Resistência a Anomalias do alvo em 30% (1 turno), reduz a Taxa de Dano do alvo em 15% (2 turnos), 50% de chance de causar [Imobilização] (incapacidade de agir, dura 1 turno), aumenta a Taxa de Bloqueio dos aliados [Saiyajin] em 20% (2 turnos) e causa [Repulsão].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, reduz a Resistência a Anomalias do alvo em 30% (1 turno), reduz a Taxa de Dano do alvo em 15% (2 turnos), 50% de chance de causar [Imobilização] (incapacidade de agir, dura 1 turno), aumenta a Taxa de Bloqueio dos aliados [Saiyajin] em 20% (2 turnos) e causa [Empurrão].",
           "dano": "400%+24",
           "icone": "ability-icons/SSR,SR e R/SR_18_Goku_GT/Ultimate.png"
         }
@@ -4787,7 +4787,7 @@
           "nome": "Balas de Energia Contínuas",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, restaura 100 de Fúria, 60% de chance de infligir [Derrubar].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, restaura 100 de Fúria, 60% de chance de infligir [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_02_Vegeta/Skill.png"
         },
@@ -4795,7 +4795,7 @@
           "nome": "MAX. Rajada Contínua",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo, recupera 150 de Fúria própria. Se o número de aliados não for superior ao de inimigos, aumenta o dano em 25% e causa [Caído] com 60% de chance.",
+          "desc": "[Ataque Especial] Ataca um único inimigo, recupera 150 de Fúria própria. Se o número de aliados não for superior ao de inimigos, aumenta o dano em 25% e causa [Derrubada] com 60% de chance.",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_02_Vegeta/Skill.png"
         }
@@ -4821,7 +4821,7 @@
           "nome": "SMAX. Clarão Supremo",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Especial] Ataca um único inimigo. Este ataque aumenta temporariamente a Taxa de Crítico em 15% e a Taxa de Penetração em 25%. Causa 40% de Dano de Respingo nos inimigos ao redor, sem gerar Fúria. A partir do 2º turno em campo, a própria Velocidade de Recuperação de Fúria aumenta em 30%, causando [Repulsão].",
+          "desc": "[ATQ Especial] Ataca um único inimigo. Este ataque aumenta temporariamente a Taxa de Crítico em 15% e a Taxa de Penetração em 25%. Causa 40% de Dano de Respingo nos inimigos ao redor, sem gerar Fúria. A partir do 2º turno em campo, a própria Velocidade de Recuperação de Fúria aumenta em 30%, causando [Empurrão].",
           "dano": "400%+26",
           "icone": "ability-icons/SSR,SR e R/R_02_Vegeta/Ultimate.png"
         }
@@ -4894,7 +4894,7 @@
           "nome": "Corte de Disco",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, causa +30% de dano a inimigos do [Tipo Ataque], 50% de chance de restaurar 100 de Fúria, 60% de chance de infligir [Derrubar].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, causa +30% de dano a inimigos do [Tipo Ataque], 50% de chance de restaurar 100 de Fúria, 60% de chance de infligir [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_03_Freeza/Skill.png"
         },
@@ -4902,7 +4902,7 @@
           "nome": "MAX. Disco de Corte",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo, causando 30% de dano adicional contra Guerreiros do tipo ataque, com 50% de chance de recuperar 200 de própria Fúria, 30% de chance de silenciar o alvo e 60% de chance de causar [Queda].",
+          "desc": "[Ataque Especial] Ataca um único inimigo, causando 30% de dano adicional contra Guerreiros do tipo ataque, com 50% de chance de recuperar 200 de própria Fúria, 30% de chance de silenciar o alvo e 60% de chance de causar [Derrubada].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_03_Freeza/Skill.png"
         }
@@ -4928,7 +4928,7 @@
           "nome": "SMAX. Esfera de Energia Mortal",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca a fileira frontal inimiga, reduzindo 150 pontos de raiva de cada alvo. Se houver apenas 1 inimigo na fileira, reduz 300 pontos de raiva, com 30% de chance de causar [Silêncio] (impede o uso de golpes especiais por 1 turno) e causa [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca a fileira frontal inimiga, reduzindo 150 pontos de raiva de cada alvo. Se houver apenas 1 inimigo na fileira, reduz 300 pontos de raiva, com 30% de chance de causar [Silêncio] (impede o uso de golpes especiais por 1 turno) e causa [Elevação Baixa].",
           "dano": "230%+18",
           "icone": "ability-icons/SSR,SR e R/R_03_Freeza/Ultimate.png"
         }
@@ -5009,7 +5009,7 @@
           "nome": "MAX. Golpe Infernal",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo e aumenta a taxa de bloqueio da própria coluna em 20% e a taxa de redução de dano em 10%, com 60% de chance de causar [Repulsão].",
+          "desc": "[ATQ Físico] Ataca um único inimigo e aumenta a taxa de bloqueio da própria coluna em 20% e a taxa de redução de dano em 10%, com 60% de chance de causar [Empurrão].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_04_Android_16/Skill.png"
         }
@@ -5108,7 +5108,7 @@
           "nome": "Punho Redemoinho",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, reduz a Taxa de Crít. do alvo em 15% (2 turnos), 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, reduz a Taxa de Crít. do alvo em 15% (2 turnos), 60% de chance de infligir [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_05_Yamcha/Skill.png"
         },
@@ -5116,7 +5116,7 @@
           "nome": "MAX. Golpe Ciclone",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo a taxa de crítico do alvo em 15% e o dano crítico em 20% (2 turnos), com 60% de chance de causar [Derrubar].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo a taxa de crítico do alvo em 15% e o dano crítico em 20% (2 turnos), com 60% de chance de causar [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_05_Yamcha/Skill.png"
         }
@@ -5223,7 +5223,7 @@
           "nome": "MAX. Golpe Veloz",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo sua taxa de bloqueio em 25% e a probabilidade de ativação de habilidades em 25%, além de aumentar a taxa de penetração de defesa dos aliados na mesma fileira em 20%. Com 60% de chance, causa [Repulsão].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo sua taxa de bloqueio em 25% e a probabilidade de ativação de habilidades em 25%, além de aumentar a taxa de penetração de defesa dos aliados na mesma fileira em 20%. Com 60% de chance, causa [Empurrão].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_06_Piccolo/Skill.png"
         }
@@ -5249,7 +5249,7 @@
           "nome": "SMAX. Canhão de Feixe de Energia Demoníaca",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, ignorando bloqueio e resistência a dano, reduzindo a defesa do alvo principal em 30% e a redução de dano em 20% (por 1 turno), causando [Pequeno Elevação].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, ignorando bloqueio e resistência a dano, reduzindo a defesa do alvo principal em 30% e a redução de dano em 20% (por 1 turno), causando [Elevação Baixa].",
           "dano": "280%+18",
           "icone": "ability-icons/SSR,SR e R/R_06_Piccolo/Ultimate.png"
         }
@@ -5322,7 +5322,7 @@
           "nome": "Choque Espiritual",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, com 24% de chance de infligir [Silêncio] (incapaz de usar Supremo, dura 1 turno), e 60% de chance de infligir [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, com 24% de chance de infligir [Silêncio] (incapaz de usar Supremo, dura 1 turno), e 60% de chance de infligir [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_07_Tenshinhan/Skill.png"
         },
@@ -5330,7 +5330,7 @@
           "nome": "MAX. Ataque de Energia",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, com 34% de chance de causar [Silêncio] (incapacidade de agir, 1 turno), aumenta sua própria taxa de redução de dano em 8% (2 turnos) e, com 60% de chance, causa [Caído].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, com 34% de chance de causar [Silêncio] (incapacidade de agir, 1 turno), aumenta sua própria taxa de redução de dano em 8% (2 turnos) e, com 60% de chance, causa [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_07_Tenshinhan/Skill.png"
         }
@@ -5356,7 +5356,7 @@
           "nome": "SMAX. Ataque de Ki",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Golpe Especial] Ataca um único inimigo, causando 40% de dano em área ao redor do alvo. Com 70% de chance, aplica [Cegueira] no alvo principal (impede o uso de habilidades por 1 turno), remove os estados negativos dos [Artistas Marciais] aliados e causa [Queda].",
+          "desc": "[Golpe Especial] Ataca um único inimigo, causando 40% de dano em área ao redor do alvo. Com 70% de chance, aplica [Cegueira] no alvo principal (impede o uso de habilidades por 1 turno), remove os estados negativos dos [Artistas Marciais] aliados e causa [Derrubada].",
           "dano": "380%+20",
           "icone": "ability-icons/SSR,SR e R/R_07_Tenshinhan/Ultimate.png"
         }
@@ -5437,7 +5437,7 @@
           "nome": "MAX. Bêbado em Kung Fu",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta a taxa de bloqueio do próprio e dos Guerreiros na mesma coluna em 15%, com 60% de chance de causar [Repulsão].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta a taxa de bloqueio do próprio e dos Guerreiros na mesma coluna em 15%, com 60% de chance de causar [Empurrão].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_08_Mestre_Kame/Skill.png"
         }
@@ -5463,7 +5463,7 @@
           "nome": "SMAX. Golpe de Múltiplas Imagens Residuais",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Ataca uma fileira de inimigos, em seguida aumenta em 25% a Defesa própria e dos Guerreiros da mesma fileira, e adiciona um [Escudo] equivalente a 12% da Vida perdida do Mestre Kame, causando [Repulsão].",
+          "desc": "[ATQ Físico] Ataca uma fileira de inimigos, em seguida aumenta em 25% a Defesa própria e dos Guerreiros da mesma fileira, e adiciona um [Escudo] equivalente a 12% da Vida perdida do Mestre Kame, causando [Empurrão].",
           "dano": "280%+18",
           "icone": "ability-icons/SSR,SR e R/R_08_Mestre_Kame/Ultimate.png"
         }
@@ -5472,7 +5472,7 @@
         "nome": "Ataque de Perseguição",
         "estrelas": 1,
         "tipo": "Ativar",
-        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo Malabarismo Menor, infligindo [Empurrão].",
+        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Baixa], infligindo [Empurrão].",
         "dano": null,
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png"
       },
@@ -5536,7 +5536,7 @@
           "nome": "Corte Circular Espiritual",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, aumentando a Taxa de Penetração dos aliados da Fileira da Frente em 15% (2 turnos), com 60% de chance de infligir [Derrubar].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, aumentando a Taxa de Penetração dos aliados da Fileira da Frente em 15% (2 turnos), com 60% de chance de infligir [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_09_Kuririn/Skill.png"
         },
@@ -5544,7 +5544,7 @@
           "nome": "MAX. Ataque de Chi Circular",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo e aumenta a taxa de quebra de defesa da linha de frente aliada em 25% (por 2 turnos), com 60% de chance de causar [Queda].",
+          "desc": "[Ataque Especial] Ataca um único inimigo e aumenta a taxa de quebra de defesa da linha de frente aliada em 25% (por 2 turnos), com 60% de chance de causar [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_09_Kuririn/Skill.png"
         }
@@ -5570,7 +5570,7 @@
           "nome": "SMAX. Explosão Aérea",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, aumenta o ataque e a defesa da linha de frente aliada em 12% (por 1 turno), com 10% de chance de causar [Imobilização] (impede ação, por 1 turno) no alvo, causando [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, aumenta o ataque e a defesa da linha de frente aliada em 12% (por 1 turno), com 10% de chance de causar [Imobilização] (impede ação, por 1 turno) no alvo, causando [Elevação Baixa].",
           "dano": "230%+18",
           "icone": "ability-icons/SSR,SR e R/R_09_Kuririn/Ultimate.png"
         }
@@ -5579,7 +5579,7 @@
         "nome": "Ataque de Perseguição",
         "estrelas": 1,
         "tipo": "Ativar",
-        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo Malabarismo Maior, infligindo [Derrubada].",
+        "desc": "[Artes Marciais / Explosão de Ki] Ataca um único inimigo, perseguindo [Elevação Alta], infligindo [Derrubada].",
         "dano": "75%+8",
         "icone": "ability-icons/Passiva padrão/ATQ Combinado.png"
       },
@@ -5750,7 +5750,7 @@
           "nome": "Impacto de Calor",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo; se o alvo for um lutador do [Tipo Técnica], causa 30% de Dano Extra; 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Artes Marciais] Ataca um único inimigo; se o alvo for um lutador do [Tipo Técnica], causa 30% de Dano Extra; 60% de chance de infligir [Elevação Baixa].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_11_Bergamo/Skill.png"
         },
@@ -5758,7 +5758,7 @@
           "nome": "MAX. Choque Térmico",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo. Se o alvo for um guerreiro do tipo [Técnica], causa 45% de dano adicional, com 60% de chance de causar [Pequeno Lançamento ao Ar].",
+          "desc": "[ATQ Físico] Ataca um único inimigo. Se o alvo for um guerreiro do tipo [Técnica], causa 45% de dano adicional, com 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_11_Bergamo/Skill.png"
         }
@@ -5857,7 +5857,7 @@
           "nome": "Batida Rápida",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, reduz a Chance de Habilidade do alvo em 30% (2 turnos), 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo, reduz a Chance de Habilidade do alvo em 30% (2 turnos), 60% de chance de infligir [Elevação Baixa].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_12_Goku_Crianca/Skill.png"
         },
@@ -5865,7 +5865,7 @@
           "nome": "MAX. Golpe Rápido",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aplica 1 camada de [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ATQ do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, com duração de 2 turnos), e tem 40% de chance de reduzir 200 de raiva do alvo, 60% de chance de causar [Pequena Elevação].",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aplica 1 camada de [Queimadura] (no início de cada turno, sofre dano equivalente a 25% do ATQ do aplicador; cada camada reduz 10% do efeito de cura, podendo acumular até 10 camadas, com duração de 2 turnos), e tem 40% de chance de reduzir 200 de raiva do alvo, 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_12_Goku_Crianca/Skill.png"
         }
@@ -5891,7 +5891,7 @@
           "nome": "SMAX. Kamehameha",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo o Ataque do alvo e dos alvos ao redor em 10%. Causa 30% de dano extra contra [Guerreiros das Trevas]. Para cada personagem maligno no lado inimigo, o dano aumenta em 5%, até no máximo 20%. Tem 16% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno) e causa [Grande Elevação].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, reduzindo o Ataque do alvo e dos alvos ao redor em 10%. Causa 30% de dano extra contra [Guerreiros das Trevas]. Para cada personagem maligno no lado inimigo, o dano aumenta em 5%, até no máximo 20%. Tem 16% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno) e causa [Elevação Alta].",
           "dano": "380%+16",
           "icone": "ability-icons/SSR,SR e R/R_12_Goku_Crianca/Ultimate.png"
         }
@@ -5952,7 +5952,7 @@
           "nome": "Onda Explosiva",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, causa 30% de Dano Extra se o alvo estiver [Envenenado], 60% de chance de infligir [Malabarismo Menor].",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, causa 30% de Dano Extra se o alvo estiver [Envenenado], 60% de chance de infligir [Elevação Baixa].",
           "dano": "155%+8",
           "icone": "ability-icons/SSR,SR e R/R_13_Frost/Skill.png"
         },
@@ -5960,7 +5960,7 @@
           "nome": "MAX. Onda de Explosão",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] Ataca um único inimigo. Causa 30% de dano adicional em alvos já com [Envenenamento] e reduz a velocidade de recuperação de raiva em 40%. Tem 60% de chance de causar [Pequena Elevação].",
+          "desc": "[Ataque Especial] Ataca um único inimigo. Causa 30% de dano adicional em alvos já com [Envenenamento] e reduz a velocidade de recuperação de raiva em 40%. Tem 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_13_Frost/Skill.png"
         }
@@ -5986,7 +5986,7 @@
           "nome": "SMAX. Rajada Contínua",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca todos os inimigos. Se o alvo tiver 2 ou mais camadas de [Envenenamento], causa dano adicional equivalente a 15% da vida perdida do alvo. Se tiver 3 ou mais camadas, reduz a taxa de redução de dano do alvo em 15% e 200 de raiva, causando [Caído].",
+          "desc": "[Ataque Especial] Ataca todos os inimigos. Se o alvo tiver 2 ou mais camadas de [Envenenamento], causa dano adicional equivalente a 15% da vida perdida do alvo. Se tiver 3 ou mais camadas, reduz a taxa de redução de dano do alvo em 15% e 200 de raiva, causando [Derrubada].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_13_Frost/Ultimate.png"
         }
@@ -6059,7 +6059,7 @@
           "nome": "Corte Relâmpago",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, 100% de chance de infligir [Sangramento] (sofre dano igual a 25% do ATQ do lançador no início de cada turno, cada acúmulo reduz a DEF em 5%, até 10 acúmulos), 60% de chance de causar [Pequeno Malabarismo].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, 100% de chance de infligir [Sangramento] (sofre dano igual a 25% do ATQ do lançador no início de cada turno, cada acúmulo reduz a DEF em 5%, até 10 acúmulos), 60% de chance de causar [Elevação Baixa].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_14_Trunks_do_Futuro/Skill.png"
         },
@@ -6067,7 +6067,7 @@
           "nome": "MAX. Corte Relâmpago",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, com 100% de chance de causar [Sangramento] no alvo (no início de cada turno, sofre dano equivalente a 25% do ATQ do aplicador; cada camada reduz 5% da DEF, podendo acumular até 10 camadas). Quando a vida do inimigo estiver acima de 40%, o dano é aumentado em 35%, com 60% de chance de causar [Pequeno Lançamento].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, com 100% de chance de causar [Sangramento] no alvo (no início de cada turno, sofre dano equivalente a 25% do ATQ do aplicador; cada camada reduz 5% da DEF, podendo acumular até 10 camadas). Quando a vida do inimigo estiver acima de 40%, o dano é aumentado em 35%, com 60% de chance de causar [Elevação Baixa].",
           "dano": "175%+8",
           "icone": "ability-icons/SSR,SR e R/R_14_Trunks_do_Futuro/Skill.png"
         }
@@ -6093,7 +6093,7 @@
           "nome": "SMAX. Flash Mágico",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca o inimigo com o maior HP, causando 40% de dano extra a Guerreiros do tipo [Defesa]. Além disso, concede efeito Letal a si mesmo e aos Guerreiros da retaguarda aliados (quando o HP do inimigo estiver acima de 50%, o dano é aumentado em 25%). Também remove quaisquer efeitos negativos de qualquer Vegeta em campo aliado e recupera 200 de sua Fúria, causando [Repulsão].",
+          "desc": "[Ataque Especial] Ataca o inimigo com o maior HP, causando 40% de dano extra a Guerreiros do tipo [Defesa]. Além disso, concede efeito Letal a si mesmo e aos Guerreiros da retaguarda aliados (quando o HP do inimigo estiver acima de 50%, o dano é aumentado em 25%). Também remove quaisquer efeitos negativos de qualquer Vegeta em campo aliado e recupera 200 de sua Fúria, causando [Empurrão].",
           "dano": "390%+20",
           "icone": "ability-icons/SSR,SR e R/R_14_Trunks_do_Futuro/Ultimate.png"
         }
@@ -6166,7 +6166,7 @@
           "nome": "Fogos de Artifício Sujos",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, causa 30% de Dano Extra a alvos [Duelo], 60% de chance de causar [Pequeno Malabarismo].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, causa 30% de Dano Extra a alvos [Duelo], 60% de chance de causar [Elevação Baixa].",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/R_15_Vegeta_Base/Skill.png"
         },
@@ -6174,7 +6174,7 @@
           "nome": "MAX. Fogos de Artifício Sujos",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, causando 45% de dano adicional ao alvo do [Duelo], reduzindo sua Fúria em 200 pontos e com 60% de chance de causar [Pequeno Elevamento].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, causando 45% de dano adicional ao alvo do [Duelo], reduzindo sua Fúria em 200 pontos e com 60% de chance de causar [Elevação Baixa].",
           "dano": "160%+8",
           "icone": "ability-icons/SSR,SR e R/R_15_Vegeta_Base/Skill.png"
         }
@@ -6200,7 +6200,7 @@
           "nome": "SMAX. Tiro Brilhante",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Ataca um único inimigo, causando 35% de dano adicional a alvos em [Duelo], reduzindo 30% de resistência a anomalias, com 70% de chance de aplicar [Cegueira] no alvo (impede o uso de habilidades por 1 turno), causando [Queda].",
+          "desc": "[Ataque Especial] Ataca um único inimigo, causando 35% de dano adicional a alvos em [Duelo], reduzindo 30% de resistência a anomalias, com 70% de chance de aplicar [Cegueira] no alvo (impede o uso de habilidades por 1 turno), causando [Derrubada].",
           "dano": "360%+20",
           "icone": "ability-icons/SSR,SR e R/R_15_Vegeta_Base/Ultimate.png"
         }
@@ -6273,7 +6273,7 @@
           "nome": "Erupção de Lava",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais] Ataca um único inimigo, aumenta a própria DEF em 30% (2 turnos), 60% de chance de causar [Derrubar].",
+          "desc": "[Artes Marciais] Ataca um único inimigo, aumenta a própria DEF em 30% (2 turnos), 60% de chance de causar [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_16_Otta_Magetta/Skill.png"
         },
@@ -6281,7 +6281,7 @@
           "nome": "MAX. Erupção de Lava",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria DEF em 30% e taxa de bloqueio em 12% (2 turnos), com 60% de chance de causar [Derrubado].",
+          "desc": "[ATQ Físico] Ataca um único inimigo, aumenta sua própria DEF em 30% e taxa de bloqueio em 12% (2 turnos), com 60% de chance de causar [Derrubada].",
           "dano": "140%+8",
           "icone": "ability-icons/SSR,SR e R/R_16_Otta_Magetta/Skill.png"
         }
@@ -6307,7 +6307,7 @@
           "nome": "SMAX. Cuspe de Lava",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATQ Físico] Ataca uma fileira de inimigos. Se a própria vida estiver abaixo de 50%, aumenta adicionalmente sua própria taxa de redução de dano em 20% e taxa de bloqueio em 20% (2 turnos), causando [Repulsão].",
+          "desc": "[ATQ Físico] Ataca uma fileira de inimigos. Se a própria vida estiver abaixo de 50%, aumenta adicionalmente sua própria taxa de redução de dano em 20% e taxa de bloqueio em 20% (2 turnos), causando [Empurrão].",
           "dano": "280%+12",
           "icone": "ability-icons/SSR,SR e R/R_16_Otta_Magetta/Ultimate.png"
         }
@@ -6380,7 +6380,7 @@
           "nome": "Explosão de Ki",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Explosão de Ki] Ataca um único inimigo, reduz a Resistência a Crít. do inimigo em 12% (2 turnos), causa [Derrubar]. Inflige 145%+8 de dano ao alvo.",
+          "desc": "[Explosão de Ki] Ataca um único inimigo, reduz a Resistência a Crít. do inimigo em 12% (2 turnos), causa [Derrubada]. Inflige 145%+8 de dano ao alvo.",
           "dano": "145%+8",
           "icone": "ability-icons/SSR,SR e R/R_17_Dyspo/Skill.png"
         },
@@ -7010,7 +7010,7 @@
           "nome": "Explosão Ressonante",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Pequeno Flutuar]. Aumenta a própria Taxa de Roubo de Vida em 20% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo (o dano em área não restaura Fúria extra). Se este ataque for um Acerto Crítico, aumenta o dano desta habilidade em 30%.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Elevação Baixa]. Aumenta a própria Taxa de Roubo de Vida em 20% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo (o dano em área não restaura Fúria extra). Se este ataque for um Acerto Crítico, aumenta o dano desta habilidade em 30%.",
           "dano": "160%+15",
           "icone": "ability-icons/Limitado e Lenda/Gogeta_SS4/Skill.png"
         },
@@ -7018,7 +7018,7 @@
           "nome": "MAX. Explosão Ressonante",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Pequeno Flutuar], e reduz a Taxa de Redução de Dano do alvo em 15% (2 turnos). Aumenta a própria Taxa de Roubo de Vida em 25% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo. Se Acerto Crítico, aumenta o dano desta habilidade em 40%.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Elevação Baixa], e reduz a Taxa de Redução de Dano do alvo em 15% (2 turnos). Aumenta a própria Taxa de Roubo de Vida em 25% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo. Se Acerto Crítico, aumenta o dano desta habilidade em 40%.",
           "dano": "175%+15",
           "icone": "ability-icons/Limitado e Lenda/Gogeta_SS4/Skill.png"
         }
@@ -7125,7 +7125,7 @@
           "nome": "MAX. Impacto Explosivo Contínuo",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo com um golpe de [Artes Marciais/Ki], com 60% de chance de causar [Derrubar]. Aumenta o próprio Dano Crítico e Taxa de Penetração em 30% por 2 turnos. Se Acerto Crítico, causa dano adicional igual a 5% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Restaura PV igual a 40% do dano causado.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo com um golpe de [Artes Marciais/Ki], com 60% de chance de causar [Derrubada]. Aumenta o próprio Dano Crítico e Taxa de Penetração em 30% por 2 turnos. Se Acerto Crítico, causa dano adicional igual a 5% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Restaura PV igual a 40% do dano causado.",
           "dano": "175%+15",
           "icone": "ability-icons/Limitado e Lenda/SSGSS_Gogeta/Skill.png"
         }
@@ -7135,7 +7135,7 @@
           "nome": "Punidor de Almas",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Pequeno Flutuar], aumentando a própria Taxa de Dano e Taxa de Redução de Dano em 20%, reduzindo a Fúria do alvo principal em 150, e causando dano adicional igual a 4% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se o alvo for [Tipo Defesa], também reduz a cura recebida em 20%. Se o ataque for Acerto Crítico, causa dano adicional aos inimigos atrás do alvo igual a 30% do dano deste ataque (não gera Fúria adicional). Se o ataque não for Acerto Crítico, restaura PV igual a 6% do próprio PV Máx.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Elevação Baixa], aumentando a própria Taxa de Dano e Taxa de Redução de Dano em 20%, reduzindo a Fúria do alvo principal em 150, e causando dano adicional igual a 4% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se o alvo for [Tipo Defesa], também reduz a cura recebida em 20%. Se o ataque for Acerto Crítico, causa dano adicional aos inimigos atrás do alvo igual a 30% do dano deste ataque (não gera Fúria adicional). Se o ataque não for Acerto Crítico, restaura PV igual a 6% do próprio PV Máx.",
           "dano": "400%+24",
           "icone": "ability-icons/Limitado e Lenda/SSGSS_Gogeta/Ultimate.png"
         },
@@ -7143,7 +7143,7 @@
           "nome": "MAX. Punidor de Almas",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Pequeno Flutuar], aumentando a própria Taxa de Dano e Taxa de Redução de Dano em 25%, reduzindo a Fúria do alvo principal em 200 e a Resistência a Supremo em 15% por 1 turno, e causando dano adicional igual a 5% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se [Tipo Defesa], também reduz a cura recebida em 30%. Se Acerto Crítico, causa dano adicional aos inimigos atrás do alvo igual a 30% do dano deste ataque. Se o ataque não for Acerto Crítico, ganha 1 acúmulo de [Espírito de Luta], restaura PV igual a 8% do próprio PV Máx., e restaura 150 de Fúria.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Elevação Baixa], aumentando a própria Taxa de Dano e Taxa de Redução de Dano em 25%, reduzindo a Fúria do alvo principal em 200 e a Resistência a Supremo em 15% por 1 turno, e causando dano adicional igual a 5% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se [Tipo Defesa], também reduz a cura recebida em 30%. Se Acerto Crítico, causa dano adicional aos inimigos atrás do alvo igual a 30% do dano deste ataque. Se o ataque não for Acerto Crítico, ganha 1 acúmulo de [Espírito de Luta], restaura PV igual a 8% do próprio PV Máx., e restaura 150 de Fúria.",
           "dano": "420%+24",
           "icone": "ability-icons/Limitado e Lenda/SSGSS_Gogeta/Ultimate.png"
         },
@@ -7151,7 +7151,7 @@
           "nome": "SMAX. Punidor de Almas",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Pequeno Flutuar]. Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 30%. Reduz a Fúria do alvo principal em 300 e a Resistência a Supremo em 20% por 1 turno. Causa dano adicional igual a 8% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se [Tipo Defesa], também reduz a cura recebida em 40%. Se Acerto Crítico, causa dano adicional aos inimigos adjacentes ao alvo igual a 30% do dano deste ataque (não gera Fúria adicional). Se o ataque não for Acerto Crítico, ganha 1 acúmulo de [Espírito de Luta], restaura PV igual a 10% do próprio PV Máx., e restaura 200 de Fúria. [Efeito Passivo]: Aprimora o [Espírito de Luta]; cada acúmulo aumenta a Taxa de Crít. em 10% e a Taxa de Bloqueio em 5%.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, infligindo [Elevação Baixa]. Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 30%. Reduz a Fúria do alvo principal em 300 e a Resistência a Supremo em 20% por 1 turno. Causa dano adicional igual a 8% do PV Máx. do alvo (dobrado se [Tipo Defesa]). Se [Tipo Defesa], também reduz a cura recebida em 40%. Se Acerto Crítico, causa dano adicional aos inimigos adjacentes ao alvo igual a 30% do dano deste ataque (não gera Fúria adicional). Se o ataque não for Acerto Crítico, ganha 1 acúmulo de [Espírito de Luta], restaura PV igual a 10% do próprio PV Máx., e restaura 200 de Fúria. [Efeito Passivo]: Aprimora o [Espírito de Luta]; cada acúmulo aumenta a Taxa de Crít. em 10% e a Taxa de Bloqueio em 5%.",
           "dano": "440%+24",
           "icone": "ability-icons/Limitado e Lenda/SSGSS_Gogeta/Ultimate.png"
         }
@@ -7224,7 +7224,7 @@
           "nome": "Foice de Ki",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 60% de chance de causar [Grande Elevação] e 40% de chance de infligir [Silêncio] em alvos da retaguarda. 80% de chance de aplicar [Chama Extintora da Alma] nos alvos. Restaura PV igual a 100% do próprio ATQ e 100 de Fúria. Se o próprio possuir [Escudo Extintor da Alma], o PV e a Fúria restaurados aumentam em 50%. [Silêncio]: não pode usar Supremos (Ultimate Skills), dura 1 turno. [Chama Extintora da Alma]: reduz o ATQ em 10%, causa dano igual a 60% do ATQ do lançador a cada turno, dura 2 turnos, não acumula.",
+          "desc": "[Ataque Especial] Ataca uma fileira de inimigos, com 60% de chance de causar [Elevação Alta] e 40% de chance de infligir [Silêncio] em alvos da retaguarda. 80% de chance de aplicar [Chama Extintora da Alma] nos alvos. Restaura PV igual a 100% do próprio ATQ e 100 de Fúria. Se o próprio possuir [Escudo Extintor da Alma], o PV e a Fúria restaurados aumentam em 50%. [Silêncio]: não pode usar Supremos (Ultimate Skills), dura 1 turno. [Chama Extintora da Alma]: reduz o ATQ em 10%, causa dano igual a 60% do ATQ do lançador a cada turno, dura 2 turnos, não acumula.",
           "dano": "160%+15",
           "icone": "ability-icons/Limitado e Lenda/Goku_SS3_Rose/Skill.png"
         },
@@ -7232,7 +7232,7 @@
           "nome": "MAX. Foice de Ki",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ataque Especial] [Explosão de Ki] Ataca uma fileira inimiga aleatória, com 60% de chance de causar [Grande Elevação] e 40% de chance de infligir [Silêncio] em alvos da retaguarda. 90% de chance de aplicar [Chama Extintora da Alma] nos alvos. Antes de atacar, para cada [Chama Extintora da Alma] em campo inimigo, a Taxa de Crít. deste ataque aumenta em 20%. Restaura PV igual a 100% do próprio ATQ e 100 de Fúria. Se o próprio possuir [Escudo Extintor da Alma], o PV e a Fúria restaurados aumentam em 100%. [Silêncio]: não pode usar Supremos, 1 turno. [Chama Extintora da Alma]: -10% ATQ, dano igual a 60% do ATQ do lançador por turno, 2 turnos, não acumula. [Escudo Extintor da Alma] Aprimorado: Quando o [Escudo Extintor da Alma] absorve dano, há 45% de chance de aplicar [Chama Extintora da Alma] no atacante.",
+          "desc": "[Ataque Especial] [Explosão de Ki] Ataca uma fileira inimiga aleatória, com 60% de chance de causar [Elevação Alta] e 40% de chance de infligir [Silêncio] em alvos da retaguarda. 90% de chance de aplicar [Chama Extintora da Alma] nos alvos. Antes de atacar, para cada [Chama Extintora da Alma] em campo inimigo, a Taxa de Crít. deste ataque aumenta em 20%. Restaura PV igual a 100% do próprio ATQ e 100 de Fúria. Se o próprio possuir [Escudo Extintor da Alma], o PV e a Fúria restaurados aumentam em 100%. [Silêncio]: não pode usar Supremos, 1 turno. [Chama Extintora da Alma]: -10% ATQ, dano igual a 60% do ATQ do lançador por turno, 2 turnos, não acumula. [Escudo Extintor da Alma] Aprimorado: Quando o [Escudo Extintor da Alma] absorve dano, há 45% de chance de aplicar [Chama Extintora da Alma] no atacante.",
           "dano": "175%+15",
           "icone": "ability-icons/Limitado e Lenda/Goku_SS3_Rose/Skill.png"
         }
@@ -7331,7 +7331,7 @@
           "nome": "Punho Definitivo",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único alvo, priorizando a unidade da fileira da frente com maior porcentagem de PV. Tem 60% de chance de causar [Derrubar]. Se o PV do alvo estiver acima de 50%, o dano aumenta em 30%. Esta habilidade aumenta permanentemente a própria Taxa de Crít. e Dano Crítico em 15% cada (até 30% cada). Restaura 150 de Fúria para si. Causa 40% de dano em área aos alvos da retaguarda (o dano em área não restaura Fúria extra).",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único alvo, priorizando a unidade da fileira da frente com maior porcentagem de PV. Tem 60% de chance de causar [Derrubada]. Se o PV do alvo estiver acima de 50%, o dano aumenta em 30%. Esta habilidade aumenta permanentemente a própria Taxa de Crít. e Dano Crítico em 15% cada (até 30% cada). Restaura 150 de Fúria para si. Causa 40% de dano em área aos alvos da retaguarda (o dano em área não restaura Fúria extra).",
           "dano": "160%+15",
           "icone": "ability-icons/Limitado e Lenda/Ultra_Instinct_Goku/Skill.png"
         },
@@ -7339,7 +7339,7 @@
           "nome": "MAX. Punho Definitivo",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único alvo, priorizando a unidade da fileira da frente com maior porcentagem de PV. Tem 60% de chance de causar [Derrubar]. Se o PV do alvo estiver acima de 50%, o dano aumenta em 40%. Esta habilidade aumenta permanentemente a própria Taxa de Crít. e Dano Crítico em 15% cada (até 45% cada). Restaura 150 de Fúria para si. Se a própria Fúria estiver abaixo de 300, restaura 150 de Fúria adicional. Causa 40% de dano em área aos alvos da retaguarda (o dano em área não restaura Fúria extra).",
+          "desc": "[ATQ Físico/ATQ Especial] Ataca um único alvo, priorizando a unidade da fileira da frente com maior porcentagem de PV. Tem 60% de chance de causar [Derrubada]. Se o PV do alvo estiver acima de 50%, o dano aumenta em 40%. Esta habilidade aumenta permanentemente a própria Taxa de Crít. e Dano Crítico em 15% cada (até 45% cada). Restaura 150 de Fúria para si. Se a própria Fúria estiver abaixo de 300, restaura 150 de Fúria adicional. Causa 40% de dano em área aos alvos da retaguarda (o dano em área não restaura Fúria extra).",
           "dano": "170%+15",
           "icone": "ability-icons/Limitado e Lenda/Ultra_Instinct_Goku/Skill.png"
         }
@@ -7553,7 +7553,7 @@
           "nome": "MAX. Esfera de Impacto",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "Ataca um único inimigo, aumenta a própria Resistência a Crítico e Cura em 30%. +30% de dano se o alvo estiver [Preso], espalha [Prisão] para um inimigo aleatório (1 turno). Por 2 turnos: aliados do tipo Ataque recebem 40% do dano (o próprio recebe 60% a menos de dano compartilhado). Quando o PV da Towa estiver abaixo de 30%, recebe 100% a menos de dano compartilhado. Aumenta em 50 a Fúria ganha pelos aliados do tipo Ataque ao serem atingidos. Causa [Grande Lançamento].",
+          "desc": "Ataca um único inimigo, aumenta a própria Resistência a Crítico e Cura em 30%. +30% de dano se o alvo estiver [Preso], espalha [Prisão] para um inimigo aleatório (1 turno). Por 2 turnos: aliados do tipo Ataque recebem 40% do dano (o próprio recebe 60% a menos de dano compartilhado). Quando o PV da Towa estiver abaixo de 30%, recebe 100% a menos de dano compartilhado. Aumenta em 50 a Fúria ganha pelos aliados do tipo Ataque ao serem atingidos. Causa [Elevação Alta].",
           "dano": "145%+8 (alvos em uma fileira)",
           "icone": "ability-icons/Limitado e Lenda/Towa/Skill.png"
         }
@@ -7973,7 +7973,7 @@
           "nome": "Bolas Explosivas Múltiplas",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[Ki] Ataca um único inimigo, 60% de chance de causar [Pequeno Lançamento]; se o próprio tiver [Escudo], absorve 100 de Fúria do alvo; se não tiver [Escudo], o dano da habilidade aumenta em 30%, e restaura 6% do próprio PV.",
+          "desc": "[Ki] Ataca um único inimigo, 60% de chance de causar [Elevação Baixa]; se o próprio tiver [Escudo], absorve 100 de Fúria do alvo; se não tiver [Escudo], o dano da habilidade aumenta em 30%, e restaura 6% do próprio PV.",
           "dano": "160%+15",
           "icone": "ability-icons/Limitado e Lenda/Vados/Skill.png"
         },
@@ -7981,7 +7981,7 @@
           "nome": "MAX. Bolas Explosivas Múltiplas",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Ki] Ataca um único inimigo. 60% de chance de [Lançamento Leve]. +15% de ATQ para Guerreiras (2 turnos). Com Escudo: rouba 200 de Fúria. Sem Escudo: +40% de dano + ganha Escudo (10% do PV Máx.).",
+          "desc": "[Ki] Ataca um único inimigo. 60% de chance de [Elevação Baixa]. +15% de ATQ para Guerreiras (2 turnos). Com Escudo: rouba 200 de Fúria. Sem Escudo: +40% de dano + ganha Escudo (10% do PV Máx.).",
           "dano": "175%+15",
           "icone": "ability-icons/Limitado e Lenda/Vados/Skill.png"
         }
@@ -8080,7 +8080,7 @@
           "nome": "Masenko",
           "estrelas": 1,
           "tipo": "Ativar",
-          "desc": "[ATQ Físico] Ataca um único inimigo aleatório da retaguarda, causando [Derrubar]. Este ataque ignora 20% da DEF do inimigo e o inimigo não recupera Fúria extra. Concede a si mesmo 1 acúmulo de [Destemido] (cada acúmulo aumenta o ATQ em 3%, máx. 6 acúmulos; herda metade dos acúmulos ao reviver).",
+          "desc": "[ATQ Físico] Ataca um único inimigo aleatório da retaguarda, causando [Derrubada]. Este ataque ignora 20% da DEF do inimigo e o inimigo não recupera Fúria extra. Concede a si mesmo 1 acúmulo de [Destemido] (cada acúmulo aumenta o ATQ em 3%, máx. 6 acúmulos; herda metade dos acúmulos ao reviver).",
           "dano": "145%+15",
           "icone": "ability-icons/Limitado e Lenda/Future_Gohan/Skill.png"
         },
@@ -8088,7 +8088,7 @@
           "nome": "MAX. Lampejo de Luz Demoníaco",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[ATQ Físico] Ataca um único inimigo aleatório da retaguarda, causando [Derrubar]. Este ataque ignora 30% da DEF do inimigo e o inimigo não recupera Fúria extra. Concede a si mesmo 1 acúmulo de [Destemido] (cada acúmulo aumenta o ATQ em 4%, máx. 6 acúmulos. Herda metade dos acúmulos ao reviver). No 3º ataque, torna-se aprimorado, aumentando temporariamente o ATQ em 30%, e restaura 150 de Fúria para si.",
+          "desc": "[ATQ Físico] Ataca um único inimigo aleatório da retaguarda, causando [Derrubada]. Este ataque ignora 30% da DEF do inimigo e o inimigo não recupera Fúria extra. Concede a si mesmo 1 acúmulo de [Destemido] (cada acúmulo aumenta o ATQ em 4%, máx. 6 acúmulos. Herda metade dos acúmulos ao reviver). No 3º ataque, torna-se aprimorado, aumentando temporariamente o ATQ em 30%, e restaura 150 de Fúria para si.",
           "dano": "155%+15",
           "icone": "ability-icons/Limitado e Lenda/Future_Gohan/Skill.png"
         }
