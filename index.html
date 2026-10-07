@@ -620,14 +620,24 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .tier-row{display:flex;align-items:stretch;background:rgba(14,12,22,.92);border-bottom:1px solid rgba(255,150,50,.25);}
 .tier-row:last-child{border-bottom:none;}
 .tier-label{
-  width:110px;flex-shrink:0;display:flex;align-items:center;justify-content:center;text-align:center;
+  width:130px;flex-shrink:0;display:flex;align-items:center;justify-content:center;text-align:center;
   font-family:'Kaushan Script',cursive;font-weight:400;font-size:46px;line-height:1.1;color:#fff;
-  text-shadow:0 3px 0 rgba(0,0,0,.35);padding:8px 10px;overflow-wrap:anywhere;cursor:text;outline:none;overflow:hidden;
+  text-shadow:0 3px 0 rgba(0,0,0,.35);padding:8px 10px;overflow-wrap:normal;word-break:normal;hyphens:none;cursor:text;outline:none;overflow:hidden;
 }
 .tier-label:focus{box-shadow:inset 0 0 0 2px rgba(255,255,255,.55);}
 .tier-items{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;gap:10px;padding:12px;min-height:124px;transition:background .12s;}
 .tier-items.drag-over,.tier-pool-items.drag-over{background:rgba(255,150,40,.12);}
-.tier-remove-btn{flex-shrink:0;width:34px;align-self:stretch;border:none;border-left:1px solid rgba(255,150,50,.25);background:transparent;color:var(--text-faint);font-size:15px;transition:color .12s,background .12s;}
+.tier-ctrl{flex-shrink:0;width:38px;display:flex;flex-direction:column;border-left:1px solid rgba(255,150,50,.25);}
+.tier-ctrl > *{flex:1;display:flex;align-items:center;justify-content:center;min-height:28px;border:none;border-top:1px solid rgba(255,150,50,.12);background:transparent;color:var(--text-faint);font-size:14px;transition:color .12s,background .12s;}
+.tier-ctrl > *:first-child{border-top:none;}
+.tier-handle{cursor:grab;font-size:18px;letter-spacing:-2px;user-select:none;}
+.tier-handle:active{cursor:grabbing;}
+.tier-handle:hover,.tier-move-btn:hover{color:var(--gold-light);background:rgba(255,150,40,.12);}
+.tier-move-btn:disabled{opacity:.25;cursor:default;pointer-events:none;}
+.tier-row.row-dragging{opacity:.4;}
+.tier-row.drop-before{box-shadow:inset 0 4px 0 var(--gold-light);}
+.tier-row.drop-after{box-shadow:inset 0 -4px 0 var(--gold-light);}
+.tier-remove-btn{flex-shrink:0;border:none;background:transparent;color:var(--text-faint);font-size:15px;transition:color .12s,background .12s;}
 .tier-remove-btn:hover{color:#ff6a2a;background:rgba(216,54,26,.12);}
 .tier-pool{border-radius:14px;border:1.5px dashed rgba(255,170,70,.45);padding:16px;background:rgba(10,9,16,.8);display:flex;flex-direction:column;gap:12px;}
 .tier-pool-items{display:flex;flex-wrap:wrap;gap:10px;min-height:110px;border-radius:8px;transition:background .12s;}
@@ -922,7 +932,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-sim{padding:16px 12px 18px;}
   .kz-sim-head h2{font-size:30px;}
   .kz-guide-effects{grid-template-columns:1fr;}
-  .tier-label{width:76px;}
+  .tier-label{width:96px;}
   .tier-item{width:60px;}
   .kz-fav-empty{flex-direction:column;align-items:flex-start;padding:26px 20px;}
   .grid-2{grid-template-columns:1fr;}
@@ -4045,7 +4055,29 @@ let state = {
 let dragSlotIdx = null;             // slot index currently being dragged (team reorder)
 let dragRosterId = null;            // character id being dragged from the Elenco panel into a slot
 let charsListScrollY = 0;           // posição de scroll da lista de Personagens antes de abrir a ficha, pra restaurar ao voltar
+let dragTierRowId = null;          // rank sendo arrastado pela alça pra reordenar (Tier List)
 let dragWasDropped = false;         // set by the 'drop' handler so dragend knows not to treat it as "dropped outside"
+
+/* ---------- Auto-rolagem durante o arrastar (Tier List, Montador de Combos…) ----------
+   O arrastar nativo nem sempre rola a página; aqui, enquanto um card está sendo arrastado e o mouse
+   chega perto da borda de cima ou de baixo da janela, a página rola sozinha (mais rápido quanto mais perto da borda). */
+let dragScrollY = null, dragScrollRaf = 0;
+function dragScrollTick(){
+  if(dragScrollY === null){ dragScrollRaf = 0; return; }
+  const vh = window.innerHeight, edge = Math.max(70, Math.min(130, vh * 0.2)), MAX = 26;
+  let dy = 0;
+  if(dragScrollY < edge) dy = -Math.max(2, Math.ceil((edge - dragScrollY) / edge * MAX));
+  else if(dragScrollY > vh - edge) dy = Math.max(2, Math.ceil((dragScrollY - (vh - edge)) / edge * MAX));
+  if(dy) window.scrollBy(0, dy);
+  dragScrollRaf = requestAnimationFrame(dragScrollTick);
+}
+function dragScrollStop(){ dragScrollY = null; }
+document.addEventListener('dragover', e=>{
+  dragScrollY = e.clientY;
+  if(!dragScrollRaf) dragScrollRaf = requestAnimationFrame(dragScrollTick);
+}, true);
+document.addEventListener('dragend', dragScrollStop, true);
+document.addEventListener('drop', dragScrollStop, true);
 let dragTierItemId = null;          // character id currently being dragged in the tier list
 
 let loaded = false;
@@ -4146,6 +4178,26 @@ function moveTierItem(charId, toTierId){
     if(tier) tier.items.push(charId);
   }
   saveTierList();
+}
+// Move o rank 'id' pra antes/depois do rank 'targetId' (reordenar a tier list).
+function moveTierRow(id, targetId, after){
+  const tiers = state.tierList.tiers;
+  const from = tiers.findIndex(t=>t.id===id);
+  if(from === -1 || id === targetId) return;
+  const [t] = tiers.splice(from, 1);
+  let to = tiers.findIndex(x=>x.id===targetId);
+  if(to === -1){ tiers.splice(from, 0, t); return; }
+  tiers.splice(after ? to + 1 : to, 0, t);
+  saveTierList();
+  render();
+}
+function moveTierBy(id, dir){
+  const tiers = state.tierList.tiers;
+  const i = tiers.findIndex(t=>t.id===id), j = i + dir;
+  if(i === -1 || j < 0 || j >= tiers.length) return;
+  [tiers[i], tiers[j]] = [tiers[j], tiers[i]];
+  saveTierList();
+  render();
 }
 function addTier(){
   const id = 't_' + Math.random().toString(36).slice(2,9);
@@ -5384,13 +5436,19 @@ const SHOW_ABILITY_ICONS = true;
 function renderTierItem(c){
   return `<div class="tier-item" draggable="true" data-id="${c.id}" title="${escapeAttr(c.name)}">${portraitInner(c)}</div>`;
 }
-function renderTierRow(t){
+function renderTierRow(t, i, all){
   const chars = t.items.map(getChar).filter(Boolean);
+  const n = (all || state.tierList.tiers).length;
   return `
-  <div class="tier-row">
-    <div class="tier-label" contenteditable="true" spellcheck="false" data-tier="${t.id}" style="background:${t.color};">${escapeHtml(t.label)}</div>
+  <div class="tier-row" data-tier-row="${t.id}">
+    <div class="tier-label" contenteditable="true" spellcheck="false" lang="pt-BR" data-tier="${t.id}" style="background:${t.color};">${escapeHtml(t.label)}</div>
     <div class="tier-items" data-tier="${t.id}">${chars.map(renderTierItem).join('')}</div>
-    <button class="tier-remove-btn" data-tier="${t.id}" title="Remover este rank">✕</button>
+    <div class="tier-ctrl">
+      <span class="tier-handle" draggable="true" data-tier="${t.id}" title="Arraste para reordenar este rank" aria-label="Reordenar rank">⋮⋮</span>
+      <button class="tier-move-btn" data-tier="${t.id}" data-dir="-1" title="Subir este rank" ${i===0?'disabled':''}>▲</button>
+      <button class="tier-move-btn" data-tier="${t.id}" data-dir="1" title="Descer este rank" ${i===n-1?'disabled':''}>▼</button>
+      <button class="tier-remove-btn" data-tier="${t.id}" title="Remover este rank">✕</button>
+    </div>
   </div>`;
 }
 function renderTierListTab(){
@@ -5400,7 +5458,7 @@ function renderTierListTab(){
     <div class="kz-page-head">
       <div>
         <h1 class="kz-title">Tier List</h1>
-        <div class="kz-subtitle">Arraste os guerreiros entre os ranks. Clique no nome de um rank pra renomear. Fica salvo neste aparelho.</div>
+        <div class="kz-subtitle">Arraste os guerreiros entre os ranks. Reorganize os ranks pela alça ⋮⋮ (ou pelas setas ▲▼) e clique no nome de um rank pra renomear. Fica salvo neste aparelho.</div>
       </div>
       <div class="kz-head-actions">
         <button class="kz-btn" id="tierSuggestBtn">Sugestão por raridade</button>
@@ -5408,7 +5466,7 @@ function renderTierListTab(){
         <button class="kz-btn" id="tierListExportBtn">Exportar imagem</button>
       </div>
     </div>
-    <div class="kz-tier-rows">${state.tierList.tiers.map(renderTierRow).join('')}</div>
+    <div class="kz-tier-rows">${state.tierList.tiers.map((t,i,a)=>renderTierRow(t,i,a)).join('')}</div>
     <button class="kz-btn kz-btn-sm" id="tierAddBtn" style="align-self:flex-start;">+ Adicionar rank</button>
     <div class="tier-pool">
       <span class="kz-label">Sem tier (${unrankedChars.length})</span>
@@ -5435,24 +5493,38 @@ function suggestTierListByRarity(){
 // Encolhe a fonte do nome do rank até caber na altura mínima da fileira, medindo numa
 // "sonda" fora da tela (o label real é esticado pelo flex, então o scrollHeight dele não serve).
 const TIER_LABEL_MAX_HEIGHT = 124;
-const TIER_LABEL_MAX_FONT = 46;
-const TIER_LABEL_MIN_FONT = 14;
+const TIER_LABEL_MAX_FONT = 54;
+const TIER_LABEL_MIN_FONT = 12;
+// Acha o maior tamanho de fonte em que o nome do rank cabe na fileira: texto curto cresce, texto
+// longo diminui. Só quebra linha entre palavras (sem cortar palavra no meio nem hifenizar); só se
+// uma única palavra não couber nem no tamanho mínimo é que ela é quebrada, como último recurso.
+// Mede numa "sonda" fora da tela (o label real é esticado pelo flex, então o scrollHeight dele não serve).
 function fitTierLabelFont(el){
   const probe = document.createElement('div');
+  probe.lang = 'pt-BR';
   probe.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;pointer-events:none;'
-    + `width:${el.offsetWidth || 110}px;padding:8px 10px;box-sizing:border-box;`
+    + `width:${el.offsetWidth || 130}px;padding:8px 10px;box-sizing:border-box;`
     + "font-family:'Kaushan Script',cursive;line-height:1.1;"
-    + 'overflow-wrap:anywhere;text-align:center;';
+    + 'overflow-wrap:normal;word-break:normal;hyphens:none;text-align:center;';
   probe.textContent = el.textContent || '?';
   document.body.appendChild(probe);
+  // largura útil (sem o padding) e a palavra mais larga medida no canvas, que é exato (o scrollWidth da sonda deixa passar estouro de 1 palavra)
+  const cs = getComputedStyle(el);
+  const contentW = (el.offsetWidth || 130) - (parseFloat(cs.paddingLeft) || 10) - (parseFloat(cs.paddingRight) || 10);
+  const words = (el.textContent || '?').split(/\s+/).filter(Boolean);
+  const mctx = document.createElement('canvas').getContext('2d');
+  const widestWord = size => { mctx.font = `${size}px 'Kaushan Script', cursive`; return Math.max(0, ...words.map(wd=>mctx.measureText(wd).width)); };
+  const fits = ()=> probe.scrollHeight <= TIER_LABEL_MAX_HEIGHT && widestWord(fontSize) <= contentW - 1;
   let fontSize = TIER_LABEL_MAX_FONT;
   probe.style.fontSize = fontSize + 'px';
-  while(probe.scrollHeight > TIER_LABEL_MAX_HEIGHT && fontSize > TIER_LABEL_MIN_FONT){
+  while(!fits() && fontSize > TIER_LABEL_MIN_FONT){
     fontSize -= 1;
     probe.style.fontSize = fontSize + 'px';
   }
+  const wordTooWide = widestWord(fontSize) > contentW - 1;
   document.body.removeChild(probe);
   el.style.fontSize = fontSize + 'px';
+  el.style.overflowWrap = wordTooWide ? 'anywhere' : 'normal';
 }
 
 function attachTierListHandlers(){
@@ -5490,6 +5562,7 @@ function attachTierListHandlers(){
 
   // Nome do rank é editado direto no label colorido (contenteditable) — salva ao sair
   // do campo, sem re-render (senão perde o foco/cursor no meio da digitação).
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ view.querySelectorAll('.tier-label[contenteditable]').forEach(fitTierLabelFont); });
   view.querySelectorAll('.tier-label[contenteditable]').forEach(el=>{
     fitTierLabelFont(el);
     el.addEventListener('input', ()=> fitTierLabelFont(el));
@@ -5498,6 +5571,41 @@ function attachTierListHandlers(){
   });
 
   view.querySelectorAll('.tier-remove-btn').forEach(btn=> btn.addEventListener('click', ()=> removeTier(btn.dataset.tier)));
+  view.querySelectorAll('.tier-move-btn').forEach(btn=> btn.addEventListener('click', ()=> moveTierBy(btn.dataset.tier, parseInt(btn.dataset.dir, 10))));
+
+  // Reordenar ranks arrastando pela alça ⋮⋮: a linha de destaque mostra se entra antes ou depois.
+  const clearRowMarks = ()=> view.querySelectorAll('.tier-row').forEach(r=>r.classList.remove('drop-before','drop-after','row-dragging'));
+  view.querySelectorAll('.tier-handle').forEach(handle=>{
+    const row = handle.closest('.tier-row');
+    handle.addEventListener('dragstart', e=>{
+      dragTierRowId = handle.dataset.tier;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', 'tier:' + dragTierRowId);
+      try{ e.dataTransfer.setDragImage(row, 40, 30); }catch(_){}
+      requestAnimationFrame(()=> row.classList.add('row-dragging'));
+    });
+    handle.addEventListener('dragend', ()=>{ dragTierRowId = null; clearRowMarks(); });
+  });
+  view.querySelectorAll('.tier-row').forEach(row=>{
+    const isAfter = e=>{ const r = row.getBoundingClientRect(); return e.clientY > r.top + r.height / 2; };
+    row.addEventListener('dragover', e=>{
+      if(dragTierRowId === null || row.dataset.tierRow === dragTierRowId) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const after = isAfter(e);
+      row.classList.toggle('drop-after', after);
+      row.classList.toggle('drop-before', !after);
+    });
+    row.addEventListener('dragleave', e=>{ if(!row.contains(e.relatedTarget)) row.classList.remove('drop-before','drop-after'); });
+    row.addEventListener('drop', e=>{
+      if(dragTierRowId === null) return;
+      e.preventDefault();
+      const id = dragTierRowId, after = isAfter(e);
+      dragTierRowId = null;
+      clearRowMarks();
+      moveTierRow(id, row.dataset.tierRow, after);
+    });
+  });
 
   const addBtn = document.getElementById('tierAddBtn');
   if(addBtn) addBtn.addEventListener('click', addTier);
@@ -5541,6 +5649,26 @@ function wrapCanvasText(ctx, text, cx, cy, maxWidth, lineHeight){
   lines.forEach((l, i)=> ctx.fillText(l, cx, startY + i * lineHeight));
 }
 
+// Escolhe o maior tamanho de fonte (12–40px) em que o nome do rank cabe sem cortar palavra:
+// quebra só entre palavras e confere largura e altura. Devolve a fonte e as linhas.
+function fitCanvasLabel(ctx, text, maxW, maxH){
+  const words = String(text).split(/\s+/).filter(Boolean);
+  for(let size = 40; size >= 12; size--){
+    ctx.font = `${size}px 'Kaushan Script', cursive`;
+    const lines = []; let line = '';
+    words.forEach(w=>{
+      const test = line ? line + ' ' + w : w;
+      if(line && ctx.measureText(test).width > maxW){ lines.push(line); line = w; } else line = test;
+    });
+    if(line) lines.push(line);
+    const lh = Math.round(size * 1.1);
+    const widest = Math.max(...lines.map(l=>ctx.measureText(l).width), 0);
+    if(widest <= maxW && lines.length * lh <= maxH) return { font: ctx.font, lines, lineHeight: lh };
+  }
+  ctx.font = "12px 'Kaushan Script', cursive";
+  return { font: ctx.font, lines: words.length ? words : ['?'], lineHeight: 14 };
+}
+
 // Exporta a tier list como PNG. Abrindo o arquivo direto do disco o navegador pode bloquear
 // a leitura das artes (canvas "tainted") — aí avisa em vez de falhar quieto.
 async function exportTierListImage(){
@@ -5579,10 +5707,11 @@ async function exportTierListImage(){
     ctx.fillStyle = t.color;
     ctx.fillRect(PADDING, y, LABEL_W, h);
     ctx.fillStyle = '#ffffff';
-    ctx.font = "30px 'Kaushan Script', cursive";
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    wrapCanvasText(ctx, t.label || '?', PADDING + LABEL_W/2, y + h/2, LABEL_W - 12, 32);
+    const fit = fitCanvasLabel(ctx, t.label || '?', LABEL_W - 14, h - 10);
+    ctx.font = fit.font;
+    fit.lines.forEach((l, li)=> ctx.fillText(l, PADDING + LABEL_W/2, y + h/2 - ((fit.lines.length - 1) * fit.lineHeight) / 2 + li * fit.lineHeight));
 
     ctx.fillStyle = '#0e0c16';
     ctx.fillRect(PADDING + LABEL_W, y, canvasWidth - PADDING*2 - LABEL_W, h);
