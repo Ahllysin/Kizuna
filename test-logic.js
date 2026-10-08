@@ -303,6 +303,23 @@ async function main(){
     assert.strictEqual(r.solo, null, 'com 1 guerreiro não há o que reordenar');
   });
 
+  await test('comboSummary conta os encadeamentos, os inícios com combo e a maior cadeia da equipe', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, skillEff, trig, eff) => ({ id, name:id.toUpperCase(), tags:[], rarity:'R', skill:{name:'S'+id, effects:skillEff}, supreme:{name:'U'+id, effects:[]}, combo:{name:'C'+id, triggers:trig, effects:eff} });
+      state.characters = [ mk('a',['derrubada'],[],[]), mk('b',[],['derrubada'],['empurrao']), mk('c',[],['empurrao'],[]) ];
+      state.team = ['a','b','c',null,null,null];
+      const s = comboSummary(state.team);
+      const vazio = comboSummary(['a',null,null,null,null,null]);
+      state.characters = bk[0]; state.team = bk[1];
+      return { s, vazio };
+    })()`);
+    assert.strictEqual(r.s.starts, 1, 'só a Habilidade de A inicia combo');
+    assert.strictEqual(r.s.total, 2, 'A→B→C: B e C são puxados');
+    assert.strictEqual(r.s.best.n, 2);
+    assert.strictEqual(r.vazio.total, 0);
+  });
+
   await test('recommendForTeam filtra por raridade (SSR inclui Limitado, exclui SR/R)', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];
