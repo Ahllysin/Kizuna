@@ -320,6 +320,22 @@ async function main(){
     assert.strictEqual(r.vazio.total, 0);
   });
 
+  await test('comboMaxFor: habilidades sem efeito de combo não entram no máximo, e cada cadeia puxa no máx. 1 por guerreiro em campo', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, skillEff, supEff) => ({ id, name:id, tags:[], rarity:'R', skill:{name:'S', effects:skillEff}, supreme:{name:'U', effects:supEff}, combo:{name:'C', triggers:[], effects:[]} });
+      state.characters = [ mk('a',['derrubada'],['empurrao']), mk('b',['derrubada'],[]), mk('c',[],[]) ];
+      const cheio = comboMaxFor(['a','b','c',null,null,null]);
+      const um = comboMaxFor(['a',null,null,null,null,null]);
+      state.characters = bk[0]; state.team = bk[1];
+      return { cheio, um };
+    })()`);
+    assert.strictEqual(r.cheio.starters, 3, 'A (2) + B (1); C não inicia combo');
+    assert.strictEqual(r.cheio.max, 9, '3 inícios × 3 guerreiros');
+    assert.strictEqual(r.cheio.abilities, 6);
+    assert.strictEqual(r.um.max, 2);
+  });
+
   await test('recommendForTeam filtra por raridade (SSR inclui Limitado, exclui SR/R)', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];

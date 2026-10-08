@@ -6032,14 +6032,23 @@ function comboSummary(team){
   } finally { state.team = bak; }
   return { total, starts, best };
 }
-// Teto teórico: 6 guerreiros × 2 inícios (Habilidade/Suprema) × 6 Ataques Combinados puxados por cadeia.
-const COMBO_MAX = 6 * STARTER_KEYS.length * 6;
+// Teto da equipe atual: só conta como início a Habilidade/Suprema que causa efeito de combo, e cada cadeia puxa no
+// máximo 1 Ataque Combinado por guerreiro em campo (quem iniciou também persegue uma vez).
+function comboMaxFor(team){
+  const filled = team.filter(Boolean);
+  let starters = 0;
+  filled.forEach(id=>{ const c = getChar(id); if(c) STARTER_KEYS.forEach(k=>{ if(c[k] && (c[k].effects||[]).length) starters++; }); });
+  return { max: starters * filled.length, starters, abilities: filled.length * STARTER_KEYS.length, perChain: filled.length };
+}
 function comboCountHtml(){
   if(!state.team.some(Boolean)) return '';
   const s = comboSummary(state.team);
-  if(!s.total) return `<div class="kz-combo-count none"><b>0</b> combos<span class="max"> / ${COMBO_MAX}</span><span class="sub">Nenhuma Habilidade ou Suprema da equipe ativa o Ataque Combinado de alguém.</span></div>`;
+  const m = comboMaxFor(state.team);
+  const tip = `Máximo possível com essa equipe: ${m.starters} habilidade${m.starters===1?'':'s'} que iniciam combo × ${m.perChain} combos por cadeia = ${m.max}. Habilidades sem efeito de combo não contam.`;
+  const startersTxt = `<b>${m.starters}</b> de ${m.abilities} habilidades iniciam combo`;
+  if(!s.total) return `<div class="kz-combo-count none" title="${escapeAttr(tip)}"><b>0</b> combos<span class="max"> / ${m.max}</span><span class="sub">${startersTxt} · nenhuma ativa o Ataque Combinado de alguém.</span></div>`;
   const bc = getChar(s.best.charId);
-  return `<div class="kz-combo-count"><span class="big" title="Máximo possível: 6 guerreiros × 2 inícios (Habilidade e Suprema) × 6 combos por cadeia = 72"><b>${s.total}</b> combo${s.total>1?'s':''}<span class="max"> / ${COMBO_MAX}</span></span><span class="sub"><b>${s.starts}</b> início${s.starts>1?'s':''} com combo · maior cadeia: <b>${s.best.n+1} hits</b> (${escapeHtml(bc.name)} · ${ABILITY_LABEL[s.best.key]})</span></div>`;
+  return `<div class="kz-combo-count" title="${escapeAttr(tip)}"><span class="big"><b>${s.total}</b> combo${s.total>1?'s':''}<span class="max"> / ${m.max}</span></span><span class="sub"><b>${s.starts}</b> início${s.starts>1?'s':''} com combo (${startersTxt}) · maior cadeia: <b>${s.best.n+1} hits</b> (${escapeHtml(bc.name)} · ${ABILITY_LABEL[s.best.key]})</span></div>`;
 }
 // Reordena SÓ quem já está em campo (as mesmas casas ocupadas) testando todas as ordens possíveis
 // — no máx. 6! = 720. Vence a que soma mais encadeamentos; empate: a cadeia mais longa; empate de novo:
