@@ -274,6 +274,35 @@ async function main(){
     assert.deepStrictEqual(r.rec2, ['c'], 'com A+B em campo, C estende a cadeia e Z continua de fora');
   });
 
+  await test('optimizeTeamOrder: acha a ordem de casas que rende mais encadeamentos e mantém as casas ocupadas', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, skillEff, trig, eff) => ({ id, name:id.toUpperCase(), tags:[], rarity:'R', skill:{name:'S'+id, effects:skillEff}, supreme:{name:'U'+id, effects:[]}, combo:{name:'C'+id, triggers:trig, effects:eff} });
+      state.characters = [
+        mk('a', ['derrubada'], [], []),
+        mk('b2', [], ['derrubada'], []),            // pega a derrubada primeiro se estiver numa casa menor, mas não continua
+        mk('b1', [], ['derrubada'], ['empurrao']),  // pega a derrubada e causa empurrão
+        mk('c', [], ['empurrao'], []),
+      ];
+      state.team = ['b2', null, 'b1', 'c', null, 'a'];
+      const antes = comboScoreFor(state.team);
+      const res = optimizeTeamOrder();
+      const depois = comboScoreFor(res.team);
+      const ocupadas = res.team.map(x => x ? 1 : 0).join('');
+      state.team = res.team;
+      const again = optimizeTeamOrder();
+      state.team = ['a'];
+      const solo = optimizeTeamOrder();
+      state.characters = bk[0]; state.team = bk[1];
+      return { antes, depois, ocupadas, changed: res.changed, againChanged: again.changed, solo };
+    })()`);
+    assert.ok(r.depois > r.antes, 'a ordem otimizada rende mais (' + r.antes + ' → ' + r.depois + ')');
+    assert.strictEqual(r.ocupadas, '101101', 'continua nas mesmas casas ocupadas');
+    assert.strictEqual(r.changed, true);
+    assert.strictEqual(r.againChanged, false, 'já otimizada: não propõe mudar de novo');
+    assert.strictEqual(r.solo, null, 'com 1 guerreiro não há o que reordenar');
+  });
+
   await test('recommendForTeam com equipe cheia sugere trocas e equipe vazia não sugere nada', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];

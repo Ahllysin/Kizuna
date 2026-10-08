@@ -564,6 +564,11 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-rec-chain b{color:var(--text);}
 .kz-rec-chain .arr{color:#ff8a2a;margin:0 4px;}
 .kz-rec-card .kz-btn{align-self:flex-start;}
+.kz-field-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.kz-opt-btn{border-color:rgba(201,162,75,.6);color:#f0d9a0;}
+.kz-opt-btn:disabled{opacity:.45;cursor:not-allowed;}
+.kz-opt-info{margin:8px 0 2px;padding:9px 12px;border-radius:10px;background:rgba(201,162,75,.1);border:1px solid rgba(201,162,75,.35);font-size:13px;line-height:1.5;color:#f0e2bd;}
+.kz-opt-info b{color:#ffd66b;}
 .kz-sim-open{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;font-size:16px;}
 .kz-sim-open .glyph{font-family:'Shippori Mincho',serif;font-weight:800;font-size:20px;}
 .kz-sim-open .cnt{padding:2px 9px;border-radius:999px;background:rgba(0,0,0,.28);font-size:12px;font-weight:800;}
@@ -5846,8 +5851,13 @@ function renderCombosTab(){
         <div class="kz-field">
           <div class="kz-field-head">
             <span class="kz-label">Equipe</span>
-            <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
+            <div class="kz-field-actions">
+              ${canUndoOptimize() ? `<button type="button" class="kz-btn" id="undoOptBtn" title="Voltar à ordem anterior">↶ Desfazer ordem</button>` : ''}
+              <button type="button" class="kz-btn kz-opt-btn" id="optimizeBtn" ${filledCount<2?'disabled':''} title="${filledCount<2?'Coloque ao menos 2 guerreiros em campo':'Reorganiza os guerreiros em campo pra render a maior quantidade de combos'}">✦ Gerar melhor ordem</button>
+              <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
+            </div>
           </div>
+          ${state.optInfo && canUndoOptimize() ? `<div class="kz-opt-info">${state.optInfo}</div>` : ''}
           <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
           ${renderRecommendations()}
         </div>
@@ -5975,6 +5985,77 @@ function comboScoreFor(team){
     });
   } finally { state.team = bak; }
   return total;
+}
+// Nota da equipe + a maior cadeia que ela forma (critério de desempate do otimizador).
+function comboStatsFor(team){
+  const bak = state.team;
+  state.team = team;
+  let total = 0, longest = 0;
+  try{
+    team.forEach(id=>{
+      if(!id) return;
+      STARTER_KEYS.forEach(k=>{
+        const n = Math.max(0, simulateCombo(id, k).length - 1);
+        total += n;
+        if(n > longest) longest = n;
+      });
+    });
+  } finally { state.team = bak; }
+  return { total, longest };
+}
+// Reordena SÓ quem já está em campo (as mesmas casas ocupadas) testando todas as ordens possíveis
+// — no máx. 6! = 720. Vence a que soma mais encadeamentos; empate: a cadeia mais longa; empate de novo:
+// a que mexe em menos guerreiros em relação à ordem atual.
+function optimizeTeamOrder(){
+  const team = [...state.team];
+  const slots = team.map((id,i)=>id ? i : -1).filter(i=>i>-1);
+  if(slots.length < 2) return null;
+  const ids = slots.map(i=>team[i]);
+  const before = comboStatsFor(team);
+  let best = null;
+  const perm = (arr, rest) => {
+    if(!rest.length){
+      const t = [...team];
+      slots.forEach((s,k)=>{ t[s] = arr[k]; });
+      const st = comboStatsFor(t);
+      const moved = arr.reduce((n,id,k)=> n + (id !== ids[k] ? 1 : 0), 0);
+      if(!best || st.total > best.st.total || (st.total === best.st.total && (st.longest > best.st.longest || (st.longest === best.st.longest && moved < best.moved)))){
+        best = { team:t, st, moved };
+      }
+      return;
+    }
+    rest.forEach((id,i)=> perm([...arr, id], [...rest.slice(0,i), ...rest.slice(i+1)]));
+  };
+  perm([], ids);
+  return { team:best.team, before, after:best.st, changed: best.moved > 0 };
+}
+function canUndoOptimize(){
+  const u = state.optUndo;
+  return !!(u && JSON.stringify(u.after) === JSON.stringify(state.team));
+}
+function runOptimizeTeam(){
+  const r = optimizeTeamOrder();
+  if(!r){ showToast('Coloque ao menos 2 guerreiros em campo.'); return; }
+  if(!r.changed){
+    state.optUndo = null; state.optInfo = null;
+    showToast(r.before.total ? 'A ordem atual já é a que rende mais combos.' : 'Esses guerreiros não formam combos entre si em nenhuma ordem.');
+    render();
+    return;
+  }
+  const prev = [...state.team];
+  commitTeam(r.team);
+  state.optUndo = { before:prev, after:[...r.team] };
+  state.optInfo = r.after.total > r.before.total
+    ? `Nova ordem: <b>${r.after.total} encadeamentos</b> (antes ${r.before.total}) · maior cadeia com <b>${r.after.longest + 1} hits</b>.`
+    : `A quantidade de encadeamentos (<b>${r.after.total}</b>) já era a máxima; reorganizei pra deixar a cadeia mais longa (<b>${r.after.longest + 1} hits</b>).`;
+  render();
+  showToast('Ordem otimizada!');
+}
+function undoOptimizeTeam(){
+  if(!canUndoOptimize()) return;
+  const before = state.optUndo.before;
+  state.optUndo = null; state.optInfo = null;
+  commitTeam([...before]);
 }
 // Cadeias (da equipe 'team') em que o guerreiro 'cid' participa, da mais longa pra mais curta.
 function chainsWithChar(team, cid){
@@ -6107,6 +6188,10 @@ function attachCombosHandlers(){
   }));
   const openSim = document.getElementById('openSimBtn');
   if(openSim) openSim.addEventListener('click', openSimModal);
+  const optBtn = document.getElementById('optimizeBtn');
+  if(optBtn) optBtn.addEventListener('click', runOptimizeTeam);
+  const undoOpt = document.getElementById('undoOptBtn');
+  if(undoOpt) undoOpt.addEventListener('click', undoOptimizeTeam);
 
   view.querySelectorAll('.kz-slot').forEach(slot=>{
     slot.addEventListener('click', e=>{
