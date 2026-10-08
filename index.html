@@ -548,6 +548,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-sim-modal .modal-body{max-height:78vh;}
 .kz-rec{display:flex;flex-direction:column;gap:12px;margin-top:6px;padding-top:18px;border-top:1.5px solid rgba(255,150,50,.3);}
 .kz-rec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.kz-rec-filter{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 4px;}
 .kz-rec-head h3{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:28px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;}
 .kz-rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
 .kz-rec-card{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;border:1.5px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);}
@@ -4040,6 +4041,7 @@ let state = {
   heroCharId: null,                 // personagem em destaque no topo da lista (troca no hover)
   slotSel: null,                    // casa do Montador selecionada, esperando um guerreiro do elenco
   rosterSearch: '',
+  recRarity: 'all',
   sf: { chars:{tags:[],trig:[],eff:[]}, coll:{tags:[],trig:[],eff:[]}, roster:{tags:[],trig:[],eff:[]}, open:{} },   // filtro de pesquisa por tags + o que o Ataque Combinado persegue/causa, um por aba
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
@@ -6076,7 +6078,7 @@ function chainsWithChar(team, cid){
 // Candidatos fora da equipe, ordenados pelo quanto aumentam os encadeamentos. Com casa livre,
 // testa cada casa vazia (casa menor tem prioridade na cadeia); equipe cheia, testa trocar por cada
 // membro. Só entra quem melhora a nota.
-function recommendForTeam(limit){
+function recommendForTeam(limit, rarity){
   const team = [...state.team];
   if(!team.some(Boolean)) return [];
   const base = comboScoreFor(team);
@@ -6086,6 +6088,7 @@ function recommendForTeam(limit){
   const res = [];
   state.characters.forEach(c=>{
     if(inTeam.has(c.id)) return;
+    if(rarity && rarity !== 'all' && rarityLabel(c.rarity) !== rarity) return;
     let best = null;
     slots.forEach(s=>{
       const t = [...team];
@@ -6103,10 +6106,13 @@ function renderRecommendations(){
   const filled = state.team.filter(Boolean).length;
   if(!filled) return '';
   const full = filled === 6;
-  const recs = recommendForTeam(8);
-  const head = `<div class="kz-rec-head"><h3>Quem encaixa na sua equipe</h3><span class="kz-muted" style="font-size:13px;">Ordenado pelo quanto aumenta os encadeamentos da equipe (soma das cadeias de Habilidade e Suprema de todos). Considera o que cada um persegue e causa e a casa onde entraria.</span></div>`;
+  const rar = state.recRarity || 'all';
+  const recs = recommendForTeam(8, rar);
+  const head = `<div class="kz-rec-head"><h3>Quem encaixa na sua equipe</h3><span class="kz-muted" style="font-size:13px;">Ordenado pelo quanto aumenta os encadeamentos da equipe (soma das cadeias de Habilidade e Suprema de todos). Considera o que cada um persegue e causa e a casa onde entraria.</span></div>
+  <div class="kz-rec-filter"><span class="kz-label">Sugerir</span>${[['all','Todas'],['SSR','Só SSR'],['SR','Só SR'],['R','Só R']].map(([v,l])=>`<button type="button" class="kz-fchip ${rar===v?'active':''}" data-rec-rarity="${v}">${l}</button>`).join('')}</div>`;
   if(!recs.length){
-    return `<div class="kz-rec">${head}<div class="kz-muted">${full ? 'Nenhuma troca melhora os combos dessa equipe — ela já está bem encaixada.' : 'Nenhum guerreiro do elenco aumenta os combos dessa equipe.'}</div></div>`;
+    const msg = full ? (rar !== 'all' ? `Nenhuma troca por um guerreiro ${rar} melhora os combos dessa equipe. Tente outra raridade.` : 'Nenhuma troca melhora os combos dessa equipe — ela já está bem encaixada.') : (rar !== 'all' ? `Nenhum guerreiro ${rar} do elenco aumenta os combos dessa equipe. Tente outra raridade.` : 'Nenhum guerreiro do elenco aumenta os combos dessa equipe.');
+    return `<div class="kz-rec">${head}<div class="kz-muted">${msg}</div></div>`;
   }
   const cards = recs.map((r,i)=>{
     const c = r.char, rep = r.replacedId ? getChar(r.replacedId) : null;
@@ -6181,6 +6187,7 @@ function attachCombosHandlers(){
   });
   attachRosterItemHandlers(view);
   attachSF('roster', view, render);
+  view.querySelectorAll('[data-rec-rarity]').forEach(b=>b.addEventListener('click', ()=>{ state.recRarity = b.dataset.recRarity; render(); }));
   view.querySelectorAll('[data-rec-place]').forEach(b=>b.addEventListener('click', ()=>{
     state.slotSel = parseInt(b.dataset.recSlot, 10);
     placeChar(b.dataset.recPlace);

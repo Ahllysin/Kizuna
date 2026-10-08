@@ -303,6 +303,24 @@ async function main(){
     assert.strictEqual(r.solo, null, 'com 1 guerreiro não há o que reordenar');
   });
 
+  await test('recommendForTeam filtra por raridade (SSR inclui Limitado, exclui SR/R)', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, rar, trig) => ({ id, name:id.toUpperCase(), tags:[], rarity:rar, skill:{name:'S'+id, effects:id==='a'?['derrubada']:[]}, supreme:{name:'U'+id, effects:[]}, combo:{name:'C'+id, triggers:trig, effects:[]} });
+      state.characters = [ mk('a','SSR',[]), mk('s1','SSR',['derrubada']), mk('s2','SSR [Limitado]',['derrubada']), mk('r1','SR',['derrubada']), mk('r2','R',['derrubada']) ];
+      state.team = ['a', null, null, null, null, null];
+      const ids = x => recommendForTeam(10, x).map(y => y.char.id).sort().join(',');
+      const out = { all: ids('all'), ssr: ids('SSR'), sr: ids('SR'), r: ids('R'), none: ids() };
+      state.characters = bk[0]; state.team = bk[1];
+      return out;
+    })()`);
+    assert.strictEqual(r.ssr, 's1,s2');
+    assert.strictEqual(r.sr, 'r1');
+    assert.strictEqual(r.r, 'r2');
+    assert.strictEqual(r.all, 'r1,r2,s1,s2');
+    assert.strictEqual(r.none, 'r1,r2,s1,s2');
+  });
+
   await test('recommendForTeam com equipe cheia sugere trocas e equipe vazia não sugere nada', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];
