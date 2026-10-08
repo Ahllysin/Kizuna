@@ -569,6 +569,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-combo-count{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:10px 0 2px;padding:9px 14px;border-radius:10px;background:rgba(8,7,14,.6);border:1px solid rgba(255,255,255,.14);}
 .kz-combo-count .big{font-size:17px;font-weight:800;color:#f0e2bd;}
 .kz-combo-count .big b{font-size:24px;color:#ffd66b;margin-right:2px;}
+.kz-combo-count .max{font-size:14px;font-weight:700;color:#a79f8c;}
 .kz-combo-count .sub{font-size:13px;color:#cfc8b8;}
 .kz-combo-count .sub b{color:#f0e2bd;}
 .kz-combo-count.none{color:#cfc8b8;}
@@ -6031,12 +6032,14 @@ function comboSummary(team){
   } finally { state.team = bak; }
   return { total, starts, best };
 }
+// Teto teórico: 6 guerreiros × 2 inícios (Habilidade/Suprema) × 6 Ataques Combinados puxados por cadeia.
+const COMBO_MAX = 6 * STARTER_KEYS.length * 6;
 function comboCountHtml(){
   if(!state.team.some(Boolean)) return '';
   const s = comboSummary(state.team);
-  if(!s.total) return `<div class="kz-combo-count none"><b>0</b> combos<span class="sub">Nenhuma Habilidade ou Suprema da equipe ativa o Ataque Combinado de alguém.</span></div>`;
+  if(!s.total) return `<div class="kz-combo-count none"><b>0</b> combos<span class="max"> / ${COMBO_MAX}</span><span class="sub">Nenhuma Habilidade ou Suprema da equipe ativa o Ataque Combinado de alguém.</span></div>`;
   const bc = getChar(s.best.charId);
-  return `<div class="kz-combo-count"><span class="big"><b>${s.total}</b> combo${s.total>1?'s':''}</span><span class="sub"><b>${s.starts}</b> início${s.starts>1?'s':''} com combo · maior cadeia: <b>${s.best.n+1} hits</b> (${escapeHtml(bc.name)} · ${ABILITY_LABEL[s.best.key]})</span></div>`;
+  return `<div class="kz-combo-count"><span class="big" title="Máximo possível: 6 guerreiros × 2 inícios (Habilidade e Suprema) × 6 combos por cadeia = 72"><b>${s.total}</b> combo${s.total>1?'s':''}<span class="max"> / ${COMBO_MAX}</span></span><span class="sub"><b>${s.starts}</b> início${s.starts>1?'s':''} com combo · maior cadeia: <b>${s.best.n+1} hits</b> (${escapeHtml(bc.name)} · ${ABILITY_LABEL[s.best.key]})</span></div>`;
 }
 // Reordena SÓ quem já está em campo (as mesmas casas ocupadas) testando todas as ordens possíveis
 // — no máx. 6! = 720. Vence a que soma mais encadeamentos; empate: a cadeia mais longa; empate de novo:
