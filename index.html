@@ -5855,22 +5855,22 @@ async function exportTierListImage(){
 /* ======================= PAPÉIS EM BATALHA + MONTAGEM AUTOMÁTICA ======================= */
 // Lê o texto das habilidades (Habilidade, Suprema, passiva única, passivas do Supremo e ★4) e classifica o
 // guerreiro em papéis. É uma leitura automática por palavras-chave — serve de guia, não de verdade absoluta.
-const ROLE_ORDER = ['dano','dot','tank','cura','suporte','controle','debuff'];
+const ROLE_ORDER = ['dano','dot','tank','sobrevivencia','cura','suporte','controle'];
 const ROLE_INFO = {
   dano:     { label:'Dano',          full:'Causador de Dano', glyph:'攻', rgb:['192,57,43','#ef8b7f'],  pillar:'dano',     thr:8,
-    about:'Foco em causar dano alto: golpes fortes, dano adicional, críticos ou ataques em área.' },
+    about:'Alto dano, crítico e afins: golpes fortes, dano adicional, taxa de crítico, ataques em área.' },
   dot:      { label:'Dano Contínuo', full:'Dano Contínuo',    glyph:'炎', rgb:['217,123,42','#f0a05f'], pillar:'dano',     thr:4,
-    about:'Aplica queimadura, sangramento, veneno ou parecidos: o dano continua acontecendo turno após turno.' },
+    about:'Queimadura, veneno, sangramento e parecidos: o dano continua acontecendo turno após turno.' },
   tank:     { label:'Tank',          full:'Tank',             glyph:'守', rgb:['59,130,196','#86c0f0'], pillar:'tank',     thr:8,
-    about:'Aguenta a pancada: redução de dano, escudo, bloqueio, recuperação da própria vida ou proteção para os aliados.' },
+    about:'Aguenta a pancada: redução de dano, bloqueio, escudo e proteção dos aliados.' },
+  sobrevivencia: { label:'Sobrevivência', full:'Sobrevivência', glyph:'生', rgb:['46,170,140','#7fe0c8'], pillar:'tank', thr:2,
+    about:'Mantém-se vivo por conta própria: autocura (recuperar a própria vida), roubo de vida e renascimento. Não ajuda os aliados — isso é Cura.' },
   cura:     { label:'Cura',          full:'Curandeiro',       glyph:'癒', rgb:['63,174,90','#86e3a2'],  pillar:'suporte',  thr:3,
-    about:'Recupera a vida dos aliados ou os revive. Curar só a si mesmo não conta: isso reforça o Tank, não o Suporte.' },
+    about:'Recupera a vida dos aliados ou os revive. Curar só a si mesmo não conta: isso é Sobrevivência.' },
   suporte:  { label:'Suporte',       full:'Suporte',          glyph:'援', rgb:['201,162,55','#e8cf6f'], pillar:'suporte',  thr:4,
-    about:'Potencializa os aliados: aumenta ATQ e DEF, entrega Fúria, concede escudos e remove efeitos negativos.' },
+    about:'Fortalece o time: aumento de status dos aliados (ATQ, DEF, Fúria...), escudos e imunidade a efeitos.' },
   controle: { label:'Controle',      full:'Controle',         glyph:'縛', rgb:['139,95,191','#c3aaf0'], pillar:'controle', thr:4,
-    about:'Tira o inimigo da luta: atordoamento, silêncio, paralisia, petrificação, encanto ou drenagem de Fúria.' },
-  debuff:   { label:'Debilitador',   full:'Debilitador',      glyph:'弱', rgb:['201,82,122','#e084a7'], pillar:'controle', thr:4,
-    about:'Enfraquece os inimigos: reduz ATQ, DEF, cura recebida ou redução de dano, e suprime o supremo deles.' },
+    about:'Enfraquece e trava os inimigos: redução de status (ATQ, DEF, cura...) e efeitos de controle (atordoamento, silêncio, paralisia, encanto, drenagem de Fúria).' },
 };
 // Um time equilibrado cobre quatro frentes (alvos pensados para 6 guerreiros).
 const PILLARS = {
@@ -5893,22 +5893,24 @@ const ROLE_RULES = [
   ['dano', /ataca (todos|uma fileira|uma coluna|toda)|todos os inimigos|coluna de inimigos|fileira de inimigos|fileira da frente|linha frontal|dano em [aá]rea/, null, 0.8],
   ['dano', /ignora (a )?(defesa|def)|penetra|perfura|quebra de defesa/, null, 1],
 
-  ['tank', /redu[cç][aã]o de dano|dano recebido|dano sofrido|bloque|imun[ei]|reflex|contra-?ataque|renasc|revive|ressusc|resist[eê]ncia|esquiva|invulner|sobreviv|n[aã]o morre|(aumenta|\+|ganha)[^.]*\b(def|defesa|pv|vida)\b/, 'proprio', 1, /inimig|do alvo|dos alvos|reduz/],
-  ['tank', /protege (os )?aliad|absorve|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5],
+  ['tank', /redu[cç][aã]o de dano|dano recebido|dano sofrido|bloque|imun[ei]|reflex|contra-?ataque|esquiva|invulner|(aumenta|\+|ganha)[^.]*\b(def|defesa|pv|vida)\b/, 'proprio', 1, /inimig|do alvo|dos alvos|reduz|roubo de vida/],
+  ['tank', /protege (os )?aliad|absorve[^.]*dano|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5],
   ['tank', /escudo/, null, 1, /remove|dissip|quebra|quebrador|quebram|destr/],
-  ['tank', /recupera[^.]*(vida|pv)|vida por turno|roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|\bregenera|\brevive\b/, null, 1.5, /aliad|equipe|recebid/],
+  ['sobrevivencia', /recupera[^.]*(vida|pv)|restaura[^.]*(vida|pv)|vida por turno|\bregenera|\brevive\b|renasc|ressurge|ressuscit|sobreviv|n[aã]o morre/, null, 3, /aliad|equipe|recebid/],
+  ['sobrevivencia', /roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|vampir/, null, 2, /aliad|recebid/],
 
   ['cura', /\bcura (todos|os |a |aos|as |2 |1 |um |uma |o guerreiro|a equipe|toda)|aplica cura|restaura (pv|vida)[^.]*(aliad|equipe|guerreiros|menor)|restaura pv para|recupera a vida d[oa][^.]*alia|converte[^.]*dano em vida[^.]*(fileira|aliad|equipe)|efeito de cura aumentado|recupera [^.]*(pv|vida) d[eo] (todos|\d)/, null, 3, /cura recebida|reduz[^.]*cura|efeito de cura (reduz|diminui)/],
   ['cura', /revive|reanima|ressuscita/, 'aliado', 2],
 
   ['suporte', new RegExp(RB_VERB + '[^.]*' + RB_STAT + '[^.]*alia|' + RB_VERB + '[^.]*alia[^.]*' + RB_STAT + '|(f[uú]ria|raiva)[^.]*(1 guerreiro|um guerreiro|2 guerreiros|aleat)[^.]*alia|aumenta aleatoriamente[^.]*(f[uú]ria|raiva)|alia[^.]*(ganham|recebem)'), 'aliado', 1.5, /reduz[^.]*(alvo|inimig)|derrotad|morr|abatid/],
   ['suporte', /remove[^.]*(efeitos negativos|debuff|anormal)|dissipa os efeitos de \[controle\]|purifica|concede \[|refor[cç]o/, 'aliado', 1],
+  ['suporte', /imun[ie]|imunidade|invulner/, 'aliado', 1.5, /inimig|alvo|reduz|\bpr[oó]pri/],
 
   ['controle', /atordo|sil[eê]ncio|silencia|paralis|petrific|confus|imobiliza|enraiz|encant|cegueira|pesadelo|supress[aã]o de supremo|\[suprimir\]|congel|adormec|\bmedo\b/, 'inimigo', 2, /imun|resist|res\. anormal|remove|dissip|purific|contra alvos|em alvos|alvos (em|com|sob)|estado de|sob controle|se acertar|aumenta para|alvo de|taxa de (resist|res)|ao morrer/],
   ['controle', /(reduz|diminui|drena|rouba|zera|corta|reduzindo)[^.]*(f[uú]ria|raiva)|(f[uú]ria|raiva) d[oe]s? (alvo|inimig)[^.]*(reduz|-\s?\d)|desacelera|reduz a velocidade|recupera[cç][aã]o de (f[uú]ria|raiva)[^.]*(reduz|-)/, 'inimigo', 1.5, /recupera \d+ (de )?(f|r)|pr[oó]pria? (f[uú]ria|raiva)|rouba[^.]*pr[oó]pria/],
 
-  ['debuff', /(reduz|diminui|-\s?\d+(,\d+)?%|drena|reduzindo)[^.]*(atq|ataque|\bdef|defesa|redu[cç][aã]o de dano|cura|taxa de cr|velocidade|vel\b|dano d[eo]|taxa de dano|resist)/, 'inimigo', 1.5, /pr[oó]pri|dano recebido|reduz[^.]*dano (sofrido|recebido)/],
-  ['debuff', /inflige \[(julgamento|marca|enfraquec|vulnerab)|amaldi[cç]o|enfraquece|vulnerab|\[suprimir\]|repress[aã]o/, null, 1.5],
+  ['controle', /(reduz|diminui|-\s?\d+(,\d+)?%|drena|reduzindo)[^.]*(atq|ataque|\bdef|defesa|redu[cç][aã]o de dano|cura|taxa de cr|velocidade|vel\b|dano d[eo]|taxa de dano|resist)/, 'inimigo', 1.5, /pr[oó]pri|dano recebido|reduz[^.]*dano (sofrido|recebido)/],
+  ['controle', /inflige \[(julgamento|marca|enfraquec|vulnerab)|amaldi[cç]o|enfraquece|vulnerab|\[suprimir\]|repress[aã]o/, null, 1.5],
 
   ['dot', /queima|sangr|veneno|envenen|corro|dano cont[ií]nuo|a cada turno[^.]*dano|no in[ií]cio de cada turno[^.]*(dano|causa)|chamas? (azul|azuis|extintora)/, 'inimigo', 2, /imun|resist|remove|dissip|\breduz\b[^.]*queima|aliad|pr[oó]pri|contra alvos|em alvos|alvos (em|com)|absorve/],
 ];
@@ -5989,9 +5991,12 @@ function analyzeRoles(c){
   if(c.type === 'Defesa') score.tank += 2;
   if(c.type === 'Habilidade'){ score.suporte += 0.8; score.controle += 0.4; }
 
-  const list = ROLE_ORDER.map(r => [r, score[r] / ROLE_INFO[r].thr]).sort((a, b) => b[1] - a[1]);
+  // Sobrevivência (autocura, roubo de vida, reviver) aparece em muita gente: entra sempre como complemento, nunca como papel principal.
+  const norm = r => score[r] / ROLE_INFO[r].thr;
+  const list = ROLE_ORDER.filter(r => r !== 'sobrevivencia').map(r => [r, norm(r)]).sort((a, b) => b[1] - a[1]);
   let keep = list.filter(([r, n], i) => n >= 1 && (i === 0 || n >= list[0][1] * 0.55)).slice(0, 3).map(x => x[0]);
   if(!keep.length) keep = [list[0][0]];
+  if(norm('sobrevivencia') >= 1) keep = keep.slice(0, 2).concat('sobrevivencia');
   const ov = ROLE_OVERRIDES[c.name];
   if(ov && ov.length) keep = ov.slice(0, 3);
   const pillars = { dano:0, tank:0, suporte:0, controle:0 };
