@@ -336,6 +336,88 @@ async function main(){
     assert.strictEqual(r.um.max, 2);
   });
 
+  await test('analyzeRoles: reconhece cura, tank, controle, suporte e dano pelo texto das habilidades', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = state.characters;
+      const mk = (id, type, skill, supreme) => ({ id, name:'Teste ' + id, type, tags:[], rarity:'R', skill:{name:'S', desc:skill, effects:[]}, supreme:{name:'U', desc:supreme, effects:[]}, combo:{name:'C', triggers:[], effects:[]} });
+      const out = {
+        cura: analyzeRoles(mk('h', 'Habilidade', 'Cura todos os aliados em 90% do ATQ.', 'Restaura PV para 2 aliados com menor PV.')).roles,
+        tank: analyzeRoles(mk('t', 'Defesa', 'Ganha Escudo de 30% do PV Máx. e aumenta a Redução de Dano em 20%.', 'Protege aliados da mesma coluna e absorve 35% do dano.')).roles,
+        ctrl: analyzeRoles(mk('c', 'Habilidade', 'Ataca todos os inimigos, 70% de chance de causar [Atordoamento] e [Silêncio].', 'Reduz 300 de Fúria do alvo e causa [Paralisia].')).roles,
+        sup: analyzeRoles(mk('s', 'Habilidade', 'Aumenta o ATQ e a DEF de todos os aliados em 20%.', 'Recupera 200 de Fúria para todos os aliados e concede escudo aos aliados.')).roles,
+        dano: analyzeRoles(mk('d', 'Ataque', 'Ataca um único inimigo causando 30% de dano adicional.', 'Ataca todos os inimigos, aumenta a Taxa de Crítico em 30% e causa dano extra.')).roles,
+        cond: analyzeRoles(mk('x', 'Ataque', 'Quando um guerreiro aliado é derrotado, recupera 8% da vida.', '')).roles,
+      };
+      state.characters = bk;
+      return out;
+    })()`);
+    assert.strictEqual(r.cura[0], 'cura');
+    assert.ok(r.tank.includes('tank'));
+    assert.ok(r.ctrl.includes('controle'));
+    assert.ok(r.sup.includes('suporte'));
+    assert.strictEqual(r.dano[0], 'dano');
+    assert.ok(!r.cond.includes('cura'), 'curar a si quando um aliado morre não faz do guerreiro um curandeiro');
+  });
+
+  await test('balanceScore premia equipe com dano, tank, suporte e controle; missingPillars aponta o que falta', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, type, skill) => ({ id, name:'Eq ' + id, type, tags:[], rarity:'R', skill:{name:'S', desc:skill, effects:[]}, supreme:{name:'U', desc:'', effects:[]}, combo:{name:'C', triggers:[], effects:[]} });
+      state.characters = [
+        mk('d1','Ataque','Causa 30% de dano adicional.'), mk('d2','Ataque','Causa dano extra a todos os inimigos.'),
+        mk('t1','Defesa','Ganha Escudo e aumenta a Redução de Dano em 20%.'), mk('t2','Defesa','Aumenta a DEF própria em 20%.'),
+        mk('s1','Habilidade','Cura todos os aliados em 90% do ATQ e aumenta o ATQ de todos os aliados.'),
+        mk('c1','Habilidade','Causa [Atordoamento] e [Silêncio] nos inimigos e reduz a Fúria do alvo.'),
+      ];
+      const ids = state.characters.map(c => c.id);
+      const solo = ['d1','d2','d1','d2'].slice(0,2);
+      const equilibrada = balanceScore(ids);
+      const soDano = balanceScore(['d1','d2']);
+      const miss = missingPillars(['d1','d2']);
+      state.characters = bk[0]; state.team = bk[1];
+      return { equilibrada, soDano, miss };
+    })()`);
+    assert.ok(r.equilibrada > 0.9, 'equipe completa e variada fica perto de 100% (' + r.equilibrada + ')');
+    assert.ok(r.soDano < r.equilibrada, 'só dano é menos equilibrado');
+    assert.ok(r.miss.includes('tank') && r.miss.includes('suporte'), 'só dano: faltam tank e suporte');
+  });
+
+  await test('buildTeamOptions completa a equipe mantendo os guerreiros escolhidos, sem repetir e respeitando a raridade', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.characters, state.team];
+      const mk = (id, rar, type, skill, trig, eff, skEff) => ({ id, name:'Bt ' + id, type, tags:[], rarity:rar, skill:{name:'S', desc:skill, effects:skEff||[]}, supreme:{name:'U', desc:'', effects:[]}, combo:{name:'C', triggers:trig||[], effects:eff||[]} });
+      state.characters = [
+        mk('a','SSR','Ataque','Causa dano adicional.',[],[],['derrubada']),
+        mk('b','SSR','Defesa','Ganha Escudo e Redução de Dano.',['derrubada'],['empurrao']),
+        mk('c','SR','Habilidade','Cura todos os aliados em 90% do ATQ.',['empurrao'],[]),
+        mk('d','SSR','Habilidade','Causa [Atordoamento] e [Silêncio] nos inimigos.',['derrubada'],[]),
+        mk('e','R','Ataque','Causa dano extra.',[],[]),
+        mk('f','SSR [Limitado]','Ataque','Causa dano adicional a todos os inimigos.',[],[]),
+        mk('g','SSR','Defesa','Aumenta a DEF própria.',[],[]),
+      ];
+      state.team = ['a', null, null, null, null, null];
+      const todas = buildTeamOptions('equilibrado', 'all', 3);
+      const ssr = buildTeamOptions('equilibrado', 'SSR', 3);
+      state.team = ['a','b','c','d','e','f'];
+      const cheia = buildTeamOptions('equilibrado', 'all', 3);
+      state.team = [];
+      const vazia = buildTeamOptions('equilibrado', 'all', 3);
+      state.characters = bk[0]; state.team = bk[1];
+      return {
+        nTodas: todas.length, todasOk: todas.every(o => o.team.filter(Boolean).length === 6 && new Set(o.team.filter(Boolean)).size === 6 && o.team.includes('a')),
+        ssrOnly: ssr.every(o => o.team.filter(Boolean).every(id => id === 'a' || ['b','d','f','g'].includes(id))),
+        nSsr: ssr.length, cheia: cheia.length, vazia: vazia.length,
+        ordenado: todas.every((o, i) => i === 0 || todas[i-1].score >= o.score),
+      };
+    })()`);
+    assert.ok(r.nTodas >= 1);
+    assert.ok(r.todasOk, 'sempre 6 guerreiros distintos, com o escolhido dentro');
+    assert.ok(r.ssrOnly && r.nSsr >= 0, 'com "Só SSR" só entram SSR (inclui Limitado) além do guerreiro escolhido');
+    assert.strictEqual(r.cheia, 0, 'equipe cheia não tem o que completar');
+    assert.strictEqual(r.vazia, 0, 'sem nenhum guerreiro escolhido não monta nada');
+    assert.ok(r.ordenado);
+  });
+
   await test('recommendForTeam filtra por raridade (SSR inclui Limitado, exclui SR/R)', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];

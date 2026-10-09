@@ -565,6 +565,53 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-rec-chain b{color:var(--text);}
 .kz-rec-chain .arr{color:#ff8a2a;margin:0 4px;}
 .kz-rec-card .kz-btn{align-self:flex-start;}
+.kz-role{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;border:1.5px solid;font-size:14px;font-weight:800;white-space:nowrap;}
+.kz-role .g{font-family:'Shippori Mincho',serif;font-weight:800;font-size:15px;line-height:1;}
+.kz-role.sm{padding:2px 8px;font-size:11px;gap:5px;border-width:1px;}
+.kz-role.sm .g{font-size:12px;}
+.kz-role-line{align-items:center;gap:8px;}
+.kz-slot-roles{display:flex;gap:4px;flex-wrap:wrap;justify-content:inherit;}
+.kz-role-card{margin:0 0 18px;padding:14px 16px;border-radius:14px;border:1.5px solid rgba(255,150,50,.3);background:rgba(16,14,26,.7);}
+.kz-role-card-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+.kz-role-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.kz-role-row{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:12px;background:rgba(8,7,14,.55);border:1px solid rgba(255,255,255,.1);}
+.kz-role-row-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.kz-role-rank{font-size:12px;color:#a79f8c;font-weight:700;}
+.kz-role-about{font-size:13px;color:#dcd6c6;line-height:1.45;}
+.kz-role-ev{margin:0;padding-left:18px;font-size:12.5px;color:#b9b2a2;line-height:1.45;}
+.kz-role-ev li{margin:2px 0;}
+.kz-comp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 2px;}
+.kz-comp-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;border:1.5px solid rgba(255,255,255,.2);font-size:13px;font-weight:700;background:rgba(8,7,14,.6);color:#dcd6c6;}
+.kz-comp-chip .g{font-family:'Shippori Mincho',serif;font-weight:800;}
+.kz-comp-chip b{color:#fff3da;}
+.kz-comp-chip.miss{opacity:.65;border-style:dashed;}
+.kz-comp-note{font-size:13px;font-weight:700;}
+.kz-comp-note.warn{color:#f0a05f;}
+.kz-comp-note.ok{color:#86e3a2;}
+.kz-comp-bal{margin-left:auto;font-size:13px;color:#cfc8b8;}
+.kz-comp-bal b{color:#ffd66b;}
+.kz-rec-roles{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.kz-fill-tag{padding:2px 9px;border-radius:999px;background:rgba(63,174,90,.18);border:1px solid rgba(63,174,90,.55);color:#86e3a2;font-size:11px;font-weight:800;}
+.kz-auto{margin-top:16px;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(255,170,70,.4);background:rgba(16,14,26,.8);}
+.kz-auto-head{display:flex;flex-direction:column;gap:10px;margin-bottom:10px;}
+.kz-auto-head h3{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:26px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;}
+.kz-auto-ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.kz-auto-opts{display:grid;grid-template-columns:1fr;gap:12px;}
+.kz-auto-opt{padding:12px;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(8,7,14,.6);display:flex;flex-direction:column;gap:10px;}
+.kz-auto-opt.top{border-color:rgba(255,200,90,.7);box-shadow:0 0 0 1px rgba(255,200,90,.25) inset;}
+.kz-auto-opt-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;color:#fff3da;}
+.kz-auto-stat{font-size:13px;color:#cfc8b8;}
+.kz-auto-stat b{color:#ffd66b;}
+.kz-auto-team{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;}
+.kz-auto-mem{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;padding:6px 4px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid transparent;}
+.kz-auto-mem.core{border-color:rgba(255,200,90,.6);background:rgba(255,200,90,.08);}
+.kz-auto-art{width:100%;max-width:74px;aspect-ratio:3/4;border-radius:8px;overflow:hidden;}
+.kz-auto-art > *{width:100%;height:100%;}
+.kz-auto-nm{font-size:11.5px;font-weight:800;text-align:center;line-height:1.2;color:var(--text-strong);}
+.kz-auto-roles{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.kz-auto-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.kz-auto-pill{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+@media (max-width:760px){.kz-auto-team{grid-template-columns:repeat(3,minmax(0,1fr));}}
 .kz-field-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .kz-combo-count{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:10px 0 2px;padding:9px 14px;border-radius:10px;background:rgba(8,7,14,.6);border:1px solid rgba(255,255,255,.14);}
 .kz-combo-count .big{font-size:17px;font-weight:800;color:#f0e2bd;}
@@ -4050,6 +4097,8 @@ let state = {
   slotSel: null,                    // casa do Montador selecionada, esperando um guerreiro do elenco
   rosterSearch: '',
   recRarity: 'all',
+  autoMode: 'equilibrado',
+  autoOpts: null,
   sf: { chars:{tags:[],trig:[],eff:[]}, coll:{tags:[],trig:[],eff:[]}, roster:{tags:[],trig:[],eff:[]}, open:{} },   // filtro de pesquisa por tags + o que o Ataque Combinado persegue/causa, um por aba
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
@@ -5064,7 +5113,7 @@ function renderCharDetailPage(charId){
   if(!c) return `<div class="kz-empty">Personagem não encontrado.</div>`;
   const fav = isFav(c.id);
   const cur = DETAIL_TABS.find(t=>t[0]===state.charDetailTab) || DETAIL_TABS[0];
-  const body = cur[0] === 'habilidades' ? renderDetailAbilities(c)
+  const body = cur[0] === 'habilidades' ? renderRoleCard(c) + renderDetailAbilities(c)
     : cur[0] === 'comida' ? renderCharFoodSection(c)
     : renderCharBondsSection(c);
   return `
@@ -5088,6 +5137,7 @@ function renderCharDetailPage(charId){
               ${c.type ? pillHtml(c.type, c.type) : ''}${c.affinity ? pillHtml(c.affinity, c.affinity) : ''}
             </div>
             ${(c.tags||[]).length ? `<div class="kz-pill-row">${c.tags.map(tagPillHtml).join('')}</div>` : ''}
+            <div class="kz-pill-row kz-role-line"><span class="kz-label">Papel</span>${rolePillsHtml(c, 3)}</div>
             <div class="kz-action-row">
               <button class="kz-build-btn" id="buildWithCharBtn" data-id="${c.id}"><span class="glyph">連</span><span>Montar combo com este guerreiro</span></button>
               <button class="kz-fav-toggle ${fav?'on':''}" data-fav="${c.id}"><span class="star">★</span><span class="lbl">${fav?'Favoritado':'Favoritar'}</span></button>
@@ -5802,6 +5852,365 @@ async function exportTierListImage(){
   }
 }
 
+/* ======================= PAPÉIS EM BATALHA + MONTAGEM AUTOMÁTICA ======================= */
+// Lê o texto das habilidades (Habilidade, Suprema, passiva única, passivas do Supremo e ★4) e classifica o
+// guerreiro em papéis. É uma leitura automática por palavras-chave — serve de guia, não de verdade absoluta.
+const ROLE_ORDER = ['dano','dot','tank','cura','suporte','controle','debuff'];
+const ROLE_INFO = {
+  dano:     { label:'Dano',          full:'Causador de Dano', glyph:'攻', rgb:['192,57,43','#ef8b7f'],  pillar:'dano',     thr:8,
+    about:'Foco em causar dano alto: golpes fortes, dano adicional, críticos ou ataques em área.' },
+  dot:      { label:'Dano Contínuo', full:'Dano Contínuo',    glyph:'炎', rgb:['217,123,42','#f0a05f'], pillar:'dano',     thr:4,
+    about:'Aplica queimadura, sangramento, veneno ou parecidos: o dano continua acontecendo turno após turno.' },
+  tank:     { label:'Tank',          full:'Tank',             glyph:'守', rgb:['59,130,196','#86c0f0'], pillar:'tank',     thr:8,
+    about:'Aguenta a pancada: redução de dano, escudo, bloqueio, recuperação da própria vida ou proteção para os aliados.' },
+  cura:     { label:'Cura',          full:'Curandeiro',       glyph:'癒', rgb:['63,174,90','#86e3a2'],  pillar:'suporte',  thr:3,
+    about:'Recupera a vida dos aliados ou os revive.' },
+  suporte:  { label:'Suporte',       full:'Suporte',          glyph:'援', rgb:['201,162,55','#e8cf6f'], pillar:'suporte',  thr:4,
+    about:'Potencializa os aliados: aumenta ATQ e DEF, entrega Fúria, concede escudos e remove efeitos negativos.' },
+  controle: { label:'Controle',      full:'Controle',         glyph:'縛', rgb:['139,95,191','#c3aaf0'], pillar:'controle', thr:4,
+    about:'Tira o inimigo da luta: atordoamento, silêncio, paralisia, petrificação, encanto ou drenagem de Fúria.' },
+  debuff:   { label:'Debilitador',   full:'Debilitador',      glyph:'弱', rgb:['201,82,122','#e084a7'], pillar:'controle', thr:4,
+    about:'Enfraquece os inimigos: reduz ATQ, DEF, cura recebida ou redução de dano, e suprime o supremo deles.' },
+};
+// Um time equilibrado cobre quatro frentes (alvos pensados para 6 guerreiros).
+const PILLARS = {
+  dano:     { label:'Dano',     target:2,   weight:0.30, cap:4 },
+  tank:     { label:'Tank',     target:1.5, weight:0.30, cap:3 },
+  suporte:  { label:'Suporte',  target:1,   weight:0.25, cap:3 },
+  controle: { label:'Controle', target:1,   weight:0.15, cap:3 },
+};
+const PILLAR_ORDER = ['dano','tank','suporte','controle'];
+const ROLE_WEIGHTS = [1, 0.6, 0.4];           // principal, secundário, terciário
+// Correções à mão (nome do guerreiro → papéis, do principal pro último) caso a leitura automática erre.
+const ROLE_OVERRIDES = {};
+
+const RB_VERB = '(aumenta|concede|ganha|ganham|recupera|restaura|fornece|adiciona|aplica|protege|recebem|libera|garante|d[aá]|empresta|reduz o custo)';
+const RB_STAT = '(atq|ataque|def|defesa|f[uú]ria|raiva|dano|redu[cç][aã]o|cr[ií]t|vel|esquiv|escudo|ki\\b|resist|bloque|pv|vida|cura)';
+// [papel, regex, alvo exigido ('aliado'|'proprio'|'inimigo'|null), peso, exclusão]
+const ROLE_RULES = [
+  ['dano', /dano adicional|dano extra|\+\s?\d+(,\d+)?% (de )?dano|aumenta[^.]*\bdano\b|dano (aumenta|escala)|dano de (habilidade|supremo|sequência|ataque)|maior o dano|maior dano|taxa de cr[ií]t|dano cr[ií]t|intensidade de cr[ií]t|multiplica/, null, 1, /redu[cç][aã]o de dano|dano recebido|reduz[^.]*dano|dano sofrido|menos dano/],
+  ['dano', /(aumenta|\+\s?\d+(,\d+)?%|ganha)[^.]*\b(atq|ataque)\b/, 'proprio', 1, /reduz|dano recebido/],
+  ['dano', /ataca (todos|uma fileira|uma coluna|toda)|todos os inimigos|coluna de inimigos|fileira de inimigos|fileira da frente|linha frontal|dano em [aá]rea/, null, 0.8],
+  ['dano', /ignora (a )?(defesa|def)|penetra|perfura|quebra de defesa/, null, 1],
+
+  ['tank', /redu[cç][aã]o de dano|dano recebido|dano sofrido|bloque|imun[ei]|reflex|contra-?ataque|renasc|revive|ressusc|resist[eê]ncia|esquiva|invulner|sobreviv|n[aã]o morre|(aumenta|\+|ganha)[^.]*\b(def|defesa|pv|vida)\b/, 'proprio', 1, /inimig|do alvo|dos alvos|reduz/],
+  ['tank', /protege (os )?aliad|absorve|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5],
+  ['tank', /escudo/, null, 1, /remove|dissip|quebra|quebrador|quebram|destr/],
+  ['tank', /recupera[^.]*(vida|pv)|vida por turno|roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|\bregenera/, 'proprio', 1.5, /alia(do|dos) com menor|todos os aliados/],
+
+  ['cura', /\bcura (todos|os |a |aos|as |2 |1 |um |uma |o guerreiro|a equipe|toda)|aplica cura|restaura (pv|vida)[^.]*(aliad|equipe|guerreiros|menor)|restaura pv para|recupera a vida d[oa][^.]*alia|converte[^.]*dano em vida[^.]*(fileira|aliad|equipe)|efeito de cura aumentado|recupera [^.]*(pv|vida) d[eo] (todos|\d)/, null, 3, /cura recebida|reduz[^.]*cura|efeito de cura (reduz|diminui)/],
+  ['cura', /revive|reanima|ressuscita/, 'aliado', 2],
+
+  ['suporte', new RegExp(RB_VERB + '[^.]*' + RB_STAT + '[^.]*alia|' + RB_VERB + '[^.]*alia[^.]*' + RB_STAT + '|(f[uú]ria|raiva)[^.]*(1 guerreiro|um guerreiro|2 guerreiros|aleat)[^.]*alia|aumenta aleatoriamente[^.]*(f[uú]ria|raiva)|alia[^.]*(ganham|recebem)'), 'aliado', 1.5, /reduz[^.]*(alvo|inimig)|derrotad|morr|abatid/],
+  ['suporte', /remove[^.]*(efeitos negativos|debuff|anormal)|dissipa os efeitos de \[controle\]|purifica|concede \[|refor[cç]o/, 'aliado', 1],
+
+  ['controle', /atordo|sil[eê]ncio|silencia|paralis|petrific|confus|imobiliza|enraiz|encant|cegueira|pesadelo|supress[aã]o de supremo|\[suprimir\]|congel|adormec|\bmedo\b/, 'inimigo', 2, /imun|resist|res\. anormal|remove|dissip|purific|contra alvos|em alvos|alvos (em|com|sob)|estado de|sob controle|se acertar|aumenta para|alvo de|taxa de (resist|res)|ao morrer/],
+  ['controle', /(reduz|diminui|drena|rouba|zera|corta|reduzindo)[^.]*(f[uú]ria|raiva)|(f[uú]ria|raiva) d[oe]s? (alvo|inimig)[^.]*(reduz|-\s?\d)|desacelera|reduz a velocidade|recupera[cç][aã]o de (f[uú]ria|raiva)[^.]*(reduz|-)/, 'inimigo', 1.5, /recupera \d+ (de )?(f|r)|pr[oó]pria? (f[uú]ria|raiva)|rouba[^.]*pr[oó]pria/],
+
+  ['debuff', /(reduz|diminui|-\s?\d+(,\d+)?%|drena|reduzindo)[^.]*(atq|ataque|\bdef|defesa|redu[cç][aã]o de dano|cura|taxa de cr|velocidade|vel\b|dano d[eo]|taxa de dano|resist)/, 'inimigo', 1.5, /pr[oó]pri|dano recebido|reduz[^.]*dano (sofrido|recebido)/],
+  ['debuff', /inflige \[(julgamento|marca|enfraquec|vulnerab)|amaldi[cç]o|enfraquece|vulnerab|\[suprimir\]|repress[aã]o/, null, 1.5],
+
+  ['dot', /queima|sangr|veneno|envenen|corro|dano cont[ií]nuo|a cada turno[^.]*dano|no in[ií]cio de cada turno[^.]*(dano|causa)|chamas? (azul|azuis|extintora)/, 'inimigo', 2, /imun|resist|remove|dissip|\breduz\b[^.]*queima|aliad|pr[oó]pri|contra alvos|em alvos|alvos (em|com)|absorve/],
+];
+const ROLE_TEXT_CAP = 6;   // um mesmo texto não pode pesar mais que isso num papel
+
+// Textos que valem pra classificação: a versão mais evoluída de cada habilidade.
+function roleTexts(c){
+  const p = ABILITY_PROGRESSION[c.name];
+  const out = [];
+  const add = o => { if(o && typeof o.desc === 'string') out.push(o.desc); else if(typeof o === 'string') out.push(o); };
+  if(p){
+    if(p.habilidade) add(p.habilidade.max || p.habilidade.base);
+    if(p.suprema) add(p.suprema.smax || p.suprema.max || p.suprema.base);
+    if(p.passivaUnica) add(p.passivaUnica.max || p.passivaUnica.base);
+    (p.passivasSupremo || []).forEach(add);
+    if(p.passivaQuatroEstrelas) add(p.passivaQuatroEstrelas.max || p.passivaQuatroEstrelas.base || p.passivaQuatroEstrelas);
+  } else {
+    [c.skill, c.supreme].forEach(a => a && a.desc && out.push(a.desc));
+  }
+  return out;
+}
+function roleDamageMult(c){
+  const p = ABILITY_PROGRESSION[c.name];
+  if(!p) return 0;
+  const pick = o => o && o.dano;
+  const arr = [pick(p.habilidade && (p.habilidade.max || p.habilidade.base)), pick(p.suprema && (p.suprema.smax || p.suprema.max || p.suprema.base))];
+  return arr.map(s => parseFloat(String(s || '').replace(',', '.'))).filter(n => !isNaN(n)).reduce((a, b) => a + b, 0);
+}
+function roleClauses(t){
+  return t.replace(/\[[^\]]*\]/g, m => m.replace(/\./g, '')).split(/[.;]|\n|\s—\s/).map(s => s.trim()).filter(Boolean);
+}
+// Tira a condição ("quando X morre,", "se houver Y:", "para cada Z,") pra olhar só o que a habilidade FAZ e em quem.
+function roleMainPart(s){
+  if(/^(quando|se |caso|para cada|sempre que|ao |após|enquanto|no in[ií]cio|a cada|com |sem |início|fim|[\[(]?passiva)/.test(s)){
+    const m = s.match(/[,:]\s*(.{12,})$/);
+    if(m) return m[1];
+  }
+  return s;
+}
+function roleTarget(s){
+  const t = {
+    aliado: /aliad|equipe|retaguarda aliada|\ba si\b|time/.test(s),
+    proprio: /pr[oó]pri|\ba si\b|si mesm|\bganha\b|\brecebe\b|\bentra\b/.test(s),
+    inimigo: /inimig|alvo|oponent|\binflige\b|causa \[/.test(s),
+  };
+  if(!t.aliado && !t.inimigo) t.proprio = true;
+  return t;
+}
+const _roleCache = new Map();
+function analyzeRoles(c){
+  const key = [c.id, c.name, c.type, c.skill && c.skill.desc, c.supreme && c.supreme.desc].join('|');
+  const hit = _roleCache.get(key);
+  if(hit) return hit;
+  const score = {}, why = {};
+  ROLE_ORDER.forEach(r => { score[r] = 0; why[r] = []; });
+  roleTexts(c).forEach(txt => {
+    const tscore = {};
+    roleClauses(txt).forEach(raw => {
+      const cl = roleMainPart(raw.toLowerCase());
+      const tg = roleTarget(cl);
+      const best = {};
+      ROLE_RULES.forEach(([role, re, need, w, ex]) => {
+        if(!re.test(cl)) return;
+        if(ex && ex.test(cl)) return;
+        if(need && !tg[need]) return;
+        if(!best[role] || w > best[role]) best[role] = w;
+      });
+      Object.keys(best).forEach(role => {
+        tscore[role] = (tscore[role] || 0) + best[role];
+        if(why[role].length < 3) why[role].push(raw);
+      });
+    });
+    Object.keys(tscore).forEach(r => { score[r] += Math.min(ROLE_TEXT_CAP, tscore[r]); });
+  });
+  const mult = roleDamageMult(c);
+  if(mult) score.dano += Math.max(0, Math.min(4, (mult - 350) / 80));
+  if(c.type === 'Ataque') score.dano += 2;
+  if(c.type === 'Defesa') score.tank += 2;
+  if(c.type === 'Habilidade'){ score.suporte += 0.8; score.controle += 0.4; }
+
+  const list = ROLE_ORDER.map(r => [r, score[r] / ROLE_INFO[r].thr]).sort((a, b) => b[1] - a[1]);
+  let keep = list.filter(([r, n], i) => n >= 1 && (i === 0 || n >= list[0][1] * 0.55)).slice(0, 3).map(x => x[0]);
+  if(!keep.length) keep = [list[0][0]];
+  const ov = ROLE_OVERRIDES[c.name];
+  if(ov && ov.length) keep = ov.slice(0, 3);
+  const pillars = { dano:0, tank:0, suporte:0, controle:0 };
+  keep.forEach((r, i) => { pillars[ROLE_INFO[r].pillar] += ROLE_WEIGHTS[i] || 0.3; });
+  const res = { roles: keep, primary: keep[0], score, why, pillars };
+  _roleCache.set(key, res);
+  return res;
+}
+function rolesOf(c){ return analyzeRoles(c).roles; }
+
+function rolePillHtml(role, small){
+  const info = ROLE_INFO[role], r = info.rgb;
+  return `<span class="kz-role${small ? ' sm' : ''}" style="background:linear-gradient(rgba(${r[0]},.22),rgba(${r[0]},.22)),#0c0a14;color:${r[1]};border-color:rgba(${r[0]},.65);" title="${escapeAttr(info.full + ' — ' + info.about)}"><span class="g">${info.glyph}</span>${escapeHtml(info.label)}</span>`;
+}
+function rolePillsHtml(c, max, small){
+  return rolesOf(c).slice(0, max || 3).map(r => rolePillHtml(r, small)).join('');
+}
+function roleEvidence(txt){
+  let s = String(txt || '').trim();
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+  if(s.length > 150) s = s.slice(0, 150).replace(/\s+\S*$/, '') + '…';
+  return s;
+}
+// Bloco "Papel em batalha" da ficha: os papéis, o que cada um significa e os trechos das habilidades que levaram a isso.
+function renderRoleCard(c){
+  const a = analyzeRoles(c);
+  const rows = a.roles.map((r, i) => {
+    const ev = a.why[r].slice(0, 2);
+    return `<div class="kz-role-row">
+      <div class="kz-role-row-head">${rolePillHtml(r)}<span class="kz-role-rank">${i === 0 ? 'Papel principal' : 'Papel secundário'}</span></div>
+      <div class="kz-role-about">${escapeHtml(ROLE_INFO[r].about)}</div>
+      ${ev.length ? `<ul class="kz-role-ev">${ev.map(e => `<li>${escapeHtml(roleEvidence(e))}</li>`).join('')}</ul>` : `<div class="kz-role-ev kz-muted">Definido pelo tipo do guerreiro (${escapeHtml(c.type || '—')}).</div>`}
+    </div>`;
+  }).join('');
+  return `<div class="kz-role-card">
+    <div class="kz-role-card-head"><span class="kz-label">Papel em batalha</span><span class="kz-muted">Lido automaticamente das habilidades e passivas — serve de guia pra montar equipe.</span></div>
+    <div class="kz-role-rows">${rows}</div>
+  </div>`;
+}
+
+/* ---------- Equilíbrio da equipe ---------- */
+function teamPillars(team){
+  const v = { dano:0, tank:0, suporte:0, controle:0 };
+  (team || []).forEach(id => {
+    const c = id && getChar(id);
+    if(!c) return;
+    const p = analyzeRoles(c).pillars;
+    PILLAR_ORDER.forEach(k => { v[k] += p[k]; });
+  });
+  return v;
+}
+// 0 a 1. Cada frente conta até o alvo (ajustado ao tamanho da equipe); passar muito do limite tira um pouco.
+function balanceScore(team){
+  const n = (team || []).filter(Boolean).length;
+  if(!n) return 0;
+  const scale = n / 6;
+  const v = teamPillars(team);
+  let s = 0;
+  PILLAR_ORDER.forEach(k => {
+    const P = PILLARS[k];
+    s += P.weight * Math.min(1, v[k] / (P.target * scale));
+    s -= 0.05 * Math.max(0, v[k] - P.cap * scale);
+  });
+  return Math.max(0, Math.min(1, s));
+}
+// Frentes que ainda faltam (abaixo de 70% do alvo), da mais importante pra menos.
+function missingPillars(team){
+  const n = (team || []).filter(Boolean).length;
+  if(!n) return [];
+  const v = teamPillars(team), scale = Math.max(n / 6, 0.5);
+  return PILLAR_ORDER.filter(k => v[k] < PILLARS[k].target * scale * 0.7);
+}
+function compositionHtml(){
+  const team = state.team;
+  if(!team.some(Boolean)) return '';
+  const v = teamPillars(team), miss = missingPillars(team);
+  const bal = Math.round(balanceScore(team) * 100);
+  const chips = PILLAR_ORDER.map(k => {
+    const info = ROLE_INFO[k === 'suporte' ? 'suporte' : k === 'controle' ? 'controle' : k];
+    const r = info.rgb, isMiss = miss.includes(k);
+    return `<span class="kz-comp-chip${isMiss ? ' miss' : ''}" style="border-color:rgba(${r[0]},${isMiss ? .35 : .7});color:${isMiss ? '#9a93a3' : r[1]};"><span class="g">${info.glyph}</span>${PILLARS[k].label} <b>${(Math.round(v[k] * 10) / 10).toString().replace('.', ',')}</b></span>`;
+  }).join('');
+  const note = !miss.length ? 'Equipe equilibrada.' : `Falta: ${miss.map(k => PILLARS[k].label).join(', ')}.`;
+  return `<div class="kz-comp" title="Soma dos papéis dos guerreiros em campo (principal vale 1, secundário 0,6). Alvo pra 6 guerreiros: Dano 2 · Tank 1,5 · Suporte 1 · Controle 1.">
+    <span class="kz-label">Composição</span>${chips}<span class="kz-comp-note ${miss.length ? 'warn' : 'ok'}">${note}</span><span class="kz-comp-bal">Equilíbrio <b>${bal}%</b></span>
+  </div>`;
+}
+
+/* ---------- Montagem automática (completa a equipe a partir de 1 a 5 guerreiros) ---------- */
+const AUTO_MODES = {
+  equilibrado: { label:'Equilibrado',   wc:0.55, wb:0.45, hint:'Combos + papéis (dano, tank, suporte e controle)' },
+  combos:      { label:'Mais combos',   wc:0.9,  wb:0.1,  hint:'Prioriza a maior quantidade de combos' },
+};
+function autoObjective(team, mode){
+  const m = AUTO_MODES[mode] || AUTO_MODES.equilibrado;
+  const n = team.filter(Boolean).length;
+  const st = comboStatsFor(team);
+  const ref = Math.max(1, 66 * Math.pow(n / 6, 2));
+  const comboNorm = Math.min(1, st.total / ref);
+  const bal = balanceScore(team);
+  return { score: m.wc * comboNorm + m.wb * bal, combos: st.total, longest: st.longest, balance: bal };
+}
+// Busca em feixe: a cada passo experimenta cada guerreiro do elenco em cada casa livre e guarda as melhores
+// equipes parciais. No fim, reordena as 3 melhores pra render o máximo de combos.
+function buildTeamOptions(mode, rarity, maxOptions){
+  const base = [...state.team];
+  const empties = base.map((id, i) => id ? -1 : i).filter(i => i > -1);
+  if(!empties.length || !base.some(Boolean)) return [];
+  const inTeam = new Set(base.filter(Boolean));
+  const pool = state.characters.filter(c => !inTeam.has(c.id) && (!rarity || rarity === 'all' || rarityLabel(c.rarity) === rarity));
+  if(!pool.length) return [];
+  const WIDTH = 12;
+  let beam = [{ team: base, obj: autoObjective(base, mode) }];
+  for(let step = 0; step < empties.length; step++){
+    const seen = new Map();
+    beam.forEach(st => {
+      const free = empties.filter(i => !st.team[i]);
+      const used = new Set(st.team.filter(Boolean));
+      pool.forEach(c => {
+        if(used.has(c.id)) return;
+        free.forEach(slot => {
+          const t = [...st.team];
+          t[slot] = c.id;
+          const key = t.filter(Boolean).sort().join(',');
+          const obj = autoObjective(t, mode);
+          const prev = seen.get(key);
+          if(!prev || obj.score > prev.obj.score) seen.set(key, { team: t, obj });
+        });
+      });
+    });
+    if(!seen.size) break;   // elenco filtrado acabou: devolve a equipe parcial do passo anterior
+    beam = [...seen.values()].sort((a, b) => b.obj.score - a.obj.score).slice(0, WIDTH);
+  }
+  // Opções bem diferentes entre si: uma nova opção só entra se trocar pelo menos 2 guerreiros em relação às já escolhidas.
+  const want = Math.max(maxOptions || 3, 1), cands = beam.filter(b => b.team.filter(Boolean).length > inTeam.size);
+  const diff = (x, y) => { const sx = new Set(x.team.filter(Boolean)); return y.team.filter(id => id && !sx.has(id)).length; };
+  const picked = [];
+  cands.forEach(b => { if(picked.length < want && picked.every(p => diff(p, b) >= 2)) picked.push(b); });
+  cands.forEach(b => { if(picked.length < want && !picked.includes(b)) picked.push(b); });
+  const out = picked.map(b => {
+    const best = optimizeTeamOrder(b.team);
+    const team = best && best.changed ? best.team : b.team;
+    const obj = autoObjective(team, mode);
+    return { team, ...obj, pillars: teamPillars(team), missing: missingPillars(team) };
+  });
+  return out.sort((a, b) => b.score - a.score);
+}
+function renderAutoPanel(){
+  const filled = state.team.filter(Boolean).length;
+  if(!filled) return '';
+  const full = filled === 6;
+  const mode = state.autoMode || 'equilibrado';
+  const rar = state.recRarity || 'all';
+  const opts = (state.autoOpts && state.autoOpts.base === JSON.stringify(state.team)) ? state.autoOpts.list : null;
+  const chips = Object.entries(AUTO_MODES).map(([k, m]) => `<button type="button" class="kz-fchip ${mode === k ? 'active' : ''}" data-auto-mode="${k}" title="${escapeAttr(m.hint)}">${m.label}</button>`).join('');
+  const rchips = [['all', 'Todas'], ['SSR', 'Só SSR'], ['SR', 'Só SR'], ['R', 'Só R']].map(([v, l]) => `<button type="button" class="kz-fchip ${rar === v ? 'active' : ''}" data-rec-rarity="${v}">${l}</button>`).join('');
+  let body = '';
+  if(full){
+    body = `<div class="kz-muted">A equipe já está completa. Tire alguém (ou use "Limpar") pra eu montar de novo a partir dos guerreiros que ficarem.</div>`;
+  } else if(opts){
+    body = opts.length ? `<div class="kz-auto-opts">${opts.map((o, i) => renderAutoOption(o, i)).join('')}</div>` : `<div class="kz-muted">Não encontrei guerreiros que completem essa equipe com esse filtro de raridade.</div>`;
+  } else {
+    body = `<div class="kz-muted">Escolha de 1 a 3 guerreiros (ou mais) nas casas e eu completo o resto, analisando o que cada um persegue e causa e o papel de cada um (dano, tank, suporte, controle…).</div>`;
+  }
+  return `<div class="kz-auto">
+    <div class="kz-auto-head"><h3>Montar equipe automaticamente</h3>
+      <div class="kz-auto-ctrls">
+        <span class="kz-label">Foco</span>${chips}
+        <span class="kz-label" style="margin-left:6px;">Novos guerreiros</span>${rchips}
+        <button type="button" class="kz-btn kz-btn-primary" id="autoBuildBtn" ${full ? 'disabled' : ''}>⚡ ${opts ? 'Gerar de novo' : 'Completar equipe'}</button>
+      </div>
+    </div>
+    ${body}
+  </div>`;
+}
+function renderAutoOption(o, i){
+  const filled = o.team.filter(Boolean);
+  const comboMax = comboMaxFor(o.team).max;
+  const core = new Set((state.autoOpts && state.autoOpts.core) || []);
+  const members = o.team.map((id, slot) => {
+    if(!id) return '';
+    const c = getChar(id);
+    return `<div class="kz-auto-mem ${core.has(id) ? 'core' : ''}" title="${escapeAttr(c.name)} — Casa ${slot + 1}">
+      <div class="kz-auto-art">${portraitInner(c)}</div>
+      <div class="kz-auto-nm">${escapeHtml(c.name)}</div>
+      <div class="kz-auto-roles">${rolePillsHtml(c, 2, true)}</div>
+    </div>`;
+  }).join('');
+  const chipsP = PILLAR_ORDER.map(k => `<span class="kz-comp-chip${o.missing.includes(k) ? ' miss' : ''}"><b>${(Math.round(o.pillars[k] * 10) / 10).toString().replace('.', ',')}</b> ${PILLARS[k].label}</span>`).join('');
+  return `<div class="kz-auto-opt ${i === 0 ? 'top' : ''}">
+    <div class="kz-auto-opt-head"><b>${i === 0 ? 'Melhor opção' : 'Opção ' + (i + 1)}</b>
+      <span class="kz-auto-stat"><b>${o.combos}</b>/${comboMax} combos · maior cadeia <b>${o.longest + 1}</b> hits · equilíbrio <b>${Math.round(o.balance * 100)}%</b></span></div>
+    <div class="kz-auto-team">${members}</div>
+    <div class="kz-auto-foot"><div class="kz-auto-pill">${chipsP}${o.missing.length ? `<span class="kz-comp-note warn">Falta: ${o.missing.map(k => PILLARS[k].label).join(', ')}</span>` : ''}</div>
+      <button type="button" class="kz-btn kz-btn-sm kz-btn-primary" data-auto-apply="${i}">Usar esta equipe</button></div>
+  </div>`;
+}
+function runAutoBuild(){
+  const filled = state.team.filter(Boolean);
+  if(!filled.length){ showToast('Coloque ao menos 1 guerreiro em campo.'); return; }
+  if(filled.length === 6){ showToast('A equipe já está completa.'); return; }
+  showToast('Montando equipes…');
+  setTimeout(() => {
+    const list = buildTeamOptions(state.autoMode || 'equilibrado', state.recRarity || 'all', 3);
+    state.autoOpts = { base: JSON.stringify(state.team), core: filled, list };
+    render();
+  }, 30);
+}
+function applyAutoOption(i){
+  const o = state.autoOpts && state.autoOpts.list[i];
+  if(!o) return;
+  const prev = [...state.team];
+  commitTeam([...o.team]);
+  state.optUndo = { before: prev, after: [...o.team] };
+  state.optInfo = `Equipe montada: <b>${o.combos} combos</b> · maior cadeia <b>${o.longest + 1} hits</b> · equilíbrio <b>${Math.round(o.balance * 100)}%</b>${o.missing.length ? ' · falta ' + o.missing.map(k => PILLARS[k].label).join(', ') : ''}.`;
+  render();
+  showToast('Equipe montada!');
+}
+
 /* ======================= COMBOS (MONTADOR) ======================= */
 // Coloca um guerreiro do elenco: na casa selecionada (trocando de lugar se ele já estava em
 // campo) ou na primeira casa vazia. Sem casa selecionada, clicar em quem já está em campo tira.
@@ -5868,8 +6277,10 @@ function renderCombosTab(){
             </div>
           </div>
           ${comboCountHtml()}
+          ${compositionHtml()}
           ${state.optInfo && canUndoOptimize() ? `<div class="kz-opt-info">${state.optInfo}</div>` : ''}
           <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
+          ${renderAutoPanel()}
           ${renderRecommendations()}
         </div>
       </div>
@@ -5884,7 +6295,7 @@ function renderRosterList(filterText){
   return chars.map(c=>{
     const at = state.team.indexOf(c.id);
     return `
-    <div class="kz-roster-item ${at>-1?'placed':''}" data-id="${c.id}" title="${escapeAttr(c.name)}" draggable="true">
+    <div class="kz-roster-item ${at>-1?'placed':''}" data-id="${c.id}" title="${escapeAttr(c.name + ' — ' + rolesOf(c).map(r=>ROLE_INFO[r].label).join(' / '))}" draggable="true">
       <div class="kz-roster-art">${portraitInner(c)}</div>
       <div class="kz-roster-name">${escapeHtml(c.name)}</div>
       ${at>-1 ? `<span class="kz-roster-casa">Casa ${at+1}</span>` : ''}
@@ -5912,7 +6323,7 @@ function renderSlot(idx){
     ${c ? `
     <button class="kz-slot-remove" data-remove-slot="${idx}" title="Remover">✕</button>
     <div class="kz-slot-art">${portraitInner(c)}</div>
-    <div class="kz-slot-info"><div class="kz-slot-name">${escapeHtml(c.name)}</div></div>${slotEffectsHtml(c)}`
+    <div class="kz-slot-info"><div class="kz-slot-name">${escapeHtml(c.name)}</div><div class="kz-slot-roles">${rolePillsHtml(c, 2, true)}</div></div>${slotEffectsHtml(c)}`
     : `<span class="kz-slot-plus">+</span><span class="kz-slot-hint">${sel ? 'Escolha no elenco' : 'Escolha um guerreiro'}</span>`}
   </div>`;
 }
@@ -6053,8 +6464,8 @@ function comboCountHtml(){
 // Reordena SÓ quem já está em campo (as mesmas casas ocupadas) testando todas as ordens possíveis
 // — no máx. 6! = 720. Vence a que soma mais encadeamentos; empate: a cadeia mais longa; empate de novo:
 // a que mexe em menos guerreiros em relação à ordem atual.
-function optimizeTeamOrder(){
-  const team = [...state.team];
+function optimizeTeamOrder(teamArg){
+  const team = [...(teamArg || state.team)];
   const slots = team.map((id,i)=>id ? i : -1).filter(i=>i>-1);
   if(slots.length < 2) return null;
   const ids = slots.map(i=>team[i]);
@@ -6142,9 +6553,9 @@ function recommendForTeam(limit, rarity){
       const gain = comboScoreFor(t) - base;
       if(!best || gain > best.gain) best = { gain, slot:s, replaced, team:t };
     });
-    if(best && best.gain > 0) res.push({ char:c, slot:best.slot, replacedId:best.replaced, gain:best.gain, team:best.team });
+    if(best && best.gain > 0) res.push({ char:c, slot:best.slot, replacedId:best.replaced, gain:best.gain, team:best.team, bal:balanceScore(best.team) });
   });
-  res.sort((a,b)=> b.gain - a.gain || rarityRank(a.char.rarity) - rarityRank(b.char.rarity) || a.char.name.localeCompare(b.char.name));
+  res.sort((a,b)=> b.gain - a.gain || (b.bal - a.bal) || rarityRank(a.char.rarity) - rarityRank(b.char.rarity) || a.char.name.localeCompare(b.char.name));
   return res.slice(0, limit || 8);
 }
 function renderRecommendations(){
@@ -6159,6 +6570,8 @@ function renderRecommendations(){
     const msg = full ? (rar !== 'all' ? `Nenhuma troca por um guerreiro ${rar} melhora os combos dessa equipe. Tente outra raridade.` : 'Nenhuma troca melhora os combos dessa equipe — ela já está bem encaixada.') : (rar !== 'all' ? `Nenhum guerreiro ${rar} do elenco aumenta os combos dessa equipe. Tente outra raridade.` : 'Nenhum guerreiro do elenco aumenta os combos dessa equipe.');
     return `<div class="kz-rec">${head}<div class="kz-muted">${msg}</div></div>`;
   }
+  const miss = missingPillars(state.team);
+  const fillTag = c => { const p = analyzeRoles(c).pillars; const f = miss.filter(k => p[k] >= 0.6); return f.length ? `<span class="kz-fill-tag">Preenche: ${f.map(k => PILLARS[k].label).join(', ')}</span>` : ''; };
   const cards = recs.map((r,i)=>{
     const c = r.char, rep = r.replacedId ? getChar(r.replacedId) : null;
     const best = chainsWithChar(r.team, c.id)[0];
@@ -6176,6 +6589,7 @@ function renderRecommendations(){
           <span class="kz-rec-gain">+${r.gain} encadeamento${r.gain>1?'s':''} · Casa ${r.slot+1}</span>
         </div>
       </div>
+      <div class="kz-rec-roles">${rolePillsHtml(c, 2, true)}${fillTag(c)}</div>
       <div class="kz-rec-eff">${effLineHtml('Persegue', c.combo.triggers)}${effLineHtml('Causa', c.combo.effects)}</div>
       ${chainTxt ? `<div class="kz-rec-chain">Melhor cadeia: ${chainTxt} <small>(${best.chain.length} hits)</small></div>` : ''}
       <button type="button" class="kz-btn kz-btn-sm" data-rec-place="${c.id}" data-rec-slot="${r.slot}">${rep ? `Trocar com ${escapeHtml(rep.name)} (Casa ${r.slot+1})` : `Colocar na Casa ${r.slot+1}`}</button>
@@ -6232,7 +6646,7 @@ function attachCombosHandlers(){
   });
   attachRosterItemHandlers(view);
   attachSF('roster', view, render);
-  view.querySelectorAll('[data-rec-rarity]').forEach(b=>b.addEventListener('click', ()=>{ state.recRarity = b.dataset.recRarity; render(); }));
+  view.querySelectorAll('[data-rec-rarity]').forEach(b=>b.addEventListener('click', ()=>{ state.recRarity = b.dataset.recRarity; state.autoOpts = null; render(); }));
   view.querySelectorAll('[data-rec-place]').forEach(b=>b.addEventListener('click', ()=>{
     state.slotSel = parseInt(b.dataset.recSlot, 10);
     placeChar(b.dataset.recPlace);
@@ -6240,6 +6654,10 @@ function attachCombosHandlers(){
   }));
   const openSim = document.getElementById('openSimBtn');
   if(openSim) openSim.addEventListener('click', openSimModal);
+  view.querySelectorAll('[data-auto-mode]').forEach(b=>b.addEventListener('click', ()=>{ state.autoMode = b.dataset.autoMode; state.autoOpts = null; render(); }));
+  const autoBtn = document.getElementById('autoBuildBtn');
+  if(autoBtn) autoBtn.addEventListener('click', runAutoBuild);
+  view.querySelectorAll('[data-auto-apply]').forEach(b=>b.addEventListener('click', ()=> applyAutoOption(parseInt(b.dataset.autoApply, 10))));
   const optBtn = document.getElementById('optimizeBtn');
   if(optBtn) optBtn.addEventListener('click', runOptimizeTeam);
   const undoOpt = document.getElementById('undoOptBtn');
