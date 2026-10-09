@@ -359,6 +359,21 @@ async function main(){
     assert.ok(!r.cond.includes('cura'), 'curar a si quando um aliado morre não faz do guerreiro um curandeiro');
   });
 
+  await test('curar só a si mesmo reforça o Tank e não faz do guerreiro Cura nem Suporte', () => {
+    const r = evalIn(sandbox, `(() => {
+      const mk = (id, type, skill, sup) => ({ id, name:'Au ' + id, type, tags:[], rarity:'R', skill:{name:'S', desc:skill, effects:[]}, supreme:{name:'U', desc:sup, effects:[]}, combo:{name:'C', triggers:[], effects:[]} });
+      const a = analyzeRoles(mk('k', 'Defesa', 'Ataca um único inimigo.', 'Ataca todos os inimigos e concede o efeito Fúria (recupera 20% da vida, aumenta 20% de defesa e 20% de redução de dano).'));
+      const b = analyzeRoles(mk('l', 'Ataque', 'Ataca um único inimigo, absorvendo 30% do dano causado em vida e recuperando 8% da vida por turno.', ''));
+      const healer = analyzeRoles(mk('h', 'Habilidade', 'Cura todos os aliados em 90% do ATQ.', ''));
+      return { a: a.roles, b: b.roles, aPil: a.pillars, bScore: b.score, healer: healer.roles };
+    })()`);
+    assert.ok(r.a.includes('tank'), 'autocura + defesa: Tank (' + r.a + ')');
+    assert.ok(!r.a.includes('cura') && !r.a.includes('suporte') && r.aPil.suporte === 0, 'não é Cura nem Suporte');
+    assert.ok(!r.b.includes('cura') && !r.b.includes('suporte'), 'roubo de vida/recuperação própria não é Cura nem Suporte');
+    assert.ok(r.bScore.tank > 0, 'a recuperação própria soma no Tank');
+    assert.ok(r.healer.includes('cura'), 'curar aliados continua sendo Cura');
+  });
+
   await test('balanceScore premia equipe com dano, tank, suporte e controle; missingPillars aponta o que falta', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];

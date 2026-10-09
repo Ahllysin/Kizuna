@@ -5864,7 +5864,7 @@ const ROLE_INFO = {
   tank:     { label:'Tank',          full:'Tank',             glyph:'守', rgb:['59,130,196','#86c0f0'], pillar:'tank',     thr:8,
     about:'Aguenta a pancada: redução de dano, escudo, bloqueio, recuperação da própria vida ou proteção para os aliados.' },
   cura:     { label:'Cura',          full:'Curandeiro',       glyph:'癒', rgb:['63,174,90','#86e3a2'],  pillar:'suporte',  thr:3,
-    about:'Recupera a vida dos aliados ou os revive.' },
+    about:'Recupera a vida dos aliados ou os revive. Curar só a si mesmo não conta: isso reforça o Tank, não o Suporte.' },
   suporte:  { label:'Suporte',       full:'Suporte',          glyph:'援', rgb:['201,162,55','#e8cf6f'], pillar:'suporte',  thr:4,
     about:'Potencializa os aliados: aumenta ATQ e DEF, entrega Fúria, concede escudos e remove efeitos negativos.' },
   controle: { label:'Controle',      full:'Controle',         glyph:'縛', rgb:['139,95,191','#c3aaf0'], pillar:'controle', thr:4,
@@ -5896,7 +5896,7 @@ const ROLE_RULES = [
   ['tank', /redu[cç][aã]o de dano|dano recebido|dano sofrido|bloque|imun[ei]|reflex|contra-?ataque|renasc|revive|ressusc|resist[eê]ncia|esquiva|invulner|sobreviv|n[aã]o morre|(aumenta|\+|ganha)[^.]*\b(def|defesa|pv|vida)\b/, 'proprio', 1, /inimig|do alvo|dos alvos|reduz/],
   ['tank', /protege (os )?aliad|absorve|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5],
   ['tank', /escudo/, null, 1, /remove|dissip|quebra|quebrador|quebram|destr/],
-  ['tank', /recupera[^.]*(vida|pv)|vida por turno|roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|\bregenera/, 'proprio', 1.5, /alia(do|dos) com menor|todos os aliados/],
+  ['tank', /recupera[^.]*(vida|pv)|vida por turno|roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|\bregenera|\brevive\b/, null, 1.5, /aliad|equipe|recebid/],
 
   ['cura', /\bcura (todos|os |a |aos|as |2 |1 |um |uma |o guerreiro|a equipe|toda)|aplica cura|restaura (pv|vida)[^.]*(aliad|equipe|guerreiros|menor)|restaura pv para|recupera a vida d[oa][^.]*alia|converte[^.]*dano em vida[^.]*(fileira|aliad|equipe)|efeito de cura aumentado|recupera [^.]*(pv|vida) d[eo] (todos|\d)/, null, 3, /cura recebida|reduz[^.]*cura|efeito de cura (reduz|diminui)/],
   ['cura', /revive|reanima|ressuscita/, 'aliado', 2],
