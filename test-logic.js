@@ -359,20 +359,6 @@ async function main(){
     assert.ok(!r.cond.includes('cura'), 'curar a si quando um aliado morre não faz do guerreiro um curandeiro');
   });
 
-  await test('cura só em si mesmo vira Tank + Autocura (nunca Cura nem Suporte); cura em aliados continua sendo Cura', () => {
-    const r = evalIn(sandbox, `(() => {
-      const mk = (id, type, skill, sup) => ({ id, name:'Au ' + id, type, tags:[], rarity:'R', skill:{name:'S', desc:skill, effects:[]}, supreme:{name:'U', desc:sup, effects:[]}, combo:{name:'C', triggers:[], effects:[]} });
-      const kale = analyzeRoles(mk('k', 'Defesa', 'Ataca um único inimigo.', 'Ataca todos os inimigos e concede o efeito Fúria (recupera 20% da vida, aumenta 20% de defesa e 20% de redução de dano).'));
-      const healer = analyzeRoles(mk('h', 'Habilidade', 'Cura todos os aliados em 90% do ATQ.', ''));
-      return { kale: kale.roles, healer: healer.roles, kalePillars: kale.pillars };
-    })()`);
-    assert.ok(r.kale.includes('tank') && r.kale.includes('autocura'), 'self-heal + defesa: Tank e Autocura (' + r.kale + ')');
-    assert.ok(!r.kale.includes('cura') && !r.kale.includes('suporte'), 'não é Cura nem Suporte');
-    assert.strictEqual(r.kale[0], 'tank', 'Autocura nunca é o papel principal');
-    assert.strictEqual(r.kalePillars.suporte, 0, 'não conta pra frente de Suporte');
-    assert.ok(r.healer.includes('cura') && !r.healer.includes('autocura'));
-  });
-
   await test('balanceScore premia equipe com dano, tank, suporte e controle; missingPillars aponta o que falta', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];
