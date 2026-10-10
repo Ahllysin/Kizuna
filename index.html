@@ -596,6 +596,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-auto-head{display:flex;flex-direction:column;gap:10px;margin-bottom:10px;}
 .kz-auto-head h3{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:26px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;}
 .kz-auto-ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.kz-auto-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .kz-auto-opts{display:grid;grid-template-columns:1fr;gap:12px;}
 .kz-auto-opt{padding:12px;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(8,7,14,.6);display:flex;flex-direction:column;gap:10px;}
 .kz-auto-opt.top{border-color:rgba(255,200,90,.7);box-shadow:0 0 0 1px rgba(255,200,90,.25) inset;}
@@ -6306,8 +6307,7 @@ function buildTeamOptions(mode, rarity, maxOptions){
 }
 function renderAutoPanel(){
   const filled = state.team.filter(Boolean).length;
-  if(!filled) return '';
-  const full = filled === 6;
+  const full = filled === 6, empty = filled === 0;
   const mode = state.autoMode || 'equilibrado';
   const rar = state.recRarity || 'all';
   const opts = (state.autoOpts && state.autoOpts.base === JSON.stringify(state.team)) ? state.autoOpts.list : null;
@@ -6321,12 +6321,17 @@ function renderAutoPanel(){
   } else {
     body = `<div class="kz-muted">Escolha de 1 a 3 guerreiros (ou mais) nas casas e eu completo o resto, analisando o que cada um persegue e causa e o papel de cada um (dano, tank, suporte, controle…).</div>`;
   }
-  return `<div class="kz-auto">
-    <div class="kz-auto-head"><h3>Montar equipe automaticamente</h3>
+  return `<div class="kz-panel kz-auto">
+    <div class="kz-auto-head"><h3>Montar equipe</h3>
       <div class="kz-auto-ctrls">
         <span class="kz-label">Foco</span>${chips}
         <span class="kz-label" style="margin-left:6px;">Novos guerreiros</span>${rchips}
-        <button type="button" class="kz-btn kz-btn-primary" id="autoBuildBtn" ${full ? 'disabled' : ''}>⚡ ${opts ? 'Gerar de novo' : 'Completar equipe'}</button>
+      </div>
+      <div class="kz-auto-actions">
+        <button type="button" class="kz-btn kz-btn-primary" id="autoBuildBtn" ${full || empty ? 'disabled' : ''} title="${empty ? 'Coloque ao menos 1 guerreiro em campo' : 'Completa a equipe a partir dos guerreiros em campo'}">⚡ ${opts ? 'Gerar de novo' : 'Completar equipe'}</button>
+        <button type="button" class="kz-btn kz-opt-btn" id="optimizeBtn" ${filled < 2 ? 'disabled' : ''} title="${filled < 2 ? 'Coloque ao menos 2 guerreiros em campo' : 'Reorganiza os guerreiros em campo pra render a maior quantidade de combos'}">✦ Gerar melhor ordem</button>
+        ${canUndoOptimize() ? `<button type="button" class="kz-btn" id="undoOptBtn" title="Voltar à ordem anterior">↶ Desfazer ordem</button>` : ''}
+        <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filled}/6</span></button>
       </div>
     </div>
     ${body}
@@ -7111,6 +7116,7 @@ function renderCombosTab(){
       <span class="kz-label">Formações salvas</span>
       ${state.formations.map((f,i)=>`<span class="kz-formation-pill"><button class="load" data-load-formation="${i}">${escapeHtml(f.name)}</button><button class="del" data-del-formation="${i}" title="Excluir">✕</button></span>`).join('')}
     </div>` : ''}
+    ${renderAutoPanel()}
     <div class="kz-combos-layout">
       <aside class="kz-panel kz-roster">
         <div class="kz-roster-head"><span class="kz-label">Elenco</span><span class="kz-roster-hint">${hint}</span></div>
@@ -7119,15 +7125,9 @@ function renderCombosTab(){
         <div class="kz-roster-grid" id="rosterList">${renderRosterList(state.rosterSearch)}</div>
       </aside>
       <div class="kz-combos-main">
-        ${renderAutoPanel()}
         <div class="kz-field">
           <div class="kz-field-head">
             <span class="kz-label">Equipe</span>
-            <div class="kz-field-actions">
-              ${canUndoOptimize() ? `<button type="button" class="kz-btn" id="undoOptBtn" title="Voltar à ordem anterior">↶ Desfazer ordem</button>` : ''}
-              <button type="button" class="kz-btn kz-opt-btn" id="optimizeBtn" ${filledCount<2?'disabled':''} title="${filledCount<2?'Coloque ao menos 2 guerreiros em campo':'Reorganiza os guerreiros em campo pra render a maior quantidade de combos'}">✦ Gerar melhor ordem</button>
-              <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
-            </div>
           </div>
           ${comboCountHtml()}
           ${compositionHtml()}
