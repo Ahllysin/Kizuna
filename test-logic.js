@@ -771,23 +771,28 @@ async function main(){
     assert.strictEqual(r.tierMuitos.tiers.length, 10, 'no máximo 10 ranks');
   });
 
-  await test('communityShareData: time precisa de 2+ guerreiros e tier list de 3+ classificados', () => {
+  await test('communityShareData: time vem da Coleção (2+ guerreiros adquiridos, com o nível de estrela de cada um); tier list precisa de 3+ classificados', () => {
     const r = evalIn(sandbox, `(() => {
-      const bk = [state.team, state.tierList];
+      const bk = [state.team, state.tierList, state.collection];
       const ids = state.characters.slice(0, 5).map(c => c.id);
-      state.team = [ids[0], null, null, null, null, null];
-      const um = communityShareData('team');
-      state.team = [ids[0], ids[1], null, null, null, null];
-      const dois = communityShareData('team');
+      state.collection = { [ids[0]]: { owned: true, level: 7 }, [ids[1]]: { owned: true, level: 3 }, [ids[2]]: { owned: false, level: 9 } };
+      const um = communityShareData('team', { team: [ids[0]] });
+      const naoAdquirido = communityShareData('team', { team: [ids[0], ids[2]] });
+      const dois = communityShareData('team', { team: [ids[0], ids[1], ids[2], ids[3]] });
+      const semCompose = communityShareData('team');
       state.tierList = { tiers: [{ id:'t1', label:'S', color:'#d65a44', items:[ids[0], ids[1]] }], unranked: [] };
       const doisTier = communityShareData('tierlist');
       state.tierList = { tiers: [{ id:'t1', label:'S', color:'#d65a44', items:[ids[0], ids[1]] }, { id:'t2', label:'A', color:'#c9a24b', items:[ids[2], 'id-que-nao-existe'] }], unranked: [] };
       const tres = communityShareData('tierlist');
       state.team = bk[0]; state.tierList = bk[1];
-      return { um, dois, doisTier, tres: tres && tres.tiers.map(x => x.items.length) };
+      state.collection = bk[2];
+      return { um, naoAdquirido, dois, semCompose, doisTier, tres: tres && tres.tiers.map(x => x.items.length) };
     })()`);
     assert.strictEqual(r.um, null);
-    assert.ok(r.dois && r.dois.team.filter(Boolean).length === 2);
+    assert.strictEqual(r.naoAdquirido, null, 'guerreiro que não está adquirido na Coleção não entra no time');
+    assert.strictEqual(r.semCompose, null);
+    assert.ok(r.dois && r.dois.team.filter(Boolean).length === 2, 'só os 2 adquiridos entram');
+    assert.deepStrictEqual(Object.values(r.dois.levels).sort(), [3, 7], 'cada um leva o nível de estrela que tem na Coleção');
     assert.strictEqual(r.doisTier, null);
     assert.deepStrictEqual(r.tres, [2, 1], 'ids inexistentes não são publicados');
   });
@@ -842,11 +847,11 @@ async function main(){
       }) } };
       supabaseAvailable = true;
       localStorage.removeItem('kiai_community_last');
-      window.__bk = [state.team, state.communityCompose, state.discordUser, state.myProfile];
-      state.team = [state.characters[0].id, state.characters[1].id, null, null, null, null];
+      window.__bk = [state.team, state.communityCompose, state.discordUser, state.myProfile, state.collection];
+      state.collection = { [state.characters[0].id]: { owned: true, level: 8 }, [state.characters[1].id]: { owned: true, level: 2 } };
       state.myProfile = { nickname: 'Apelido', public: true };
       state.discordUser = null;
-      state.communityCompose = { kind: 'team', title: 'Meu time', desc: '  descrição  ' };
+      state.communityCompose = { kind: 'team', title: 'Meu time', desc: '  descrição  ', team: [state.characters[0].id, state.characters[1].id] };
     `);
     runIn(sandbox, 'publishCommunityPost()');
     await new Promise(res => setTimeout(res, 20));
@@ -858,11 +863,11 @@ async function main(){
     await new Promise(res => setTimeout(res, 40));
     const row = evalIn(sandbox, 'window.__inserts[0] && window.__inserts[0].row');
     const table = evalIn(sandbox, 'window.__inserts[0] && window.__inserts[0].table');
-    runIn(sandbox, "state.communityCompose = { kind: 'team', title: 'Segundo post', desc: '' }; publishCommunityPost();");
+    runIn(sandbox, "state.communityCompose = { kind: 'team', title: 'Segundo post', desc: '', team: [state.characters[0].id, state.characters[1].id] }; publishCommunityPost();");
     await new Promise(res => setTimeout(res, 40));
     const depoisDoSegundo = evalIn(sandbox, 'window.__inserts.length');
     runIn(sandbox, `
-      state.team = window.__bk[0]; state.communityCompose = window.__bk[1]; state.discordUser = window.__bk[2]; state.myProfile = window.__bk[3];
+      state.team = window.__bk[0]; state.communityCompose = window.__bk[1]; state.discordUser = window.__bk[2]; state.myProfile = window.__bk[3]; state.collection = window.__bk[4];
       supabaseAvailable = false; window.__sb = undefined; window.__inserts = undefined; window.__bk = undefined;
       localStorage.removeItem('kiai_community_last');
     `);
@@ -875,6 +880,7 @@ async function main(){
     assert.strictEqual(row.description, 'descrição', 'descrição sai sem espaços sobrando');
     assert.strictEqual(row.author_name, 'Apelido', 'perfil público: usa o apelido');
     assert.ok(row.data.team.filter(Boolean).length === 2);
+    assert.deepStrictEqual(Object.values(row.data.levels).sort(), [2, 8], 'o time publicado leva o nível de estrela de cada guerreiro (da Coleção)');
     assert.strictEqual(depoisDoSegundo, 1, 'o segundo post logo em seguida é barrado pelo intervalo');
   });
 
@@ -884,16 +890,16 @@ async function main(){
       window.__sb = { client: { from: () => ({ insert: (row) => { window.__ins.push(row); return Promise.resolve({ error: null }); },
         select: () => ({ order: () => ({ limit: () => Promise.resolve({ error: null, data: [] }) }), eq: () => Promise.resolve({ error: null, data: [] }) }) }) } };
       supabaseAvailable = true;
-      window.__bk3 = [state.team, state.communityPosts, state.communityCompose, state.discordUser, state.donors, state.myProfile, state.tierList];
+      window.__bk3 = [state.team, state.communityPosts, state.communityCompose, state.discordUser, state.donors, state.myProfile, state.tierList, state.collection];
       state.myProfile = null;
-      state.team = [state.characters[0].id, state.characters[1].id, null, null, null, null];
+      state.collection = { [state.characters[0].id]: { owned: true, level: 1 }, [state.characters[1].id]: { owned: true, level: 1 } };
       state.discordUser = { id: 'uid-L', username: 'Lim' };
       const mk = (id, kind) => ({ id, userId: 'uid-L', kind, title: 'T', desc: '', author: 'A', createdAt: '', data: {}, likes: 0, reports: 0 });
       state.communityPosts = [mk('a', 'team'), mk('b', 'team'), mk('c', 'tierlist')];
       state.donors = [];
     `);
     const sem = evalIn(sandbox, '[communityTeamLimit(), communityMyTeamCount()]');
-    runIn(sandbox, "localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'team', title: 'Terceiro time', desc: '' }; publishCommunityPost();");
+    runIn(sandbox, "localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'team', title: 'Terceiro time', desc: '', team: [state.characters[0].id, state.characters[1].id] }; publishCommunityPost();");
     await new Promise(res => setTimeout(res, 30));
     const bloqueado = evalIn(sandbox, 'window.__ins.length');
     runIn(sandbox, "state.donors = [{ id: 'd1', number: 1, name: 'Lim', amount: 9.99, honras: [], active: true, linkedUserId: 'uid-L' }];");
@@ -902,15 +908,15 @@ async function main(){
     const inativo = evalIn(sandbox, 'communityTeamLimit()');
     runIn(sandbox, "state.donors = [{ id: 'd1', number: 1, name: 'Lim', amount: 6, honras: [], active: true, linkedUserId: 'uid-L' }, { id: 'd2', number: 2, name: 'Lim', amount: 4, honras: [], active: true, linkedUserId: 'uid-L' }, { id: 'd3', number: 3, name: 'Outro', amount: 500, honras: [], active: true, linkedUserId: 'outro' }];");
     const somado = evalIn(sandbox, 'communityTeamLimit()');
-    runIn(sandbox, "localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'team', title: 'Terceiro time', desc: '' }; publishCommunityPost();");
+    runIn(sandbox, "localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'team', title: 'Terceiro time', desc: '', team: [state.characters[0].id, state.characters[1].id] }; publishCommunityPost();");
     await new Promise(res => setTimeout(res, 40));
     const apoiadorPublica = evalIn(sandbox, 'window.__ins.length');
     runIn(sandbox, "state.donors = []; localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'tierlist', title: 'Minha tier', desc: '' }; state.tierList = { tiers: [{ id:'t1', label:'S', color:'#d65a44', items: [state.characters[0].id, state.characters[1].id, state.characters[2].id] }], unranked: [] }; publishCommunityPost();");
     await new Promise(res => setTimeout(res, 40));
     const tierLivre = evalIn(sandbox, 'window.__ins.length');
-    const composeHtml = evalIn(sandbox, "(() => { const mk = (id) => ({ id, userId: 'uid-L', kind: 'team', title: 'T', desc: '', author: 'A', createdAt: '', data: {}, likes: 0, reports: 0 }); state.communityPosts = [mk('a'), mk('b')]; state.donors = []; state.communityCompose = { kind: 'team', title: '', desc: '' }; const h = renderCommunityCompose(); state.communityCompose = null; return h; })()");
+    const composeHtml = evalIn(sandbox, "(() => { const mk = (id) => ({ id, userId: 'uid-L', kind: 'team', title: 'T', desc: '', author: 'A', createdAt: '', data: {}, likes: 0, reports: 0 }); state.communityPosts = [mk('a'), mk('b')]; state.donors = []; state.communityCompose = { kind: 'team', title: '', desc: '', team: [] }; const h = renderCommunityCompose(); state.communityCompose = null; return h; })()");
     runIn(sandbox, `
-      state.team = window.__bk3[0]; state.communityPosts = window.__bk3[1]; state.communityCompose = window.__bk3[2]; state.discordUser = window.__bk3[3]; state.donors = window.__bk3[4]; state.myProfile = window.__bk3[5]; state.tierList = window.__bk3[6];
+      state.team = window.__bk3[0]; state.communityPosts = window.__bk3[1]; state.communityCompose = window.__bk3[2]; state.discordUser = window.__bk3[3]; state.donors = window.__bk3[4]; state.myProfile = window.__bk3[5]; state.tierList = window.__bk3[6]; state.collection = window.__bk3[7];
       supabaseAvailable = false; window.__sb = undefined; window.__ins = undefined; window.__bk3 = undefined;
       localStorage.removeItem('kiai_community_last');
     `);
@@ -922,6 +928,70 @@ async function main(){
     assert.strictEqual(apoiadorPublica, 1, 'apoiador com 2 times publica o terceiro');
     assert.strictEqual(tierLivre, 2, 'tier list continua livre mesmo com o limite de times cheio');
     assert.ok(composeHtml.includes('2/2') && composeHtml.includes('disabled'), 'formulário mostra 2/2 e trava o botão');
+  });
+
+  await test('sanitize do time: nível de estrela só de 1 a 10 e só de quem está no time; estrelas douradas até 5 e azuis de 6 a 10', () => {
+    const r = evalIn(sandbox, `(() => {
+      const d = sanitizeCommunityData('team', { team: ['c_a', 'c_b'], levels: { c_a: 7, c_b: 11, c_z: 4, 'x': 3 } });
+      const d2 = sanitizeCommunityData('team', { team: ['c_a'], levels: { c_a: '<b>' } });
+      const d3 = sanitizeCommunityData('team', { team: ['c_a'] });
+      return { d, d2, d3, ouro: communityStarsHtml(3), azul: communityStarsHtml(8), nada: communityStarsHtml(0), lixo: communityStarsHtml('abc') };
+    })()`);
+    assert.deepStrictEqual(r.d.levels, { c_a: 7 }, 'nível 11, de quem não está no time ou inválido é descartado');
+    assert.deepStrictEqual(r.d2.levels, {}, 'nível que não é número é descartado');
+    assert.deepStrictEqual(r.d3.levels, {}, 'post antigo, sem níveis, continua válido');
+    assert.ok(r.ouro.includes('gold') && r.ouro.includes('★★★☆☆'));
+    assert.ok(r.azul.includes('blue') && r.azul.includes('★★★☆☆'), 'nível 8 = 3 estrelas azuis');
+    assert.strictEqual(r.nada, '');
+    assert.strictEqual(r.lixo, '');
+  });
+
+  await test('formulário do time: escolhe só guerreiros adquiridos da Coleção, até 6, e mostra as estrelas de cada um', () => {
+    const r = evalIn(sandbox, `(() => {
+      supabaseAvailable = true; window.__sb = { client: {} };
+      const bk = [state.collection, state.communityCompose, state.discordUser, state.communityPosts, state.donors];
+      const [a, b, c] = state.characters;
+      state.discordUser = { id: 'u-form', username: 'Forma' }; state.communityPosts = []; state.donors = [];
+      state.collection = {};
+      const semColecao = renderCommunityTeamPart({ kind: 'team', title: '', desc: '', team: [], search: '' });
+      state.collection = { [a.id]: { owned: true, level: 9 }, [b.id]: { owned: true, level: 2 } };
+      state.communityCompose = { kind: 'team', title: '', desc: '', team: [a.id], search: '' };
+      const html = renderCommunityCompose();
+      const grid = renderCommunityPickerGrid({ team: [a.id], search: '' });
+      const busca = renderCommunityPickerGrid({ team: [], search: b.name.toLowerCase() });
+      const semResultado = renderCommunityPickerGrid({ team: [], search: 'zzzz-nao-existe' });
+      state.collection = bk[0]; state.communityCompose = bk[1]; state.discordUser = bk[2]; state.communityPosts = bk[3]; state.donors = bk[4];
+      supabaseAvailable = false; window.__sb = undefined;
+      return { semColecao, html, grid, busca, semResultado, aNome: a.name, bNome: b.name, cNome: c.name };
+    })()`);
+    assert.ok(r.semColecao.includes('data-com-gocoll'), 'sem nada na Coleção, manda marcar guerreiros lá');
+    assert.ok(r.html.includes('Seu time (1/6)') && r.html.includes('Meu time (da Coleção)'));
+    assert.ok(r.grid.includes(r.aNome.replace(/&/g, '&amp;')) && r.grid.includes('data-com-pick'), 'lista os adquiridos');
+    assert.ok(!r.grid.includes('>' + r.cNome + '<'), 'quem não está na Coleção não aparece pra escolher');
+    assert.ok(r.grid.includes('blue'), 'nível 9 aparece com estrelas azuis');
+    assert.ok(r.grid.includes('kz-com-pick on'), 'quem já está no time fica marcado');
+    assert.ok(!r.busca.includes('>' + r.aNome + '<') || r.aNome === r.bNome, 'a busca filtra a lista');
+    assert.ok(r.semResultado.includes('Nenhum guerreiro seu'));
+  });
+
+  await test('toggleComposePick: adiciona, remove e trava no 6º guerreiro', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.communityCompose, state.collection];
+      const ids = state.characters.slice(0, 8).map(c => c.id);
+      state.collection = Object.fromEntries(ids.map(id => [id, { owned: true, level: 1 }]));
+      state.communityCompose = { kind: 'team', title: '', desc: '', team: [], search: '' };
+      ids.slice(0, 7).forEach(id => toggleComposePick(id));
+      const seis = state.communityCompose.team.length;
+      toggleComposePick(ids[0]);
+      const cinco = state.communityCompose.team.length;
+      toggleComposePick(ids[6]);
+      const volta = state.communityCompose.team.length;
+      state.communityCompose = bk[0]; state.collection = bk[1];
+      return { seis, cinco, volta };
+    })()`);
+    assert.strictEqual(r.seis, 6, 'o 7º guerreiro não entra');
+    assert.strictEqual(r.cinco, 5, 'clicar em quem já está tira do time');
+    assert.strictEqual(r.volta, 6);
   });
 
   await test('curtir: atualiza na hora, grava no banco, desfaz se o banco recusar e exige login', async () => {
