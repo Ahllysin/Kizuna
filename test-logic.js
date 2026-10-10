@@ -1025,6 +1025,67 @@ async function main(){
     assert.ok(r.html.indexOf('Casa 4') < r.html.indexOf('Casa 1'), 'mesma ordem visual do Montador: coluna 4-5-6 antes da 1-2-3');
   });
 
+  await test('lista da Comunidade: cards limpos (sem botões de ação), com autor clicável e escapando HTML; abrir o post mostra o time completo e as ações', () => {
+    const r = evalIn(sandbox, `(() => {
+      supabaseAvailable = true; window.__sb = { client: {} };
+      const bk = [state.communityPosts, state.communityLoaded, state.communityOpenPost, state.donors, state.discordUser];
+      const [a, b] = state.characters;
+      state.discordUser = null; state.donors = [];
+      state.communityPosts = [
+        { id: 'p1', userId: 'u-1', kind: 'team', title: 'Time <b>forte</b>', desc: 'desc do time', author: '<img src=x onerror=alert(1)>', createdAt: new Date().toISOString(), likes: 4, reports: 0,
+          data: { team: [a.id, null, b.id, null, null, null], levels: { [a.id]: 9 } } },
+        { id: 'p2', userId: 'u-2', kind: 'tierlist', title: 'Tier boa', desc: '', author: 'Beto', createdAt: new Date().toISOString(), likes: 1, reports: 0,
+          data: { tiers: [{ label: 'S', color: '#112233', items: [a.id, b.id] }, { label: 'A', color: '#445566', items: [a.id] }] } },
+      ];
+      state.communityLoaded = true; state.communityOpenPost = null;
+      const lista = renderComunidadeTab();
+      const card = renderCommunityCard(state.communityPosts[0]);
+      const cardTier = renderCommunityCard(state.communityPosts[1]);
+      state.communityOpenPost = 'p1';
+      const detalhe = renderComunidadeTab();
+      state.communityOpenPost = 'nao-existe';
+      const inexistente = renderComunidadeTab();
+      state.communityPosts = bk[0]; state.communityLoaded = bk[1]; state.communityOpenPost = bk[2]; state.donors = bk[3]; state.discordUser = bk[4];
+      supabaseAvailable = false; window.__sb = undefined;
+      return { lista, card, cardTier, detalhe, inexistente };
+    })()`);
+    assert.ok(r.lista.includes('data-com-open="p1"') && r.lista.includes('data-com-open="p2"'), 'cada card abre o seu post');
+    assert.ok(!r.lista.includes('data-com-like') && !r.lista.includes('data-com-load') && !r.lista.includes('data-com-report') && !r.lista.includes('kz-slots'), 'a lista não tem botões nem o time completo — só a prévia');
+    assert.ok(!r.lista.includes('<img src=x onerror=alert(1)>') && !r.card.includes('<b>forte</b>'), 'título e autor com HTML saem escapados');
+    assert.ok(r.card.includes('data-com-profile="u-1"'), 'nome do autor abre o perfil');
+    assert.ok(r.cardTier.includes('kz-com-pv-chip'), 'tier list mostra os ranks na prévia');
+    assert.ok(r.detalhe.includes('comBackBtn') && r.detalhe.includes('kz-slots') && r.detalhe.includes('data-com-like="p1"') && r.detalhe.includes('data-com-load="p1"'), 'post aberto: voltar, time completo e ações');
+    assert.ok(!r.detalhe.includes('comSearch'), 'o post aberto não mostra a barra de busca da lista');
+    assert.ok(r.inexistente.includes('comSearch'), 'post que não existe volta pra lista');
+  });
+
+  await test('perfil do autor: nome, patente, honras, estatísticas e publicações; dados só quando o perfil é público; tudo escapado', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.communityPosts, state.profiles, state.donors, state.discordUser];
+      const mk = (id, kind, title, likes, when) => ({ id, userId: 'u-9', kind, title, desc: '', author: 'Nick Post', createdAt: when, likes, reports: 0, data: {} });
+      state.communityPosts = [mk('a', 'team', 'Primeiro', 3, '2026-01-01T00:00:00Z'), mk('b', 'tierlist', 'Segundo <i>x</i>', 2, '2026-02-01T00:00:00Z'), mk('c', 'team', 'Terceiro', 5, '2026-03-01T00:00:00Z'), { id: 'z', userId: 'outro', kind: 'team', title: 'De outro', desc: '', author: 'O', createdAt: '2026-03-02T00:00:00Z', likes: 99, reports: 0, data: {} }];
+      state.discordUser = { id: 'u-9', username: 'Eu' };
+      state.donors = [{ id: 'd1', number: 1, name: 'Apoiador', amount: 120, honras: ['escriba'], active: true, linkedUserId: 'u-9' }];
+      state.profiles = [{ id: 'u-9', public: true, nickname: 'Apelido <b>Público</b>', servidor: 'S12', bio: 'Bio do jogador', instagram: '@insta', twitch: '', youtube: '', showSocials: true, patenteForma: '', patenteCor: '' }];
+      const publico = communityProfileModalHtml('u-9');
+      state.profiles = [{ id: 'u-9', public: false, nickname: 'Segredo', servidor: 'S99', bio: 'Bio secreta', showSocials: true, instagram: '@oculto' }];
+      state.donors = []; state.discordUser = null;
+      const privado = communityProfileModalHtml('u-9');
+      state.communityPosts = bk[0]; state.profiles = bk[1]; state.donors = bk[2]; state.discordUser = bk[3];
+      return { publico, privado };
+    })()`);
+    assert.ok(r.publico.includes('S12') && r.publico.includes('Bio do jogador') && r.publico.includes('@insta'), 'perfil público mostra servidor, bio e redes');
+    assert.ok(!r.publico.includes('<b>Público</b>') && r.publico.includes('&lt;b&gt;'), 'apelido com HTML sai escapado');
+    assert.ok(r.publico.includes('Super Saiyajin God') && r.publico.includes('Escriba'), 'mostra a patente e as honras');
+    assert.ok(r.publico.includes('<b>2</b> time') && r.publico.includes('<b>1</b> tier list') && r.publico.includes('<b>10</b> curtida'), 'estatísticas só dos posts dessa pessoa');
+    assert.ok(r.publico.indexOf('Terceiro') < r.publico.indexOf('Primeiro'), 'publicações da mais nova pra mais antiga');
+    assert.ok(!r.publico.includes('De outro'), 'não mistura posts de outras pessoas');
+    assert.ok(r.publico.includes('Esse é você') && r.publico.includes('comEditProfileBtn'), 'no próprio perfil aparece "Esse é você" e o atalho de editar');
+    assert.ok(!r.privado.includes('S99') && !r.privado.includes('Bio secreta') && !r.privado.includes('@oculto') && !r.privado.includes('Segredo'), 'perfil não público: nada do que a pessoa preencheu aparece');
+    assert.ok(r.privado.includes('ainda não tornou o perfil público') && r.privado.includes('Nick Post'), 'usa só o nome dos posts e avisa que o perfil não é público');
+    assert.ok(!r.privado.includes('comEditProfileBtn'), 'sem login igual ao autor, sem atalho de editar');
+  });
+
   await test('curtir: atualiza na hora, grava no banco, desfaz se o banco recusar e exige login', async () => {
     runIn(sandbox, `
       window.__likeCalls = []; window.__failLikes = false;

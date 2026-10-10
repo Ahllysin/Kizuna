@@ -780,7 +780,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .kz-com-sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 4px;}
 .kz-com-search{flex:1;min-width:200px;max-width:380px;}
-.kz-com-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start;max-width:860px;}
+.kz-com-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;align-items:start;}
 .kz-com-empty{padding:26px 20px;text-align:center;color:var(--text-dim);}
 .kz-com-card{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;border:1.5px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);min-width:0;}
 .kz-com-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
@@ -821,6 +821,31 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-quota{font-size:13px;color:#cfc8b8;padding:8px 12px;border-radius:10px;border:1px dashed rgba(255,255,255,.25);}
 .kz-com-quota b{color:#ffd66b;}
 .kz-com-quota.full{border-color:rgba(240,160,95,.7);color:#f0a05f;}
+.kz-com-card.clean{cursor:pointer;gap:9px;transition:border-color .15s,transform .15s;}
+.kz-com-card.clean:hover,.kz-com-card.clean:focus-visible{border-color:rgba(255,200,90,.8);transform:translateY(-2px);outline:none;}
+.kz-com-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.kz-com-likes{font-size:13px;font-weight:800;color:#ff8aa3;}
+.kz-com-card-by{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#cfc8b8;}
+.kz-com-author{background:none;border:none;padding:0;font:inherit;font-weight:800;color:#f0e2bd;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(240,226,189,.35);text-underline-offset:3px;}
+.kz-com-author:hover{color:#ffd66b;text-decoration-color:#ffd66b;}
+.kz-com-pv-team{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;}
+.kz-com-pv-team .kz-com-thumb.big{max-width:none;border-radius:6px;}
+.kz-com-thumb.empty{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.15);}
+.kz-com-pv-tier{display:flex;flex-direction:column;gap:6px;}
+.kz-com-pv-chips{display:flex;gap:4px;flex-wrap:wrap;}
+.kz-com-pv-chip{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);}
+.kz-com-pv-chip b{font-size:11px;opacity:.85;}
+.kz-com-detail-top{display:flex;align-items:center;}
+.kz-com-detail{display:flex;flex-direction:column;gap:14px;padding:18px 20px;max-width:900px;}
+.kz-com-detail-title{margin:0;font-size:26px;font-weight:900;color:var(--text-strong);line-height:1.2;overflow-wrap:anywhere;}
+.kz-com-me-tag{padding:3px 10px;border-radius:999px;background:rgba(255,200,90,.15);border:1px solid rgba(255,200,90,.6);color:#ffd66b;font-size:12px;font-weight:800;}
+.kz-com-pstats{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-size:13px;color:#cfc8b8;}
+.kz-com-pstats b{color:#ffd66b;font-size:16px;}
+.kz-com-pposts{display:flex;flex-direction:column;gap:6px;align-self:stretch;text-align:left;}
+.kz-com-ppost{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#dcd6c6;cursor:pointer;text-align:left;}
+.kz-com-ppost:hover{border-color:rgba(255,200,90,.7);}
+.kz-com-ppost .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;}
+.kz-com-ppost .l{font-size:12px;color:#ff8aa3;font-weight:800;}
 .kz-slot.ro{cursor:default;}
 .kz-slot.ro:hover{filter:none;}
 .kz-com-slotsview .kz-slot,.kz-com-composeslots .kz-slot{min-height:0;}
@@ -4220,6 +4245,7 @@ let state = {
   communityPosts: [],                // posts da aba Comunidade (vêm do Supabase, já sanitizados)
   communityLoaded: false, communityLoading: false, communityError: null, communityFor: null,
   communityMyLikes: [], communityReported: [],
+  communityOpenPost: null, communityProfileUser: null,   // post aberto na aba Comunidade / perfil de autor aberto no popup
   communityFilter: 'all', communitySort: 'recent', communitySearch: '', communityCompose: null,
   sf: { chars:{tags:[],trig:[],eff:[]}, coll:{tags:[],trig:[],eff:[]}, roster:{tags:[],trig:[],eff:[]}, open:{} },   // filtro de pesquisa por tags + o que o Ataque Combinado persegue/causa, um por aba
   editingChar: null,                // character object being edited in modal, or null
@@ -4894,6 +4920,7 @@ function render(){
   else if(state.simModalOpen) renderSimModal();
   else if(state.abilityPopupCharId) renderAbilityPopup(state.abilityPopupCharId);
   else if(state.donorProfileId) renderDonorProfileModal();
+  else if(state.communityProfileUser) renderCommunityProfileModal();
   else closeModalDOM();
   updateModalFocusTrap();
 }
@@ -4901,6 +4928,8 @@ function render(){
 function goTab(tab){
   state.tab = tab;
   state.viewingCharId = null;
+  state.communityOpenPost = null;
+  state.communityProfileUser = null;
   state.slotSel = null;
   if(isNarrowLayout()) state.navCompact = true;
   saveUiTab();
@@ -6532,23 +6561,42 @@ function renderCommunityTierBody(p){
     <div class="kz-com-tier"><span class="kz-com-tier-label" style="background:${t.color};">${escapeHtml(t.label || '—')}</span>
       <span class="kz-com-tier-items">${t.items.map(id => communityThumb(id)).join('')}</span></div>`).join('')}</div>`;
 }
-function renderCommunityPost(p){
+// Autor clicável: abre o popup com o perfil dele.
+function communityAuthorLink(p){
+  return `<button type="button" class="kz-com-author" data-com-profile="${escapeAttr(p.userId || '')}" title="Ver o perfil de ${escapeAttr(p.author)}">${escapeHtml(p.author)}</button>`;
+}
+function communityDonorOf(userId){
+  return userId ? (state.donors || []).find(d => d.linkedUserId === userId) || null : null;
+}
+// Prévia curta pra lista: 6 retratos na ordem das casas (time) ou os ranks com quantos guerreiros cada um tem (tier list).
+function renderCommunityPreview(p){
+  if(p.kind === 'team'){
+    return `<div class="kz-com-pv-team">${p.data.team.map(id => { const c = id && getChar(id); return c ? `<span class="kz-com-thumb big" title="${escapeAttr(c.name)}">${portraitInner(c)}</span>` : `<span class="kz-com-thumb big empty"></span>`; }).join('')}</div>`;
+  }
+  const tiers = p.data.tiers;
+  const top = tiers[0].items.slice(0, 6);
+  return `<div class="kz-com-pv-tier"><div class="kz-com-pv-chips">${tiers.slice(0, 6).map(t => `<span class="kz-com-pv-chip" style="background:${t.color};">${escapeHtml(t.label || '—')}<b>${t.items.length}</b></span>`).join('')}</div>
+    <div class="kz-com-pv-team">${top.map(id => communityThumb(id, true)).join('')}</div></div>`;
+}
+// Card da lista: só o essencial. Clicar abre o post; clicar no nome do autor abre o perfil dele.
+function renderCommunityCard(p){
+  const donor = communityDonorOf(p.userId);
+  return `
+  <article class="kz-com-card clean" data-com-open="${escapeAttr(p.id)}" tabindex="0" role="button" aria-label="Abrir ${escapeAttr(p.title)}">
+    ${renderCommunityPreview(p)}
+    <div class="kz-com-card-top"><span class="kz-com-kind ${p.kind}">${p.kind === 'team' ? '連 Time' : '番 Tier List'}</span><span class="kz-com-likes">♥ ${p.likes}</span></div>
+    <h3 class="kz-com-title">${escapeHtml(p.title)}</h3>
+    <div class="kz-com-card-by">${communityAuthorLink(p)}${donor ? ' ' + patenteBadgeHtml(donor.amount, '', linkedProfileFor(donor)) : ''}<span class="kz-com-ago">${escapeHtml(communityAgo(p.createdAt))}</span></div>
+  </article>`;
+}
+// Tela do post: time/tier list completos + ações.
+function renderCommunityActions(p){
   const me = state.discordUser ? state.discordUser.id : null;
   const liked = (state.communityMyLikes || []).includes(p.id);
   const mine = me && p.userId === me;
   const canDelete = mine || isDonorAdmin();
-  const donor = (state.donors || []).find(d => p.userId && d.linkedUserId === p.userId);
-  const prof = donor ? linkedProfileFor(donor) : null;
   const reported = (state.communityReported || []).includes(p.id);
   return `
-  <article class="kz-com-card" data-com-id="${escapeAttr(p.id)}">
-    <header class="kz-com-head">
-      <span class="kz-com-kind ${p.kind}">${p.kind === 'team' ? '連 Time' : '番 Tier List'}</span>
-      <span class="kz-com-by"><b>${escapeHtml(p.author)}</b>${donor ? ' ' + patenteBadgeHtml(donor.amount, '', prof) : ''}<span class="kz-com-ago">${escapeHtml(communityAgo(p.createdAt))}</span></span>
-    </header>
-    <h3 class="kz-com-title">${escapeHtml(p.title)}</h3>
-    ${p.desc ? `<p class="kz-com-desc">${escapeHtml(p.desc)}</p>` : ''}
-    ${p.kind === 'team' ? renderCommunityTeamBody(p) : renderCommunityTierBody(p)}
     <footer class="kz-com-foot">
       <button type="button" class="kz-com-like${liked ? ' on' : ''}" data-com-like="${escapeAttr(p.id)}" title="${liked ? 'Tirar a curtida' : 'Curtir'}"><span class="h">♥</span><b>${p.likes}</b></button>
       ${p.kind === 'team'
@@ -6558,9 +6606,76 @@ function renderCommunityPost(p){
       ${isDonorAdmin() && p.reports ? `<span class="kz-com-reports" title="Denúncias recebidas">⚑ ${p.reports}</span>` : ''}
       ${!mine ? `<button type="button" class="kz-com-link" data-com-report="${escapeAttr(p.id)}" ${reported ? 'disabled' : ''}>${reported ? 'Denunciado' : 'Denunciar'}</button>` : ''}
       ${canDelete ? `<button type="button" class="kz-com-link danger" data-com-del="${escapeAttr(p.id)}">Excluir</button>` : ''}
-    </footer>
-  </article>`;
+    </footer>`;
 }
+function renderCommunityDetail(p){
+  const donor = communityDonorOf(p.userId);
+  return `
+  <section class="kz-page">
+    <div class="kz-com-detail-top"><button type="button" class="kz-back-btn" id="comBackBtn"><span class="arr">←</span><span>Voltar à Comunidade</span></button></div>
+    <article class="kz-panel kz-com-detail" data-com-id="${escapeAttr(p.id)}">
+      <header class="kz-com-head">
+        <span class="kz-com-kind ${p.kind}">${p.kind === 'team' ? '連 Time' : '番 Tier List'}</span>
+        <span class="kz-com-by">por ${communityAuthorLink(p)}${donor ? ' ' + patenteBadgeHtml(donor.amount, '', linkedProfileFor(donor)) : ''}<span class="kz-com-ago">${escapeHtml(communityAgo(p.createdAt))}</span></span>
+      </header>
+      <h1 class="kz-com-detail-title">${escapeHtml(p.title)}</h1>
+      ${p.desc ? `<p class="kz-com-desc">${escapeHtml(p.desc)}</p>` : ''}
+      ${p.kind === 'team' ? renderCommunityTeamBody(p) : renderCommunityTierBody(p)}
+      ${renderCommunityActions(p)}
+    </article>
+  </section>`;
+}
+
+// Perfil do autor (popup). Dados públicos só quando a própria pessoa marcou o perfil como público; o resto vem dos posts.
+function communityProfileModalHtml(userId){
+  const posts = (state.communityPosts || []).filter(p => p.userId === userId).sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+  const prof = (state.profiles || []).find(x => x.id === userId && x.public) || null;
+  const donor = communityDonorOf(userId);
+  const linked = donor ? linkedProfileFor(donor) : null;
+  const name = (prof && prof.nickname) || (posts[0] && posts[0].author) || 'Jogador';
+  const me = state.discordUser && state.discordUser.id === userId;
+  const teams = posts.filter(p => p.kind === 'team').length, tiers = posts.length - teams;
+  const likes = posts.reduce((n, p) => n + p.likes, 0);
+  const socials = prof && prof.showSocials ? [prof.instagram, prof.twitch, prof.youtube].filter(Boolean) : [];
+  return `
+  <div class="modal-overlay" id="comProfileOverlay">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <h2>${escapeHtml(name)}</h2>
+        <button class="kz-close-btn" id="closeComProfileBtn" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-body" style="align-items:center;text-align:center;">
+        <span class="kz-donor-avatar" style="width:72px;height:72px;font-size:24px;">${donorAvatarInner(name)}</span>
+        <div class="kz-pill-row" style="justify-content:center;">
+          ${donor ? patenteBadgeHtml(donor.amount, '', linked) : ''}
+          ${donor && (donor.honras || []).length ? donor.honras.map(honraBadgeHtml).join('') : ''}
+          ${me ? '<span class="kz-com-me-tag">Esse é você</span>' : ''}
+        </div>
+        ${prof && prof.servidor ? `<div class="kz-donate-note">Servidor: <b>${escapeHtml(prof.servidor)}</b></div>` : ''}
+        ${prof && prof.bio ? `<div class="kz-profile-quote">"${escapeHtml(prof.bio)}"</div>` : ''}
+        ${socials.length ? `<div class="kz-donate-note">${socials.map(escapeHtml).join(' · ')}</div>` : ''}
+        ${!prof ? '<div class="kz-donate-note">Esse jogador ainda não tornou o perfil público.</div>' : ''}
+        <div class="kz-com-pstats"><span><b>${teams}</b> time${teams === 1 ? '' : 's'}</span><span><b>${tiers}</b> tier list${tiers === 1 ? '' : 's'}</span><span><b>${likes}</b> curtida${likes === 1 ? '' : 's'}</span></div>
+        ${posts.length ? `<div class="kz-com-pposts"><span class="kz-label">Publicações</span>${posts.slice(0, 8).map(p => `<button type="button" class="kz-com-ppost" data-com-open="${escapeAttr(p.id)}"><span class="kz-com-kind ${p.kind}">${p.kind === 'team' ? '連' : '番'}</span><span class="t">${escapeHtml(p.title)}</span><span class="l">♥ ${p.likes}</span></button>`).join('')}</div>` : ''}
+        ${me ? '<button type="button" class="kz-btn kz-btn-sm" id="comEditProfileBtn">Editar meu perfil</button>' : ''}
+      </div>
+    </div>
+  </div>`;
+}
+function renderCommunityProfileModal(){
+  const root = document.getElementById('modalRoot');
+  if(!root) return;
+  root.innerHTML = communityProfileModalHtml(state.communityProfileUser);
+  document.getElementById('closeComProfileBtn').addEventListener('click', closeCommunityProfile);
+  document.getElementById('comProfileOverlay').addEventListener('click', e => { if(e.target.id === 'comProfileOverlay') closeCommunityProfile(); });
+  root.querySelectorAll('[data-com-open]').forEach(b => b.addEventListener('click', () => { state.communityProfileUser = null; openCommunityPost(b.dataset.comOpen); }));
+  const edit = document.getElementById('comEditProfileBtn');
+  if(edit) edit.addEventListener('click', () => { state.communityProfileUser = null; goTab('perfil'); });
+}
+function openCommunityProfile(userId){ if(!userId) return; state.communityProfileUser = userId; render(); }
+function closeCommunityProfile(){ state.communityProfileUser = null; render(); }
+function openCommunityPost(id){ state.communityOpenPost = id; render(); window.scrollTo(0, 0); }
+
 function renderCommunityList(){
   if(state.communityError) return `<div class="kz-panel kz-com-empty">${escapeHtml(state.communityError)}</div>`;
   if(!state.communityLoaded) return `<div class="kz-panel kz-com-empty">Carregando a Comunidade…</div>`;
@@ -6568,7 +6683,7 @@ function renderCommunityList(){
   if(!list.length){
     return `<div class="kz-panel kz-com-empty">${(state.communityPosts || []).length ? 'Nada encontrado com esses filtros.' : 'Ainda não tem nada por aqui — seja o primeiro a compartilhar um time ou uma tier list!'}</div>`;
   }
-  return `<div class="kz-com-grid">${list.map(renderCommunityPost).join('')}</div>`;
+  return `<div class="kz-com-grid">${list.map(renderCommunityCard).join('')}</div>`;
 }
 function renderCommunityPickerGrid(c){
   const q = (c.search || '').trim().toLowerCase();
@@ -6748,6 +6863,8 @@ function renderComunidadeTab(){
   if(!isSupabaseConfigured()){
     return `<section class="kz-page">${head}<div class="kz-panel kz-com-empty">A Comunidade precisa da conta online, que ainda não está disponível neste site.</div></section>`;
   }
+  const openPost = state.communityOpenPost && (state.communityPosts || []).find(p => p.id === state.communityOpenPost);
+  if(openPost) return renderCommunityDetail(openPost);
   const f = state.communityFilter, s = state.communitySort;
   const chip = (attr, val, cur, label) => `<button type="button" class="kz-fchip ${cur === val ? 'active' : ''}" ${attr}="${val}">${label}</button>`;
   const share = state.discordUser
@@ -6838,6 +6955,7 @@ function deleteCommunityPost(id){
       const { error } = await window.__sb.client.from('community_posts').delete().eq('id', id);
       if(error) throw error;
       state.communityPosts = state.communityPosts.filter(x => x.id !== id);
+      if(state.communityOpenPost === id) state.communityOpenPost = null;
       showToast('Post excluído.');
       render();
     }catch(e){
@@ -6888,6 +7006,14 @@ function attachCommunityListHandlers(root){
   on('[data-com-copy]', b => copyCommunityTierList(b.dataset.comCopy));
   on('[data-com-report]', b => reportCommunityPost(b.dataset.comReport));
   on('[data-com-del]', b => deleteCommunityPost(b.dataset.comDel));
+  on('[data-com-profile]', b => openCommunityProfile(b.dataset.comProfile));
+  root.querySelectorAll('[data-com-profile]').forEach(b => b.addEventListener('click', e => e.stopPropagation()));
+  root.querySelectorAll('[data-com-open]').forEach(card => {
+    card.addEventListener('click', () => openCommunityPost(card.dataset.comOpen));
+    card.addEventListener('keydown', e => { if((e.key === 'Enter' || e.key === ' ') && e.target === card){ e.preventDefault(); openCommunityPost(card.dataset.comOpen); } });
+  });
+  const back = document.getElementById('comBackBtn');
+  if(back) back.addEventListener('click', () => { state.communityOpenPost = null; render(); window.scrollTo(0, 0); });
 }
 function attachComunidadeHandlers(){
   const view = document.getElementById('view');
@@ -8724,6 +8850,8 @@ document.addEventListener('keydown', e=>{
   if(bodyOverlay){ bodyOverlay.remove(); restoreFocusAfterModal(); return; }
   if(state.abilityPopupCharId !== null){ closeAbilityPopup(); return; }
   if(state.donorProfileId !== null){ closeDonorProfile(); return; }
+  if(state.communityProfileUser){ closeCommunityProfile(); return; }
+  if(state.tab === 'comunidade' && state.communityOpenPost){ state.communityOpenPost = null; render(); return; }
   if(state.simModalOpen){ closeSimModal(); return; }
   if(state.pickerSlot !== null){ closePickerModal(); return; }
   if(state.ioModalOpen){ closeIOModal(); return; }
