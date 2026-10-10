@@ -1086,6 +1086,25 @@ async function main(){
     assert.ok(!r.privado.includes('comEditProfileBtn'), 'sem login igual ao autor, sem atalho de editar');
   });
 
+  await test('post de time sem níveis (publicado na versão antiga) avisa só o autor; com níveis mostra estrelas e "Nv"', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.discordUser, state.communityPosts];
+      const [a, b] = state.characters;
+      const mk = (levels) => ({ id: 'pz', userId: 'u-autor', kind: 'team', title: 'T', desc: '', author: 'A', createdAt: '', likes: 0, reports: 0, data: { team: [a.id, b.id, null, null, null, null], levels } });
+      state.discordUser = { id: 'u-autor', username: 'A' };
+      const antigoAutor = renderCommunityDetail(mk({}));
+      state.discordUser = { id: 'outro', username: 'B' };
+      const antigoOutro = renderCommunityDetail(mk({}));
+      const novo = renderCommunityDetail(mk({ [a.id]: 7, [b.id]: 3 }));
+      state.discordUser = bk[0]; state.communityPosts = bk[1];
+      return { antigoAutor, antigoOutro, novo };
+    })()`);
+    assert.ok(r.antigoAutor.includes('sem os níveis de estrela'), 'o autor é avisado pra republicar');
+    assert.ok(!r.antigoOutro.includes('sem os níveis de estrela'), 'quem vê de fora não vê o aviso');
+    assert.ok(r.novo.includes('Nv 7') && r.novo.includes('Nv 3') && r.novo.includes('blue') && r.novo.includes('gold'), 'níveis aparecem com estrelas e "Nv"');
+    assert.ok(!r.novo.includes('sem os níveis de estrela'));
+  });
+
   await test('curtir: atualiza na hora, grava no banco, desfaz se o banco recusar e exige login', async () => {
     runIn(sandbox, `
       window.__likeCalls = []; window.__failLikes = false;

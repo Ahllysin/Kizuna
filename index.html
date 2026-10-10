@@ -851,7 +851,8 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-slotsview .kz-slot,.kz-com-composeslots .kz-slot{min-height:0;}
 .kz-com-composeslots .kz-slot{cursor:pointer;}
 .kz-com-card .kz-combo-count{margin-top:0;}
-.kz-com-stars{font-size:11px;letter-spacing:1px;line-height:1;white-space:nowrap;}
+.kz-com-stars{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:1px;line-height:1;white-space:nowrap;}
+.kz-com-stars .n{font-size:11px;font-weight:900;letter-spacing:0;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid currentColor;}
 .kz-com-stars.gold{color:#ffd23f;text-shadow:0 0 6px rgba(255,190,50,.45);}
 .kz-com-stars.blue{color:#6fb6ff;text-shadow:0 0 6px rgba(80,160,255,.5);}
 .kz-com-teampart{display:flex;flex-direction:column;gap:14px;}
@@ -6436,7 +6437,7 @@ function communityStarsHtml(lv){
   lv = Math.floor(Number(lv)) || 0;
   if(lv < 1) return '';
   const blue = lv > 5, n = blue ? lv - 5 : lv;
-  return `<span class="kz-com-stars ${blue ? 'blue' : 'gold'}" title="${blue ? 'Azul' : 'Dourada'} ${n} (nível ${lv}/10)">${'★'.repeat(n)}${'☆'.repeat(5 - n)}</span>`;
+  return `<span class="kz-com-stars ${blue ? 'blue' : 'gold'}" title="${blue ? 'Azul' : 'Dourada'} ${n} (nível ${lv}/10)"><span class="s">${'★'.repeat(n)}${'☆'.repeat(5 - n)}</span><span class="n">Nv ${lv}</span></span>`;
 }
 // Sempre 6 casas, na ordem das casas (1 a 6); posição vazia é null.
 function communityNormTeam(t){
@@ -6621,6 +6622,7 @@ function renderCommunityDetail(p){
       <h1 class="kz-com-detail-title">${escapeHtml(p.title)}</h1>
       ${p.desc ? `<p class="kz-com-desc">${escapeHtml(p.desc)}</p>` : ''}
       ${p.kind === 'team' ? renderCommunityTeamBody(p) : renderCommunityTierBody(p)}
+      ${p.kind === 'team' && !Object.keys(p.data.levels || {}).length && state.discordUser && state.discordUser.id === p.userId ? '<div class="kz-muted" style="font-size:12.5px;">Este time foi publicado sem os níveis de estrela (versão antiga). Exclua e publique de novo pra mostrar o nível de cada guerreiro.</div>' : ''}
       ${renderCommunityActions(p)}
     </article>
   </section>`;
