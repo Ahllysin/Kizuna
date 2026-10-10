@@ -780,7 +780,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .kz-com-sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 4px;}
 .kz-com-search{flex:1;min-width:200px;max-width:380px;}
-.kz-com-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;align-items:start;}
+.kz-com-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start;max-width:860px;}
 .kz-com-empty{padding:26px 20px;text-align:center;color:var(--text-dim);}
 .kz-com-card{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;border:1.5px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);min-width:0;}
 .kz-com-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
@@ -821,14 +821,15 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-quota{font-size:13px;color:#cfc8b8;padding:8px 12px;border-radius:10px;border:1px dashed rgba(255,255,255,.25);}
 .kz-com-quota b{color:#ffd66b;}
 .kz-com-quota.full{border-color:rgba(240,160,95,.7);color:#f0a05f;}
+.kz-slot.ro{cursor:default;}
+.kz-slot.ro:hover{filter:none;}
+.kz-com-slotsview .kz-slot,.kz-com-composeslots .kz-slot{min-height:0;}
+.kz-com-composeslots .kz-slot{cursor:pointer;}
+.kz-com-card .kz-combo-count{margin-top:0;}
 .kz-com-stars{font-size:11px;letter-spacing:1px;line-height:1;white-space:nowrap;}
 .kz-com-stars.gold{color:#ffd23f;text-shadow:0 0 6px rgba(255,190,50,.45);}
 .kz-com-stars.blue{color:#6fb6ff;text-shadow:0 0 6px rgba(80,160,255,.5);}
 .kz-com-teampart{display:flex;flex-direction:column;gap:14px;}
-.kz-com-slots{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:6px;}
-.kz-com-slot{display:flex;flex-direction:column;align-items:center;gap:4px;min-height:96px;padding:6px 4px;border-radius:10px;border:1.5px dashed rgba(255,255,255,.2);background:rgba(8,7,14,.5);color:#dcd6c6;justify-content:center;min-width:0;}
-.kz-com-slot.filled{border-style:solid;border-color:rgba(255,200,90,.6);background:rgba(255,200,90,.07);cursor:pointer;justify-content:flex-start;}
-.kz-com-slot .plus{font-size:22px;color:#6c6580;}
 .kz-com-pick-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
 .kz-com-pick-tools .kz-input{flex:1;min-width:180px;max-width:320px;}
 .kz-com-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;max-height:340px;overflow-y:auto;padding:8px;border-radius:12px;background:rgba(8,7,14,.55);border:1px solid rgba(255,255,255,.1);}
@@ -838,7 +839,6 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-pick .nm{font-size:10.5px;font-weight:800;text-align:center;line-height:1.15;overflow-wrap:anywhere;}
 .kz-com-pick .kz-com-thumb{width:100%;max-width:56px;}
 .kz-com-nocoll{padding:14px;border-radius:12px;border:1px dashed rgba(255,255,255,.25);font-size:13.5px;color:#cfc8b8;line-height:1.5;}
-@media (max-width:520px){.kz-com-slots{grid-template-columns:repeat(3,minmax(0,1fr));}}
 .kz-com-compose-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 @media (max-width:520px){.kz-com-grid{grid-template-columns:1fr;}.kz-com-team{grid-template-columns:repeat(3,minmax(0,1fr));}}
 .kz-patente-note{font-size:11.5px;color:var(--text-dim);font-style:italic;}
@@ -6199,8 +6199,8 @@ function missingPillars(team){
   const v = teamPillars(team), scale = Math.max(n / 6, 0.5);
   return PILLAR_ORDER.filter(k => v[k] < PILLARS[k].target * scale * 0.7);
 }
-function compositionHtml(){
-  const team = state.team;
+function compositionHtml(teamArg){
+  const team = teamArg || state.team;
   if(!team.some(Boolean)) return '';
   const v = teamPillars(team), miss = missingPillars(team);
   const bal = Math.round(balanceScore(team) * 100);
@@ -6409,14 +6409,21 @@ function communityStarsHtml(lv){
   const blue = lv > 5, n = blue ? lv - 5 : lv;
   return `<span class="kz-com-stars ${blue ? 'blue' : 'gold'}" title="${blue ? 'Azul' : 'Dourada'} ${n} (nível ${lv}/10)">${'★'.repeat(n)}${'☆'.repeat(5 - n)}</span>`;
 }
+// Sempre 6 casas, na ordem das casas (1 a 6); posição vazia é null.
+function communityNormTeam(t){
+  const a = (Array.isArray(t) ? t : []).slice(0, 6).map(x => x || null);
+  while(a.length < 6) a.push(null);
+  return a;
+}
 // O que seria publicado agora. Time: os guerreiros escolhidos no formulário (compose.team), todos da Coleção, com o
 // nível de estrela que cada um tem lá. Tier list: a tier list atual. null se estiver vazio demais.
 function communityShareData(kind, compose){
   if(kind === 'team'){
-    const ids = ((compose && compose.team) || []).filter(id => getChar(id) && getEntry(id).owned).slice(0, 6);
-    if(ids.length < COMMUNITY.minTeam) return null;
+    // mantém a posição de cada casa; guerreiro que não está adquirido na Coleção vira casa vazia
+    const ids = communityNormTeam(compose && compose.team).map(id => (id && getChar(id) && getEntry(id).owned) ? id : null);
+    if(ids.filter(Boolean).length < COMMUNITY.minTeam) return null;
     const levels = {};
-    ids.forEach(id => { const lv = Math.floor(Number(getEntry(id).level)) || 0; if(lv > 0) levels[id] = Math.min(10, lv); });
+    ids.filter(Boolean).forEach(id => { const lv = Math.floor(Number(getEntry(id).level)) || 0; if(lv > 0) levels[id] = Math.min(10, lv); });
     return sanitizeCommunityData('team', { team: ids, levels });
   }
   const known = new Set(state.characters.map(c => c.id));
@@ -6507,17 +6514,18 @@ function communityThumb(id, big){
   if(!c) return '';
   return `<span class="kz-com-thumb${big ? ' big' : ''}" title="${escapeAttr(c.name)}">${portraitInner(c)}</span>`;
 }
+// Mesmo visual do Montador de Combos: casas 4-5-6 na coluna da esquerda e 1-2-3 na da direita, cada uma com
+// retrato, nome, papéis, Persegue/Causa — e aqui também o nível de estrela de cada guerreiro.
 function renderCommunityTeamBody(p){
   const s = communityTeamStats(p);
   const lvs = p.data.levels || {};
-  const strip = s.team.map(id => {
-    const c = id && getChar(id);
-    return c ? `<div class="kz-com-mem" title="${escapeAttr(c.name + (lvs[id] ? ' — nível ' + lvs[id] + '/10' : ''))}"><span class="kz-com-thumb big">${portraitInner(c)}</span><span class="kz-com-mem-nm">${escapeHtml(c.name)}</span>${communityStarsHtml(lvs[id])}<span class="kz-com-mem-roles">${rolePillsHtml(c, 1, true)}</span></div>`
-      : `<div class="kz-com-mem empty"></div>`;
+  const slots = SLOT_VISUAL_ORDER.map(i => {
+    const id = p.data.team[i], c = id && getChar(id);
+    return slotCardHtml(c || null, i, { ro: true, attrs: '', draggable: false, stars: c ? communityStarsHtml(lvs[id]) : '', hint: 'Vazia' });
   }).join('');
-  return `<div class="kz-com-team">${strip}</div>
-    <div class="kz-com-stats"><span><b>${s.combos}</b>/${s.max} combos</span><span>cadeia de <b>${s.longest}</b> hits</span><span>equilíbrio <b>${s.balance}%</b></span>${s.missing.length ? `<span class="warn">falta ${s.missing.map(k => PILLARS[k].label).join(', ')}</span>` : ''}</div>
-    ${s.missingChars ? `<div class="kz-muted" style="font-size:12px;">${s.missingChars} guerreiro(s) dessa equipe não existem no seu site (personagem criado por quem postou).</div>` : ''}`;
+  return `${comboCountHtml(s.team)}${compositionHtml(s.team)}
+    <div class="kz-slots kz-com-slotsview">${slots}</div>
+    ${s.missingChars ? `<div class="kz-muted" style="font-size:12px;">${s.missingChars} guerreiro(s) dessa equipe não existem no seu site (personagem criado por quem postou).${''}</div>` : ''}`;
 }
 function renderCommunityTierBody(p){
   return `<div class="kz-com-tiers">${p.data.tiers.map(t => `
@@ -6564,42 +6572,48 @@ function renderCommunityList(){
 }
 function renderCommunityPickerGrid(c){
   const q = (c.search || '').trim().toLowerCase();
-  const sel = new Set(c.team);
+  const sel = new Set(communityNormTeam(c.team).filter(Boolean));
   const list = communityOwnedChars().filter(ch => !q || ch.name.toLowerCase().includes(q));
   if(!list.length) return `<div class="kz-muted">Nenhum guerreiro seu com esse nome.</div>`;
-  return list.map(ch => `<button type="button" class="kz-com-pick${sel.has(ch.id) ? ' on' : ''}" data-com-pick="${escapeAttr(ch.id)}" title="${escapeAttr(ch.name)}"><span class="kz-com-thumb">${portraitInner(ch)}</span><span class="nm">${escapeHtml(ch.name)}</span>${communityStarsHtml(getEntry(ch.id).level)}</button>`).join('');
+  return list.map(ch => `<button type="button" class="kz-com-pick${sel.has(ch.id) ? ' on' : ''}" draggable="true" data-com-pick="${escapeAttr(ch.id)}" title="${escapeAttr(ch.name)}"><span class="kz-com-thumb">${portraitInner(ch)}</span><span class="nm">${escapeHtml(ch.name)}</span>${communityStarsHtml(getEntry(ch.id).level)}</button>`).join('');
+}
+function renderComposeSlots(c){
+  const team = communityNormTeam(c.team);
+  return `<div class="kz-slots kz-com-composeslots">${SLOT_VISUAL_ORDER.map(i => {
+    const id = team[i], ch = id && getChar(id);
+    return slotCardHtml(ch || null, i, {
+      sel: c.slotSel === i, attrs: `data-com-slot="${i}"`, removeAttr: `data-com-remove="${i}"`,
+      stars: ch ? communityStarsHtml(getEntry(id).level) : '', hint: c.slotSel === i ? 'Escolha na lista abaixo' : 'Clique e escolha na lista',
+    });
+  }).join('')}</div>`;
 }
 function renderCommunityTeamPart(c){
+  c.team = communityNormTeam(c.team);
   if(!communityOwnedChars().length){
     return `<div class="kz-com-nocoll">Você ainda não marcou nenhum guerreiro na <button type="button" class="kz-com-link" data-com-gocoll>Coleção</button>. Marque os que você tem (e o nível de estrela de cada um) pra montar um time e mostrar o tier de cada guerreiro.</div>`;
   }
-  const slots = Array.from({ length: 6 }, (_, i) => {
-    const id = c.team[i], ch = id && getChar(id);
-    return ch
-      ? `<button type="button" class="kz-com-slot filled" data-com-pick="${escapeAttr(id)}" title="Tirar ${escapeAttr(ch.name)} do time"><span class="kz-com-thumb big">${portraitInner(ch)}</span><span class="kz-com-mem-nm">${escapeHtml(ch.name)}</span>${communityStarsHtml(getEntry(id).level)}</button>`
-      : `<div class="kz-com-slot"><span class="plus">+</span></div>`;
-  }).join('');
+  const filled = c.team.filter(Boolean).length;
   const data = communityShareData('team', c);
-  const preview = data ? renderCommunityTeamBody({ data }) : `<div class="kz-muted">Escolha pelo menos ${COMMUNITY.minTeam} guerreiros da sua Coleção.</div>`;
-  return `<div><span class="kz-label">Seu time (${c.team.length}/6) — escolhido na sua Coleção, com o nível de estrela de cada um</span>
-      <div class="kz-com-slots">${slots}</div></div>
+  return `<div><span class="kz-label">Seu time (${filled}/6) — na ordem das casas, com o nível de estrela de cada um</span>
+      <div class="kz-muted" style="font-size:12px;margin:2px 0 8px;">Clique numa casa e depois num guerreiro da lista (ou arraste). Clicar em duas casas troca os dois de lugar.</div>
+      ${renderComposeSlots(c)}</div>
     <div class="kz-com-pick-tools">
       <input type="text" class="kz-input" id="comPickSearch" placeholder="Buscar na sua Coleção…" value="${escapeAttr(c.search || '')}">
-      <button type="button" class="kz-btn kz-btn-sm" id="comFillBtn" title="Preenche com os guerreiros que estão no campo da aba Combos (só os que estão na sua Coleção)">Usar minha equipe do campo</button>
+      <button type="button" class="kz-btn kz-btn-sm" id="comFillBtn" title="Copia as casas do campo da aba Combos (só os guerreiros que estão na sua Coleção)">Usar minha equipe do campo</button>
     </div>
     <div class="kz-com-picker" id="comPicker">${renderCommunityPickerGrid(c)}</div>
-    <div><span class="kz-label">Prévia do que será publicado</span>${preview}</div>`;
+    ${data ? '' : `<div class="kz-muted">Escolha pelo menos ${COMMUNITY.minTeam} guerreiros da sua Coleção.</div>`}`;
 }
 function renderCommunityCompose(){
   const c = state.communityCompose;
   if(!c) return '';
-  c.team = c.team || [];
+  c.team = communityNormTeam(c.team);
   const data = c.kind === 'team' ? communityShareData('team', c) : communityShareData('tierlist');
   const lim = communityTeamLimit(), used = communityMyTeamCount();
   const teamFull = c.kind === 'team' && used >= lim;
   let middle;
   if(c.kind === 'team'){
-    middle = `<div class="kz-com-quota${teamFull ? ' full' : ''}">Seus times publicados: <b>${used}/${lim}</b>${lim < COMMUNITY.teamLimitSupporter ? ` — apoie o site com R$ ${COMMUNITY.supporterMin} ou mais pra liberar até ${COMMUNITY.teamLimitSupporter}.` : ' (limite de apoiador).'}${teamFull ? ' Exclua um pra publicar outro.' : ''}</div>
+    middle = `<div><span class="kz-label">Prévia do que será publicado</span><div id="comPreview">${data ? renderCommunityTeamBody({ data }) : ''}</div></div><div class="kz-com-quota${teamFull ? ' full' : ''}">Seus times publicados: <b>${used}/${lim}</b>${lim < COMMUNITY.teamLimitSupporter ? ` — apoie o site com R$ ${COMMUNITY.supporterMin} ou mais pra liberar até ${COMMUNITY.teamLimitSupporter}.` : ' (limite de apoiador).'}${teamFull ? ' Exclua um pra publicar outro.' : ''}</div>
       <div id="comTeamPart" class="kz-com-teampart">${renderCommunityTeamPart(c)}</div>`;
   } else {
     middle = `<div><span class="kz-label">Prévia do que será publicado</span>${data ? renderCommunityTierBody({ data }) : `<div class="kz-muted">Classifique pelo menos ${COMMUNITY.minTierItems} guerreiros na aba Tier List pra compartilhar.</div>`}</div>`;
@@ -6622,6 +6636,8 @@ function renderCommunityCompose(){
   </div>`;
 }
 // Atualiza só a parte do time (slots + lista + prévia) pra não perder o foco nem a rolagem da lista.
+// Atualiza só a parte do time (casas + lista) pra não perder o foco nem a rolagem da lista; a prévia e o botão
+// Publicar acompanham.
 function refreshComposeTeamPart(){
   const c = state.communityCompose, box = document.getElementById('comTeamPart');
   if(!c || !box){ render(); return; }
@@ -6631,38 +6647,91 @@ function refreshComposeTeamPart(){
   attachComposeTeamHandlers(box);
   const pk2 = document.getElementById('comPicker');
   if(pk2) pk2.scrollTop = top;
+  const data = communityShareData('team', c);
   const pub = document.getElementById('comPublishBtn');
-  if(pub) pub.disabled = !communityShareData('team', c) || communityMyTeamCount() >= communityTeamLimit();
+  if(pub) pub.disabled = !data || communityMyTeamCount() >= communityTeamLimit();
+  const prev = document.getElementById('comPreview');
+  if(prev) prev.innerHTML = data ? renderCommunityTeamBody({ data }) : '';
 }
-function toggleComposePick(id){
+// Mesma lógica do Montador: sem casa escolhida, clicar em quem já está tira e senão vai pra primeira casa vazia;
+// com casa escolhida, o guerreiro vai pra ela (trocando de lugar se já estava em outra).
+function placeComposePick(id){
   const c = state.communityCompose;
   if(!c) return;
-  const i = c.team.indexOf(id);
-  if(i > -1) c.team.splice(i, 1);
-  else if(c.team.length >= 6){ showToast('Seu time já tem 6 guerreiros. Tire alguém antes.'); return; }
-  else c.team.push(id);
+  const team = communityNormTeam(c.team);
+  const cur = team.indexOf(id);
+  let target = c.slotSel;
+  if(target === null || target === undefined){
+    if(cur > -1){ team[cur] = null; c.team = team; refreshComposeTeamPart(); return; }
+    target = team.indexOf(null);
+    if(target === -1){ showToast('Seu time já tem 6 guerreiros. Tire alguém antes.'); return; }
+  }
+  if(cur > -1) team[cur] = team[target];
+  team[target] = id;
+  c.slotSel = null;
+  c.team = team;
+  refreshComposeTeamPart();
+}
+function swapComposeSlots(a, b){
+  const c = state.communityCompose;
+  if(!c || a === b) return;
+  const team = communityNormTeam(c.team);
+  [team[a], team[b]] = [team[b], team[a]];
+  c.team = team; c.slotSel = null;
   refreshComposeTeamPart();
 }
 function attachComposeTeamHandlers(root){
-  root.querySelectorAll('[data-com-pick]').forEach(b => b.addEventListener('click', () => toggleComposePick(b.dataset.comPick)));
+  const c = state.communityCompose;
+  const pickClick = b => b.addEventListener('click', () => placeComposePick(b.dataset.comPick));
+  root.querySelectorAll('[data-com-pick]').forEach(b => {
+    pickClick(b);
+    b.addEventListener('dragstart', e => { e.dataTransfer.effectAllowed = 'copy'; e.dataTransfer.setData('text/plain', 'char:' + b.dataset.comPick); });
+  });
+  root.querySelectorAll('[data-com-slot]').forEach(s => {
+    const idx = parseInt(s.dataset.comSlot, 10);
+    s.addEventListener('click', e => {
+      if(e.target.closest('[data-com-remove]')) return;
+      if(c.slotSel !== null && c.slotSel !== undefined && c.slotSel !== idx){ swapComposeSlots(c.slotSel, idx); return; }
+      c.slotSel = c.slotSel === idx ? null : idx;
+      refreshComposeTeamPart();
+    });
+    s.addEventListener('dragstart', e => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'slot:' + idx); });
+    s.addEventListener('dragover', e => { e.preventDefault(); s.classList.add('drag-over'); });
+    s.addEventListener('dragleave', () => s.classList.remove('drag-over'));
+    s.addEventListener('drop', e => {
+      e.preventDefault(); s.classList.remove('drag-over');
+      const [kind, val] = String(e.dataTransfer.getData('text/plain')).split(':');
+      if(kind === 'slot') swapComposeSlots(parseInt(val, 10), idx);
+      else if(kind === 'char' && communityIdOk(val)){ c.slotSel = idx; placeComposePick(val); }
+    });
+  });
+  root.querySelectorAll('[data-com-remove]').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    const team = communityNormTeam(c.team);
+    team[parseInt(b.dataset.comRemove, 10)] = null;
+    c.team = team; c.slotSel = null;
+    refreshComposeTeamPart();
+  }));
   const go = root.querySelector('[data-com-gocoll]');
   if(go) go.addEventListener('click', () => goTab('collection'));
   const search = root.querySelector('#comPickSearch');
   if(search) search.addEventListener('input', () => {
-    const c = state.communityCompose;
     c.search = search.value;
     const pk = document.getElementById('comPicker');
     pk.innerHTML = renderCommunityPickerGrid(c);
-    pk.querySelectorAll('[data-com-pick]').forEach(b => b.addEventListener('click', () => toggleComposePick(b.dataset.comPick)));
+    pk.querySelectorAll('[data-com-pick]').forEach(b => {
+      pickClick(b);
+      b.addEventListener('dragstart', e => { e.dataTransfer.effectAllowed = 'copy'; e.dataTransfer.setData('text/plain', 'char:' + b.dataset.comPick); });
+    });
   });
   const fill = root.querySelector('#comFillBtn');
   if(fill) fill.addEventListener('click', () => {
-    const c = state.communityCompose;
-    const field = state.team.filter(Boolean);
-    const owned = field.filter(id => getChar(id) && getEntry(id).owned);
-    c.team = owned.slice(0, 6);
-    if(owned.length < field.length) showToast((field.length - owned.length) + ' guerreiro(s) do campo não estão na sua Coleção e ficaram de fora.');
-    else if(!field.length) showToast('Não tem ninguém em campo na aba Combos.');
+    const field = state.team.map(id => id || null);
+    const kept = field.map(id => (id && getChar(id) && getEntry(id).owned) ? id : null);
+    const lost = field.filter(Boolean).length - kept.filter(Boolean).length;
+    c.team = communityNormTeam(kept); c.slotSel = null;
+    if(lost) showToast(lost + ' guerreiro(s) do campo não estão na sua Coleção e ficaram de fora.');
+    else if(!field.some(Boolean)) showToast('Não tem ninguém em campo na aba Combos.');
     refreshComposeTeamPart();
   });
 }
@@ -6844,8 +6913,8 @@ function attachComunidadeHandlers(){
   if(open) open.addEventListener('click', () => {
     if(!state.communityCompose){
       // já vem preenchido com o que está em campo na aba Combos (só quem está na Coleção)
-      const team = state.team.filter(id => id && getChar(id) && getEntry(id).owned).slice(0, 6);
-      state.communityCompose = { kind: team.length >= COMMUNITY.minTeam ? 'team' : (communityShareData('tierlist') ? 'tierlist' : 'team'), title: '', desc: '', team, search: '' };
+      const team = communityNormTeam(state.team.map(id => (id && getChar(id) && getEntry(id).owned) ? id : null));
+      state.communityCompose = { kind: team.filter(Boolean).length >= COMMUNITY.minTeam ? 'team' : (communityShareData('tierlist') ? 'tierlist' : 'team'), title: '', desc: '', team, search: '', slotSel: null };
     }
     render();
   });
@@ -6969,18 +7038,26 @@ function slotEffectsHtml(c){
   </div>`;
 }
 
-function renderSlot(idx){
-  const c = state.team[idx] ? getChar(state.team[idx]) : null;
-  const sel = state.slotSel === idx;
+// Uma casa do campo (bolinha da casa, retrato, nome, papéis, Persegue/Causa). Usada no Montador e na Comunidade.
+// o = { sel, ro (só leitura), draggable, attrs (atributos do container), removeAttr, stars, hint }
+function slotCardHtml(c, idx, o){
+  o = o || {};
+  const attrs = o.attrs !== undefined ? o.attrs : `data-slot="${idx}"`;
+  const rm = o.removeAttr !== undefined ? o.removeAttr : `data-remove-slot="${idx}"`;
+  const drag = o.draggable !== undefined ? o.draggable : !!c;
   return `
-  <div class="kz-slot ${c?'filled':''} ${sel?'selected':''}" data-slot="${idx}" ${c?'draggable="true"':''} title="Casa ${idx+1}">
+  <div class="kz-slot ${c?'filled':''} ${o.sel?'selected':''} ${o.ro?'ro':''}" ${attrs} ${c && drag ? 'draggable="true"' : ''} title="Casa ${idx+1}">
     <img class="kz-slot-ball" src="${ballSrc(idx+1)}" alt="Casa ${idx+1}" draggable="false">
     ${c ? `
-    <button class="kz-slot-remove" data-remove-slot="${idx}" title="Remover">✕</button>
+    ${o.ro ? '' : `<button class="kz-slot-remove" ${rm} title="Remover">✕</button>`}
     <div class="kz-slot-art">${portraitInner(c)}</div>
-    <div class="kz-slot-info"><div class="kz-slot-name">${escapeHtml(c.name)}</div><div class="kz-slot-roles">${rolePillsHtml(c, 2, true)}</div></div>${slotEffectsHtml(c)}`
-    : `<span class="kz-slot-plus">+</span><span class="kz-slot-hint">${sel ? 'Escolha no elenco' : 'Escolha um guerreiro'}</span>`}
+    <div class="kz-slot-info"><div class="kz-slot-name">${escapeHtml(c.name)}</div>${o.stars || ''}<div class="kz-slot-roles">${rolePillsHtml(c, 2, true)}</div></div>${slotEffectsHtml(c)}`
+    : `<span class="kz-slot-plus">${o.ro ? '' : '+'}</span><span class="kz-slot-hint">${o.hint || (o.sel ? 'Escolha no elenco' : 'Escolha um guerreiro')}</span>`}
   </div>`;
+}
+function renderSlot(idx){
+  const c = state.team[idx] ? getChar(state.team[idx]) : null;
+  return slotCardHtml(c, idx, { sel: state.slotSel === idx });
 }
 
 // Igual ao "Det. ATQ Comb." do jogo: escolhe um guerreiro do time e vê, lado a lado, quem
@@ -7106,10 +7183,11 @@ function comboMaxFor(team){
   filled.forEach(id=>{ const c = getChar(id); if(c) STARTER_KEYS.forEach(k=>{ if(c[k] && (c[k].effects||[]).length) starters++; }); });
   return { max: starters * filled.length, starters, abilities: filled.length * STARTER_KEYS.length, perChain: filled.length };
 }
-function comboCountHtml(){
-  if(!state.team.some(Boolean)) return '';
-  const s = comboSummary(state.team);
-  const m = comboMaxFor(state.team);
+function comboCountHtml(teamArg){
+  const team = teamArg || state.team;
+  if(!team.some(Boolean)) return '';
+  const s = comboSummary(team);
+  const m = comboMaxFor(team);
   const tip = `Máximo possível com essa equipe: ${m.starters} habilidade${m.starters===1?'':'s'} que iniciam combo × ${m.perChain} combos por cadeia = ${m.max}. Habilidades sem efeito de combo não contam.`;
   const startersTxt = `<b>${m.starters}</b> de ${m.abilities} habilidades iniciam combo`;
   if(!s.total) return `<div class="kz-combo-count none" title="${escapeAttr(tip)}"><b>0</b> combos<span class="max"> / ${m.max}</span><span class="sub">${startersTxt} · nenhuma ativa o Ataque Combinado de alguém.</span></div>`;

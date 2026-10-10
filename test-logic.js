@@ -974,24 +974,55 @@ async function main(){
     assert.ok(r.semResultado.includes('Nenhum guerreiro seu'));
   });
 
-  await test('toggleComposePick: adiciona, remove e trava no 6º guerreiro', () => {
+  await test('formulário do time: cada guerreiro vai pra casa escolhida (ou a primeira livre), troca de lugar e trava nas 6 casas — mesma lógica do Montador', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.communityCompose, state.collection];
       const ids = state.characters.slice(0, 8).map(c => c.id);
       state.collection = Object.fromEntries(ids.map(id => [id, { owned: true, level: 1 }]));
-      state.communityCompose = { kind: 'team', title: '', desc: '', team: [], search: '' };
-      ids.slice(0, 7).forEach(id => toggleComposePick(id));
-      const seis = state.communityCompose.team.length;
-      toggleComposePick(ids[0]);
-      const cinco = state.communityCompose.team.length;
-      toggleComposePick(ids[6]);
-      const volta = state.communityCompose.team.length;
+      const novo = () => { state.communityCompose = { kind: 'team', title: '', desc: '', team: [], search: '', slotSel: null }; return state.communityCompose; };
+      let c = novo();
+      placeComposePick(ids[0]); placeComposePick(ids[1]);
+      const ordem = [...c.team];                                   // primeira casa livre, na ordem de escolha
+      c.slotSel = 4; placeComposePick(ids[2]);                     // casa escolhida: casa 5
+      const naCasa5 = c.team[4];
+      c.slotSel = 0; placeComposePick(ids[2]);                     // quem já estava na casa 5 vai pra casa 1 (troca)
+      const trocou = [c.team[0], c.team[4]];
+      swapComposeSlots(0, 1);
+      const swap = [c.team[0], c.team[1]];
+      placeComposePick(ids[1]);                                    // sem casa escolhida, clicar em quem já está tira
+      const tirou = c.team[0];
+      c = novo();
+      ids.forEach(id => placeComposePick(id));                     // 8 tentativas, só cabem 6
+      const cheio = c.team.filter(Boolean).length;
       state.communityCompose = bk[0]; state.collection = bk[1];
-      return { seis, cinco, volta };
+      return { ordem, naCasa5, trocou, swap, tirou, cheio, ids };
     })()`);
-    assert.strictEqual(r.seis, 6, 'o 7º guerreiro não entra');
-    assert.strictEqual(r.cinco, 5, 'clicar em quem já está tira do time');
-    assert.strictEqual(r.volta, 6);
+    const ids = r.ids;
+    assert.deepStrictEqual(r.ordem.slice(0, 3), [ids[0], ids[1], null], 'sem casa escolhida vai pra primeira livre');
+    assert.strictEqual(r.naCasa5, ids[2], 'com a casa 5 escolhida, o guerreiro vai pra casa 5');
+    assert.deepStrictEqual(r.trocou, [ids[2], ids[0]], 'escolher a casa 1 e clicar em quem está na casa 5 troca os dois');
+    assert.deepStrictEqual(r.swap, [ids[1], ids[2]], 'trocar duas casas inverte os dois');
+    assert.strictEqual(r.tirou, null, 'clicar de novo em quem já está tira do time');
+    assert.strictEqual(r.cheio, 6, 'no máximo 6 casas');
+  });
+
+  await test('time publicado mantém a ordem das casas (posições vazias incluídas) e o card usa o mesmo layout do Montador', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.collection];
+      const [a, b, c] = state.characters;
+      state.collection = { [a.id]: { owned: true, level: 9 }, [b.id]: { owned: true, level: 2 }, [c.id]: { owned: true, level: 5 } };
+      const data = communityShareData('team', { team: [null, c.id, null, a.id, b.id, null] });
+      const html = renderCommunityTeamBody({ data });
+      state.collection = bk[0];
+      return { team: data.team, levels: data.levels, html, ids: [a.id, b.id, c.id], nomes: [a.name, b.name, c.name] };
+    })()`);
+    assert.deepStrictEqual(r.team, [null, r.ids[2], null, r.ids[0], r.ids[1], null], 'cada guerreiro fica na casa em que foi colocado');
+    assert.strictEqual(Object.keys(r.levels).length, 3);
+    assert.ok(r.html.includes('kz-slots') && r.html.includes('kz-slot') && r.html.includes('Casa 4') && r.html.includes('Casa 6'), 'mesmo grid de casas do Montador');
+    assert.ok(r.html.includes('Persegue') && r.html.includes('Causa'), 'mostra Persegue/Causa de cada guerreiro');
+    assert.ok(r.html.includes('kz-comp') && r.html.includes('combos'), 'mostra composição e contagem de combos como no Montador');
+    assert.ok(!r.html.includes('kz-slot-remove'), 'no post publicado não tem botão de remover');
+    assert.ok(r.html.indexOf('Casa 4') < r.html.indexOf('Casa 1'), 'mesma ordem visual do Montador: coluna 4-5-6 antes da 1-2-3');
   });
 
   await test('curtir: atualiza na hora, grava no banco, desfaz se o banco recusar e exige login', async () => {
