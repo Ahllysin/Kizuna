@@ -878,6 +878,52 @@ async function main(){
     assert.strictEqual(depoisDoSegundo, 1, 'o segundo post logo em seguida é barrado pelo intervalo');
   });
 
+  await test('limite de times na Comunidade: 2 pra todos, 5 pra quem apoiou com R$ 10+ (soma só apoio ativo vinculado ao login); tier list não entra nessa conta', async () => {
+    runIn(sandbox, `
+      window.__ins = [];
+      window.__sb = { client: { from: () => ({ insert: (row) => { window.__ins.push(row); return Promise.resolve({ error: null }); },
+        select: () => ({ order: () => ({ limit: () => Promise.resolve({ error: null, data: [] }) }), eq: () => Promise.resolve({ error: null, data: [] }) }) }) } };
+      supabaseAvailable = true;
+      window.__bk3 = [state.team, state.communityPosts, state.communityCompose, state.discordUser, state.donors, state.myProfile, state.tierList];
+      state.myProfile = null;
+      state.team = [state.characters[0].id, state.characters[1].id, null, null, null, null];
+      state.discordUser = { id: 'uid-L', username: 'Lim' };
+      const mk = (id, kind) => ({ id, userId: 'uid-L', kind, title: 'T', desc: '', author: 'A', createdAt: '', data: {}, likes: 0, reports: 0 });
+      state.communityPosts = [mk('a', 'team'), mk('b', 'team'), mk('c', 'tierlist')];
+      state.donors = [];
+    `);
+    const sem = evalIn(sandbox, '[communityTeamLimit(), communityMyTeamCount()]');
+    runIn(sandbox, "localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'team', title: 'Terceiro time', desc: '' }; publishCommunityPost();");
+    await new Promise(res => setTimeout(res, 30));
+    const bloqueado = evalIn(sandbox, 'window.__ins.length');
+    runIn(sandbox, "state.donors = [{ id: 'd1', number: 1, name: 'Lim', amount: 9.99, honras: [], active: true, linkedUserId: 'uid-L' }];");
+    const quaseDez = evalIn(sandbox, 'communityTeamLimit()');
+    runIn(sandbox, "state.donors = [{ id: 'd1', number: 1, name: 'Lim', amount: 10, honras: [], active: false, linkedUserId: 'uid-L' }];");
+    const inativo = evalIn(sandbox, 'communityTeamLimit()');
+    runIn(sandbox, "state.donors = [{ id: 'd1', number: 1, name: 'Lim', amount: 6, honras: [], active: true, linkedUserId: 'uid-L' }, { id: 'd2', number: 2, name: 'Lim', amount: 4, honras: [], active: true, linkedUserId: 'uid-L' }, { id: 'd3', number: 3, name: 'Outro', amount: 500, honras: [], active: true, linkedUserId: 'outro' }];");
+    const somado = evalIn(sandbox, 'communityTeamLimit()');
+    runIn(sandbox, "localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'team', title: 'Terceiro time', desc: '' }; publishCommunityPost();");
+    await new Promise(res => setTimeout(res, 40));
+    const apoiadorPublica = evalIn(sandbox, 'window.__ins.length');
+    runIn(sandbox, "state.donors = []; localStorage.removeItem('kiai_community_last'); state.communityCompose = { kind: 'tierlist', title: 'Minha tier', desc: '' }; state.tierList = { tiers: [{ id:'t1', label:'S', color:'#d65a44', items: [state.characters[0].id, state.characters[1].id, state.characters[2].id] }], unranked: [] }; publishCommunityPost();");
+    await new Promise(res => setTimeout(res, 40));
+    const tierLivre = evalIn(sandbox, 'window.__ins.length');
+    const composeHtml = evalIn(sandbox, "(() => { const mk = (id) => ({ id, userId: 'uid-L', kind: 'team', title: 'T', desc: '', author: 'A', createdAt: '', data: {}, likes: 0, reports: 0 }); state.communityPosts = [mk('a'), mk('b')]; state.donors = []; state.communityCompose = { kind: 'team', title: '', desc: '' }; const h = renderCommunityCompose(); state.communityCompose = null; return h; })()");
+    runIn(sandbox, `
+      state.team = window.__bk3[0]; state.communityPosts = window.__bk3[1]; state.communityCompose = window.__bk3[2]; state.discordUser = window.__bk3[3]; state.donors = window.__bk3[4]; state.myProfile = window.__bk3[5]; state.tierList = window.__bk3[6];
+      supabaseAvailable = false; window.__sb = undefined; window.__ins = undefined; window.__bk3 = undefined;
+      localStorage.removeItem('kiai_community_last');
+    `);
+    assert.deepStrictEqual(sem, [2, 2], 'sem apoio: limite 2 (tier list não conta nos times)');
+    assert.strictEqual(bloqueado, 0, 'com 2 times já publicados, o terceiro é barrado');
+    assert.strictEqual(quaseDez, 2, 'R$ 9,99 ainda não libera');
+    assert.strictEqual(inativo, 2, 'apoio inativo (removido do mural) não conta');
+    assert.strictEqual(somado, 5, 'R$ 6 + R$ 4 do mesmo login somam 10 e liberam 5; apoio de outra pessoa não conta');
+    assert.strictEqual(apoiadorPublica, 1, 'apoiador com 2 times publica o terceiro');
+    assert.strictEqual(tierLivre, 2, 'tier list continua livre mesmo com o limite de times cheio');
+    assert.ok(composeHtml.includes('2/2') && composeHtml.includes('disabled'), 'formulário mostra 2/2 e trava o botão');
+  });
+
   await test('curtir: atualiza na hora, grava no banco, desfaz se o banco recusar e exige login', async () => {
     runIn(sandbox, `
       window.__likeCalls = []; window.__failLikes = false;

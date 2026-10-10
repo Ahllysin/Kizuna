@@ -818,6 +818,9 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-com-reports{font-size:12px;font-weight:800;color:#f0a05f;}
 .kz-com-compose{display:flex;flex-direction:column;gap:14px;padding:18px 20px;}
 .kz-com-compose-kinds{display:flex;gap:8px;flex-wrap:wrap;}
+.kz-com-quota{font-size:13px;color:#cfc8b8;padding:8px 12px;border-radius:10px;border:1px dashed rgba(255,255,255,.25);}
+.kz-com-quota b{color:#ffd66b;}
+.kz-com-quota.full{border-color:rgba(240,160,95,.7);color:#f0a05f;}
 .kz-com-compose-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 @media (max-width:520px){.kz-com-grid{grid-template-columns:1fr;}.kz-com-team{grid-template-columns:repeat(3,minmax(0,1fr));}}
 .kz-patente-note{font-size:11.5px;color:var(--text-dim);font-style:italic;}
@@ -1210,8 +1213,14 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
               alter table public.community_likes enable row level security;
               alter table public.community_reports enable row level security;
               create policy "todos leem os posts" on public.community_posts for select using (true);
-              create policy "logado posta (ate 30)" on public.community_posts for insert
-                with check (auth.uid() = user_id and (select count(*) from public.community_posts p where p.user_id = auth.uid()) < 30);
+              /* limite: 30 posts no total; times publicados ao mesmo tempo: 2 (ou 5 pra quem apoiou com R$ 10+ vinculado ao login) */
+              create policy "logado posta (limites)" on public.community_posts for insert
+                with check (
+                  auth.uid() = user_id
+                  and (select count(*) from public.community_posts p where p.user_id = auth.uid()) < 30
+                  and (kind <> 'team' or (select count(*) from public.community_posts p where p.user_id = auth.uid() and p.kind = 'team')
+                       < case when coalesce((select sum(d.amount) from public.donations d where d.user_id = auth.uid() and d.active), 0) >= 10 then 5 else 2 end)
+                );
               create policy "apaga o proprio ou admin" on public.community_posts for delete
                 using (auth.uid() = user_id or auth.uid() = 'SEU-UID-AQUI'::uuid);
               create policy "todos leem as curtidas" on public.community_likes for select using (true);
@@ -6323,7 +6332,26 @@ function applyAutoOption(i){
 // Qualquer um vê; pra publicar, curtir ou denunciar precisa estar logado com Discord. Tudo mora no Supabase
 // (tabelas community_posts / community_likes / community_reports — SQL no comentário de instalação lá em cima).
 // O que vem do banco é tratado como NÃO confiável: passa por sanitizeCommunityData e sempre sai com escapeHtml.
-const COMMUNITY = { title: 60, desc: 300, maxPostsPerUser: 30, cooldownMs: 60000, fetchLimit: 80, minTeam: 2, minTierItems: 3 };
+const COMMUNITY = { title: 60, desc: 300, maxPostsPerUser: 30, cooldownMs: 60000, fetchLimit: 80, minTeam: 2, minTierItems: 3,
+  teamLimit: 2, teamLimitSupporter: 5, supporterMin: 10 };
+// Times publicados ao mesmo tempo: 2 pra todo mundo; quem apoiou com R$ 10+ (acumulado, apoio vinculado ao login) tem 5.
+// A regra de verdade mora no banco (policy do SQL); aqui é só pra avisar a pessoa antes de tentar.
+function communityTeamLimit(){
+  const me = state.discordUser && state.discordUser.id;
+  if(!me) return COMMUNITY.teamLimit;
+  const total = (state.donors || []).filter(d => d.linkedUserId === me && d.active !== false).reduce((n, d) => n + (Number(d.amount) || 0), 0);
+  return total >= COMMUNITY.supporterMin ? COMMUNITY.teamLimitSupporter : COMMUNITY.teamLimit;
+}
+function communityMyTeamCount(){
+  const me = state.discordUser && state.discordUser.id;
+  return me ? (state.communityPosts || []).filter(p => p.userId === me && p.kind === 'team').length : 0;
+}
+function communityTeamLimitMsg(){
+  const lim = communityTeamLimit();
+  return lim < COMMUNITY.teamLimitSupporter
+    ? `Você já tem ${lim} times publicados (o limite é ${lim}). Exclua um pra publicar outro — ou apoie o site com R$ ${COMMUNITY.supporterMin} ou mais pra liberar até ${COMMUNITY.teamLimitSupporter}.`
+    : `Você já tem ${lim} times publicados (o limite de apoiador). Exclua um pra publicar outro.`;
+}
 
 function communityIdOk(id){ return typeof id === 'string' && /^[\w.:\-]{1,64}$/.test(id); }
 function sanitizeCommunityData(kind, data){
@@ -6497,6 +6525,8 @@ function renderCommunityCompose(){
   const c = state.communityCompose;
   if(!c) return '';
   const data = communityShareData(c.kind);
+  const lim = communityTeamLimit(), used = communityMyTeamCount();
+  const teamFull = c.kind === 'team' && used >= lim;
   let preview;
   if(!data){
     preview = `<div class="kz-muted">${c.kind === 'team' ? `Coloque pelo menos ${COMMUNITY.minTeam} guerreiros em campo na aba Combos pra compartilhar a equipe.` : `Classifique pelo menos ${COMMUNITY.minTierItems} guerreiros na aba Tier List pra compartilhar.`}</div>`;
@@ -6514,9 +6544,10 @@ function renderCommunityCompose(){
       <input type="text" id="comTitleInput" maxlength="${COMMUNITY.title}" value="${escapeAttr(c.title)}" placeholder="Ex.: Time de combos pra arena"></div>
     <div><label class="field-label">Descrição (<span id="comDescCount">${c.desc.length}</span>/${COMMUNITY.desc})</label>
       <textarea id="comDescInput" maxlength="${COMMUNITY.desc}" rows="3" placeholder="Como usar, estratégia, por que montou assim… (opcional)">${escapeHtml(c.desc)}</textarea></div>
+    ${c.kind === 'team' ? `<div class="kz-com-quota${teamFull ? ' full' : ''}">Seus times publicados: <b>${used}/${lim}</b>${lim < COMMUNITY.teamLimitSupporter ? ` — apoie o site com R$ ${COMMUNITY.supporterMin} ou mais pra liberar até ${COMMUNITY.teamLimitSupporter}.` : ' (limite de apoiador).'}${teamFull ? ' Exclua um pra publicar outro.' : ''}</div>` : ''}
     <div><span class="kz-label">Prévia do que será publicado</span>${preview}</div>
     <div class="kz-com-compose-actions">
-      <button type="button" class="kz-btn kz-btn-primary" id="comPublishBtn" ${data ? '' : 'disabled'}>Publicar</button>
+      <button type="button" class="kz-btn kz-btn-primary" id="comPublishBtn" ${data && !teamFull ? '' : 'disabled'}>Publicar</button>
       <button type="button" class="kz-btn" id="comCancelBtn">Cancelar</button>
       <span class="kz-muted" style="font-size:12px;">Seu nome aparece como "${escapeHtml(communityAuthorName())}". Seja respeitoso — posts podem ser denunciados e removidos.</span>
     </div>
@@ -6571,6 +6602,7 @@ async function publishCommunityPost(){
   let last = 0;
   try{ last = Number(localStorage.getItem('kiai_community_last')) || 0; }catch(e){}
   if(Date.now() - last < COMMUNITY.cooldownMs){ showToast('Calma! Espere um minutinho antes de publicar de novo.'); return; }
+  if(c.kind === 'team' && communityMyTeamCount() >= communityTeamLimit()){ showToast(communityTeamLimitMsg()); return; }
   if((state.communityPosts || []).filter(p => p.userId === state.discordUser.id).length >= COMMUNITY.maxPostsPerUser){
     showToast('Você chegou no limite de ' + COMMUNITY.maxPostsPerUser + ' posts. Exclua algum pra publicar outro.'); return;
   }
@@ -6588,7 +6620,8 @@ async function publishCommunityPost(){
     await refreshCommunity();
   }catch(e){
     console.error('Não consegui publicar', e);
-    showToast('Não consegui publicar agora. Tente de novo em instantes.');
+    // 42501 = o banco recusou pela regra de limite (ex.: lista local desatualizada)
+    showToast(e && e.code === '42501' ? (c.kind === 'team' ? communityTeamLimitMsg() : 'Você chegou no limite de posts. Exclua algum pra publicar outro.') : 'Não consegui publicar agora. Tente de novo em instantes.');
   }
 }
 async function toggleCommunityLike(id){
@@ -7843,6 +7876,7 @@ function renderDoarTab(){
         <a class="kz-donate-cta" href="${LIVEPIX_DONATE_URL}" target="_blank" rel="noopener noreferrer">
           <span>気</span><span>Doar agora</span>
         </a>
+        <div class="kz-donate-note"><b>Bônus de apoiador:</b> quem apoia com R$ 10 ou mais pode manter até 5 times publicados na Comunidade ao mesmo tempo (o padrão são 2).</div>
         <div class="kz-donate-note">Escaneie o QR Code com o app do seu banco (Pix) ou clique em "Doar agora" pra pagar direto pelo link. O valor exato nunca aparece publicamente — só a Patente.</div>
         ${renderDiscordLoginNote()}
       </div>
