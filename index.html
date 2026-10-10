@@ -592,7 +592,22 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-comp-bal b{color:#ffd66b;}
 .kz-rec-roles{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 .kz-fill-tag{padding:2px 9px;border-radius:999px;background:rgba(63,174,90,.18);border:1px solid rgba(63,174,90,.55);color:#86e3a2;font-size:11px;font-weight:800;}
-.kz-auto{margin:0;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(255,170,70,.4);background:rgba(16,14,26,.8);}
+.kz-auto{margin:10px 0 0;}
+.kz-auto-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12.5px;color:#cfc8b8;}
+.kz-auto-bar label{display:inline-flex;align-items:center;gap:6px;}
+.kz-auto-lbl{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);cursor:help;}
+.kz-select-sm{width:auto;padding:4px 26px 4px 8px;font-size:12.5px;border-radius:8px;}
+.kz-auto-rows{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.kz-auto-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(8,7,14,.6);}
+.kz-auto-row.top{border-color:rgba(255,200,90,.7);}
+.kz-auto-row-team{display:flex;gap:4px;}
+.kz-auto-mini{display:block;width:30px;aspect-ratio:3/4;border-radius:5px;overflow:hidden;border:1.5px solid transparent;flex:none;background:#1a1426;}
+.kz-auto-mini > *{width:100%;height:100%;}
+.kz-auto-mini.core{border-color:#ffd66b;}
+.kz-auto-mini.empty{border:1px dashed rgba(255,255,255,.2);}
+.kz-auto-row-info{flex:1;min-width:200px;display:flex;flex-direction:column;gap:1px;font-size:12px;color:#cfc8b8;}
+.kz-auto-row-info b{color:#ffd66b;}
+.kz-auto-row-info .warn{color:#f0a05f;font-weight:700;}
 .kz-auto-head{display:flex;flex-direction:column;gap:10px;margin-bottom:10px;}
 .kz-auto-head h3{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:26px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;}
 .kz-auto-ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
@@ -6305,58 +6320,43 @@ function buildTeamOptions(mode, rarity, maxOptions){
   });
   return out.sort((a, b) => b.score - a.score);
 }
-function renderAutoPanel(){
+// Linha de ajustes da montagem automática (pequena) + as sugestões geradas, em linhas compactas.
+function renderAutoBar(){
   const filled = state.team.filter(Boolean).length;
-  const full = filled === 6, empty = filled === 0;
+  if(!filled) return '';
   const mode = state.autoMode || 'equilibrado';
   const rar = state.recRarity || 'all';
   const opts = (state.autoOpts && state.autoOpts.base === JSON.stringify(state.team)) ? state.autoOpts.list : null;
-  const chips = Object.entries(AUTO_MODES).map(([k, m]) => `<button type="button" class="kz-fchip ${mode === k ? 'active' : ''}" data-auto-mode="${k}" title="${escapeAttr(m.hint)}">${m.label}</button>`).join('');
-  const rchips = [['all', 'Todas'], ['SSR', 'Só SSR'], ['SR', 'Só SR'], ['R', 'Só R']].map(([v, l]) => `<button type="button" class="kz-fchip ${rar === v ? 'active' : ''}" data-rec-rarity="${v}">${l}</button>`).join('');
-  let body = '';
-  if(full){
-    body = `<div class="kz-muted">A equipe já está completa. Tire alguém (ou use "Limpar") pra eu montar de novo a partir dos guerreiros que ficarem.</div>`;
-  } else if(opts){
-    body = opts.length ? `<div class="kz-auto-opts">${opts.map((o, i) => renderAutoOption(o, i)).join('')}</div>` : `<div class="kz-muted">Não encontrei guerreiros que completem essa equipe com esse filtro de raridade.</div>`;
-  } else {
-    body = `<div class="kz-muted">Escolha de 1 a 3 guerreiros (ou mais) nas casas e eu completo o resto, analisando o que cada um persegue e causa e o papel de cada um (dano, tank, suporte, controle…).</div>`;
+  const modeOpts = Object.entries(AUTO_MODES).map(([k, m]) => `<option value="${k}" ${mode === k ? 'selected' : ''}>${m.label}</option>`).join('');
+  const rarOpts = [['all', 'Todas'], ['SSR', 'Só SSR'], ['SR', 'Só SR'], ['R', 'Só R']].map(([v, l]) => `<option value="${v}" ${rar === v ? 'selected' : ''}>${l}</option>`).join('');
+  let rows = '';
+  if(opts){
+    rows = opts.length
+      ? `<div class="kz-auto-rows">${opts.map((o, i) => renderAutoOptionRow(o, i)).join('')}</div>`
+      : `<div class="kz-muted" style="font-size:12.5px;">Não encontrei guerreiros que completem essa equipe com esse filtro de raridade.</div>`;
   }
-  return `<div class="kz-panel kz-auto">
-    <div class="kz-auto-head"><h3>Montar equipe</h3>
-      <div class="kz-auto-ctrls">
-        <span class="kz-label">Foco</span>${chips}
-        <span class="kz-label" style="margin-left:6px;">Novos guerreiros</span>${rchips}
-      </div>
-      <div class="kz-auto-actions">
-        <button type="button" class="kz-btn kz-btn-primary" id="autoBuildBtn" ${full || empty ? 'disabled' : ''} title="${empty ? 'Coloque ao menos 1 guerreiro em campo' : 'Completa a equipe a partir dos guerreiros em campo'}">⚡ ${opts ? 'Gerar de novo' : 'Completar equipe'}</button>
-        <button type="button" class="kz-btn kz-opt-btn" id="optimizeBtn" ${filled < 2 ? 'disabled' : ''} title="${filled < 2 ? 'Coloque ao menos 2 guerreiros em campo' : 'Reorganiza os guerreiros em campo pra render a maior quantidade de combos'}">✦ Gerar melhor ordem</button>
-        ${canUndoOptimize() ? `<button type="button" class="kz-btn" id="undoOptBtn" title="Voltar à ordem anterior">↶ Desfazer ordem</button>` : ''}
-        <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filled}/6</span></button>
-      </div>
+  return `<div class="kz-auto">
+    <div class="kz-auto-bar">
+      <span class="kz-auto-lbl" title="Escolha de 1 a 3 guerreiros nas casas e clique em Completar equipe: eu preencho o resto olhando o que cada um persegue e causa e o papel de cada um.">Montagem automática</span>
+      <label>Foco <select class="kz-select-sm" id="autoModeSelect" title="${escapeAttr(AUTO_MODES[mode].hint)}">${modeOpts}</select></label>
+      <label>Novos guerreiros <select class="kz-select-sm" id="autoRarSelect">${rarOpts}</select></label>
+      ${opts ? '<button type="button" class="kz-com-link" id="autoCloseBtn">Fechar sugestões</button>' : ''}
     </div>
-    ${body}
+    ${rows}
   </div>`;
 }
-function renderAutoOption(o, i){
-  const filled = o.team.filter(Boolean);
+function renderAutoOptionRow(o, i){
   const comboMax = comboMaxFor(o.team).max;
   const core = new Set((state.autoOpts && state.autoOpts.core) || []);
-  const members = o.team.map((id, slot) => {
-    if(!id) return '';
-    const c = getChar(id);
-    return `<div class="kz-auto-mem ${core.has(id) ? 'core' : ''}" title="${escapeAttr(c.name)} — Casa ${slot + 1}">
-      <div class="kz-auto-art">${portraitInner(c)}</div>
-      <div class="kz-auto-nm">${escapeHtml(c.name)}</div>
-      <div class="kz-auto-roles">${rolePillsHtml(c, 2, true)}</div>
-    </div>`;
+  const minis = o.team.map((id, slot) => {
+    const c = id && getChar(id);
+    return c ? `<span class="kz-auto-mini${core.has(id) ? ' core' : ''}" title="${escapeAttr('Casa ' + (slot + 1) + ' — ' + c.name)}">${portraitInner(c)}</span>` : '<span class="kz-auto-mini empty"></span>';
   }).join('');
-  const chipsP = PILLAR_ORDER.map(k => `<span class="kz-comp-chip${o.missing.includes(k) ? ' miss' : ''}"><b>${(Math.round(o.pillars[k] * 10) / 10).toString().replace('.', ',')}</b> ${PILLARS[k].label}</span>`).join('');
-  return `<div class="kz-auto-opt ${i === 0 ? 'top' : ''}">
-    <div class="kz-auto-opt-head"><b>${i === 0 ? 'Melhor opção' : 'Opção ' + (i + 1)}</b>
-      <span class="kz-auto-stat"><b>${o.combos}</b>/${comboMax} combos · maior cadeia <b>${o.longest + 1}</b> hits · equilíbrio <b>${Math.round(o.balance * 100)}%</b></span></div>
-    <div class="kz-auto-team">${members}</div>
-    <div class="kz-auto-foot"><div class="kz-auto-pill">${chipsP}${o.missing.length ? `<span class="kz-comp-note warn">Falta: ${o.missing.map(k => PILLARS[k].label).join(', ')}</span>` : ''}</div>
-      <button type="button" class="kz-btn kz-btn-sm kz-btn-primary" data-auto-apply="${i}">Usar esta equipe</button></div>
+  return `<div class="kz-auto-row${i === 0 ? ' top' : ''}">
+    <div class="kz-auto-row-team">${minis}</div>
+    <div class="kz-auto-row-info"><b>${i === 0 ? 'Melhor opção' : 'Opção ' + (i + 1)}</b>
+      <span><b>${o.combos}</b>/${comboMax} combos · cadeia <b>${o.longest + 1}</b> · equilíbrio <b>${Math.round(o.balance * 100)}%</b>${o.missing.length ? ` · <span class="warn">falta ${o.missing.map(k => PILLARS[k].label).join(', ')}</span>` : ''}</span></div>
+    <button type="button" class="kz-btn kz-btn-sm kz-btn-primary" data-auto-apply="${i}">Usar</button>
   </div>`;
 }
 function runAutoBuild(){
@@ -7116,7 +7116,6 @@ function renderCombosTab(){
       <span class="kz-label">Formações salvas</span>
       ${state.formations.map((f,i)=>`<span class="kz-formation-pill"><button class="load" data-load-formation="${i}">${escapeHtml(f.name)}</button><button class="del" data-del-formation="${i}" title="Excluir">✕</button></span>`).join('')}
     </div>` : ''}
-    ${renderAutoPanel()}
     <div class="kz-combos-layout">
       <aside class="kz-panel kz-roster">
         <div class="kz-roster-head"><span class="kz-label">Elenco</span><span class="kz-roster-hint">${hint}</span></div>
@@ -7128,7 +7127,14 @@ function renderCombosTab(){
         <div class="kz-field">
           <div class="kz-field-head">
             <span class="kz-label">Equipe</span>
+            <div class="kz-field-actions">
+              <button type="button" class="kz-btn kz-btn-primary" id="autoBuildBtn" ${filledCount === 0 || filledCount === 6 ? 'disabled' : ''} title="${filledCount === 0 ? 'Coloque ao menos 1 guerreiro em campo' : filledCount === 6 ? 'A equipe já está completa' : 'Completa a equipe a partir dos guerreiros em campo, olhando combos e papéis'}">⚡ ${state.autoOpts && state.autoOpts.base === JSON.stringify(state.team) ? 'Gerar de novo' : 'Completar equipe'}</button>
+              <button type="button" class="kz-btn kz-opt-btn" id="optimizeBtn" ${filledCount<2?'disabled':''} title="${filledCount<2?'Coloque ao menos 2 guerreiros em campo':'Reorganiza os guerreiros em campo pra render a maior quantidade de combos'}">✦ Gerar melhor ordem</button>
+              ${canUndoOptimize() ? `<button type="button" class="kz-btn" id="undoOptBtn" title="Voltar à ordem anterior">↶ Desfazer ordem</button>` : ''}
+              <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
+            </div>
           </div>
+          ${renderAutoBar()}
           ${comboCountHtml()}
           ${compositionHtml()}
           ${state.optInfo && canUndoOptimize() ? `<div class="kz-opt-info">${state.optInfo}</div>` : ''}
@@ -7515,7 +7521,12 @@ function attachCombosHandlers(){
   }));
   const openSim = document.getElementById('openSimBtn');
   if(openSim) openSim.addEventListener('click', openSimModal);
-  view.querySelectorAll('[data-auto-mode]').forEach(b=>b.addEventListener('click', ()=>{ state.autoMode = b.dataset.autoMode; state.autoOpts = null; render(); }));
+  const autoMode = document.getElementById('autoModeSelect');
+  if(autoMode) autoMode.addEventListener('change', ()=>{ state.autoMode = autoMode.value; state.autoOpts = null; render(); });
+  const autoRar = document.getElementById('autoRarSelect');
+  if(autoRar) autoRar.addEventListener('change', ()=>{ state.recRarity = autoRar.value; state.autoOpts = null; render(); });
+  const autoClose = document.getElementById('autoCloseBtn');
+  if(autoClose) autoClose.addEventListener('click', ()=>{ state.autoOpts = null; render(); });
   const autoBtn = document.getElementById('autoBuildBtn');
   if(autoBtn) autoBtn.addEventListener('click', runAutoBuild);
   view.querySelectorAll('[data-auto-apply]').forEach(b=>b.addEventListener('click', ()=> applyAutoOption(parseInt(b.dataset.autoApply, 10))));
