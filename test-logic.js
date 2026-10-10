@@ -741,6 +741,185 @@ async function main(){
     assert.ok(!r.simple.includes('kz-profile-quote'), 'sem citação não deveria renderizar o bloco de citação');
   });
 
+  console.log('\n[Comunidade: times e tier lists compartilhados]');
+
+  await test('sanitizeCommunityData: aceita o formato certo e descarta lixo/injeção vindos do banco', () => {
+    const r = evalIn(sandbox, `(() => ({
+      time: sanitizeCommunityData('team', { team: ['c_a', null, 'c_b'] }),
+      timeSujo: sanitizeCommunityData('team', { team: ['<img src=x onerror=alert(1)>', 'c_ok', 7, 'a'.repeat(200)] }),
+      timeVazio: sanitizeCommunityData('team', { team: [null, null] }),
+      timeErrado: sanitizeCommunityData('team', { team: 'c_a' }),
+      tipoDesconhecido: sanitizeCommunityData('outro', { team: ['c_a'] }),
+      tier: sanitizeCommunityData('tierlist', { tiers: [
+        { label: 'S'.repeat(40), color: 'red;background:url(x)', items: ['c_a', '<b>', 'c_b'] },
+        { label: 'Vazio', color: '#112233', items: [] },
+        { label: 'A', color: '#AABBCC', items: ['c_c'] },
+      ] }),
+      tierSemNada: sanitizeCommunityData('tierlist', { tiers: [{ label: 'S', color: '#112233', items: [] }] }),
+      tierMuitos: sanitizeCommunityData('tierlist', { tiers: Array.from({length: 30}, (_, i) => ({ label: 'T' + i, color: '#112233', items: ['c_a'] })) }),
+    }))()`);
+    assert.deepStrictEqual(r.time.team, ['c_a', null, 'c_b', null, null, null]);
+    assert.deepStrictEqual(r.timeSujo.team, [null, 'c_ok', null, null, null, null], 'ids com HTML, números e textos gigantes viram vazio');
+    assert.strictEqual(r.timeVazio, null);
+    assert.strictEqual(r.timeErrado, null);
+    assert.strictEqual(r.tipoDesconhecido, null);
+    assert.strictEqual(r.tier.tiers.length, 2, 'rank sem ninguém é descartado');
+    assert.strictEqual(r.tier.tiers[0].label.length, 16, 'nome do rank é cortado');
+    assert.strictEqual(r.tier.tiers[0].color, '#5b7fa6', 'cor que não é #rrggbb vira a padrão (nada vira CSS solto)');
+    assert.deepStrictEqual(r.tier.tiers[0].items, ['c_a', 'c_b']);
+    assert.strictEqual(r.tierSemNada, null);
+    assert.strictEqual(r.tierMuitos.tiers.length, 10, 'no máximo 10 ranks');
+  });
+
+  await test('communityShareData: time precisa de 2+ guerreiros e tier list de 3+ classificados', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = [state.team, state.tierList];
+      const ids = state.characters.slice(0, 5).map(c => c.id);
+      state.team = [ids[0], null, null, null, null, null];
+      const um = communityShareData('team');
+      state.team = [ids[0], ids[1], null, null, null, null];
+      const dois = communityShareData('team');
+      state.tierList = { tiers: [{ id:'t1', label:'S', color:'#d65a44', items:[ids[0], ids[1]] }], unranked: [] };
+      const doisTier = communityShareData('tierlist');
+      state.tierList = { tiers: [{ id:'t1', label:'S', color:'#d65a44', items:[ids[0], ids[1]] }, { id:'t2', label:'A', color:'#c9a24b', items:[ids[2], 'id-que-nao-existe'] }], unranked: [] };
+      const tres = communityShareData('tierlist');
+      state.team = bk[0]; state.tierList = bk[1];
+      return { um, dois, doisTier, tres: tres && tres.tiers.map(x => x.items.length) };
+    })()`);
+    assert.strictEqual(r.um, null);
+    assert.ok(r.dois && r.dois.team.filter(Boolean).length === 2);
+    assert.strictEqual(r.doisTier, null);
+    assert.deepStrictEqual(r.tres, [2, 1], 'ids inexistentes não são publicados');
+  });
+
+  await test('aba Comunidade: sem Supabase explica; com posts escapa HTML, filtra, ordena por curtidas e busca por guerreiro', () => {
+    const r = evalIn(sandbox, `(() => {
+      const semBanco = renderComunidadeTab();
+      supabaseAvailable = true;
+      window.__sb = { client: {} };
+      const bk = [state.communityPosts, state.communityLoaded];
+      const a = state.characters[0], b = state.characters[1];
+      const mkRow = (id, kind, title, likes, when, data, author) => ({ id, user_id:'u-' + id, kind, title, description:'desc ' + id, data, author_name: author || 'Autor ' + id, created_at: when, community_likes:[{count:likes}], community_reports:[{count:0}] });
+      state.communityPosts = [
+        mkRow('1', 'team', 'Time <script>alert(1)</script> forte', 2, '2026-01-01T00:00:00Z', { team:[a.id, b.id, null, null, null, null] }, '<img src=x onerror=alert(2)>'),
+        mkRow('2', 'tierlist', 'Minha tier', 9, '2026-01-02T00:00:00Z', { tiers:[{ label:'S', color:'#112233', items:[a.id] }] }),
+        mkRow('3', 'team', 'Outro time', 5, '2026-01-03T00:00:00Z', { team:[b.id, null, null, null, null, null] }),
+        { id:'x', kind:'team', title:'lixo', data:{ team: 'nao-e-lista' } },
+      ].map(communityPostFromRow).filter(Boolean);
+      state.communityLoaded = true;
+      state.communityFilter = 'all'; state.communitySort = 'recent'; state.communitySearch = '';
+      const html = renderComunidadeTab();
+      const ordemRecente = communityVisiblePosts().map(p => p.id).join(',');
+      state.communitySort = 'likes';
+      const ordemLikes = communityVisiblePosts().map(p => p.id).join(',');
+      state.communitySort = 'recent'; state.communityFilter = 'team';
+      const soTimes = communityVisiblePosts().map(p => p.id).join(',');
+      state.communityFilter = 'all'; state.communitySearch = b.name.toLowerCase();
+      const porNome = communityVisiblePosts().map(p => p.id).sort().join(',');
+      state.communitySearch = 'zzzz-nada';
+      const nada = renderCommunityList();
+      state.communitySearch = ''; state.communityPosts = bk[0]; state.communityLoaded = bk[1];
+      supabaseAvailable = false; window.__sb = undefined;
+      return { semBanco, html, ordemRecente, ordemLikes, soTimes, porNome, nada, total: 3 };
+    })()`);
+    assert.ok(r.semBanco.includes('precisa da conta online'));
+    assert.ok(!r.html.includes('<script>alert(1)</script>') && r.html.includes('&lt;script&gt;'), 'título com HTML sai escapado');
+    assert.ok(!r.html.includes('<img src=x onerror=alert(2)>'), 'nome do autor com HTML sai escapado');
+    assert.ok(!r.html.includes('lixo'), 'post com dados inválidos nem aparece');
+    assert.strictEqual(r.ordemRecente, '3,2,1');
+    assert.strictEqual(r.ordemLikes, '2,3,1');
+    assert.strictEqual(r.soTimes, '3,1');
+    assert.ok(r.porNome.includes('1') && r.porNome.includes('3') && !r.porNome.includes('2'), 'busca pelo nome de um guerreiro do time (' + r.porNome + ')');
+    assert.ok(r.nada.includes('Nada encontrado'));
+  });
+
+  await test('publicar na Comunidade: exige login, título e conteúdo; manda a linha certa; respeita o intervalo entre posts', async () => {
+    runIn(sandbox, `
+      window.__inserts = [];
+      window.__sb = { client: { from: (table) => ({
+        insert: (row) => { window.__inserts.push({ table, row }); return Promise.resolve({ error: null }); },
+        select: () => ({ order: () => ({ limit: () => Promise.resolve({ error: null, data: [] }) }), eq: () => Promise.resolve({ error: null, data: [] }) }),
+      }) } };
+      supabaseAvailable = true;
+      localStorage.removeItem('kiai_community_last');
+      window.__bk = [state.team, state.communityCompose, state.discordUser, state.myProfile];
+      state.team = [state.characters[0].id, state.characters[1].id, null, null, null, null];
+      state.myProfile = { nickname: 'Apelido', public: true };
+      state.discordUser = null;
+      state.communityCompose = { kind: 'team', title: 'Meu time', desc: '  descrição  ' };
+    `);
+    runIn(sandbox, 'publishCommunityPost()');
+    await new Promise(res => setTimeout(res, 20));
+    const semLogin = evalIn(sandbox, 'window.__inserts.length');
+    runIn(sandbox, "state.discordUser = { id: 'uid-1', username: 'Fulano' }; state.communityCompose.title = 'ab'; publishCommunityPost();");
+    await new Promise(res => setTimeout(res, 20));
+    const tituloCurto = evalIn(sandbox, 'window.__inserts.length');
+    runIn(sandbox, "state.communityCompose.title = 'Meu time'; publishCommunityPost();");
+    await new Promise(res => setTimeout(res, 40));
+    const row = evalIn(sandbox, 'window.__inserts[0] && window.__inserts[0].row');
+    const table = evalIn(sandbox, 'window.__inserts[0] && window.__inserts[0].table');
+    runIn(sandbox, "state.communityCompose = { kind: 'team', title: 'Segundo post', desc: '' }; publishCommunityPost();");
+    await new Promise(res => setTimeout(res, 40));
+    const depoisDoSegundo = evalIn(sandbox, 'window.__inserts.length');
+    runIn(sandbox, `
+      state.team = window.__bk[0]; state.communityCompose = window.__bk[1]; state.discordUser = window.__bk[2]; state.myProfile = window.__bk[3];
+      supabaseAvailable = false; window.__sb = undefined; window.__inserts = undefined; window.__bk = undefined;
+      localStorage.removeItem('kiai_community_last');
+    `);
+    assert.strictEqual(semLogin, 0, 'sem login não publica');
+    assert.strictEqual(tituloCurto, 0, 'título curto não publica');
+    assert.strictEqual(table, 'community_posts');
+    assert.strictEqual(row.user_id, 'uid-1');
+    assert.strictEqual(row.kind, 'team');
+    assert.strictEqual(row.title, 'Meu time');
+    assert.strictEqual(row.description, 'descrição', 'descrição sai sem espaços sobrando');
+    assert.strictEqual(row.author_name, 'Apelido', 'perfil público: usa o apelido');
+    assert.ok(row.data.team.filter(Boolean).length === 2);
+    assert.strictEqual(depoisDoSegundo, 1, 'o segundo post logo em seguida é barrado pelo intervalo');
+  });
+
+  await test('curtir: atualiza na hora, grava no banco, desfaz se o banco recusar e exige login', async () => {
+    runIn(sandbox, `
+      window.__likeCalls = []; window.__failLikes = false;
+      window.__sb = { client: { from: (table) => ({
+        insert: (row) => { window.__likeCalls.push(['insert', table, row]); return Promise.resolve({ error: window.__failLikes ? { message: 'boom' } : null }); },
+        delete: () => ({ eq: () => ({ eq: () => { window.__likeCalls.push(['delete', table]); return Promise.resolve({ error: null }); } }) }),
+      }) } };
+      supabaseAvailable = true;
+      window.__bk2 = [state.communityPosts, state.communityMyLikes, state.discordUser];
+      state.communityPosts = [{ id: 'p1', userId: 'u2', kind: 'team', title: 'T', desc: '', author: 'A', createdAt: '', data: { team: [null,null,null,null,null,null] }, likes: 3, reports: 0 }];
+      state.communityMyLikes = [];
+      state.discordUser = null;
+    `);
+    runIn(sandbox, "toggleCommunityLike('p1')");
+    await new Promise(res => setTimeout(res, 20));
+    const semLogin = evalIn(sandbox, 'state.communityPosts[0].likes');
+    runIn(sandbox, "state.discordUser = { id: 'uid-9', username: 'X' }; toggleCommunityLike('p1')");
+    const otimista = evalIn(sandbox, '[state.communityPosts[0].likes, state.communityMyLikes.length]');
+    await new Promise(res => setTimeout(res, 20));
+    runIn(sandbox, "toggleCommunityLike('p1')");
+    await new Promise(res => setTimeout(res, 20));
+    const descurtiu = evalIn(sandbox, '[state.communityPosts[0].likes, state.communityMyLikes.length]');
+    runIn(sandbox, "window.__failLikes = true; toggleCommunityLike('p1')");
+    await new Promise(res => setTimeout(res, 30));
+    const revertido = evalIn(sandbox, '[state.communityPosts[0].likes, state.communityMyLikes.length]');
+    const calls = evalIn(sandbox, 'window.__likeCalls.map(c => c[0])');
+    runIn(sandbox, `
+      state.communityPosts = window.__bk2[0]; state.communityMyLikes = window.__bk2[1]; state.discordUser = window.__bk2[2];
+      supabaseAvailable = false; window.__sb = undefined; window.__likeCalls = undefined; window.__bk2 = undefined; window.__failLikes = undefined;
+    `);
+    assert.strictEqual(semLogin, 3, 'sem login não curte');
+    assert.deepStrictEqual(otimista, [4, 1], 'a curtida aparece na hora');
+    assert.deepStrictEqual(descurtiu, [3, 0], 'curtir de novo tira a curtida');
+    assert.deepStrictEqual(revertido, [3, 0], 'se o banco recusar, volta ao que era');
+    assert.deepStrictEqual(calls, ['insert', 'delete', 'insert']);
+  });
+
+  await test('Comunidade aparece na navegação e é uma aba válida', () => {
+    const r = evalIn(sandbox, "({ nav: NAV_TABS.includes('comunidade') })");
+    assert.ok(r.nav);
+  });
+
   console.log('\n[ids estáveis do elenco padrão]');
 
   await test('ids do elenco padrão são únicos e iguais entre duas cargas da página (equipe/coleção/favoritos sobrevivem ao recarregar)', async () => {

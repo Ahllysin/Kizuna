@@ -776,6 +776,50 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .patente-ultra{--pc:140,180,255;--pctx:#d7e6ff;}  /* cor padrão — a pessoa pode escolher outra no Perfil */
 .patente-deus_destruicao{--pc:139,95,191;--pctx:#c3aaf0;}
 .patente-anjo{--pc:232,241,255;--pctx:#ffffff;}
+.kz-com-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.kz-com-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.kz-com-sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 4px;}
+.kz-com-search{flex:1;min-width:200px;max-width:380px;}
+.kz-com-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;align-items:start;}
+.kz-com-empty{padding:26px 20px;text-align:center;color:var(--text-dim);}
+.kz-com-card{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;border:1.5px solid rgba(255,150,50,.3);background:rgba(16,14,26,.85);min-width:0;}
+.kz-com-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.kz-com-kind{padding:3px 11px;border-radius:999px;font-size:12px;font-weight:800;border:1px solid;}
+.kz-com-kind.team{color:#ffd66b;border-color:rgba(255,200,90,.6);background:rgba(255,200,90,.1);}
+.kz-com-kind.tierlist{color:#c3aaf0;border-color:rgba(139,95,191,.7);background:rgba(139,95,191,.14);}
+.kz-com-by{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#dcd6c6;}
+.kz-com-ago{font-size:12px;color:#a79f8c;}
+.kz-com-title{margin:0;font-size:18px;font-weight:900;color:var(--text-strong);line-height:1.25;overflow-wrap:anywhere;}
+.kz-com-desc{margin:0;font-size:13.5px;color:#cfc8b8;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;}
+.kz-com-team{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;}
+.kz-com-mem{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;}
+.kz-com-mem.empty{min-height:60px;border-radius:8px;border:1px dashed rgba(255,255,255,.15);}
+.kz-com-mem-nm{font-size:10.5px;font-weight:800;text-align:center;line-height:1.15;color:var(--text-strong);overflow-wrap:anywhere;}
+.kz-com-mem-roles{display:flex;justify-content:center;}
+.kz-com-thumb{display:block;width:30px;aspect-ratio:3/4;border-radius:5px;overflow:hidden;flex:none;background:#1a1426;}
+.kz-com-thumb.big{width:100%;max-width:62px;border-radius:8px;}
+.kz-com-thumb > *{width:100%;height:100%;}
+.kz-com-stats{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:12.5px;color:#cfc8b8;}
+.kz-com-stats b{color:#ffd66b;}
+.kz-com-stats .warn{color:#f0a05f;font-weight:700;}
+.kz-com-tiers{display:flex;flex-direction:column;gap:5px;}
+.kz-com-tier{display:flex;align-items:stretch;gap:6px;}
+.kz-com-tier-label{flex:none;width:34px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:900;font-size:13px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);overflow:hidden;}
+.kz-com-tier-items{display:flex;flex-wrap:wrap;gap:3px;flex:1;min-width:0;padding:3px;border-radius:6px;background:rgba(255,255,255,.04);}
+.kz-com-foot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:4px;border-top:1px solid rgba(255,255,255,.08);}
+.kz-com-spacer{flex:1;}
+.kz-com-like{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;border:1.5px solid rgba(255,255,255,.2);background:rgba(8,7,14,.7);color:#dcd6c6;font-size:14px;cursor:pointer;}
+.kz-com-like .h{font-size:15px;line-height:1;}
+.kz-com-like.on{border-color:#e0496b;color:#ff8aa3;background:rgba(224,73,107,.15);}
+.kz-com-link{background:none;border:none;color:#a79f8c;font-size:12px;cursor:pointer;text-decoration:underline;padding:2px 4px;}
+.kz-com-link:hover:not(:disabled){color:#fff3da;}
+.kz-com-link:disabled{opacity:.55;cursor:default;text-decoration:none;}
+.kz-com-link.danger:hover{color:#ff8a7a;}
+.kz-com-reports{font-size:12px;font-weight:800;color:#f0a05f;}
+.kz-com-compose{display:flex;flex-direction:column;gap:14px;padding:18px 20px;}
+.kz-com-compose-kinds{display:flex;gap:8px;flex-wrap:wrap;}
+.kz-com-compose-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+@media (max-width:520px){.kz-com-grid{grid-template-columns:1fr;}.kz-com-team{grid-template-columns:repeat(3,minmax(0,1fr));}}
 .kz-patente-note{font-size:11.5px;color:var(--text-dim);font-style:italic;}
 .kz-patente-mine{padding:8px 12px;border-radius:10px;border:1px dashed rgba(255,255,255,.25);}
 .kz-patente-badge{
@@ -1039,6 +1083,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
         <button class="kz-nav-btn" data-tab="combos" title="Combos"><span class="kz-nav-glyph">連</span><span class="kz-nav-label">Combos</span></button>
         <button class="kz-nav-btn" data-tab="guias" title="Guias"><span class="kz-nav-glyph">書</span><span class="kz-nav-label">Guias</span></button>
         <button class="kz-nav-btn" data-tab="tierlist" title="Tier List"><span class="kz-nav-glyph">番</span><span class="kz-nav-label">Tier List</span></button>
+        <button class="kz-nav-btn" data-tab="comunidade" title="Comunidade"><span class="kz-nav-glyph">社</span><span class="kz-nav-label">Comunidade</span></button>
         <button class="kz-nav-btn" data-tab="favs" title="Favoritos"><span class="kz-nav-glyph">★</span><span class="kz-nav-label">Favoritos</span></button>
         <button class="kz-nav-btn" data-tab="perfil" title="Perfil"><span class="kz-nav-glyph">印</span><span class="kz-nav-label">Perfil</span></button>
         <button class="kz-nav-btn" data-tab="doar" title="Doar"><span class="kz-nav-glyph">援</span><span class="kz-nav-label">Doar</span></button>
@@ -1137,6 +1182,43 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
             cor (Anjo) que a própria pessoa escolhe no Perfil — sem isso o resto do perfil salva
             normal, só essas duas escolhas não ficam guardadas:
               alter table public.profiles add column patente_forma text, add column patente_cor text;
+        12. (Aba Comunidade) Rode também — cria as tabelas de posts, curtidas e denúncias. Qualquer
+            um lê; só logado posta/curte/denuncia; cada um apaga os próprios posts e o admin (o mesmo
+            UID do passo 8) apaga qualquer um e é o único que enxerga as denúncias:
+              create table public.community_posts (
+                id uuid primary key default gen_random_uuid(),
+                user_id uuid not null references auth.users(id) on delete cascade,
+                kind text not null check (kind in ('team','tierlist')),
+                title text not null check (char_length(title) between 3 and 60),
+                description text check (description is null or char_length(description) <= 300),
+                data jsonb not null check (octet_length(data::text) <= 20000),
+                author_name text check (author_name is null or char_length(author_name) <= 40),
+                created_at timestamptz not null default now()
+              );
+              create table public.community_likes (
+                post_id uuid not null references public.community_posts(id) on delete cascade,
+                user_id uuid not null references auth.users(id) on delete cascade,
+                primary key (post_id, user_id)
+              );
+              create table public.community_reports (
+                post_id uuid not null references public.community_posts(id) on delete cascade,
+                user_id uuid not null references auth.users(id) on delete cascade,
+                created_at timestamptz not null default now(),
+                primary key (post_id, user_id)
+              );
+              alter table public.community_posts enable row level security;
+              alter table public.community_likes enable row level security;
+              alter table public.community_reports enable row level security;
+              create policy "todos leem os posts" on public.community_posts for select using (true);
+              create policy "logado posta (ate 30)" on public.community_posts for insert
+                with check (auth.uid() = user_id and (select count(*) from public.community_posts p where p.user_id = auth.uid()) < 30);
+              create policy "apaga o proprio ou admin" on public.community_posts for delete
+                using (auth.uid() = user_id or auth.uid() = 'SEU-UID-AQUI'::uuid);
+              create policy "todos leem as curtidas" on public.community_likes for select using (true);
+              create policy "curte como si mesmo" on public.community_likes for insert with check (auth.uid() = user_id);
+              create policy "descurte a propria" on public.community_likes for delete using (auth.uid() = user_id);
+              create policy "denuncia como si mesmo" on public.community_reports for insert with check (auth.uid() = user_id);
+              create policy "so admin ve denuncias" on public.community_reports for select using (auth.uid() = 'SEU-UID-AQUI'::uuid);
         No painel admin da Aliança Z, o campo "Vincular perfil (User UID)" aceita o
         "User UID" de quem apoiou (Authentication > Users) — se a pessoa marcar o próprio
         perfil como público (aba Perfil), o mural passa a mostrar os dados dela em vez do
@@ -4108,6 +4190,10 @@ let state = {
   recRarity: 'all',
   autoMode: 'equilibrado',
   autoOpts: null,
+  communityPosts: [],                // posts da aba Comunidade (vêm do Supabase, já sanitizados)
+  communityLoaded: false, communityLoading: false, communityError: null, communityFor: null,
+  communityMyLikes: [], communityReported: [],
+  communityFilter: 'all', communitySort: 'recent', communitySearch: '', communityCompose: null,
   sf: { chars:{tags:[],trig:[],eff:[]}, coll:{tags:[],trig:[],eff:[]}, roster:{tags:[],trig:[],eff:[]}, open:{} },   // filtro de pesquisa por tags + o que o Ataque Combinado persegue/causa, um por aba
   editingChar: null,                // character object being edited in modal, or null
   ioModalOpen: false,               // import/export JSON modal
@@ -4187,7 +4273,7 @@ async function loadState(){
   loaded = true;
   render();
 }
-const NAV_TABS = ['chars','collection','combos','guias','tierlist','favs','perfil','doar'];
+const NAV_TABS = ['chars','collection','combos','guias','tierlist','comunidade','favs','perfil','doar'];
 async function saveFavs(){ await persist('favs', JSON.stringify(state.favs)); }
 async function saveDonorWidgetCollapsed(){ await persist('donor_widget_collapsed', state.donorWidgetCollapsed ? '1' : '0'); }
 async function saveUiTab(){ await persist('ui_tab', state.tab); }
@@ -4758,6 +4844,7 @@ function render(){
     : tab === 'collection' ? renderCollectionTab()
     : tab === 'tierlist' ? renderTierListTab()
     : tab === 'guias' ? renderGuiasTab()
+    : tab === 'comunidade' ? renderComunidadeTab()
     : tab === 'favs' ? renderFavsTab()
     : tab === 'perfil' ? renderPerfilTab()
     : tab === 'doar' ? renderDoarTab()
@@ -4767,6 +4854,7 @@ function render(){
   attachTierListHandlers();
   attachCombosHandlers();
   attachFavsHandlers();
+  attachComunidadeHandlers();
   attachPerfilHandlers();
   attachDoarHandlers();
   document.getElementById('accountArea').innerHTML = renderAccountArea();
@@ -6229,6 +6317,401 @@ function applyAutoOption(i){
   state.optInfo = `Equipe montada: <b>${o.combos} combos</b> · maior cadeia <b>${o.longest + 1} hits</b> · equilíbrio <b>${Math.round(o.balance * 100)}%</b>${o.missing.length ? ' · falta ' + o.missing.map(k => PILLARS[k].label).join(', ') : ''}.`;
   render();
   showToast('Equipe montada!');
+}
+
+/* ======================= COMUNIDADE (times e tier lists compartilhados) ======================= */
+// Qualquer um vê; pra publicar, curtir ou denunciar precisa estar logado com Discord. Tudo mora no Supabase
+// (tabelas community_posts / community_likes / community_reports — SQL no comentário de instalação lá em cima).
+// O que vem do banco é tratado como NÃO confiável: passa por sanitizeCommunityData e sempre sai com escapeHtml.
+const COMMUNITY = { title: 60, desc: 300, maxPostsPerUser: 30, cooldownMs: 60000, fetchLimit: 80, minTeam: 2, minTierItems: 3 };
+
+function communityIdOk(id){ return typeof id === 'string' && /^[\w.:\-]{1,64}$/.test(id); }
+function sanitizeCommunityData(kind, data){
+  if(!data || typeof data !== 'object') return null;
+  if(kind === 'team'){
+    if(!Array.isArray(data.team)) return null;
+    const t = data.team.slice(0, 6).map(id => communityIdOk(id) ? id : null);
+    while(t.length < 6) t.push(null);
+    return t.some(Boolean) ? { team: t } : null;
+  }
+  if(kind === 'tierlist'){
+    if(!Array.isArray(data.tiers)) return null;
+    const tiers = data.tiers.slice(0, 10).map(t => ({
+      label: String((t && t.label) || '').slice(0, 16),
+      color: /^#[0-9a-f]{6}$/i.test((t && t.color) || '') ? t.color : '#5b7fa6',
+      items: Array.isArray(t && t.items) ? t.items.filter(communityIdOk).slice(0, 100) : [],
+    })).filter(t => t.items.length);
+    return tiers.length ? { tiers } : null;
+  }
+  return null;
+}
+// O que seria publicado agora (equipe do campo ou tier list atual); null se estiver vazio demais.
+function communityShareData(kind){
+  if(kind === 'team'){
+    const d = sanitizeCommunityData('team', { team: state.team });
+    return d && d.team.filter(Boolean).length >= COMMUNITY.minTeam ? d : null;
+  }
+  const known = new Set(state.characters.map(c => c.id));
+  const d = sanitizeCommunityData('tierlist', { tiers: ((state.tierList && state.tierList.tiers) || []).map(t => ({ label: t.label, color: t.color, items: (t.items || []).filter(id => known.has(id)) })) });
+  return d && d.tiers.reduce((n, t) => n + t.items.length, 0) >= COMMUNITY.minTierItems ? d : null;
+}
+function communityPostFromRow(r){
+  const kind = r && (r.kind === 'tierlist' ? 'tierlist' : r.kind === 'team' ? 'team' : null);
+  if(!kind) return null;
+  const data = sanitizeCommunityData(kind, r.data);
+  if(!data) return null;
+  const cnt = a => (Array.isArray(a) && a[0] && Number(a[0].count)) || 0;
+  return {
+    id: String(r.id), userId: r.user_id || null, kind, data,
+    title: String(r.title || '').slice(0, COMMUNITY.title),
+    desc: String(r.description || '').slice(0, COMMUNITY.desc),
+    author: String(r.author_name || 'Anônimo').slice(0, 40),
+    createdAt: r.created_at || '',
+    likes: cnt(r.community_likes), reports: cnt(r.community_reports),
+  };
+}
+function communityAgo(iso){
+  const t = Date.parse(iso);
+  if(!t) return '';
+  const s = Math.max(0, (Date.now() - t) / 1000);
+  if(s < 60) return 'agora há pouco';
+  if(s < 3600) return 'há ' + Math.floor(s / 60) + ' min';
+  if(s < 86400) return 'há ' + Math.floor(s / 3600) + ' h';
+  if(s < 86400 * 30) return 'há ' + Math.floor(s / 86400) + ' d';
+  return new Date(t).toLocaleDateString('pt-BR');
+}
+
+async function refreshCommunity(){
+  if(!isSupabaseConfigured() || state.communityLoading) return;
+  state.communityLoading = true;
+  const me = state.discordUser ? state.discordUser.id : null;
+  try{
+    const { data, error } = await window.__sb.client.from('community_posts')
+      .select('id,user_id,kind,title,description,data,author_name,created_at,community_likes(count),community_reports(count)')
+      .order('created_at', { ascending: false }).limit(COMMUNITY.fetchLimit);
+    if(error) throw error;
+    state.communityPosts = (data || []).map(communityPostFromRow).filter(Boolean);
+    state.communityMyLikes = [];
+    if(me){
+      const r = await window.__sb.client.from('community_likes').select('post_id').eq('user_id', me);
+      if(!r.error) state.communityMyLikes = (r.data || []).map(x => x.post_id);
+    }
+    state.communityError = null;
+  }catch(e){
+    console.error('Não consegui carregar a Comunidade', e);
+    state.communityError = 'Não consegui carregar a Comunidade agora. Tente de novo em instantes.';
+  }
+  state.communityLoading = false;
+  state.communityLoaded = true;
+  state.communityFor = me;
+  if(state.tab === 'comunidade') render();
+}
+
+function communityTeamStats(p){
+  if(p._stats) return p._stats;
+  const team = p.data.team.map(id => (id && getChar(id)) ? id : null);
+  const st = comboStatsFor(team);
+  p._stats = {
+    team, filled: team.filter(Boolean).length, missingChars: p.data.team.filter(Boolean).length - team.filter(Boolean).length,
+    combos: st.total, max: comboMaxFor(team).max, longest: st.longest + 1,
+    balance: Math.round(balanceScore(team) * 100), missing: missingPillars(team),
+  };
+  return p._stats;
+}
+function communityPostHay(p){
+  if(p._hay) return p._hay;
+  const ids = p.kind === 'team' ? p.data.team.filter(Boolean) : p.data.tiers.flatMap(t => t.items);
+  const names = ids.map(id => { const c = getChar(id); return c ? c.name : ''; });
+  p._hay = [p.title, p.desc, p.author, ...names].join(' ').toLowerCase();
+  return p._hay;
+}
+function communityVisiblePosts(){
+  const q = (state.communitySearch || '').trim().toLowerCase();
+  let list = (state.communityPosts || []).filter(p =>
+    (state.communityFilter === 'all' || p.kind === state.communityFilter) && (!q || communityPostHay(p).includes(q)));
+  list = [...list].sort((a, b) => state.communitySort === 'likes'
+    ? (b.likes - a.likes) || (Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    : Date.parse(b.createdAt) - Date.parse(a.createdAt));
+  return list;
+}
+function communityThumb(id, big){
+  const c = getChar(id);
+  if(!c) return '';
+  return `<span class="kz-com-thumb${big ? ' big' : ''}" title="${escapeAttr(c.name)}">${portraitInner(c)}</span>`;
+}
+function renderCommunityTeamBody(p){
+  const s = communityTeamStats(p);
+  const strip = s.team.map(id => {
+    const c = id && getChar(id);
+    return c ? `<div class="kz-com-mem" title="${escapeAttr(c.name)}"><span class="kz-com-thumb big">${portraitInner(c)}</span><span class="kz-com-mem-nm">${escapeHtml(c.name)}</span><span class="kz-com-mem-roles">${rolePillsHtml(c, 1, true)}</span></div>`
+      : `<div class="kz-com-mem empty"></div>`;
+  }).join('');
+  return `<div class="kz-com-team">${strip}</div>
+    <div class="kz-com-stats"><span><b>${s.combos}</b>/${s.max} combos</span><span>cadeia de <b>${s.longest}</b> hits</span><span>equilíbrio <b>${s.balance}%</b></span>${s.missing.length ? `<span class="warn">falta ${s.missing.map(k => PILLARS[k].label).join(', ')}</span>` : ''}</div>
+    ${s.missingChars ? `<div class="kz-muted" style="font-size:12px;">${s.missingChars} guerreiro(s) dessa equipe não existem no seu site (personagem criado por quem postou).</div>` : ''}`;
+}
+function renderCommunityTierBody(p){
+  return `<div class="kz-com-tiers">${p.data.tiers.map(t => `
+    <div class="kz-com-tier"><span class="kz-com-tier-label" style="background:${t.color};">${escapeHtml(t.label || '—')}</span>
+      <span class="kz-com-tier-items">${t.items.map(id => communityThumb(id)).join('')}</span></div>`).join('')}</div>`;
+}
+function renderCommunityPost(p){
+  const me = state.discordUser ? state.discordUser.id : null;
+  const liked = (state.communityMyLikes || []).includes(p.id);
+  const mine = me && p.userId === me;
+  const canDelete = mine || isDonorAdmin();
+  const donor = (state.donors || []).find(d => p.userId && d.linkedUserId === p.userId);
+  const prof = donor ? linkedProfileFor(donor) : null;
+  const reported = (state.communityReported || []).includes(p.id);
+  return `
+  <article class="kz-com-card" data-com-id="${escapeAttr(p.id)}">
+    <header class="kz-com-head">
+      <span class="kz-com-kind ${p.kind}">${p.kind === 'team' ? '連 Time' : '番 Tier List'}</span>
+      <span class="kz-com-by"><b>${escapeHtml(p.author)}</b>${donor ? ' ' + patenteBadgeHtml(donor.amount, '', prof) : ''}<span class="kz-com-ago">${escapeHtml(communityAgo(p.createdAt))}</span></span>
+    </header>
+    <h3 class="kz-com-title">${escapeHtml(p.title)}</h3>
+    ${p.desc ? `<p class="kz-com-desc">${escapeHtml(p.desc)}</p>` : ''}
+    ${p.kind === 'team' ? renderCommunityTeamBody(p) : renderCommunityTierBody(p)}
+    <footer class="kz-com-foot">
+      <button type="button" class="kz-com-like${liked ? ' on' : ''}" data-com-like="${escapeAttr(p.id)}" title="${liked ? 'Tirar a curtida' : 'Curtir'}"><span class="h">♥</span><b>${p.likes}</b></button>
+      ${p.kind === 'team'
+        ? `<button type="button" class="kz-btn kz-btn-sm kz-btn-primary" data-com-load="${escapeAttr(p.id)}">Usar este time</button>`
+        : `<button type="button" class="kz-btn kz-btn-sm kz-btn-primary" data-com-copy="${escapeAttr(p.id)}">Copiar para minha Tier List</button>`}
+      <span class="kz-com-spacer"></span>
+      ${isDonorAdmin() && p.reports ? `<span class="kz-com-reports" title="Denúncias recebidas">⚑ ${p.reports}</span>` : ''}
+      ${!mine ? `<button type="button" class="kz-com-link" data-com-report="${escapeAttr(p.id)}" ${reported ? 'disabled' : ''}>${reported ? 'Denunciado' : 'Denunciar'}</button>` : ''}
+      ${canDelete ? `<button type="button" class="kz-com-link danger" data-com-del="${escapeAttr(p.id)}">Excluir</button>` : ''}
+    </footer>
+  </article>`;
+}
+function renderCommunityList(){
+  if(state.communityError) return `<div class="kz-panel kz-com-empty">${escapeHtml(state.communityError)}</div>`;
+  if(!state.communityLoaded) return `<div class="kz-panel kz-com-empty">Carregando a Comunidade…</div>`;
+  const list = communityVisiblePosts();
+  if(!list.length){
+    return `<div class="kz-panel kz-com-empty">${(state.communityPosts || []).length ? 'Nada encontrado com esses filtros.' : 'Ainda não tem nada por aqui — seja o primeiro a compartilhar um time ou uma tier list!'}</div>`;
+  }
+  return `<div class="kz-com-grid">${list.map(renderCommunityPost).join('')}</div>`;
+}
+function renderCommunityCompose(){
+  const c = state.communityCompose;
+  if(!c) return '';
+  const data = communityShareData(c.kind);
+  let preview;
+  if(!data){
+    preview = `<div class="kz-muted">${c.kind === 'team' ? `Coloque pelo menos ${COMMUNITY.minTeam} guerreiros em campo na aba Combos pra compartilhar a equipe.` : `Classifique pelo menos ${COMMUNITY.minTierItems} guerreiros na aba Tier List pra compartilhar.`}</div>`;
+  } else if(c.kind === 'team'){
+    preview = renderCommunityTeamBody({ data });
+  } else {
+    preview = renderCommunityTierBody({ data });
+  }
+  return `<div class="kz-panel kz-com-compose">
+    <div class="kz-com-compose-kinds">
+      <button type="button" class="kz-fchip ${c.kind === 'team' ? 'active' : ''}" data-com-kind="team">Meu time (aba Combos)</button>
+      <button type="button" class="kz-fchip ${c.kind === 'tierlist' ? 'active' : ''}" data-com-kind="tierlist">Minha Tier List</button>
+    </div>
+    <div><label class="field-label">Título (${COMMUNITY.title} caracteres)</label>
+      <input type="text" id="comTitleInput" maxlength="${COMMUNITY.title}" value="${escapeAttr(c.title)}" placeholder="Ex.: Time de combos pra arena"></div>
+    <div><label class="field-label">Descrição (<span id="comDescCount">${c.desc.length}</span>/${COMMUNITY.desc})</label>
+      <textarea id="comDescInput" maxlength="${COMMUNITY.desc}" rows="3" placeholder="Como usar, estratégia, por que montou assim… (opcional)">${escapeHtml(c.desc)}</textarea></div>
+    <div><span class="kz-label">Prévia do que será publicado</span>${preview}</div>
+    <div class="kz-com-compose-actions">
+      <button type="button" class="kz-btn kz-btn-primary" id="comPublishBtn" ${data ? '' : 'disabled'}>Publicar</button>
+      <button type="button" class="kz-btn" id="comCancelBtn">Cancelar</button>
+      <span class="kz-muted" style="font-size:12px;">Seu nome aparece como "${escapeHtml(communityAuthorName())}". Seja respeitoso — posts podem ser denunciados e removidos.</span>
+    </div>
+  </div>`;
+}
+function communityAuthorName(){
+  const p = state.myProfile;
+  const nick = p && p.public && p.nickname ? p.nickname : '';
+  return (nick || (state.discordUser && state.discordUser.username) || 'Anônimo').slice(0, 40);
+}
+function renderComunidadeTab(){
+  const head = `<div class="kz-page-head">
+    <div><h1 class="kz-title">Comunidade</h1>
+    <div class="kz-subtitle">Times e tier lists feitos no Kizuna, compartilhados por quem joga. Curta, copie e inspire-se.</div></div>
+  </div>`;
+  if(!isSupabaseConfigured()){
+    return `<section class="kz-page">${head}<div class="kz-panel kz-com-empty">A Comunidade precisa da conta online, que ainda não está disponível neste site.</div></section>`;
+  }
+  const f = state.communityFilter, s = state.communitySort;
+  const chip = (attr, val, cur, label) => `<button type="button" class="kz-fchip ${cur === val ? 'active' : ''}" ${attr}="${val}">${label}</button>`;
+  const share = state.discordUser
+    ? `<button type="button" class="kz-btn kz-btn-primary" id="comOpenBtn">＋ Compartilhar</button>`
+    : `<button type="button" class="kz-btn kz-btn-primary" id="comLoginBtn">Entrar com Discord pra compartilhar</button>`;
+  return `<section class="kz-page">${head}
+    <div class="kz-com-toolbar">
+      <div class="kz-com-chips">
+        ${chip('data-com-filter', 'all', f, 'Tudo')}${chip('data-com-filter', 'team', f, 'Times')}${chip('data-com-filter', 'tierlist', f, 'Tier Lists')}
+        <span class="kz-com-sep"></span>
+        ${chip('data-com-sort', 'recent', s, 'Recentes')}${chip('data-com-sort', 'likes', s, 'Mais curtidos')}
+      </div>
+      <input type="text" class="kz-input kz-com-search" id="comSearch" placeholder="Buscar por título, autor ou guerreiro…" value="${escapeAttr(state.communitySearch)}">
+      <button type="button" class="kz-btn kz-btn-sm" id="comRefreshBtn" title="Recarregar">↻</button>
+      ${share}
+    </div>
+    ${renderCommunityCompose()}
+    <div id="comList">${renderCommunityList()}</div>
+  </section>`;
+}
+
+function communityRequireLogin(){
+  if(state.discordUser) return true;
+  showToast('Entre com Discord (topo da página) pra fazer isso.');
+  return false;
+}
+async function publishCommunityPost(){
+  const c = state.communityCompose;
+  if(!c || !communityRequireLogin()) return;
+  const title = (c.title || '').trim(), desc = (c.desc || '').trim();
+  if(title.length < 3){ showToast('Dê um título ao post (mínimo 3 letras).'); return; }
+  const data = communityShareData(c.kind);
+  if(!data){ showToast('Não tem o que compartilhar ainda.'); return; }
+  let last = 0;
+  try{ last = Number(localStorage.getItem('kiai_community_last')) || 0; }catch(e){}
+  if(Date.now() - last < COMMUNITY.cooldownMs){ showToast('Calma! Espere um minutinho antes de publicar de novo.'); return; }
+  if((state.communityPosts || []).filter(p => p.userId === state.discordUser.id).length >= COMMUNITY.maxPostsPerUser){
+    showToast('Você chegou no limite de ' + COMMUNITY.maxPostsPerUser + ' posts. Exclua algum pra publicar outro.'); return;
+  }
+  try{
+    const { error } = await window.__sb.client.from('community_posts').insert({
+      user_id: state.discordUser.id, kind: c.kind, title: title.slice(0, COMMUNITY.title),
+      description: desc ? desc.slice(0, COMMUNITY.desc) : null, data, author_name: communityAuthorName(),
+    });
+    if(error) throw error;
+    try{ localStorage.setItem('kiai_community_last', String(Date.now())); }catch(e){}
+    state.communityCompose = null;
+    state.communityLoaded = false;
+    showToast('Publicado na Comunidade!');
+    render();
+    await refreshCommunity();
+  }catch(e){
+    console.error('Não consegui publicar', e);
+    showToast('Não consegui publicar agora. Tente de novo em instantes.');
+  }
+}
+async function toggleCommunityLike(id){
+  if(!communityRequireLogin()) return;
+  const p = (state.communityPosts || []).find(x => x.id === id);
+  if(!p) return;
+  const had = (state.communityMyLikes || []).includes(id);
+  const apply = on => {
+    state.communityMyLikes = on ? [...state.communityMyLikes, id] : state.communityMyLikes.filter(x => x !== id);
+    p.likes = Math.max(0, p.likes + (on ? 1 : -1));
+  };
+  apply(!had);
+  render();
+  try{
+    const q = window.__sb.client.from('community_likes');
+    const { error } = had ? await q.delete().eq('post_id', id).eq('user_id', state.discordUser.id) : await q.insert({ post_id: id, user_id: state.discordUser.id });
+    if(error) throw error;
+  }catch(e){
+    console.error('Curtida falhou', e);
+    apply(had);
+    render();
+    showToast('Não consegui registrar a curtida.');
+  }
+}
+function deleteCommunityPost(id){
+  const p = (state.communityPosts || []).find(x => x.id === id);
+  if(!p) return;
+  const me = state.discordUser && state.discordUser.id;
+  if(!(me && p.userId === me) && !isDonorAdmin()) return;
+  customConfirm(`Excluir "${p.title}" da Comunidade? Isso não dá pra desfazer.`, async () => {
+    try{
+      const { error } = await window.__sb.client.from('community_posts').delete().eq('id', id);
+      if(error) throw error;
+      state.communityPosts = state.communityPosts.filter(x => x.id !== id);
+      showToast('Post excluído.');
+      render();
+    }catch(e){
+      console.error('Exclusão falhou', e);
+      showToast('Não consegui excluir agora.');
+    }
+  });
+}
+async function reportCommunityPost(id){
+  if(!communityRequireLogin()) return;
+  try{
+    const { error } = await window.__sb.client.from('community_reports').insert({ post_id: id, user_id: state.discordUser.id });
+    if(error && !/duplicate|23505/i.test((error.code || '') + ' ' + (error.message || ''))) throw error;
+    state.communityReported = [...(state.communityReported || []), id];
+    showToast(error ? 'Você já denunciou este post.' : 'Denúncia enviada. Obrigado!');
+    render();
+  }catch(e){
+    console.error('Denúncia falhou', e);
+    showToast('Não consegui enviar a denúncia agora.');
+  }
+}
+function useCommunityTeam(id){
+  const p = (state.communityPosts || []).find(x => x.id === id);
+  if(!p || p.kind !== 'team') return;
+  const team = communityTeamStats(p).team;
+  const go = () => { commitTeam([...team]); goTab('combos'); showToast('Time carregado na aba Combos'); };
+  if(state.team.some(Boolean)) customConfirm('Substituir a equipe que está no campo agora por esse time?', go); else go();
+}
+function copyCommunityTierList(id){
+  const p = (state.communityPosts || []).find(x => x.id === id);
+  if(!p || p.kind !== 'tierlist') return;
+  customConfirm('Substituir a sua Tier List atual por essa? A sua organização atual será perdida.', () => {
+    state.tierList = {
+      tiers: p.data.tiers.map((t, i) => ({ id: 't_c' + i, label: t.label, color: t.color, items: [...t.items] })),
+      unranked: [],
+    };
+    ensureTierListIntegrity();
+    saveTierList();
+    goTab('tierlist');
+    showToast('Tier List copiada!');
+  });
+}
+
+function attachCommunityListHandlers(root){
+  const on = (sel, fn) => root.querySelectorAll(sel).forEach(b => b.addEventListener('click', () => fn(b)));
+  on('[data-com-like]', b => toggleCommunityLike(b.dataset.comLike));
+  on('[data-com-load]', b => useCommunityTeam(b.dataset.comLoad));
+  on('[data-com-copy]', b => copyCommunityTierList(b.dataset.comCopy));
+  on('[data-com-report]', b => reportCommunityPost(b.dataset.comReport));
+  on('[data-com-del]', b => deleteCommunityPost(b.dataset.comDel));
+}
+function attachComunidadeHandlers(){
+  const view = document.getElementById('view');
+  if(!view || state.tab !== 'comunidade') return;
+  // carrega (ou recarrega, se o login mudou desde a última leitura)
+  const me = state.discordUser ? state.discordUser.id : null;
+  if(isSupabaseConfigured() && !state.communityLoading && (!state.communityLoaded || state.communityFor !== me)) refreshCommunity();
+  const on = (sel, fn) => view.querySelectorAll(sel).forEach(b => b.addEventListener('click', () => fn(b)));
+  on('[data-com-filter]', b => { state.communityFilter = b.dataset.comFilter; render(); });
+  on('[data-com-sort]', b => { state.communitySort = b.dataset.comSort; render(); });
+  const search = document.getElementById('comSearch');
+  if(search) search.addEventListener('input', () => {
+    state.communitySearch = search.value;
+    const box = document.getElementById('comList');
+    box.innerHTML = renderCommunityList();
+    attachCommunityListHandlers(box);
+  });
+  const refresh = document.getElementById('comRefreshBtn');
+  if(refresh) refresh.addEventListener('click', () => { state.communityLoaded = false; render(); });
+  const login = document.getElementById('comLoginBtn');
+  if(login) login.addEventListener('click', signInWithDiscord);
+  const open = document.getElementById('comOpenBtn');
+  if(open) open.addEventListener('click', () => {
+    state.communityCompose = state.communityCompose || { kind: communityShareData('team') ? 'team' : (communityShareData('tierlist') ? 'tierlist' : 'team'), title: '', desc: '' };
+    render();
+  });
+  const c = state.communityCompose;
+  if(c){
+    on('[data-com-kind]', b => { c.kind = b.dataset.comKind; render(); });
+    const t = document.getElementById('comTitleInput');
+    if(t) t.addEventListener('input', () => { c.title = t.value; });
+    const d = document.getElementById('comDescInput'), cnt = document.getElementById('comDescCount');
+    if(d) d.addEventListener('input', () => { c.desc = d.value; if(cnt) cnt.textContent = d.value.length; });
+    const pub = document.getElementById('comPublishBtn');
+    if(pub) pub.addEventListener('click', publishCommunityPost);
+    const cancel = document.getElementById('comCancelBtn');
+    if(cancel) cancel.addEventListener('click', () => { state.communityCompose = null; render(); });
+  }
+  attachCommunityListHandlers(view);
 }
 
 /* ======================= COMBOS (MONTADOR) ======================= */
