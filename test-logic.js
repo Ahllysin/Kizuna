@@ -604,22 +604,78 @@ async function main(){
 
   console.log('\n[Patentes, Trilha de Honra e perfil da Aliança Z]');
 
-  await test('patenteFor segue os limiares corretos, do Terráqueo ao Ultra Instinto', () => {
-    const r = evalIn(sandbox, `[0, 19.99, 20, 49.99, 50, 99.99, 100, 249.99, 250, 499.99, 500, 10000].map(v => patenteFor(v).key)`);
+  await test('patenteFor segue os limiares corretos, do Guerreiro Z ao Anjo', () => {
+    const r = evalIn(sandbox, `[0, 19.99, 20, 49.99, 50, 99.99, 100, 199.99, 200, 349.99, 350, 599.99, 600, 999.99, 1000, 10000].map(v => patenteFor(v).key)`);
     assert.deepStrictEqual(r, [
-      'terraqueo','terraqueo','guerreiro_z','guerreiro_z','ssj','ssj',
-      'ssj2','ssj2','deus_ssj','deus_ssj','ultra_instinto','ultra_instinto',
+      'guerreiro_z','guerreiro_z','saiyajin','saiyajin','ssj','ssj',
+      'ssj_god','ssj_god','ssj_blue','ssj_blue','ultra','ultra',
+      'deus_destruicao','deus_destruicao','anjo','anjo',
     ]);
   });
 
-  await test('renderDoarTab mostra as 6 Patentes e as 4 Honras da trilha', () => {
+  await test('renderDoarTab mostra as 8 Patentes e as 4 Honras da trilha', () => {
     const html = evalIn(sandbox, 'renderDoarTab()');
-    ['Terráqueo','Guerreiro Z','Super Saiyajin','Super Saiyajin 2','Deus Saiyajin','Ultra Instinto'].forEach(label => {
+    ['Guerreiro Z','Saiyajin','Super Saiyajin','Super Saiyajin God','Super Saiyajin Blue','Ultra Instinto','Deus da Destruição','Anjo'].forEach(label => {
       assert.ok(html.includes(label), `faltou a Patente "${label}"`);
     });
     Object.values(evalIn(sandbox, 'HONOR_BADGES')).forEach(h => {
       assert.ok(html.includes(h.label), `faltou a Honra "${h.label}"`);
     });
+  });
+
+  await test('patenteLook: Ultra aceita só as formas válidas e escolhe cor; Anjo escolhe cor (só #rrggbb) ou usa a padrão', () => {
+    const r = evalIn(sandbox, `(() => {
+      const forma = v => patenteLook(400, { patenteForma: v }).label;
+      const cor = v => patenteLook(1500, { patenteCor: v }).style;
+      return {
+        beast: forma('Beast'), ego: forma('Ultra Ego'), invalida: forma('Sei lá'), semPerfil: patenteLook(400, null).label,
+        outraPatenteIgnoraForma: patenteLook(60, { patenteForma: 'Beast' }).label,
+        corOk: cor('#ff0000'), corPadrao: cor(''), corInjetada: cor('red;background:url(x)'),
+        badge: patenteBadgeHtml(400, '', { patenteForma: 'Ultra Ego' }),
+        badgeAnjo: patenteBadgeHtml(1500, '', { patenteCor: '#00ff00' }),
+        corOutraPatente: patenteLook(60, { patenteCor: '#00ff00' }).style,
+        ultraComCor: patenteLook(400, { patenteForma: 'Beast', patenteCor: '#ff00ff' }),
+        ultraPadrao: patenteLook(400, null).style,
+      };
+    })()`);
+    assert.strictEqual(r.beast, 'Beast');
+    assert.strictEqual(r.ego, 'Ultra Ego');
+    assert.strictEqual(r.invalida, 'Ultra Instinto', 'forma desconhecida volta pro nome da patente');
+    assert.strictEqual(r.semPerfil, 'Ultra Instinto');
+    assert.strictEqual(r.outraPatenteIgnoraForma, 'Super Saiyajin', 'só a patente Ultra tem formas');
+    assert.ok(r.corOk.startsWith('--pc:255,0,0;'), 'cor escolhida vira variável de CSS (' + r.corOk + ')');
+    assert.ok(r.corPadrao.startsWith('--pc:232,241,255;'), 'sem cor escolhida usa a padrão do Anjo');
+    assert.ok(r.corPadrao === r.corInjetada, 'texto que não é #rrggbb é ignorado (nada vira CSS solto)');
+    assert.ok(r.badge.includes('Ultra Ego') && r.badge.includes('patente-ultra'));
+    assert.ok(r.badgeAnjo.includes('--pc:0,255,0;') && r.badgeAnjo.includes('patente-anjo'));
+    assert.strictEqual(r.corOutraPatente, '', 'só Ultra Instinto e Anjo escolhem cor');
+    assert.strictEqual(r.ultraComCor.label, 'Beast');
+    assert.ok(r.ultraComCor.style.startsWith('--pc:255,0,255;'), 'Ultra: forma E cor escolhidas');
+    assert.ok(r.ultraPadrao.startsWith('--pc:140,180,255;'), 'Ultra sem cor escolhida usa o azul prateado padrão');
+  });
+
+  await test('Perfil mostra a escolha de forma (patente Ultra) ou de cor (Anjo) só pra quem tem apoio vinculado a esse login', () => {
+    const r = evalIn(sandbox, `(() => {
+      supabaseAvailable = true;
+      window.__sb = { client: {} };
+      state.discordUser = { id: 'u1', username: 'Fulano' };
+      state.myProfile = blankProfile();
+      const semApoio = renderPerfilTab();
+      state.donors = [{ id:'d1', number:1, name:'Fulano', amount:400, honras:[], active:true, linkedUserId:'u1' }];
+      const ultra = renderPerfilTab();
+      state.donors = [{ id:'d1', number:1, name:'Fulano', amount:1200, honras:[], active:true, linkedUserId:'u1' }];
+      const anjo = renderPerfilTab();
+      state.donors = [{ id:'d1', number:1, name:'Fulano', amount:60, honras:[], active:true, linkedUserId:'u1' }];
+      const ssj = renderPerfilTab();
+      state.donors = []; state.discordUser = null; state.myProfile = null;
+      supabaseAvailable = false; window.__sb = undefined;
+      return { semApoio, ultra, anjo, ssj };
+    })()`);
+    assert.ok(!r.semApoio.includes('perfilPatenteForma') && !r.semApoio.includes('perfilPatenteCor'));
+    assert.ok(r.ultra.includes('perfilPatenteForma') && r.ultra.includes('Ultra Ego') && r.ultra.includes('Beast') && r.ultra.includes('perfilPatenteCor'), 'Ultra Instinto escolhe forma e cor');
+    assert.ok(r.anjo.includes('perfilPatenteCor') && !r.anjo.includes('perfilPatenteForma'), 'Anjo escolhe só a cor');
+    assert.ok(!r.ssj.includes('perfilPatenteForma') && !r.ssj.includes('perfilPatenteCor') && r.ssj.includes('Super Saiyajin'));
+    assert.ok(!r.ultra.includes('perfilAvatarSelect'), 'avatar por guerreiro continua desligado');
   });
 
   await test('sem Supabase configurado, o painel de admin fica aberto (compatível com o que já existia)', () => {
@@ -672,7 +728,7 @@ async function main(){
       return out;
     })()`);
     assert.ok(html.includes('Ajudante'));
-    assert.ok(html.includes('Terráqueo'), 'amount 0 cai na Patente-base (Terráqueo), não fica sem nenhuma');
+    assert.ok(html.includes('Guerreiro Z'), 'amount 0 cai na Patente-base (Guerreiro Z), não fica sem nenhuma');
   });
 
   await test('popup de perfil mostra citação, Discord, link e Honras quando presentes; e nada quando ausentes', () => {
@@ -845,8 +901,31 @@ async function main(){
     assert.strictEqual(calls[0].table, 'profiles');
     assert.deepStrictEqual(calls[0].row, {
       id:'user-uid-789', nickname:'Nick', servidor:'S1', bio:'Bio', instagram:'insta', twitch:null, youtube:null,
-      avatar_char_id:'char1', show_socials:true, is_public:true,
+      avatar_char_id:'char1', show_socials:true, is_public:true, patente_forma:null, patente_cor:null,
     });
+  });
+
+  await test('saveMyProfile(): se o banco ainda não tem as colunas de forma/cor da patente, salva o resto do perfil mesmo assim', async () => {
+    runIn(sandbox, `
+      window.__upsertCalls = [];
+      window.__sb = { client: { from: (table) => ({
+        upsert: (row) => {
+          window.__upsertCalls.push({table, row});
+          return Promise.resolve('patente_forma' in row ? {error:{message:'column "patente_forma" does not exist'}} : {error:null});
+        },
+        select: () => ({ eq: () => Promise.resolve({error:null, data:[]}) }),
+      }) } };
+      supabaseAvailable = true;
+      state.discordUser = { id:'user-uid-789', username:'Fulano' };
+      state.myProfile = { nickname:'Nick', servidor:'S1', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', patenteForma:'Beast', patenteCor:'', showSocials:false, public:true };
+    `);
+    runIn(sandbox, "saveMyProfile()");
+    await new Promise(res => setTimeout(res, 30));
+    const calls = evalIn(sandbox, 'window.__upsertCalls');
+    runIn(sandbox, "supabaseAvailable = false; state.discordUser = null; state.myProfile = null; window.__sb = undefined; window.__upsertCalls = undefined;");
+    assert.strictEqual(calls.length, 2, 'tenta com as colunas novas e, se o banco recusar, repete sem elas');
+    assert.ok('patente_forma' in calls[0].row && !('patente_forma' in calls[1].row));
+    assert.strictEqual(calls[1].row.nickname, 'Nick');
   });
 
   await test('logado (Supabase simulado), refreshMyProfile() aplica a linha existente ou volta um rascunho em branco', async () => {
@@ -869,7 +948,7 @@ async function main(){
     runIn(sandbox, "supabaseAvailable = false; state.discordUser = null; state.myProfile = null; window.__sb = undefined;");
     assert.strictEqual(comPerfil.nickname, 'Servidor');
     assert.strictEqual(comPerfil.servidor, 'S9');
-    assert.deepStrictEqual(semPerfil, { nickname:'', servidor:'', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', showSocials:false, public:false }, 'sem linha no servidor deveria voltar um rascunho em branco, não null/erro');
+    assert.deepStrictEqual(semPerfil, { nickname:'', servidor:'', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', patenteForma:'', patenteCor:'', showSocials:false, public:false }, 'sem linha no servidor deveria voltar um rascunho em branco, não null/erro');
   });
 
   console.log('\n[layout Kizuna: lógica nova]');

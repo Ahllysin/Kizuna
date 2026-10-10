@@ -768,12 +768,16 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-donor-admin-row input[type=number]{max-width:130px;}
 
 /* ---- Patentes (faixas por apoio acumulado) — cor vem de --pc/--pctx, setadas por .patente-<key> ---- */
-.patente-terraqueo{--pc:91,127,166;--pctx:#9fb0c7;}
-.patente-guerreiro_z{--pc:217,123,42;--pctx:#f0a868;}
+.patente-guerreiro_z{--pc:150,155,165;--pctx:#c7cbd3;}
+.patente-saiyajin{--pc:217,123,42;--pctx:#f0a868;}
 .patente-ssj{--pc:255,210,63;--pctx:#ffe9a8;}
-.patente-ssj2{--pc:255,233,122;--pctx:#fff3c4;}
-.patente-deus_ssj{--pc:224,64,31;--pctx:#ff9a8a;}
-.patente-ultra_instinto{--pc:140,180,255;--pctx:#d7e6ff;}
+.patente-ssj_god{--pc:224,64,31;--pctx:#ff9a8a;}
+.patente-ssj_blue{--pc:47,125,235;--pctx:#8ec0ff;}
+.patente-ultra{--pc:140,180,255;--pctx:#d7e6ff;}  /* cor padrão — a pessoa pode escolher outra no Perfil */
+.patente-deus_destruicao{--pc:139,95,191;--pctx:#c3aaf0;}
+.patente-anjo{--pc:232,241,255;--pctx:#ffffff;}
+.kz-patente-note{font-size:11.5px;color:var(--text-dim);font-style:italic;}
+.kz-patente-mine{padding:8px 12px;border-radius:10px;border:1px dashed rgba(255,255,255,.25);}
 .kz-patente-badge{
   display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:800;
   text-transform:uppercase;letter-spacing:.4px;border:1px solid rgba(var(--pc,120,130,170),.7);
@@ -1129,6 +1133,10 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
             for all using (auth.uid() = id) with check (auth.uid() = id);
 
           alter table public.donations add column user_id uuid references auth.users(id);
+        11. (Patentes novas) Rode também, pra guardar a forma (Ultra Instinto/Ultra Ego/Beast) e a
+            cor (Anjo) que a própria pessoa escolhe no Perfil — sem isso o resto do perfil salva
+            normal, só essas duas escolhas não ficam guardadas:
+              alter table public.profiles add column patente_forma text, add column patente_cor text;
         No painel admin da Aliança Z, o campo "Vincular perfil (User UID)" aceita o
         "User UID" de quem apoiou (Authentication > Users) — se a pessoa marcar o próprio
         perfil como público (aba Perfil), o mural passa a mostrar os dados dela em vez do
@@ -6909,12 +6917,17 @@ const LIVEPIX_DONATE_URL = 'https://livepix.gg/ahllysin';
 // Inspirado no "Muro dos Aliados" do labninja.com.br, mas com progressão de poder do
 // próprio Dragon Ball em vez de ranks ninja — mais reconhecível pra quem manja de DB.
 const PATENTES = [
-  { key:'terraqueo', min:0, label:'Terráqueo', desc:'Sentiu o ki pela primeira vez. A Terra já conta com você.' },
-  { key:'guerreiro_z', min:20, label:'Guerreiro Z', desc:'Treinou com os melhores guerreiros do planeta. Segura a linha de frente.' },
+  { key:'guerreiro_z', min:0, label:'Guerreiro Z', desc:'Treinou com os melhores guerreiros do planeta. Segura a linha de frente.' },
+  { key:'saiyajin', min:20, label:'Saiyajin', desc:'Sangue guerreiro nas veias. Cada batalha deixa o poder maior.' },
   { key:'ssj', min:50, label:'Super Saiyajin', desc:'Cabelo dourado, poder redobrado. Vira o jogo na batalha.' },
-  { key:'ssj2', min:100, label:'Super Saiyajin 2', desc:'Ultrapassa os próprios limites de novo. Poucos chegam tão longe.' },
-  { key:'deus_ssj', min:250, label:'Deus Saiyajin', desc:'Poder divino correndo nas veias. Lenda em vida.' },
-  { key:'ultra_instinto', min:500, label:'Ultra Instinto', desc:'O corpo se move sozinho, guiado pelos deuses. O topo absoluto.' },
+  { key:'ssj_god', min:100, label:'Super Saiyajin God', desc:'Ki divino ao alcance das mãos. Lenda em vida.' },
+  { key:'ssj_blue', min:200, label:'Super Saiyajin Blue', desc:'Domina o poder divino com perfeição. Poucos chegam tão longe.' },
+  { key:'ultra', min:350, label:'Ultra Instinto', desc:'O corpo se move sozinho, no limite do poder.',
+    forms:['Ultra Instinto','Ultra Ego','Beast'], customColor:true, defaultColor:'#8cb4ff',
+    note:'A pessoa escolhe a forma (Ultra Instinto, Ultra Ego ou Beast) e a cor.' },
+  { key:'deus_destruicao', min:600, label:'Deus da Destruição', desc:'Decide o destino de universos inteiros. Respeitado — e temido — por todos.' },
+  { key:'anjo', min:1000, label:'Anjo', desc:'Acima até dos deuses. O topo absoluto.',
+    customColor:true, defaultColor:'#e8f1ff', note:'A pessoa escolhe a cor da própria patente.' },
 ];
 // Trilha de Honra: reconhecimento pra quem contribui sem doar dinheiro — concedido à mão
 // pelo admin, igual ao ranking por Pix. Cada chave é independente (uma pessoa pode ter várias).
@@ -6939,9 +6952,24 @@ function patenteFor(amount){
   for(const p of PATENTES){ if(amount >= p.min) cur = p; }
   return cur;
 }
-function patenteBadgeHtml(amount, extraClass){
+// Só aceita #rrggbb — a cor vem do perfil de outra pessoa, nunca vira CSS solto.
+function patenteHex(hex){ return /^#[0-9a-f]{6}$/i.test(hex || '') ? hex : null; }
+function patenteColorVars(hex){
+  const n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  const mix = v => Math.round(v + (255 - v) * 0.55);
+  return `--pc:${r},${g},${b};--pctx:rgb(${mix(r)},${mix(g)},${mix(b)});`;
+}
+// Patente + o que a própria pessoa escolheu no Perfil: forma (Ultra Instinto/Ultra Ego/Beast) ou cor (Anjo).
+function patenteLook(amount, prof){
   const p = patenteFor(amount);
-  return `<span class="kz-patente-badge patente-${p.key} ${extraClass||''}">${escapeHtml(p.label)}</span>`;
+  let label = p.label, style = '';
+  if(p.forms && prof && p.forms.includes(prof.patenteForma)) label = prof.patenteForma;
+  if(p.customColor) style = patenteColorVars(patenteHex(prof && prof.patenteCor) || p.defaultColor);
+  return { p, label, style };
+}
+function patenteBadgeHtml(amount, extraClass, prof){
+  const look = patenteLook(amount, prof);
+  return `<span class="kz-patente-badge patente-${look.p.key} ${extraClass||''}"${look.style ? ` style="${look.style}"` : ''}>${escapeHtml(look.label)}</span>`;
 }
 function honraBadgeHtml(key){
   const h = HONOR_BADGES[key];
@@ -7074,13 +7102,14 @@ async function refreshDonorsRemote(){
 // público, o mural passa a mostrar esses dados em vez do que foi digitado à mão.
 const PROFILE_BIO_MAX = 220;
 function blankProfile(){
-  return { nickname:'', servidor:'', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', showSocials:false, public:false };
+  return { nickname:'', servidor:'', bio:'', instagram:'', twitch:'', youtube:'', avatarCharId:'', patenteForma:'', patenteCor:'', showSocials:false, public:false };
 }
 function profileFromRow(row){
   return {
     nickname: row.nickname||'', servidor: row.servidor||'', bio: row.bio||'',
     instagram: row.instagram||'', twitch: row.twitch||'', youtube: row.youtube||'',
-    avatarCharId: row.avatar_char_id||'', showSocials: !!row.show_socials, public: !!row.is_public,
+    avatarCharId: row.avatar_char_id||'', patenteForma: row.patente_forma||'', patenteCor: row.patente_cor||'',
+    showSocials: !!row.show_socials, public: !!row.is_public,
   };
 }
 async function refreshMyProfile(){
@@ -7108,14 +7137,21 @@ async function saveMyProfile(){
   if(!isSupabaseConfigured() || !state.discordUser) return;
   const p = state.myProfile;
   try{
-    const { error } = await window.__sb.client.from('profiles').upsert({
+    const row = {
       id: state.discordUser.id, nickname: p.nickname||null, servidor: p.servidor||null, bio: p.bio||null,
       instagram: p.instagram||null, twitch: p.twitch||null, youtube: p.youtube||null,
       avatar_char_id: p.avatarCharId||null, show_socials: !!p.showSocials, is_public: !!p.public,
-    });
-    if(error) throw error;
+    };
+    let { error } = await window.__sb.client.from('profiles').upsert({ ...row, patente_forma: p.patenteForma||null, patente_cor: p.patenteCor||null });
+    let semColunas = false;
+    if(error){
+      // Colunas novas (forma/cor da patente) ainda não criadas no Supabase: salva o resto do perfil mesmo assim.
+      const r2 = await window.__sb.client.from('profiles').upsert(row);
+      if(r2.error) throw r2.error;
+      semColunas = true;
+    }
     await refreshProfilesRemote();
-    showToast('Perfil salvo');
+    showToast(semColunas ? 'Perfil salvo — forma/cor da patente precisam do SQL novo no Supabase' : 'Perfil salvo');
   }catch(e){
     console.error('Não consegui salvar seu perfil', e);
     showToast('Salvo neste aparelho — não consegui sincronizar com a nuvem');
@@ -7132,6 +7168,26 @@ function linkedProfileFor(d){
 // Escolha de avatar por guerreiro desligada por enquanto: o campo some do perfil e o avatar volta a ser o do Discord.
 // O valor já salvo (avatar_char_id) não é apagado — é só ligar de novo aqui.
 const PROFILE_CHAR_AVATAR = false;
+// Apoio vinculado a este login (o admin liga o User UID na Aliança Z) — é dele que vem a patente.
+function myDonorEntry(){
+  if(!state.discordUser) return null;
+  return (state.donors||[]).find(d=>d.linkedUserId === state.discordUser.id) || null;
+}
+// Campo de escolha da patente: forma pra quem está no patamar Ultra, cor pra quem é Anjo.
+function patenteChoiceHtml(p){
+  const d = myDonorEntry();
+  if(!d) return '';
+  const pat = patenteFor(d.amount);
+  let extra = '';
+  if(pat.forms){
+    const cur = pat.forms.includes(p.patenteForma) ? p.patenteForma : pat.forms[0];
+    extra += `<div><label class="field-label">Forma da patente</label><select id="perfilPatenteForma">${pat.forms.map(f=>`<option value="${escapeAttr(f)}" ${f===cur?'selected':''}>${escapeHtml(f)}</option>`).join('')}</select></div>`;
+  }
+  if(pat.customColor){
+    extra += `<div><label class="field-label">Cor da patente</label><input type="color" id="perfilPatenteCor" value="${patenteHex(p.patenteCor) || pat.defaultColor}" style="width:72px;height:40px;padding:2px;cursor:pointer;"></div>`;
+  }
+  return `<div class="kz-patente-mine"><span class="kz-donate-note" style="margin:0;">Sua patente: <b>${escapeHtml(pat.label)}</b></span></div>${extra}`;
+}
 function renderPerfilTab(){
   if(!isSupabaseConfigured()){
     return `<section class="kz-page"><h1 class="kz-title">Perfil</h1><div class="kz-subtitle">O login com Discord ainda não foi configurado neste site.</div></section>`;
@@ -7145,6 +7201,8 @@ function renderPerfilTab(){
   const p = state.myProfile || blankProfile();
   const avatarChar = PROFILE_CHAR_AVATAR ? state.characters.find(c=>c.id===p.avatarCharId) : null;
   const bioLen = (p.bio||'').length;
+  const myDonor = myDonorEntry();
+  const myLook = myDonor ? patenteLook(myDonor.amount, p) : { p: PATENTES[0], label: PATENTES[0].label, style: '' };
   return `
   <section class="kz-page">
     <div>
@@ -7173,6 +7231,7 @@ function renderPerfilTab(){
           <label class="field-label">YouTube</label>
           <input type="text" id="perfilYoutubeInput" value="${escapeAttr(p.youtube)}" placeholder="Link do canal">
         </div>
+        ${patenteChoiceHtml(p)}
         ${PROFILE_CHAR_AVATAR ? `<div>
           <label class="field-label">Avatar</label>
           <select id="perfilAvatarSelect">
@@ -7186,11 +7245,12 @@ function renderPerfilTab(){
       </div>
       <div class="kz-panel kz-donor-list">
         <span class="kz-label">Prévia</span>
-        <div class="kz-donor-card patente-terraqueo" style="pointer-events:none;">
+        <div class="kz-donor-card patente-${myLook.p.key}" style="pointer-events:none;${myLook.style}">
           <span class="kz-donor-avatar">${avatarChar ? portraitInner(avatarChar) : donorAvatarInner(p.nickname||state.discordUser.username)}</span>
           <span class="kz-donor-name">${escapeHtml(p.nickname || state.discordUser.username)}</span>
           ${p.servidor ? `<span class="kz-donate-note" style="margin:0;">${escapeHtml(p.servidor)}</span>` : ''}
         </div>
+        ${myDonor ? patenteBadgeHtml(myDonor.amount, '', p) : ''}
         ${p.bio ? `<div class="kz-profile-quote">"${escapeHtml(p.bio)}"</div>` : ''}
         ${p.showSocials && (p.instagram||p.twitch||p.youtube) ? `<div class="kz-donate-note">${[p.instagram,p.twitch,p.youtube].filter(Boolean).map(escapeHtml).join(' · ')}</div>` : ''}
       </div>
@@ -7204,6 +7264,17 @@ function attachPerfilHandlers(){
   const bioInput = document.getElementById('perfilBioInput');
   const bioCount = document.getElementById('perfilBioCount');
   if(bioInput && bioCount) bioInput.addEventListener('input', ()=>{ bioCount.textContent = bioInput.value.length; });
+  // Prévia ao vivo da forma/cor escolhida
+  const forma = document.getElementById('perfilPatenteForma');
+  const cor = document.getElementById('perfilPatenteCor');
+  const prevBadge = view.querySelector('.kz-donor-list .kz-patente-badge');
+  const prevCard = view.querySelector('.kz-donor-list .kz-donor-card');
+  if(forma && prevBadge) forma.addEventListener('change', ()=>{ prevBadge.textContent = forma.value; });
+  if(cor && prevBadge && prevCard) cor.addEventListener('input', ()=>{
+    const v = patenteColorVars(cor.value);
+    prevBadge.setAttribute('style', v);
+    prevCard.setAttribute('style', 'pointer-events:none;' + v);
+  });
   const save = document.getElementById('savePerfilBtn');
   if(!save) return;
   save.addEventListener('click', async ()=>{
@@ -7214,6 +7285,8 @@ function attachPerfilHandlers(){
       instagram: document.getElementById('perfilInstaInput').value.trim(),
       twitch: document.getElementById('perfilTwitchInput').value.trim(),
       youtube: document.getElementById('perfilYoutubeInput').value.trim(),
+      patenteForma: (document.getElementById('perfilPatenteForma') || {}).value || ((state.myProfile && state.myProfile.patenteForma) || ''),
+      patenteCor: ((document.getElementById('perfilPatenteCor') || {}).value) || ((state.myProfile && state.myProfile.patenteCor) || ''),
       avatarCharId: PROFILE_CHAR_AVATAR ? document.getElementById('perfilAvatarSelect').value : ((state.myProfile && state.myProfile.avatarCharId) || ''),
       showSocials: document.getElementById('perfilShowSocialsInput').checked,
       public: document.getElementById('perfilPublicInput').checked,
@@ -7328,13 +7401,14 @@ function renderDoarTab(){
     </div>
 
     <div class="kz-page-head" style="margin-top:6px;">
-      <div><h2 class="kz-panel-title" style="font-size:36px;">Patentes</h2><div class="kz-subtitle">Sobe conforme o apoio acumulado — do Terráqueo recém-desperto ao Ultra Instinto.</div></div>
+      <div><h2 class="kz-panel-title" style="font-size:36px;">Patentes</h2><div class="kz-subtitle">Sobe conforme o apoio acumulado — do Guerreiro Z ao Anjo.</div></div>
     </div>
     <div class="kz-patente-grid">
       ${PATENTES.map(p=>`
       <article class="kz-patente-card patente-${p.key}">
         <span class="kz-patente-name">${escapeHtml(p.label)}</span>
         <span class="kz-patente-desc">${escapeHtml(p.desc)}</span>
+        ${p.note ? `<span class="kz-patente-note">${escapeHtml(p.note)}</span>` : ''}
         <span class="kz-patente-min">${p.min>0 ? `A partir de ${formatBRL(p.min)}` : 'Qualquer apoio'}</span>
       </article>`).join('')}
     </div>
@@ -7354,17 +7428,18 @@ function renderDoarTab(){
 }
 
 function renderDonorCard(d, i){
-  const p = patenteFor(d.amount);
   const prof = linkedProfileFor(d);
+  const look = patenteLook(d.amount, prof);
+  const p = look.p;
   const name = (prof && prof.nickname) || d.name;
   const avatarChar = PROFILE_CHAR_AVATAR && prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
   return `
-  <button class="kz-donor-card patente-${p.key}" data-open-donor="${d.id}">
+  <button class="kz-donor-card patente-${p.key}" data-open-donor="${d.id}"${look.style ? ` style="${look.style}"` : ''}>
     <span class="kz-donor-number">Nº ${d.number != null ? d.number : (i+1)}</span>
     <span class="kz-donor-avatar">${avatarChar ? portraitInner(avatarChar) : donorAvatarInner(name)}</span>
     <span class="kz-donor-name">${escapeHtml(name)}</span>
     ${prof && prof.servidor ? `<span class="kz-donate-note" style="margin:0;">${escapeHtml(prof.servidor)}</span>` : ''}
-    ${patenteBadgeHtml(d.amount)}
+    ${patenteBadgeHtml(d.amount, '', prof)}
     ${(d.honras||[]).length ? `<span class="kz-donor-honras">${d.honras.map(k=>HORRA_GLYPH(k)).join('')}</span>` : ''}
   </button>`;
 }
@@ -7393,7 +7468,7 @@ function donorProfileModalHtml(d){
         <span class="kz-donor-avatar" style="width:72px;height:72px;font-size:24px;">${avatarChar ? portraitInner(avatarChar) : donorAvatarInner(name)}</span>
         <span class="kz-donor-number">Nº ${d.number}</span>
         ${prof && prof.servidor ? `<div class="kz-donate-note">${escapeHtml(prof.servidor)}</div>` : ''}
-        ${patenteBadgeHtml(d.amount)}
+        ${patenteBadgeHtml(d.amount, '', prof)}
         <div class="kz-donate-note" style="max-width:320px;">${escapeHtml(p.desc)}</div>
         ${quote ? `<div class="kz-profile-quote">"${escapeHtml(quote)}"</div>` : ''}
         ${(d.honras||[]).length ? `<div class="kz-pill-row" style="justify-content:center;">${d.honras.map(honraBadgeHtml).join('')}</div>` : ''}
@@ -7482,7 +7557,7 @@ function renderDonorWidget(){
         <span class="kz-dw-rank">${top3.indexOf(d)+1}</span>
       </div>
       <span class="name">${escapeHtml(d.name)}</span>
-      ${patenteBadgeHtml(d.amount, 'kz-dw-patente')}
+      ${patenteBadgeHtml(d.amount, 'kz-dw-patente', linkedProfileFor(d))}
     </div>`;
   };
   return `
