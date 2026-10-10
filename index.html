@@ -756,6 +756,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-donate-cta:hover{filter:brightness(1.1);}
 .kz-donate-note{font-size:12.5px;color:var(--text-dim);line-height:1.6;}
+.kz-form-panel{display:flex;flex-direction:column;gap:14px;padding:18px 20px;}
 .kz-donor-list{display:flex;flex-direction:column;gap:14px;padding:18px 20px;}
 .kz-donor-list-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
 .kz-donor-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;overflow:hidden;display:flex;}
@@ -7128,6 +7129,9 @@ function linkedProfileFor(d){
   return (p && p.public) ? p : null;
 }
 
+// Escolha de avatar por guerreiro desligada por enquanto: o campo some do perfil e o avatar volta a ser o do Discord.
+// O valor já salvo (avatar_char_id) não é apagado — é só ligar de novo aqui.
+const PROFILE_CHAR_AVATAR = false;
 function renderPerfilTab(){
   if(!isSupabaseConfigured()){
     return `<section class="kz-page"><h1 class="kz-title">Perfil</h1><div class="kz-subtitle">O login com Discord ainda não foi configurado neste site.</div></section>`;
@@ -7139,7 +7143,7 @@ function renderPerfilTab(){
     </section>`;
   }
   const p = state.myProfile || blankProfile();
-  const avatarChar = state.characters.find(c=>c.id===p.avatarCharId);
+  const avatarChar = PROFILE_CHAR_AVATAR ? state.characters.find(c=>c.id===p.avatarCharId) : null;
   const bioLen = (p.bio||'').length;
   return `
   <section class="kz-page">
@@ -7148,7 +7152,7 @@ function renderPerfilTab(){
       <div class="kz-subtitle">Monte como você aparece na Aliança Z: apelido, servidor, bio e redes. Patente e Honras vêm do seu apoio — ninguém digita isso aqui.</div>
     </div>
     <div class="kz-donate-layout">
-      <div class="kz-panel" style="display:flex;flex-direction:column;gap:14px;">
+      <div class="kz-panel kz-form-panel">
         <div>
           <label class="field-label">Apelido</label>
           <input type="text" id="perfilNickInput" value="${escapeAttr(p.nickname)}" placeholder="Como quer aparecer" maxlength="40">
@@ -7169,13 +7173,13 @@ function renderPerfilTab(){
           <label class="field-label">YouTube</label>
           <input type="text" id="perfilYoutubeInput" value="${escapeAttr(p.youtube)}" placeholder="Link do canal">
         </div>
-        <div>
+        ${PROFILE_CHAR_AVATAR ? `<div>
           <label class="field-label">Avatar</label>
           <select id="perfilAvatarSelect">
             <option value="">Foto do Discord</option>
             ${state.characters.map(c=>`<option value="${c.id}" ${c.id===p.avatarCharId?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}
           </select>
-        </div>
+        </div>` : ''}
         <label class="kz-honor-check"><input type="checkbox" id="perfilShowSocialsInput" ${p.showSocials?'checked':''}> Mostrar minhas redes no perfil público</label>
         <label class="kz-honor-check"><input type="checkbox" id="perfilPublicInput" ${p.public?'checked':''}> Aparecer na Aliança Z com esses dados (se eu já apoiar)</label>
         <button class="kz-btn kz-btn-primary kz-btn-sm" id="savePerfilBtn">Salvar perfil</button>
@@ -7210,7 +7214,7 @@ function attachPerfilHandlers(){
       instagram: document.getElementById('perfilInstaInput').value.trim(),
       twitch: document.getElementById('perfilTwitchInput').value.trim(),
       youtube: document.getElementById('perfilYoutubeInput').value.trim(),
-      avatarCharId: document.getElementById('perfilAvatarSelect').value,
+      avatarCharId: PROFILE_CHAR_AVATAR ? document.getElementById('perfilAvatarSelect').value : ((state.myProfile && state.myProfile.avatarCharId) || ''),
       showSocials: document.getElementById('perfilShowSocialsInput').checked,
       public: document.getElementById('perfilPublicInput').checked,
     };
@@ -7353,7 +7357,7 @@ function renderDonorCard(d, i){
   const p = patenteFor(d.amount);
   const prof = linkedProfileFor(d);
   const name = (prof && prof.nickname) || d.name;
-  const avatarChar = prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
+  const avatarChar = PROFILE_CHAR_AVATAR && prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
   return `
   <button class="kz-donor-card patente-${p.key}" data-open-donor="${d.id}">
     <span class="kz-donor-number">Nº ${d.number != null ? d.number : (i+1)}</span>
@@ -7375,7 +7379,7 @@ function donorProfileModalHtml(d){
   const p = patenteFor(d.amount);
   const prof = linkedProfileFor(d);
   const name = (prof && prof.nickname) || d.name;
-  const avatarChar = prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
+  const avatarChar = PROFILE_CHAR_AVATAR && prof && prof.avatarCharId ? state.characters.find(c=>c.id===prof.avatarCharId) : null;
   const quote = (prof && prof.bio) || d.quote;
   const socials = prof && prof.showSocials ? [prof.instagram, prof.twitch, prof.youtube].filter(Boolean) : [];
   return `
