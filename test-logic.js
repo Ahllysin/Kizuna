@@ -359,19 +359,26 @@ async function main(){
     assert.ok(!r.cond.includes('cura'), 'curar a si quando um aliado morre não faz do guerreiro um curandeiro');
   });
 
-  await test('curar só a si mesmo e roubo de vida são Sobrevivência — não fazem do guerreiro Cura nem Suporte', () => {
+  await test('Sobrevivência: quem revive ou tem 2+ habilidades de autocura (cura própria/roubo de vida) entra; 1 só não; curar aliados é Cura', () => {
     const r = evalIn(sandbox, `(() => {
-      const mk = (id, type, skill, sup) => ({ id, name:'Au ' + id, type, tags:[], rarity:'R', skill:{name:'S', desc:skill, effects:[]}, supreme:{name:'U', desc:sup, effects:[]}, combo:{name:'C', triggers:[], effects:[]} });
-      const a = analyzeRoles(mk('k', 'Defesa', 'Ataca um único inimigo.', 'Ataca todos os inimigos e concede o efeito Fúria (recupera 20% da vida, aumenta 20% de defesa e 20% de redução de dano).'));
-      const b = analyzeRoles(mk('l', 'Ataque', 'Ataca um único inimigo, absorvendo 30% do dano causado em vida e aumentando a Taxa de Roubo de Vida em 20%.', ''));
-      const healer = analyzeRoles(mk('h', 'Habilidade', 'Cura todos os aliados em 90% do ATQ.', ''));
-      return { a: a.roles, b: b.roles, aPil: a.pillars, bScore: b.score, healer: healer.roles };
+      const mk = (id, type, skill, sup) => ({ id, name:'Sv ' + id, type, tags:[], rarity:'R', skill:{name:'S', desc:skill, effects:[]}, supreme:{name:'U', desc:sup, effects:[]}, combo:{name:'C', triggers:[], effects:[]} });
+      const roles = (...a) => analyzeRoles(mk(...a)).roles;
+      return {
+        uma: roles('1', 'Ataque', 'Ataca um único inimigo.', 'Ataca todos os inimigos e recupera 20% da vida.'),
+        duas: roles('2', 'Ataque', 'Ataca um único inimigo e recupera 10% do PV.', 'Ataca todos os inimigos, com +40% de Roubo de Vida.'),
+        reviver: roles('3', 'Ataque', 'Ataca um único inimigo.', 'Se for derrotado, revive com 30% do PV.'),
+        reviverAliado: roles('4', 'Habilidade', 'Revive um aliado derrotado com 30% do PV.', ''),
+        healer: roles('5', 'Habilidade', 'Cura todos os aliados em 90% do ATQ.', ''),
+        duasPil: analyzeRoles(mk('6', 'Ataque', 'Recupera 10% da vida.', 'Aumenta o Roubo de Vida em 30%.')).pillars,
+      };
     })()`);
-    assert.ok(r.a.includes('sobrevivencia'), 'autocura vira Sobrevivência (' + r.a + ')');
-    assert.ok(!r.a.includes('cura') && !r.a.includes('suporte') && r.aPil.suporte === 0, 'não é Cura nem Suporte');
-    assert.ok(r.b.includes('sobrevivencia') && !r.b.includes('cura') && !r.b.includes('suporte'), 'roubo de vida é Sobrevivência (' + r.b + ')');
-    assert.ok(r.bScore.sobrevivencia >= 2, 'roubo de vida soma na Sobrevivência');
-    assert.ok(r.healer.includes('cura') && !r.healer.includes('sobrevivencia'), 'curar aliados continua sendo Cura');
+    assert.ok(!r.uma.includes('sobrevivencia'), 'só 1 habilidade de autocura não basta (' + r.uma + ')');
+    assert.ok(r.duas.includes('sobrevivencia'), '2 habilidades de autocura (cura própria + roubo de vida) entram (' + r.duas + ')');
+    assert.ok(r.reviver.includes('sobrevivencia'), 'reviver entra (' + r.reviver + ')');
+    assert.ok(!r.reviverAliado.includes('sobrevivencia'), 'reviver um aliado não é Sobrevivência (' + r.reviverAliado + ')');
+    assert.ok(r.healer.includes('cura') && !r.healer.includes('sobrevivencia') && !r.healer.includes('suporte'), 'curar aliados continua sendo Cura');
+    assert.ok(!r.duas.includes('suporte') && !r.duas.includes('cura'), 'autocura nunca vira Suporte nem Cura');
+    assert.strictEqual(r.duasPil.suporte, 0);
   });
 
   await test('balanceScore premia equipe com dano, tank, suporte e controle; missingPillars aponta o que falta', () => {

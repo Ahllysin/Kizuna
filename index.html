@@ -5864,7 +5864,7 @@ const ROLE_INFO = {
   tank:     { label:'Tank',          full:'Tank',             glyph:'守', rgb:['59,130,196','#86c0f0'], pillar:'tank',     thr:8,
     about:'Aguenta a pancada: redução de dano, bloqueio, escudo e proteção dos aliados.' },
   sobrevivencia: { label:'Sobrevivência', full:'Sobrevivência', glyph:'生', rgb:['46,170,140','#7fe0c8'], pillar:'tank', thr:2,
-    about:'Mantém-se vivo por conta própria: autocura (recuperar a própria vida), roubo de vida e renascimento. Não ajuda os aliados — isso é Cura.' },
+    about:'Sobrevive por conta própria: reviver, ou ter pelo menos 2 habilidades de autocura (cura própria ou roubo de vida). Não ajuda os aliados — isso é Cura.' },
   cura:     { label:'Cura',          full:'Curandeiro',       glyph:'癒', rgb:['63,174,90','#86e3a2'],  pillar:'suporte',  thr:3,
     about:'Recupera a vida dos aliados ou os revive. Curar só a si mesmo não conta: isso é Sobrevivência.' },
   suporte:  { label:'Suporte',       full:'Suporte',          glyph:'援', rgb:['201,162,55','#e8cf6f'], pillar:'suporte',  thr:4,
@@ -5896,8 +5896,7 @@ const ROLE_RULES = [
   ['tank', /redu[cç][aã]o de dano|dano recebido|dano sofrido|bloque|imun[ei]|reflex|contra-?ataque|esquiva|invulner|(aumenta|\+|ganha)[^.]*\b(def|defesa|pv|vida)\b/, 'proprio', 1, /inimig|do alvo|dos alvos|reduz|roubo de vida/],
   ['tank', /protege (os )?aliad|absorve[^.]*dano|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5],
   ['tank', /escudo/, null, 1, /remove|dissip|quebra|quebrador|quebram|destr/],
-  ['sobrevivencia', /recupera[^.]*(vida|pv)|restaura[^.]*(vida|pv)|vida por turno|\bregenera|\brevive\b|renasc|ressurge|ressuscit|sobreviv|n[aã]o morre/, null, 3, /aliad|equipe|recebid/],
-  ['sobrevivencia', /roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|vampir/, null, 2, /aliad|recebid/],
+  ['sobrevivencia', /recupera[^.]*(vida|pv)|restaura[^.]*(vida|pv)|vida por turno|\bregenera|roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|vampir/, null, 2, /aliad|equipe|recebid/],
 
   ['cura', /\bcura (todos|os |a |aos|as |2 |1 |um |uma |o guerreiro|a equipe|toda)|aplica cura|restaura (pv|vida)[^.]*(aliad|equipe|guerreiros|menor)|restaura pv para|recupera a vida d[oa][^.]*alia|converte[^.]*dano em vida[^.]*(fileira|aliad|equipe)|efeito de cura aumentado|recupera [^.]*(pv|vida) d[eo] (todos|\d)/, null, 3, /cura recebida|reduz[^.]*cura|efeito de cura (reduz|diminui)/],
   ['cura', /revive|reanima|ressuscita/, 'aliado', 2],
@@ -5915,6 +5914,9 @@ const ROLE_RULES = [
   ['dot', /queima|sangr|veneno|envenen|corro|dano cont[ií]nuo|a cada turno[^.]*dano|no in[ií]cio de cada turno[^.]*(dano|causa)|chamas? (azul|azuis|extintora)/, 'inimigo', 2, /imun|resist|remove|dissip|\breduz\b[^.]*queima|aliad|pr[oó]pri|contra alvos|em alvos|alvos (em|com)|absorve/],
 ];
 const ROLE_TEXT_CAP = 6;   // um mesmo texto não pode pesar mais que isso num papel
+// Sobrevivência: entra quem REVIVE (ou sobrevive à morte) ou tem pelo menos 2 habilidades/passivas de autocura (cura própria ou roubo de vida).
+const SURV_REVIVE = /\brevive\b|renasc|ressurge|ressuscit|volta à vida|sobreviv|n[aã]o morre|imortal/;
+const SURV_MIN_ABILITIES = 2;
 
 // Textos que valem pra classificação: a versão mais evoluída de cada habilidade.
 function roleTexts(c){
@@ -5966,6 +5968,7 @@ function analyzeRoles(c){
   if(hit) return hit;
   const score = {}, why = {};
   ROLE_ORDER.forEach(r => { score[r] = 0; why[r] = []; });
+  let reviveHit = false, survTexts = 0;
   roleTexts(c).forEach(txt => {
     const tscore = {};
     roleClauses(txt).forEach(raw => {
@@ -5978,13 +5981,16 @@ function analyzeRoles(c){
         if(need && !tg[need]) return;
         if(!best[role] || w > best[role]) best[role] = w;
       });
+      if(SURV_REVIVE.test(cl) && !/aliad|equipe|inimig/.test(cl)){ reviveHit = true; if(why.sobrevivencia.length < 3) why.sobrevivencia.push(raw); }
       Object.keys(best).forEach(role => {
         tscore[role] = (tscore[role] || 0) + best[role];
         if(why[role].length < 3) why[role].push(raw);
       });
     });
-    Object.keys(tscore).forEach(r => { score[r] += Math.min(ROLE_TEXT_CAP, tscore[r]); });
+    if(tscore.sobrevivencia) survTexts++;
+    Object.keys(tscore).forEach(r => { if(r !== 'sobrevivencia') score[r] += Math.min(ROLE_TEXT_CAP, tscore[r]); });
   });
+  score.sobrevivencia = reviveHit ? Math.max(ROLE_INFO.sobrevivencia.thr, survTexts) : (survTexts >= SURV_MIN_ABILITIES ? survTexts : 0);
   const mult = roleDamageMult(c);
   if(mult) score.dano += Math.max(0, Math.min(4, (mult - 350) / 80));
   if(c.type === 'Ataque') score.dano += 2;
