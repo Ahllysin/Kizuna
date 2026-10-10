@@ -381,6 +381,29 @@ async function main(){
     assert.strictEqual(r.duasPil.suporte, 0);
   });
 
+  await test('papéis: atordoamento com chance baixa não é Controle; guardar/assumir o dano dos aliados é Suporte; tipo Ataque exige muito mais defesa pra ser Tank', () => {
+    const r = evalIn(sandbox, `(() => {
+      const mk = (id, type, skill, sup, pas) => ({ id, name: 'Rl ' + id, type, tags: [], rarity: 'R', skill: { name: 'S', desc: skill, effects: [] }, supreme: { name: 'U', desc: sup, effects: [] }, combo: { name: 'C', triggers: [], effects: [] } });
+      const roles = (...a) => analyzeRoles(mk(...a)).roles;
+      const ctrlScore = (...a) => analyzeRoles(mk(...a)).score.controle;
+      return {
+        stunBaixoScore: ctrlScore('1', 'Habilidade', 'Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 25% de chance de causar [Silêncio].'),
+        stunAltoScore: ctrlScore('2', 'Habilidade', 'Ataca um único inimigo, com 70% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 60% de chance de causar [Paralisia] e [Silêncio].'),
+        stunBaixo: roles('1', 'Habilidade', 'Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 25% de chance de causar [Silêncio].'),
+        stunAlto: roles('2', 'Habilidade', 'Ataca um único inimigo, com 70% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 60% de chance de causar [Paralisia] e [Silêncio].'),
+        guardiao: roles('3', 'Habilidade', 'Ataca um único inimigo.', 'No início de cada turno, concede [Guardião] ao aliado da linha de frente com maior ataque. A unidade com esse estado, ao sofrer um ataque, fará com que o guerreiro assuma 70% do dano.'),
+        ataqueDef: roles('4', 'Ataque', 'Causa 30% de dano adicional.', 'Aumenta a própria Taxa de Redução de Dano em 20%. Aumenta a própria DEF em 30%.'),
+        defesaDef: roles('5', 'Defesa', 'Ataca um único inimigo.', 'Aumenta a própria Taxa de Redução de Dano em 20%. Aumenta a própria DEF em 30%.'),
+      };
+    })()`);
+    assert.ok(r.stunBaixoScore < 4, 'atordoar/silenciar com chance baixa pesa pouco (' + r.stunBaixoScore + ')');
+    assert.ok(r.stunAltoScore >= 4 && r.stunAltoScore - r.stunBaixoScore >= 1.5, 'com chance alta pesa bem mais e vira Controle (' + r.stunAltoScore + ')');
+    assert.ok(r.stunAlto.includes('controle'), 'efeitos de controle com chance alta continuam sendo Controle (' + r.stunAlto + ')');
+    assert.ok(r.guardiao.includes('suporte'), 'assumir o dano dos aliados é Suporte (' + r.guardiao + ')');
+    assert.ok(r.defesaDef.includes('tank'), 'tipo Defesa com redução de dano e DEF é Tank');
+    assert.ok(!r.ataqueDef.includes('tank') && r.ataqueDef[0] === 'dano', 'tipo Ataque com o mesmo texto fica Dano (' + r.ataqueDef + ')');
+  });
+
   await test('balanceScore premia equipe com dano, tank, suporte e controle; missingPillars aponta o que falta', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];

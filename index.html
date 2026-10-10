@@ -6027,7 +6027,7 @@ async function exportTierListImage(){
 // guerreiro em papéis. É uma leitura automática por palavras-chave — serve de guia, não de verdade absoluta.
 const ROLE_ORDER = ['dano','dot','tank','sobrevivencia','cura','suporte','controle'];
 const ROLE_INFO = {
-  dano:     { label:'Dano',          full:'Causador de Dano', glyph:'攻', rgb:['192,57,43','#ef8b7f'],  pillar:'dano',     thr:8,
+  dano:     { label:'Dano',          full:'Causador de Dano', glyph:'攻', rgb:['192,57,43','#ef8b7f'],  pillar:'dano',     thr:7,
     about:'Alto dano, crítico e afins: golpes fortes, dano adicional, taxa de crítico, ataques em área.' },
   dot:      { label:'Dano Contínuo', full:'Dano Contínuo',    glyph:'炎', rgb:['217,123,42','#f0a05f'], pillar:'dano',     thr:4,
     about:'Queimadura, veneno, sangramento e parecidos: o dano continua acontecendo turno após turno.' },
@@ -6073,6 +6073,7 @@ const ROLE_RULES = [
 
   ['suporte', new RegExp(RB_VERB + '[^.]*' + RB_STAT + '[^.]*alia|' + RB_VERB + '[^.]*alia[^.]*' + RB_STAT + '|(f[uú]ria|raiva)[^.]*(1 guerreiro|um guerreiro|2 guerreiros|aleat)[^.]*alia|aumenta aleatoriamente[^.]*(f[uú]ria|raiva)|alia[^.]*(ganham|recebem)'), 'aliado', 1.5, /reduz[^.]*(alvo|inimig)|derrotad|morr|abatid/],
   ['suporte', /remove[^.]*(efeitos negativos|debuff|anormal)|dissipa os efeitos de \[controle\]|purifica|concede \[|refor[cç]o/, 'aliado', 1],
+  ['suporte', /guardi[aã]o|prote[cç][aã]o\][^.]*assum|assum[a-z]*[^.]*\bdano\b|protege[^.]*alia|alia[^.]*recebem[^.]*\bdano\b|compartilh[^.]*\bdano\b/, null, 3, /imun|inimig/],
   ['suporte', /imun[ie]|imunidade|invulner/, 'aliado', 1.5, /inimig|alvo|reduz|\bpr[oó]pri/],
 
   ['controle', /atordo|sil[eê]ncio|silencia|paralis|petrific|confus|imobiliza|enraiz|encant|cegueira|pesadelo|supress[aã]o de supremo|\[suprimir\]|congel|adormec|\bmedo\b/, 'inimigo', 2, /imun|resist|res\. anormal|remove|dissip|purific|contra alvos|em alvos|alvos (em|com|sob)|estado de|sob controle|se acertar|aumenta para|alvo de|taxa de (resist|res)|ao morrer/],
@@ -6083,6 +6084,7 @@ const ROLE_RULES = [
 
   ['dot', /queima|sangr|veneno|envenen|corro|dano cont[ií]nuo|a cada turno[^.]*dano|no in[ií]cio de cada turno[^.]*(dano|causa)|chamas? (azul|azuis|extintora)/, 'inimigo', 2, /imun|resist|remove|dissip|\breduz\b[^.]*queima|aliad|pr[oó]pri|contra alvos|em alvos|alvos (em|com)|absorve/],
 ];
+const ROLE_CC_WEIGHT = 2;   // peso da regra de efeito de controle (atordoamento, silêncio...) — cai pela metade com chance baixa
 const ROLE_TEXT_CAP = 6;   // um mesmo texto não pode pesar mais que isso num papel
 // Sobrevivência: entra quem REVIVE (ou sobrevive à morte) ou tem pelo menos 2 habilidades/passivas de autocura (cura própria ou roubo de vida).
 const SURV_REVIVE = /\brevive\b|renasc|ressurge|ressuscit|volta à vida|sobreviv|n[aã]o morre|imortal/;
@@ -6144,12 +6146,15 @@ function analyzeRoles(c){
     roleClauses(txt).forEach(raw => {
       const cl = roleMainPart(raw.toLowerCase());
       const tg = roleTarget(cl);
+      const chm = cl.match(/(\d+(?:,\d+)?)% de chance/);
+      const lowChance = !!chm && parseFloat(chm[1].replace(',', '.')) < 40;
       const best = {};
       ROLE_RULES.forEach(([role, re, need, w, ex]) => {
         if(!re.test(cl)) return;
         if(ex && ex.test(cl)) return;
         if(need && !tg[need]) return;
-        if(!best[role] || w > best[role]) best[role] = w;
+        const ww = (role === 'controle' && w === ROLE_CC_WEIGHT && lowChance) ? w / 2 : w;
+        if(!best[role] || ww > best[role]) best[role] = ww;
       });
       if(SURV_REVIVE.test(cl) && !/aliad|equipe|inimig/.test(cl)){ reviveHit = true; if(why.sobrevivencia.length < 3) why.sobrevivencia.push(raw); }
       Object.keys(best).forEach(role => {
@@ -6164,6 +6169,7 @@ function analyzeRoles(c){
   const mult = roleDamageMult(c);
   if(mult) score.dano += Math.max(0, Math.min(4, (mult - 350) / 80));
   if(c.type === 'Ataque') score.dano += 2;
+  if(c.type === 'Ataque') score.tank *= 0.75;
   if(c.type === 'Defesa') score.tank += 2;
   if(c.type === 'Habilidade'){ score.suporte += 0.8; score.controle += 0.4; }
 
@@ -6172,7 +6178,7 @@ function analyzeRoles(c){
   const list = ROLE_ORDER.filter(r => r !== 'sobrevivencia').map(r => [r, norm(r)]).sort((a, b) => b[1] - a[1]);
   let keep = list.filter(([r, n], i) => n >= 1 && (i === 0 || n >= list[0][1] * 0.55)).slice(0, 3).map(x => x[0]);
   if(!keep.length) keep = [list[0][0]];
-  if(norm('sobrevivencia') >= 1) keep = keep.slice(0, 2).concat('sobrevivencia');
+  if(norm('sobrevivencia') >= 1) keep = keep.slice(0, 3).concat('sobrevivencia');
   const ov = ROLE_OVERRIDES[c.name];
   if(ov && ov.length) keep = ov.slice(0, 3);
   const pillars = { dano:0, tank:0, suporte:0, controle:0 };
