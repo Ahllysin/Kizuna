@@ -592,7 +592,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-comp-bal b{color:#ffd66b;}
 .kz-rec-roles{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 .kz-fill-tag{padding:2px 9px;border-radius:999px;background:rgba(63,174,90,.18);border:1px solid rgba(63,174,90,.55);color:#86e3a2;font-size:11px;font-weight:800;}
-.kz-auto{margin-top:16px;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(255,170,70,.4);background:rgba(16,14,26,.8);}
+.kz-auto{margin:0;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(255,170,70,.4);background:rgba(16,14,26,.8);}
 .kz-auto-head{display:flex;flex-direction:column;gap:10px;margin-bottom:10px;}
 .kz-auto-head h3{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:26px;color:var(--text-strong);text-shadow:0 3px 0 #3a1200;}
 .kz-auto-ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
@@ -7119,6 +7119,7 @@ function renderCombosTab(){
         <div class="kz-roster-grid" id="rosterList">${renderRosterList(state.rosterSearch)}</div>
       </aside>
       <div class="kz-combos-main">
+        ${renderAutoPanel()}
         <div class="kz-field">
           <div class="kz-field-head">
             <span class="kz-label">Equipe</span>
@@ -7132,7 +7133,6 @@ function renderCombosTab(){
           ${compositionHtml()}
           ${state.optInfo && canUndoOptimize() ? `<div class="kz-opt-info">${state.optInfo}</div>` : ''}
           <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
-          ${renderAutoPanel()}
           ${renderRecommendations()}
         </div>
       </div>
