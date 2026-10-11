@@ -387,10 +387,13 @@ async function main(){
       const roles = (...a) => analyzeRoles(mk(...a)).roles;
       const ctrlScore = (...a) => analyzeRoles(mk(...a)).score.controle;
       return {
-        stunBaixoScore: ctrlScore('1', 'Habilidade', 'Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 25% de chance de causar [Silêncio].'),
+        stunBaixoScore: ctrlScore('1', 'Habilidade', 'Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca um único inimigo com 25% de chance de causar [Silêncio].'),
         stunAltoScore: ctrlScore('2', 'Habilidade', 'Ataca um único inimigo, com 70% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 60% de chance de causar [Paralisia] e [Silêncio].'),
         stunBaixo: roles('1', 'Habilidade', 'Ataca um único inimigo, com 30% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 25% de chance de causar [Silêncio].'),
         stunAlto: roles('2', 'Habilidade', 'Ataca um único inimigo, com 70% de chance de causar [Atordoamento] (incapacidade de agir por 1 turno).', 'Ataca todos os inimigos com 60% de chance de causar [Paralisia] e [Silêncio].'),
+        areaBaixo: ctrlScore('6', 'Habilidade', 'Ataca um único inimigo.', 'Ataca todos os inimigos. Tem 30% de chance de reduzir 300 de raiva de cada inimigo e 20% de chance de causar [Imobilização].'),
+        unicoBaixo: ctrlScore('7', 'Habilidade', 'Ataca um único inimigo.', 'Ataca um único inimigo. Tem 30% de chance de reduzir 300 de raiva do alvo e 20% de chance de causar [Imobilização].'),
+        absorveAdicional: analyzeRoles(mk('8', 'Ataque', 'Ataca um único inimigo, absorve 20% da taxa de bloqueio do alvo, causa 35% de dano adicional e absorve 200 pontos de raiva do alvo.', '')).score.tank,
         guardiao: roles('3', 'Habilidade', 'Ataca um único inimigo.', 'No início de cada turno, concede [Guardião] ao aliado da linha de frente com maior ataque. A unidade com esse estado, ao sofrer um ataque, fará com que o guerreiro assuma 70% do dano.'),
         ataqueDef: roles('4', 'Ataque', 'Causa 30% de dano adicional.', 'Aumenta a própria Taxa de Redução de Dano em 20%. Aumenta a própria DEF em 30%.'),
         defesaDef: roles('5', 'Defesa', 'Ataca um único inimigo.', 'Aumenta a própria Taxa de Redução de Dano em 20%. Aumenta a própria DEF em 30%.'),
@@ -399,6 +402,8 @@ async function main(){
     assert.ok(r.stunBaixoScore < 4, 'atordoar/silenciar com chance baixa pesa pouco (' + r.stunBaixoScore + ')');
     assert.ok(r.stunAltoScore >= 4 && r.stunAltoScore - r.stunBaixoScore >= 1.5, 'com chance alta pesa bem mais e vira Controle (' + r.stunAltoScore + ')');
     assert.ok(r.stunAlto.includes('controle'), 'efeitos de controle com chance alta continuam sendo Controle (' + r.stunAlto + ')');
+    assert.ok(r.absorveAdicional < 3, '"absorve ... dano adicional" (atributo do alvo) não conta como Tank (' + r.absorveAdicional + ')');
+    assert.ok(r.areaBaixo > r.unicoBaixo, 'em golpe de área a chance baixa não diminui o peso do controle (' + r.areaBaixo + ' x ' + r.unicoBaixo + ')');
     assert.ok(r.guardiao.includes('suporte'), 'assumir o dano dos aliados é Suporte (' + r.guardiao + ')');
     assert.ok(r.defesaDef.includes('tank'), 'tipo Defesa com redução de dano e DEF é Tank');
     assert.ok(!r.ataqueDef.includes('tank') && r.ataqueDef[0] === 'dano', 'tipo Ataque com o mesmo texto fica Dano (' + r.ataqueDef + ')');

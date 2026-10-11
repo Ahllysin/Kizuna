@@ -6064,7 +6064,7 @@ const ROLE_RULES = [
   ['dano', /ignora (a )?(defesa|def)|penetra|perfura|quebra de defesa/, null, 1],
 
   ['tank', /redu[cç][aã]o de dano|dano recebido|dano sofrido|bloque|imun[ei]|reflex|contra-?ataque|esquiva|invulner|(aumenta|\+|ganha)[^.]*\b(def|defesa|pv|vida)\b/, 'proprio', 1, /inimig|do alvo|dos alvos|reduz|roubo de vida/],
-  ['tank', /protege (os )?aliad|absorve[^.]*dano|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5],
+  ['tank', /protege (os )?aliad|absorve[^.,]*\bdo dano\b|assume o dano|provoc|cobre aliad|divide o dano|compartilh/, null, 2.5, /do alvo|dos alvos|adicional/],
   ['tank', /escudo/, null, 1, /remove|dissip|quebra|quebrador|quebram|destr/],
   ['sobrevivencia', /recupera[^.]*(vida|pv)|restaura[^.]*(vida|pv)|vida por turno|\bregenera|roubo de vida|absor[cç][aã]o de vida|dano[^.]*em vida|vampir/, null, 2, /aliad|equipe|recebid/],
 
@@ -6143,11 +6143,13 @@ function analyzeRoles(c){
   let reviveHit = false, survTexts = 0;
   roleTexts(c).forEach(txt => {
     const tscore = {};
+    // golpe em área (todos os inimigos, fileira, coluna, "de cada inimigo"): a chance vale pra cada alvo, então não é "chance baixa"
+    const aoe = /ataca (todos|uma fileira|uma coluna|toda)|todos os inimigos|de cada inimigo|fileira de inimigos|coluna de inimigos|fileira inimiga|coluna inimiga/i.test(txt);
     roleClauses(txt).forEach(raw => {
       const cl = roleMainPart(raw.toLowerCase());
       const tg = roleTarget(cl);
       const chm = cl.match(/(\d+(?:,\d+)?)% de chance/);
-      const lowChance = !!chm && parseFloat(chm[1].replace(',', '.')) < 40;
+      const lowChance = !!chm && !aoe && parseFloat(chm[1].replace(',', '.')) < 40;
       const best = {};
       ROLE_RULES.forEach(([role, re, need, w, ex]) => {
         if(!re.test(cl)) return;
