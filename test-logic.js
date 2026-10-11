@@ -409,6 +409,15 @@ async function main(){
     assert.ok(!r.ataqueDef.includes('tank') && r.ataqueDef[0] === 'dano', 'tipo Ataque com o mesmo texto fica Dano (' + r.ataqueDef + ')');
   });
 
+  await test('Dano Contínuo (sangramento etc.) entra mesmo quando o dano do guerreiro é bem maior (Janemba); e o bloco "Papel em batalha" não tem mais o texto explicativo', () => {
+    const r = evalIn(sandbox, `(() => {
+      const c = state.characters.find(x => x.name === 'Janemba');
+      return { roles: analyzeRoles(c).roles, card: renderRoleCard(c) };
+    })()`);
+    assert.ok(r.roles.includes('dano') && r.roles.includes('dot'), 'Janemba: Dano + Dano Contínuo (' + r.roles + ')');
+    assert.ok(!r.card.includes('Lido automaticamente'), 'o texto explicativo saiu do bloco');
+  });
+
   await test('balanceScore premia equipe com dano, tank, suporte e controle; missingPillars aponta o que falta', () => {
     const r = evalIn(sandbox, `(() => {
       const bk = [state.characters, state.team];

@@ -6178,7 +6178,8 @@ function analyzeRoles(c){
   // Sobrevivência (autocura, roubo de vida, reviver) aparece em muita gente: entra sempre como complemento, nunca como papel principal.
   const norm = r => score[r] / ROLE_INFO[r].thr;
   const list = ROLE_ORDER.filter(r => r !== 'sobrevivencia').map(r => [r, norm(r)]).sort((a, b) => b[1] - a[1]);
-  let keep = list.filter(([r, n], i) => n >= 1 && (i === 0 || n >= list[0][1] * 0.55)).slice(0, 3).map(x => x[0]);
+  // Dano Contínuo é marca registrada: se o guerreiro aplica sangramento/queimadura/veneno de verdade, entra mesmo que o dano dele seja bem maior
+  let keep = list.filter(([r, n], i) => n >= 1 && (i === 0 || n >= list[0][1] * 0.55 || r === 'dot')).slice(0, 3).map(x => x[0]);
   if(!keep.length) keep = [list[0][0]];
   if(norm('sobrevivencia') >= 1) keep = keep.slice(0, 3).concat('sobrevivencia');
   const ov = ROLE_OVERRIDES[c.name];
@@ -6216,7 +6217,7 @@ function renderRoleCard(c){
     </div>`;
   }).join('');
   return `<div class="kz-role-card">
-    <div class="kz-role-card-head"><span class="kz-label">Papel em batalha</span><span class="kz-muted">Lido automaticamente das habilidades e passivas — serve de guia pra montar equipe.</span></div>
+    <div class="kz-role-card-head"><span class="kz-label">Papel em batalha</span></div>
     <div class="kz-role-rows">${rows}</div>
   </div>`;
 }
