@@ -1207,11 +1207,77 @@ async function main(){
     assert.ok(!m, 'achei handler inline: ' + (m && m.join(', ')));
   });
 
-  await test('biblioteca do Supabase com versão fixa (não "@2" solto)', () => {
-    const html = require('fs').readFileSync(require('path').join(__dirname, 'index.html'), 'utf8');
-    const m = html.match(/import\("https:\/\/esm\.sh\/@supabase\/supabase-js@([^"]+)"\)/);
-    assert.ok(m, 'não achei o import do supabase-js');
-    assert.ok(/^\d+\.\d+\.\d+$/.test(m[1]), 'versão precisa ser exata, veio "' + m[1] + '"');
+  await test('Supabase e fontes vêm do próprio site (vendor/ e fonts/): nenhum CDN/Google no HTML nem na CSP, e a cópia do supabase-js não foi alterada', () => {
+    const fs = require('fs'), path = require('path'), crypto = require('crypto');
+    const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+    assert.ok(!/esm\.sh|fonts\.googleapis|fonts\.gstatic|cdn\.jsdelivr|unpkg\.com|cdnjs/i.test(html.replace(/<!--[\s\S]*?-->/g, '')), 'o HTML não pode carregar nada de CDN/Google Fonts');
+    assert.ok(/<script src="vendor\/supabase\.js"><\/script>/.test(html), 'o Supabase precisa vir de vendor/supabase.js');
+    assert.ok(/<link rel="stylesheet" href="fonts\/fonts\.css">/.test(html), 'as fontes precisam vir de fonts/fonts.css');
+    const csp = require('./update-csp').currentPolicy(html);
+    assert.ok(!/esm\.sh|googleapis|gstatic/.test(csp), 'a CSP não pode liberar esm.sh nem Google Fonts');
+    assert.ok(/font-src 'self'/.test(csp));
+    const lib = fs.readFileSync(path.join(__dirname, 'vendor', 'supabase.js'));
+    assert.strictEqual(crypto.createHash('sha256').update(lib).digest('hex'), 'd6a5c4414a5d4ce646d9c1de223aa7067d3ff664c15394ffeb7fcffc763354a3',
+      'vendor/supabase.js mudou — se foi de propósito (atualização), troque o hash aqui e em vendor/LEIAME.txt');
+    assert.ok(fs.existsSync(path.join(__dirname, 'vendor', 'LICENSE-supabase-js.txt')) && fs.existsSync(path.join(__dirname, 'fonts', 'LICENSES.txt')), 'licenças junto das cópias');
+  });
+
+  await test('fontes locais: todo kanji usado no site está coberto por alguma faixa baixada (senão cairia na fonte do sistema)', () => {
+    const fs = require('fs'), path = require('path');
+    const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+    const css = fs.readFileSync(path.join(__dirname, 'fonts', 'fonts.css'), 'utf8');
+    const cjk = [...new Set([...html].filter(ch => /[\u3000-\u30ff\u3400-\u9fff\uff00-\uffef]/.test(ch)))].map(c => c.codePointAt(0));
+    const inRange = (cp, ur) => ur.split(',').some(r => {
+      r = r.trim().replace(/^U\+/i, '');
+      if (r.includes('-')) { const [a, b] = r.split('-'); return cp >= parseInt(a, 16) && cp <= parseInt(b, 16); }
+      return cp === parseInt(r, 16);
+    });
+    const ranges = [...css.matchAll(/font-family:'Shippori Mincho'[^}]*unicode-range:([^;]+);/g)].map(m => m[1]);
+    const faltando = cjk.filter(cp => !ranges.some(r => inRange(cp, r))).map(cp => String.fromCodePoint(cp));
+    assert.deepStrictEqual(faltando, [], 'kanji sem fonte local (rode "node fetch-fonts.js"): ' + faltando.join(' '));
+    const arquivos = [...css.matchAll(/url\(([^)]+\.woff2)\)/g)].map(m => m[1]);
+    arquivos.forEach(f => assert.ok(fs.existsSync(path.join(__dirname, 'fonts', f)), 'arquivo de fonte ausente: ' + f));
+  });
+
+  await test('Apagar meus dados: remove posts, curtidas, dados sincronizados e perfil do próprio login (e só eles); falha do banco não limpa nada na tela', async () => {
+    runIn(sandbox, `
+      window.__dels = []; window.__failDel = false;
+      window.__sb = { client: { from: (table) => ({ delete: () => ({ eq: (col, val) => { window.__dels.push([table, col, val]); return Promise.resolve({ error: window.__failDel && table === 'user_data' ? { message: 'boom' } : null }); } }) }) } };
+      supabaseAvailable = true;
+      window.__bk5 = [state.discordUser, state.myProfile, state.communityPosts, state.communityMyLikes];
+      state.discordUser = { id: 'uid-apagar', username: 'Fulano' };
+      state.myProfile = { nickname: 'Nick', public: true };
+      state.communityPosts = [{ id: 'a', userId: 'uid-apagar', kind: 'team', likes: 0, data: {} }, { id: 'b', userId: 'outro', kind: 'team', likes: 0, data: {} }];
+      state.communityMyLikes = ['b'];
+    `);
+    runIn(sandbox, 'window.__r1 = null; deleteMyOnlineData().then(v => { window.__r1 = v; });');
+    await new Promise(res => setTimeout(res, 30));
+    const ok = { r: evalIn(sandbox, 'window.__r1'), dels: evalIn(sandbox, 'window.__dels.map(d => d.join(":"))'), posts: evalIn(sandbox, 'state.communityPosts.map(p => p.id)'), nick: evalIn(sandbox, 'state.myProfile.nickname'), likes: evalIn(sandbox, 'state.communityMyLikes.length') };
+    runIn(sandbox, "window.__dels = []; window.__failDel = true; state.myProfile = { nickname: 'Nick', public: true }; window.__r2 = null; deleteMyOnlineData().then(v => { window.__r2 = v; });");
+    await new Promise(res => setTimeout(res, 30));
+    const falha = { r: evalIn(sandbox, 'window.__r2'), nick: evalIn(sandbox, 'state.myProfile.nickname'), dels: evalIn(sandbox, 'window.__dels.map(d => d[0])') };
+    runIn(sandbox, `
+      state.discordUser = window.__bk5[0]; state.myProfile = window.__bk5[1]; state.communityPosts = window.__bk5[2]; state.communityMyLikes = window.__bk5[3];
+      supabaseAvailable = false; window.__sb = undefined; window.__dels = undefined; window.__failDel = undefined; window.__bk5 = undefined; window.__r1 = undefined; window.__r2 = undefined;
+    `);
+    assert.strictEqual(ok.r, true);
+    assert.deepStrictEqual(ok.dels, ['community_posts:user_id:uid-apagar', 'community_likes:user_id:uid-apagar', 'user_data:user_id:uid-apagar', 'profiles:id:uid-apagar'], 'só apaga linhas do próprio login, nas 4 tabelas');
+    assert.deepStrictEqual(ok.posts, ['b'], 'tira da tela só os posts da própria pessoa');
+    assert.strictEqual(ok.nick, '', 'perfil volta em branco');
+    assert.strictEqual(ok.likes, 0);
+    assert.strictEqual(falha.r, false, 'se o banco recusar, avisa que falhou');
+    assert.strictEqual(falha.nick, 'Nick', 'e não apaga o perfil da tela');
+    assert.ok(!falha.dels.includes('profiles'), 'depois do erro, não segue apagando o resto');
+  });
+
+  await test('página de privacidade existe, não tem script, tem a própria CSP restrita e o site linka pra ela', () => {
+    const fs = require('fs'), path = require('path');
+    const pg = fs.readFileSync(path.join(__dirname, 'privacidade.html'), 'utf8');
+    assert.ok(!/<script/i.test(pg), 'página de texto não precisa de script');
+    assert.ok(/Content-Security-Policy" content="default-src 'none'/.test(pg));
+    ['Supabase', 'Discord', 'LivePix', 'GitHub Pages', 'Apagar meus dados'].forEach(w => assert.ok(pg.includes(w), 'a política precisa citar: ' + w));
+    const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+    assert.ok((html.match(/href="privacidade\.html"/g) || []).length >= 2, 'link no menu lateral e no Perfil');
   });
 
   await test('safeHttpUrl: só http/https; javascript:, data: e afins viram vazio; sem esquema ganha https://', () => {

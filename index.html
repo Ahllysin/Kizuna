@@ -2,14 +2,12 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Go9qgJTlCqzfJp67KzkHz2Y4WYer3UP1PwSMnVzydsU=' 'sha256-Bf8neUcjvwEvaoZlGNMdZtZ4hVKbMbPMm+VQcVUHc/w=' 'sha256-S+hbov/9qc2F8xuzzztuE8NTlBOS+7kDh6B9xu2quhI=' 'sha256-ocYWYk7TlP5itaaDsFCDc1TK1Nd9s4I+BYSeiP4C2fk=' https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-iwX2J51M2uq/RCGwPk5PG/OC5XPi729NcZEe4KTYFVs=' 'sha256-QVnr32b2Ik9yrODC5dt7vcsuuvo3DGUfrpgjvSKCAno='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23ff6a4a'/%3E%3Cstop offset='70%25' stop-color='%23c2261a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='29' fill='url(%23g)' stroke='%23ffc54a' stroke-width='3'/%3E%3Ctext x='32' y='43' font-size='30' text-anchor='middle' fill='%23fff3e0' font-family='serif' font-weight='800'%3E%E7%B5%86%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Nunito:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&family=Shippori+Mincho:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* ======================= TOKENS ======================= */
 :root{
@@ -142,6 +140,9 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-nav-btn.active .kz-nav-glyph{background:radial-gradient(circle at 35% 30%, #ffb35a, #e0461a 75%);color:#fff;border-color:var(--gold-light);}
 .kz-sidebar-spacer{flex:1;}
+.kz-privacy-link{display:block;margin:6px 8px 0;font-size:11.5px;color:var(--text-faint,#8f879a);text-decoration:underline;text-underline-offset:3px;position:relative;z-index:1;}
+.kz-privacy-link:hover{color:#ffd66b;}
+.kz-app.nav-compact .kz-privacy-link{display:none;}
 .kz-sidebar-watermark{position:absolute;left:-10px;bottom:120px;font-family:'Shippori Mincho',serif;font-weight:800;font-size:220px;line-height:1;color:rgba(255,170,60,.06);pointer-events:none;}
 .kz-sidebar-balls{position:relative;height:190px;flex-shrink:0;pointer-events:none;}
 .kz-sidebar-balls img{position:absolute;display:block;}
@@ -774,6 +775,8 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-donate-cta:hover{filter:brightness(1.1);}
 .kz-donate-note{font-size:12.5px;color:var(--text-dim);line-height:1.6;}
+.kz-privacy-zone{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding-top:10px;border-top:1px dashed rgba(255,255,255,.14);font-size:12.5px;}
+.kz-privacy-zone a{color:#a79f8c;}
 .kz-form-panel{display:flex;flex-direction:column;gap:14px;padding:18px 20px;}
 .kz-donor-list{display:flex;flex-direction:column;gap:14px;padding:18px 20px;}
 .kz-donor-list-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
@@ -1152,6 +1155,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
         <button class="kz-nav-btn" data-tab="favs" title="Favoritos"><span class="kz-nav-glyph">★</span><span class="kz-nav-label">Favoritos</span></button>
         <button class="kz-nav-btn" data-tab="perfil" title="Perfil"><span class="kz-nav-glyph">印</span><span class="kz-nav-label">Perfil</span></button>
         <button class="kz-nav-btn" data-tab="doar" title="Doar"><span class="kz-nav-glyph">援</span><span class="kz-nav-label">Doar</span></button>
+        <a class="kz-privacy-link" href="privacidade.html" target="_blank" rel="noopener noreferrer">Privacidade e dados</a>
         <div class="kz-sidebar-spacer"></div>
         <div class="kz-sidebar-watermark" aria-hidden="true">龍</div>
         <div class="kz-sidebar-balls" aria-hidden="true">
@@ -1342,6 +1346,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
         perfil como público (aba Perfil), o mural passa a mostrar os dados dela em vez do
         que foi digitado à mão.
 -->
+<script src="vendor/supabase.js"></script>
 <script type="module">
   const SUPABASE_CONFIG = {
     url: "https://luyuprliobxtxnppdohw.supabase.co",
@@ -1349,14 +1354,15 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   };
   window.ADMIN_DISCORD_ID = "a06d68b7-b5c9-4be3-a102-8a826bbe8cee"; // UID do Supabase de quem pode editar a Aliança Z
 
-  if(SUPABASE_CONFIG.url !== "COLE_AQUI"){
-    import("https://esm.sh/@supabase/supabase-js@2.117.3").then(({ createClient })=>{
-      window.__sb = { client: createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey) };
+  // A biblioteca vem de vendor/supabase.js (cópia fixa, versão 2.117.3), carregada no <script src> logo acima — nada de CDN.
+  if(SUPABASE_CONFIG.url !== "COLE_AQUI" && window.supabase && window.supabase.createClient){
+    try{
+      window.__sb = { client: window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey) };
       window.dispatchEvent(new CustomEvent('supabase-ready'));
-    }).catch(err=>{
-      console.error('Supabase falhou ao carregar', err);
+    }catch(err){
+      console.error('Supabase falhou ao iniciar', err);
       window.dispatchEvent(new CustomEvent('supabase-unavailable'));
-    });
+    }
   } else {
     window.dispatchEvent(new CustomEvent('supabase-unavailable'));
   }
@@ -8185,6 +8191,10 @@ function renderPerfilTab(){
         <label class="kz-honor-check"><input type="checkbox" id="perfilShowSocialsInput" ${p.showSocials?'checked':''}> Mostrar minhas redes no perfil público</label>
         <label class="kz-honor-check"><input type="checkbox" id="perfilPublicInput" ${p.public?'checked':''}> Aparecer na Aliança Z com esses dados (se eu já apoiar)</label>
         <button class="kz-btn kz-btn-primary kz-btn-sm" id="savePerfilBtn">Salvar perfil</button>
+        <div class="kz-privacy-zone">
+          <a href="privacidade.html" target="_blank" rel="noopener noreferrer">Privacidade e dados</a>
+          <button type="button" class="kz-com-link danger" id="deleteMyDataBtn" title="Remove do servidor seu perfil, seus posts e curtidas e os dados sincronizados">Apagar meus dados</button>
+        </div>
       </div>
       <div class="kz-panel kz-donor-list">
         <span class="kz-label">Prévia</span>
@@ -8217,6 +8227,14 @@ function attachPerfilHandlers(){
     const v = patenteColorVars(cor.value);
     prevBadge.setAttribute('style', v);
     prevCard.setAttribute('style', 'pointer-events:none;' + v);
+  });
+  const delBtn = document.getElementById('deleteMyDataBtn');
+  if(delBtn) delBtn.addEventListener('click', () => {
+    customConfirm('Apagar do servidor o seu perfil, os seus posts e curtidas da Comunidade e os dados sincronizados (coleção, equipes, tier list)? Os dados guardados neste aparelho continuam. Não dá pra desfazer. A conta de login do Discord só é removida se você pedir (veja a página de Privacidade).', async () => {
+      const ok = await deleteMyOnlineData();
+      if(ok){ showToast('Seus dados online foram apagados.'); await signOutDiscord(); }
+      else showToast('Não consegui apagar tudo agora. Tente de novo em instantes.');
+    });
   });
   const save = document.getElementById('savePerfilBtn');
   if(!save) return;
@@ -8265,6 +8283,29 @@ async function syncDonorRemote(entryOrId, action){
 async function signInWithDiscord(){
   if(!isSupabaseConfigured()){ showToast('Supabase ainda não configurado neste site.'); return; }
   await window.__sb.client.auth.signInWithOAuth({ provider:'discord', options:{ redirectTo: window.location.href } });
+}
+// Apaga do servidor tudo que pertence a este login: posts e curtidas da Comunidade, dados sincronizados e perfil.
+// Os dados guardados neste aparelho continuam. A conta de login do Discord só some a pedido (ver política de privacidade).
+async function deleteMyOnlineData(){
+  if(!isSupabaseConfigured() || !state.discordUser) return false;
+  const me = state.discordUser.id, c = window.__sb.client;
+  try{
+    // um de cada vez, na ordem; se algum falhar, para (nada de apagar o resto pela metade sem avisar)
+    const steps = [
+      () => c.from('community_posts').delete().eq('user_id', me),
+      () => c.from('community_likes').delete().eq('user_id', me),
+      () => c.from('user_data').delete().eq('user_id', me),
+      () => c.from('profiles').delete().eq('id', me),
+    ];
+    for(const run of steps){ const { error } = await run(); if(error) throw error; }
+    state.myProfile = blankProfile();
+    state.communityPosts = (state.communityPosts || []).filter(p => p.userId !== me);
+    state.communityMyLikes = [];
+    return true;
+  }catch(e){
+    console.error('Não consegui apagar os dados online', e);
+    return false;
+  }
 }
 async function signOutDiscord(){
   if(!isSupabaseConfigured()) return;

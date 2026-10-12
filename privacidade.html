@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacidade e dados — Kizuna</title>
+<style>
+  :root{color-scheme:dark;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:#0b0a14;color:#dcd6c6;font:16px/1.65 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;}
+  main{max-width:780px;margin:0 auto;padding:32px 20px 64px;}
+  a{color:#ffd66b;}
+  h1{font-size:34px;margin:8px 0 6px;color:#fff3da;line-height:1.2;}
+  h2{font-size:21px;margin:34px 0 8px;color:#ffd66b;border-bottom:1px solid rgba(255,200,90,.3);padding-bottom:6px;}
+  .upd{color:#a79f8c;font-size:14px;margin:0 0 20px;}
+  .box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;margin:14px 0;}
+  ul{padding-left:22px;} li{margin:6px 0;}
+  table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0;}
+  th,td{border:1px solid rgba(255,255,255,.14);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:rgba(255,255,255,.06);color:#fff3da;}
+  .back{display:inline-block;margin-bottom:10px;}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="./">← Voltar ao Kizuna</a>
+  <h1>Privacidade e dados</h1>
+  <p class="upd">Última atualização: 12/10/2026</p>
+
+  <div class="box">
+    <b>Em resumo:</b> o Kizuna é um projeto de fãs, gratuito, sem anúncios e sem ferramentas de rastreamento ou análise de visitantes.
+    Sem fazer login, <b>nada do que você monta sai do seu navegador</b>. Fazendo login com o Discord, só guardamos o necessário
+    para o perfil, a Comunidade e a sincronização — e você pode apagar tudo isso quando quiser.
+  </div>
+
+  <h2>1. Sem login</h2>
+  <p>Coleção, equipes, formações, tier list, favoritos e preferências ficam <b>somente no seu navegador</b> (armazenamento local do aparelho).
+  Não enviamos isso para nenhum servidor. Se você limpar os dados do navegador, eles somem.</p>
+
+  <h2>2. Com login (Discord)</h2>
+  <p>O login é feito pelo Discord, por meio do serviço Supabase. Ao entrar, ficam guardados:</p>
+  <ul>
+    <li><b>Dados da conta de login:</b> identificador da conta, nome de exibição e foto (avatar) do Discord, e o <b>e-mail da sua conta do Discord</b>
+      (repassado pelo Discord e guardado pelo serviço de login; <b>não é exibido no site</b> nem usado para contato ou propaganda).</li>
+    <li><b>Dados sincronizados:</b> coleção, equipes, formações, tier list e favoritos, para você ver o mesmo conteúdo em outro aparelho.</li>
+    <li><b>Perfil (opcional):</b> apelido, servidor, apresentação, Instagram, Twitch, YouTube, forma/cor da patente. Outras pessoas só veem
+      esses dados se você marcar o perfil como <b>público</b>; as redes sociais só aparecem se você também marcar <b>mostrar redes</b>.</li>
+    <li><b>Comunidade:</b> times e tier lists que você publicar (título, descrição, conteúdo e o nome de autor), além das suas curtidas e denúncias.
+      <b>Posts publicados são públicos.</b></li>
+  </ul>
+
+  <h2>3. Apoio (Aliança Z)</h2>
+  <ul>
+    <li>O pagamento é feito na <b>LivePix</b>. O Kizuna não recebe nem guarda dados de cartão, Pix ou banco.</li>
+    <li>O administrador registra manualmente o nome do apoiador e o valor. Publicamente aparece <b>apenas a patente</b> (faixa), nunca o valor exato;
+      o valor exato só é visível para o próprio apoiador e para o administrador.</li>
+  </ul>
+
+  <h2>4. Serviços de terceiros</h2>
+  <table>
+    <tr><th>Serviço</th><th>Para quê</th></tr>
+    <tr><td>GitHub Pages</td><td>Hospedagem do site (pode registrar endereço IP e acessos, como qualquer hospedagem).</td></tr>
+    <tr><td>Supabase</td><td>Login e banco de dados (perfil, Comunidade, sincronização, apoiadores).</td></tr>
+    <tr><td>Discord</td><td>Login e foto de perfil (avatar).</td></tr>
+    <tr><td>LivePix</td><td>QR Code e pagamento de apoio; o quadro do QR Code é carregado da LivePix.</td></tr>
+  </table>
+  <p>Fontes e bibliotecas do site ficam no próprio site: <b>não usamos Google Fonts, CDNs nem rastreadores</b>.</p>
+
+  <h2>5. Armazenamento no navegador</h2>
+  <p>Usamos o armazenamento local do navegador apenas para o funcionamento do site (salvar suas escolhas e manter você logado).
+  <b>Não usamos cookies de publicidade nem de rastreamento.</b></p>
+
+  <h2>6. Seus direitos</h2>
+  <ul>
+    <li><b>Apagar seus dados online:</b> na aba <b>Perfil</b>, o botão <b>Apagar meus dados</b> remove do servidor seu perfil, seus posts e curtidas da
+      Comunidade e os dados sincronizados. Os dados guardados no seu aparelho continuam com você.</li>
+    <li><b>Excluir a conta de login por completo</b> (incluindo o e-mail guardado pelo serviço de login), <b>corrigir</b> ou <b>consultar</b> dados,
+      ou retirar o seu nome do mural de apoiadores: peça pelo contato abaixo.</li>
+    <li>Você pode deixar o perfil privado a qualquer momento (desmarcando "Aparecer…" no Perfil) e excluir seus posts na própria Comunidade.</li>
+  </ul>
+
+  <h2>7. Segurança</h2>
+  <p>O site usa HTTPS, política de segurança de conteúdo (CSP) que impede scripts de terceiros e envio de dados para outros endereços, e regras no
+  banco de dados para que cada pessoa só altere os próprios dados. Nenhum sistema é 100% seguro, mas tratamos isso com seriedade.</p>
+
+  <h2>8. Crianças e adolescentes</h2>
+  <p>O Kizuna não é voltado a crianças. O login depende do Discord, que exige idade mínima própria. Se você acredita que dados de um menor foram
+  enviados indevidamente, fale com a gente para removê-los.</p>
+
+  <h2>9. Sobre o projeto</h2>
+  <p>Kizuna é um projeto de fãs, sem fins oficiais, <b>sem vínculo com os detentores dos direitos de Dragon Ball</b>. Nomes, personagens e imagens
+  pertencem aos seus respectivos titulares.</p>
+
+  <h2>10. Contato e mudanças</h2>
+  <p>Dúvidas ou pedidos sobre seus dados: abra uma solicitação em
+  <a href="https://github.com/Ahllysin/Kizuna/issues" rel="noopener noreferrer">github.com/Ahllysin/Kizuna/issues</a> (não coloque dados pessoais sensíveis no texto). Se esta política mudar, a data no topo será atualizada.</p>
+</main>
+</body>
+</html>

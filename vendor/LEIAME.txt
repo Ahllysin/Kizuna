@@ -1,0 +1,6 @@
+supabase-js 2.117.3 (build UMD)
+Origem: https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js
+SHA-256: d6a5c4414a5d4ce646d9c1de223aa7067d3ff664c15394ffeb7fcffc763354a3
+Licenca: MIT (ver LICENSE-supabase-js.txt)
+
+Pra atualizar: baixe a nova versao do mesmo caminho, troque o arquivo, atualize a versao/hash aqui e no teste do test-logic.js.

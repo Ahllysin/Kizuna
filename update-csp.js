@@ -38,11 +38,11 @@ function buildPolicy(html) {
   const hashes = inlineScripts(html).flatMap(hashSources);
   return [
     "default-src 'self'",
-    // scripts: só os do próprio site (por hash) e a biblioteca do Supabase, que vem do esm.sh
-    `script-src 'self' ${hashes.join(' ')} https://esm.sh`,
-    // estilos inline são usados em todo o site (style="..."); fontes do Google
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src https://fonts.gstatic.com",
+    // scripts: só os do próprio site — os inline por hash e o resto (vendor/supabase.js) por 'self'. Nenhum CDN.
+    `script-src 'self' ${hashes.join(' ')}`,
+    // estilos inline são usados em todo o site (style="..."); as fontes ficam em fonts/
+    "style-src 'self' 'unsafe-inline'",
+    "font-src 'self'",
     // imagens: do site, data:, blob: (exportação) e avatar do Discord
     "img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net",
     // chamadas de rede: só o próprio site e o Supabase — um script malicioso não consegue mandar dados pra outro lugar
