@@ -1184,6 +1184,95 @@ async function main(){
     assert.ok(r.nav);
   });
 
+  console.log('\n[Segurança]');
+
+  await test('CSP: o <meta> está em dia com o código (hash dos scripts) e não libera script inline nem eval', () => {
+    const csp = require('./update-csp');
+    const html = require('fs').readFileSync(require('path').join(__dirname, 'index.html'), 'utf8');
+    const have = csp.currentPolicy(html);
+    assert.ok(have, 'index.html precisa ter o <meta http-equiv="Content-Security-Policy">');
+    assert.strictEqual(have, csp.buildPolicy(html), 'a CSP está desatualizada: rode "node update-csp.js" antes de publicar (senão o navegador bloqueia o site)');
+    const script = (have.match(/script-src ([^;]*)/) || [])[1] || '';
+    assert.ok(!/unsafe-inline|unsafe-eval|\*/.test(script), 'script-src não pode liberar inline, eval nem curinga (' + script + ')');
+    assert.ok(/'sha256-/.test(script), 'script-src precisa liberar os scripts do site por hash');
+    assert.ok(/object-src 'none'/.test(have) && /base-uri 'self'/.test(have) && /form-action 'self'/.test(have));
+    const connect = (have.match(/connect-src ([^;]*)/) || [])[1] || '';
+    assert.ok(!/\*|https:\s|https:$/.test(connect), 'connect-src só pode ter o próprio site e o Supabase (' + connect + ')');
+    assert.strictEqual(csp.inlineScripts(html).length, 2, 'esperava 2 scripts inline (Supabase e site); se mudou, confira a CSP');
+  });
+
+  await test('não existe handler inline (onerror, onclick, onload…) no HTML — a CSP bloquearia', () => {
+    const html = require('fs').readFileSync(require('path').join(__dirname, 'index.html'), 'utf8');
+    const m = html.match(/\son(error|load|click|change|input|submit|mouse[a-z]+|focus|blur|key[a-z]+)\s*=/gi);
+    assert.ok(!m, 'achei handler inline: ' + (m && m.join(', ')));
+  });
+
+  await test('biblioteca do Supabase com versão fixa (não "@2" solto)', () => {
+    const html = require('fs').readFileSync(require('path').join(__dirname, 'index.html'), 'utf8');
+    const m = html.match(/import\("https:\/\/esm\.sh\/@supabase\/supabase-js@([^"]+)"\)/);
+    assert.ok(m, 'não achei o import do supabase-js');
+    assert.ok(/^\d+\.\d+\.\d+$/.test(m[1]), 'versão precisa ser exata, veio "' + m[1] + '"');
+  });
+
+  await test('safeHttpUrl: só http/https; javascript:, data: e afins viram vazio; sem esquema ganha https://', () => {
+    const r = evalIn(sandbox, `(() => ({
+      js: safeHttpUrl('javascript:alert(1)'), jsCaixa: safeHttpUrl('  JaVaScRiPt:alert(1)'), data: safeHttpUrl('data:text/html,<b>x</b>'), ftp: safeHttpUrl('ftp://a.com'),
+      https: safeHttpUrl('https://x.com/user'), semEsquema: safeHttpUrl('x.com/user'), http: safeHttpUrl('http://a.com'), vazio: safeHttpUrl(''), nulo: safeHttpUrl(null),
+      avatarHttp: safeHttpsUrl('http://a.com/x.png'), avatarHttps: safeHttpsUrl('https://cdn.discordapp.com/a.png'),
+    }))()`);
+    assert.strictEqual(r.js, ''); assert.strictEqual(r.jsCaixa, ''); assert.strictEqual(r.data, ''); assert.strictEqual(r.ftp, '');
+    assert.strictEqual(r.https, 'https://x.com/user'); assert.strictEqual(r.semEsquema, 'https://x.com/user'); assert.strictEqual(r.http, 'http://a.com');
+    assert.strictEqual(r.vazio, ''); assert.strictEqual(r.nulo, '');
+    assert.strictEqual(r.avatarHttp, '', 'avatar só vale se for https'); assert.strictEqual(r.avatarHttps, 'https://cdn.discordapp.com/a.png');
+  });
+
+  await test('popup do apoiador: link com javascript: não vira <a href>; link normal continua clicável', () => {
+    const r = evalIn(sandbox, `(() => {
+      const mal = donorProfileModalHtml({ id: 'a', number: 1, name: 'Mal', amount: 5, honras: [], active: true, link: 'javascript:alert(document.cookie)' });
+      const ok = donorProfileModalHtml({ id: 'b', number: 2, name: 'Ok', amount: 5, honras: [], active: true, link: 'https://x.com/ok' });
+      return { mal, ok };
+    })()`);
+    assert.ok(!/href="javascript:/i.test(r.mal) && !/<a [^>]*javascript:/i.test(r.mal), 'link javascript: não pode virar href');
+    assert.ok(r.mal.includes('javascript:alert'), 'o texto aparece (escapado), só não é clicável');
+    assert.ok(r.ok.includes('href="https://x.com/ok"'));
+  });
+
+  await test('listas públicas vêm das vistas seguras (sem valor exato de doação e sem redes escondidas), com plano B enquanto a vista não existe; admin lê a tabela', async () => {
+    runIn(sandbox, `
+      window.__reads = [];
+      const rows = { donations_public: [{ id: 'd1', number: 1, name: 'A', amount: 50, honras: [], active: true, user_id: 'u1' }], donations: [{ id: 'd1', number: 1, name: 'A', amount: 73.5, honras: [], active: true, user_id: 'u1' }], profiles_public: [{ id: 'u1', nickname: 'Pub', is_public: true, show_socials: false }], profiles: [{ id: 'u1', nickname: 'Pub', is_public: true, show_socials: false, instagram: '@oculto' }] };
+      window.__missing = {};
+      window.__sb = { client: { from: (table) => {
+        const q = { select: () => q, order: () => q, eq: () => q,
+          then: (res) => { window.__reads.push(table); res(window.__missing[table] ? { error: { message: 'nao existe' }, data: null } : { error: null, data: rows[table] || [] }); } };
+        return q;
+      } } };
+      supabaseAvailable = true;
+      window.__bk4 = [state.discordUser, state.donors, state.profiles, state.myDonationTotal];
+      state.discordUser = null;
+    `);
+    runIn(sandbox, 'refreshDonorsRemote(); refreshProfilesRemote();');
+    await new Promise(res => setTimeout(res, 30));
+    const publico = { reads: evalIn(sandbox, 'window.__reads.slice()'), amount: evalIn(sandbox, 'state.donors[0].amount'), nick: evalIn(sandbox, 'state.profiles[0].nickname') };
+    runIn(sandbox, "window.__reads = []; window.__missing = { donations_public: true, profiles_public: true }; refreshDonorsRemote(); refreshProfilesRemote();");
+    await new Promise(res => setTimeout(res, 30));
+    const planB = { reads: evalIn(sandbox, 'window.__reads.slice()'), amount: evalIn(sandbox, 'state.donors[0].amount') };
+    runIn(sandbox, "window.__reads = []; window.__missing = {}; state.discordUser = { id: window.ADMIN_DISCORD_ID, username: 'Dono' }; refreshDonorsRemote();");
+    await new Promise(res => setTimeout(res, 30));
+    const admin = { reads: evalIn(sandbox, 'window.__reads.slice()'), amount: evalIn(sandbox, 'state.donors[0].amount'), total: evalIn(sandbox, 'state.myDonationTotal') };
+    runIn(sandbox, `
+      state.discordUser = window.__bk4[0]; state.donors = window.__bk4[1]; state.profiles = window.__bk4[2]; state.myDonationTotal = window.__bk4[3];
+      supabaseAvailable = false; window.__sb = undefined; window.__reads = undefined; window.__missing = undefined; window.__bk4 = undefined;
+    `);
+    assert.ok(publico.reads.includes('donations_public') && !publico.reads.includes('donations'), 'visitante lê a vista de doações, não a tabela (' + publico.reads + ')');
+    assert.ok(publico.reads.includes('profiles_public') && !publico.reads.includes('profiles'), 'visitante lê a vista de perfis, não a tabela');
+    assert.strictEqual(publico.amount, 50, 'o valor que o visitante vê é só a faixa da patente');
+    assert.strictEqual(planB.amount, 73.5, 'sem a vista, cai pra tabela (comportamento antigo)');
+    assert.ok(admin.reads[0] === 'donations' && !admin.reads.includes('donations_public'), 'admin lê a tabela com o valor exato');
+    assert.strictEqual(admin.amount, 73.5);
+    assert.strictEqual(admin.total, 73.5, 'o total real do próprio login vem da tabela (valor exato)');
+  });
+
   console.log('\n[ids estáveis do elenco padrão]');
 
   await test('ids do elenco padrão são únicos e iguais entre duas cargas da página (equipe/coleção/favoritos sobrevivem ao recarregar)', async () => {

@@ -2,6 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Go9qgJTlCqzfJp67KzkHz2Y4WYer3UP1PwSMnVzydsU=' 'sha256-Bf8neUcjvwEvaoZlGNMdZtZ4hVKbMbPMm+VQcVUHc/w=' 'sha256-S+hbov/9qc2F8xuzzztuE8NTlBOS+7kDh6B9xu2quhI=' 'sha256-ocYWYk7TlP5itaaDsFCDc1TK1Nd9s4I+BYSeiP4C2fk=' https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23ff6a4a'/%3E%3Cstop offset='70%25' stop-color='%23c2261a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='29' fill='url(%23g)' stroke='%23ffc54a' stroke-width='3'/%3E%3Ctext x='32' y='43' font-size='30' text-anchor='middle' fill='%23fff3e0' font-family='serif' font-weight='800'%3E%E7%B5%86%3C/text%3E%3C/svg%3E">
@@ -1288,6 +1290,53 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
               create policy "descurte a propria" on public.community_likes for delete using (auth.uid() = user_id);
               create policy "denuncia como si mesmo" on public.community_reports for insert with check (auth.uid() = user_id);
               create policy "so admin ve denuncias" on public.community_reports for select using (auth.uid() = 'SEU-UID-AQUI'::uuid);
+        13. (Segurança) Rode também — a leitura pública passa a sair de vistas que só mostram o que a pessoa
+            autorizou (nada de redes escondidas nem valor exato de doação), com limites de tamanho nos campos e o
+            nome do autor dos posts definido pelo servidor (ninguém posta com o nome de outro pelo DevTools):
+              create or replace view public.profiles_public as
+                select id, nickname, servidor, bio,
+                       case when show_socials then instagram end as instagram,
+                       case when show_socials then twitch end as twitch,
+                       case when show_socials then youtube end as youtube,
+                       avatar_char_id, patente_forma, patente_cor, show_socials, is_public
+                from public.profiles where is_public = true;
+              grant select on public.profiles_public to anon, authenticated;
+              drop policy if exists "leitura publica dos perfis publicos" on public.profiles;
+
+              create or replace view public.donations_public as
+                select id, number, name,
+                       case when amount >= 1000 then 1000 when amount >= 600 then 600 when amount >= 350 then 350
+                            when amount >= 200 then 200 when amount >= 100 then 100 when amount >= 50 then 50
+                            when amount >= 20 then 20 when amount >= 10 then 10 else 0 end as amount,
+                       quote, discord, link, honras, active, user_id
+                from public.donations;
+              grant select on public.donations_public to anon, authenticated;
+              drop policy if exists "leitura publica" on public.donations;
+              create policy "le o proprio ou admin" on public.donations for select
+                using (auth.uid() = user_id or auth.uid() = 'SEU-UID-AQUI'::uuid);
+
+              alter table public.profiles add constraint profiles_limites check (
+                char_length(coalesce(nickname,'')) <= 40 and char_length(coalesce(servidor,'')) <= 20
+                and char_length(coalesce(bio,'')) <= 220 and char_length(coalesce(instagram,'')) <= 60
+                and char_length(coalesce(twitch,'')) <= 80 and char_length(coalesce(youtube,'')) <= 120
+                and char_length(coalesce(avatar_char_id,'')) <= 64 and char_length(coalesce(patente_forma,'')) <= 20
+                and (patente_cor is null or patente_cor ~ '^#[0-9a-fA-F]{6}$')) not valid;
+              alter table public.user_data add constraint user_data_limites
+                check (char_length(key) <= 64 and octet_length(value) <= 200000) not valid;
+
+              create or replace function public.community_set_author() returns trigger
+              language plpgsql security definer set search_path = public, auth as $fn$
+              declare nick text; disc text;
+              begin
+                select nullif(trim(nickname), '') into nick from public.profiles where id = auth.uid() and is_public = true;
+                select coalesce(identity_data->>'full_name', identity_data->>'name') into disc
+                  from auth.identities where user_id = auth.uid() and provider = 'discord' limit 1;
+                new.author_name := left(coalesce(nick, disc, 'Jogador'), 40);
+                return new;
+              end $fn$;
+              drop trigger if exists community_posts_author on public.community_posts;
+              create trigger community_posts_author before insert on public.community_posts
+                for each row execute function public.community_set_author();
         No painel admin da Aliança Z, o campo "Vincular perfil (User UID)" aceita o
         "User UID" de quem apoiou (Authentication > Users) — se a pessoa marcar o próprio
         perfil como público (aba Perfil), o mural passa a mostrar os dados dela em vez do
@@ -1301,7 +1350,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   window.ADMIN_DISCORD_ID = "a06d68b7-b5c9-4be3-a102-8a826bbe8cee"; // UID do Supabase de quem pode editar a Aliança Z
 
   if(SUPABASE_CONFIG.url !== "COLE_AQUI"){
-    import("https://esm.sh/@supabase/supabase-js@2").then(({ createClient })=>{
+    import("https://esm.sh/@supabase/supabase-js@2.117.3").then(({ createClient })=>{
       window.__sb = { client: createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey) };
       window.dispatchEvent(new CustomEvent('supabase-ready'));
     }).catch(err=>{
@@ -1314,6 +1363,22 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
 </script>
 
 <script>
+
+// Imagens: o que antes era onerror/onload dentro do HTML agora é tratado aqui (a política de segurança do site proíbe script em atributo).
+document.addEventListener('error', e => {
+  const t = e.target;
+  if(!t || t.tagName !== 'IMG' || !t.dataset || !t.dataset.onerr) return;
+  switch(t.dataset.onerr){
+    case 'fallback': t.style.display = 'none'; if(t.nextElementSibling) t.nextElementSibling.style.display = 'flex'; if(t.parentElement) t.parentElement.classList.add('img-failed'); break;
+    case 'hide': t.style.visibility = 'hidden'; break;
+    case 'remove': t.remove(); break;
+    case 'remove-parent': if(t.parentNode) t.parentNode.remove(); break;
+  }
+}, true);
+document.addEventListener('load', e => {
+  const t = e.target;
+  if(t && t.tagName === 'IMG' && t.dataset && t.dataset.onload === 'show') t.style.visibility = '';
+}, true);
 /* ======================= STORAGE SHIM ======================= */
 // window.storage (get/set assíncronos por chave) pode ser injetado por um ambiente
 // de hospedagem específico. Quando o arquivo é aberto direto num navegador comum,
@@ -4248,6 +4313,7 @@ let state = {
   donors: [],                       // [{id, number, name, amount, quote, discord, link, honras:[], active}] — Aliança Z (aba Doar + widget flutuante)
   nextDonorNumber: 1,               // próximo número permanente a distribuir (nunca reaproveita número de quem foi removido)
   donorWidgetCollapsed: false,      // widget flutuante "Top 3 apoiadores" recolhido pro canto
+  myDonationTotal: null,            // soma real das doações do próprio login (null = desconhecido)
   donorProfileId: null,             // id do apoiador com o perfil aberto no popup, ou null
   discordUser: null,                // {id, username, avatarUrl} — sessão Supabase/Discord da Aliança Z, ou null
   myProfile: null,                  // rascunho do próprio perfil (aba Perfil), carregado após login
@@ -4604,11 +4670,11 @@ function slug(name){
 }
 function avatarInner(c){
   // Full-body sprite (transparent bg) — used only on the team-builder battlefield slots.
-  return `<img src="sprites/${slug(c.name)}.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';this.parentElement.classList.add('img-failed');"><span class="avatar-fallback" style="display:none;">${initials(c.name)}</span>`;
+  return `<img src="sprites/${slug(c.name)}.png" alt="" data-onerr="fallback"><span class="avatar-fallback" style="display:none;">${initials(c.name)}</span>`;
 }
 function portraitInner(c){
   // Bust/face portrait — used everywhere else (roster list, character cards, picker modal).
-  return `<img src="portraits/${slug(c.name)}.png" alt="" loading="lazy" draggable="false" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';this.parentElement.classList.add('img-failed');"><span class="avatar-fallback" style="display:none;">${initials(c.name)}</span>`;
+  return `<img src="portraits/${slug(c.name)}.png" alt="" loading="lazy" draggable="false" data-onerr="fallback"><span class="avatar-fallback" style="display:none;">${initials(c.name)}</span>`;
 }
 function rarityClass(r){
   if(!r) return 'rarity-r';
@@ -5017,7 +5083,7 @@ function renderCharsTab(){
   <section class="kz-page">
     <div class="kz-hero">
       <div class="kz-hero-art"><div class="kz-hero-art-mask">
-        ${hero ? `<img id="heroImg" src="${portraitSrc(hero)}" alt="" style="${heroStyleOf(heroFrame('list', hero.id))}" onload="this.style.visibility=''" onerror="this.style.visibility='hidden'">` : ''}
+        ${hero ? `<img id="heroImg" src="${portraitSrc(hero)}" alt="" style="${heroStyleOf(heroFrame('list', hero.id))}" data-onload="show" data-onerr="hide">` : ''}
       </div></div>
       <div class="kz-hero-scrim"></div>
       <div class="kz-hero-name" id="heroName">${hero ? escapeHtml(hero.name) : ''}</div>
@@ -5290,7 +5356,7 @@ function renderCharDetailPage(charId){
   <section class="kz-page">
     <div class="kz-hero kz-detail-hero">
       <div class="kz-hero-art"><div class="kz-hero-art-mask">
-        <img id="detailHeroImg" src="${portraitSrc(c)}" alt="" style="${heroArtStyle(c.id)}" onerror="this.style.visibility='hidden'">
+        <img id="detailHeroImg" src="${portraitSrc(c)}" alt="" style="${heroArtStyle(c.id)}" data-onerr="hide">
       </div></div>
       <div class="kz-hero-scrim"></div>
       <div class="kz-detail-content">
@@ -5329,7 +5395,7 @@ function renderCharDetailPage(charId){
 
 // Ícone real de habilidade só quando SHOW_ABILITY_ICONS estiver ligado; senão fica o "?" reservando o espaço.
 function abilityIconBox(data){
-  const img = (SHOW_ABILITY_ICONS && data && data.icone) ? `<img src="${escapeAttr(encodeURI(data.icone))}" alt="" onerror="this.remove()">` : '?';
+  const img = (SHOW_ABILITY_ICONS && data && data.icone) ? `<img src="${escapeAttr(encodeURI(data.icone))}" alt="" data-onerr="remove">` : '?';
   return `<div class="kz-ab-icon${img === '?' ? '' : ' has-img'}">${img}</div>`;
 }
 
@@ -5380,7 +5446,7 @@ function renderDetailAbilities(c){
     <div class="kz-ab-group">
       <div class="kz-ab-group-head"><span class="kz-ab-group-title">Passivas do Supremo</span></div>
       <div class="kz-supremo-grid">
-        ${sup.map(ps=>`<div class="kz-supremo-card">${(SHOW_ABILITY_ICONS && ps.icone) ? `<div class="ico"><img src="${escapeAttr(encodeURI(ps.icone))}" alt="" onerror="this.parentNode.remove()"></div>` : ''}<div class="t"><div class="n">${escapeHtml(ps.nome)||'—'}</div><div class="d">${escapeHtml(ps.desc||'')}</div></div></div>`).join('')}
+        ${sup.map(ps=>`<div class="kz-supremo-card">${(SHOW_ABILITY_ICONS && ps.icone) ? `<div class="ico"><img src="${escapeAttr(encodeURI(ps.icone))}" alt="" data-onerr="remove-parent"></div>` : ''}<div class="t"><div class="n">${escapeHtml(ps.nome)||'—'}</div><div class="d">${escapeHtml(ps.desc||'')}</div></div></div>`).join('')}
       </div>
     </div>` : '';
   return `<div class="kz-ab-groups">${groups}${supHtml}</div>`;
@@ -6401,7 +6467,7 @@ const COMMUNITY = { title: 60, desc: 300, maxPostsPerUser: 30, cooldownMs: 60000
 function communityTeamLimit(){
   const me = state.discordUser && state.discordUser.id;
   if(!me) return COMMUNITY.teamLimit;
-  const total = (state.donors || []).filter(d => d.linkedUserId === me && d.active !== false).reduce((n, d) => n + (Number(d.amount) || 0), 0);
+  const total = state.myDonationTotal != null ? state.myDonationTotal : (state.donors || []).filter(d => d.linkedUserId === me && d.active !== false).reduce((n, d) => n + (Number(d.amount) || 0), 0);
   return total >= COMMUNITY.supporterMin ? COMMUNITY.teamLimitSupporter : COMMUNITY.teamLimit;
 }
 function communityMyTeamCount(){
@@ -7858,7 +7924,8 @@ window.addEventListener('supabase-ready', async ()=>{
   client.auth.onAuthStateChange(async (_event, session)=>{
     const hadUser = !!state.discordUser;
     applyDiscordSession(session);
-    if(session && (!hadUser || _event === 'SIGNED_IN')){ await pullUserDataFromRemote(); await refreshMyProfile(); }
+    if(session && (!hadUser || _event === 'SIGNED_IN')){ await pullUserDataFromRemote(); await refreshMyProfile(); await refreshDonorsRemote(); }
+    if(!session) state.myDonationTotal = null;
     render();
   });
   await refreshDonorsRemote();
@@ -7873,7 +7940,7 @@ function applyDiscordSession(session){
   state.discordUser = {
     id: u.id,
     username: meta.full_name || meta.name || (meta.custom_claims && meta.custom_claims.global_name) || 'Guerreiro sem nome',
-    avatarUrl: meta.avatar_url || '',
+    avatarUrl: safeHttpsUrl(meta.avatar_url),
   };
 }
 
@@ -7943,14 +8010,27 @@ async function initDonorBackend(){
 async function refreshDonorsRemote(){
   if(!isSupabaseConfigured()) return;
   try{
-    const { data, error } = await window.__sb.client.from('donations').select('*').order('amount', {ascending:false});
-    if(error) throw error;
+    const client = window.__sb.client;
+    // Todo mundo lê a lista pela vista pública (valor arredondado pra faixa da patente); só o admin lê a tabela com o valor exato.
+    // Se a vista ainda não foi criada no banco, cai pra tabela (comportamento antigo).
+    const admin = isDonorAdmin();
+    let res = admin ? await client.from('donations').select('*').order('amount', {ascending:false})
+                    : await client.from('donations_public').select('*').order('amount', {ascending:false});
+    if(res.error && !admin) res = await client.from('donations').select('*').order('amount', {ascending:false});
+    if(res.error) throw res.error;
+    const data = res.data;
     state.donors = (data||[]).map(row=>({
       id: row.id, number: row.number, name: row.name, amount: Number(row.amount)||0,
       quote: row.quote||'', discord: row.discord||'', link: row.link||'',
       honras: row.honras||[], active: row.active !== false, linkedUserId: row.user_id||null,
     }));
     state.nextDonorNumber = state.donors.reduce((m,d)=>Math.max(m, d.number||0), 0) + 1;
+    // Total real do próprio login (só ele enxerga as próprias doações) — usado no limite de times da Comunidade.
+    state.myDonationTotal = null;
+    if(state.discordUser){
+      const mine = await client.from('donations').select('amount,active').eq('user_id', state.discordUser.id);
+      if(!mine.error) state.myDonationTotal = (mine.data||[]).filter(r=>r.active !== false).reduce((n,r)=>n + (Number(r.amount)||0), 0);
+    }
   }catch(e){
     console.error('Não consegui carregar a Aliança Z do Supabase', e);
   }
@@ -7987,9 +8067,11 @@ async function refreshMyProfile(){
 async function refreshProfilesRemote(){
   if(!isSupabaseConfigured()){ state.profiles = []; return; }
   try{
-    const { data, error } = await window.__sb.client.from('profiles').select('*').eq('is_public', true);
-    if(error) throw error;
-    state.profiles = (data||[]).map(row=>({ id: row.id, ...profileFromRow(row) }));
+    // Vista pública: já vem sem as redes de quem não quis mostrá-las. Plano B (vista ainda não criada): tabela, filtrando só os públicos.
+    let res = await window.__sb.client.from('profiles_public').select('*');
+    if(res.error) res = await window.__sb.client.from('profiles').select('*').eq('is_public', true);
+    if(res.error) throw res.error;
+    state.profiles = (res.data||[]).map(row=>({ id: row.id, ...profileFromRow(row) }));
   }catch(e){
     console.error('Não consegui carregar os perfis públicos', e);
   }
@@ -8085,12 +8167,12 @@ function renderPerfilTab(){
           <textarea id="perfilBioInput" maxlength="${PROFILE_BIO_MAX}" rows="3" placeholder="Uma frase sobre você">${escapeHtml(p.bio)}</textarea>
         </div>
         <div class="grid-2">
-          <div><label class="field-label">Instagram</label><input type="text" id="perfilInstaInput" value="${escapeAttr(p.instagram)}" placeholder="@usuario"></div>
-          <div><label class="field-label">Twitch</label><input type="text" id="perfilTwitchInput" value="${escapeAttr(p.twitch)}" placeholder="twitch.tv/..."></div>
+          <div><label class="field-label">Instagram</label><input type="text" id="perfilInstaInput" value="${escapeAttr(p.instagram)}" placeholder="@usuario" maxlength="60"></div>
+          <div><label class="field-label">Twitch</label><input type="text" id="perfilTwitchInput" value="${escapeAttr(p.twitch)}" placeholder="twitch.tv/..." maxlength="80"></div>
         </div>
         <div>
           <label class="field-label">YouTube</label>
-          <input type="text" id="perfilYoutubeInput" value="${escapeAttr(p.youtube)}" placeholder="Link do canal">
+          <input type="text" id="perfilYoutubeInput" value="${escapeAttr(p.youtube)}" placeholder="Link do canal" maxlength="120">
         </div>
         ${patenteChoiceHtml(p)}
         ${PROFILE_CHAR_AVATAR ? `<div>
@@ -8217,7 +8299,7 @@ function renderDoarTab(){
     </div>
     <div class="kz-donate-layout">
       <div class="kz-panel kz-donate-card">
-        <div class="kz-qr-crop"><iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy"></iframe></div>
+        <div class="kz-qr-crop"><iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
         <a class="kz-donate-cta" href="${LIVEPIX_DONATE_URL}" target="_blank" rel="noopener noreferrer">
           <span>気</span><span>Doar agora</span>
         </a>
@@ -8336,7 +8418,7 @@ function donorProfileModalHtml(d){
         ${(d.honras||[]).length ? `<div class="kz-pill-row" style="justify-content:center;">${d.honras.map(honraBadgeHtml).join('')}</div>` : ''}
         ${d.discord ? `<div class="kz-donate-note">Discord: ${escapeHtml(d.discord)}</div>` : ''}
         ${socials.length ? `<div class="kz-donate-note">${socials.map(escapeHtml).join(' · ')}</div>` : ''}
-        ${d.link ? `<a class="kz-donate-note" href="${escapeAttr(d.link)}" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light);">${escapeHtml(d.link)}</a>` : ''}
+        ${d.link ? (safeHttpUrl(d.link) ? `<a class="kz-donate-note" href="${escapeAttr(safeHttpUrl(d.link))}" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light);">${escapeHtml(d.link)}</a>` : `<div class="kz-donate-note">${escapeHtml(d.link)}</div>`) : ''}
         ${!d.active ? `<div class="kz-locked-tag" style="align-self:center;">Histórico preservado</div>` : ''}
       </div>
       ${isDonorAdmin() ? `<div class="modal-footer"><button class="btn btn-ghost btn-danger btn-sm" id="removeDonorProfileBtn">Remover da Aliança Z</button></div>` : ''}
@@ -8813,6 +8895,17 @@ function escapeHtml(str){
   return String(str).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 function escapeAttr(str){ return escapeHtml(str); }
+// Só deixa passar endereço http(s). Sem esquema ("x.com/fulano") ganha https://. Qualquer outra coisa (javascript:, data:...) vira ''.
+function safeHttpUrl(u){
+  let s = String(u == null ? '' : u).trim();
+  if(!s || /[\s<>"'`\\]/.test(s)) return '';            // espaço, aspas, < > ou barra invertida: não é endereço decente
+  if(!/^[a-z][a-z0-9+.\-]*:/i.test(s)) s = 'https://' + s;
+  return /^https?:\/\/[^\/?#]+/i.test(s) ? s : '';       // só http(s) e com host
+}
+function safeHttpsUrl(u){
+  const s = safeHttpUrl(u);
+  return s.startsWith('https://') ? s : '';
+}
 
 /* ======================= NAV LATERAL ======================= */
 document.querySelectorAll('.kz-nav-btn[data-tab]').forEach(btn=>{
