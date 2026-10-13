@@ -1678,6 +1678,30 @@ async function main(){
     assert.deepStrictEqual(r, {stillExists:false, inTeam:false, inFavs:false, inTiers:false});
   });
 
+  await test('"Ajustar retrato" só aparece e funciona para o dono (Discord de administrador)', () => {
+    const r = evalIn(sandbox, `(() => {
+      const id = state.characters[0].id;
+      const view = () => ({ ficha: renderCharDetailPage(id).includes('id="heroAdjustBtn"'), lista: renderCharsTab().includes('id="heroAdjustBtn"') });
+      const semLogin = { admin: isHeroAdmin(), ...view() };
+      startHeroEdit('detail', id); const editouSemLogin = !!state.heroEdit; state.heroEdit = null;
+      supabaseAvailable = true; window.__sb = { client: {} };
+      state.discordUser = { id: 'outro-uid', username: 'Fulano' };
+      const outro = { admin: isHeroAdmin(), ...view() };
+      state.discordUser = { id: window.ADMIN_DISCORD_ID, username: 'Dono' };
+      const dono = { admin: isHeroAdmin(), ...view() };
+      startHeroEdit('detail', id); const editouDono = !!state.heroEdit; state.heroEdit = null;
+      state.discordUser = null; supabaseAvailable = false; window.__sb = undefined;
+      const limpo = cleanFrames({ 'c_ok': { x: 250, y: -5, z: 9 }, 'c_ruim': { x: 'a', y: 1, z: 1 }, 'x y': { x: 1, y: 1, z: 1 } });
+      return { semLogin, outro, dono, editouSemLogin, editouDono, limpo };
+    })()`);
+    assert.deepStrictEqual(r.semLogin, { admin:false, ficha:false, lista:false });
+    assert.deepStrictEqual(r.outro, { admin:false, ficha:false, lista:false });
+    assert.deepStrictEqual(r.dono, { admin:true, ficha:true, lista:true });
+    assert.strictEqual(r.editouSemLogin, false);
+    assert.strictEqual(r.editouDono, true);
+    assert.deepStrictEqual(r.limpo, { c_ok: { x:100, y:0, z:4 } }, 'só números válidos, dentro dos limites');
+  });
+
   console.log(`\n${passed} passaram, ${failed} falharam.`);
   if(failed > 0) process.exit(1);
 }
