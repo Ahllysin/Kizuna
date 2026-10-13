@@ -478,7 +478,7 @@
           "nome": "Poder da Vingança",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Durante a batalha aumenta a própria Taxa Anti-Crítico; Cumber ganha [Poder de Vingança] a cada início de turno (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%), começa com 1 acúmulo, ganha 1 acúmulo por turno, máx. 4 acúmulos; no máximo de acúmulos, aumenta de tamanho; Cumber mata guerreiros inimigos com habilidades ou Supremos para ganhar aprimoramentos, restaurando 15% do PV Máx., removendo status anormais, imune a controle por 1 rodada; quando um [Guerreiro Maligno] aliado consegue o primeiro abate, Cumber instantaneamente ganha o [Poder de Vingança] máximo; Cumber é imune ao estado de [Pesadelo]; perde e recalcula o [Poder de Vingança] após reviver.",
+          "desc": "Durante a batalha aumenta a própria Taxa Anti-Crít.; Cumber ganha [Poder da Vingança] no início de cada turno (cada acúmulo aumenta a Taxa de Dano e a Taxa de Redução de Dano em 6%), começa com 1 acúmulo, ganha 1 acúmulo por turno, máximo de 4 acúmulos; com acúmulos máximos, aumenta de tamanho; Cumber mata Guerreiros inimigos com habilidades ou Supremos para ganhar aprimoramentos, restaurando 15% do PV Máx., removendo status anormais, ficando imune a Controle por 1 rodada; quando um aliado [Guerreiro Maligno] fizer o primeiro abate, Cumber ganha instantaneamente o máximo de [Poder da Vingança]; Cumber é imune ao estado [Pesadelo]; perde e recalcula o [Poder da Vingança] após reviver.",
           "icone": "ability-icons/Limitado e Lenda/Cumber/Passiva.png"
         },
         "max": {
@@ -1804,7 +1804,7 @@
           "nome": "Super Rajada de Energia Maligna MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Ataca todos os inimigos, 60% de chance de aplicar [Veneno] em cada alvo, causa 15% de Dano Extra a alvos envenenados, converte 15% do dano causado em PV para a Fileira da Frente; para cada efeito negativo que o alvo tiver (Queimadura, etc.), o dano aumenta.",
+          "desc": "[Explosão de Ki] Ataca todos os inimigos, 60% de chance de aplicar [Veneno] em cada alvo, causa 15% de Dano Extra a alvos envenenados, converte 15% do dano causado em PV para a Fileira da Frente; para cada efeito negativo que o alvo tiver (Queimadura, Queima da Alma, Veneno, Sangramento), o dano aumenta em 7%, até 28%.",
           "dano": "Causa dano adicional conforme os debuffs presentes no alvo.",
           "icone": "ability-icons/SSR,SR e R/SSR_09_Super_Syn_Shenlong/Ultimate.png"
         },
@@ -3083,7 +3083,7 @@
           "nome": "Trovão Absoluto MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Ataca 3 inimigos aleatórios, 40% de chance de aplicar [Julgamento] (aumentado para 60% contra [Saiyajins]); se o alvo tiver [Julgamento], causa Dano Extra igual a 10% do PV Máx..",
+          "desc": "[Explosão de Ki] Ataca 3 inimigos aleatórios, 40% de chance de aplicar [Julgamento] (não pode causar crítico, pode ser dissipado, dura 1 rodada), aumentado para 60% contra [Saiyajins]; se o alvo tiver [Julgamento], causa Dano Extra igual a 10% do PV Máx..",
           "dano": "220%+18",
           "icone": "ability-icons/SSR,SR e R/SSR_20_Zamasu_Fundido/Ultimate.png"
         },
@@ -3297,7 +3297,7 @@
           "nome": "Onda Explosiva MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Ataca a Fileira da Frente inimiga, 25% de chance de infligir [Atordoamento]. Se o próprio PV estiver abaixo de 50%, ganha adicionalmente +25% de Resistência a [Explosão de Ki] (dura 2 turnos).",
+          "desc": "[Explosão de Ki] Ataca a Fileira da Frente inimiga, 25% de chance de infligir [Atordoamento] (incapaz de agir por 1 turno). Se o próprio PV estiver abaixo de 50%, ganha adicionalmente +25% de Resistência a [Explosão de Ki] (dura 2 turnos).",
           "dano": "220%+12",
           "icone": "ability-icons/SSR,SR e R/SR_01_Majin_Boo/Ultimate.png"
         },
@@ -3721,7 +3721,7 @@
           "nome": "SMAX. Ataque Fantasma Supremo",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[ATK Especial] Aumenta o próprio ATQ e DEF em 15%. Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 70% de chance de causar [Queimadura] (mesmo efeito). Causa 25% de dano extra em alvos com [Queimadura]. Em seguida, aumenta a própria taxa de crítico em 15% (2 turnos). Causa [Elevação Baixa].",
+          "desc": "[ATK Especial] Aumenta o próprio ATQ e DEF em 15%. Ataca todos os inimigos. Quanto menos inimigos, maior o dano. Tem 70% de chance de causar [Queimadura] (no início de cada turno, sofre dano igual a 25% do ATQ do aplicador; cada camada reduz 10% do efeito de cura, máximo de 10 camadas). Causa 25% de dano extra em alvos com [Queimadura]. Em seguida, aumenta a própria taxa de crítico em 15% (2 turnos). Causa [Elevação Baixa].",
           "dano": "160%+15",
           "icone": "ability-icons/SSR,SR e R/SR_05_Gotenks/Ultimate.png"
         }
@@ -7231,7 +7231,7 @@
           "nome": "Vida Eterna",
           "estrelas": 3,
           "tipo": "Ativar",
-          "desc": "Melhora a defesa de guerreiros [Lendários]. Após Broly morrer, ele entra em estado de [Adormecimento], restaurando 40% do PV e herdando 100% da Fúria. Após um turno, ele [Desperta] novamente, herdando 100% do PV e 100% da Fúria do estado adormecido; no primeiro turno, aumenta a Taxa de Acerto Anormal em 20%, que é removida ao entrar em [Adormecimento]. Enquanto [Adormecido], Broly ganha uma Redução de Dano adicional de 50% e 50% de Defesa. Ao ser atacado (exceto contra-ataques), reduz a Fúria do atacante em 150. Ao [Despertar]: restaura 200 de Fúria para si e ganha permanentemente 15% de Roubo de Vida; Broly fica imune a [Petrificação]. Se houver apenas um aliado e um inimigo em campo ao entrar na batalha, aumenta o próprio dano de [Explosão de Ki].",
+          "desc": "Aumenta a DEF dos Guerreiros [Lendários]. Após Broly morrer, ele entra no estado [Adormecido], restaurando 40% do PV e herdando 100% da Fúria. Após 1 turno, ele é [Desperto] novamente, herdando 100% do PV e 100% da Fúria do estado adormecido; no primeiro turno, aumenta a Taxa de Acerto de Status Anormais em 20%, que é removida ao entrar em [Adormecido]. Enquanto estiver [Adormecido], Broly ganha 50% adicional de Redução de Dano e 50% de DEF. Ao ser atacado (exceto contra-ataques), reduz a Fúria do atacante em 150. Ao [Despertar], restaura 200 de Fúria para si e ganha permanentemente 15% de Roubo de Vida; Broly é imune a [Petrificar]. Se houver apenas 1 aliado e 1 inimigo ao entrar na batalha, aumenta o próprio dano de [Explosão de Ki] em 25% durante toda a batalha.",
           "icone": "ability-icons/Limitado e Lenda/Broly_DBS/Passiva.png"
         },
         "max": {
@@ -8721,7 +8721,7 @@
           "nome": "MAX. Dança Explosiva",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[ATQ Físico/ATQ Especial] Ataca um único inimigo, aplica [Inabalável] em si mesmo (quanto menor o próprio PV, maior o dano, até um aumento de 30%). Aumenta a própria Taxa de Roubo de Vida em 15%, Taxa de Dano em 15%, e Taxa de Precisão em 30% (2 turnos). 70% de chance de ganhar 1 uso extra de habilidade imediato, e causa [Empurrão].",
+          "desc": "[Ataque Físico/Ataque Especial] Ataca um único inimigo, aplica [Inabalável] em si (quanto menor o próprio PV, maior o dano, até 30% de aumento). Aumenta a própria Taxa de Roubo de Vida em 15%, Taxa de Dano em 15%, e Taxa de Precisão em 30% (2 turnos). 70% de chance de ganhar 1 uso extra imediato de habilidade, e aumenta a Probabilidade de Habilidade em 20% (2 turnos), causando [Empurrão].",
           "dano": "380%+20",
           "icone": "ability-icons/Limitado e Lenda/Future_Gohan/Ultimate.png"
         },
