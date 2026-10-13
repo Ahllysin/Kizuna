@@ -50,6 +50,7 @@ async function main(){
       else lr.forEach((x, i) => {
         if(x.estrelas !== 11 + i) fail(`"${n}": item de LR #${i + 1} tem estrelas=${x.estrelas}, esperado ${11 + i}`);
         if(!x.desc && !x.semTexto) fail(`"${n}": item de LR ★${11 + i} sem descrição`);
+        if(!x.icone || !fileExists(x.icone)) fail(`"${n}": item de LR ★${11 + i} sem ícone em disco (${x.icone})`);
       });
     });
     console.log(`  ${lrNames.length} guerreiros com habilidades de LR conferidos.`);
