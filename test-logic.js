@@ -967,14 +967,14 @@ async function main(){
     assert.ok(composeHtml.includes('2/2') && composeHtml.includes('disabled'), 'formulário mostra 2/2 e trava o botão');
   });
 
-  await test('sanitize do time: nível de estrela só de 1 a 10 e só de quem está no time; estrelas douradas até 5 e azuis de 6 a 10', () => {
+  await test('sanitize do time: nível de estrela só de 1 a 15 e só de quem está no time; douradas 1-5, azuis 6-10, LR 11-15', () => {
     const r = evalIn(sandbox, `(() => {
-      const d = sanitizeCommunityData('team', { team: ['c_a', 'c_b'], levels: { c_a: 7, c_b: 11, c_z: 4, 'x': 3 } });
+      const d = sanitizeCommunityData('team', { team: ['c_a', 'c_b'], levels: { c_a: 7, c_b: 16, c_z: 4, 'x': 3 } });
       const d2 = sanitizeCommunityData('team', { team: ['c_a'], levels: { c_a: '<b>' } });
       const d3 = sanitizeCommunityData('team', { team: ['c_a'] });
       return { d, d2, d3, ouro: communityStarsHtml(3), azul: communityStarsHtml(8), nada: communityStarsHtml(0), lixo: communityStarsHtml('abc') };
     })()`);
-    assert.deepStrictEqual(r.d.levels, { c_a: 7 }, 'nível 11, de quem não está no time ou inválido é descartado');
+    assert.deepStrictEqual(r.d.levels, { c_a: 7 }, 'nível 16, de quem não está no time ou inválido é descartado');
     assert.deepStrictEqual(r.d2.levels, {}, 'nível que não é número é descartado');
     assert.deepStrictEqual(r.d3.levels, {}, 'post antigo, sem níveis, continua válido');
     assert.ok(r.ouro.includes('gold') && r.ouro.includes('★★★☆☆'));
@@ -1278,6 +1278,72 @@ async function main(){
     ['Supabase', 'Discord', 'LivePix', 'GitHub Pages', 'Apagar meus dados'].forEach(w => assert.ok(pg.includes(w), 'a política precisa citar: ' + w));
     const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
     assert.ok((html.match(/href="privacidade\.html"/g) || []).length >= 2, 'link no menu lateral e no Perfil');
+  });
+
+  console.log('\n[LR: estrelas coloridas (11 a 15)]');
+
+  await test('fases das estrelas: dourada 1-5, azul 6-10, LR 11-15 (rótulos, estrelas de texto e Comunidade)', () => {
+    const r = evalIn(sandbox, `(() => ({
+      fases: [1, 5, 6, 10, 11, 15].map(starPhase), cheias: [1, 5, 6, 10, 11, 15].map(starFilled),
+      rot: [3, 8, 11, 15].map(reqLabelText),
+      rb: textStarsHtml(12).split('kz-rb').length - 1, rbAzul: textStarsHtml(8).split('kz-rb').length - 1,
+      com12: communityStarsHtml(12), com15: communityStarsHtml(15), com16: communityStarsHtml(16), com8: communityStarsHtml(8),
+      lim: [maxStarLevel(state.characters.find(c => c.name === 'Beerus')), maxStarLevel(state.characters.find(c => c.name === 'Android 17')), maxStarLevel(state.characters.find(c => c.name === 'Kuririn'))],
+    }))()`);
+    assert.deepStrictEqual(r.fases, ['gold', 'gold', 'blue', 'blue', 'lr', 'lr']);
+    assert.deepStrictEqual(r.cheias, [1, 5, 1, 5, 1, 5]);
+    assert.deepStrictEqual(r.rot, ['★3 Dourada', '★3 Azul', '★1 LR', '★5 LR']);
+    assert.strictEqual(r.rb, 2, 'nível 12 = 2 estrelas coloridas');
+    assert.strictEqual(r.rbAzul, 0);
+    assert.ok(r.com12.includes('kz-com-stars lr') && r.com12.includes('Nv 12') && r.com12.includes('★★☆☆☆'));
+    assert.ok(r.com15.includes('★★★★★') && r.com8.includes('blue') && r.com16 === '');
+    assert.deepStrictEqual(r.lim, [15, 10, 10], 'só SSR chega ao LR (Beerus SSR; Android 17 SR e Kuririn R param no 10)');
+  });
+
+  await test('habilidades de LR: 19 guerreiros com 5 itens (★11 a ★15); entram no grupo "Super Despertar (LR)" e só liberam com o nível', () => {
+    const r = evalIn(sandbox, `(() => {
+      const comLR = Object.keys(ABILITY_PROGRESSION).filter(n => Array.isArray(ABILITY_PROGRESSION[n].lr));
+      const itens = comLR.map(n => ABILITY_PROGRESSION[n].lr.map(x => x.estrelas).join(','));
+      const vazios = comLR.filter(n => ABILITY_PROGRESSION[n].lr.some(x => !x.desc && !x.semTexto));
+      const gLR = lv => { const u = getAbilityUnlocks('Beerus', lv); const g = u.groups.find(x => x.title === 'Super Despertar (LR)'); return g && g.tiers.map(x => x.unlocked); };
+      const hit = getAbilityUnlocks('Hit', 15).groups.map(g => g.title);
+      const semTexto = getAbilityUnlocks('Goku Instinto Superior', 15).groups.find(x => x.title === 'Super Despertar (LR)').tiers[0].data.desc;
+      return { n: comLR.length, itens: [...new Set(itens)], vazios, l10: gLR(10), l12: gLR(12), l15: gLR(15), hit, semTexto, nomes: ABILITY_PROGRESSION['Beerus'].lr.map(x => x.nome), conta15: collUnlockCount(state.characters.find(c => c.name === 'Beerus'), 15), conta10: collUnlockCount(state.characters.find(c => c.name === 'Beerus'), 10) };
+    })()`);
+    assert.strictEqual(r.n, 19);
+    assert.deepStrictEqual(r.itens, ['11,12,13,14,15']);
+    assert.deepStrictEqual(r.vazios, [], 'todo item tem texto (ou está marcado como sem texto no APK)');
+    assert.deepStrictEqual(r.l10, [false, false, false, false, false]);
+    assert.deepStrictEqual(r.l12, [true, true, false, false, false]);
+    assert.deepStrictEqual(r.l15, [true, true, true, true, true]);
+    assert.ok(!r.hit.includes('Super Despertar (LR)'), 'guerreiro sem habilidades de LR não ganha o grupo');
+    assert.ok(/ainda não disponível/.test(r.semTexto), 'item sem texto no APK avisa em vez de ficar vazio');
+    assert.deepStrictEqual(r.nomes, ['Despertar Transcendente I', 'Redução de Dano', 'Despertar Supremo II', 'Aumento de Dano', 'Despertar Transcendente III']);
+    assert.strictEqual(r.conta15 - r.conta10, 5, 'as 5 habilidades de LR contam como liberadas no nível 15');
+  });
+
+  await test('Coleção: botão Super Despertar só pros SSR no ★5 Azul; fase LR com estrelas coloridas e volta pro azul; nível limitado por raridade', () => {
+    const r = evalIn(sandbox, `(() => {
+      const bk = state.collection;
+      const ssr = state.characters.find(c => c.name === 'Beerus'), sr = state.characters.find(c => c.name === 'Android 17');
+      const card = (c, lv) => { state.collection = { [c.id]: { owned: true, level: lv } }; return renderCollectionCard(c); };
+      const out = {
+        ssr5: card(ssr, 5), ssr10: card(ssr, 10), ssr12: card(ssr, 12), sr10: card(sr, 10), ssr7: card(ssr, 7),
+      };
+      state.collection = { [ssr.id]: { owned: true, level: 10 }, [sr.id]: { owned: true, level: 10 } };
+      setCollectionLevel(ssr.id, 14); setCollectionLevel(sr.id, 14);
+      const niveis = [state.collection[ssr.id].level, state.collection[sr.id].level];
+      setCollectionLevel(ssr.id, 0);
+      niveis.push(state.collection[ssr.id].level);
+      state.collection = bk;
+      return { ...out, niveis };
+    })()`);
+    assert.ok(r.ssr5.includes('data-awaken') && !r.ssr5.includes('data-lr-awaken'), 'no ★5 Dourada o botão é o Despertar normal');
+    assert.ok(r.ssr10.includes('data-lr-awaken') && r.ssr10.includes('Nv.5 Azul'), 'SSR no ★5 Azul ganha o Super Despertar');
+    assert.ok(!r.sr10.includes('data-lr-awaken'), 'SR não tem LR');
+    assert.ok(r.ssr12.includes('Nv.2 LR') && r.ssr12.includes('kz-coll-card owned lr') && r.ssr12.includes('data-phase="lr"') && r.ssr12.includes('data-blueback') && !r.ssr12.includes('data-lr-awaken'), 'fase LR: rótulo, card colorido e botão pra voltar pro azul');
+    assert.ok(r.ssr7.includes('data-goldback') && !r.ssr7.includes('data-blueback'));
+    assert.deepStrictEqual(r.niveis, [14, 10, 1], 'SSR vai até 15, SR trava no 10 e o nível nunca cai abaixo de 1');
   });
 
   await test('safeHttpUrl: só http/https; javascript:, data: e afins viram vazio; sem esquema ganha https://', () => {

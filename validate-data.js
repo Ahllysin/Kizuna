@@ -41,6 +41,20 @@ async function main(){
     console.log('  ok - nenhum nome duplicado');
   }
 
+  console.log('\nLR (estrelas 11-15)');
+  {
+    const lrNames = evalIn(sandbox, "Object.keys(ABILITY_PROGRESSION).filter(n => ABILITY_PROGRESSION[n].lr)");
+    lrNames.forEach(n => {
+      const lr = evalIn(sandbox, 'ABILITY_PROGRESSION[' + JSON.stringify(n) + '].lr');
+      if(!Array.isArray(lr) || lr.length !== 5) fail(`"${n}": LR precisa ter 5 itens (★11 a ★15)`);
+      else lr.forEach((x, i) => {
+        if(x.estrelas !== 11 + i) fail(`"${n}": item de LR #${i + 1} tem estrelas=${x.estrelas}, esperado ${11 + i}`);
+        if(!x.desc && !x.semTexto) fail(`"${n}": item de LR ★${11 + i} sem descrição`);
+      });
+    });
+    console.log(`  ${lrNames.length} guerreiros com habilidades de LR conferidos.`);
+  }
+
   console.log('\n[2/5] JSON de habilidades completas (personagens-habilidades-completas.json)');
   if(!fs.existsSync(RAW_JSON_PATH)){
     fail(`arquivo não encontrado: ${RAW_JSON_PATH}`);

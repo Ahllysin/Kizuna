@@ -213,7 +213,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "[Aprimoramento Passivo]: Ao obter uma [Parede de Energia], aumenta permanentemente a Defesa de Jiren em 10%, até um máximo de 40% (herdado após reviver).",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Aprimoramento de Habilidade]: Recupera 200% da própria Defesa em Vida e causa Dano Adicional (sem recuperar Raiva) igual a 200% da própria Defesa contra [Saiyajins]. [Efeito Passivo]: Ao ter a Vida abaixo de 70%, 50% e 30% pela primeira vez, ganha 2 camadas de [Muro de Energia].",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "[Efeito Passivo]: Ao obter [Parede de Energia], ganha um [Escudo] de 10% da Vida Máxima e recupera 150 de Raiva. Após reviver, pode obter 2 camadas de [Parede de Energia].",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Goku Instinto",
@@ -320,7 +354,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o ATQ em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Se houver 2 ou mais Guerreiros do Espírito de Batalha [Tigre Branco] no seu lado, obtenha as características do Espírito de Batalha [Tigre Branco]. Quando um guerreiro aliado morrer, recupere 200 de Fúria. [Reforço Passivo]: Após esquivar-se com sucesso, aumente permanentemente em 6% a Redução de Golpe Especial e 6% o Dano de Golpe Especial (2 turnos).",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Se houver 2 ou mais Guerreiros do Espírito de Batalha [Fênix Vermelha] em seu lado, obtenha as características do Espírito de Batalha [Fênix Vermelha], recuperando 100 pontos adicionais de raiva ao atacar. [Fortalecimento Passivo]: Após esquivar-se com sucesso, aumenta permanentemente em 8% a redução de dano de golpe especial e 8% de dano de golpe especial (2 turnos).",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Se houver 2 ou mais Guerreiros do Espírito de Batalha [Tartaruga Negra] em seu lado, obtenha a característica do Espírito de Batalha [Tartaruga Negra]: ao ser atingido, recupere 50 pontos adicionais de Fúria. Após esquivar-se com sucesso, aumente permanentemente em 12% a redução de dano de golpe especial e 12% de dano de golpe especial (2 turnos).",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Cumber",
@@ -427,7 +495,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o PV em 5%\nAumenta o ATQ em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Efeito de fortalecimento [Pesadelo]: Dano de golpe especial reduzido em 25%, defesa reduzida em 25%, redução significativa da taxa de resistência a golpes críticos do alvo (até receber ataque de habilidade ou golpe especial), com duração de 1 turno.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "No início dos turnos ímpares, libera [Rede de Energia Maligna]. Todos os [Guerreiros das Trevas] aliados ganham um escudo de 8% da [Vida Máxima], causando dano equivalente a 160% do Ataque a todos os inimigos sem gerar Fúria. Um Saiyajin inimigo aleatório entra em estado de [Pesadelo].",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "No início dos turnos ímpares, libera [Rede Maligna], todos os [Guerreiros Sombrios] aliados ganham um escudo de 8% da [Vida], causa dano equivalente a 180% do Ataque a todos os inimigos sem gerar raiva, faz com que 2 Saiyajins inimigos aleatórios entrem em estado de [Pesadelo] e reduz o dano causado pelos [Saiyajins] na retaguarda inimiga contra si mesmo em 25% (1 turno).",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Vegetto SSGSS",
@@ -534,7 +636,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio Ataque e PV.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "[Aprimoramento Passivo]: Ao contra-atacar, o inimigo não recupera fúria adicional e o dano é aumentado para 220% do ataque.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Aprimoramento de Golpe Fatal]: Causa 20% de dano adicional aos [Guerreiros do Mal] e ignora o efeito de [Escudo].",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Ao sofrer dano letal, não será eliminado, remove estados negativos, recupera imediatamente 30% da Vida Máxima, renova o número de contra-ataques, com efeito máximo de 1 vez por batalha.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Whis",
@@ -641,7 +777,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "[Passiva Melhorada]: No início da batalha, transfere [Artes Marciais] para 1 guerreiro fora de si mesmo (aumenta 20% de taxa de dano e 20% de redução de dano, sem restrição de qualificação).",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Efeito Passivo]: Após ganhar [Proteção do Anjo], protege guerreiros com [Artes Marciais]. Whis suportará 50% do dano e reduzirá 20% do dano recebido.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "[Efeito Passivo]: O efeito de [Retroceder no Tempo] pode ser ativado 2 vezes; cada ativação aumenta seu próprio dano de golpe especial em 15%.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Hit",
@@ -962,7 +1132,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio ATQ.\nAumenta o ATQ em 7%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Quando um [Chifre Dourado] estiver presente, aumenta sua própria taxa de crítico em 20% e a taxa de crítico de todos os [Chifre Dourado] em 10%.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Quando houver um [Chifre Dourado] em campo, aumenta sua própria taxa de crítico em 24% e a taxa de crítico de todos os [Chifre Dourado] em 12%. Fortalece a habilidade especial, e 80% do dano excedente é espalhado para as unidades ao redor (não excedendo 320% do próprio ataque).",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Quando houver um [Anjo - Chifre Dourado] em campo, aumenta sua própria taxa de crítico em 30% e a taxa de crítico de todos os [Anjos] em 15%. Fortalece a habilidade especial: 100% do dano excedente é espalhado para as unidades ao redor (máximo de 400% do próprio ataque). Se não houver eliminação, aumenta a intensidade de crítico da próxima habilidade especial em 12% (acumulável). Após eliminar, o efeito é zerado.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Vegeta SSGSS",
@@ -1069,7 +1273,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio ATQ.\nAumenta o ATQ em 7%",
         "icone": "ability-icons/Passiva padrão/4 estrelas PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Aumenta em 20% a taxa de bloqueio e a intensidade de bloqueio de si mesmo.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Alterar a habilidade especial [Soco Explosivo] para que possa ser ativada 2 vezes por batalha.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Quando [Goku SSGSS] estiver em seu lado, ao sofrer dano fatal, não será derrotado, recuperando imediatamente 30% da vida e 300 de raiva. Este efeito é ativado uma vez por batalha.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Goku SSGSS",
@@ -1176,7 +1414,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio ATQ.\nAumenta o ATQ em 7%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Reforce[Habilidade Especial]. Se a própria vida estiver abaixo de 35%, este ataque de habilidade especial aumenta adicionalmente a taxa de roubo de vida em 15%.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Reforce a [Habilidade Especial]. Se a própria vida estiver abaixo de 35%, este ataque de habilidade especial ganha um aumento adicional de 25% na taxa de roubo de vida, além de obter 20% de resistência a habilidades e 20% de resistência a habilidades especiais (2 turnos, não acumulável).",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Quando houver [Vegeta SSGSS] em seu lado, ao sofrer dano fatal, não será derrotado, recuperando imediatamente 30% da vida e 300 de raiva. Este efeito só pode ser ativado uma vez por batalha.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Kale",
@@ -2139,7 +2411,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio ATQ.\nAumenta o ATQ em 7%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Quando houver [Vegeta Super Saiyajin 4] em seu lado, aumenta sua própria taxa de redução de dano em 12%. Quando [Vegeta Super Saiyajin 4] de seu lado for derrotado, ganha adicionalmente 12% de taxa de dano.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Após o aliado [Super Vegeta 4] liberar seu golpe especial, ele imediatamente libera uma habilidade extra e aumenta permanentemente a taxa de dano em 5%, com efeito de 3 vezes por batalha.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Quando houver um [Vegeta Super Saiyajin 4] em seu lado, ao sofrer um dano fatal, não será eliminado, recuperando imediatamente 30% da vida e 300 de raiva. Este efeito é ativado uma vez por batalha.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Janemba",
@@ -2353,7 +2659,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio PV.\nAumenta o PV em 7%",
         "icone": "ability-icons/Passiva padrão/4 estrelas PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Quando [Goku Super Saiyajin 4] estiver em seu lado, aumenta sua própria taxa de dano em 12%. Quando [Goku Super Saiyajin 4] do seu lado for derrotado, ganha adicionalmente 12% de taxa de redução de dano.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Após [Goku Super Saiyajin 4] do seu lado liberar um golpe especial, ele imediatamente libera uma habilidade adicional e aumenta permanentemente sua taxa de redução de dano em 5%, com efeito de 3 vezes por batalha.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Quando houver [Goku Super Saiyajin 4] em seu lado, ao sofrer dano fatal, não será eliminado, recuperará imediatamente 30% da vida e 300 de raiva. Este efeito só pode ser ativado uma vez por batalha.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Baby",
@@ -2567,7 +2907,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o próprio ATQ.\nAumenta o PV em 7%",
         "icone": "ability-icons/Passiva padrão/4 estrelas PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Se o guardião for um Guerreiro das Trevas, aumente adicionalmente em 12% a taxa de redução de dano e 12% a taxa de dano desse Guerreiro, e aumente adicionalmente em 20% a própria Defesa.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Se o protegido for um Guerreiro das Trevas, aumenta adicionalmente 15% de redução de dano e 15% de taxa de dano desse Guerreiro, e aumenta adicionalmente 30% de defesa própria. Se o personagem protegido morrer, recupera 10% da própria vida e aumenta 15% de taxa de dano reverso próprio (por 2 turnos).",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Se o protegido for um Guerreiro das Trevas, aumenta adicionalmente 20% de redução de dano e 20% de taxa de dano para esse Guerreiro, e aumenta adicionalmente 40% de defesa para si mesmo. Se o personagem protegido morrer, recupera 15% da própria vida e aumenta 20% de taxa de contra-ataque (2 turnos). [Aprimoramento de Habilidade Suprema]: A Habilidade Suprema aumenta o dano absorvido para 150% e reduz em 50 pontos a recuperação de raiva ao receber dano do alvo (1 turno).",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Cooler Dourado",
@@ -6894,7 +7268,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Ao entrar em estado [Adormecido], aumenta em 15% a taxa de redução de dano de 1 guerreiro Saiyajin aleatório aliado (exceto ele mesmo)(2 turnos) e reduz 300 de raiva de 1 inimigo aleatório.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Efeito Passivo]: Durante o estado [Adormecido], ganha 15% de reflexo de dano, e ao receber dano de golpe especial, tem 30% de chance de causar [Atordoamento] no alvo. [Atordoamento]: O próximo golpe especial não pode causar dano crítico, dura 2 turnos, não pode ser acumulado e não pode ser removido por purificação normal.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "[Golpe Especial Melhorado]: Causa dano extra de 15% da sua própria vida perdida a cada alvo. [Efeito Passivo]: Enquanto [Adormecido], aumenta em 25% a taxa de redução de dano de 1 guerreiro Saiyajin aleatório aliado (exceto ele mesmo)(2 turnos), o reflexo de dano aumenta para 20%, e a chance de causar [Atordoamento] aumenta para 50%.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "SSG Trunks",
@@ -7108,7 +7516,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Reforça o efeito de [Marca Carmesim], reduzindo adicionalmente 25% da Defesa do alvo. O dano crítico do Gogeta Super Saiyajin 4 contra alvos com [Marca Carmesim] aumenta em 20% e não pode ser removido.",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Guerreiros Fundidos] Ao liberar o golpe especial, pode adicionar uma habilidade extra ao Super Saiyajin 4 Gogeta, ativando no máximo 2 vezes por turno e até 4 vezes no total.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Aprimoramento [Endurecimento Carmesim]: Aumenta a taxa de redução de dano em 10% e a taxa de resistência a críticos em 10%. Aprimoramento [Poder Carmesim]: Aumenta a taxa de dano em 10% e o dano de golpe especial em 10%. Ao acumular 4 camadas, limpa [Poder Carmesim] e entra no estado [Despertar Carmesim], recuperando imediatamente 30% da própria vida, removendo efeitos de [Controle], recuperando 300 de raiva, aumentando a taxa de dano em 40% e o dano de golpe especial em 40%, aumentando a resistência a anomalias em 50%, além de aumentar o ataque, a defesa e a velocidade de recuperação de raiva de todos os [Guerreiros Fundidos] em 10% por 2 turnos. Durante este período, [Poder Carmesim] é convertido em [Endurecimento Carmesim], e o golpe especial ignora o limite máximo de vida do inimigo.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "SSGSS Gogeta",
@@ -7215,7 +7657,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Reforço do efeito [Vontade de Lutar]: cada camada aumenta adicionalmente em 4% o dano crítico, e no início do turno, ganhe 1 ponto adicional de [Vontade de Lutar].",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Guerreiros da Fusão] Ao liberar o golpe especial, pode adicionar uma habilidade extra ao Gogeta SSGSS, ativando no máximo 2 vezes por turno, com um limite de até 4 ativações.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Fortalecimento do efeito [Vontade de Lutar], cada camada aumenta adicionalmente 6% de Dano Crítico. [Efeito Passivo]: Quando houver outros [Guerreiros de Fusão], ganhe 1 efeito de imortalidade adicional. Após ser ativado, recupere 40% da Vida Máxima e 300 de Raiva.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Goku SS3 (Rose)",
@@ -7429,7 +7905,44 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "",
+          "estrelas": 11,
+          "tipo": "Despertar",
+          "semTexto": true
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "",
+          "estrelas": 13,
+          "tipo": "Despertar",
+          "semTexto": true
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "",
+          "estrelas": 15,
+          "tipo": "Despertar",
+          "semTexto": true
+        }
+      ]
     },
     {
       "nome": "Moro",
@@ -7857,7 +8370,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e o PV Máx. próprios.\nAumenta o ATQ próprio em 5%.\nAumenta o PV Máx. próprio em 5%.",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Neste turno, cada vez que [Chama Azul] é aplicada a um inimigo, no início do próximo turno, a taxa de redução de dano e a taxa de dano de Kefla aumentam em 5% (1 turno).",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Reforço [Chama Azul]. Quando [Chama Azul] é dissipada, 1 [Guerreiro] de [Fusão] aleatório aliado recupera 12% de Vida e 6% de Dano de Habilidade Suprema (acumulável). Pode ser ativado no máximo 2 vezes por turno.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Fortalece [Chama Azul]. Quando [Chama Azul] é dissipada, 1 [Guerreiro] de [Fusão] aleatório aliado recupera 12% de vida e 6% de dano de golpe especial (acumulável), ativando no máximo 3 vezes por turno. Ao sofrer dano letal, remove seus próprios estados negativos, recupera imediatamente 30% de vida e 300 de fúria, com efeito máximo de 1 vez por batalha.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Super Mira",
@@ -7964,7 +8511,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "Reduz em 20% o dano recebido de alvos com [Vórtice Sombrio]. No início do turno, se houver um alvo com [Vórtice Sombrio], adiciona 1 camada extra de [Energia Sombria].",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "Reforço do efeito de dano do [Vórtice Sombrio], cada camada aumenta o dano para 50% do ataque.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Ao causar dano de [Vórtice Sombrio], se a camada de [Energia Sombria] for 3/6/9/12, causará 40% do dano de [Vórtice Sombrio] sem recuperar raiva aos alvos ao redor.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Vados",
@@ -8071,7 +8652,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o PV próprio.\nAumenta a Taxa de Redução de Dano em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "[Aprimoramento de Golpe Fatal]: Ao adicionar [Escudo do Anjo] a um aliado, o alvo aumenta a taxa de dano em 8% e ganha +1 golpe de perseguição (1 turno).",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Efeito Passivo]: Quando perde [Escudo do Anjo], aumenta permanentemente a Taxa de Crítico em 15% e a Taxa de Dano em 15%. Ao aplicar [Escudo do Anjo] em um aliado, remove todos os estados negativos (incluindo estados negativos avançados) do alvo e aumenta a Resistência a Anomalias em 12% (por 2 turnos).",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "[Efeito Passivo]: Se houver um Guerreiro de [Guardião] presente, quando Vados sofrer dano letal, ela recupera 10% de sua própria vida e imediatamente adiciona [Escudo de Chifre Dourado] a si mesma. Este efeito só pode ser ativado uma vez por batalha. [Escudo de Chifre Dourado]: A intensidade do escudo é de 20% da vida máxima de Vados. Quando o escudo é quebrado, não sofre dano excedente.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     },
     {
       "nome": "Gohan do Futuro",
@@ -8178,7 +8793,41 @@
         "tipo": "Ativar",
         "desc": "Aumenta permanentemente o ATQ e PV próprios.\nAumenta o ATQ em 5%\nAumenta o PV em 5%",
         "icone": "ability-icons/Passiva padrão/4 estrelas ATQ+PV.png"
-      }
+      },
+      "lr": [
+        {
+          "nome": "Despertar Transcendente I",
+          "desc": "[Efeito Passivo]: No início do turno, ganhe um escudo de vida máxima igual a .",
+          "estrelas": 11,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Redução de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que reduz o dano sofrido pelo Guerreiro (+12% para os aliados)",
+          "estrelas": 12,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 2.png"
+        },
+        {
+          "nome": "Despertar Supremo II",
+          "desc": "[Habilidade Aprimorada]: No 3º ataque aprimorado, a taxa de crítico e o dano crítico aumentam em 20% adicional.",
+          "estrelas": 13,
+          "tipo": "Despertar"
+        },
+        {
+          "nome": "Aumento de Dano",
+          "desc": "Habilidade passiva geral de Guerreiro, que ajuda a causar mais dano (+12% para os aliados)",
+          "estrelas": 14,
+          "tipo": "Passiva",
+          "icone": "ability-icons/Passiva padrão/despertar 4.png"
+        },
+        {
+          "nome": "Despertar Transcendente III",
+          "desc": "Ao sofrer dano letal, não será eliminado e recuperará de vida, além de liberar imediatamente 1 habilidade extra.",
+          "estrelas": 15,
+          "tipo": "Despertar"
+        }
+      ]
     }
   ]
 }
