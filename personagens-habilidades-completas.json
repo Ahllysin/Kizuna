@@ -2018,7 +2018,7 @@
           "nome": "Balas de Energia Combinadas MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Ataca a Fileira de Trás inimiga, aplica [Queimadura] (mesmo efeito acima), 35% de chance de infligir [Silêncio]; aumenta o Dano de Supremo de 2 [Guerreiros Malignos] aliados em 8% adicional, até 14%, dura 1 turno.",
+          "desc": "[Explosão de Ki] Ataca a Fileira de Trás inimiga, aplica [Queimadura] (mesmo efeito acima), 35% de chance de infligir [Silêncio]; aumenta o Dano de Supremo de 3 [Guerreiros Malignos] aliados em 6% (para cada [Guerreiros Malignos] aliado, exceto ele mesmo, o Dano de Supremo aumenta em 2% adicional, até 14%, dura 1 turno).",
           "dano": "210%+18",
           "icone": "ability-icons/SSR,SR e R/SSR_11_Goku_Black_Rose/Ultimate.png"
         },
@@ -2125,7 +2125,7 @@
           "nome": "Foguete Infernal MÁX.",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, [Suprime] o alvo principal (reduz ATQ, Taxa de Dano e Taxa de Redução de Dano em 12%, encolhe o alvo, dura 2 turnos); se ele mesmo estiver no campo há ≥ 2 turnos, o dano se expande para todos os inimigos e tem 70% de chance de [Suprimir] outros dois inimigos aleatórios. Restaura PV para 2 aliados com menor PV: ATQ *100%+12.",
+          "desc": "[Explosão de Ki] Ataca uma coluna de inimigos, [Suprime] o alvo principal (reduz ATQ, Taxa de Dano e Taxa de Redução de Dano em 12%, encolhe o alvo, dura 2 turnos); se ele mesmo estiver no campo há ≥ 2 turnos, o dano se expande para todos os inimigos e tem 70% de chance de [Suprimir] um inimigo aleatório adicional. Restaura PV para 2 aliados com menor PV: ATQ *100%+12.",
           "dano": "150%+12",
           "icone": "ability-icons/SSR,SR e R/SSR_12_Freeza_Dourado/Ultimate.png"
         },
@@ -7178,7 +7178,7 @@
           "nome": "MAX. Bombardeio Devastador",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo com 70% de chance de causar [Empurrão], aumenta a própria Taxa de Bloqueio e Tenacidade em 30%, ganha um escudo equivalente a 10% do PV Máx., e aumenta o dano de Ki em 12% de um guerreiro [Lendário] aleatório além de si mesmo (1 turno); 40% de chance de infligir [Petrificação] no alvo (dobrada contra Saiyajins), +50% de dano a alvos com [Petrificação]. [Despertado]: uso garantido de habilidade uma vez por turno. [Passiva]: Enquanto tiver um Escudo, aumenta a Resistência a Habilidade/Supremo em 10%. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
+          "desc": "[Artes Marciais/Explosão de Ki] Ataca um único inimigo com 60% de chance de causar [Empurrão], aumenta a própria Taxa de Bloqueio e Tenacidade em 25%, ganha um escudo equivalente a 10% do PV Máx., e aumenta o dano de Ki em 12% de um guerreiro [Lendário] aleatório além de si mesmo (1 turno); 35% de chance de infligir [Petrificação] no alvo (dobrada contra Saiyajins), +40% de dano a alvos com [Petrificação]. [Despertado]: uso garantido de habilidade uma vez por turno. [Passiva]: Enquanto tiver um Escudo, aumenta a Resistência a Habilidade/Supremo em 30%. [Petrificação]: incapaz de agir por 1 turno; se dissipada, reduz a Fúria do alvo em 200.",
           "dano": "175%+15",
           "icone": "ability-icons/Limitado e Lenda/Broly_DBS/Skill.png"
         }
@@ -7426,7 +7426,7 @@
           "nome": "MAX. Explosão Ressonante",
           "estrelas": 3,
           "tipo": "Despertar",
-          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Elevação Baixa], e reduz a Taxa de Redução de Dano do alvo em 15% (2 turnos). Aumenta a própria Taxa de Roubo de Vida em 25% (1 turno). Causa dano em área igual a 30% do dano deste ataque aos inimigos atrás do alvo. Se Acerto Crítico, aumenta o dano desta habilidade em 40%.",
+          "desc": "[Artes Marciais/Ki] Ataca um único inimigo, priorizando alvos com [Marca Carmesim]. 60% de chance de infligir [Elevação Baixa], e reduz a Taxa de Redução de Dano do alvo em 15% (2 turnos). Aumenta a própria Taxa de Roubo de Vida em 25% (1 turno). Causa dano em área igual a 40% do dano deste ataque aos inimigos atrás do alvo. Se Acerto Crítico, aumenta o dano desta habilidade em 40%.",
           "dano": "175%+15",
           "icone": "ability-icons/Limitado e Lenda/Gogeta_SS4/Skill.png"
         }
@@ -7444,7 +7444,7 @@
           "nome": "MAX. Golpe Supremo",
           "estrelas": 5,
           "tipo": "Despertar (dourada)",
-          "desc": "[Ki] [Ki] aumenta o próprio ATQ e Dano Crítico em 20%, ataca uma fileira inimiga, reduz a Fúria do alvo principal em 200, 70% de chance de aplicar [Marca Carmesim] nos alvos atingidos. Se o alvo principal tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 10% do seu PV Máx., inflige [Empurrão]. Se qualquer inimigo em campo tiver [Marca Carmesim], troca o Supremo para [Investida Suprema]. [Investida Suprema]: [Artes Marciais/Ki] mira um inimigo com [Marca Carmesim], aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 25%, ataca um único inimigo, reduz a Fúria do alvo principal em 200, ignora 30% da DEF, restaura PV igual a 30% do dano causado e restaura 200 de Fúria. Se o alvo tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 12% do seu PV Máx. [Marca Carmesim]: -15% de cura recebida/-15% de Taxa de Crít., Taxa de Crít. de Gogeta SS4 contra marcados +50% (2 turnos).",
+          "desc": "[Ki] [Ki] aumenta o próprio ATQ e Dano Crítico em 25%, ataca uma fileira inimiga, reduz a Fúria do alvo principal em 200, 90% de chance de aplicar [Marca Carmesim] nos alvos atingidos. Se o alvo principal tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 12% do seu PV Máx., inflige [Empurrão]. Se qualquer inimigo em campo tiver [Marca Carmesim], troca o Supremo para [Investida Suprema]. [Investida Suprema]: [Artes Marciais/Ki] mira um inimigo com [Marca Carmesim], aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 25%, ataca um único inimigo, reduz a Fúria do alvo principal em 200, ignora 30% da DEF, restaura PV igual a 30% do dano causado e restaura 200 de Fúria. Se o alvo tiver [Marca Carmesim] e não sofrer Acerto Crítico, causa dano adicional igual a 12% do seu PV Máx. [Marca Carmesim]: -15% de cura recebida/-15% de Taxa de Crít., Taxa de Crít. de Gogeta SS4 contra marcados +50% (2 turnos).",
           "dano": "400%+24",
           "icone": "ability-icons/Limitado e Lenda/Gogeta_SS4/Ultimate.png"
         },
@@ -7734,7 +7734,7 @@
           "nome": "SMAX. Kamehameha Negro",
           "estrelas": 5,
           "tipo": "Despertar (azul)",
-          "desc": "[Ataque Especial] Aumenta a própria Taxa de Dano, Taxa de Redução de Dano e Taxa de Roubo de Vida em 15% (2 turnos). No primeiro uso, ignora Bloqueio. Ataca uma fileira de inimigos. Reduz a DEF de guerreiros do tipo [Defesa] em 30% e a Taxa de Cura em 15% (2 turnos). Se houver [Chama Extintora da Alma] em um alvo, causa dano igual a <10% do PV Máx. do alvo + 180% do próprio ATQ>. Se houver [Queimadura], causa dano adicional igual a 90% do próprio ATQ. Ao reviver, causa imediatamente dano de [Ataque Especial] igual a <5% do PV Máx. do alvo + 180% do próprio ATQ> a todos os alvos. Contra alvos afligidos com [Chama Extintora da Alma], aumenta a Taxa de Crít. e o Dano em 35%. Este dano não permite recuperar Fúria extra. Pode ser ativado até 3 vezes por batalha. Se as tentativas de revivificação se esgotarem, concede ao próprio 1 instância de [Imunidade à Morte] (ao sofrer um golpe fatal, não morre, restaura imediatamente 30% do próprio PV, remove debuffs, aumenta permanentemente a própria Resistência a Supremo e Taxa de Roubo de Vida em 25% cada). O efeito de [Imunidade à Morte] só pode ser concedido uma vez por batalha. O próximo Supremo usado após reviver ignora Bloqueio. Este efeito é ativo 3 vezes por batalha. [Efeito Passivo]: Cada vez que revive, aplica [Chama Extintora da Alma] em 1 inimigo aleatório. [Chama Extintora da Alma] Aprimorada: reduz o ATQ em 15%, causa dano igual a 90% do ATQ do lançador a cada turno, dura 2 turnos, não acumula.",
+          "desc": "[Ataque Especial] Aumenta a própria Taxa de Dano e Taxa de Redução de Dano em 30% e a Taxa de Roubo de Vida em 15% (2 turnos). No primeiro uso, ignora Bloqueio. Ataca uma fileira de inimigos. Reduz a DEF de guerreiros do tipo [Defesa] em 30% e a Taxa de Cura em 15% (2 turnos). Se houver [Chama Extintora da Alma] em um alvo, causa dano igual a <10% do PV Máx. do alvo + 180% do próprio ATQ>. Se houver [Queimadura], causa dano adicional igual a 90% do próprio ATQ. Ao reviver, causa imediatamente dano de [Ataque Especial] igual a <5% do PV Máx. do alvo + 180% do próprio ATQ> a todos os alvos. Contra alvos afligidos com [Chama Extintora da Alma], aumenta a Taxa de Crít. e o Dano em 35%. Este dano não permite recuperar Fúria extra. Pode ser ativado até 3 vezes por batalha. Se as tentativas de revivificação se esgotarem, concede ao próprio 1 instância de [Imunidade à Morte] (ao sofrer um golpe fatal, não morre, restaura imediatamente 30% do próprio PV, remove debuffs, aumenta permanentemente a própria Resistência a Supremo e Taxa de Roubo de Vida em 25% cada). O efeito de [Imunidade à Morte] só pode ser concedido uma vez por batalha. O próximo Supremo usado após reviver ignora Bloqueio. Este efeito é ativo 3 vezes por batalha. [Efeito Passivo]: Cada vez que revive, aplica [Chama Extintora da Alma] em 1 inimigo aleatório. [Chama Extintora da Alma] Aprimorada: reduz o ATQ em 15%, causa dano igual a 90% do ATQ do lançador a cada turno, dura 2 turnos, não acumula.",
           "dano": "320%+25",
           "icone": "ability-icons/Limitado e Lenda/Goku_SS3_Rose/Ultimate.png"
         }
