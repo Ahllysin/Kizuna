@@ -1101,6 +1101,8 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-hero-content{padding:22px 18px;}
   .kz-hero-art{width:70%;opacity:.55;}
   .kz-hero-name{display:none;}
+  .kz-hero-nav{position:relative;right:auto;top:auto;flex-wrap:wrap;justify-content:flex-end;padding:14px 18px 0;}
+  .kz-hero:not(.kz-detail-hero) .kz-hero-content{padding-top:10px;}
   .kz-filter-label{width:100%;}
   .kz-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 12px;}
   .kz-coll-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
@@ -1118,12 +1120,15 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-ab-icon{width:48px;height:48px;font-size:22px;}
   .kz-field{padding:16px 12px 18px;}
   .kz-slots{gap:10px;}
-  .kz-slot{flex-direction:column;gap:4px;min-height:110px;padding:30px 8px 10px;}
+  .kz-coll-counter{flex-wrap:wrap;gap:8px 12px;padding:10px 12px;}
+  .kz-coll-balls img{width:26px;height:26px;}
+  .kz-coll-summary{font-size:15px;}
+  .kz-slot,.kz-slot.filled{flex-direction:column;flex-wrap:nowrap;align-items:center;gap:4px;min-height:110px;padding:30px 8px 10px;}
   .kz-slot-art{width:56px;}
   .kz-slot-ball{width:28px;height:28px;}
   .kz-slot-info{flex:none;align-items:center;}
   .kz-slot-name{font-size:12px;text-align:center;}
-  .kz-slot-eff{justify-content:center;gap:10px;}
+  .kz-slot-eff{flex:none;flex-basis:auto;width:100%;justify-content:center;gap:10px;}
   .kz-slot-eff .col{align-items:center;}
   .kz-slot-remove{width:24px;height:24px;font-size:11px;}
   .kz-sim{padding:16px 12px 18px;}
