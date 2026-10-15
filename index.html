@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Q7bn3PMQuJfWvqZLkJbfN+R8XM8SU8nYM+Lv1b0Yr9M=' 'sha256-fytTGLTyMwUdbP7o9uFLZZ72BcsKSxOpqWPyjEzOxGc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-c7K882ClJRKT4XCyqX7W+s+UHIXmneZoK/25NNVtWms=' 'sha256-krGjs6I5+3aTtphzCS2oepOPMVS1VlAoVboFzDwQApU='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna — guerreiros, combos e tier list</title>
@@ -410,6 +410,9 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .cdp-food-icon.rarity-dourado{border-color:var(--gold);box-shadow:0 0 12px rgba(255,177,59,.35);}
 .cdp-food-name{font-size:13px;color:var(--text-soft);line-height:1.3;font-weight:700;}
 .cdp-food-exp{font-size:12px;font-weight:900;color:var(--gold);}
+.cdp-food-icon img{width:60px;height:60px;object-fit:contain;display:block;}
+.cdp-gift-cell{display:flex;align-items:center;gap:6px;}
+.cdp-gift-cell img{width:30px;height:30px;object-fit:contain;flex-shrink:0;}
 .cdp-aff-block{display:flex;flex-direction:column;gap:12px;padding:6px 0 18px;}
 .cdp-aff-block+.cdp-aff-block{border-top:1px dashed rgba(255,255,255,.12);padding-top:18px;}
 .cdp-aff-title{margin:0;font-size:17px;font-weight:900;color:var(--gold-light);}
@@ -5826,19 +5829,35 @@ function foodRarityClass(raridade){
   return '';
 }
 
-// Presentes de Afinidade por grupo (guia 03 do jogo: o catálogo tem 80 guerreiros em 41 grupos; estes são os grupos conhecidos).
-// Cada grupo aceita os mesmos 3 presentes (5, 20 e 60 EXP), mas cada guerreiro tem a própria Afinidade.
-const AFFINITY_GROUPS = [
-  { membros:['Goku','Goku SS3','Xeno Goku'], presentes:[['Bolinhos de Arroz',5],['Lagosta de Cereja',20],['Bife na Brasa',60]],
-    fontes:'Teste Diário, Caminho da Serpente, Loja de Vínculo e, conforme o presente, Mercearia, Loja da Arena, Loja de Teste, Pacote Semanal e Arena Multisservidor.' },
-  { membros:['Majin Boo','Android 21','Boo Puro'], presentes:[['Bolinhos de Polvo',5],['Bolo de Morango',20],['Tofu Picante',60]] },
-  { membros:['Kuririn','Goku (Criança)'], presentes:[['Arroz Frito com Frutos do Mar',5],['Muffin com Calda',20],['Sardinha de Namekusei',60]] },
-  { membros:['Cumber'], presentes:[['Udon Especial',5],['Sorvete de Mirtilo',20],['Tofu Especial',60]] },
-];
-function affinityGroupOf(name){ return AFFINITY_GROUPS.find(g=>g.membros.includes(name)) || null; }
+// Presentes de Afinidade de cada guerreiro ("03-Lista de Afinidade.pdf"): 3 presentes de 5, 20 e 60 EXP.
+// Os dados entre os marcadores são gerados por ferramentas-guias/build_presentes.py.
+/* AFINIDADE-DADOS:inicio — gerado por ferramentas-guias/build_presentes.py a partir de "03-Lista de Afinidade.pdf" */
+const AFFINITY_GIFTS = {"arroz-com-carne-assada": "Arroz com Carne Assada", "arroz-com-milho": "Arroz com Milho", "arroz-com-ovo": "Arroz com Ovo", "arroz-de-frutos-do-mar-do-vegeta": "Arroz de Frutos do Mar do Vegeta", "arroz-frito-com-frutos-do-mar": "Arroz Frito com Frutos do Mar", "arroz-frito-dourado": "Arroz Frito Dourado", "asas-de-frango-assadas": "Asas de Frango Assadas", "bife-energetico": "Bife Energético", "bife-na-brasa": "Bife na Brasa", "bife-tartaro": "Bife Tártaro", "biscoitos-de-cranberry": "Biscoitos de Cranberry", "bolinho-de-arroz-frito": "Bolinho de Arroz Frito", "bolinhos-de-arroz": "Bolinhos de Arroz", "bolinhos-de-polvo": "Bolinhos de Polvo", "bolo-de-morango": "Bolo de Morango", "carne-de-dinossauro-especial": "Carne de Dinossauro Especial", "cavala-grelhada": "Cavala Grelhada", "costeleta-de-cordeiro": "Costeleta de Cordeiro", "costeleta-de-porco-extrema": "Costeleta de Porco Extrema", "croquete": "Croquete", "curry-especial": "Curry Especial", "ensopado-de-frango": "Ensopado de Frango", "frango-assado": "Frango Assado", "gyudon-especial": "Gyudon Especial", "lagosta-de-cereja": "Lagosta de Cereja", "lamen-de-ameijoa": "Lámen de Amêijoa", "lamen-delicioso": "Lámen Delicioso", "macarrao-com-lagosta": "Macarrão com Lagosta", "macarrao-dragao": "Macarrão Dragão", "muffin-com-calda": "Muffin com Calda", "oden": "Oden", "omelete": "Omelete", "ovo-beneditino": "Ovo Beneditino", "oyakodon": "Oyakodon", "pao-com-manteiga": "Pão com Manteiga", "pao-no-vapor": "Pão no Vapor", "pastel-de-carne-em-camadas": "Pastel de Carne em Camadas", "peixe-com-batatas": "Peixe com Batatas", "peixe-com-limao": "Peixe com Limão", "peixe-frito-especial": "Peixe Frito Especial", "porco-assado-inteiro": "Porco Assado Inteiro", "prato-de-frutas-frescas": "Prato de Frutas Frescas", "presente-204062": "Presente sem nome no jogo (ID 204062)", "presente-204063": "Presente sem nome no jogo (ID 204063)", "pudim-de-ovo": "Pudim de Ovo", "raspadinha-de-verao": "Raspadinha de Verão", "rocambole-de-nozes": "Rocambole de Nozes", "salada-de-vegetais": "Salada de Vegetais", "sanduiche-de-cafe-da-manha": "Sanduíche de Café da Manhã", "sardinha-de-namekusei": "Sardinha de Namekusei", "sashimi-de-salmao": "Sashimi de Salmão", "sobremesa-de-taro": "Sobremesa de Taro", "sopa-de-frutos-do-mar": "Sopa de Frutos do Mar", "sopa-de-misso": "Sopa de Missô", "sorvete-de-mirtilo": "Sorvete de Mirtilo", "tofu-com-ovo": "Tofu com Ovo", "tofu-especial": "Tofu Especial", "tofu-picante": "Tofu Picante", "torrada-com-sorvete": "Torrada com Sorvete", "torta-de-chocolate": "Torta de Chocolate", "torta-de-dinossauro": "Torta de Dinossauro", "torta-de-maca-com-baunilha": "Torta de Maçã com Baunilha", "udon-especial": "Udon Especial"};
+const AFFINITY_CHAR_GIFTS = {"Android 16": ["frango-assado", "torta-de-maca-com-baunilha", "bife-energetico"], "Android 17": ["frango-assado", "torta-de-maca-com-baunilha", "bife-energetico"], "Android 18": ["frango-assado", "torta-de-maca-com-baunilha", "bife-energetico"], "Android 21": ["bolinhos-de-polvo", "bolo-de-morango", "tofu-picante"], "Baby": ["croquete", "arroz-de-frutos-do-mar-do-vegeta", "sopa-de-frutos-do-mar"], "Bardock": ["sashimi-de-salmao", "asas-de-frango-assadas", "bife-tartaro"], "Bardock Quebrador do Tempo": ["sashimi-de-salmao", "asas-de-frango-assadas", "bife-tartaro"], "Beerus": ["pao-no-vapor", "lamen-delicioso", "sopa-de-misso"], "Bergamo": ["peixe-com-batatas", "sobremesa-de-taro", "pao-com-manteiga"], "Boo Puro": ["bolinhos-de-polvo", "bolo-de-morango", "tofu-picante"], "Broly": ["pao-no-vapor", "lamen-delicioso", "sopa-de-misso"], "Broly (DBS)": ["pao-no-vapor", "lamen-delicioso", "omelete"], "Broly SS4": ["sanduiche-de-cafe-da-manha", "arroz-com-ovo", "presente-204063"], "Bulma": ["arroz-com-carne-assada", "peixe-com-limao", "lamen-de-ameijoa"], "Caulifla": ["prato-de-frutas-frescas", "rocambole-de-nozes", "carne-de-dinossauro-especial"], "Cell": ["sashimi-de-salmao", "asas-de-frango-assadas", "bife-tartaro"], "Champa": ["pao-no-vapor", "lamen-delicioso", "sopa-de-misso"], "Cooler Dourado": ["cavala-grelhada", "torrada-com-sorvete", "ovo-beneditino"], "Cumber": ["udon-especial", "sorvete-de-mirtilo", "tofu-especial"], "Dabura": ["croquete", "arroz-de-frutos-do-mar-do-vegeta", "sopa-de-frutos-do-mar"], "Demigra Demoníaco": ["udon-especial", "sorvete-de-mirtilo", "tofu-especial"], "Dyspo": ["gyudon-especial", "ensopado-de-frango", "bolinho-de-arroz-frito"], "Freeza": ["cavala-grelhada", "torrada-com-sorvete", "ovo-beneditino"], "Freeza Dourado": ["cavala-grelhada", "torrada-com-sorvete", "ovo-beneditino"], "Frost": ["cavala-grelhada", "torrada-com-sorvete", "ovo-beneditino"], "Gogeta SS4": ["arroz-com-carne-assada", "peixe-com-limao", "oden"], "Gohan": ["salada-de-vegetais", "torta-de-dinossauro", "curry-especial"], "Gohan BEAST": ["salada-de-vegetais", "torta-de-dinossauro", "presente-204062"], "Gohan Místico": ["salada-de-vegetais", "torta-de-dinossauro", "curry-especial"], "Gohan do Futuro": ["salada-de-vegetais", "torta-de-dinossauro", "raspadinha-de-verao"], "Goku": ["bolinhos-de-arroz", "lagosta-de-cereja", "bife-na-brasa"], "Goku (Criança)": ["arroz-frito-com-frutos-do-mar", "muffin-com-calda", "sardinha-de-namekusei"], "Goku (GT)": ["arroz-com-carne-assada", "peixe-com-limao", "lamen-de-ameijoa"], "Goku Black": ["udon-especial", "sorvete-de-mirtilo", "oyakodon"], "Goku Black (Rose)": ["udon-especial", "sorvete-de-mirtilo", "oyakodon"], "Goku Instinto": ["sanduiche-de-cafe-da-manha", "arroz-com-ovo", "porco-assado-inteiro"], "Goku Instinto Superior": ["bolinhos-de-arroz", "lagosta-de-cereja", "macarrao-com-lagosta"], "Goku SS3": ["bolinhos-de-arroz", "lagosta-de-cereja", "bife-na-brasa"], "Goku SS3 (Rose)": ["bolinhos-de-arroz", "lagosta-de-cereja", "macarrao-com-lagosta"], "Goku SS4": ["sanduiche-de-cafe-da-manha", "arroz-com-ovo", "torta-de-chocolate"], "Goku SSGSS": ["sanduiche-de-cafe-da-manha", "arroz-com-ovo", "torta-de-chocolate"], "Goku SSJ Deus": ["sanduiche-de-cafe-da-manha", "arroz-com-ovo", "torta-de-chocolate"], "Gotenks": ["arroz-com-carne-assada", "peixe-com-limao", "lamen-de-ameijoa"], "Gás": ["bolinhos-de-arroz", "lagosta-de-cereja", "macarrao-com-lagosta"], "Hit": ["prato-de-frutas-frescas", "rocambole-de-nozes", "carne-de-dinossauro-especial"], "Janemba": ["croquete", "arroz-de-frutos-do-mar-do-vegeta", "sopa-de-frutos-do-mar"], "Jiren": ["gyudon-especial", "ensopado-de-frango", "bolinho-de-arroz-frito"], "Jiren Poder Máximo": ["gyudon-especial", "ensopado-de-frango", "omelete"], "Kale": ["prato-de-frutas-frescas", "rocambole-de-nozes", "carne-de-dinossauro-especial"], "Kefla": ["prato-de-frutas-frescas", "rocambole-de-nozes", "porco-assado-inteiro"], "Kuririn": ["arroz-frito-com-frutos-do-mar", "muffin-com-calda", "sardinha-de-namekusei"], "Majin Boo": ["bolinhos-de-polvo", "bolo-de-morango", "tofu-picante"], "Majin Vegeta": ["tofu-com-ovo", "biscoitos-de-cranberry", "pastel-de-carne-em-camadas"], "Mestre Kame": ["arroz-frito-com-frutos-do-mar", "muffin-com-calda", "sardinha-de-namekusei"], "Moro": ["tofu-com-ovo", "biscoitos-de-cranberry", "costeleta-de-cordeiro"], "Otta Magetta": ["peixe-com-batatas", "sobremesa-de-taro", "pao-com-manteiga"], "Piccolo": ["sashimi-de-salmao", "asas-de-frango-assadas", "bife-tartaro"], "Ribrianne": ["peixe-com-batatas", "sobremesa-de-taro", "pao-com-manteiga"], "SSG Trunks": ["arroz-frito-com-frutos-do-mar", "muffin-com-calda", "raspadinha-de-verao"], "SSGSS Gogeta": ["arroz-com-carne-assada", "peixe-com-limao", "oden"], "Super Mira": ["frango-assado", "torta-de-maca-com-baunilha", "arroz-com-milho"], "Super Syn Shenlong": ["croquete", "arroz-de-frutos-do-mar-do-vegeta", "sopa-de-frutos-do-mar"], "Tenshinhan": ["arroz-frito-com-frutos-do-mar", "muffin-com-calda", "sardinha-de-namekusei"], "Toppo": ["gyudon-especial", "ensopado-de-frango", "bolinho-de-arroz-frito"], "Towa": ["croquete", "arroz-de-frutos-do-mar-do-vegeta", "pudim-de-ovo"], "Trunks do Futuro": ["salada-de-vegetais", "torta-de-dinossauro", "curry-especial"], "Vados": ["pao-no-vapor", "lamen-delicioso", "pudim-de-ovo"], "Vegeta": ["tofu-com-ovo", "biscoitos-de-cranberry", "pastel-de-carne-em-camadas"], "Vegeta Base": ["tofu-com-ovo", "biscoitos-de-cranberry", "pastel-de-carne-em-camadas"], "Vegeta Instinto Superior": ["tofu-com-ovo", "biscoitos-de-cranberry", "macarrao-dragao"], "Vegeta SS4": ["peixe-frito-especial", "costeleta-de-porco-extrema", "arroz-frito-dourado"], "Vegeta SSG": ["peixe-frito-especial", "costeleta-de-porco-extrema", "arroz-frito-dourado"], "Vegeta SSGSS": ["peixe-frito-especial", "costeleta-de-porco-extrema", "arroz-frito-dourado"], "Vegeta Ultra Ego": ["tofu-com-ovo", "biscoitos-de-cranberry", "costeleta-de-cordeiro"], "Vegetto SSGSS": ["arroz-com-carne-assada", "peixe-com-limao", "porco-assado-inteiro"], "Whis": ["pao-no-vapor", "lamen-delicioso", "pudim-de-ovo"], "Xeno Goku": ["bolinhos-de-arroz", "lagosta-de-cereja", "bife-na-brasa"], "Yamcha": ["arroz-frito-com-frutos-do-mar", "muffin-com-calda", "sardinha-de-namekusei"], "Zamasu": ["udon-especial", "sorvete-de-mirtilo", "oyakodon"], "Zamasu Fundido": ["udon-especial", "sorvete-de-mirtilo", "oyakodon"]};
+/* AFINIDADE-DADOS:fim */
+const AFFINITY_EXP = [5, 20, 60];
+// Fontes conhecidas (guia de Afinidade, só para os presentes do grupo do Goku).
+const AFFINITY_SOURCES = { 'bolinhos-de-arroz|lagosta-de-cereja|bife-na-brasa':'Teste Diário, Caminho da Serpente, Loja de Vínculo e, conforme o presente, Mercearia, Loja da Arena, Loja de Teste, Pacote Semanal e Arena Multisservidor.' };
+function affinityGiftsOf(name){
+  return (AFFINITY_CHAR_GIFTS[name] || []).map((slug, i)=>({ slug, nome: AFFINITY_GIFTS[slug] || slug, exp: AFFINITY_EXP[i] }));
+}
+function affinityKey(name){ return (AFFINITY_CHAR_GIFTS[name] || []).join('|'); }
+// Guerreiros que aceitam exatamente os mesmos 3 presentes.
+function affinityMatesOf(name){
+  const k = affinityKey(name);
+  return k ? Object.keys(AFFINITY_CHAR_GIFTS).filter(n=>n !== name && affinityKey(n) === k) : [];
+}
+function affinityGroups(){
+  const g = new Map();
+  Object.keys(AFFINITY_CHAR_GIFTS).forEach(n=>{ const k = affinityKey(n); if(!g.has(k)) g.set(k, []); g.get(k).push(n); });
+  return [...g.entries()].map(([k, membros])=>({ membros, slugs: k.split('|') }));
+}
 function affinityFoodTier(exp){ return exp >= 60 ? 'rarity-dourado' : exp >= 20 ? 'rarity-roxo' : 'rarity-azul'; }
+function affinityIconHtml(slug){ return /^[a-z0-9-]{1,60}$/.test(slug) ? `<img src="assets/presentes/${slug}.webp" alt="" loading="lazy" data-onerr="hide">` : '🍽'; }
 function affinityResumoHtml(){
-  const linhas = AFFINITY_GROUPS.map(g=>`<tr><td>${g.membros.map(escapeHtml).join(', ')}</td>${g.presentes.map(p=>`<td>${escapeHtml(p[0])}</td>`).join('')}</tr>`).join('');
+  const grupos = affinityGroups();
+  const nomeLink = n=>{ const o = state.characters.find(x=>x.name === n); return o ? `<button type="button" class="kz-link-btn" data-open-char="${escapeAttr(o.id)}">${escapeHtml(n)}</button>` : escapeHtml(n); };
+  const linhas = grupos.map(g=>`<tr><td>${g.membros.map(nomeLink).join(', ')}</td>${g.slugs.map(s=>`<td><span class="cdp-gift-cell">${affinityIconHtml(s)}${escapeHtml(AFFINITY_GIFTS[s] || s)}</span></td>`).join('')}</tr>`).join('');
   return `
   <div class="cdp-aff-block">
     <h3 class="cdp-aff-title">Como a Afinidade funciona</h3>
@@ -5849,30 +5868,30 @@ function affinityResumoHtml(){
       <li>A EXP que sobra no fim de um estágio é perdida: perto do limite, use o presente de 5.</li>
       <li>Aumenta ATQ, DEF, PV e mais dois atributos da categoria do guerreiro, só para ele. A Prioridade ganha soma na Velocidade da Equipe.</li>
     </ul>
-    <details class="kz-gd"><summary><span class="tx"><b>Todos os presentes conhecidos</b><small>${AFFINITY_GROUPS.length} grupos · 5 / 20 / 60 EXP</small></span></summary>
-      <div class="kz-gd-body"><div class="kz-gt-wrap"><table class="kz-gt"><thead><tr><th>Guerreiros</th><th>5 EXP</th><th>20 EXP</th><th>60 EXP</th></tr></thead><tbody>${linhas}</tbody></table></div>
-      <p class="cdp-aff-src">O jogo tem 41 grupos de presentes. Os demais ainda não estão no site.</p></div>
+    <details class="kz-gd"><summary><span class="tx"><b>Presentes de todos os guerreiros</b><small>${Object.keys(AFFINITY_CHAR_GIFTS).length} guerreiros · ${grupos.length} grupos com os mesmos presentes</small></span></summary>
+      <div class="kz-gd-body"><div class="kz-gt-wrap"><table class="kz-gt"><thead><tr><th>Guerreiros</th><th>5 EXP</th><th>20 EXP</th><th>60 EXP</th></tr></thead><tbody>${linhas}</tbody></table></div></div>
     </details>
     <button type="button" class="kz-btn kz-btn-sm" data-guide="afinidade">Abrir o guia de Afinidade →</button>
   </div>`;
 }
 function renderCharFoodSection(c){
   const extras = CHAR_EXTRAS[c.name];
-  const grupo = affinityGroupOf(c.name);
-  const foods = grupo ? grupo.presentes.map(([nome, exp])=>({ nome, exp })) : ((extras && extras.comidaAfinidade) || []);
-  const outros = grupo ? grupo.membros.filter(n=>n !== c.name) : [];
+  const doJogo = affinityGiftsOf(c.name);
+  const foods = doJogo.length ? doJogo : ((extras && extras.comidaAfinidade) || []);
+  const outros = affinityMatesOf(c.name);
+  const fontes = AFFINITY_SOURCES[affinityKey(c.name)];
   const topo = foods.length ? `
   <div class="cdp-aff-block">
     <h3 class="cdp-aff-title">Presentes que ${escapeHtml(c.name)} aceita</h3>
     <div class="cdp-food-row">${foods.map(f=>`
       <div class="cdp-food-item">
-        <div class="cdp-food-icon ${f.exp ? affinityFoodTier(f.exp) : foodRarityClass(f.raridade)}">🍽</div>
+        <div class="cdp-food-icon ${f.exp ? affinityFoodTier(f.exp) : foodRarityClass(f.raridade)}">${f.slug ? affinityIconHtml(f.slug) : '🍽'}</div>
         <div class="cdp-food-name">${escapeHtml(f.nome)||'—'}</div>
         ${f.exp ? `<div class="cdp-food-exp">+${+f.exp} EXP</div>` : ''}
       </div>`).join('')}</div>
     ${outros.length ? `<div class="cdp-aff-group">Aceitam os mesmos presentes: ${outros.map(n=>{ const o = state.characters.find(x=>x.name === n); return o ? `<button type="button" class="kz-link-btn" data-open-char="${escapeAttr(o.id)}">${escapeHtml(n)}</button>` : escapeHtml(n); }).join(', ')} <span>(cada um tem a própria Afinidade)</span></div>` : ''}
-    ${grupo && grupo.fontes ? `<div class="cdp-aff-src"><b>Onde conseguir:</b> ${escapeHtml(grupo.fontes)}</div>` : ''}
-  </div>` : `<div class="kz-empty-ball"><img src="${ballSrc(2)}" alt=""><div>Os presentes de ${escapeHtml(c.name)} ainda não estão no site. O jogo tem 41 grupos de presentes, e por enquanto temos os de ${AFFINITY_GROUPS.length}.</div></div>`;
+    ${fontes ? `<div class="cdp-aff-src"><b>Onde conseguir:</b> ${escapeHtml(fontes)}</div>` : ''}
+  </div>` : `<div class="kz-empty-ball"><img src="${ballSrc(2)}" alt=""><div>Os presentes de ${escapeHtml(c.name)} ainda não estão no site.</div></div>`;
   return topo + affinityResumoHtml();
 }
 

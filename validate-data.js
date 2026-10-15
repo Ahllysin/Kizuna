@@ -79,6 +79,24 @@ async function main(){
     console.log(`  ${r.regras} sinergias de ${r.donos} guerreiros conferidas.`);
   }
 
+  console.log('\nPresentes de Afinidade (AFFINITY_CHAR_GIFTS)');
+  {
+    const r = evalIn(sandbox, `(() => {
+      const out = { sem: [], ruins: [], slugs: [] };
+      state.characters.forEach(c => {
+        const s = AFFINITY_CHAR_GIFTS[c.name];
+        if(!s) out.sem.push(c.name);
+        else if(s.length !== 3 || s.some(x => !AFFINITY_GIFTS[x])) out.ruins.push(c.name);
+      });
+      out.slugs = Object.keys(AFFINITY_GIFTS);
+      return out;
+    })()`);
+    r.sem.forEach(n => warn(`"${n}": sem presentes de Afinidade`));
+    r.ruins.forEach(n => fail(`"${n}": presentes de Afinidade incompletos ou desconhecidos`));
+    r.slugs.forEach(s => { if(!fileExists(`assets/presentes/${s}.webp`)) fail(`ícone do presente não existe: assets/presentes/${s}.webp`); });
+    console.log(`  ${r.slugs.length} presentes conferidos; ${r.sem.length} guerreiro(s) sem presentes.`);
+  }
+
   console.log('\nGuias do jogo (guias/guias.json)');
   {
     let j = null;
