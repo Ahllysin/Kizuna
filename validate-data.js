@@ -163,14 +163,16 @@ async function main(){
     }
   }
 
-  console.log('\n[5/5] Retratos existem em disco (portraits/<slug>.png)');
+  console.log('\n[5/5] Retratos existem em disco (portraits/<slug>.webp e portraits/mini/<slug>.webp)');
   let portraitsOk = 0;
   characters.forEach(c => {
     const slugName = evalIn(sandbox, `slug(${JSON.stringify(c.name)})`);
-    const relPath = `portraits/${slugName}.png`;
-    if(fileExists(relPath)) portraitsOk++;
-    else warn(`"${c.name}": retrato não encontrado (${relPath}) — cai no fallback de iniciais, mas também quebra a exportação de imagem da tier list`);
+    const grande = `portraits/${slugName}.webp`, mini = `portraits/mini/${slugName}.webp`;
+    if(fileExists(grande) && fileExists(mini)) portraitsOk++;
+    else warn(`"${c.name}": retrato não encontrado (${fileExists(grande) ? mini : grande}) — cai no fallback de iniciais, mas também quebra a exportação de imagem da tier list`);
   });
+  const pngs = fs.readdirSync(path.join(ROOT, 'portraits')).filter(f => f.endsWith('.png'));
+  if(pngs.length) warn(`${pngs.length} retrato(s) ainda em PNG (pesado): rode "python otimizar-retratos.py" na pasta Kizuna`);
   console.log(`  ${portraitsOk}/${characters.length} retratos encontrados em disco.`);
 
   console.log(`\n${errors} erro(s), ${warnings} aviso(s).`);

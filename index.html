@@ -2,10 +2,25 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Bmb8CZtAgsYRtrGpfVHv3UQSN/7XhDmAUnNYNv64sCM=' 'sha256-XhCMtwkejKq9EDMdZthbND7Y9vbgbwHkwKS0p++RY/0='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-++931L3rw0vx6l7I93WWGBZQo9rsf727g1/ngsiCDFs=' 'sha256-zFuAc9ngWrbFpEw4vZhzcU4TLZiewUQ+YwXvn0gp0jk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Kizuna</title>
+<title>Kizuna — guerreiros, combos e tier list</title>
+<meta name="description" content="Guerreiros, habilidades, combos, tier list, coleção e guias de Dragon Ball. Site de fã, não oficial.">
+<meta name="theme-color" content="#0b0912">
+<link rel="apple-touch-icon" href="assets/icone-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kizuna">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Kizuna — guerreiros, combos e tier list">
+<meta property="og:description" content="Guerreiros, habilidades, combos, tier list, coleção e guias de Dragon Ball. Site de fã, não oficial.">
+<meta property="og:url" content="https://ahllysin.github.io/Kizuna/">
+<meta property="og:image" content="https://ahllysin.github.io/Kizuna/assets/previa-link.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kizuna: guerreiros, combos e tier list">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23ff6a4a'/%3E%3Cstop offset='70%25' stop-color='%23c2261a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='29' fill='url(%23g)' stroke='%23ffc54a' stroke-width='3'/%3E%3Ctext x='32' y='43' font-size='30' text-anchor='middle' fill='%23fff3e0' font-family='serif' font-weight='800'%3E%E7%B5%86%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
@@ -140,6 +155,10 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-nav-btn.active .kz-nav-glyph{background:radial-gradient(circle at 35% 30%, #ffb35a, #e0461a 75%);color:#fff;border-color:var(--gold-light);}
 .kz-sidebar-spacer{flex:1;}
+.kz-footer{position:relative;z-index:1;max-width:860px;margin:48px auto 0;padding:16px 12px 0;border-top:1px solid rgba(255,255,255,.1);text-align:center;font-size:12.5px;line-height:1.6;color:var(--text-dim);text-shadow:0 1px 3px #000;}
+.kz-footer p{margin:0 0 6px;}
+.kz-footer b{color:var(--text-soft);}
+.kz-footer a{color:var(--text-soft);text-decoration:underline;text-underline-offset:3px;}
 .kz-privacy-link{display:block;margin:6px 8px 0;font-size:11.5px;color:var(--text-faint,#8f879a);text-decoration:underline;text-underline-offset:3px;position:relative;z-index:1;}
 .kz-privacy-link:hover{color:#ffd66b;}
 .kz-app.nav-compact .kz-privacy-link{display:none;}
@@ -390,6 +409,16 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .cdp-food-icon.rarity-roxo{border-color:#8b5fbf;box-shadow:0 0 12px rgba(139,95,191,.35);}
 .cdp-food-icon.rarity-dourado{border-color:var(--gold);box-shadow:0 0 12px rgba(255,177,59,.35);}
 .cdp-food-name{font-size:13px;color:var(--text-soft);line-height:1.3;font-weight:700;}
+.cdp-food-exp{font-size:12px;font-weight:900;color:var(--gold);}
+.cdp-aff-block{display:flex;flex-direction:column;gap:12px;padding:6px 0 18px;}
+.cdp-aff-block+.cdp-aff-block{border-top:1px dashed rgba(255,255,255,.12);padding-top:18px;}
+.cdp-aff-title{margin:0;font-size:17px;font-weight:900;color:var(--gold-light);}
+.cdp-aff-group,.cdp-aff-src{font-size:14px;line-height:1.55;color:var(--text-soft);}
+.cdp-aff-group span{color:var(--text-faint);}
+.cdp-aff-group .kz-link-btn{padding:0;font-size:14px;}
+.cdp-aff-list{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--text);font-size:14.5px;line-height:1.55;}
+.cdp-aff-list li::marker{color:#ff8a2a;}
+.cdp-aff-block>.kz-btn{align-self:flex-start;}
 .cdp-bond-list{display:flex;flex-direction:column;gap:12px;}
 .cdp-bond-row{display:flex;gap:16px;align-items:flex-start;padding:14px 16px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(20,20,34,.6);}
 .cdp-bond-partner{display:flex;align-items:center;flex-shrink:0;}
@@ -1316,6 +1345,11 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
     <main class="kz-main">
       <div class="kz-main-watermark" aria-hidden="true">絆</div>
       <div id="view"></div>
+      <footer class="kz-footer">
+        <p>Kizuna é um site de fã, feito pela comunidade, <b>sem vínculo</b> com Bandai Namco, Toei Animation, Shueisha ou com os criadores do jogo.
+        Dragon Ball, os personagens e as imagens pertencem aos seus donos.</p>
+        <p><a href="privacidade.html" target="_blank" rel="noopener noreferrer">Privacidade e dados</a> · <a href="https://github.com/Ahllysin/Kizuna/issues" target="_blank" rel="noopener noreferrer">Contato / pedir remoção de conteúdo</a></p>
+      </footer>
     </main>
   </div>
 
@@ -4847,7 +4881,7 @@ function avatarInner(c){
 }
 function portraitInner(c){
   // Bust/face portrait — used everywhere else (roster list, character cards, picker modal).
-  return `<img src="portraits/${slug(c.name)}.png" alt="" loading="lazy" draggable="false" data-onerr="fallback"><span class="avatar-fallback" style="display:none;">${initials(c.name)}</span>`;
+  return `<img src="portraits/mini/${slug(c.name)}.webp" alt="" loading="lazy" decoding="async" draggable="false" data-onerr="fallback"><span class="avatar-fallback" style="display:none;">${initials(c.name)}</span>`;
 }
 function rarityClass(r){
   if(!r) return 'rarity-r';
@@ -5129,7 +5163,7 @@ function effPillHtml(eff){
   return s ? `<span class="kz-eff-pill" style="background:${s.bg};color:${s.fg};">${EFFECT_LABELS[eff]}</span>` : '';
 }
 function ballSrc(n){ return `assets/balls/esfera-${n}.webp`; }
-function portraitSrc(c){ return `portraits/${slug(c.name)}.png`; }
+function portraitSrc(c){ return `portraits/${slug(c.name)}.webp`; }
 function isFav(id){ return state.favs.includes(id); }
 function isNarrowLayout(){ return (window.innerWidth || 1200) <= 700; }
 function applyNavState(){
@@ -5200,6 +5234,7 @@ function openCharDetail(id){
   state.tab = 'chars';
   state.viewingCharId = id;
   state.heroEdit = null;
+  if(typeof location !== 'undefined' && /^#guia-/.test(location.hash || '')) setGuideHash(null);
   state.charDetailTab = 'habilidades';
   saveUiTab();
   render();
@@ -5387,7 +5422,7 @@ function softRerenderChars(){
 }
 
 /* ======================= PERSONAGENS: FICHA ======================= */
-const DETAIL_TABS = [['habilidades','技','Habilidades'],['comida','食','Comida de Afinidade'],['vinculos','絆','Vínculos']];
+const DETAIL_TABS = [['habilidades','技','Habilidades'],['comida','食','Afinidade'],['vinculos','絆','Vínculos']];
 
 // Ordem usada pra passar de um guerreiro pro outro: a mesma da lista (respeita os filtros ativos).
 function charStepList(currentId){
@@ -5781,17 +5816,54 @@ function foodRarityClass(raridade){
   return '';
 }
 
+// Presentes de Afinidade por grupo (guia 03 do jogo: o catálogo tem 80 guerreiros em 41 grupos; estes são os grupos conhecidos).
+// Cada grupo aceita os mesmos 3 presentes (5, 20 e 60 EXP), mas cada guerreiro tem a própria Afinidade.
+const AFFINITY_GROUPS = [
+  { membros:['Goku','Goku SS3','Xeno Goku'], presentes:[['Bolinhos de Arroz',5],['Lagosta de Cereja',20],['Bife na Brasa',60]],
+    fontes:'Teste Diário, Caminho da Serpente, Loja de Vínculo e, conforme o presente, Mercearia, Loja da Arena, Loja de Teste, Pacote Semanal e Arena Multisservidor.' },
+  { membros:['Majin Boo','Android 21','Boo Puro'], presentes:[['Bolinhos de Polvo',5],['Bolo de Morango',20],['Tofu Picante',60]] },
+  { membros:['Kuririn','Goku (Criança)'], presentes:[['Arroz Frito com Frutos do Mar',5],['Muffin com Calda',20],['Sardinha de Namekusei',60]] },
+  { membros:['Cumber'], presentes:[['Udon Especial',5],['Sorvete de Mirtilo',20],['Tofu Especial',60]] },
+];
+function affinityGroupOf(name){ return AFFINITY_GROUPS.find(g=>g.membros.includes(name)) || null; }
+function affinityFoodTier(exp){ return exp >= 60 ? 'rarity-dourado' : exp >= 20 ? 'rarity-roxo' : 'rarity-azul'; }
+function affinityResumoHtml(){
+  const linhas = AFFINITY_GROUPS.map(g=>`<tr><td>${g.membros.map(escapeHtml).join(', ')}</td>${g.presentes.map(p=>`<td>${escapeHtml(p[0])}</td>`).join('')}</tr>`).join('');
+  return `
+  <div class="cdp-aff-block">
+    <h3 class="cdp-aff-title">Como a Afinidade funciona</h3>
+    <ul class="cdp-aff-list">
+      <li>Abre no Nv.36 da conta, em Apoio &gt; Afinidade.</li>
+      <li>Cada guerreiro aceita 3 presentes, de 5, 20 e 60 EXP. Dar presentes não custa ouro nem Pedras.</li>
+      <li>São 7 estágios (D, C, B, A, S, SS e SSS), com 78.300 EXP no total. Ao encher um estágio, toque em Impulso de Afinidade para seguir.</li>
+      <li>A EXP que sobra no fim de um estágio é perdida: perto do limite, use o presente de 5.</li>
+      <li>Aumenta ATQ, DEF, PV e mais dois atributos da categoria do guerreiro, só para ele. A Prioridade ganha soma na Velocidade da Equipe.</li>
+    </ul>
+    <details class="kz-gd"><summary><span class="tx"><b>Todos os presentes conhecidos</b><small>${AFFINITY_GROUPS.length} grupos · 5 / 20 / 60 EXP</small></span></summary>
+      <div class="kz-gd-body"><div class="kz-gt-wrap"><table class="kz-gt"><thead><tr><th>Guerreiros</th><th>5 EXP</th><th>20 EXP</th><th>60 EXP</th></tr></thead><tbody>${linhas}</tbody></table></div>
+      <p class="cdp-aff-src">O jogo tem 41 grupos de presentes. Os demais ainda não estão no site.</p></div>
+    </details>
+    <button type="button" class="kz-btn kz-btn-sm" data-guide="afinidade">Abrir o guia de Afinidade →</button>
+  </div>`;
+}
 function renderCharFoodSection(c){
   const extras = CHAR_EXTRAS[c.name];
-  const foods = extras ? extras.comidaAfinidade : [];
-  if(!foods || !foods.length){
-    return `<div class="kz-empty-ball"><img src="${ballSrc(2)}" alt=""><div>Comidas favoritas ainda não capturadas para este personagem.</div></div>`;
-  }
-  return `<div class="cdp-food-row">${foods.map(f=>`
-    <div class="cdp-food-item">
-      <div class="cdp-food-icon ${foodRarityClass(f.raridade)}">🍽</div>
-      <div class="cdp-food-name">${escapeHtml(f.nome)||'—'}</div>
-    </div>`).join('')}</div>`;
+  const grupo = affinityGroupOf(c.name);
+  const foods = grupo ? grupo.presentes.map(([nome, exp])=>({ nome, exp })) : ((extras && extras.comidaAfinidade) || []);
+  const outros = grupo ? grupo.membros.filter(n=>n !== c.name) : [];
+  const topo = foods.length ? `
+  <div class="cdp-aff-block">
+    <h3 class="cdp-aff-title">Presentes que ${escapeHtml(c.name)} aceita</h3>
+    <div class="cdp-food-row">${foods.map(f=>`
+      <div class="cdp-food-item">
+        <div class="cdp-food-icon ${f.exp ? affinityFoodTier(f.exp) : foodRarityClass(f.raridade)}">🍽</div>
+        <div class="cdp-food-name">${escapeHtml(f.nome)||'—'}</div>
+        ${f.exp ? `<div class="cdp-food-exp">+${+f.exp} EXP</div>` : ''}
+      </div>`).join('')}</div>
+    ${outros.length ? `<div class="cdp-aff-group">Aceitam os mesmos presentes: ${outros.map(n=>{ const o = state.characters.find(x=>x.name === n); return o ? `<button type="button" class="kz-link-btn" data-open-char="${escapeAttr(o.id)}">${escapeHtml(n)}</button>` : escapeHtml(n); }).join(', ')} <span>(cada um tem a própria Afinidade)</span></div>` : ''}
+    ${grupo && grupo.fontes ? `<div class="cdp-aff-src"><b>Onde conseguir:</b> ${escapeHtml(grupo.fontes)}</div>` : ''}
+  </div>` : `<div class="kz-empty-ball"><img src="${ballSrc(2)}" alt=""><div>Os presentes de ${escapeHtml(c.name)} ainda não estão no site. O jogo tem 41 grupos de presentes, e por enquanto temos os de ${AFFINITY_GROUPS.length}.</div></div>`;
+  return topo + affinityResumoHtml();
 }
 
 function renderCharBondsSection(c){
@@ -5824,6 +5896,8 @@ function attachCharDetailHandlers(){
   attachHeroAdjust();
   view.querySelectorAll('.kz-step-btn[data-step]').forEach(b=> b.addEventListener('click', ()=> stepCharDetail(parseInt(b.dataset.step, 10))));
   view.querySelectorAll('.edit-char').forEach(b=> b.addEventListener('click', ()=> openCharEditor(b.dataset.id)));
+  view.querySelectorAll('[data-open-char]').forEach(b=> b.addEventListener('click', ()=>{ openCharDetail(b.dataset.openChar); state.charDetailTab = 'comida'; render(); }));
+  view.querySelectorAll('.kz-tabpanel [data-guide]').forEach(b=> b.addEventListener('click', ()=> openGuide(b.dataset.guide)));
   view.querySelectorAll('.kz-tab[data-cdptab]').forEach(b=> b.addEventListener('click', ()=>{
     state.charDetailTab = b.dataset.cdptab;
     render();
@@ -8872,7 +8946,7 @@ function renderDoarTab(){
   <section class="kz-page">
     <div>
       <h1 class="kz-title">Doar</h1>
-      <div class="kz-subtitle">Ajude a manter o Kizuna no ar. Personagens, Coleção, Montador e guias são de graça e continuam assim — quem apoia ganha lugar na Aliança Z.</div>
+      <div class="kz-subtitle">Ajude a manter o Kizuna no ar. Personagens, Coleção, Montador e guias são de graça e continuam assim — quem apoia ganha lugar na Aliança Z. A doação vai só para o site: não compra itens nem vantagens no jogo.</div>
     </div>
     <div class="kz-donate-layout">
       <div class="kz-panel kz-donate-card">
