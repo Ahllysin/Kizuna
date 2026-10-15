@@ -61,19 +61,22 @@ async function main(){
     let j = null;
     try{ j = JSON.parse(fs.readFileSync(path.join(ROOT, 'guias', 'guias.json'), 'utf8')); }catch(e){ fail('guias/guias.json não abre: ' + e.message); }
     if(j){
-      if(!Array.isArray(j.guias) || j.guias.length !== 12) fail('esperava 12 guias, achei ' + (j.guias && j.guias.length));
+      if(!Array.isArray(j.guias) || j.guias.length !== 13) fail('esperava 13 guias (12 + Acessórios detalhado), achei ' + (j.guias && j.guias.length));
       const ids = new Set();
       (j.guias || []).forEach(g => {
         const tag = `guia ${g.n} "${g.titulo}"`;
-        if(!/^\d{2}$/.test(g.n)) fail(`${tag}: número inválido`);
+        if(!/^\d{2}b?$/.test(g.n)) fail(`${tag}: número inválido`);
         if(!/^[a-z0-9-]{1,40}$/.test(g.id || '')) fail(`${tag}: id inválido`); else if(ids.has(g.id)) fail(`${tag}: id repetido`); else ids.add(g.id);
         if(!nonEmpty(g.titulo) || !nonEmpty(g.resumo)) fail(`${tag}: sem título ou resumo`);
         if(!(g.nivel > 0)) fail(`${tag}: nível de desbloqueio inválido`);
         if(!Array.isArray(g.secoes) || !g.secoes.length) fail(`${tag}: sem seções`);
         if(!fileExists(`guias/img/${g.n}.webp`)) fail(`${tag}: capa guias/img/${g.n}.webp não existe`);
+        (g.verTambem || []).forEach(v => { if(!(j.guias || []).some(o => o.id === v)) fail(`${tag}: "veja também" aponta para um guia que não existe (${v})`); });
         (g.secoes || []).forEach(sec => (sec.blocos || []).forEach(b => {
           if(b.t === 'table' && (!Array.isArray(b.head) || !b.head.length || (b.rows || []).some(r => r.length !== b.head.length))) fail(`${tag}, seção ${sec.num}: tabela com colunas desalinhadas`);
-          if(b.t === 'ul' && !(b.items || []).length) fail(`${tag}, seção ${sec.num}: lista vazia`);
+          if((b.t === 'ul' || b.t === 'ol') && !(b.items || []).length) fail(`${tag}, seção ${sec.titulo}: lista vazia`);
+          if(b.t === 'icons') (b.items || []).forEach(i => { if(!fileExists(i.src)) fail(`${tag}, seção ${sec.titulo}: ícone ${i.src} não existe`); });
+          if(!['p', 'note', 'h', 'ul', 'ol', 'table', 'callout', 'icons'].includes(b.t)) fail(`${tag}, seção ${sec.titulo}: tipo de bloco desconhecido (${b.t})`);
         }));
       });
       console.log(`  ${(j.guias || []).length} guias conferidos.`);

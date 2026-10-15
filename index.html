@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-SvbnOjLyrky/kU9SzVQTqLhEcF8jbV6Yjpevhk4SWbU=' 'sha256-48nxebaJ4RudXl91AMCOG00WPYjLjOTynT66JGnpJsA='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-b7nn9c4GSNNLAc/5Ri3CYuWpy4rcMDDE7rCPBmwR6Xg=' 'sha256-mU773suQ8hCQszyXAm4fmXZ4X8WNxOy0gDriWQxfJsY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna</title>
@@ -818,6 +818,42 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-gr-pager button .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);}
 .kz-gr-pager button .t{font-size:15px;font-weight:800;color:var(--text-strong);}
 .kz-gr-pager button.next{text-align:right;}
+
+/* leitura: painel sólido para o texto não se perder no fundo */
+.kz-gr-main{background:rgba(9,8,15,.97);border:1px solid rgba(255,150,50,.28);border-radius:14px;padding:24px 28px;box-shadow:0 10px 36px rgba(0,0,0,.45);}
+.kz-gr-head,.kz-gr-toc{background:rgba(9,8,15,.97);}
+.kz-gr-sec p,.kz-gr-main>p{color:var(--text);}
+.kz-gr-sec p.note,.kz-gr-main>p.note{color:var(--text-soft);}
+.kz-gr-sec ul,.kz-gr-sec ol,.kz-gr-obs ul{color:var(--text);}
+.kz-gr-sec ol{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:7px;font-size:15px;line-height:1.6;}
+.kz-gr-sec ol li::marker{color:#ff8a2a;font-weight:900;}
+.kz-gt td{color:var(--text);}
+.kz-gt tr:nth-child(even) td{background:rgba(30,30,48,.9);}
+.kz-gt-wrap{background:rgba(14,13,22,.9);}
+.kz-gt-long td:nth-child(n+2){min-width:190px;}
+.kz-gl-count{padding:4px 12px;border-radius:999px;background:rgba(9,8,15,.9);border:1px solid var(--line-soft);color:var(--text-soft);}
+.kz-gl-card{background:linear-gradient(180deg,rgba(14,11,20,.97),rgba(9,8,15,.98));}
+.kz-gl-card p{color:var(--text-soft);}
+.kz-gr-pager button{background:rgba(9,8,15,.97);}
+.kz-gr-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.kz-gr-stats .st{display:flex;flex-direction:column;align-items:flex-start;padding:6px 12px;border-radius:10px;background:rgba(255,150,50,.1);border:1px solid rgba(255,150,50,.35);}
+.kz-gr-stats .st b{font-size:20px;line-height:1.1;color:var(--gold-light);}
+.kz-gr-stats .st span{font-size:11.5px;color:var(--text-soft);}
+.kz-gr-also{align-self:flex-start;max-width:100%;white-space:normal;margin-top:6px;padding:7px 14px;border-radius:999px;border:1.5px solid var(--gold);background:rgba(255,150,50,.12);color:var(--text);font-size:13.5px;font-weight:700;cursor:pointer;text-align:left;}
+.kz-gr-also:hover{background:rgba(255,150,50,.25);}
+.kz-gr-callout{padding:14px 16px;border-radius:12px;border:1px solid rgba(60,200,190,.4);border-left:4px solid #2fc4b8;background:rgba(40,160,150,.1);display:flex;flex-direction:column;gap:6px;}
+.kz-gr-callout strong{font-size:15px;color:#8ee8df;}
+.kz-gr-main .kz-gr-callout p{font-size:14.5px;line-height:1.6;color:var(--text);}
+.kz-gr-icons{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;max-width:520px;}
+.kz-gr-icons figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:10px;background:rgba(30,30,48,.85);border:1px solid var(--line-soft);}
+.kz-gr-icons img{width:48px;height:48px;object-fit:contain;display:block;}
+.kz-gr-icons figcaption{font-size:11px;color:var(--text-soft);text-align:center;line-height:1.2;}
+.kz-gr-toc button .n.dot{color:var(--text-faint);}
+@media (max-width:640px){
+  .kz-gr-main{padding:16px 14px;}
+  .kz-gr-icons{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .kz-gr-icons img{width:56px;height:56px;}
+}
 @media (max-width:900px){
   .kz-gr-layout{grid-template-columns:minmax(0,1fr);}
   .kz-gr-toc{position:static;flex-direction:row;flex-wrap:nowrap;overflow-x:auto;max-height:none;gap:6px;padding:8px;}
@@ -8090,8 +8126,10 @@ async function loadGuias(){
   if(state.tab === 'guias') render();
 }
 function guideCover(g){ return 'guias/img/' + encodeURIComponent(g.n) + '.webp'; }
+function guideLabel(g){ return g.rotulo ? String(g.rotulo) : 'Guia ' + g.n; }
+function guideImgSrc(s){ return /^guias\/img\/[a-z0-9\/-]+\.webp$/.test(String(s||'')) ? s : ''; }
 function guideBlocksText(bs){
-  return (bs||[]).map(b=> b.t === 'ul' ? (b.items||[]).join(' ') : b.t === 'table' ? [(b.head||[]).join(' ')].concat((b.rows||[]).map(r=>r.join(' '))).join(' ') : (b.x||'')).join(' ');
+  return (bs||[]).map(b=> (b.t === 'ul' || b.t === 'ol') ? (b.items||[]).join(' ') : b.t === 'callout' ? [b.titulo||''].concat(b.x||[]).join(' ') : b.t === 'icons' ? '' : b.t === 'table' ? [(b.head||[]).join(' ')].concat((b.rows||[]).map(r=>r.join(' '))).join(' ') : (b.x||'')).join(' ');
 }
 function guideSearchNorm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
 function guideIndex(g){
@@ -8121,7 +8159,7 @@ function guideCardsHtml(q){
     <button type="button" class="kz-gl-card" data-guide="${escapeAttr(g.id)}">
       <img class="kz-gl-cover" src="${guideCover(g)}" alt="" loading="lazy" data-onerr="hide">
       <span class="kz-gl-body">
-        <span class="kz-gl-num">Guia ${escapeHtml(g.n)}</span>
+        <span class="kz-gl-num">${escapeHtml(guideLabel(g))}</span>
         <h3>${escapeHtml(g.titulo)}</h3>
         <p>${escapeHtml(g.resumo)}</p>
         ${secs.length ? `<span class="kz-gl-hits">${secs.slice(0,4).map(i=>`<span class="kz-gl-hit">${escapeHtml(g.secoes[i].titulo)}</span>`).join('')}${secs.length>4?`<span class="kz-gl-hit">+${secs.length-4}</span>`:''}</span>` : ''}
@@ -8135,7 +8173,10 @@ function guideBlockHtml(b){
   if(b.t === 'note') return `<p class="note">${escapeHtml(b.x)}</p>`;
   if(b.t === 'h') return `<h3>${escapeHtml(b.x)}</h3>`;
   if(b.t === 'ul') return `<ul>${(b.items||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
-  if(b.t === 'table') return `<div class="kz-gt-wrap"><table class="kz-gt"><thead><tr>${(b.head||[]).map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${(b.rows||[]).map(r=>`<tr>${r.map(c=>`<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  if(b.t === 'ol') return `<ol>${(b.items||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ol>`;
+  if(b.t === 'callout') return `<div class="kz-gr-callout">${b.titulo ? `<strong>${escapeHtml(b.titulo)}</strong>` : ''}${(b.x||[]).map(t=>`<p>${escapeHtml(t)}</p>`).join('')}</div>`;
+  if(b.t === 'icons') return `<div class="kz-gr-icons">${(b.items||[]).map(i=>{ const s = guideImgSrc(i.src); return s ? `<figure><img src="${s}" alt="${escapeAttr(i.r)}" width="48" height="48" loading="lazy" data-onerr="hide"><figcaption>${escapeHtml(i.r)}</figcaption></figure>` : ''; }).join('')}</div>`;
+  if(b.t === 'table') return `<div class="kz-gt-wrap"><table class="kz-gt${(b.rows||[]).some(r=>r.some(c=>String(c).length > 90)) ? ' kz-gt-long' : ''}"><thead><tr>${(b.head||[]).map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${(b.rows||[]).map(r=>`<tr>${r.map(c=>`<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   return '';
 }
 function renderGuideReader(g){
@@ -8148,16 +8189,18 @@ function renderGuideReader(g){
     <div class="kz-gr-head">
       <img src="${guideCover(g)}" alt="" data-onerr="hide">
       <div class="txt">
-        <span class="kz-gl-num">Guia ${escapeHtml(g.n)} de ${list.length}</span>
+        <span class="kz-gl-num">${escapeHtml(guideLabel(g))}</span>
         <h1>${escapeHtml(g.titulo)}</h1>
         <span class="sub">${escapeHtml(g.subtitulo)}</span>
         <span class="kz-gl-lock" style="margin-top:4px;">Desbloqueio · Nv. ${+g.nivel || 0}</span>
+        ${(g.stats||[]).length ? `<div class="kz-gr-stats">${g.stats.map(s=>`<div class="st"><b>${escapeHtml(s[0])}</b><span>${escapeHtml(s[1])}</span></div>`).join('')}</div>` : ''}
+        ${(g.verTambem||[]).map(id=>{ const o = guideBySlug(id); return o ? `<button type="button" class="kz-gr-also" data-guide="${escapeAttr(o.id)}">Veja também: <b>${escapeHtml(o.titulo)}</b> →</button>` : ''; }).join('')}
       </div>
     </div>
     <div class="kz-gr-layout">
       <nav class="kz-gr-toc" aria-label="Nesta página">
         <span class="lbl">Nesta página</span>
-        ${sec.map((s,k)=>`<button type="button" data-gsec="${k}"><span class="n">${escapeHtml(s.num)}</span><span>${escapeHtml(s.titulo)}</span></button>`).join('')}
+        ${sec.map((s,k)=>`<button type="button" data-gsec="${k}"><span class="n${s.num ? '' : ' dot'}">${s.num ? escapeHtml(s.num) : '•'}</span><span>${escapeHtml(s.titulo)}</span></button>`).join('')}
         ${(g.observacoes||[]).length ? `<button type="button" data-gsec="obs"><span class="n">!</span><span>Observações</span></button>` : ''}
       </nav>
       <div class="kz-gr-main">
@@ -8165,14 +8208,14 @@ function renderGuideReader(g){
         ${(g.visao||[]).map(guideBlockHtml).join('')}
         ${sec.map((s,k)=>`
         <section class="kz-gr-sec" id="gsec-${k}">
-          <h2><span class="n">${escapeHtml(s.num)}</span><span>${escapeHtml(s.titulo)}</span></h2>
+          <h2>${s.num ? `<span class="n">${escapeHtml(s.num)}</span>` : ''}<span>${escapeHtml(s.titulo)}</span></h2>
           ${(s.blocos||[]).map(guideBlockHtml).join('')}
         </section>`).join('')}
         ${(g.observacoes||[]).length ? `<section class="kz-gr-obs" id="gsec-obs"><h2>Observações</h2>${g.observacoes.map(guideBlockHtml).join('')}</section>` : ''}
         ${g.edicao ? `<div class="kz-gr-edicao">${escapeHtml(g.edicao)}</div>` : ''}
         <div class="kz-gr-pager">
-          ${prev ? `<button type="button" data-guide="${escapeAttr(prev.id)}"><span class="k">← Guia anterior</span><span class="t">${escapeHtml(prev.titulo)}</span></button>` : '<span></span>'}
-          ${next ? `<button type="button" class="next" data-guide="${escapeAttr(next.id)}"><span class="k">Próximo guia →</span><span class="t">${escapeHtml(next.titulo)}</span></button>` : ''}
+          ${prev ? `<button type="button" data-guide="${escapeAttr(prev.id)}"><span class="k">← Guia anterior · ${escapeHtml(guideLabel(prev))}</span><span class="t">${escapeHtml(prev.titulo)}</span></button>` : '<span></span>'}
+          ${next ? `<button type="button" class="next" data-guide="${escapeAttr(next.id)}"><span class="k">Próximo guia · ${escapeHtml(guideLabel(next))} →</span><span class="t">${escapeHtml(next.titulo)}</span></button>` : ''}
         </div>
       </div>
     </div>
