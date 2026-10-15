@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-UToyhTnic3W69xcpYCG+5Ufkw/zjUZU35SvBbTZ/vFE=' 'sha256-Z83GubWRvIYxIoarlHUfEj+AB5wBYsAkE61FfOlDXbk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-SvbnOjLyrky/kU9SzVQTqLhEcF8jbV6Yjpevhk4SWbU=' 'sha256-48nxebaJ4RudXl91AMCOG00WPYjLjOTynT66JGnpJsA='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna</title>
@@ -766,6 +766,74 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-guide-prog{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid var(--line-soft);}
 .kz-guide-prog-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center;padding:9px 14px;background:rgba(20,20,34,.85);}
 .kz-guide-prog-row:nth-child(even){background:rgba(20,20,34,.5);}
+
+/* ---- Guias do jogo (12 sistemas) ---- */
+.kz-gl-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.kz-gl-tools .kz-input{flex:1 1 280px;max-width:520px;}
+.kz-gl-count{font-size:13px;color:var(--text-dim);}
+.kz-gl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;}
+.kz-gl-card{display:flex;gap:14px;align-items:stretch;text-align:left;padding:12px;border-radius:14px;border:1.5px solid rgba(255,150,50,.4);background:linear-gradient(180deg,rgba(18,14,24,.92),rgba(10,9,16,.95));color:var(--text);cursor:pointer;transition:border-color .15s,transform .15s;}
+.kz-gl-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.kz-gl-cover{width:84px;flex-shrink:0;border-radius:8px;object-fit:cover;aspect-ratio:301/545;background:#0a0912;}
+.kz-gl-body{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1;}
+.kz-gl-num{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);}
+.kz-gl-card h3{margin:0;font-size:19px;line-height:1.2;color:var(--text-strong);font-weight:900;}
+.kz-gl-card p{margin:0;font-size:13px;line-height:1.5;color:var(--text-dim);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.kz-gl-lock{margin-top:auto;align-self:flex-start;font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,150,50,.55);color:#ffb86b;background:rgba(255,120,30,.1);}
+.kz-gl-hits{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px;}
+.kz-gl-hit{font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(120,130,170,.18);color:var(--text-soft);border:1px solid var(--line-soft);}
+.kz-gr{display:flex;flex-direction:column;gap:18px;}
+.kz-gr-head{display:flex;gap:20px;align-items:center;padding:18px;border-radius:14px;border:1.5px solid rgba(255,150,50,.5);background:linear-gradient(180deg,rgba(18,14,24,.92),rgba(10,9,16,.95));}
+.kz-gr-head img{width:92px;flex-shrink:0;border-radius:8px;aspect-ratio:301/545;object-fit:cover;}
+.kz-gr-head .txt{display:flex;flex-direction:column;gap:6px;min-width:0;}
+.kz-gr-head h1{margin:0;font-family:'Kaushan Script',cursive;font-weight:400;font-size:38px;line-height:1.1;color:var(--text-strong);text-shadow:0 3px 0 #3a1200,0 0 16px rgba(255,140,30,.5);overflow-wrap:anywhere;}
+.kz-gr-head .sub{font-size:15px;color:var(--text-dim);}
+.kz-gr-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;align-items:start;}
+.kz-gr-toc{position:sticky;top:12px;display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(14,12,22,.85);max-height:calc(100vh - 24px);overflow:auto;}
+.kz-gr-toc .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);padding:2px 6px 6px;}
+.kz-gr-toc button{display:flex;gap:8px;align-items:baseline;text-align:left;padding:7px 8px;border-radius:8px;border:none;background:none;color:var(--text-soft);font-size:13.5px;line-height:1.3;cursor:pointer;}
+.kz-gr-toc button:hover{background:rgba(255,150,50,.12);color:var(--text-strong);}
+.kz-gr-toc button .n{font-weight:900;color:#ff8a2a;flex-shrink:0;}
+.kz-gr-main{display:flex;flex-direction:column;gap:26px;min-width:0;}
+.kz-gr-sec{display:flex;flex-direction:column;gap:12px;scroll-margin-top:12px;}
+.kz-gr-sec>h2{margin:0;display:flex;gap:12px;align-items:baseline;font-size:24px;line-height:1.2;color:var(--text-strong);font-weight:900;padding-bottom:8px;border-bottom:2px solid;border-image:linear-gradient(90deg,#ff7a1a,#ffb13b 30%,rgba(255,150,50,0) 80%) 1;}
+.kz-gr-sec>h2 .n{font-family:'Shippori Mincho',serif;color:#ff7a1a;flex-shrink:0;}
+.kz-gr-sec h3{margin:8px 0 0;font-size:16px;font-weight:900;color:var(--gold-light);}
+.kz-gr-sec p,.kz-gr-main>p{margin:0;font-size:15.5px;line-height:1.7;color:var(--text-soft);text-wrap:pretty;}
+.kz-gr-sec p.note,.kz-gr-main>p.note{font-size:13.5px;color:var(--text-dim);}
+.kz-gr-sec ul,.kz-gr-obs ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:7px;font-size:15px;line-height:1.6;color:var(--text-soft);}
+.kz-gr-sec li::marker,.kz-gr-obs li::marker{color:#ff8a2a;}
+.kz-gt-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line-soft);-webkit-overflow-scrolling:touch;}
+.kz-gt{border-collapse:collapse;width:100%;font-size:14px;}
+.kz-gt th{background:rgba(255,130,30,.2);color:var(--gold-light);text-align:left;font-weight:800;padding:9px 12px;white-space:nowrap;font-size:13px;}
+.kz-gt td{padding:8px 12px;border-top:1px solid var(--line-soft);color:var(--text-soft);vertical-align:top;line-height:1.45;}
+.kz-gt tr:nth-child(even) td{background:rgba(20,20,34,.55);}
+.kz-gt td:first-child{color:var(--text-strong);font-weight:700;}
+.kz-gr-obs{padding:16px 18px;border-radius:12px;border:1px solid rgba(255,150,50,.4);border-left:4px solid #ff7a1a;background:rgba(255,120,30,.07);display:flex;flex-direction:column;gap:10px;}
+.kz-gr-obs h2{margin:0;font-size:18px;color:var(--gold-light);}
+.kz-gr-edicao{font-size:12.5px;color:var(--text-faint);line-height:1.5;}
+.kz-gr-pager{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;}
+.kz-gr-pager button{flex:1 1 220px;display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);color:var(--text);text-align:left;cursor:pointer;}
+.kz-gr-pager button:hover{border-color:var(--gold);}
+.kz-gr-pager button .k{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);}
+.kz-gr-pager button .t{font-size:15px;font-weight:800;color:var(--text-strong);}
+.kz-gr-pager button.next{text-align:right;}
+@media (max-width:900px){
+  .kz-gr-layout{grid-template-columns:minmax(0,1fr);}
+  .kz-gr-toc{position:static;flex-direction:row;flex-wrap:nowrap;overflow-x:auto;max-height:none;gap:6px;padding:8px;}
+  .kz-gr-toc .lbl{display:none;}
+  .kz-gr-toc button{flex-shrink:0;white-space:nowrap;border:1px solid var(--line-soft);}
+}
+@media (max-width:640px){
+  .kz-gr-head{padding:12px;gap:14px;}
+  .kz-gr-head img{width:64px;}
+  .kz-gr-head h1{font-size:28px;}
+  .kz-gr-sec>h2{font-size:20px;}
+  .kz-gr-sec p,.kz-gr-main>p{font-size:15px;}
+  .kz-gt{font-size:13px;}
+  .kz-gt th,.kz-gt td{padding:7px 9px;}
+  .kz-gl-cover{width:68px;}
+}
 .kz-guide-prog-row .kz-stars{font-size:16px;}
 .kz-guide-prog-row .t{font-size:14px;color:#dcd6c6;}
 .kz-guide-stat{display:flex;flex-direction:column;gap:8px;}
@@ -4363,6 +4431,9 @@ let state = {
   myProfile: null,                  // rascunho do próprio perfil (aba Perfil), carregado após login
   profiles: [],                     // cache dos perfis públicos (pra enriquecer o mural da Aliança Z)
   navCompact: false,                // barra lateral recolhida (só ícones)
+  guiasView: 'sistemas',            // 'sistemas' (12 guias do jogo) | 'combos' (como o site monta combos)
+  guideId: null,                    // guia aberto na leitura, ou null
+  guideQuery: '',                   // busca na lista de guias
   heroEdit: null,                   // rascunho {scope,id,x,y,z} enquanto o ajuste do retrato está aberto, ou null
   heroCharId: null,                 // personagem em destaque no topo da lista (troca no hover)
   slotSel: null,                    // casa do Montador selecionada, esperando um guerreiro do elenco
@@ -4451,6 +4522,7 @@ async function loadState(){
   state.favs = (Array.isArray(state.favs) ? state.favs : []).filter(id=>allIds.has(id));
   ensureTierListIntegrity();
   await loadHeroFrames();
+  applyGuideHash();
   loaded = true;
   render();
 }
@@ -5035,6 +5107,7 @@ function render(){
   attachTierListHandlers();
   attachCombosHandlers();
   attachFavsHandlers();
+  attachGuiasHandlers();
   attachComunidadeHandlers();
   attachPerfilHandlers();
   attachDoarHandlers();
@@ -5059,6 +5132,7 @@ function goTab(tab){
   state.communityOpenPost = null;
   state.communityProfileUser = null;
   state.slotSel = null;
+  if(tab !== 'guias' && state.guideId) setGuideHash(null);
   if(isNarrowLayout()) state.navCompact = true;
   saveUiTab();
   render();
@@ -7948,7 +8022,7 @@ const GUIDE_PROGRESS = [
   [5,'Suprema MÁX.'],[6,'Passiva Única desperta'],[7,'Passiva universal'],[8,'Habilidade MAX.'],
   [9,'Passiva universal'],[10,'Suprema SMAX.'],
 ];
-function renderGuiasTab(){
+function renderGuiasCombos(){
   const C = state.characters;
   const effCards = EFFECTS.map(k=>{
     const n = C.filter(c=>(c.combo.triggers||[]).includes(k)).length;
@@ -7970,11 +8044,6 @@ function renderGuiasTab(){
       }).join('')}</div>
     </div>`;
   return `
-  <section class="kz-page">
-    <div>
-      <h1 class="kz-title">Guias</h1>
-      <div class="kz-subtitle">Como funcionam os combos, a formação e a progressão por estrelas.</div>
-    </div>
     <div class="kz-guide-grid">
       <article class="kz-guide-card">
         <div class="kz-guide-head"><span class="glyph">連</span><h2>A cadeia de combo</h2></div>
@@ -8001,8 +8070,177 @@ function renderGuiasTab(){
         ${stat('Tipos', TYPES, 'type')}
         ${stat('Afinidades', AFFINITIES, 'affinity')}
       </article>
+    </div>`;
+}
+
+// ---- Guias do jogo: 12 sistemas (guias/guias.json, carregado só quando a aba é aberta) ----
+let guiasData = null, guiasLoading = false, guiasError = false;
+function guideBySlug(id){ return guiasData ? guiasData.guias.find(g=>g.id === id) : null; }
+async function loadGuias(){
+  if(guiasData || guiasLoading || guiasError) return;
+  guiasLoading = true;
+  try{
+    const r = await fetch('guias/guias.json', { cache:'no-cache' });
+    if(!r.ok) throw new Error('http ' + r.status);
+    const j = await r.json();
+    if(!j || !Array.isArray(j.guias)) throw new Error('formato inesperado');
+    guiasData = { edicao:String(j.edicao||''), guias:j.guias.filter(g=>g && typeof g.id === 'string' && typeof g.titulo === 'string') };
+  }catch(e){ guiasError = true; console.error('Não consegui carregar os guias', e); }
+  guiasLoading = false;
+  if(state.tab === 'guias') render();
+}
+function guideCover(g){ return 'guias/img/' + encodeURIComponent(g.n) + '.webp'; }
+function guideBlocksText(bs){
+  return (bs||[]).map(b=> b.t === 'ul' ? (b.items||[]).join(' ') : b.t === 'table' ? [(b.head||[]).join(' ')].concat((b.rows||[]).map(r=>r.join(' '))).join(' ') : (b.x||'')).join(' ');
+}
+function guideSearchNorm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function guideIndex(g){
+  if(!g._ix) g._ix = {
+    all: guideSearchNorm([g.titulo, g.subtitulo, g.resumo, guideBlocksText(g.visao), guideBlocksText(g.observacoes)].join(' ') + ' ' + (g.secoes||[]).map(s=>s.titulo + ' ' + guideBlocksText(s.blocos)).join(' ')),
+    secs: (g.secoes||[]).map(s=>guideSearchNorm(s.titulo + ' ' + guideBlocksText(s.blocos))),
+  };
+  return g._ix;
+}
+// Guias que batem com todas as palavras buscadas, e as seções onde elas aparecem.
+function guideSearch(q){
+  const words = guideSearchNorm(q).split(/\s+/).filter(Boolean);
+  const list = guiasData ? guiasData.guias : [];
+  if(!words.length) return list.map(g=>({ g, secs:[] }));
+  return list.map(g=>{
+    const ix = guideIndex(g);
+    if(!words.every(w=>ix.all.includes(w))) return null;
+    const secs = [];
+    ix.secs.forEach((t, i)=>{ if(words.every(w=>t.includes(w))) secs.push(i); });
+    return { g, secs };
+  }).filter(Boolean);
+}
+function guideCardsHtml(q){
+  const res = guideSearch(q);
+  if(!res.length) return `<div class="kz-empty">Nenhum guia fala sobre isso. Tente outra palavra.</div>`;
+  return res.map(({g, secs})=>`
+    <button type="button" class="kz-gl-card" data-guide="${escapeAttr(g.id)}">
+      <img class="kz-gl-cover" src="${guideCover(g)}" alt="" loading="lazy" data-onerr="hide">
+      <span class="kz-gl-body">
+        <span class="kz-gl-num">Guia ${escapeHtml(g.n)}</span>
+        <h3>${escapeHtml(g.titulo)}</h3>
+        <p>${escapeHtml(g.resumo)}</p>
+        ${secs.length ? `<span class="kz-gl-hits">${secs.slice(0,4).map(i=>`<span class="kz-gl-hit">${escapeHtml(g.secoes[i].titulo)}</span>`).join('')}${secs.length>4?`<span class="kz-gl-hit">+${secs.length-4}</span>`:''}</span>` : ''}
+        <span class="kz-gl-lock">Desbloqueio · Nv. ${+g.nivel || 0}</span>
+      </span>
+    </button>`).join('');
+}
+function guideBlockHtml(b){
+  if(!b) return '';
+  if(b.t === 'p') return `<p>${escapeHtml(b.x)}</p>`;
+  if(b.t === 'note') return `<p class="note">${escapeHtml(b.x)}</p>`;
+  if(b.t === 'h') return `<h3>${escapeHtml(b.x)}</h3>`;
+  if(b.t === 'ul') return `<ul>${(b.items||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
+  if(b.t === 'table') return `<div class="kz-gt-wrap"><table class="kz-gt"><thead><tr>${(b.head||[]).map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${(b.rows||[]).map(r=>`<tr>${r.map(c=>`<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  return '';
+}
+function renderGuideReader(g){
+  const list = guiasData.guias, i = list.indexOf(g);
+  const prev = list[i-1], next = list[i+1];
+  const sec = (g.secoes||[]);
+  return `
+  <div class="kz-gr">
+    <div><button class="kz-back-btn" id="guideBackBtn"><span class="arr">←</span><span>Voltar aos Guias</span></button></div>
+    <div class="kz-gr-head">
+      <img src="${guideCover(g)}" alt="" data-onerr="hide">
+      <div class="txt">
+        <span class="kz-gl-num">Guia ${escapeHtml(g.n)} de ${list.length}</span>
+        <h1>${escapeHtml(g.titulo)}</h1>
+        <span class="sub">${escapeHtml(g.subtitulo)}</span>
+        <span class="kz-gl-lock" style="margin-top:4px;">Desbloqueio · Nv. ${+g.nivel || 0}</span>
+      </div>
     </div>
+    <div class="kz-gr-layout">
+      <nav class="kz-gr-toc" aria-label="Nesta página">
+        <span class="lbl">Nesta página</span>
+        ${sec.map((s,k)=>`<button type="button" data-gsec="${k}"><span class="n">${escapeHtml(s.num)}</span><span>${escapeHtml(s.titulo)}</span></button>`).join('')}
+        ${(g.observacoes||[]).length ? `<button type="button" data-gsec="obs"><span class="n">!</span><span>Observações</span></button>` : ''}
+      </nav>
+      <div class="kz-gr-main">
+        <p>${escapeHtml(g.resumo)}</p>
+        ${(g.visao||[]).map(guideBlockHtml).join('')}
+        ${sec.map((s,k)=>`
+        <section class="kz-gr-sec" id="gsec-${k}">
+          <h2><span class="n">${escapeHtml(s.num)}</span><span>${escapeHtml(s.titulo)}</span></h2>
+          ${(s.blocos||[]).map(guideBlockHtml).join('')}
+        </section>`).join('')}
+        ${(g.observacoes||[]).length ? `<section class="kz-gr-obs" id="gsec-obs"><h2>Observações</h2>${g.observacoes.map(guideBlockHtml).join('')}</section>` : ''}
+        ${g.edicao ? `<div class="kz-gr-edicao">${escapeHtml(g.edicao)}</div>` : ''}
+        <div class="kz-gr-pager">
+          ${prev ? `<button type="button" data-guide="${escapeAttr(prev.id)}"><span class="k">← Guia anterior</span><span class="t">${escapeHtml(prev.titulo)}</span></button>` : '<span></span>'}
+          ${next ? `<button type="button" class="next" data-guide="${escapeAttr(next.id)}"><span class="k">Próximo guia →</span><span class="t">${escapeHtml(next.titulo)}</span></button>` : ''}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function renderGuiasSistemas(){
+  loadGuias();
+  if(!guiasData) return guiasError
+    ? `<div class="kz-empty">Não consegui carregar os guias agora. <button class="kz-link-btn" id="guiasRetryBtn">Tentar de novo</button></div>`
+    : `<div class="kz-empty">Carregando guias…</div>`;
+  const g = state.guideId ? guideBySlug(state.guideId) : null;
+  if(g) return renderGuideReader(g);
+  return `
+    <div class="kz-gl-tools">
+      <input type="search" class="kz-input" id="guideSearch" placeholder="Buscar nos guias (ex.: Pedras, estrelas, custo)…" value="${escapeAttr(state.guideQuery)}" autocomplete="off">
+      <span class="kz-gl-count">${guiasData.guias.length} guias · edição ${escapeHtml(guiasData.edicao)}</span>
+    </div>
+    <div class="kz-gl-grid" id="guideGrid">${guideCardsHtml(state.guideQuery)}</div>`;
+}
+function renderGuiasTab(){
+  const lendo = state.guiasView === 'sistemas' && state.guideId;
+  const views = [['sistemas','星','Sistemas do jogo'],['combos','連','Combos e formação']];
+  return `
+  <section class="kz-page">
+    ${lendo ? '' : `<div>
+      <h1 class="kz-title">Guias</h1>
+      <div class="kz-subtitle">Como cada sistema do jogo funciona, e como o site monta combos e formação.</div>
+    </div>
+    <div class="kz-tabs" role="tablist">
+      ${views.map(([k,gl,l])=>`<button class="kz-tab ${state.guiasView===k?'active':''}" data-guias-view="${k}" role="tab" aria-selected="${state.guiasView===k}"><span class="glyph">${gl}</span><span>${l}</span></button>`).join('')}
+    </div>`}
+    ${state.guiasView === 'combos' ? renderGuiasCombos() : renderGuiasSistemas()}
   </section>`;
+}
+function setGuideHash(id){ try{ history.replaceState(null, '', id ? '#guia-' + id : location.pathname + location.search); }catch(e){} }
+function openGuide(id, secIdx){
+  state.tab = 'guias'; state.guiasView = 'sistemas'; state.guideId = id;
+  if(isNarrowLayout()) state.navCompact = true;
+  setGuideHash(id); saveUiTab(); render();
+  if(secIdx != null) scrollToGuideSec(secIdx); else window.scrollTo(0, 0);
+}
+function closeGuide(){ state.guideId = null; setGuideHash(null); render(); window.scrollTo(0, 0); }
+function scrollToGuideSec(k){
+  const el = document.getElementById('gsec-' + k);
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+// Abrir um link direto (…/Kizuna/#guia-colecao).
+function applyGuideHash(){
+  const m = /^#guia-([a-z0-9-]{1,40})$/.exec((typeof location !== 'undefined' && location.hash) || '');
+  if(!m) return;
+  state.tab = 'guias'; state.guiasView = 'sistemas'; state.guideId = m[1];
+}
+function attachGuiasHandlers(){
+  const view = document.getElementById('view');
+  if(!view || state.tab !== 'guias') return;
+  view.querySelectorAll('[data-guias-view]').forEach(b=>b.addEventListener('click', ()=>{ state.guiasView = b.dataset.guiasView; state.guideId = null; setGuideHash(null); render(); }));
+  view.querySelectorAll('[data-guide]').forEach(b=>b.addEventListener('click', ()=> openGuide(b.dataset.guide)));
+  const back = document.getElementById('guideBackBtn');
+  if(back) back.addEventListener('click', closeGuide);
+  const retry = document.getElementById('guiasRetryBtn');
+  if(retry) retry.addEventListener('click', ()=>{ guiasError = false; render(); });
+  view.querySelectorAll('[data-gsec]').forEach(b=>b.addEventListener('click', ()=> scrollToGuideSec(b.dataset.gsec)));
+  const search = document.getElementById('guideSearch');
+  if(search) search.addEventListener('input', e=>{
+    state.guideQuery = e.target.value;
+    const grid = document.getElementById('guideGrid');
+    if(grid){ grid.innerHTML = guideCardsHtml(state.guideQuery); grid.querySelectorAll('[data-guide]').forEach(b=>b.addEventListener('click', ()=> openGuide(b.dataset.guide))); }
+  });
 }
 
 /* ======================= FAVORITOS ======================= */

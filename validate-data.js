@@ -56,6 +56,30 @@ async function main(){
     console.log(`  ${lrNames.length} guerreiros com habilidades de LR conferidos.`);
   }
 
+  console.log('\nGuias do jogo (guias/guias.json)');
+  {
+    let j = null;
+    try{ j = JSON.parse(fs.readFileSync(path.join(ROOT, 'guias', 'guias.json'), 'utf8')); }catch(e){ fail('guias/guias.json não abre: ' + e.message); }
+    if(j){
+      if(!Array.isArray(j.guias) || j.guias.length !== 12) fail('esperava 12 guias, achei ' + (j.guias && j.guias.length));
+      const ids = new Set();
+      (j.guias || []).forEach(g => {
+        const tag = `guia ${g.n} "${g.titulo}"`;
+        if(!/^\d{2}$/.test(g.n)) fail(`${tag}: número inválido`);
+        if(!/^[a-z0-9-]{1,40}$/.test(g.id || '')) fail(`${tag}: id inválido`); else if(ids.has(g.id)) fail(`${tag}: id repetido`); else ids.add(g.id);
+        if(!nonEmpty(g.titulo) || !nonEmpty(g.resumo)) fail(`${tag}: sem título ou resumo`);
+        if(!(g.nivel > 0)) fail(`${tag}: nível de desbloqueio inválido`);
+        if(!Array.isArray(g.secoes) || !g.secoes.length) fail(`${tag}: sem seções`);
+        if(!fileExists(`guias/img/${g.n}.webp`)) fail(`${tag}: capa guias/img/${g.n}.webp não existe`);
+        (g.secoes || []).forEach(sec => (sec.blocos || []).forEach(b => {
+          if(b.t === 'table' && (!Array.isArray(b.head) || !b.head.length || (b.rows || []).some(r => r.length !== b.head.length))) fail(`${tag}, seção ${sec.num}: tabela com colunas desalinhadas`);
+          if(b.t === 'ul' && !(b.items || []).length) fail(`${tag}, seção ${sec.num}: lista vazia`);
+        }));
+      });
+      console.log(`  ${(j.guias || []).length} guias conferidos.`);
+    }
+  }
+
   console.log('\n[2/5] JSON de habilidades completas (personagens-habilidades-completas.json)');
   if(!fs.existsSync(RAW_JSON_PATH)){
     fail(`arquivo não encontrado: ${RAW_JSON_PATH}`);

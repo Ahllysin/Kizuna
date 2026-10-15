@@ -1702,6 +1702,32 @@ async function main(){
     assert.deepStrictEqual(r.limpo, { c_ok: { x:100, y:0, z:4 } }, 'só números válidos, dentro dos limites');
   });
 
+  await test('Guias do jogo: lista, busca, leitura de cada guia e HTML escapado', () => {
+    const fs = require('fs'), path = require('path');
+    const json = fs.readFileSync(path.join(__dirname, 'guias', 'guias.json'), 'utf8');
+    const r = evalIn(sandbox, `(() => {
+      guiasData = JSON.parse(${JSON.stringify(json)});
+      state.tab = 'guias'; state.guiasView = 'sistemas'; state.guideId = null; state.guideQuery = '';
+      const lista = renderGuiasTab();
+      const cards = (lista.match(/class="kz-gl-card"/g) || []).length;
+      const achou = guideSearch('pedras essência').map(x => x.g.id);
+      const semResultado = guideSearch('zzzxxxqqq').length;
+      const leitura = guiasData.guias.map(g => { state.guideId = g.id; const h = renderGuiasTab(); return { id: g.id, secoes: (h.match(/class="kz-gr-sec"/g) || []).length, tabelas: (h.match(/class="kz-gt"/g) || []).length, voltar: h.includes('id="guideBackBtn"') }; });
+      guiasData.guias[0].titulo = '<img src=x onerror=alert(1)>'; guiasData.guias[0].secoes[0].blocos[0] = { t: 'p', x: '<script>alert(1)<\\/script>' };
+      state.guideId = guiasData.guias[0].id; const xss = renderGuiasTab(); state.guideId = null; const xssLista = renderGuiasTab();
+      const combos = (state.guiasView = 'combos', renderGuiasTab().includes('kz-guide-grid'));
+      state.guiasView = 'sistemas'; state.guideId = null; guiasData = null;
+      return { cards, achou, semResultado, leitura, xssOk: !xss.includes('<img src=x') && !xss.includes('<script>') && !xssLista.includes('<img src=x'), combos };
+    })()`);
+    assert.strictEqual(r.cards, 12);
+    assert.ok(r.achou.includes('supremo') && r.achou.length < 12, 'busca por "pedras essência" acha só alguns guias');
+    assert.strictEqual(r.semResultado, 0);
+    assert.strictEqual(r.leitura.length, 12);
+    r.leitura.forEach(x => { assert.ok(x.secoes >= 4 && x.tabelas >= 3 && x.voltar, 'guia ' + x.id + ' sem seções/tabelas'); });
+    assert.ok(r.xssOk, 'título e texto dos guias precisam sair escapados');
+    assert.ok(r.combos, 'a aba "Combos e formação" continua existindo');
+  });
+
   console.log(`\n${passed} passaram, ${failed} falharam.`);
   if(failed > 0) process.exit(1);
 }
