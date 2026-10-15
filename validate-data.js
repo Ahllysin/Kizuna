@@ -82,7 +82,8 @@ async function main(){
             if(b.icone && !fileExists(b.icone)) fail(`${tag}, seção ${sec.titulo}: ícone ${b.icone} não existe`);
             (b.blocos || []).forEach(x => confere(sec, x));
           }
-          if(!['p', 'note', 'h', 'ul', 'ol', 'table', 'callout', 'icons', 'details'].includes(b.t)) fail(`${tag}, seção ${sec.titulo}: tipo de bloco desconhecido (${b.t})`);
+          if(b.t === 'img' && !(/^guias\/img\/[a-z0-9\/-]+\.webp$/.test(b.src || '') && fileExists(b.src))) fail(`${tag}, seção ${sec.titulo}: imagem ${b.src} inválida ou ausente`);
+          if(!['p', 'note', 'h', 'ul', 'ol', 'table', 'callout', 'icons', 'details', 'img'].includes(b.t)) fail(`${tag}, seção ${sec.titulo}: tipo de bloco desconhecido (${b.t})`);
         };
         (g.secoes || []).forEach(sec => (sec.blocos || []).forEach(b => confere(sec, b)));
       });
