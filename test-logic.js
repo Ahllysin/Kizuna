@@ -1719,10 +1719,10 @@ async function main(){
       state.guiasView = 'sistemas'; state.guideId = null; guiasData = null;
       return { cards, achou, semResultado, leitura, xssOk: !xss.includes('<img src=x') && !xss.includes('<script>') && !xssLista.includes('<img src=x'), combos };
     })()`);
-    assert.strictEqual(r.cards, 13);
+    assert.strictEqual(r.cards, 12);
     assert.ok(r.achou.includes('supremo') && r.achou.length < 12, 'busca por "pedras essência" acha só alguns guias');
     assert.strictEqual(r.semResultado, 0);
-    assert.strictEqual(r.leitura.length, 13);
+    assert.strictEqual(r.leitura.length, 12);
     r.leitura.forEach(x => { assert.ok(x.secoes >= 4 && x.tabelas >= 3 && x.voltar, 'guia ' + x.id + ' sem seções/tabelas'); });
     assert.ok(r.xssOk, 'título e texto dos guias precisam sair escapados');
     assert.ok(r.combos, 'a aba "Combos e formação" continua existindo');

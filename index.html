@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-b7nn9c4GSNNLAc/5Ri3CYuWpy4rcMDDE7rCPBmwR6Xg=' 'sha256-mU773suQ8hCQszyXAm4fmXZ4X8WNxOy0gDriWQxfJsY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-cxOb+OGtk8RcTQiRhiANx/NWZoRL4ob1WPLpvcCt26M=' 'sha256-eVfP/4RdoQ454vu/Rhw2t6d3NITDewnWzkV5JoW68T8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna</title>
@@ -849,6 +849,17 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-gr-icons img{width:48px;height:48px;object-fit:contain;display:block;}
 .kz-gr-icons figcaption{font-size:11px;color:var(--text-soft);text-align:center;line-height:1.2;}
 .kz-gr-toc button .n.dot{color:var(--text-faint);}
+.kz-gd{border-radius:12px;border:1px solid rgba(255,150,50,.3);background:rgba(20,18,30,.9);}
+.kz-gd>summary{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;list-style:none;}
+.kz-gd>summary::-webkit-details-marker{display:none;}
+.kz-gd>summary::after{content:'+';margin-left:auto;flex-shrink:0;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--gold);border:1px solid rgba(255,150,50,.45);}
+.kz-gd[open]>summary::after{content:'−';}
+.kz-gd>summary:hover{background:rgba(255,150,50,.08);border-radius:12px;}
+.kz-gd>summary img{width:40px;height:40px;object-fit:contain;flex-shrink:0;}
+.kz-gd>summary .tx{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.kz-gd>summary .tx b{font-size:15.5px;color:var(--text-strong);}
+.kz-gd>summary .tx small{font-size:12.5px;color:var(--text-soft);}
+.kz-gd-body{display:flex;flex-direction:column;gap:12px;padding:4px 14px 16px;}
 @media (max-width:640px){
   .kz-gr-main{padding:16px 14px;}
   .kz-gr-icons{grid-template-columns:repeat(3,minmax(0,1fr));}
@@ -868,6 +879,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
   .kz-gr-sec p,.kz-gr-main>p{font-size:15px;}
   .kz-gt{font-size:13px;}
   .kz-gt th,.kz-gt td{padding:7px 9px;}
+  .kz-gt th{white-space:normal;}
   .kz-gl-cover{width:68px;}
 }
 .kz-guide-prog-row .kz-stars{font-size:16px;}
@@ -8129,7 +8141,7 @@ function guideCover(g){ return 'guias/img/' + encodeURIComponent(g.n) + '.webp';
 function guideLabel(g){ return g.rotulo ? String(g.rotulo) : 'Guia ' + g.n; }
 function guideImgSrc(s){ return /^guias\/img\/[a-z0-9\/-]+\.webp$/.test(String(s||'')) ? s : ''; }
 function guideBlocksText(bs){
-  return (bs||[]).map(b=> (b.t === 'ul' || b.t === 'ol') ? (b.items||[]).join(' ') : b.t === 'callout' ? [b.titulo||''].concat(b.x||[]).join(' ') : b.t === 'icons' ? '' : b.t === 'table' ? [(b.head||[]).join(' ')].concat((b.rows||[]).map(r=>r.join(' '))).join(' ') : (b.x||'')).join(' ');
+  return (bs||[]).map(b=> (b.t === 'ul' || b.t === 'ol') ? (b.items||[]).join(' ') : b.t === 'callout' ? [b.titulo||''].concat(b.x||[]).join(' ') : b.t === 'details' ? [b.titulo||'', b.sub||'', guideBlocksText(b.blocos)].join(' ') : b.t === 'icons' ? '' : b.t === 'table' ? [(b.head||[]).join(' ')].concat((b.rows||[]).map(r=>r.join(' '))).join(' ') : (b.x||'')).join(' ');
 }
 function guideSearchNorm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
 function guideIndex(g){
@@ -8175,8 +8187,12 @@ function guideBlockHtml(b){
   if(b.t === 'ul') return `<ul>${(b.items||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
   if(b.t === 'ol') return `<ol>${(b.items||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ol>`;
   if(b.t === 'callout') return `<div class="kz-gr-callout">${b.titulo ? `<strong>${escapeHtml(b.titulo)}</strong>` : ''}${(b.x||[]).map(t=>`<p>${escapeHtml(t)}</p>`).join('')}</div>`;
+  if(b.t === 'details'){
+    const ic = guideImgSrc(b.icone);
+    return `<details class="kz-gd"><summary>${ic ? `<img src="${ic}" alt="" width="40" height="40" loading="lazy" data-onerr="hide">` : ''}<span class="tx"><b>${escapeHtml(b.titulo)}</b>${b.sub ? `<small>${escapeHtml(b.sub)}</small>` : ''}</span></summary><div class="kz-gd-body">${(b.blocos||[]).map(guideBlockHtml).join('')}</div></details>`;
+  }
   if(b.t === 'icons') return `<div class="kz-gr-icons">${(b.items||[]).map(i=>{ const s = guideImgSrc(i.src); return s ? `<figure><img src="${s}" alt="${escapeAttr(i.r)}" width="48" height="48" loading="lazy" data-onerr="hide"><figcaption>${escapeHtml(i.r)}</figcaption></figure>` : ''; }).join('')}</div>`;
-  if(b.t === 'table') return `<div class="kz-gt-wrap"><table class="kz-gt${(b.rows||[]).some(r=>r.some(c=>String(c).length > 90)) ? ' kz-gt-long' : ''}"><thead><tr>${(b.head||[]).map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${(b.rows||[]).map(r=>`<tr>${r.map(c=>`<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  if(b.t === 'table') return `<div class="kz-gt-wrap"><table class="kz-gt${(b.head||[]).length >= 3 && (b.rows||[]).some(r=>r.some(c=>String(c).length > 90)) ? ' kz-gt-long' : ''}"><thead><tr>${(b.head||[]).map(c=>`<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>${(b.rows||[]).map(r=>`<tr>${r.map(c=>`<td>${escapeHtml(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   return '';
 }
 function renderGuideReader(g){
