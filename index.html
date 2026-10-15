@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-++931L3rw0vx6l7I93WWGBZQo9rsf727g1/ngsiCDFs=' 'sha256-zFuAc9ngWrbFpEw4vZhzcU4TLZiewUQ+YwXvn0gp0jk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Q7bn3PMQuJfWvqZLkJbfN+R8XM8SU8nYM+Lv1b0Yr9M=' 'sha256-fytTGLTyMwUdbP7o9uFLZZ72BcsKSxOpqWPyjEzOxGc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna — guerreiros, combos e tier list</title>
@@ -613,6 +613,16 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-rec-eff{display:flex;gap:14px;flex-wrap:wrap;}
 .kz-rec-eff .kz-atk-effline{align-items:flex-start;margin-top:0;}
 .kz-rec-chain{font-size:12.5px;line-height:1.5;color:var(--text-dim);}
+.kz-syn-line{font-size:12.5px;line-height:1.5;color:#9fe6d8;}
+.kz-auto-syn{flex-basis:100%;display:flex;flex-direction:column;gap:1px;padding:2px 2px 0;}
+.kz-syn-line b{color:#c8fff4;}
+.kz-syn-line .g{color:#5fe0c8;font-weight:900;margin-right:4px;}
+.kz-comp-syn{display:flex;flex-direction:column;gap:2px;margin:2px 0 6px;padding:8px 12px;border-radius:10px;border:1px solid rgba(80,210,190,.35);background:rgba(40,160,150,.08);}
+.kz-comp-syn .t{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5fe0c8;}
+.kz-role-syn{margin-top:12px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.12);display:flex;flex-direction:column;gap:6px;}
+.kz-role-syn ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:13.5px;line-height:1.5;color:var(--text);}
+.kz-role-syn li::marker{color:#5fe0c8;}
+.kz-role-syn .rx{font-size:13px;color:var(--text-soft);}
 .kz-rec-chain b{color:var(--text);}
 .kz-rec-chain .arr{color:#ff8a2a;margin:0 4px;}
 .kz-rec-card .kz-btn{align-self:flex-start;}
@@ -6693,6 +6703,137 @@ function renderRoleCard(c){
   return `<div class="kz-role-card">
     <div class="kz-role-card-head"><span class="kz-label">Papel em batalha</span></div>
     <div class="kz-role-rows">${rows}</div>
+    ${synergyCardHtml(c)}
+  </div>`;
+}
+
+
+/* ---------- Sinergias entre habilidades ----------
+   Tirado dos textos das habilidades: quem fortalece um grupo de aliados (Malignos, Saiyajins, Fusão, SS4…)
+   e duplas/trios que se ajudam pelo nome (Goku SS4 + Vegeta SS4, Kale + Caulifla…). "peso" é o quanto vale
+   com o efeito completo (1 = muito forte); nos de grupo, o valor cresce com cada aliado do grupo até "max". */
+const SYNERGY_GROUPS = {
+  maligno:    { label:'Malignos',          test:c=>(c.tags||[]).includes('Guerreiro Maligno') },
+  saiyajin:   { label:'Saiyajins',         test:c=>c.element === 'Saiyajin' },
+  fusao:      { label:'de Fusão',          test:c=>(c.tags||[]).includes('Guerreiro de Fusão') },
+  fusao_ss4:  { label:'de Fusão e SS4',    test:c=>(c.tags||[]).includes('Guerreiro de Fusão') || (c.tags||[]).includes('SS4') },
+  lendario:   { label:'Lendários',         test:c=>(c.tags||[]).includes('Guerreiro Lendário') },
+  artista:    { label:'Artistas Marciais', test:c=>(c.tags||[]).includes('Artista Marcial') },
+  guerreiras: { label:'Guerreiras',        test:c=>c.gender === 'Feminino' },
+  androide:   { label:'Androides',         test:c=>c.element === 'Androide' },
+  divino:     { label:'Anjos e Deuses da Destruição', test:c=>(c.tags||[]).includes('Anjo') || (c.tags||[]).includes('Deus da Destruição') },
+  raio:       { label:'de afinidade Raio', test:c=>c.affinity === 'Raio' },
+};
+const SYNERGY_RULES = {
+  'Goku SS4':          [{ com:['Vegeta SS4'], peso:1, txt:'libera o Supremo combinado com Vegeta SS4' }],
+  'Vegeta SS4':        [{ com:['Goku SS4'], peso:1, txt:'libera o Supremo combinado com Goku SS4' }],
+  'Goku SSGSS':        [{ com:['Vegeta SSGSS'], peso:0.9, txt:'resiste a um golpe fatal com Vegeta SSGSS no time' }],
+  'Vegeta SSGSS':      [{ com:['Goku SSGSS'], peso:0.9, txt:'resiste a um golpe fatal com Goku SSGSS no time' }],
+  'Caulifla':          [{ com:['Kale'], peso:0.8, txt:'revive a Kale' }, { grupo:'guerreiras', peso:0.3, max:3, txt:'acelera a Fúria das Guerreiras' }],
+  'Tenshinhan':        [{ com:['Yamcha', 'Mestre Kame'], todos:true, peso:0.7, txt:'com Yamcha e Mestre Kame, +15% de ATQ para os três' }, { grupo:'artista', peso:0.3, max:3, txt:'limpa debuffs dos Artistas Marciais' }],
+  'Whis':              [{ com:['Beerus'], peso:0.6, txt:'cura e protege Beerus' }, { com:['Vados'], peso:0.4, txt:'com Vados, Artistas Marciais ganham Retrocesso Temporal' }],
+  'Vados':             [{ grupo:'divino', peso:0.4, max:2, txt:'bônus dobrado para Anjos e Deuses da Destruição' }],
+  'Android 17':        [{ com:['Android 18'], peso:0.5, txt:'deixa Android 18 usar habilidade logo após o Supremo' }],
+  'Goku Black':        [{ com:['Goku Black (Rose)'], peso:0.4, txt:'+30% de recuperação de Fúria com Goku Black (Rose)' }],
+  'Zamasu':            [{ com:['Goku Black'], peso:0.4, txt:'chance de atordoar com Goku Black em campo' }],
+  'Piccolo':           [{ prefixo:'Gohan', peso:0.5, txt:'+12% de dano e de redução de dano com Gohan em campo' }],
+  'Goku':              [{ prefixo:'Vegeta', peso:0.3, txt:'+15% de dano com Vegeta em campo' }],
+  'Trunks do Futuro':  [{ prefixo:'Vegeta', peso:0.3, txt:'limpa debuffs e dá Fúria a Vegeta' }],
+  'Kuririn':           [{ prefixo:'Goku', peso:0.3, txt:'ao cair, dá 1000 de Fúria ao Goku' }, { grupo:'artista', peso:0.3, max:3, txt:'+10% de intensidade crítica para Artistas Marciais' }],
+  'Jiren':             [{ com:['Toppo'], peso:0.15, txt:'recuperação dobrada se Toppo cair' }],
+  'Toppo':             [{ com:['Jiren'], peso:0.15, txt:'recuperação dobrada se Jiren cair' }],
+  'Gogeta SS4':        [{ grupo:'fusao_ss4', peso:0.6, max:3, txt:'fortalece aliados de Fusão e SS4' }],
+  'SSGSS Gogeta':      [{ grupo:'fusao', peso:0.4, max:2, txt:'Supremos de aliados de Fusão tiram controle dele' }],
+  'Kefla':             [{ grupo:'fusao', peso:0.3, max:2, txt:'cura e fortalece aliados de Fusão (LR)' }],
+  'Kale':              [{ grupo:'lendario', peso:0.4, max:3, txt:'+10% de Resistência a Supremo para Lendários' }],
+  'Broly (DBS)':       [{ grupo:'lendario', peso:0.4, max:3, txt:'aumenta a DEF dos Lendários' }],
+  'Broly SS4':         [{ grupo:'saiyajin', peso:0.5, max:4, txt:'+7% de crítico por Saiyajin aliado' }, { grupo:'maligno', peso:0.4, max:4, txt:'+7% de bloqueio por Maligno aliado' }],
+  'Cooler Dourado':    [{ grupo:'maligno', peso:0.5, max:4, txt:'dá Fúria aos Malignos' }],
+  'Super Syn Shenlong':[{ grupo:'maligno', peso:0.3, minimo:3, txt:'+20% de resistência a Supremo com 3 ou mais Malignos' }],
+  'Goku Instinto':     [{ grupo:'saiyajin', peso:0.4, minimo:3, txt:'bônus extra com 3 ou mais Saiyajins' }],
+  'Goku Black (Rose)': [{ grupo:'maligno', peso:0.6, max:4, txt:'aumenta o Dano de Supremo dos Malignos' }],
+  'Goku SS3 (Rose)':   [{ grupo:'maligno', peso:0.6, max:3, txt:'revive quando Malignos usam Supremo' }],
+  'Janemba':           [{ grupo:'maligno', peso:0.2, max:3, txt:'fica mais forte quando um Maligno cai' }],
+  'Vegeta SSG':        [{ grupo:'saiyajin', peso:0.4, max:3, txt:'fortalece Saiyajins da fileira de trás' }],
+  'Beerus':            [{ grupo:'saiyajin', peso:0.5, max:4, txt:'+7% de intensidade crítica por Saiyajin aliado' }],
+  'Cell':              [{ grupo:'maligno', peso:0.5, max:4, txt:'dá escudo aos Malignos' }],
+  'Goku SS3':          [{ grupo:'saiyajin', peso:0.5, max:2, txt:'dá habilidade extra a um Saiyajin' }],
+  'Dabura':            [{ grupo:'maligno', peso:0.5, max:3, txt:'pode reviver um Maligno' }],
+  'Ribrianne':         [{ grupo:'guerreiras', peso:0.5, minimo:3, contaProprio:true, txt:'+20% de cura para a equipe com 3 ou mais Guerreiras' }],
+  'Mestre Kame':       [{ grupo:'artista', peso:0.5, max:4, txt:'+10% de dano para Artistas Marciais' }],
+  'Yamcha':            [{ grupo:'artista', peso:0.3, max:4, txt:'+12% de DEF por Artista Marcial' }],
+  'Goku (Criança)':    [{ grupo:'saiyajin', peso:0.3, max:4, txt:'+5% de Dano de Supremo para Saiyajins' }],
+  'Vegeta':            [{ grupo:'saiyajin', peso:0.4, max:4, txt:'ganha habilidade extra com Supremos de Saiyajins' }],
+  'Freeza':            [{ grupo:'maligno', peso:0.3, minimo:3, txt:'+20% de acerto de debuff com 3 ou mais Malignos' }],
+  'Cumber':            [{ grupo:'maligno', peso:0.5, max:4, txt:'dá escudo aos Malignos' }],
+  'Moro':              [{ grupo:'maligno', peso:0.4, max:3, txt:'fortalece os Malignos da retaguarda' }],
+  'Towa':              [{ grupo:'maligno', peso:0.3, max:3, txt:'+5% de Resistência a Supremo para Malignos da retaguarda' }],
+  'Super Mira':        [{ grupo:'maligno', peso:0.5, max:4, txt:'Supremos de Malignos aumentam o dano do Vórtice' }],
+  'Gohan':             [{ grupo:'saiyajin', peso:0.15, max:2, txt:'+4% de Dano de Supremo quando um Saiyajin cai' }],
+  'Android 21':        [{ grupo:'androide', peso:0.4, max:3, txt:'aumenta o ATQ dos Androides' }],
+  'SSG Trunks':        [{ grupo:'guerreiras', peso:0.15, max:3, txt:'+2,5% de PV para Guerreiras' }],
+  'Demigra Demoníaco': [{ grupo:'raio', peso:0.15, max:4, txt:'+5% de dano para aliados de afinidade Raio' }],
+};
+// "Vegeta" vale para todas as versões do Vegeta (não para o Vegetto); "Goku" não inclui Goku Black/Rosé.
+function synergyPrefixMatch(name, prefixo){
+  if(!(name === prefixo || name.startsWith(prefixo + ' '))) return false;
+  return !(prefixo === 'Goku' && /Black|Rose/.test(name));
+}
+function synergyRuleTargets(rule, owner, members){
+  if(rule.grupo){ const g = SYNERGY_GROUPS[rule.grupo]; return members.filter(o=>o !== owner && g && g.test(o)); }
+  if(rule.prefixo) return members.filter(o=>o !== owner && synergyPrefixMatch(o.name, rule.prefixo));
+  return members.filter(o=>o !== owner && (rule.com || []).includes(o.name));
+}
+// Sinergias ativas numa equipe: [{de, nome, alvos:[ids], txt, val}] e a soma dos valores.
+function synergyReport(team){
+  const members = (team || []).filter(Boolean).map(getChar).filter(Boolean);
+  const ativos = [];
+  let total = 0;
+  members.forEach(m=>{
+    (SYNERGY_RULES[m.name] || []).forEach(r=>{
+      const alvos = synergyRuleTargets(r, m, members);
+      let val = 0;
+      if(r.grupo){
+        const n = alvos.length + (r.contaProprio && SYNERGY_GROUPS[r.grupo].test(m) ? 1 : 0);
+        if(r.minimo) val = n >= r.minimo ? r.peso : 0;
+        else if(alvos.length) val = r.peso * Math.min(alvos.length, r.max || 4) / (r.max || 4);
+      } else if(r.todos){
+        if((r.com || []).every(nm=>members.some(o=>o.name === nm))) val = r.peso;
+      } else if(alvos.length) val = r.peso;
+      if(val > 0){ total += val; ativos.push({ de:m.id, nome:m.name, alvos:alvos.map(o=>o.id), txt:r.txt, val }); }
+    });
+  });
+  ativos.sort((a, b)=>b.val - a.val);
+  return { total, ativos };
+}
+// 0 a 1: ~2,2 pontos de sinergia numa equipe cheia já é muito.
+function synergyNorm(team){
+  const n = (team || []).filter(Boolean).length;
+  return n ? Math.min(1, synergyReport(team).total / (2.2 * Math.max(n, 2) / 6)) : 0;
+}
+function synergyItemHtml(a){
+  const alvos = a.alvos.map(id=>getChar(id)).filter(Boolean);
+  const quem = alvos.length && alvos.length <= 3 ? ` <span style="opacity:.8">(${alvos.map(o=>escapeHtml(o.name)).join(', ')})</span>` : alvos.length > 3 ? ` <span style="opacity:.8">(${alvos.length} aliados)</span>` : '';
+  return `<span class="g">✦</span><b>${escapeHtml(a.nome)}</b>: ${escapeHtml(a.txt)}${quem}`;
+}
+// Na ficha: o que o guerreiro faz pela equipe e quem fortalece ele.
+function synergyCardHtml(c){
+  const proprias = (SYNERGY_RULES[c.name] || []).map(r=>{
+    if(r.grupo){ const g = SYNERGY_GROUPS[r.grupo]; const n = state.characters.filter(o=>o.id !== c.id && g.test(o)).length; return `${escapeHtml(r.txt)} <span class="rx">(${n} guerreiros ${escapeHtml(g.label)})</span>`; }
+    if(r.prefixo) return escapeHtml(r.txt);
+    return escapeHtml(r.txt);
+  });
+  const recebe = [];
+  state.characters.forEach(o=>{
+    if(o.id === c.id) return;
+    (SYNERGY_RULES[o.name] || []).forEach(r=>{ if(synergyRuleTargets(r, o, [o, c]).includes(c)) recebe.push(o.name); });
+  });
+  const unicos = [...new Set(recebe)];
+  if(!proprias.length && !unicos.length) return '';
+  return `<div class="kz-role-syn">
+    <span class="kz-label">Sinergias</span>
+    ${proprias.length ? `<ul>${proprias.map(t=>`<li>${t}</li>`).join('')}</ul>` : ''}
+    ${unicos.length ? `<div class="rx">Fortalecido por: ${unicos.slice(0, 8).map(escapeHtml).join(', ')}${unicos.length > 8 ? ` e mais ${unicos.length - 8}` : ''}.</div>` : ''}
   </div>`;
 }
 
@@ -6739,15 +6880,17 @@ function compositionHtml(teamArg){
     return `<span class="kz-comp-chip${isMiss ? ' miss' : ''}" style="border-color:rgba(${r[0]},${isMiss ? .35 : .7});color:${isMiss ? '#9a93a3' : r[1]};"><span class="g">${info.glyph}</span>${PILLARS[k].label} <b>${(Math.round(v[k] * 10) / 10).toString().replace('.', ',')}</b></span>`;
   }).join('');
   const note = !miss.length ? 'Equipe equilibrada.' : `Falta: ${miss.map(k => PILLARS[k].label).join(', ')}.`;
+  const syn = synergyReport(team).ativos;
   return `<div class="kz-comp" title="Soma dos papéis dos guerreiros em campo (principal vale 1, secundário 0,6). Alvo pra 6 guerreiros: Dano 2 · Tank 1,5 · Suporte 1 · Controle 1.">
     <span class="kz-label">Composição</span>${chips}<span class="kz-comp-note ${miss.length ? 'warn' : 'ok'}">${note}</span><span class="kz-comp-bal">Equilíbrio <b>${bal}%</b></span>
-  </div>`;
+  </div>${syn.length ? `<div class="kz-comp-syn"><span class="t">Sinergias ativas (${syn.length})</span>${syn.slice(0, 4).map(a=>`<div class="kz-syn-line">${synergyItemHtml(a)}</div>`).join('')}${syn.length > 4 ? `<div class="kz-syn-line">e mais ${syn.length - 4}.</div>` : ''}</div>` : ''}`;
 }
 
 /* ---------- Montagem automática (completa a equipe a partir de 1 a 5 guerreiros) ---------- */
 const AUTO_MODES = {
-  equilibrado: { label:'Equilibrado',   wc:0.55, wb:0.45, hint:'Combos + papéis (dano, tank, suporte e controle)' },
-  combos:      { label:'Mais combos',   wc:0.9,  wb:0.1,  hint:'Prioriza a maior quantidade de combos' },
+  equilibrado: { label:'Equilibrado',    wc:0.45, wb:0.35, ws:0.2,  hint:'Combos + papéis (dano, tank, suporte e controle) + sinergias entre habilidades' },
+  combos:      { label:'Mais combos',    wc:0.85, wb:0.1,  ws:0.05, hint:'Prioriza a maior quantidade de combos' },
+  sinergias:   { label:'Mais sinergias', wc:0.3,  wb:0.2,  ws:0.5,  hint:'Prioriza guerreiros que se fortalecem (ex.: Goku SS4 + Vegeta SS4, Malignos juntos)' },
 };
 function autoObjective(team, mode){
   const m = AUTO_MODES[mode] || AUTO_MODES.equilibrado;
@@ -6756,7 +6899,8 @@ function autoObjective(team, mode){
   const ref = Math.max(1, 66 * Math.pow(n / 6, 2));
   const comboNorm = Math.min(1, st.total / ref);
   const bal = balanceScore(team);
-  return { score: m.wc * comboNorm + m.wb * bal, combos: st.total, longest: st.longest, balance: bal };
+  const syn = synergyNorm(team);
+  return { score: m.wc * comboNorm + m.wb * bal + (m.ws || 0) * syn, combos: st.total, longest: st.longest, balance: bal, synergy: syn };
 }
 // Busca em feixe: a cada passo experimenta cada guerreiro do elenco em cada casa livre e guarda as melhores
 // equipes parciais. No fim, reordena as 3 melhores pra render o máximo de combos.
@@ -6799,7 +6943,7 @@ function buildTeamOptions(mode, rarity, maxOptions){
     const best = optimizeTeamOrder(b.team);
     const team = best && best.changed ? best.team : b.team;
     const obj = autoObjective(team, mode);
-    return { team, ...obj, pillars: teamPillars(team), missing: missingPillars(team) };
+    return { team, ...obj, pillars: teamPillars(team), missing: missingPillars(team), syn: synergyReport(team).ativos };
   });
   return out.sort((a, b) => b.score - a.score);
 }
@@ -6840,6 +6984,7 @@ function renderAutoOptionRow(o, i){
     <div class="kz-auto-row-info"><b>${i === 0 ? 'Melhor opção' : 'Opção ' + (i + 1)}</b>
       <span><b>${o.combos}</b>/${comboMax} combos · cadeia <b>${o.longest + 1}</b> · equilíbrio <b>${Math.round(o.balance * 100)}%</b>${o.missing.length ? ` · <span class="warn">falta ${o.missing.map(k => PILLARS[k].label).join(', ')}</span>` : ''}</span></div>
     <button type="button" class="kz-btn kz-btn-sm kz-btn-primary" data-auto-apply="${i}">Usar</button>
+    ${(o.syn || []).length ? `<div class="kz-auto-syn">${o.syn.slice(0, 3).map(a=>`<div class="kz-syn-line">${synergyItemHtml(a)}</div>`).join('')}${o.syn.length > 3 ? `<div class="kz-syn-line">e mais ${o.syn.length - 3} sinergia${o.syn.length - 3 > 1 ? 's' : ''}.</div>` : ''}</div>` : ''}
   </div>`;
 }
 function runAutoBuild(){
@@ -7888,6 +8033,7 @@ function recommendForTeam(limit, rarity){
   const team = [...state.team];
   if(!team.some(Boolean)) return [];
   const base = comboScoreFor(team);
+  const baseSyn = synergyReport(team).total;
   const empties = team.map((id,i)=>id ? -1 : i).filter(i=>i>-1);
   const slots = empties.length ? empties : team.map((_,i)=>i);
   const inTeam = new Set(team.filter(Boolean));
@@ -7901,11 +8047,16 @@ function recommendForTeam(limit, rarity){
       const replaced = t[s];
       t[s] = c.id;
       const gain = comboScoreFor(t) - base;
-      if(!best || gain > best.gain) best = { gain, slot:s, replaced, team:t };
+      const syn = synergyReport(t).total - baseSyn;
+      const nota = gain + 5 * syn;   // uma dupla forte (Goku SS4 + Vegeta SS4) vale como ~10 encadeamentos
+      if(!best || nota > best.nota) best = { gain, syn, nota, slot:s, replaced, team:t };
     });
-    if(best && best.gain > 0) res.push({ char:c, slot:best.slot, replacedId:best.replaced, gain:best.gain, team:best.team, bal:balanceScore(best.team) });
+    if(best && (best.gain > 0 || best.syn >= 0.15)){
+      const sinergias = synergyReport(best.team).ativos.filter(a=>a.de === c.id || a.alvos.includes(c.id));
+      res.push({ char:c, slot:best.slot, replacedId:best.replaced, gain:best.gain, syn:best.syn, nota:best.nota, sinergias, team:best.team, bal:balanceScore(best.team) });
+    }
   });
-  res.sort((a,b)=> b.gain - a.gain || (b.bal - a.bal) || rarityRank(a.char.rarity) - rarityRank(b.char.rarity) || a.char.name.localeCompare(b.char.name));
+  res.sort((a,b)=> b.nota - a.nota || b.gain - a.gain || (b.bal - a.bal) || rarityRank(a.char.rarity) - rarityRank(b.char.rarity) || a.char.name.localeCompare(b.char.name));
   return res.slice(0, limit || 8);
 }
 function renderRecommendations(){
@@ -7914,7 +8065,7 @@ function renderRecommendations(){
   const full = filled === 6;
   const rar = state.recRarity || 'all';
   const recs = recommendForTeam(8, rar);
-  const head = `<div class="kz-rec-head"><h3>Quem encaixa na sua equipe</h3><span class="kz-muted" style="font-size:13px;">Ordenado pelo quanto aumenta os encadeamentos da equipe (soma das cadeias de Habilidade e Suprema de todos). Considera o que cada um persegue e causa e a casa onde entraria.</span></div>
+  const head = `<div class="kz-rec-head"><h3>Quem encaixa na sua equipe</h3><span class="kz-muted" style="font-size:13px;">Ordenado pelo quanto aumenta os encadeamentos da equipe (soma das cadeias de Habilidade e Suprema de todos) e pelas sinergias entre as habilidades (ex.: Goku SS4 + Vegeta SS4, Malignos juntos). Considera o que cada um persegue e causa e a casa onde entraria.</span></div>
   <div class="kz-rec-filter"><span class="kz-label">Sugerir</span>${[['all','Todas'],['SSR','Só SSR'],['SR','Só SR'],['R','Só R']].map(([v,l])=>`<button type="button" class="kz-fchip ${rar===v?'active':''}" data-rec-rarity="${v}">${l}</button>`).join('')}</div>`;
   if(!recs.length){
     const msg = full ? (rar !== 'all' ? `Nenhuma troca por um guerreiro ${rar} melhora os combos dessa equipe. Tente outra raridade.` : 'Nenhuma troca melhora os combos dessa equipe — ela já está bem encaixada.') : (rar !== 'all' ? `Nenhum guerreiro ${rar} do elenco aumenta os combos dessa equipe. Tente outra raridade.` : 'Nenhum guerreiro do elenco aumenta os combos dessa equipe.');
@@ -7936,12 +8087,13 @@ function renderRecommendations(){
         <div class="kz-rec-art">${portraitInner(c)}</div>
         <div>
           <div class="kz-rec-name">${escapeHtml(c.name)}</div>
-          <span class="kz-rec-gain">+${r.gain} encadeamento${r.gain>1?'s':''} · Casa ${r.slot+1}</span>
+          <span class="kz-rec-gain">${r.gain > 0 ? `+${r.gain} encadeamento${r.gain>1?'s':''}` : 'Sinergia'} · Casa ${r.slot+1}</span>
         </div>
       </div>
       <div class="kz-rec-roles">${rolePillsHtml(c, 2, true)}${fillTag(c)}</div>
       <div class="kz-rec-eff">${effLineHtml('Persegue', c.combo.triggers)}${effLineHtml('Causa', c.combo.effects)}</div>
       ${chainTxt ? `<div class="kz-rec-chain">Melhor cadeia: ${chainTxt} <small>(${best.chain.length} hits)</small></div>` : ''}
+      ${(r.sinergias || []).slice(0, 2).map(a=>`<div class="kz-syn-line">${synergyItemHtml(a)}</div>`).join('')}
       <button type="button" class="kz-btn kz-btn-sm" data-rec-place="${c.id}" data-rec-slot="${r.slot}">${rep ? `Trocar com ${escapeHtml(rep.name)} (Casa ${r.slot+1})` : `Colocar na Casa ${r.slot+1}`}</button>
     </div>`;
   }).join('');

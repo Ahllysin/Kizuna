@@ -56,6 +56,29 @@ async function main(){
     console.log(`  ${lrNames.length} guerreiros com habilidades de LR conferidos.`);
   }
 
+  console.log('\nSinergias entre habilidades (SYNERGY_RULES)');
+  {
+    const r = evalIn(sandbox, `(() => {
+      const nomes = new Set(state.characters.map(c => c.name)), erros = [];
+      let regras = 0;
+      Object.entries(SYNERGY_RULES).forEach(([dono, lista]) => {
+        if(!nomes.has(dono)) erros.push('guerreiro não existe: ' + dono);
+        lista.forEach(x => {
+          regras++;
+          if(!x.txt) erros.push(dono + ': regra sem texto');
+          if(x.grupo && !SYNERGY_GROUPS[x.grupo]) erros.push(dono + ': grupo desconhecido ' + x.grupo);
+          if(x.grupo && SYNERGY_GROUPS[x.grupo] && !state.characters.some(c => c.name !== dono && SYNERGY_GROUPS[x.grupo].test(c))) erros.push(dono + ': ninguém no grupo ' + x.grupo);
+          (x.com || []).forEach(n => { if(!nomes.has(n)) erros.push(dono + ': parceiro não existe ' + n); });
+          if(x.prefixo && !state.characters.some(c => c.name !== dono && synergyPrefixMatch(c.name, x.prefixo))) erros.push(dono + ': ninguém com o nome ' + x.prefixo);
+          if(!x.grupo && !x.prefixo && !(x.com || []).length) erros.push(dono + ': regra sem alvo');
+        });
+      });
+      return { erros, regras, donos: Object.keys(SYNERGY_RULES).length };
+    })()`);
+    r.erros.forEach(e => fail('sinergia: ' + e));
+    console.log(`  ${r.regras} sinergias de ${r.donos} guerreiros conferidas.`);
+  }
+
   console.log('\nGuias do jogo (guias/guias.json)');
   {
     let j = null;

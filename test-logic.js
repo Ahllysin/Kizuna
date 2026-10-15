@@ -1728,6 +1728,38 @@ async function main(){
     assert.ok(r.combos, 'a aba "Combos e formação" continua existindo');
   });
 
+  await test('Sinergias: duplas nomeadas, grupos e uso na montagem automática e nas sugestões', () => {
+    const r = evalIn(sandbox, `(() => {
+      const id = n => state.characters.find(c => c.name === n).id;
+      const dupla = synergyReport([id('Goku SS4'), id('Vegeta SS4')]);
+      const sozinho = synergyReport([id('Goku SS4')]);
+      const malignos = ['Goku Black (Rose)', 'Cell', 'Cooler Dourado', 'Janemba'].map(id);
+      const grupo = synergyReport(malignos);
+      const misto = synergyReport([id('Goku Black (Rose)'), id('Goku SSGSS')]);
+      const ribri2 = synergyReport([id('Ribrianne'), id('Android 18')]).ativos.some(a => a.nome === 'Ribrianne');
+      const vegs = synergyReport([id('Goku'), id('Vegeta SSGSS')]).ativos.some(a => a.nome === 'Goku');
+      const black = synergyReport([id('Kuririn'), id('Goku Black')]).ativos.some(a => a.nome === 'Kuririn' && a.txt.includes('Goku'));
+      // montagem automática no modo "Mais sinergias" a partir do Goku SS4 traz o Vegeta SS4
+      const bak = [...state.team];
+      state.team = [id('Goku SS4'), null, null, null, null, null];
+      const opts = buildTeamOptions('sinergias', 'all', 3);
+      const comVegeta = opts.some(o => o.team.includes(id('Vegeta SS4')));
+      const recs = recommendForTeam(8).map(x => x.char.name);
+      state.team = bak;
+      return { dupla: dupla.ativos.length, duplaTotal: dupla.total, sozinho: sozinho.total, grupoTotal: grupo.total, grupoAtivos: grupo.ativos.length, misto: misto.ativos.map(a => a.nome), ribri2, vegs, black, comVegeta, recVegeta: recs.includes('Vegeta SS4'), norm: synergyNorm([id('Goku SS4'), id('Vegeta SS4')]) };
+    })()`);
+    assert.strictEqual(r.dupla, 2, 'Goku SS4 e Vegeta SS4 se ativam os dois');
+    assert.strictEqual(r.sozinho, 0);
+    assert.ok(r.grupoTotal > 1 && r.grupoAtivos === 4, 'quatro Malignos que fortalecem Malignos');
+    assert.deepStrictEqual(r.misto, [], 'Goku SSGSS não é Maligno: nada ativa');
+    assert.strictEqual(r.ribri2, false, 'Ribrianne precisa de 3 Guerreiras');
+    assert.strictEqual(r.vegs, true, 'Goku conta qualquer Vegeta');
+    assert.strictEqual(r.black, false, 'Kuririn não conta o Goku Black como Goku');
+    assert.ok(r.norm > 0 && r.norm <= 1);
+    assert.ok(r.comVegeta, 'modo Mais sinergias completa o Goku SS4 com o Vegeta SS4');
+    assert.ok(r.recVegeta, 'Vegeta SS4 aparece nas sugestões para quem tem o Goku SS4');
+  });
+
   console.log(`\n${passed} passaram, ${failed} falharam.`);
   if(failed > 0) process.exit(1);
 }
