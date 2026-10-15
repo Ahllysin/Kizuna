@@ -1668,7 +1668,10 @@ async function main(){
     runIn(sandbox, `toggleFav(${JSON.stringify(id)})`);
     await new Promise(r => setTimeout(r, 20));
     assert.ok(JSON.parse(evalIn(sandbox, "localStorage.getItem('kiai_favs')")).includes(id));
-    runIn(sandbox, `state.team[2] = ${JSON.stringify(id)}; deleteCharacter(${JSON.stringify(id)})`);
+    // excluir é só do dono: simula o login de administrador durante a exclusão
+    runIn(sandbox, `supabaseAvailable = true; window.__sb = { client: { from: () => ({ upsert: async () => ({}), select: () => ({ eq: async () => ({ data: [] }) }) }) } }; state.discordUser = { id: window.ADMIN_DISCORD_ID, username: 'Dono' };
+      state.team[2] = ${JSON.stringify(id)}; deleteCharacter(${JSON.stringify(id)});
+      state.discordUser = null; supabaseAvailable = false; window.__sb = undefined;`);
     const r = evalIn(sandbox, `({
       stillExists: state.characters.some(c => c.id === ${JSON.stringify(id)}),
       inTeam: state.team.includes(${JSON.stringify(id)}),
@@ -1676,6 +1679,70 @@ async function main(){
       inTiers: state.tierList.tiers.some(t => t.items.includes(${JSON.stringify(id)})) || state.tierList.unranked.includes(${JSON.stringify(id)}),
     })`);
     assert.deepStrictEqual(r, {stillExists:false, inTeam:false, inFavs:false, inTiers:false});
+  });
+
+  await test('Log de crash: envia para site_errors, sem repetir, no máximo 5 por visita; painel só para o dono', () => {
+    const r = evalIn(sandbox, `(() => {
+      const enviados = [];
+      const antes = { sb: window.__sb, av: supabaseAvailable };
+      crashEnviados = 0; crashVistos.clear(); crashFila = [];
+      window.__sb = { client: { from: t => ({ insert: l => { enviados.push([t, l]); return Promise.resolve({}); } }) } };
+      reportCrash('falhou A', 'pilha A', { aba: 'chars' });
+      reportCrash('falhou A', 'pilha A');                // repetido: não envia
+      for(let i = 0; i < 10; i++) reportCrash('falhou ' + i, null);
+      const total = enviados.length, tabela = enviados[0][0], primeiro = enviados[0][1];
+      const grande = (crashEnviados = 0, crashVistos.clear(), enviados.length = 0, reportCrash('x'.repeat(900), 'y'.repeat(5000)), enviados[0][1]);
+      // painel: visitante logado não vê; dono vê
+      supabaseAvailable = true; state.discordUser = { id: 'outro', username: 'Fulano' };
+      state.myProfile = null;
+      const outro = renderPerfilTab().includes('crashLoadBtn');
+      state.discordUser = { id: window.ADMIN_DISCORD_ID, username: 'Dono' };
+      const dono = renderPerfilTab().includes('crashLoadBtn');
+      state.discordUser = null; supabaseAvailable = antes.av; window.__sb = antes.sb; crashEnviados = 0; crashVistos.clear(); crashFila = [];
+      return { total, tabela, msg: primeiro.msg, aba: primeiro.extra.aba, temPilha: !!primeiro.stack, tamMsg: grande.msg.length, tamPilha: grande.stack.length, outro, dono };
+    })()`);
+    assert.strictEqual(r.tabela, 'site_errors');
+    assert.strictEqual(r.total, 5, 'no máximo 5 por visita, sem repetir');
+    assert.strictEqual(r.msg, 'falhou A');
+    assert.strictEqual(r.aba, 'chars');
+    assert.ok(r.temPilha);
+    assert.strictEqual(r.tamMsg, 500, 'mensagem cortada no limite do banco');
+    assert.strictEqual(r.tamPilha, 2000, 'pilha cortada no limite do banco');
+    assert.strictEqual(r.outro, false, 'outra conta não vê o log');
+    assert.strictEqual(r.dono, true, 'o dono vê o painel do log');
+  });
+
+  await test('Edição de guerreiros só do dono; cópia salva antiga não substitui a lista do site para visitantes', () => {
+    const r = evalIn(sandbox, `(() => {
+      const base = DEFAULT_CHARACTERS.length;
+      const goku = siteCharacters().find(c => c.name === 'Goku');
+      // visitante com uma cópia velha salva (Goku editado + um guerreiro inventado): é ignorada
+      storedCharacters = [ Object.assign(JSON.parse(JSON.stringify(goku)), { type: 'Defesa', _editado: true }), { id: 'c_inventado', name: 'Inventado', tags: [], skill: {}, supreme: {}, combo: { triggers: [], effects: [] } } ];
+      const visitante = siteCharacters();
+      const v = { total: visitante.length, gokuTipo: visitante.find(c => c.name === 'Goku').type, inventado: visitante.some(c => c.id === 'c_inventado') };
+      const id = goku.id;
+      openCharEditor(id); const editorVisitante = !!state.editingChar; state.editingChar = null;
+      const fichaVisitante = renderCharDetailPage(id).includes('edit-char');
+      const listaVisitante = renderCharsTab().includes('id="addCharBtn"');
+      // dono: as fichas que ele editou e as que criou ficam por cima
+      supabaseAvailable = true; window.__sb = { client: {} }; state.discordUser = { id: window.ADMIN_DISCORD_ID, username: 'Dono' };
+      const dono = siteCharacters();
+      const d = { total: dono.length, gokuTipo: dono.find(c => c.name === 'Goku').type, inventado: dono.some(c => c.id === 'c_inventado') };
+      const fichaDono = renderCharDetailPage(id).includes('edit-char');
+      const listaDono = renderCharsTab().includes('id="addCharBtn"');
+      state.discordUser = null; supabaseAvailable = false; window.__sb = undefined; storedCharacters = null;
+      refreshCharacters();
+      return { base, v, d, editorVisitante, fichaVisitante, listaVisitante, fichaDono, listaDono, gokuOriginal: goku.type };
+    })()`);
+    assert.strictEqual(r.v.total, r.base, 'visitante vê exatamente a lista do site');
+    assert.strictEqual(r.v.gokuTipo, r.gokuOriginal, 'edição salva antiga não vale para visitante');
+    assert.strictEqual(r.v.inventado, false);
+    assert.strictEqual(r.editorVisitante, false, 'visitante não abre o editor');
+    assert.strictEqual(r.fichaVisitante, false, 'visitante não vê "Editar dados de combo"');
+    assert.strictEqual(r.listaVisitante, false, 'visitante não vê "Adicionar personagem"');
+    assert.strictEqual(r.d.total, r.base + 1, 'dono vê o guerreiro que criou');
+    assert.strictEqual(r.d.gokuTipo, 'Defesa', 'dono vê a ficha que editou');
+    assert.ok(r.fichaDono && r.listaDono, 'dono vê os botões de edição');
   });
 
   await test('"Ajustar retrato" só aparece e funciona para o dono (Discord de administrador)', () => {

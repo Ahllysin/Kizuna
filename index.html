@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-rFPiGQVIF5465JpcoFkjOfDNqKOUlbKFDLcZBsj3Sko=' 'sha256-8tzeMKarnL/piF+VpRQUwz+d/nqkPV0OuG3d7Mric78='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Z+jwZuAX8IExYPDgUg/DwQqaXWuhEgP67NbXZgqMSic=' 'sha256-JWFfIdv7ctCd8CfwnAcZBUzw0Vzx8IjxkgYn9gOPpWc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna — guerreiros, combos e tier list</title>
@@ -156,6 +156,18 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 }
 .kz-nav-btn.active .kz-nav-glyph{background:radial-gradient(circle at 35% 30%, #ffb35a, #e0461a 75%);color:#fff;border-color:var(--gold-light);}
 .kz-sidebar-spacer{flex:1;}
+.kz-crash{padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.kz-crash-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.kz-crash-list{display:flex;flex-direction:column;gap:8px;max-height:560px;overflow:auto;}
+.kz-crash-row{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,90,90,.35);border-left:4px solid #ff5a5a;background:rgba(40,10,14,.45);display:flex;flex-direction:column;gap:4px;}
+.kz-crash-row.aviso{border-color:rgba(255,177,59,.35);border-left-color:var(--gold);background:rgba(40,28,10,.4);}
+.kz-crash-top{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline;font-size:12px;color:var(--text-dim);}
+.kz-crash-top b{color:var(--text-strong);font-size:12.5px;}
+.kz-crash-top .tag{padding:0 6px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--text-soft);font-weight:800;}
+.kz-crash-msg{font-size:14px;color:var(--text);overflow-wrap:anywhere;}
+.kz-crash-det{font-size:11.5px;color:var(--text-faint);overflow-wrap:anywhere;}
+.kz-crash-row pre{margin:4px 0 0;padding:8px;border-radius:8px;background:#07060c;color:var(--text-soft);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto;}
+.kz-crash-row summary{cursor:pointer;font-size:12px;color:var(--gold);}
 .kz-footer{position:relative;z-index:1;max-width:860px;margin:48px auto 0;padding:16px 12px 0;border-top:1px solid rgba(255,255,255,.1);text-align:center;font-size:12.5px;line-height:1.6;color:var(--text-dim);text-shadow:0 1px 3px #000;}
 .kz-footer p{margin:0 0 6px;}
 .kz-footer b{color:var(--text-soft);}
@@ -1599,6 +1611,57 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
 </script>
 
 <script>
+
+/* ---------- Log de crash: erros do site vão para a tabela site_errors do Supabase (só o dono lê, na aba Perfil) ----------
+   Fica no começo do script para pegar também erros durante a carga. No máximo 5 registros por visita, sem repetir. */
+const CRASH_MAX = 5;
+let crashEnviados = 0, crashFila = [];
+const crashVistos = new Set();
+function crashAba(){ try{ return (typeof state !== 'undefined' && state) ? state.tab : null; }catch(e){ return null; } }
+function reportCrash(msg, stack, extra){
+  try{
+    msg = String(msg == null ? '' : msg).replace(/\s+/g, ' ').trim().slice(0, 500) || 'erro desconhecido';
+    const chave = msg + '|' + String(stack || '').slice(0, 160);
+    if(crashVistos.has(chave) || crashEnviados >= CRASH_MAX) return;
+    crashVistos.add(chave); crashEnviados++;
+    const linha = {
+      msg,
+      stack: stack ? String(stack).slice(0, 2000) : null,
+      pagina: typeof location !== 'undefined' ? String((location.pathname || '') + (location.hash || '')).slice(0, 200) : null,
+      navegador: typeof navigator !== 'undefined' ? String(navigator.userAgent || '').slice(0, 300) : null,
+      versao: typeof document !== 'undefined' ? String(document.lastModified || '').slice(0, 60) : null,
+      extra: extra || null,
+    };
+    if(window.__sb && window.__sb.client) enviarCrash(linha); else crashFila.push(linha);
+  }catch(e){}
+}
+function enviarCrash(linha){
+  try{ window.__sb.client.from('site_errors').insert(linha).then(()=>{}, ()=>{}); }catch(e){}
+}
+if(typeof window.addEventListener === 'function'){
+  window.addEventListener('supabase-ready', ()=>{ const f = crashFila; crashFila = []; f.forEach(enviarCrash); });
+  window.addEventListener('error', e=>{
+    if(e && e.target && e.target !== window) return;                         // imagem/arquivo que não carregou: não é crash
+    if(!e.filename && /^Script error\.?$/.test(e.message || '')) return;     // erro de script de fora, sem detalhes
+    reportCrash(e.message, e.error && e.error.stack, { arquivo: String(e.filename || '').split('/').pop().slice(0, 80) || null, linha: e.lineno || null, coluna: e.colno || null, aba: crashAba() });
+  }, true);
+  window.addEventListener('unhandledrejection', e=>{
+    const r = e && e.reason;
+    reportCrash('Promessa rejeitada: ' + ((r && r.message) || String(r)), r && r.stack, { aba: crashAba() });
+  });
+}
+// Falhas tratadas pelo próprio site (ex.: "Não consegui carregar os guias") também entram no log, marcadas como "aviso".
+if(typeof console !== 'undefined' && typeof console.error === 'function'){
+  const consoleErrorOriginal = console.error.bind(console);
+  console.error = (...args)=>{
+    consoleErrorOriginal(...args);
+    try{
+      const txt = args.map(a=>a && a.message ? a.message : (typeof a === 'string' ? a : '')).filter(Boolean).join(' — ');
+      const err = args.find(a=>a && a.stack);
+      if(txt) reportCrash(txt, err && err.stack, { tipo: 'aviso', aba: crashAba() });
+    }catch(e){}
+  };
+}
 
 // Imagens: o que antes era onerror/onload dentro do HTML agora é tratado aqui (a política de segurança do site proíbe script em atributo).
 document.addEventListener('error', e => {
@@ -4572,6 +4635,7 @@ let state = {
   guiasView: 'sistemas',            // 'sistemas' (12 guias do jogo) | 'combos' (como o site monta combos)
   guideId: null,                    // guia aberto na leitura, ou null
   guideQuery: '',                   // busca na lista de guias
+  crashLog: null,                   // log de erros carregado no painel do dono (aba Perfil)
   heroEdit: null,                   // rascunho {scope,id,x,y,z} enquanto o ajuste do retrato está aberto, ou null
   heroCharId: null,                 // personagem em destaque no topo da lista (troca no hover)
   slotSel: null,                    // casa do Montador selecionada, esperando um guerreiro do elenco
@@ -4642,9 +4706,7 @@ async function loadState(){
       if(r && r.value != null) applyStoredValue(key, r.value);
     }catch(e){}
   }
-  if(!state.characters || !state.characters.length){
-    state.characters = DEFAULT_CHARACTERS.map(makeCharFromData);
-  }
+  state.characters = siteCharacters();
   // Doadores (Aliança Z) são dado PÚBLICO — não fazem parte da conta pessoal de ninguém,
   // por isso ficam fora de SYNCED_KEYS/applyStoredValue e são carregados à parte aqui.
   try{
@@ -4771,7 +4833,31 @@ function renameTier(tierId, newLabel){
   tier.label = newLabel || '?';
   saveTierList();
 }
+// Guerreiros: a lista do site (DEFAULT_CHARACTERS) é sempre a fonte. Só o dono edita: as fichas que ele editou
+// (marcadas com _editado) e os guerreiros que ele criou ficam por cima, no navegador/conta dele. Visitantes sempre
+// veem a lista atual do site, mesmo que tenham uma cópia antiga salva (ela é ignorada, não apagada).
+let storedCharacters = null;
+function siteCharacters(){
+  const base = DEFAULT_CHARACTERS.map(makeCharFromData);
+  if(!isHeroAdmin() || !Array.isArray(storedCharacters)) return base;
+  const baseIds = new Set(base.map(c=>c.id));
+  const salvo = new Map(storedCharacters.filter(c=>c && c.id).map(c=>[c.id, c]));
+  const out = base.map(b=>{ const s = salvo.get(b.id); return s && s._editado ? s : b; });
+  storedCharacters.forEach(c=>{ if(c && c.id && !baseIds.has(c.id)) out.push(c); });
+  return out;
+}
+// Recalcula a lista (ao entrar/sair da conta ou ao puxar os dados da nuvem) e limpa referências a quem sumiu.
+function refreshCharacters(){
+  state.characters = siteCharacters();
+  const ids = new Set(state.characters.map(c=>c.id));
+  state.favs = (Array.isArray(state.favs) ? state.favs : []).filter(id=>ids.has(id));
+  state.team = (state.team || []).map(id=>id && ids.has(id) ? id : null);
+  if(state.viewingCharId && !ids.has(state.viewingCharId)) state.viewingCharId = null;
+  ensureTierListIntegrity();
+}
 async function saveCharacters(){
+  if(!isHeroAdmin()) return;
+  storedCharacters = JSON.parse(JSON.stringify(state.characters));
   try{ await persist('characters', JSON.stringify(state.characters)); }catch(e){ showToast('Erro ao salvar personagens'); }
 }
 async function saveTeamState(){ await persist('team_state', JSON.stringify({team:state.team})); }
@@ -5254,8 +5340,8 @@ function render(){
   attachAccountHandlers();
   document.getElementById('donorWidgetRoot').innerHTML = renderDonorWidget();
   attachDonorWidgetHandlers();
-  if(state.editingChar) renderModal();
-  else if(state.ioModalOpen) renderIOModal();
+  if(state.editingChar && isHeroAdmin()) renderModal();
+  else if(state.ioModalOpen && isHeroAdmin()) renderIOModal();
   else if(state.pickerSlot!==null) renderPickerModal();
   else if(state.simModalOpen) renderSimModal();
   else if(state.abilityPopupCharId) renderAbilityPopup(state.abilityPopupCharId);
@@ -5316,6 +5402,7 @@ function buildWithChar(id){
 }
 
 function openCharEditor(id){
+  if(!isHeroAdmin()) return;
   const c = getChar(id);
   if(!c) return;
   state.editingChar = JSON.parse(JSON.stringify(c));
@@ -5370,10 +5457,10 @@ function renderCharsTab(){
         <button class="kz-link-btn" id="clearFilters" ${hasActiveFilters()?'':'hidden'}>Limpar filtros</button>
       </div>
     </div>
-    <div class="kz-list-tools">
+    ${isHeroAdmin() ? `<div class="kz-list-tools">
       <button class="kz-btn kz-btn-sm" id="ioBtn">Importar / Exportar</button>
       <button class="kz-btn kz-btn-sm" id="addCharBtn">+ Adicionar personagem</button>
-    </div>
+    </div>` : ''}
     <div id="charsGridWrap">${renderCharsGrid(chars)}</div>
   </section>`;
 }
@@ -5452,9 +5539,9 @@ function attachCharsHandlers(){
   if(heroAdj) heroAdj.addEventListener('click', ()=>{ const hc = getChar(state.heroCharId) || defaultHeroChar(); if(hc) startHeroEdit('list', hc.id); });
   attachHeroAdjust();
   const addBtn = document.getElementById('addCharBtn');
-  if(addBtn) addBtn.addEventListener('click', ()=>{ state.editingChar = blankChar(); state.editingIsNew = true; render(); });
+  if(addBtn) addBtn.addEventListener('click', ()=>{ if(!isHeroAdmin()) return; state.editingChar = blankChar(); state.editingIsNew = true; render(); });
   const ioBtn = document.getElementById('ioBtn');
-  if(ioBtn) ioBtn.addEventListener('click', ()=>{ state.ioModalOpen = true; render(); });
+  if(ioBtn) ioBtn.addEventListener('click', ()=>{ if(!isHeroAdmin()) return; state.ioModalOpen = true; render(); });
   attachCharCardHandlers(view);
 }
 
@@ -5781,7 +5868,7 @@ function renderCharDetailPage(charId){
             <div class="kz-action-row">
               <button class="kz-build-btn" id="buildWithCharBtn" data-id="${c.id}"><span class="glyph">連</span><span>Montar combo com este guerreiro</span></button>
               <button class="kz-fav-toggle ${fav?'on':''}" data-fav="${c.id}"><span class="star">★</span><span class="lbl">${fav?'Favoritado':'Favoritar'}</span></button>
-              <button class="kz-edit-btn edit-char" data-id="${c.id}" title="Editar os dados usados no Montador de Combos">Editar dados de combo</button>
+              ${isHeroAdmin() ? `<button class="kz-edit-btn edit-char" data-id="${c.id}" title="Editar os dados usados no Montador de Combos">Editar dados de combo</button>` : ''}
               ${isHeroAdmin() ? `<button class="kz-edit-btn" id="heroAdjustBtn" data-id="${c.id}" title="Mover e dar zoom no retrato de fundo">Ajustar retrato</button>` : ''}
             </div>
           </div>
@@ -8756,12 +8843,14 @@ window.addEventListener('supabase-ready', async ()=>{
     const { data:{ session } } = await client.auth.getSession();
     applyDiscordSession(session);
     if(session){ await pullUserDataFromRemote(); await refreshMyProfile(); }
+    refreshCharacters();
   }catch(e){ console.error(e); }
   client.auth.onAuthStateChange(async (_event, session)=>{
     const hadUser = !!state.discordUser;
     applyDiscordSession(session);
     if(session && (!hadUser || _event === 'SIGNED_IN')){ await pullUserDataFromRemote(); await refreshMyProfile(); await refreshDonorsRemote(); }
     if(!session) state.myDonationTotal = null;
+    refreshCharacters();
     recomputeHeroFrames();
     if(session && isHeroAdmin()) loadHeroFramesRemote();
     render();
@@ -8791,7 +8880,7 @@ function applyStoredValue(key, raw){
   if(raw == null) return;
   try{
     switch(key){
-      case 'characters': state.characters = JSON.parse(raw); break;
+      case 'characters': storedCharacters = JSON.parse(raw); break;   // só vale para o dono (ver siteCharacters)
       case 'team_state': { const p = JSON.parse(raw); state.team = p.team || Array(6).fill(null); break; }
       case 'formations': state.formations = JSON.parse(raw); break;
       case 'collection': state.collection = JSON.parse(raw); break;
@@ -8830,10 +8919,7 @@ async function pullUserDataFromRemote(){
       applyStoredValue(row.key, row.value);
       try{ await window.storage.set(row.key, row.value); }catch(e){}
     }
-    if(!state.characters || !state.characters.length) state.characters = DEFAULT_CHARACTERS.map(makeCharFromData);
-    const allIds = new Set(state.characters.map(c=>c.id));
-    state.favs = (Array.isArray(state.favs) ? state.favs : []).filter(id=>allIds.has(id));
-    ensureTierListIntegrity();
+    refreshCharacters();
   }catch(e){
     console.error('Não consegui carregar seus dados da conta', e);
     showToast('Não consegui carregar seus dados da conta');
@@ -9041,12 +9127,65 @@ function renderPerfilTab(){
         ${p.showSocials && (p.instagram||p.twitch||p.youtube) ? `<div class="kz-donate-note">${[p.instagram,p.twitch,p.youtube].filter(Boolean).map(escapeHtml).join(' · ')}</div>` : ''}
       </div>
     </div>
+    ${isSiteOwner() ? renderCrashLogPanel() : ''}
   </section>`;
+}
+
+/* ---------- Painel do log de erros (só o dono, aba Perfil) ---------- */
+function isSiteOwner(){ return isSupabaseConfigured() && !!(state.discordUser && state.discordUser.id === window.ADMIN_DISCORD_ID); }
+function crashNavegador(ua){
+  ua = String(ua || '');
+  const nav = /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera' : /Firefox\//.test(ua) ? 'Firefox' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : 'outro';
+  const so = /iPhone|iPad/.test(ua) ? 'iPhone/iPad' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows' : /Mac OS/.test(ua) ? 'Mac' : /Linux/.test(ua) ? 'Linux' : '?';
+  return nav + ' · ' + so;
+}
+function renderCrashLogPanel(){
+  const lista = state.crashLog;
+  const quando = iso=>{ try{ return new Date(iso).toLocaleString('pt-BR'); }catch(e){ return String(iso || ''); } };
+  const linhas = !lista ? '<div class="kz-muted">Clique em Carregar para ver os erros registrados no site.</div>'
+    : !lista.length ? '<div class="kz-muted">Nenhum erro registrado.</div>'
+    : lista.map(e=>{
+        const x = e.extra || {};
+        return `<div class="kz-crash-row${x.tipo === 'aviso' ? ' aviso' : ''}">
+          <div class="kz-crash-top"><b>${escapeHtml(quando(e.created_at))}</b><span class="tag">${x.tipo === 'aviso' ? 'aviso' : 'erro'}</span>${x.aba ? `<span>aba ${escapeHtml(String(x.aba))}</span>` : ''}${e.user_id ? '<span>logado</span>' : ''}<span>${escapeHtml(crashNavegador(e.navegador))}</span></div>
+          <div class="kz-crash-msg">${escapeHtml(e.msg)}</div>
+          ${x.arquivo ? `<div class="kz-crash-det">${escapeHtml(String(x.arquivo))}${x.linha ? ':' + (+x.linha) : ''}${x.coluna ? ':' + (+x.coluna) : ''}</div>` : ''}
+          ${e.stack ? `<details><summary>Detalhes</summary><pre>${escapeHtml(e.stack)}</pre></details>` : ''}
+          <div class="kz-crash-det">${escapeHtml(e.pagina || '')} · versão ${escapeHtml(e.versao || '?')}</div>
+        </div>`;
+      }).join('');
+  return `<div class="kz-panel kz-crash">
+    <div class="kz-crash-head"><span class="kz-label">Log de erros do site · só você vê</span>
+      <button type="button" class="kz-btn kz-btn-sm" id="crashLoadBtn">${lista ? 'Atualizar' : 'Carregar'}</button>
+      ${lista && lista.length ? '<button type="button" class="kz-com-link danger" id="crashClearBtn">Limpar log</button>' : ''}
+    </div>
+    ${lista && lista.length ? `<div class="kz-muted" style="font-size:12.5px;">${lista.length} registro${lista.length > 1 ? 's' : ''} (os 100 mais recentes).</div>` : ''}
+    <div class="kz-crash-list">${linhas}</div>
+  </div>`;
+}
+async function loadCrashLog(){
+  if(!isSiteOwner()) return;
+  const { data, error } = await window.__sb.client.from('site_errors').select('*').order('id', { ascending:false }).limit(100);
+  if(error){ showToast('Não consegui carregar o log de erros'); return; }
+  state.crashLog = data || [];
+  render();
+}
+async function clearCrashLog(){
+  if(!isSiteOwner() || !confirm('Apagar todos os erros registrados?')) return;
+  const { error } = await window.__sb.client.from('site_errors').delete().gt('id', 0);
+  if(error){ showToast('Não consegui limpar o log'); return; }
+  state.crashLog = [];
+  render();
+  showToast('Log de erros limpo');
 }
 
 function attachPerfilHandlers(){
   const view = document.getElementById('view');
   if(!view || state.tab !== 'perfil') return;
+  const crashLoad = document.getElementById('crashLoadBtn');
+  if(crashLoad) crashLoad.addEventListener('click', loadCrashLog);
+  const crashClear = document.getElementById('crashClearBtn');
+  if(crashClear) crashClear.addEventListener('click', clearCrashLog);
   const bioInput = document.getElementById('perfilBioInput');
   const bioCount = document.getElementById('perfilBioCount');
   if(bioInput && bioCount) bioInput.addEventListener('input', ()=>{ bioCount.textContent = bioInput.value.length; });
@@ -9440,6 +9579,7 @@ function abilityEditorHTML(key, label, iconClass, ability, withTriggers, iconTex
 
 // Tira o personagem de todo lugar que guarda o id dele (equipe, favoritos, coleção, tier list).
 function deleteCharacter(id){
+  if(!isHeroAdmin()) return;
   state.characters = state.characters.filter(c=>c.id!==id);
   state.team = state.team.map(t=> t===id ? null : t);
   state.favs = state.favs.filter(x=>x!==id);
@@ -9549,6 +9689,8 @@ function renderModal(){
       c[key].desc = ed.querySelector('[data-field=desc]').value.trim();
     });
     if(!c.name){ showToast('Dê um nome ao personagem antes de salvar.'); return; }
+    if(!isHeroAdmin()){ state.editingChar = null; render(); return; }
+    c._editado = true;
 
     const existingIdx = state.characters.findIndex(x=>x.id===c.id);
     if(existingIdx>-1) state.characters[existingIdx] = c; else state.characters.push(c);
@@ -9638,6 +9780,7 @@ function renderIOModal(){
   });
 
   document.getElementById('importBtn').addEventListener('click', ()=>{
+    if(!isHeroAdmin()) return;
     const raw = document.getElementById('ioTextarea').value.trim();
     if(!raw){ showToast('Cole um JSON antes de importar.'); return; }
     let parsed;
@@ -9656,6 +9799,7 @@ function renderIOModal(){
         supreme: {...base.supreme, ...(item.supreme||{})},
         combo: {...base.combo, ...(item.combo||{})},
       };
+      merged._editado = true;
       const existingIdx = state.characters.findIndex(c=>
         c.id===merged.id || (c.name && merged.name && c.name.toLowerCase()===merged.name.toLowerCase())
       );
