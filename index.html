@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-F2cZ1WG+bmeiCNefMDfmPwSbZZnhsgUuFNUhec53kec=' 'sha256-oQcv38b+TnI8VksVwhEhM2jm8PeLideQ/8j4pwiyBB0='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-rFPiGQVIF5465JpcoFkjOfDNqKOUlbKFDLcZBsj3Sko=' 'sha256-8tzeMKarnL/piF+VpRQUwz+d/nqkPV0OuG3d7Mric78='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna — guerreiros, combos e tier list</title>
@@ -137,6 +137,7 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 /* Recolhida, a barra some por completo (largura 0) — só volta pelo ☰ ou, no
    celular, arrastando a partir da borda esquerda da tela. */
 .kz-app.nav-compact .kz-sidebar{width:0;box-shadow:none;}
+.kz-app:not(.kz-ready) .kz-sidebar{transition:none;}   /* sem animação até o site carregar (evita o menu "piscar" no celular) */
 .kz-sidebar-inner{width:212px;}
 .kz-sidebar-inner{position:sticky;top:0;height:100vh;padding:22px 12px;display:flex;flex-direction:column;gap:6px;overflow:hidden;}
 .kz-nav-btn{
@@ -423,6 +424,18 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .cdp-pop-av:hover .face{border-color:var(--gold-light);}
 .cdp-pop-av .nm{width:56px;font-size:10px;line-height:1.2;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .cdp-pop-av.fora{cursor:default;}
+@media (max-width:480px){
+  .kz-build-btn{max-width:100%;white-space:normal;text-align:left;padding:10px 14px;font-size:14px;}
+  .kz-tabs .kz-tab{padding:10px 9px;gap:5px;font-size:13px;}
+  .kz-tabs .kz-tab .glyph{font-size:17px;}
+}
+@media (max-width:640px){
+  .cdp-food-row{gap:10px;flex-wrap:nowrap;justify-content:space-between;max-width:300px;}
+  .cdp-food-item{width:auto;flex:1 1 0;min-width:0;}
+  .cdp-food-icon{width:68px;height:68px;}
+  .cdp-food-icon img{width:54px;height:54px;}
+  .cdp-food-name{font-size:12px;}
+}
 .cdp-food-icon{
   width:76px;height:76px;border-radius:12px;border:2px solid rgba(140,150,190,.45);background:linear-gradient(180deg,#141828,#0b0d16);
   display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--text-faint);flex-shrink:0;
@@ -1278,9 +1291,9 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-sidebar{width:0;}
   .kz-app.nav-compact .kz-sidebar{width:0;}
   .kz-sidebar-inner{padding:16px 8px;}
-  .kz-app:not(.nav-compact) .kz-sidebar{position:absolute;left:0;top:0;bottom:0;width:212px;z-index:30;}
-  .kz-app:not(.nav-compact) .kz-sidebar-inner{padding:16px 10px;}
-  .kz-app:not(.nav-compact) .kz-nav-backdrop{display:block;position:fixed;inset:0;z-index:29;background:rgba(3,2,8,.55);}
+  .kz-app.kz-ready:not(.nav-compact) .kz-sidebar{position:absolute;left:0;top:0;bottom:0;width:212px;z-index:30;}
+  .kz-app.kz-ready:not(.nav-compact) .kz-sidebar-inner{padding:16px 10px;}
+  .kz-app.kz-ready:not(.nav-compact) .kz-nav-backdrop{display:block;position:fixed;inset:0;z-index:29;background:rgba(3,2,8,.55);}
   .kz-main{padding:20px 14px 60px;}
   .kz-main-watermark{font-size:200px;}
   .kz-float-ball{display:none;}
@@ -4555,7 +4568,7 @@ let state = {
   discordUser: null,                // {id, username, avatarUrl} — sessão Supabase/Discord da Aliança Z, ou null
   myProfile: null,                  // rascunho do próprio perfil (aba Perfil), carregado após login
   profiles: [],                     // cache dos perfis públicos (pra enriquecer o mural da Aliança Z)
-  navCompact: false,                // barra lateral recolhida (só ícones)
+  navCompact: typeof window !== 'undefined' && (window.innerWidth || 1200) < 900,   // no celular a barra já começa recolhida (sem "piscar" na carga)                // barra lateral recolhida (só ícones)
   guiasView: 'sistemas',            // 'sistemas' (12 guias do jogo) | 'combos' (como o site monta combos)
   guideId: null,                    // guia aberto na leitura, ou null
   guideQuery: '',                   // busca na lista de guias
@@ -5204,6 +5217,7 @@ function isNarrowLayout(){ return (window.innerWidth || 1200) <= 700; }
 function applyNavState(){
   const app = document.getElementById('kzApp');
   if(app) app.classList.toggle('nav-compact', !!state.navCompact);
+  if(app && !app.classList.contains('kz-ready') && typeof requestAnimationFrame === 'function') requestAnimationFrame(()=>requestAnimationFrame(()=>app.classList.add('kz-ready')));
 }
 
 /* ======================= RENDER: ROOT ======================= */
