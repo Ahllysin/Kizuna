@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-c7K882ClJRKT4XCyqX7W+s+UHIXmneZoK/25NNVtWms=' 'sha256-krGjs6I5+3aTtphzCS2oepOPMVS1VlAoVboFzDwQApU='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-F2cZ1WG+bmeiCNefMDfmPwSbZZnhsgUuFNUhec53kec=' 'sha256-oQcv38b+TnI8VksVwhEhM2jm8PeLideQ/8j4pwiyBB0='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kizuna — guerreiros, combos e tier list</title>
@@ -400,7 +400,29 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-empty-ball div{font-size:16px;color:var(--text-soft);line-height:1.6;}
 /* comida de afinidade e vínculos (quando já tiver dado capturado) */
 .cdp-food-row{display:flex;gap:18px;flex-wrap:wrap;}
-.cdp-food-item{display:flex;flex-direction:column;align-items:center;gap:8px;width:96px;text-align:center;}
+.cdp-food-item{display:flex;flex-direction:column;align-items:center;gap:8px;width:96px;text-align:center;position:relative;border-radius:12px;outline:none;cursor:default;}
+.cdp-food-item:focus-visible .cdp-food-icon{box-shadow:0 0 0 3px rgba(255,177,59,.6);}
+/* balão "quem usa este presente" (passar o mouse ou tocar) */
+.cdp-food-pop{position:absolute;top:calc(100% + 8px);left:50%;transform:translate(-50%,6px);z-index:30;width:max-content;max-width:min(300px,86vw);padding:10px 12px 12px;border-radius:12px;
+  border:1.5px solid var(--gold);background:linear-gradient(180deg,#1b1424,#0d0a14);box-shadow:0 10px 30px rgba(0,0,0,.65);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s,transform .15s,visibility .15s;text-align:left;}
+.cdp-food-pop::before{content:'';position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);background:#1b1424;border-left:1.5px solid var(--gold);border-top:1.5px solid var(--gold);}
+.cdp-food-item:first-child .cdp-food-pop{left:0;transform:translate(0,6px);}
+.cdp-food-item:first-child .cdp-food-pop::before{left:42px;}
+.cdp-food-item:last-child .cdp-food-pop{left:auto;right:0;transform:translate(0,6px);}
+.cdp-food-item:last-child .cdp-food-pop::before{left:auto;right:36px;}
+.cdp-food-item:hover .cdp-food-pop,.cdp-food-item:focus-within .cdp-food-pop{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);}
+.cdp-food-item:first-child:hover .cdp-food-pop,.cdp-food-item:first-child:focus-within .cdp-food-pop,
+.cdp-food-item:last-child:hover .cdp-food-pop,.cdp-food-item:last-child:focus-within .cdp-food-pop{transform:translate(0,0);}
+.cdp-food-pop .t{display:block;margin-bottom:8px;font-family:'Kaushan Script',cursive;font-size:17px;color:var(--gold-light);white-space:nowrap;}
+.cdp-food-pop-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.cdp-pop-av{display:flex;flex-direction:column;align-items:center;gap:3px;width:56px;padding:0;border:none;background:none;color:var(--text-soft);cursor:pointer;}
+.cdp-pop-av .face{width:52px;height:52px;border-radius:8px;overflow:hidden;border:2px solid #b8862f;background:#120e1a;position:relative;}
+.cdp-pop-av .face img{width:100%;height:100%;object-fit:cover;display:block;}
+.cdp-pop-av .face .ini{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:var(--text-dim);}
+.cdp-pop-av.eu .face{border-color:var(--gold-light);box-shadow:0 0 10px rgba(255,214,107,.55);}
+.cdp-pop-av:hover .face{border-color:var(--gold-light);}
+.cdp-pop-av .nm{width:56px;font-size:10px;line-height:1.2;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cdp-pop-av.fora{cursor:default;}
 .cdp-food-icon{
   width:76px;height:76px;border-radius:12px;border:2px solid rgba(140,150,190,.45);background:linear-gradient(180deg,#141828,#0b0d16);
   display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--text-faint);flex-shrink:0;
@@ -5852,6 +5874,21 @@ function affinityGroups(){
   Object.keys(AFFINITY_CHAR_GIFTS).forEach(n=>{ const k = affinityKey(n); if(!g.has(k)) g.set(k, []); g.get(k).push(n); });
   return [...g.entries()].map(([k, membros])=>({ membros, slugs: k.split('|') }));
 }
+// Todos os guerreiros que usam um presente (em qualquer faixa de EXP).
+function affinityUsersOf(slug){
+  return Object.keys(AFFINITY_CHAR_GIFTS).filter(n=>AFFINITY_CHAR_GIFTS[n].includes(slug));
+}
+function affinityPopHtml(giftSlug, atual){
+  const users = affinityUsersOf(giftSlug).sort((a, b)=> (b === atual) - (a === atual) || a.localeCompare(b));
+  if(!users.length) return '';
+  const av = n=>{
+    const o = state.characters.find(x=>x.name === n);
+    if(!o) return `<span class="cdp-pop-av fora" title="${escapeAttr(n)} (ainda não está no site)"><span class="face"><span class="ini">${escapeHtml(initials(n))}</span></span><span class="nm">${escapeHtml(n)}</span></span>`;
+    const fr = heroFrame('detail', o.id);
+    return `<button type="button" class="cdp-pop-av${n === atual ? ' eu' : ''}" ${n === atual ? '' : `data-open-char="${escapeAttr(o.id)}"`} title="${escapeAttr(n)}"><span class="face"><img src="portraits/mini/${slug(o.name)}.webp" alt="" loading="lazy" style="${heroStyleOf(fr)}" data-onerr="hide"></span><span class="nm">${escapeHtml(n)}</span></button>`;
+  };
+  return `<div class="cdp-food-pop" role="tooltip"><span class="t">Quem usa este presente</span><div class="cdp-food-pop-grid">${users.map(av).join('')}</div></div>`;
+}
 function affinityFoodTier(exp){ return exp >= 60 ? 'rarity-dourado' : exp >= 20 ? 'rarity-roxo' : 'rarity-azul'; }
 function affinityIconHtml(slug){ return /^[a-z0-9-]{1,60}$/.test(slug) ? `<img src="assets/presentes/${slug}.webp" alt="" loading="lazy" data-onerr="hide">` : '🍽'; }
 function affinityResumoHtml(){
@@ -5884,10 +5921,11 @@ function renderCharFoodSection(c){
   <div class="cdp-aff-block">
     <h3 class="cdp-aff-title">Presentes que ${escapeHtml(c.name)} aceita</h3>
     <div class="cdp-food-row">${foods.map(f=>`
-      <div class="cdp-food-item">
+      <div class="cdp-food-item"${f.slug ? ' tabindex="0"' : ''}>
         <div class="cdp-food-icon ${f.exp ? affinityFoodTier(f.exp) : foodRarityClass(f.raridade)}">${f.slug ? affinityIconHtml(f.slug) : '🍽'}</div>
         <div class="cdp-food-name">${escapeHtml(f.nome)||'—'}</div>
         ${f.exp ? `<div class="cdp-food-exp">+${+f.exp} EXP</div>` : ''}
+        ${f.slug ? affinityPopHtml(f.slug, c.name) : ''}
       </div>`).join('')}</div>
     ${outros.length ? `<div class="cdp-aff-group">Aceitam os mesmos presentes: ${outros.map(n=>{ const o = state.characters.find(x=>x.name === n); return o ? `<button type="button" class="kz-link-btn" data-open-char="${escapeAttr(o.id)}">${escapeHtml(n)}</button>` : escapeHtml(n); }).join(', ')} <span>(cada um tem a própria Afinidade)</span></div>` : ''}
     ${fontes ? `<div class="cdp-aff-src"><b>Onde conseguir:</b> ${escapeHtml(fontes)}</div>` : ''}
