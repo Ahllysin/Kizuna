@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-ie1H8YykbmIjAp1ETlbdSwjJvnQmsc4fQ8SVyJVfupg=' 'sha256-DRGFPR95pM0+s85XBZB6HQ7c4uMeDs1IWsKx7cyJECY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-IZ5aKXEjODERptevCBDGYXFGD1cWhECWlboTTcEp4MY=' 'sha256-GBSoMysNFx+DGZel+54I737sqieQlsRPfdERMRknqOs='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -6612,6 +6612,11 @@ function collCounterInner(){
   const total = state.characters.length;
   const owned = state.characters.filter(c=>getEntry(c.id).owned).length;
   const pct = total ? owned / total : 0;
+  if(visualNovo()){   // canvas: esferas desenhadas (com as estrelas dentro) e o número grande embaixo
+    const lit = [1,2,3,4,5,6,7].filter(i=> pct >= i/7 - 1e-9 || (i === 1 && owned > 0)).length;
+    const balls = [1,2,3,4,5,6,7].map(i=>`<span class="kz-nvc-ball ${i <= lit ? 'lit' : 'off'}"><i></i>${'★'.repeat(i)}</span>`).join('');
+    return `<div class="kz-nvc-balls" role="img" aria-label="Progresso da coleção: ${lit} de 7 esferas">${balls}</div>${nvCountHtml(owned, `de ${total} adquiridos`)}`;
+  }
   const balls = [1,2,3,4,5,6,7].map(i=>{
     const on = pct >= i/7 - 1e-9 || (i === 1 && owned > 0);
     return `<img class="${on?'on':'off'}" src="${ballSrc(i)}" alt="">`;
@@ -6621,7 +6626,66 @@ function collCounterInner(){
 
 const COLL_FILTER_GROUPS = [['Tipo','collectionType',TYPES],['Afinidade','collectionAffinity',AFFINITIES]];
 
+// Coleção no formato do canvas: topo com esferas e contador, uma linha de busca e filtros, grade de 6 cartas.
+function renderCollectionTabNovo(){
+  const chars = getFilteredCollectionChars();
+  const on = !!state.collectionOnlyOwned;
+  const chip = (key, v)=>`<button type="button" class="kz-fchip ${state[key]===v?'active':''}" data-cfilter="${key}" data-val="${escapeAttr(v)}" aria-pressed="${state[key]===v}">${key === 'collectionAffinity' ? nvDotHtml(v) : ''}${escapeHtml(v)}</button>`;
+  return `
+  <section class="kz-page kz-nvp">
+    ${nvPageHeadHtml({ key:'collection', kanji:'集', tag:'Sua coleção', title:'Coleção', kanjiStyle:'left:36%;right:auto;top:-70px;font-size:420px',
+      sub:`Marque os guerreiros que você tem e o nível de estrela de cada um. ${state.discordUser ? 'Sincronizado com a sua conta.' : 'Fica salvo neste aparelho.'}`,
+      side:`<div class="kz-nvc-counter" id="collCounter">${collCounterInner()}</div>` })}
+    <div class="kz-nv-toolbar">
+      <div class="kz-nv-search sm"><span class="kz-nv-scan" aria-hidden="true"></span><div>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFC21A" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+        <label for="collSearch" class="kz-sr">Buscar personagem</label>
+        <input type="text" id="collSearch" placeholder="Buscar personagem…" value="${escapeAttr(state.collectionSearch||'')}" autocomplete="off">
+      </div></div>
+      <div class="kz-nv-switchwrap">
+        <button type="button" class="kz-nv-switch${on ? ' on' : ''}" id="collOnlyOwned" role="switch" aria-checked="${on}" aria-labelledby="collOnlyOwnedLbl"><span></span></button>
+        <span class="kz-nv-lb" id="collOnlyOwnedLbl">Só adquiridos</span>
+      </div>
+      ${COLL_FILTER_GROUPS.map(([label,key,vals])=>`<div class="kz-nv-chipgrp"><span class="kz-nv-lb">${label}</span>${vals.map(v=>chip(key, v)).join('')}</div>`).join('')}
+      ${renderSF('coll')}
+    </div>
+    <div id="collGridWrap">${renderCollectionGrid(chars)}</div>
+  </section>`;
+}
+function renderCollectionCardNovo(c){
+  const e = getEntry(c.id);
+  const owned = !!e.owned, lv = e.level || 0, phase = starPhase(lv), filled = starFilled(lv), pname = STAR_PHASE_NAME[phase];
+  const nome = escapeHtml(c.name)||'(sem nome)';
+  if(!owned) return `
+  <div class="kz-coll-card kz-nvc off" data-id="${c.id}">
+    <div class="kz-nvc-fr">${portraitInner(c)}<span class="kz-nvc-stamp" aria-hidden="true">封</span></div>
+    <div class="kz-nvc-nm">${nome}</div>
+    <button type="button" class="kz-btn kz-nvc-acq coll-acquire" data-id="${c.id}">Adquirir</button>
+  </div>`;
+  const stars = [1,2,3,4,5].map(i=>`<button type="button" class="kz-star-btn ${i<=filled?phase:''}" data-star="${i}" title="${pname} ${i}" aria-label="${pname} ${i}">★</button>`).join('');
+  const canLR = maxStarLevel(c) > 10;
+  const extra = [
+    lv === 5 ? `<button type="button" class="kz-awaken-btn" data-awaken>Despertar</button>` : '',
+    lv === 10 && canLR ? `<button type="button" class="kz-awaken-btn lr" data-lr-awaken title="Super Despertar: estrelas coloridas (LR)">Super Despertar</button>` : '',
+    phase === 'blue' ? `<button type="button" class="kz-gold-back-btn" data-goldback>◂ Dourada</button>` : '',
+    phase === 'lr' ? `<button type="button" class="kz-gold-back-btn" data-blueback>◂ Azul</button>` : '',
+  ].join('');
+  return `
+  <div class="kz-coll-card kz-nvc owned ${phase}" data-id="${c.id}">
+    <div class="kz-nvc-fr" data-open-popup title="Ver habilidades">${portraitInner(c)}</div>
+    <div class="kz-nvc-nm">${nome}</div>
+    <div class="kz-coll-stars kz-nvc-st" data-charid="${c.id}" data-phase="${phase}">
+      <div class="kz-nvc-strow"><div class="kz-star-btns">${stars}</div><span class="kz-nvc-lv ${phase}">Nv.${filled} ${pname}</span></div>
+      ${extra ? `<div class="kz-nvc-extra">${extra}</div>` : ''}
+    </div>
+    <div class="kz-nvc-acts">
+      <button type="button" class="kz-nvc-mini" data-open-popup title="${collUnlockCount(c, lv)} habilidades liberadas">Ver habilidades ›</button>
+      <button type="button" class="kz-nvc-rm coll-remove" data-id="${c.id}" title="Remover da coleção" aria-label="Remover ${escapeAttr(c.name)} da coleção">Remover</button>
+    </div>
+  </div>`;
+}
 function renderCollectionTab(){
+  if(visualNovo()) return renderCollectionTabNovo();
   const chars = getFilteredCollectionChars();
   const on = state.collectionOnlyOwned;
   return `
@@ -6650,6 +6714,9 @@ function renderCollectionTab(){
 }
 
 function renderCollectionGrid(chars){
+  if(visualNovo()) return chars.length
+    ? `<div class="kz-nvc-grid">${chars.map(renderCollectionCardNovo).join('')}</div>`
+    : `<div class="kz-empty">Nenhum personagem encontrado.</div>`;
   return chars.length
     ? `<div class="kz-coll-grid">${chars.map(renderCollectionCard).join('')}</div>`
     : `<div class="kz-empty">Nenhum personagem encontrado.</div>`;
@@ -6751,7 +6818,7 @@ function updateCollectionCard(charId){
   if(!view || !cardEl || !c || state.tab !== 'collection'){ render(); return; }
   if(state.collectionOnlyOwned && !getEntry(charId).owned){ softRerenderCollection(); return; }
   const wrap = document.createElement('div');
-  wrap.innerHTML = renderCollectionCard(c);
+  wrap.innerHTML = visualNovo() ? renderCollectionCardNovo(c) : renderCollectionCard(c);
   const newCard = wrap.firstElementChild;
   newCard.style.animation = 'none';
   cardEl.replaceWith(newCard);
