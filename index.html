@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-40P8r6+AOSrN0RmEx7Ya0AASQdqG/Yq4CBvjDXBlzt8=' 'sha256-DQclVMdJZyJysDCQ3dC/6NFkLjlH+huvRUBpDSS6k98='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-GL+Y9wbRGIROLhq0eAyCjmg5cxmns6xnphEtgKn+m94=' 'sha256-0URB4/5qit09+bib/r6gbv505Mmrl3lPct1YfumVxoE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -6161,6 +6161,7 @@ function stepHeroChar(dir){
 function renderCharDetailPage(charId){
   const c = getChar(charId);
   if(!c) return `<div class="kz-empty">Personagem não encontrado.</div>`;
+  if(visualNovo()) return renderCharDetailNovo(c);
   const fav = isFav(c.id);
   const cur = DETAIL_TABS.find(t=>t[0]===state.charDetailTab) || DETAIL_TABS[0];
   const body = cur[0] === 'habilidades' ? renderRoleCard(c) + renderDetailAbilities(c)
@@ -6209,6 +6210,159 @@ function renderCharDetailPage(charId){
   </section>`;
 }
 
+/* ---------- Ficha no visual novo (igual ao canvas "Ficha do guerreiro") ----------
+   Topo: arte da pasta Fichas com a carta do jogo ao lado, título em pincel, barra com raridade/tipo/afinidade/raça/
+   gênero, tags, papéis e ações. Habilidades: um bloco por grupo com botões de nível (mostra um nível por vez) e, ao
+   lado, os painéis de Papel em batalha e Sinergias. Afinidade e Vínculos usam as mesmas seções da ficha atual.
+   Mantém os ids e classes que attachCharDetailHandlers usa (charDetailBackBtn, kz-step-btn, data-cdptab, data-fav,
+   buildWithCharBtn, edit-char, data-open-char, data-guide). */
+const NVF_SEAL = { 'Habilidade':'技', 'Suprema':'極', 'Ataque Combinado':'連', 'Passiva Única':'魂', 'Passiva (Padrão)':'能', 'Super Despertar (LR)':'覚', 'Passivas do Supremo':'王' };
+const NVF_EFF_TERM = { '[Derrubada]':'derrubada', '[Empurrão]':'empurrao', '[Elevação Alta]':'elevacao_alta', '[Elevação Baixa]':'elevacao_baixa' };
+function nvfTermsHtml(txt){
+  return String(txt || '').split(/(\[[^\]]+\])/).filter(Boolean).map(t=>{
+    if(t.charAt(0) !== '[') return escapeHtml(t);
+    const k = NVF_EFF_TERM[t];
+    return `<span class="kz-nvf-term${k ? ' e-' + k : ''}">${escapeHtml(t)}</span>`;
+  }).join('');
+}
+function nvfSealHtml(glyph, rgb){
+  return `<span class="kz-nvf-seal" aria-hidden="true"${rgb ? ` style="--c:${rgb[0]};--t:${rgb[1]}"` : ''}>${glyph}</span>`;
+}
+function nvfAbilityBlock(c, g){
+  const key = c.id + '|' + g.title, tiers = g.tiers;
+  const comDado = tiers.map((t, i)=> t.data ? i : -1).filter(i=> i >= 0);
+  let sel = state.nvAbSel && state.nvAbSel[key];
+  if(sel == null || !tiers[sel]) sel = comDado.length ? comDado[comDado.length - 1] : 0;   // padrão: o nível mais alto
+  const t = tiers[sel], d = t.data;
+  const tipo = tipoText(d && d.tipo ? d.tipo : t.fallbackTipo);
+  const efeitos = abilityGroupEffects(c, g.title).map(([lbl, effs])=>`<span class="kz-ab-effects"><span>${lbl}</span>${effs.map(effPillHtml).join('')}</span>`).join('');
+  const niveis = tiers.length > 1 ? `<div class="kz-nvf-lvs">${tiers.map((x, i)=>`<button type="button" class="kz-nvf-lv${i === sel ? ' on' : ''}${x.data ? '' : ' vazio'}" data-ab-key="${escapeAttr(key)}" data-ab-i="${i}" aria-pressed="${i === sel}"><span class="st ${starPhase(x.reqLevel)}" aria-hidden="true">★</span>${escapeHtml(reqLabelText(x.reqLevel))}</button>`).join('')}</div>` : '';
+  return `
+      <section class="kz-nvf-mv" data-ab-block="${escapeAttr(key)}">
+        <div class="kz-nvf-mv-side">${nvfSealHtml(NVF_SEAL[g.title] || '技')}<h2>${escapeHtml(g.title)}</h2>${efeitos}</div>
+        <div class="kz-nvf-mv-main">
+          ${niveis}
+          <div class="kz-nvf-mv-meta">${textStarsHtml(t.reqLevel)}<span class="lb">${escapeHtml(tipo)} · ${escapeHtml(reqLabelText(t.reqLevel))}</span>${d && d.dano ? `<span class="kz-nvf-dmg">Dano ${escapeHtml(d.dano)}</span>` : ''}</div>
+          <h3 class="kz-nvf-sn">${d ? (escapeHtml(d.nome) || '—') : 'Ainda não capturado'}</h3>
+          <p class="kz-nvf-ds">${d ? nvfTermsHtml(d.desc) : 'Este dado ainda não foi extraído do jogo.'}</p>
+        </div>
+      </section>`;
+}
+function nvfAbilitiesHtml(c){
+  const p = ABILITY_PROGRESSION[c.name];
+  const unlocks = p ? getAbilityUnlocks(c.name, 10) : null;
+  if(!unlocks) return `<div class="kz-empty-ball"><img src="${ballSrc(1)}" alt=""><div>Dados de habilidade ainda não disponíveis para este personagem.</div></div>`;
+  const sup = p.passivasSupremo || [];
+  const supHtml = sup.length ? `
+      <section class="kz-nvf-mv">
+        <div class="kz-nvf-mv-side">${nvfSealHtml(NVF_SEAL['Passivas do Supremo'])}<h2>Passivas do Supremo</h2></div>
+        <div class="kz-nvf-mv-main">${sup.map(ps=>`<div class="kz-nvf-sup"><h3 class="kz-nvf-sn sm">${escapeHtml(ps.nome) || '—'}</h3><p class="kz-nvf-ds">${nvfTermsHtml(ps.desc)}</p></div>`).join('')}</div>
+      </section>` : '';
+  return unlocks.groups.map(g=> nvfAbilityBlock(c, g)).join('') + supHtml;
+}
+function nvfRolePanel(c){
+  const a = analyzeRoles(c);
+  const linhas = a.roles.map((r, i)=>{
+    const info = ROLE_INFO[r], ev = a.why[r].slice(0, 2);
+    return `
+        <div class="kz-nvf-role" style="--c:${info.rgb[0]};--t:${info.rgb[1]}">
+          <div class="hd">${nvfSealHtml(info.glyph, info.rgb)}<b>${escapeHtml(info.label)}</b><span class="rk${i === 0 ? ' main' : ''}">${i === 0 ? 'Principal' : 'Secundário'}</span></div>
+          <p>${escapeHtml(info.about)}</p>
+          ${ev.length ? `<ul>${ev.map(e=>`<li>${escapeHtml(roleEvidence(e))}</li>`).join('')}</ul>` : `<p class="mut">Definido pelo tipo do guerreiro (${escapeHtml(c.type || '—')}).</p>`}
+        </div>`;
+  }).join('<div class="sep" aria-hidden="true"></div>');
+  return `<div class="kz-nvf-pn"><h2>Papel em batalha</h2>${linhas}</div>`;
+}
+function nvfSynergyPanel(c){
+  const s = synergyInfo(c);
+  const pals = s.recebe.map(n=>{ const o = state.characters.find(x=>x.name === n); return o ? `<button type="button" class="kz-nvf-pal" data-nvf-open="${escapeAttr(o.id)}">${escapeHtml(n)}</button>` : ''; }).join('');
+  return `
+      <div class="kz-nvf-pn">
+        <h2>Sinergias</h2>
+        ${s.proprias.length ? `<ul class="kz-nvf-syn">${s.proprias.map(t=>`<li>${t}</li>`).join('')}</ul>` : ''}
+        ${pals ? `<p class="kz-nvf-pn-sub">Fortalecido por</p><div class="kz-nvf-pals">${pals}</div>` : ''}
+        ${!s.proprias.length && !pals ? '<p class="mut">Nenhuma sinergia conhecida com outros guerreiros.</p>' : ''}
+        <button type="button" class="kz-btn" id="nvfTestBtn" data-id="${c.id}"><span class="kj" aria-hidden="true">連</span>Testar no montador</button>
+      </div>`;
+}
+function renderCharDetailNovo(c){
+  const fav = isFav(c.id);
+  const cur = DETAIL_TABS.find(t=>t[0]===state.charDetailTab) || DETAIL_TABS[0];
+  const cor = v=>{ const r = PILL_RGB[v]; return r ? `<b style="color:${r[1]};text-shadow:0 0 12px rgba(${r[0]},.7)">${escapeHtml(v)}</b>` : `<b>${escapeHtml(v || '—')}</b>`; };
+  const rar = rarityLabel(c.rarity), rs = RARITY_PILL[rar] || RARITY_PILL.R;
+  const hud = [
+    ['Raridade', `<b class="rar" style="background:${rs.bg};color:${rs.color}">${escapeHtml(rar)}${isLimitedChar(c) ? ' ★' : ''}</b>`],
+    c.type && ['Tipo', cor(c.type)],
+    c.affinity && ['Afinidade', nvDotHtml(c.affinity) + cor(c.affinity)],
+    c.element && ['Raça', cor(c.element)],
+    c.gender && ['Gênero', cor(c.gender)],
+  ].filter(Boolean).map(([k, v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+  const tags = (c.tags || []).map(t=>{ const r = TAG_RGB[t] || ['201,162,75','#e0c070']; return `<span class="kz-nvf-tg" style="--c:${r[0]};--t:${r[1]}">#${escapeHtml(t)}</span>`; }).join('');
+  const papeis = rolesOf(c).slice(0, 3).map((r, i)=>{ const info = ROLE_INFO[r]; return `<div class="kz-nvf-rolebig" style="--t:${info.rgb[1]}">${nvfSealHtml(info.glyph, info.rgb)}<span><b>${escapeHtml(info.label)}</b><small>${i === 0 ? 'Papel principal' : 'Papel secundário'}</small></span></div>`; }).join('');
+  const nome = c.name || '(sem nome)', fs = nome.length > 20 ? 72 : nome.length > 13 ? 92 : 116;   // nome longo: título menor
+  const corpo = cur[0] === 'habilidades'
+    ? `<div class="kz-nvf-body"><div class="kz-nvf-abs">${nvfAbilitiesHtml(c)}</div><aside class="kz-nvf-side">${nvfRolePanel(c)}${nvfSynergyPanel(c)}</aside></div>`
+    : `<div class="kz-tabpanel"><div class="kz-panel-head"><span class="kz-panel-glyph">${cur[1]}</span><h2 class="kz-panel-title">${cur[2]}</h2></div>${cur[0] === 'comida' ? renderCharFoodSection(c) : renderCharBondsSection(c)}</div>`;
+  return `
+  <section class="kz-page kz-nvf">
+    <div class="kz-nvf-hero">
+      ${nvBgHtml('戦')}
+      <svg class="kz-nv-bolts" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="none">
+        <polyline class="kz-nv-bolt b1" points="120,40 150,140 118,156 168,270 132,292 190,420"/>
+        <polyline class="kz-nv-bolt b2" points="560,70 532,160 560,176 516,290 548,306 500,410"/>
+      </svg>
+      <div class="kz-nvf-top">
+        <button class="kz-back-btn" id="charDetailBackBtn"><span class="arr">←</span><span>Personagens</span></button>
+        <div class="kz-nvf-steps">${charStepButtonsHtml(c.id)}</div>
+      </div>
+      <div class="kz-nvf-grid">
+        <div class="kz-nvf-art">
+          <div class="kz-nv-dchar" aria-hidden="true"><img class="a1" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="a2" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="main" src="${renderSrc(c)}" alt="" data-onerr="card" data-card="${portraitSrc(c)}"></div>
+          <img class="kz-nvf-mini" src="${portraitSrc(c)}" alt="Carta de ${escapeAttr(nome)}" data-onerr="hide">
+        </div>
+        <div class="kz-nvf-info">
+          <span class="kz-nv-tag"><span class="kj">戦</span>Ficha do guerreiro</span>
+          <div class="kz-nvf-titlewrap">
+            <h1 class="kz-nvf-h1" style="--fs:${fs}px">${nvTtl(nome)}</h1>
+            <span class="kz-nv-sfx" aria-hidden="true">ゴゴゴ</span>
+          </div>
+          <dl class="kz-nvf-hud">${hud}</dl>
+          ${tags ? `<div class="kz-nvf-tags">${tags}</div>` : ''}
+          ${papeis ? `<div class="kz-nvf-roles">${papeis}</div>` : ''}
+          <div class="kz-nvf-actions">
+            <button class="kz-build-btn" id="buildWithCharBtn" data-id="${c.id}"><span class="glyph">連</span><span>Montar combo com ele</span></button>
+            <button class="kz-fav-toggle ${fav ? 'on' : ''}" data-fav="${c.id}"><span class="star">★</span><span class="lbl">${fav ? 'Favoritado' : 'Favoritar'}</span></button>
+            ${isHeroAdmin() ? `<button class="kz-edit-btn edit-char" data-id="${c.id}" title="Editar os dados usados no Montador de Combos">Editar dados de combo</button>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kz-tabs kz-nvf-tabs" role="tablist">
+      ${DETAIL_TABS.map(([k,g,l])=>`<button class="kz-tab ${cur[0]===k?'active':''}" data-cdptab="${k}" role="tab" aria-selected="${cur[0]===k}"><span class="glyph">${g}</span><span>${l}</span></button>`).join('')}
+    </div>
+    ${corpo}
+  </section>`;
+}
+// Ficha nova: botões de nível de cada habilidade (troca só o bloco), atalhos das sinergias e "Testar no montador".
+function attachNvfHandlers(view){
+  const abs = view.querySelector('.kz-nvf-abs');
+  if(abs) abs.addEventListener('click', e=>{
+    const b = e.target.closest('[data-ab-key]');
+    if(!b) return;
+    const key = b.dataset.abKey, i = parseInt(b.dataset.abI, 10);
+    const c = getChar(state.viewingCharId), u = c && getAbilityUnlocks(c.name, 10);
+    const g = u && u.groups.find(x=> c.id + '|' + x.title === key);
+    const blk = [...abs.querySelectorAll('[data-ab-block]')].find(x=> x.dataset.abBlock === key);
+    if(!g || !blk) return;
+    state.nvAbSel = state.nvAbSel || {};
+    state.nvAbSel[key] = i;
+    blk.outerHTML = nvfAbilityBlock(c, g);
+  });
+  view.querySelectorAll('[data-nvf-open]').forEach(b=> b.addEventListener('click', ()=> openCharDetail(b.dataset.nvfOpen)));
+  const test = document.getElementById('nvfTestBtn');
+  if(test) test.addEventListener('click', ()=> buildWithChar(test.dataset.id));
+}
+
 // Ícone real de habilidade só quando SHOW_ABILITY_ICONS estiver ligado; senão fica o "?" reservando o espaço.
 function abilityIconBox(data){
   const img = (SHOW_ABILITY_ICONS && data && data.icone) ? `<img src="${escapeAttr(encodeURI(data.icone))}" alt="" data-onerr="remove">` : '?';
@@ -6234,6 +6388,17 @@ function renderDetailAbilityRow(tier){
   </div>`;
 }
 
+// Efeitos de combo do guerreiro mostrados ao lado de cada grupo de habilidade: [[rótulo, efeitos], ...].
+function abilityGroupEffects(c, title){
+  const parts = [];
+  if(title === 'Habilidade' && c.skill.effects.length) parts.push(['Causa', c.skill.effects]);
+  if(title === 'Suprema' && c.supreme.effects.length) parts.push(['Causa', c.supreme.effects]);
+  if(title === 'Ataque Combinado'){
+    if((c.combo.triggers||[]).length) parts.push(['Requisito', c.combo.triggers]);
+    if((c.combo.effects||[]).length) parts.push(['Causa', c.combo.effects]);
+  }
+  return parts;
+}
 // Ficha completa: progressão inteira de cada habilidade (todos os níveis de up), agrupada
 // por tipo, com os efeitos de combo do personagem ao lado do título do grupo.
 function renderDetailAbilities(c){
@@ -6242,16 +6407,7 @@ function renderDetailAbilities(c){
   if(!unlocks){
     return `<div class="kz-empty-ball"><img src="${ballSrc(1)}" alt=""><div>Dados de habilidade ainda não disponíveis para este personagem.</div></div>`;
   }
-  const groupEffects = title => {
-    const parts = [];
-    if(title === 'Habilidade' && c.skill.effects.length) parts.push(['Causa', c.skill.effects]);
-    if(title === 'Suprema' && c.supreme.effects.length) parts.push(['Causa', c.supreme.effects]);
-    if(title === 'Ataque Combinado'){
-      if((c.combo.triggers||[]).length) parts.push(['Requisito', c.combo.triggers]);
-      if((c.combo.effects||[]).length) parts.push(['Causa', c.combo.effects]);
-    }
-    return parts.map(([lbl, effs])=>`<span class="kz-ab-effects"><span>${lbl}</span>${effs.map(effPillHtml).join('')}</span>`).join('');
-  };
+  const groupEffects = title => abilityGroupEffects(c, title).map(([lbl, effs])=>`<span class="kz-ab-effects"><span>${lbl}</span>${effs.map(effPillHtml).join('')}</span>`).join('');
   const groups = unlocks.groups.map(g=>`
     <div class="kz-ab-group">
       <div class="kz-ab-group-head"><span class="kz-ab-group-title">${escapeHtml(g.title)}</span>${groupEffects(g.title)}</div>
@@ -6397,6 +6553,7 @@ function attachCharDetailHandlers(){
   view.querySelectorAll('.kz-fav-toggle[data-fav]').forEach(b=> b.addEventListener('click', ()=> toggleFav(b.dataset.fav)));
   const buildBtn = document.getElementById('buildWithCharBtn');
   if(buildBtn) buildBtn.addEventListener('click', ()=> buildWithChar(buildBtn.dataset.id));
+  if(visualNovo()) attachNvfHandlers(view);
 }
 
 /* ======================= COLEÇÃO ======================= */
@@ -7299,7 +7456,7 @@ function synergyItemHtml(a){
   return `<span class="g">✦</span><b>${escapeHtml(a.nome)}</b>: ${escapeHtml(a.txt)}${quem}`;
 }
 // Na ficha: o que o guerreiro faz pela equipe e quem fortalece ele.
-function synergyCardHtml(c){
+function synergyInfo(c){
   const proprias = (SYNERGY_RULES[c.name] || []).map(r=>{
     if(r.grupo){ const g = SYNERGY_GROUPS[r.grupo]; const n = state.characters.filter(o=>o.id !== c.id && g.test(o)).length; return `${escapeHtml(r.txt)} <span class="rx">(${n} guerreiros ${escapeHtml(g.label)})</span>`; }
     if(r.prefixo) return escapeHtml(r.txt);
@@ -7310,7 +7467,10 @@ function synergyCardHtml(c){
     if(o.id === c.id) return;
     (SYNERGY_RULES[o.name] || []).forEach(r=>{ if(synergyRuleTargets(r, o, [o, c]).includes(c)) recebe.push(o.name); });
   });
-  const unicos = [...new Set(recebe)];
+  return { proprias, recebe:[...new Set(recebe)] };
+}
+function synergyCardHtml(c){
+  const { proprias, recebe:unicos } = synergyInfo(c);
   if(!proprias.length && !unicos.length) return '';
   return `<div class="kz-role-syn">
     <span class="kz-label">Sinergias</span>
