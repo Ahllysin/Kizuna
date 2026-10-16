@@ -956,3 +956,47 @@ html.vis-novo .kz-nvco-tr .row .kz-com-thumb{width:40px;height:53px;border-radiu
   .kz-nvco-act{flex-wrap:wrap;}
 }
 @media (prefers-reduced-motion:reduce){ .kz-nvco-cta,.kz-nvco-like.on svg{animation:none;} }
+
+/* ---------- PERFIL (canvas) ---------- */
+.kz-nvpf-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start;margin-top:24px;}
+.kz-nvpf-form{position:relative;display:flex;flex-direction:column;gap:22px;padding:30px;background:linear-gradient(160deg,#1A0D0A,#0E0707 70%);box-shadow:inset 0 0 0 1.5px #3A1E16;}
+.kz-nvpf-form::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#E8261B,#FF6A13,#FFC21A);}
+.kz-nvpf-row{display:grid;gap:18px;}
+.kz-nvpf-row.two{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);}
+.kz-nvpf-row.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+.kz-nvpf-lb,html.vis-novo .kz-nvpf-form .field-label{display:block;margin-bottom:8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#E9D9C8;}
+html.vis-novo .kz-nvpf-form :is(input[type=text],select,textarea){width:100%;min-height:50px;padding:0 16px;border:0;border-radius:0;background:#0A0606;box-shadow:inset 0 0 0 1.5px #4A2418;color:#FFF4E6;font-family:'Barlow',sans-serif;font-size:16px;outline:none;}
+html.vis-novo .kz-nvpf-form textarea{padding:12px 16px;line-height:1.5;resize:vertical;}
+html.vis-novo .kz-nvpf-form :is(input[type=text],select,textarea):focus{box-shadow:inset 0 0 0 2px #FF6A13,0 0 20px rgba(255,106,19,.45);}
+.kz-nvpf-checks{display:flex;flex-direction:column;gap:14px;padding:18px 0;box-shadow:inset 0 1.5px 0 #3A1E16,inset 0 -1.5px 0 #3A1E16;}
+html.vis-novo .kz-nvpf-checks .kz-honor-check{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.45;color:#E2D2C2;cursor:pointer;}
+html.vis-novo .kz-nvpf-checks input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:#FF6A13;}
+.kz-nvpf-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+html.vis-novo .kz-nvpf-foot .kz-btn-primary{min-height:52px;padding:0 26px;font-size:19px;font-weight:900;}
+html.vis-novo .kz-nvpf-foot .kz-privacy-zone{display:flex;align-items:center;gap:22px;margin:0;padding:0;border:0;}
+html.vis-novo .kz-nvpf-foot .kz-privacy-zone a{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:15px;text-transform:uppercase;letter-spacing:.04em;color:#E9D9C8;text-decoration:none;}
+html.vis-novo .kz-nvpf-foot .kz-privacy-zone a:hover{color:#FFC21A;}
+html.vis-novo .kz-nvpf-foot .kz-com-link.danger{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:#FF7A66;text-decoration:underline;text-underline-offset:4px;}
+.kz-nvpf-side{display:flex;flex-direction:column;gap:14px;}
+html.vis-novo .kz-donor-list.kz-nvpf-prev{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:14px;padding:40px 28px 32px;text-align:center;border:0;border-radius:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 30%,#FF6A13 0%,#E8261B 25%,#5A0E06 55%,#120808 80%);box-shadow:inset 0 0 0 2px #FFC21A,0 0 34px rgba(255,106,19,.45);}
+.kz-nvpf-prev .kz-nv-rays{position:absolute;left:50%;top:26%;width:1400px;height:1400px;margin:-700px 0 0 -700px;}
+.kz-nvpf-prev > :not(.kz-nv-rays){position:relative;}
+html.vis-novo .kz-donor-card.kz-nvpf-card{display:flex;flex-direction:column;align-items:center;gap:20px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;}
+.kz-nvpf-av{position:relative;display:block;width:132px;height:132px;font-size:54px;}
+.kz-nvpf-av::before{content:'';position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,180,.95),rgba(255,160,40,.7) 40%,transparent 70%);filter:blur(8px);animation:kzNvAuraP 1.2s ease-in-out infinite;}
+.kz-nvpf-av > *{position:relative;display:grid!important;place-items:center;width:100%;height:100%;object-fit:cover;transform:rotate(-4deg);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:54px;color:#FFC21A;
+  background:radial-gradient(circle at 50% 32%,#7A2410 0%,#3A0F08 45%,#140C0A 80%);box-shadow:0 0 0 3px #0A0606,0 0 0 6px #FFC21A,10px 10px 0 #0A0606;border-radius:0;}
+@keyframes kzNvAuraP{0%,100%{opacity:.8;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+.kz-nvpf-card .kz-nv-ttl{font-size:48px;white-space:normal;}
+.kz-nvpf-srv{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:17px;text-transform:uppercase;color:#FFE2B8;}
+.kz-nvpf-srv.sm{font-weight:700;font-size:15px;text-transform:none;}
+.kz-nvpf-quote{margin:8px 0 0;max-width:330px;font-size:16px;line-height:1.55;font-style:italic;color:#FFF4E6;}
+.kz-nvpf-note{margin:0;font-size:14px;line-height:1.55;color:#C9B7A6;}
+@media (max-width:1100px){ .kz-nvpf-grid{grid-template-columns:minmax(0,1fr);} }
+@media (max-width:700px){
+  .kz-nvpf-form{padding:22px 16px;}
+  .kz-nvpf-row.two,.kz-nvpf-row.three{grid-template-columns:minmax(0,1fr);}
+  .kz-nvpf-card .kz-nv-ttl{font-size:38px;}
+}
+@media (prefers-reduced-motion:reduce){ .kz-nvpf-av::before{animation:none;} }

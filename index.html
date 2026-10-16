@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-0s4F8hDbYJXFVhj+qKGww9WplkChInVdDaks6CQqfUQ=' 'sha256-lR3Hmmq9bCf//2x/LDynSu9tYEgyAPdFwdvQukASECk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-+mFaH6ir/177Kx95AzpTM6Pq6wpwd2QoE7H6AE8rtqk=' 'sha256-cTTes8NVBQU1KgDIJTW8hDkL+TEfERwff5maJDh4wf8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -9816,6 +9816,8 @@ function renderPerfilTab(){
     return `<section class="kz-page"><h1 class="kz-title">Perfil</h1><div class="kz-subtitle">O login com Discord ainda não foi configurado neste site.</div></section>`;
   }
   if(!state.discordUser){
+    if(visualNovo()) return `<section class="kz-page kz-nvp">${nvPageHeadHtml({ key:'perfil', kanji:'印', tag:'Sua conta', title:'Perfil', kanjiStyle:'right:8%;top:-60px;font-size:380px',
+      sub:'Entre com Discord (topo da página) pra montar seu perfil: apelido, servidor, bio e redes.' })}</section>`;
     return `<section class="kz-page">
       <h1 class="kz-title">Perfil</h1>
       <div class="kz-subtitle">Entre com Discord (topo da página) pra montar seu perfil: apelido, servidor, bio e redes.</div>
@@ -9826,6 +9828,60 @@ function renderPerfilTab(){
   const bioLen = (p.bio||'').length;
   const myDonor = myDonorEntry();
   const myLook = myDonor ? patenteLook(myDonor.amount, p) : { p: PATENTES[0], label: PATENTES[0].label, style: '' };
+  if(visualNovo()){   // formato do canvas: formulário à esquerda, prévia em fogo à direita (mesmos ids dos campos)
+    const nome = p.nickname || state.discordUser.username;
+    const av = avatarChar ? portraitInner(avatarChar)
+      : state.discordUser.avatarUrl ? `<img src="${escapeAttr(state.discordUser.avatarUrl)}" alt="" data-onerr="hide">` : donorAvatarInner(nome);
+    const redes = p.showSocials && (p.instagram||p.twitch||p.youtube) ? [p.instagram,p.twitch,p.youtube].filter(Boolean).map(escapeHtml).join(' · ') : '';
+    return `
+  <section class="kz-page kz-nvp kz-nvpf">
+    ${nvPageHeadHtml({ key:'perfil', kanji:'印', tag:'Sua conta', title:'Perfil', kanjiStyle:'right:8%;top:-60px;font-size:380px',
+      sub:'Monte como você aparece na Aliança Z: apelido, servidor, bio e redes. Patente e Honras vêm do seu apoio — ninguém digita isso aqui.' })}
+    <div class="kz-nvpf-grid">
+      <div class="kz-nvpf-form">
+        <div class="kz-nvpf-row two">
+          <div><label class="kz-nvpf-lb" for="perfilNickInput">Apelido</label><input type="text" class="kz-input" id="perfilNickInput" value="${escapeAttr(p.nickname)}" placeholder="Como quer aparecer" maxlength="40"></div>
+          <div><label class="kz-nvpf-lb" for="perfilServidorInput">Servidor</label><input type="text" class="kz-input" id="perfilServidorInput" value="${escapeAttr(p.servidor)}" placeholder="Ex: S12" maxlength="20"></div>
+        </div>
+        <div><label class="kz-nvpf-lb" for="perfilBioInput">Apresentação (<span id="perfilBioCount">${bioLen}</span>/${PROFILE_BIO_MAX})</label><textarea id="perfilBioInput" maxlength="${PROFILE_BIO_MAX}" rows="3" placeholder="Uma frase sobre você">${escapeHtml(p.bio)}</textarea></div>
+        <div class="kz-nvpf-row three">
+          <div><label class="kz-nvpf-lb" for="perfilInstaInput">Instagram</label><input type="text" class="kz-input" id="perfilInstaInput" value="${escapeAttr(p.instagram)}" placeholder="@usuario" maxlength="60"></div>
+          <div><label class="kz-nvpf-lb" for="perfilTwitchInput">Twitch</label><input type="text" class="kz-input" id="perfilTwitchInput" value="${escapeAttr(p.twitch)}" placeholder="twitch.tv/…" maxlength="80"></div>
+          <div><label class="kz-nvpf-lb" for="perfilYoutubeInput">YouTube</label><input type="text" class="kz-input" id="perfilYoutubeInput" value="${escapeAttr(p.youtube)}" placeholder="Link do canal" maxlength="120"></div>
+        </div>
+        ${patenteChoiceHtml(p)}
+        ${PROFILE_CHAR_AVATAR ? `<div><label class="kz-nvpf-lb" for="perfilAvatarSelect">Avatar</label><select id="perfilAvatarSelect"><option value="">Foto do Discord</option>${state.characters.map(c=>`<option value="${c.id}" ${c.id===p.avatarCharId?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}</select></div>` : ''}
+        <div class="kz-nvpf-checks">
+          <label class="kz-honor-check"><input type="checkbox" id="perfilShowSocialsInput" ${p.showSocials?'checked':''}> Mostrar minhas redes no perfil público</label>
+          <label class="kz-honor-check"><input type="checkbox" id="perfilPublicInput" ${p.public?'checked':''}> Aparecer na Aliança Z com esses dados (se eu já apoiar)</label>
+        </div>
+        <div class="kz-nvpf-foot">
+          <button class="kz-btn kz-btn-primary" id="savePerfilBtn">Salvar perfil</button>
+          <div class="kz-privacy-zone">
+            <a href="privacidade.html" target="_blank" rel="noopener noreferrer">Privacidade e dados</a>
+            <button type="button" class="kz-com-link danger" id="deleteMyDataBtn" title="Remove do servidor seu perfil, seus posts e curtidas e os dados sincronizados">Apagar meus dados</button>
+          </div>
+        </div>
+      </div>
+      <aside class="kz-nvpf-side">
+        <span class="kz-nv-lb">Prévia na Aliança Z</span>
+        <div class="kz-donor-list kz-nvpf-prev">
+          <div class="kz-nv-rays" aria-hidden="true"></div>
+          <div class="kz-donor-card kz-nvpf-card patente-${myLook.p.key}" style="pointer-events:none;${myLook.style}">
+            <span class="kz-nvpf-av">${av}</span>
+            ${nvTtl(nome)}
+          </div>
+          ${p.servidor ? `<span class="kz-nvpf-srv">Servidor ${escapeHtml(p.servidor)}</span>` : ''}
+          ${myDonor ? patenteBadgeHtml(myDonor.amount, '', p) : ''}
+          ${p.bio ? `<p class="kz-nvpf-quote">“${escapeHtml(p.bio)}”</p>` : ''}
+          ${redes ? `<span class="kz-nvpf-srv sm">${redes}</span>` : ''}
+        </div>
+        <p class="kz-nvpf-note">A patente aparece aqui só depois do primeiro apoio. O valor nunca é mostrado.</p>
+      </aside>
+    </div>
+    ${isSiteOwner() ? renderCrashLogPanel() : ''}
+  </section>`;
+  }
   return `
   <section class="kz-page">
     <div>
