@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-+mFaH6ir/177Kx95AzpTM6Pq6wpwd2QoE7H6AE8rtqk=' 'sha256-cTTes8NVBQU1KgDIJTW8hDkL+TEfERwff5maJDh4wf8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-VCee0SiucUFPQriD2oM2qCAIfomVveRZWW638qQlvpk=' 'sha256-k/7Ops0mH97XGEm6Nf8JpgjMfIk/tF0RRGhibfQAoJo='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -10112,7 +10112,112 @@ function isDonorAdmin(){
   return !!(state.discordUser && state.discordUser.id === window.ADMIN_DISCORD_ID);
 }
 
+// Visual novo: cor de cada patente (aura, brilho da figura, nome) e o guerreiro que aparece no cartão (assets/patentes/).
+const NV_PATENTE_LOOK = {
+  guerreiro_z:['#969BA5','rgba(199,203,211,.8)','#E6E8EC'], saiyajin:['#D97B2A','rgba(240,168,104,.8)','#F0A868'],
+  ssj:['#FFD23F','rgba(255,210,63,.9)','#FFE9A8'], ssj_god:['#E0401F','rgba(224,64,31,.9)','#FF9A8A'],
+  ssj_blue:['#2F7DEB','rgba(47,125,235,.9)','#8EC0FF'], ultra:['#8CB4FF','rgba(215,230,255,.9)','#D7E6FF'],
+  deus_destruicao:['#8B5FBF','rgba(139,95,191,.9)','#C3AAF0'], anjo:['#FFFFFF','rgba(232,241,255,.9)','#FFFFFF'],
+};
+// Pódio da Aliança Z: 2º, 1º e 3º lugar (lugar vazio = "Livre").
+function nvPodiumHtml(list){
+  const lugar = (pos, alto)=>{
+    const d = list[pos - 1];
+    let topo = `<span class="kz-nvd-free${pos === 1 ? ' gold' : ''}">Livre</span>`;
+    if(d){
+      const prof = linkedProfileFor(d), nome = (prof && prof.nickname) || d.name;
+      topo = `<button type="button" class="kz-nvd-who" data-open-donor="${d.id}" title="Ver o perfil de ${escapeAttr(nome)}"><span class="av">${escapeHtml(initials(nome))}</span><span class="nm">${escapeHtml(nome)}</span></button>`;
+    }
+    return `<div class="kz-nvd-place p${pos}">${pos === 1 ? `<img class="kz-nvd-ball" src="${ballSrc(4)}" alt="" aria-hidden="true">` : ''}${topo}<div class="kz-nvd-step" style="height:${alto}px">${nvTtl(String(pos))}</div></div>`;
+  };
+  return `<div class="kz-nvd-podium">${lugar(2, 130)}${lugar(1, 186)}${lugar(3, 100)}</div>`;
+}
+function renderDoarTabNovo(){
+  const list = sortedDonors();
+  const admin = isDonorAdmin();
+  const resto = list.slice(3);
+  return `
+  <section class="kz-page kz-nvp kz-nvd">
+    ${nvPageHeadHtml({ key:'doar', kanji:'援', tag:'Apoie o site', title:'Doar', kanjiStyle:'right:8%;top:-60px;font-size:380px',
+      sub:'Ajude a manter o Zenkyo no ar. Personagens, Coleção, Montador e guias são de graça e continuam assim — quem apoia ganha lugar na Aliança Z. A doação vai só para o site: não compra itens nem vantagens no jogo.' })}
+    <div class="kz-nvd-top">
+      <div class="kz-nvd-pn kz-nvd-pix">
+        <span class="kz-nv-lb">Pix</span>
+        <div class="kz-nvd-qr"><div class="kz-qr-crop"><iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div></div>
+        <a class="kz-donate-cta" href="${LIVEPIX_DONATE_URL}" target="_blank" rel="noopener noreferrer"><span>気</span><span>Doar agora</span></a>
+        <p class="kz-nvd-note"><b>Bônus de apoiador:</b> quem apoia com R$ 10 ou mais pode manter até 5 times publicados na Comunidade ao mesmo tempo (o padrão são 2).</p>
+        <p class="kz-nvd-note">Escaneie o QR Code com o app do seu banco (Pix) ou clique em “Doar agora” pra pagar direto pelo link. O valor exato nunca aparece publicamente — só a Patente.</p>
+        ${isSupabaseConfigured() && !state.discordUser ? `<p class="kz-nvd-note mut">Entre com Discord (topo da página) pra vincular seu apoio a um perfil na Aliança Z.</p>` : ''}
+      </div>
+      <div class="kz-nvd-pn kz-nvd-ally kz-donor-list">
+        <div class="kz-nv-rays" aria-hidden="true"></div>
+        <div class="kz-nvd-glow" aria-hidden="true"></div>
+        <div class="kz-nvd-allyhead"><h2>${nvTtl('Aliança Z')}</h2><span><b>${list.length}</b> ${list.length === 1 ? 'nome' : 'nomes'} no mural</span></div>
+        ${nvPodiumHtml(list)}
+        ${list.length ? '' : `<p class="kz-nvd-empty">A Aliança Z ainda está vazia — os três primeiros lugares do pódio estão livres. Seja o primeiro.</p>`}
+        ${resto.length ? `<div class="kz-donor-grid">${resto.map((d, i)=>renderDonorCard(d, i + 3)).join('')}</div>` : ''}
+        ${admin ? renderDonorAdminHtml() : ''}
+      </div>
+    </div>
+    <section class="kz-nvd-sec">
+      <div><h2 class="kz-nvd-h2">${nvTtl('Patentes')}</h2><p class="kz-nvd-sub">Sobe conforme o apoio acumulado — do Guerreiro Z ao Anjo.</p></div>
+      <div class="kz-nvd-pats">
+        ${PATENTES.map((p, i)=>{
+          const [aura, glow, cor] = NV_PATENTE_LOOK[p.key] || ['#FF6A13','rgba(255,106,19,.8)','#FFF4E6'];
+          const meter = Array.from({ length:8 }, (_, k)=> k <= i ? `<i style="background:${aura};box-shadow:0 0 8px ${aura}"></i>` : '<i></i>').join('');
+          return `
+        <article class="kz-nvd-pat${p.key === 'anjo' ? ' top' : ''}">
+          <span class="aura" aria-hidden="true" style="background:${aura}"></span>
+          <img class="ch" src="assets/patentes/${p.key}.webp" alt="" aria-hidden="true" style="--g:${glow}" data-onerr="hide">
+          <div class="meter" aria-hidden="true">${meter}</div>
+          <h3 style="color:${cor}">${escapeHtml(p.label)}</h3>
+          <p class="pd">${escapeHtml(p.desc)}</p>
+          ${p.note ? `<p class="px">${escapeHtml(p.note)}</p>` : ''}
+          <span class="pv" style="color:${cor}">${p.min > 0 ? `A partir de ${formatBRL(p.min)}` : 'Qualquer apoio'}</span>
+        </article>`;
+        }).join('')}
+      </div>
+    </section>
+    <section class="kz-nvd-sec">
+      <div><h2 class="kz-nvd-h2">${nvTtl('Trilha de Honra')}</h2><p class="kz-nvd-sub">Nem todo mundo pode doar — e tem contribuição que dinheiro nenhum compra.</p></div>
+      <div class="kz-nvd-hons">
+        ${Object.values(HONOR_BADGES).map(h=>`
+        <article class="kz-nvd-hon"><span class="kz-nvf-seal" aria-hidden="true">${h.glyph}</span><div><h3>${escapeHtml(h.label)}</h3><p class="pd">${escapeHtml(h.desc)}</p></div></article>`).join('')}
+      </div>
+    </section>
+  </section>`;
+}
+// Painel do dono do site na Aliança Z (adicionar apoiador e conceder Honras).
+function renderDonorAdminHtml(){
+  return `
+        <div class="kz-donor-admin">
+          <span class="kz-label" style="font-size:11px;">Painel do dono do site</span>
+          <div class="kz-donate-note">Depois de confirmar o Pix (a LivePix te avisa), adicione o nome e o valor aqui pra atualizar a Patente. Também dá pra conceder uma Honra sem valor nenhum, pra quem ajudou de outro jeito.</div>
+          <div class="kz-donor-admin-row">
+            <input type="text" id="donorNameInput" placeholder="Nome do apoiador">
+            <input type="number" id="donorAmountInput" placeholder="Valor (R$)" min="0" step="0.01">
+          </div>
+          <div class="kz-donor-admin-row">
+            <input type="text" id="donorQuoteInput" placeholder="Frase/citação (opcional)">
+          </div>
+          <div class="kz-donor-admin-row">
+            <input type="text" id="donorDiscordInput" placeholder="Discord (opcional)">
+            <input type="text" id="donorLinkInput" placeholder="Link de rede social (opcional)">
+          </div>
+          <div class="kz-donor-admin-row">
+            <input type="text" id="donorLinkedUidInput" placeholder="Vincular perfil (User UID, opcional)">
+          </div>
+          <div class="kz-donor-admin-row kz-honor-checks">
+            ${Object.entries(HONOR_BADGES).map(([key,h])=>`
+            <label class="kz-honor-check"><input type="checkbox" data-honor-key="${key}"><span class="glyph">${h.glyph}</span>${escapeHtml(h.label)}</label>`).join('')}
+          </div>
+          <div class="kz-donor-admin-row">
+            <button class="kz-btn kz-btn-primary kz-btn-sm" id="addDonorBtn">Adicionar à Aliança Z</button>
+          </div>
+        </div>`;
+}
 function renderDoarTab(){
+  if(visualNovo()) return renderDoarTabNovo();
   const list = sortedDonors();
   const admin = isDonorAdmin();
   return `
@@ -10139,32 +10244,7 @@ function renderDoarTab(){
         ${list.length ? `<div class="kz-donor-grid">${list.map((d,i)=>renderDonorCard(d,i)).join('')}</div>`
           : `<div class="kz-muted">A Aliança Z ainda está vazia — os três primeiros lugares do pódio estão livres. Seja o primeiro.</div>`}
 
-        ${admin ? `
-        <div class="kz-donor-admin">
-          <span class="kz-label" style="font-size:11px;">Painel do dono do site</span>
-          <div class="kz-donate-note">Depois de confirmar o Pix (a LivePix te avisa), adicione o nome e o valor aqui pra atualizar a Patente. Também dá pra conceder uma Honra sem valor nenhum, pra quem ajudou de outro jeito.</div>
-          <div class="kz-donor-admin-row">
-            <input type="text" id="donorNameInput" placeholder="Nome do apoiador">
-            <input type="number" id="donorAmountInput" placeholder="Valor (R$)" min="0" step="0.01">
-          </div>
-          <div class="kz-donor-admin-row">
-            <input type="text" id="donorQuoteInput" placeholder="Frase/citação (opcional)">
-          </div>
-          <div class="kz-donor-admin-row">
-            <input type="text" id="donorDiscordInput" placeholder="Discord (opcional)">
-            <input type="text" id="donorLinkInput" placeholder="Link de rede social (opcional)">
-          </div>
-          <div class="kz-donor-admin-row">
-            <input type="text" id="donorLinkedUidInput" placeholder="Vincular perfil (User UID, opcional)">
-          </div>
-          <div class="kz-donor-admin-row kz-honor-checks">
-            ${Object.entries(HONOR_BADGES).map(([key,h])=>`
-            <label class="kz-honor-check"><input type="checkbox" data-honor-key="${key}"><span class="glyph">${h.glyph}</span>${escapeHtml(h.label)}</label>`).join('')}
-          </div>
-          <div class="kz-donor-admin-row">
-            <button class="kz-btn kz-btn-primary kz-btn-sm" id="addDonorBtn">Adicionar à Aliança Z</button>
-          </div>
-        </div>` : ''}
+        ${admin ? renderDonorAdminHtml() : ''}
       </div>
     </div>
 
