@@ -702,3 +702,16 @@ html.vis-novo :is(.btn,.kz-back-btn,.kz-btn,.kz-build-btn,.kz-edit-btn,.kz-fav-t
   .kz-nvf-ds{font-size:15.5px;}
 }
 @media (prefers-reduced-motion:reduce){ .kz-nvf-art{animation:none;} }
+/* ícones das habilidades na ficha: redondos, com anel de fogo e o selo em kanji no canto */
+.kz-nvf-ico{position:relative;display:block;flex:none;width:84px;height:84px;}
+.kz-nvf-ico img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px #0A0606,0 0 0 5px #FFC21A,0 0 24px rgba(255,106,19,.75);}
+.kz-nvf-mv-side .kz-nvf-ico .kz-nvf-seal{position:absolute;left:-12px;top:-10px;width:32px;height:32px;font-size:18px;border-radius:4px;}
+.kz-nvf-mv-side .kz-nvf-ico:not(:has(img)) .kz-nvf-seal{position:static;width:64px;height:64px;font-size:36px;}
+.kz-nvf-sup{display:flex;gap:18px;align-items:flex-start;}
+.kz-nvf-sup>div{display:flex;flex-direction:column;gap:8px;min-width:0;}
+.kz-nvf-sup .ico{flex:none;width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 2px #0A0606,0 0 0 4px #FF6A13,0 0 14px rgba(255,106,19,.6);}
+@media (max-width:700px){
+  .kz-nvf-ico{width:60px;height:60px;}
+  .kz-nvf-mv-side .kz-nvf-ico .kz-nvf-seal{width:26px;height:26px;font-size:15px;left:-8px;top:-8px;}
+  .kz-nvf-sup .ico{width:44px;height:44px;}
+}

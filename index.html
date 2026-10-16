@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-GL+Y9wbRGIROLhq0eAyCjmg5cxmns6xnphEtgKn+m94=' 'sha256-0URB4/5qit09+bib/r6gbv505Mmrl3lPct1YfumVxoE='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Zemq/EwNqL+6Ju+jV0skQnG3pO4Zb3sY4cVmCez7lmI=' 'sha256-SJ4RCVSedvkng01hrb8se3Tf/s33b4b32l8F9jn0DyY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -6228,6 +6228,11 @@ function nvfTermsHtml(txt){
 function nvfSealHtml(glyph, rgb){
   return `<span class="kz-nvf-seal" aria-hidden="true"${rgb ? ` style="--c:${rgb[0]};--t:${rgb[1]}"` : ''}>${glyph}</span>`;
 }
+// Ícone da habilidade (quando existe) com o selo em kanji no canto; sem ícone, fica só o selo grande.
+function nvfIconHtml(data, glyph){
+  const src = SHOW_ABILITY_ICONS && data && data.icone;
+  return src ? `<span class="kz-nvf-ico"><img src="${escapeAttr(encodeURI(src))}" alt="" data-onerr="remove">${nvfSealHtml(glyph)}</span>` : nvfSealHtml(glyph);
+}
 function nvfAbilityBlock(c, g){
   const key = c.id + '|' + g.title, tiers = g.tiers;
   const comDado = tiers.map((t, i)=> t.data ? i : -1).filter(i=> i >= 0);
@@ -6239,7 +6244,7 @@ function nvfAbilityBlock(c, g){
   const niveis = tiers.length > 1 ? `<div class="kz-nvf-lvs">${tiers.map((x, i)=>`<button type="button" class="kz-nvf-lv${i === sel ? ' on' : ''}${x.data ? '' : ' vazio'}" data-ab-key="${escapeAttr(key)}" data-ab-i="${i}" aria-pressed="${i === sel}"><span class="st ${starPhase(x.reqLevel)}" aria-hidden="true">★</span>${escapeHtml(reqLabelText(x.reqLevel))}</button>`).join('')}</div>` : '';
   return `
       <section class="kz-nvf-mv" data-ab-block="${escapeAttr(key)}">
-        <div class="kz-nvf-mv-side">${nvfSealHtml(NVF_SEAL[g.title] || '技')}<h2>${escapeHtml(g.title)}</h2>${efeitos}</div>
+        <div class="kz-nvf-mv-side">${nvfIconHtml(d, NVF_SEAL[g.title] || '技')}<h2>${escapeHtml(g.title)}</h2>${efeitos}</div>
         <div class="kz-nvf-mv-main">
           ${niveis}
           <div class="kz-nvf-mv-meta">${textStarsHtml(t.reqLevel)}<span class="lb">${escapeHtml(tipo)} · ${escapeHtml(reqLabelText(t.reqLevel))}</span>${d && d.dano ? `<span class="kz-nvf-dmg">Dano ${escapeHtml(d.dano)}</span>` : ''}</div>
@@ -6256,7 +6261,7 @@ function nvfAbilitiesHtml(c){
   const supHtml = sup.length ? `
       <section class="kz-nvf-mv">
         <div class="kz-nvf-mv-side">${nvfSealHtml(NVF_SEAL['Passivas do Supremo'])}<h2>Passivas do Supremo</h2></div>
-        <div class="kz-nvf-mv-main">${sup.map(ps=>`<div class="kz-nvf-sup"><h3 class="kz-nvf-sn sm">${escapeHtml(ps.nome) || '—'}</h3><p class="kz-nvf-ds">${nvfTermsHtml(ps.desc)}</p></div>`).join('')}</div>
+        <div class="kz-nvf-mv-main">${sup.map(ps=>`<div class="kz-nvf-sup">${SHOW_ABILITY_ICONS && ps.icone ? `<img class="ico" src="${escapeAttr(encodeURI(ps.icone))}" alt="" data-onerr="remove">` : ''}<div><h3 class="kz-nvf-sn sm">${escapeHtml(ps.nome) || '—'}</h3><p class="kz-nvf-ds">${nvfTermsHtml(ps.desc)}</p></div></div>`).join('')}</div>
       </section>` : '';
   return unlocks.groups.map(g=> nvfAbilityBlock(c, g)).join('') + supHtml;
 }
