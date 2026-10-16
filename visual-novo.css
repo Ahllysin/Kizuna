@@ -370,7 +370,8 @@ html.vis-novo .kz-detail-hero .kz-nv-ph-bg .kz-nv-rays{left:22%;top:58%;}
 html.vis-novo .kz-detail-hero .kz-nv-kbig{right:-40px;top:-80px;font-size:520px;}
 html.vis-novo .kz-detail-content{position:relative;padding:26px 34px 90px;}
 html.vis-novo .kz-detail-main{align-items:center;gap:40px;}
-html.vis-novo .kz-detail-card{width:400px;height:460px;aspect-ratio:auto;filter:none;}
+/* área da arte da ficha: mesma proporção das artes (PNG 1040x1280 = 13:16), vinda da pasta Fichas */
+html.vis-novo .kz-detail-card{width:374px;height:460px;aspect-ratio:auto;filter:none;}
 html.vis-novo .kz-detail-card > img{position:absolute;left:-14px;bottom:-4px;z-index:2;width:118px;height:auto;transform:rotate(-8deg);filter:drop-shadow(6px 6px 0 #0A0606);}
 html.vis-novo .kz-detail-card > .avatar-fallback{display:none!important;}
 .kz-nv-dchar{position:absolute;inset:0;}
@@ -479,7 +480,7 @@ html.vis-novo .kz-gr-toc button{border-radius:0;}
   .kz-nv-kbig{font-size:220px;top:-30px;}
   html.vis-novo .kz-detail-hero{margin:-20px -14px 0;}
   html.vis-novo .kz-detail-content{padding:18px 16px 70px;}
-  html.vis-novo .kz-detail-card{width:100%;max-width:300px;height:340px;}
+  html.vis-novo .kz-detail-card{width:276px;max-width:100%;height:340px;}
   html.vis-novo .kz-name-band h1{font-size:52px;}
   html.vis-novo .kz-panel-title{font-size:34px;}
   .kz-nv-lineup{gap:4px;padding:12px 8px 10px;}

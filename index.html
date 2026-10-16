@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Fjj+iS7k/PyPP8XL+f91JZYufhkMoqBfYhHcEqMC8GI=' 'sha256-Vx0v2QoqCNkrvoQoGoOGATLkRdtJ9AG+Yd0nnx6Mj+Q='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-2QZmh/QoH4AbAw6VUqpuFEDV4Hw/aopmx3pQ4dU/GVs=' 'sha256-8r4MYwJC09DJTAeNxDJU4PRKSEriDHI2QjMFWVJ2U3w='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -5311,7 +5311,12 @@ function ballSrc(n){ return `assets/balls/esfera-${n}.webp`; }
 function portraitSrc(c){ return `portraits/${slug(c.name)}.webp`; }
 /* ---------- Visual novo (prévia ligada por ?visual=novo; ver o <script> do <head> e visual-novo.css) ---------- */
 function visualNovo(){ try{ return document.documentElement.classList.contains('vis-novo') === true; }catch(e){ return false; } }
-function renderSrc(c){ return `renders/${slug(c.name)}.webp`; }   // arte de corpo inteiro (fundo transparente)
+// Arte da ficha (pasta Fichas/<personagem>, convertida por gerar-artes.py); ?v= muda quando a arte muda.
+let nvFichaVer = {};
+function renderSrc(c){
+  const s = slug(c.name), v = Object.prototype.hasOwnProperty.call(nvFichaVer, s) ? nvFichaVer[s] : '';
+  return `renders/${s}.webp${v ? '?v=' + v : ''}`;
+}
 // Artes do "Em destaque" (pasta Destaques/<personagem>, convertidas por gerar-artes.py): o topo de Personagens
 // alterna entre elas. Sem arte na lista, usa o corpo inteiro de renders/.
 let nvArts = {};
@@ -5327,6 +5332,14 @@ async function loadNvArts(){
         if(/^[a-z0-9-]+$/.test(k) && l.length) ok[k] = l;
       });
       nvArts = ok;
+    }
+  }catch(e){}
+  try{
+    const r = await fetch('renders/versoes.json', { cache:'no-cache' });
+    if(r.ok){
+      const d = await r.json(), ok = {};
+      Object.keys(d || {}).forEach(k=>{ if(/^[a-z0-9-]+$/.test(k) && /^[a-z0-9]{1,16}$/.test(d[k])) ok[k] = d[k]; });
+      nvFichaVer = ok;
     }
   }catch(e){}
   try{
