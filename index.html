@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-oLsYWq16y8WnPjfjeDFG7c33OVa/qO+M/iZN8Afu5oA=' 'sha256-0XTWVABtovG6DYvCd84lteZxG6kynhaRk7d9LpnX1fY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-R1z3LHnMN4HVUjiVna5ZuALxMGhI39TDGyyaqhnFpfQ=' 'sha256-99i3KBq+N+NKT+5yiWhHB3MPrexlb/n5zI4LnKlxacY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -1416,6 +1416,13 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   </div>
 
   <img class="kz-float-ball" src="assets/balls/esfera-3.webp" alt="" aria-hidden="true">
+  <nav class="kz-nv-tabbar" aria-label="Atalhos">
+    <button type="button" class="kz-nv-tb" data-tbtab="chars"><span class="kj" aria-hidden="true">戦</span>Guerreiros</button>
+    <button type="button" class="kz-nv-tb" data-tbtab="combos"><span class="kj" aria-hidden="true">連</span>Combos</button>
+    <button type="button" class="kz-nv-tb" data-tbtab="tierlist"><span class="kj" aria-hidden="true">番</span>Tier List</button>
+    <button type="button" class="kz-nv-tb" data-tbtab="guias"><span class="kj" aria-hidden="true">書</span>Guias</button>
+    <button type="button" class="kz-nv-tb" id="tabbarMoreBtn" aria-label="Mais abas"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>Mais</button>
+  </nav>
 </div>
 <div id="modalRoot"></div>
 <div id="donorWidgetRoot"></div>
@@ -5472,6 +5479,11 @@ function render(){
   document.querySelectorAll('.kz-nav-btn[data-tab]').forEach(b=>{
     b.classList.toggle('active', b.dataset.tab === state.tab);
   });
+  // barra de abas do celular (visual novo): as 4 principais; o resto fica em "Mais", que abre o menu
+  const tbFixas = ['chars','combos','tierlist','guias'];
+  document.querySelectorAll('.kz-nv-tb[data-tbtab]').forEach(b=>{ const on = b.dataset.tbtab === state.tab; b.classList.toggle('on', on); if(on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  const tbMais = document.getElementById('tabbarMoreBtn');
+  if(tbMais) tbMais.classList.toggle('on', !tbFixas.includes(state.tab));
   const tab = state.tab;
   view.innerHTML = tab === 'chars' ? renderCharsTab()
     : tab === 'collection' ? renderCollectionTab()
@@ -5695,6 +5707,13 @@ function attachCharsHandlers(){
   view.querySelectorAll('[data-hero-step]').forEach(b=>b.addEventListener('click', ()=> stepHeroChar(parseInt(b.dataset.heroStep, 10))));
   const heroAdj = document.getElementById('heroAdjustBtn');
   if(heroAdj) heroAdj.addEventListener('click', ()=>{ const hc = getChar(state.heroCharId) || defaultHeroChar(); if(hc) startHeroEdit('list', hc.id); });
+  const nvFiltersBtn = document.getElementById('nvFiltersBtn');
+  if(nvFiltersBtn) nvFiltersBtn.addEventListener('click', ()=>{   // celular: mostra/esconde os filtros completos
+    state.nvFiltersOpen = !state.nvFiltersOpen;
+    const sec = nvFiltersBtn.closest('.kz-nv');
+    if(sec) sec.classList.toggle('filters-open', state.nvFiltersOpen);
+    nvFiltersBtn.setAttribute('aria-expanded', String(state.nvFiltersOpen));
+  });
   const heroPips = document.getElementById('heroPips');
   if(heroPips){   // visual novo: artes do destaque alternando
     const hc = getChar(nvHeroRot.id);
@@ -5754,7 +5773,7 @@ function renderCharsTabNovo(chars, hero){
     heroSrc = arts[nvHeroRot.i];
   }
   return `
-  <section class="kz-page kz-nv">
+  <section class="kz-page kz-nv${state.nvFiltersOpen ? ' filters-open' : ''}">
     <div class="kz-nv-hero">
       <div class="kz-nv-fire" aria-hidden="true"></div>
       <div class="kz-nv-rays" aria-hidden="true"></div>
@@ -5805,6 +5824,11 @@ function renderCharsTabNovo(chars, hero){
             <input type="text" id="searchInput" placeholder="Nome, tag ou habilidade…" value="${escapeAttr(f.search)}" autocomplete="off">
           </div></div>
         </div>
+        ${(()=>{   // celular (canvas): botão Filtros + raridade e tipo numa linha que rola; o resto abre no botão
+          const n = ['rarity','type','affinity','element'].filter(k=>f[k]).length + sfCount(state.sf.chars);
+          const q = (key, v)=>`<button type="button" class="kz-fchip ${f[key]===v?'active':''}" data-filter="${key}" data-val="${escapeAttr(v)}" aria-pressed="${f[key]===v}">${escapeHtml(v)}</button>`;
+          return `<div class="kz-nv-quick"><button type="button" class="kz-fchip kz-nv-ftoggle${n ? ' has' : ''}" id="nvFiltersBtn" aria-expanded="${!!state.nvFiltersOpen}">Filtros${n ? `<span class="n">${n}</span>` : ''}</button>${['SSR','SR','R'].map(v=>q('rarity', v)).join('')}${TYPES.map(v=>q('type', v)).join('')}</div>`;
+        })()}
         <div class="kz-filter-groups">
           ${LIST_FILTER_GROUPS.map(([label,key,vals])=>`
           <div class="kz-filter-row">
@@ -10951,6 +10975,13 @@ function safeHttpsUrl(u){
 /* ======================= NAV LATERAL ======================= */
 document.querySelectorAll('.kz-nav-btn[data-tab]').forEach(btn=>{
   btn.addEventListener('click', ()=> goTab(btn.dataset.tab));
+});
+document.querySelectorAll('.kz-nv-tb[data-tbtab]').forEach(btn=>{
+  btn.addEventListener('click', ()=> goTab(btn.dataset.tbtab));
+});
+document.getElementById('tabbarMoreBtn').addEventListener('click', ()=>{
+  state.navCompact = false;
+  applyNavState();
 });
 document.getElementById('menuToggleBtn').addEventListener('click', ()=>{
   state.navCompact = !state.navCompact;

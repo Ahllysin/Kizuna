@@ -1220,3 +1220,34 @@ html.vis-novo .kz-nvcb-sug > .kz-btn{min-height:46px;padding:0 20px;font-size:15
   .kz-nvcb-rechead h2 .kz-nv-ttl{font-size:42px;}
 }
 @media (prefers-reduced-motion:reduce){ .kz-nvcb-big,.kz-nvcb-chain .zap,html.vis-novo .kz-nvcb .kz-slot:not(.filled){animation:none;} }
+
+/* ---------- celular: barra de abas embaixo (canvas "Personagens — celular") ---------- */
+.kz-nv-tabbar{display:none;}
+@media (max-width:700px){
+  html.vis-novo .kz-nv-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:28;display:flex;height:calc(68px + env(safe-area-inset-bottom,0px));padding:0 4px env(safe-area-inset-bottom,0px);
+    background:#0A0606;box-shadow:0 -2px 0 #FF6A13,0 -6px 20px rgba(255,106,19,.35);}
+  html.vis-novo .kz-nv-tb{position:relative;isolation:isolate;flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:68px;padding:0;border:0;background:none;cursor:pointer;
+    font-family:"Barlow Condensed",sans-serif;font-weight:800;font-style:italic;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#C9B7A6;-webkit-tap-highlight-color:transparent;}
+  html.vis-novo .kz-nv-tb .kj{font-family:"Shippori Mincho",serif;font-style:normal;font-size:19px;line-height:1;color:#B0705A;}
+  html.vis-novo .kz-nv-tb svg{width:20px;height:20px;}
+  html.vis-novo .kz-nv-tb.on{color:#0A0606;}
+  html.vis-novo .kz-nv-tb.on .kj{color:#0A0606;}
+  html.vis-novo .kz-nv-tb.on::before{content:'';position:absolute;inset:8px 2px;z-index:-1;transform:skewX(-12deg);background:linear-gradient(180deg,#FFE27A,#FFC21A 40%,#FF6A13);box-shadow:0 0 16px rgba(255,106,19,.7);}
+  /* espaço para a barra não cobrir o fim da página nem os avisos */
+  html.vis-novo .kz-main{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));}
+  html.vis-novo .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px));}
+}
+
+/* ---------- celular: Personagens com filtros compactos (canvas) ---------- */
+.kz-nv-quick{display:none;}
+@media (max-width:700px){
+  .kz-nv-quick{display:flex;gap:10px;overflow-x:auto;margin:0 -18px;padding:6px 18px 10px 22px;scrollbar-width:none;}
+  .kz-nv-quick::-webkit-scrollbar{display:none;}
+  .kz-nv-quick .kz-fchip{flex:none;min-height:44px;padding:0 16px;}
+  .kz-nv-ftoggle{color:#FFC21A;}
+  .kz-nv-ftoggle .n{display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;margin-left:2px;background:#E8261B;color:#FFF4E6;font-size:13px;font-style:normal;}
+  .kz-nv:not(.filters-open) .kz-nv-content > .kz-filter-groups,
+  .kz-nv:not(.filters-open) .kz-nv-content > .kz-sf{display:none;}
+  .kz-nv.filters-open .kz-nv-ftoggle{color:#0A0606;}
+  .kz-nv.filters-open .kz-nv-ftoggle::before{background:linear-gradient(180deg,#FFE27A,#FFC21A 45%,#FF6A13);box-shadow:0 0 16px rgba(255,140,30,.7);}
+}
