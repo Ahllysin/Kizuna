@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-TM8hrrFQLLQmLtdFhNwiC/YgNRn/M7PUUz9vGQ0otxA=' 'sha256-NrxhMxFGMmn3TOJlETEqTYPO241zR2fLMo8KteXIQPc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-40P8r6+AOSrN0RmEx7Ya0AASQdqG/Yq4CBvjDXBlzt8=' 'sha256-DQclVMdJZyJysDCQ3dC/6NFkLjlH+huvRUBpDSS6k98='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -5669,6 +5669,14 @@ function attachCharsHandlers(){
       if(c && i >= 0 && i !== nvHeroRot.i) nvHeroGo(c, i);
     });
   }
+  // visual novo: clicar na arte do destaque (ou no nome dela) abre a ficha do guerreiro
+  const heroOpen = ()=>{ const c = getChar(nvHeroRot.id) || getChar(state.heroCharId) || defaultHeroChar(); if(c) openCharDetail(c.id); };
+  const heroArt = document.getElementById('heroChar'), heroName = document.getElementById('heroNameStack');
+  if(heroArt) heroArt.addEventListener('click', heroOpen);
+  if(heroName){
+    heroName.addEventListener('click', heroOpen);
+    heroName.addEventListener('keydown', e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); heroOpen(); } });
+  }
   attachHeroAdjust();
   const addBtn = document.getElementById('addCharBtn');
   if(addBtn) addBtn.addEventListener('click', ()=>{ if(!isHeroAdmin()) return; state.editingChar = blankChar(); state.editingIsNew = true; render(); });
@@ -5727,7 +5735,7 @@ function renderCharsTabNovo(chars, hero){
       </svg>
       <div aria-hidden="true">${embers}</div>
       <span class="kz-nv-sfx" aria-hidden="true" style="right:1.5%;top:110px;font-size:54px;writing-mode:vertical-rl;transform:rotate(12deg);opacity:.85">ゴゴゴ</span>
-      ${hero ? `<div class="kz-nv-char" id="heroChar" aria-hidden="true">
+      ${hero ? `<div class="kz-nv-char" id="heroChar" aria-hidden="true" title="Ver a ficha de ${escapeAttr(hero.name)}">
         <div class="kz-nv-char-in">
           <img class="a1" src="${heroSrc}" alt="" data-onerr="hide">
           <img class="a2" src="${heroSrc}" alt="" data-onerr="hide">
@@ -5737,7 +5745,7 @@ function renderCharsTabNovo(chars, hero){
       </div>
       <div class="kz-nv-plate">
         <span class="kz-nv-lb">Em destaque</span>
-        ${nvTtl(hero.name, ' id="heroNameStack"')}
+        ${nvTtl(hero.name, ` id="heroNameStack" role="button" tabindex="0" aria-label="Ver a ficha de ${escapeAttr(hero.name)}"`)}
         <div class="kz-nv-pips" id="heroPips">${nvHeroPipsHtml(hero)}</div>
         <div class="kz-nv-plate-row">
           <span class="kz-nv-meta" id="heroMeta">${nvMetaHtml(hero)}</span>
@@ -5812,6 +5820,8 @@ function setHeroNovo(c){
   const main = document.getElementById('heroImg');
   if(main) main.dataset.card = portraitSrc(c);
   document.querySelectorAll('#heroNameStack > span').forEach(s=>{ s.textContent = c.name; });
+  document.getElementById('heroNameStack')?.setAttribute('aria-label', `Ver a ficha de ${c.name}`);
+  box.title = `Ver a ficha de ${c.name}`;
   const meta = document.getElementById('heroMeta');
   if(meta) meta.innerHTML = nvMetaHtml(c);
   nvHeroStart(c);

@@ -556,3 +556,17 @@ html.vis-novo .kz-donate-card img{border-radius:0;box-shadow:0 0 0 3px #0A0606,0
   .kz-nv-char.nv-swap .kz-nv-char-in,.kz-nv-char.nv-swap .kz-nv-burst{animation:none;}
 }
 
+
+/* área de clique = formato inclinado inteiro: cada botão vira uma camada própria, então o ::before inclinado (que
+   desenha o fundo e passa um pouco das bordas) conta como parte do botão e não fica atrás do fundo da página */
+html.vis-novo :is(.btn,.kz-back-btn,.kz-btn,.kz-build-btn,.kz-edit-btn,.kz-fav-toggle,.kz-fchip,.kz-header-donate-btn,
+  .kz-menu-btn,.kz-nav-btn,.kz-sf-toggle,.kz-step-btn,.kz-tab),.kz-nv-plate .kz-hero-navbtn,.kz-nv-pip{isolation:isolate;}
+/* a aura da arte da ficha passa por cima dos botões de cima: não pode roubar o clique */
+.kz-nv-dchar{pointer-events:none;}
+/* clicar na arte do destaque (ou no nome) abre a ficha; a arte só recebe clique no computador, onde fica à vista */
+#heroNameStack{cursor:pointer;}
+#heroNameStack:focus-visible{outline:2px solid #FFC21A;outline-offset:6px;}
+@media (min-width:1101px){
+  .kz-nv-char{pointer-events:auto;cursor:pointer;}
+  .kz-nv-char:hover .main{filter:drop-shadow(0 0 2px #0A0606) drop-shadow(0 10px 30px rgba(10,6,6,.6)) brightness(1.1);}
+}
