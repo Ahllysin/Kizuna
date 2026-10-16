@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-qLmLB21KrTmMJlAJfvOfe3+wsv5GGKxLneDSUnJsBME=' 'sha256-ES4FoKkclgQ5mMEG6zMHcju8Wbx4yjo8EyECZmt/smk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-0s4F8hDbYJXFVhj+qKGww9WplkChInVdDaks6CQqfUQ=' 'sha256-lR3Hmmq9bCf//2x/LDynSu9tYEgyAPdFwdvQukASECk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -7985,8 +7985,47 @@ function renderCommunityPreview(p){
   return `<div class="kz-com-pv-tier"><div class="kz-com-pv-chips">${tiers.slice(0, 6).map(t => `<span class="kz-com-pv-chip" style="background:${t.color};">${escapeHtml(t.label || '—')}<b>${t.items.length}</b></span>`).join('')}</div>
     <div class="kz-com-pv-team">${top.map(id => communityThumb(id, true)).join('')}</div></div>`;
 }
+// Card da lista no visual novo (canvas): autor, tipo, título, formação em faixas (ou os 3 primeiros ranks), a maior
+// cadeia do time e as ações (curtir, abrir no montador / copiar a tier list). Clicar fora dos botões abre o post.
+function renderCommunityCardNovo(p){
+  const donor = communityDonorOf(p.userId);
+  const liked = (state.communityMyLikes || []).includes(p.id);
+  let corpo = '';
+  if(p.kind === 'team'){
+    const team = p.data.team.map(id => id && getChar(id) ? id : null);
+    const s = team.some(Boolean) ? comboSummary(team) : null;
+    const bc = s && s.best && getChar(s.best.charId);
+    corpo = nvLineupHtml(p.data.team, true)
+      + (bc ? `<div class="kz-nvco-chain"><span class="kz-nvco-hit">${s.best.n + 1} hits</span>maior cadeia · ${escapeHtml(bc.name)} (${ABILITY_LABEL[s.best.key]})</div>` : '');
+  } else {
+    corpo = `<div class="kz-nvco-tiers">${p.data.tiers.slice(0, 3).map(t => `<div class="kz-nvco-tr"><span class="r" style="--tc:${t.color}">${escapeHtml(t.label || '—')}</span><div class="row">${t.items.slice(0, 9).map(id => communityThumb(id)).join('')}${t.items.length > 9 ? `<span class="more">+${t.items.length - 9}</span>` : ''}</div></div>`).join('')}</div>`;
+  }
+  return `
+  <article class="kz-com-card kz-nvco" data-com-open="${escapeAttr(p.id)}" tabindex="0" role="button" aria-label="Abrir ${escapeAttr(p.title)}">
+    <div class="kz-nvco-who"><span class="av" aria-hidden="true">${escapeHtml(initials(p.author))}</span><div><span class="wn">${communityAuthorLink(p)}${donor ? ' ' + patenteBadgeHtml(donor.amount, '', linkedProfileFor(donor)) : ''}</span><span class="ws">${escapeHtml(communityAgo(p.createdAt))}</span></div><span class="kind${p.kind === 'team' ? '' : ' tl'}">${p.kind === 'team' ? 'Time' : 'Tier list'}</span></div>
+    <h3 class="kz-nvco-pt">${escapeHtml(p.title)}</h3>
+    ${corpo}
+    ${p.desc ? `<p class="kz-nvco-desc">${escapeHtml(p.desc)}</p>` : ''}
+    <div class="kz-nvco-act">
+      <button type="button" class="kz-nvco-like${liked ? ' on' : ''}" data-com-like="${escapeAttr(p.id)}" aria-pressed="${liked}"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="${liked ? '#FFF4E6' : 'none'}" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z"/></svg>${liked ? 'Curtido' : 'Curtir'}<b>${p.likes}</b></button>
+      ${p.kind === 'team'
+        ? `<button type="button" class="kz-btn" data-com-load="${escapeAttr(p.id)}"><span class="kj" aria-hidden="true">連</span>Abrir no montador</button>`
+        : `<button type="button" class="kz-btn" data-com-copy="${escapeAttr(p.id)}"><span class="kj" aria-hidden="true">番</span>Copiar tier list</button>`}
+    </div>
+  </article>`;
+}
+function communityCtaHtml(){
+  return `
+  <div class="kz-nvco-cta">
+    <span class="kj" aria-hidden="true">社</span>
+    <h3>${nvTtl('Mostre seu time')}</h3>
+    <p>Monte no Montador de Combos ou na Tier List e publique aqui pra todo mundo ver.</p>
+    <button type="button" class="kz-btn kz-btn-primary" data-com-cta>Montar um time</button>
+  </div>`;
+}
 // Card da lista: só o essencial. Clicar abre o post; clicar no nome do autor abre o perfil dele.
 function renderCommunityCard(p){
+  if(visualNovo()) return renderCommunityCardNovo(p);
   const donor = communityDonorOf(p.userId);
   return `
   <article class="kz-com-card clean" data-com-open="${escapeAttr(p.id)}" tabindex="0" role="button" aria-label="Abrir ${escapeAttr(p.title)}">
@@ -8089,8 +8128,11 @@ function renderCommunityList(){
   if(!state.communityLoaded) return `<div class="kz-panel kz-com-empty">Carregando a Comunidade…</div>`;
   const list = communityVisiblePosts();
   if(!list.length){
-    return `<div class="kz-panel kz-com-empty">${(state.communityPosts || []).length ? 'Nada encontrado com esses filtros.' : 'Ainda não tem nada por aqui — seja o primeiro a compartilhar um time ou uma tier list!'}</div>`;
+    const msg = (state.communityPosts || []).length ? 'Nada encontrado com esses filtros.' : 'Ainda não tem nada por aqui — seja o primeiro a compartilhar um time ou uma tier list!';
+    if(visualNovo()) return `<div class="kz-nvco-grid"><div class="kz-panel kz-com-empty">${msg}</div>${communityCtaHtml()}</div>`;
+    return `<div class="kz-panel kz-com-empty">${msg}</div>`;
   }
+  if(visualNovo()) return `<div class="kz-nvco-grid">${list.map(renderCommunityCard).join('')}${communityCtaHtml()}</div>`;
   return `<div class="kz-com-grid">${list.map(renderCommunityCard).join('')}</div>`;
 }
 function renderCommunityPickerGrid(c){
@@ -8278,6 +8320,24 @@ function renderComunidadeTab(){
   const share = state.discordUser
     ? `<button type="button" class="kz-btn kz-btn-primary" id="comOpenBtn">＋ Compartilhar</button>`
     : `<button type="button" class="kz-btn kz-btn-primary" id="comLoginBtn">Entrar com Discord pra compartilhar</button>`;
+  if(visualNovo()) return `
+  <section class="kz-page kz-nvp kz-nvcom">
+    ${nvPageHeadHtml({ key:'comunidade', kanji:'社', tag:'Feito por quem joga', title:'Comunidade', size:112, kanjiStyle:'right:26%;top:-60px;font-size:380px',
+      sub:'Times e tier lists feitos no Zenkyo, compartilhados por quem joga. Curta, copie e inspire-se.', side: share })}
+    <div class="kz-nv-toolbar kz-nvco-bar">
+      <div class="kz-nv-chipgrp">${chip('data-com-filter', 'all', f, 'Tudo')}${chip('data-com-filter', 'team', f, 'Times')}${chip('data-com-filter', 'tierlist', f, 'Tier Lists')}</div>
+      <span class="kz-nvco-sep" aria-hidden="true"></span>
+      <div class="kz-nv-chipgrp">${chip('data-com-sort', 'recent', s, 'Recentes')}${chip('data-com-sort', 'likes', s, 'Mais curtidos')}</div>
+      <div class="kz-nv-search sm kz-nvco-find"><div>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFC21A" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+        <label for="comSearch" class="kz-sr">Buscar na Comunidade</label>
+        <input type="text" id="comSearch" placeholder="Título, autor ou guerreiro…" value="${escapeAttr(state.communitySearch)}" autocomplete="off">
+      </div></div>
+      <button type="button" class="kz-nvco-like kz-nvco-refresh" id="comRefreshBtn" title="Recarregar" aria-label="Recarregar"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
+    </div>
+    ${renderCommunityCompose()}
+    <div id="comList">${renderCommunityList()}</div>
+  </section>`;
   return `<section class="kz-page">${head}
     <div class="kz-com-toolbar">
       <div class="kz-com-chips">
@@ -8415,7 +8475,9 @@ function attachCommunityListHandlers(root){
   on('[data-com-report]', b => reportCommunityPost(b.dataset.comReport));
   on('[data-com-del]', b => deleteCommunityPost(b.dataset.comDel));
   on('[data-com-profile]', b => openCommunityProfile(b.dataset.comProfile));
-  root.querySelectorAll('[data-com-profile]').forEach(b => b.addEventListener('click', e => e.stopPropagation()));
+  on('[data-com-cta]', () => goTab('combos'));
+  // botões dentro do card (visual novo): fazem só a ação deles, sem abrir o post
+  root.querySelectorAll('[data-com-profile], [data-com-open] [data-com-like], [data-com-open] [data-com-load], [data-com-open] [data-com-copy]').forEach(b => b.addEventListener('click', e => e.stopPropagation()));
   root.querySelectorAll('[data-com-open]').forEach(card => {
     card.addEventListener('click', () => openCommunityPost(card.dataset.comOpen));
     card.addEventListener('keydown', e => { if((e.key === 'Enter' || e.key === ' ') && e.target === card){ e.preventDefault(); openCommunityPost(card.dataset.comOpen); } });
