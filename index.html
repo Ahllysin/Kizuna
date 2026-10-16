@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-VCee0SiucUFPQriD2oM2qCAIfomVveRZWW638qQlvpk=' 'sha256-k/7Ops0mH97XGEm6Nf8JpgjMfIk/tF0RRGhibfQAoJo='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-oLsYWq16y8WnPjfjeDFG7c33OVa/qO+M/iZN8Afu5oA=' 'sha256-0XTWVABtovG6DYvCd84lteZxG6kynhaRk7d9LpnX1fY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -8559,7 +8559,139 @@ function commitTeam(team){
 // coluna esquerda = 4,5,6 · coluna direita = 1,2,3.
 const SLOT_VISUAL_ORDER = [3,0,4,1,5,2];
 
+/* ---------- Montador no visual novo (canvas "Montador de Combos") ---------- */
+// Cadeias: número grande de combos, teto da equipe e a maior cadeia.
+function nvComboCountHtml(team){
+  if(!team.some(Boolean)) return '';
+  const s = comboSummary(team), m = comboMaxFor(team);
+  const bc = s.best && getChar(s.best.charId);
+  return `
+      <div class="kz-nvcb-chains">
+        <span class="kz-nv-lb">Cadeias</span>
+        <div class="kz-nvcb-big"><span class="ctr">${s.total}</span><span class="lbl"><span>Combo${s.total === 1 ? '' : 's'}</span><small>de ${m.max}</small></span></div>
+        <p class="kz-nvcb-txt">${s.starts} início${s.starts === 1 ? '' : 's'} com combo (${m.starters} de ${m.abilities} habilidades iniciam combo).</p>
+        ${bc ? `<p class="kz-nvcb-best">Maior cadeia <span class="kz-nvco-hit">${s.best.n + 1} hits</span> ${escapeHtml(bc.name)} · ${ABILITY_LABEL[s.best.key]}</p>`
+             : `<p class="kz-nvcb-best">Nenhuma habilidade ativa o Ataque Combinado de alguém ainda.</p>`}
+      </div>`;
+}
+// Composição: um medidor de 12 tracinhos por papel (cada tracinho = 0,5), equilíbrio e o que falta.
+function nvCompositionHtml(team){
+  if(!team.some(Boolean)) return '';
+  const v = teamPillars(team), miss = missingPillars(team);
+  const bal = Math.round(balanceScore(team) * 100);
+  const rows = PILLAR_ORDER.map(k=>{
+    const info = ROLE_INFO[k], val = Math.round(v[k] * 10) / 10, n = Math.max(0, Math.min(12, Math.round(val * 2)));
+    return `<span class="kz-nvcb-rp" style="--c:${info.rgb[0]};--t:${info.rgb[1]}"><span class="g">${info.glyph}</span>${escapeHtml(PILLARS[k].label)}</span>`
+      + `<div class="kz-nvcb-gauge" style="--c:${info.rgb[0]}" role="img" aria-label="${escapeAttr(PILLARS[k].label)} ${String(val).replace('.', ',')}">${Array.from({ length:12 }, (_, i)=>`<i${i < n ? ' class="f"' : ''}></i>`).join('')}</div>`
+      + `<b${val ? '' : ' class="zero"'}>${String(val).replace('.', ',')}</b>`;
+  }).join('');
+  return `
+      <div class="kz-nvcb-comp" title="Soma dos papéis dos guerreiros em campo (principal vale 1, secundário 0,6). Alvo pra 6 guerreiros: Dano 2 · Tank 1,5 · Suporte 1 · Controle 1.">
+        <div class="hd"><span class="kz-nv-lb">Composição</span><span class="bal">Equilíbrio <b>${bal}%</b></span></div>
+        <div class="kz-nvcb-rows">${rows}</div>
+        <span class="kz-nvcb-miss${miss.length ? '' : ' ok'}">${miss.length ? 'Falta: ' + miss.map(k => PILLARS[k].label).join(', ') : 'Equipe equilibrada'}</span>
+      </div>`;
+}
+function nvSynergyListHtml(team){
+  const syn = synergyReport(team).ativos;
+  if(!syn.length) return '';
+  return `
+      <div class="kz-nvcb-syn">
+        <span class="kz-nv-lb">Sinergias ativas (${syn.length})</span>
+        <ul>${syn.map(a=>`<li>${synergyItemHtml(a)}</li>`).join('')}</ul>
+      </div>`;
+}
+// Rostinho redondo da cadeia: ícone da pasta Icones; sem ele, a carta.
+function nvFaceHtml(c){
+  const ico = iconeSrc(c);
+  return `<img class="hf" src="${ico || `portraits/mini/${slug(c.name)}.webp`}" alt="" loading="lazy" data-onerr="hide">`;
+}
+function renderRecommendationsNovo(){
+  const filled = state.team.filter(Boolean).length;
+  if(!filled) return '';
+  const full = filled === 6;
+  const rar = state.recRarity || 'all';
+  const recs = recommendForTeam(8, rar);
+  const head = `
+      <div class="kz-nvcb-rechead">
+        <div><h2>${nvTtl(full ? 'Quem troca' : 'Quem encaixa')}</h2>
+        <p>Ordenado pelo quanto aumenta os encadeamentos da equipe e pelas sinergias entre as habilidades. Considera o que cada um persegue e causa e a casa onde entraria.</p></div>
+        <div class="kz-nv-chipgrp"><span class="kz-nv-lb">Sugerir</span>${[['all','Todas'],['SSR','Só SSR'],['SR','Só SR'],['R','Só R']].map(([v,l])=>`<button type="button" class="kz-fchip ${rar===v?'active':''}" data-rec-rarity="${v}">${l}</button>`).join('')}</div>
+      </div>`;
+  if(!recs.length){
+    const msg = full ? (rar !== 'all' ? `Nenhuma troca por um guerreiro ${rar} melhora os combos dessa equipe. Tente outra raridade.` : 'Nenhuma troca melhora os combos dessa equipe — ela já está bem encaixada.')
+      : (rar !== 'all' ? `Nenhum guerreiro ${rar} aumenta os combos dessa equipe. Tente outra raridade.` : 'Nenhum guerreiro aumenta os combos dessa equipe agora.');
+    return `<section class="kz-rec kz-nvcb-rec">${head}<div class="kz-muted">${msg}</div></section>`;
+  }
+  const miss = missingPillars(state.team);
+  const cards = recs.map((r, i)=>{
+    const c = r.char, rep = r.replacedId ? getChar(r.replacedId) : null;
+    const p = analyzeRoles(c).pillars, fill = miss.filter(k => p[k] >= 0.6);
+    const best = chainsWithChar(r.team, c.id)[0];
+    const chain = best ? `
+          <div class="kz-nvcb-chainbox"><span class="kz-nv-lb">Melhor cadeia · <b>${best.chain.length} hits</b></span>
+          <ol class="kz-nvcb-chain">${best.chain.map((s, j)=>`<li>${j ? '<span class="zap" aria-hidden="true">›</span>' : ''}<span class="hit${s.charId === c.id ? ' me' : ''}"><b>${j + 1}</b>${nvFaceHtml(s.char)}${escapeHtml(s.char.name)}${j === 0 ? ` (${ABILITY_LABEL[best.abilityKey]})` : ''}</span></li>`).join('')}</ol></div>` : '';
+    return `
+      <div class="kz-rec-card kz-nvcb-sug${i === 0 ? ' top' : ''}">
+        <div class="art">${portraitInner(c)}</div>
+        <div class="body">
+          <div class="top"><span class="nm">${escapeHtml(c.name)}</span><span class="kz-nvco-hit">${r.gain > 0 ? `+${r.gain} encadeamento${r.gain > 1 ? 's' : ''}` : 'Sinergia'}</span><span class="kz-nv-lb mut">Casa ${r.slot + 1}</span></div>
+          <div class="tags">${rolePillsHtml(c, 2, true)}${fill.length ? `<span class="kz-fill-tag">Preenche: ${fill.map(k => PILLARS[k].label).join(', ')}</span>` : ''}${effLineHtml('Persegue', c.combo.triggers)}${effLineHtml('Causa', c.combo.effects)}</div>
+          ${chain}
+          ${(r.sinergias || []).slice(0, 2).map(a=>`<div class="kz-syn-line">${synergyItemHtml(a)}</div>`).join('')}
+        </div>
+        <button type="button" class="kz-btn${i === 0 ? ' kz-btn-primary' : ''}" data-rec-place="${c.id}" data-rec-slot="${r.slot}">${rep ? `Trocar com ${escapeHtml(rep.name)} (Casa ${r.slot + 1})` : `Colocar na Casa ${r.slot + 1}`}</button>
+      </div>`;
+  }).join('');
+  return `<section class="kz-rec kz-nvcb-rec">${head}<div class="kz-nvcb-sugs">${cards}</div></section>`;
+}
+function renderCombosTabNovo(){
+  const filledCount = state.team.filter(Boolean).length;
+  const hint = state.slotSel !== null ? `→ Casa ${state.slotSel+1}` : `<b>${filledCount}</b>/6 em campo`;
+  const team = state.team;
+  return `
+  <section class="kz-page kz-nvp kz-nvcb">
+    ${nvPageHeadHtml({ key:'combos', kanji:'連', tag:'Equipe de 6', title:'Montador de Combos', size:98, kanjiStyle:'right:4%;top:-60px;font-size:380px',
+      sub:'Monte a equipe de 6 guerreiros e veja a cadeia de combo se formar automaticamente.',
+      side:`<button class="kz-btn kz-btn-primary" id="saveFormationBtn">Salvar formação</button><button class="kz-btn" id="clearTeamBtn">Limpar</button>` })}
+    ${state.formations.length ? `
+    <div class="kz-formations">
+      <span class="kz-label">Formações salvas</span>
+      ${state.formations.map((f,i)=>`<span class="kz-formation-pill"><button class="load" data-load-formation="${i}">${escapeHtml(f.name)}</button><button class="del" data-del-formation="${i}" title="Excluir">✕</button></span>`).join('')}
+    </div>` : ''}
+    <div class="kz-combos-layout">
+      <aside class="kz-panel kz-roster">
+        <div class="kz-roster-head"><span class="kz-label">Elenco</span><span class="kz-roster-hint">${hint}</span></div>
+        <div class="kz-nv-search sm"><div>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFC21A" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+          <label for="rosterSearch" class="kz-sr">Buscar no elenco</label>
+          <input type="text" id="rosterSearch" placeholder="Buscar personagem…" value="${escapeAttr(state.rosterSearch)}" autocomplete="off">
+        </div></div>
+        ${renderSF('roster')}
+        <div class="kz-roster-grid" id="rosterList">${renderRosterList(state.rosterSearch)}</div>
+      </aside>
+      <div class="kz-combos-main">
+        <div class="kz-nvcb-teamhead">
+          <h2>${nvTtl('Equipe')}</h2>
+          <button type="button" class="kz-btn" id="autoBuildBtn" ${filledCount === 0 || filledCount === 6 ? 'disabled' : ''} title="${filledCount === 0 ? 'Coloque ao menos 1 guerreiro em campo' : filledCount === 6 ? 'A equipe já está completa' : 'Completa a equipe a partir dos guerreiros em campo, olhando combos e papéis'}">⚡ ${state.autoOpts && state.autoOpts.base === JSON.stringify(state.team) ? 'Gerar de novo' : 'Completar equipe'}</button>
+          <button type="button" class="kz-btn kz-opt-btn" id="optimizeBtn" ${filledCount<2?'disabled':''} title="${filledCount<2?'Coloque ao menos 2 guerreiros em campo':'Reorganiza os guerreiros em campo pra render a maior quantidade de combos'}">✦ Gerar melhor ordem</button>
+          ${canUndoOptimize() ? `<button type="button" class="kz-btn" id="undoOptBtn" title="Voltar à ordem anterior">↶ Desfazer ordem</button>` : ''}
+          <button type="button" class="kz-btn kz-btn-primary kz-sim-open" id="openSimBtn"><span class="glyph">連</span><span>Ver combos</span><span class="cnt">${filledCount}/6</span></button>
+        </div>
+        ${renderAutoBar()}
+        ${nvLineupHtml(team)}
+        ${filledCount ? `<div class="kz-nvcb-stats">${nvComboCountHtml(team)}${nvCompositionHtml(team)}</div>` : ''}
+        ${state.optInfo && canUndoOptimize() ? `<div class="kz-opt-info">${state.optInfo}</div>` : ''}
+        ${nvSynergyListHtml(team)}
+        <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
+        <div class="kz-nvcb-legend"><span>Persegue › causa:</span>${['derrubada','empurrao','elevacao_alta','elevacao_baixa'].map(effPillHtml).join('')}</div>
+        ${renderRecommendationsNovo()}
+      </div>
+    </div>
+  </section>`;
+}
 function renderCombosTab(){
+  if(visualNovo()) return renderCombosTabNovo();
   const filledCount = state.team.filter(Boolean).length;
   const hint = state.slotSel !== null ? `→ Casa ${state.slotSel+1}` : `${filledCount}/6 em campo`;
   return `
@@ -8649,7 +8781,7 @@ function slotCardHtml(c, idx, o){
     ${c ? `
     ${o.ro ? '' : `<button class="kz-slot-remove" ${rm} title="Remover">✕</button>`}
     <div class="kz-slot-art">${portraitInner(c)}</div>
-    <div class="kz-slot-info"><div class="kz-slot-name">${escapeHtml(c.name)}</div>${o.stars || ''}<div class="kz-slot-roles">${rolePillsHtml(c, 2, true)}</div></div>${slotEffectsHtml(c)}`
+    <div class="kz-slot-info">${visualNovo() ? `<span class="kz-slot-casa">Casa ${idx+1}</span>` : ''}<div class="kz-slot-name">${escapeHtml(c.name)}</div>${o.stars || ''}<div class="kz-slot-roles">${rolePillsHtml(c, 2, true)}</div></div>${slotEffectsHtml(c)}`
     : `<span class="kz-slot-plus">${o.ro ? '' : '+'}</span><span class="kz-slot-hint">${o.hint || (o.sel ? 'Escolha no elenco' : 'Escolha um guerreiro')}</span>`}
   </div>`;
 }
