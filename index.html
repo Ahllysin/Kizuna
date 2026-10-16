@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-tFq55X11Q1rSwGXA+z1rHRYNXjeyPQFWREaV8hHob8E=' 'sha256-KaPxvNsPjlIiIl2RGbpCARaRy6KwhA2R3VcnHlgPrCQ='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-qLmLB21KrTmMJlAJfvOfe3+wsv5GGKxLneDSUnJsBME=' 'sha256-ES4FoKkclgQ5mMEG6zMHcju8Wbx4yjo8EyECZmt/smk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -9179,7 +9179,7 @@ function guideCardsHtml(q){
     <button type="button" class="kz-gl-card" data-guide="${escapeAttr(g.id)}">
       <img class="kz-gl-cover" src="${guideCover(g)}" alt="" loading="lazy" data-onerr="hide">
       <span class="kz-gl-body">
-        <span class="kz-gl-num">${escapeHtml(guideLabel(g))}</span>
+        <span class="kz-gl-num">${escapeHtml(visualNovo() && !g.rotulo ? String(g.n) : guideLabel(g))}</span>
         <h3>${escapeHtml(g.titulo)}</h3>
         <p>${escapeHtml(g.resumo)}</p>
         ${secs.length ? `<span class="kz-gl-hits">${secs.slice(0,4).map(i=>`<span class="kz-gl-hit">${escapeHtml(g.secoes[i].titulo)}</span>`).join('')}${secs.length>4?`<span class="kz-gl-hit">+${secs.length-4}</span>`:''}</span>` : ''}
@@ -9257,6 +9257,7 @@ function renderGuiasSistemas(){
     : `<div class="kz-empty">Carregando guias…</div>`;
   const g = state.guideId ? guideBySlug(state.guideId) : null;
   if(g) return renderGuideReader(g);
+  if(visualNovo()) return `<div class="kz-gl-grid" id="guideGrid">${guideCardsHtml(state.guideQuery)}</div>`;   // busca fica na linha das abas
   return `
     <div class="kz-gl-tools">
       <input type="search" class="kz-input" id="guideSearch" placeholder="Buscar nos guias (ex.: Pedras, estrelas, custo)…" value="${escapeAttr(state.guideQuery)}" autocomplete="off">
@@ -9264,8 +9265,35 @@ function renderGuiasSistemas(){
     </div>
     <div class="kz-gl-grid" id="guideGrid">${guideCardsHtml(state.guideQuery)}</div>`;
 }
+// Guias no formato do canvas: topo novo, abas e busca na mesma linha, cartões grandes em 3 colunas.
+function renderGuiasTabNovo(){
+  const views = [['sistemas','星','Sistemas do jogo'],['combos','連','Combos e formação']];
+  const lista = state.guiasView !== 'combos' && guiasData;
+  const busca = lista ? `
+      <div class="kz-nvg-find">
+        <div class="kz-nv-search sm"><span class="kz-nv-scan" aria-hidden="true"></span><div>
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFC21A" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+          <label for="guideSearch" class="kz-sr">Buscar nos guias</label>
+          <input type="search" id="guideSearch" placeholder="Pedras, estrelas, custo…" value="${escapeAttr(state.guideQuery)}" autocomplete="off">
+        </div></div>
+        <span class="kz-nvg-count"><b>${guiasData.guias.length} guias</b> · edição ${escapeHtml(guiasData.edicao)}</span>
+      </div>` : '';
+  return `
+  <section class="kz-page kz-nvp kz-nvg">
+    ${nvPageHeadHtml({ key:'guias', kanji:'書', tag:'Como o jogo funciona', title:'Guias', kanjiStyle:'right:6%;top:-60px;font-size:380px',
+      sub:'Como cada sistema do jogo funciona, e como o site monta combos e formação.' })}
+    <div class="kz-nvg-bar">
+      <div class="kz-tabs" role="tablist" aria-label="Tipo de guia">
+        ${views.map(([k,gl,l])=>`<button class="kz-tab ${state.guiasView===k?'active':''}" data-guias-view="${k}" role="tab" aria-selected="${state.guiasView===k}"><span class="glyph">${gl}</span><span>${l}</span></button>`).join('')}
+      </div>
+      ${busca}
+    </div>
+    ${state.guiasView === 'combos' ? renderGuiasCombos() : renderGuiasSistemas()}
+  </section>`;
+}
 function renderGuiasTab(){
   const lendo = state.guiasView === 'sistemas' && state.guideId;
+  if(visualNovo() && !lendo) return renderGuiasTabNovo();
   const views = [['sistemas','星','Sistemas do jogo'],['combos','連','Combos e formação']];
   return `
   <section class="kz-page">

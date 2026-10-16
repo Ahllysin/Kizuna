@@ -861,3 +861,34 @@ html.vis-novo .kz-nvt .tier-pool-items{gap:10px;}
   html.vis-novo .kz-nvt .tier-item{width:58px;height:77px;}
 }
 @media (prefers-reduced-motion:reduce){ html.vis-novo .kz-nvt .tier-label::before{animation:none;} }
+
+/* ---------- GUIAS (canvas) ---------- */
+.kz-nvg-bar{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:-20px 0 40px;}
+html.vis-novo .kz-nvg-bar .kz-tabs{gap:12px;}
+html.vis-novo .kz-nvg-bar .kz-tab{min-height:52px;padding:0 26px;font-size:20px;}
+html.vis-novo .kz-nvg-bar .kz-tab .glyph{font-family:'Shippori Mincho',serif;font-style:normal;font-size:16px;color:#B0705A;background:none;border:0;}
+.kz-nvg-find{display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.kz-nvg-find .kz-nv-search.sm{width:380px;max-width:100%;flex:none;}
+.kz-nvg-count{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:16px;text-transform:uppercase;color:#C9B7A6;}
+.kz-nvg-count b{color:#FFC21A;}
+html.vis-novo .kz-nvg .kz-gl-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+html.vis-novo .kz-nvg .kz-gl-card{position:relative;gap:20px;padding:20px 20px 20px 18px;min-height:214px;background:linear-gradient(110deg,#1A0D0A,#0E0707 70%);box-shadow:inset 0 0 0 1.5px #3A1E16;}
+html.vis-novo .kz-nvg .kz-gl-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,#FFE27A,#FF6A13 50%,#E8261B);}
+html.vis-novo .kz-nvg .kz-gl-card:hover{transform:translateY(-6px);box-shadow:inset 0 0 0 2px #FFC21A,0 0 30px rgba(255,106,19,.55);}
+html.vis-novo .kz-nvg .kz-gl-cover{width:96px;height:174px;aspect-ratio:auto;align-self:flex-start;}
+html.vis-novo .kz-nvg .kz-gl-body{gap:9px;}
+html.vis-novo .kz-nvg .kz-gl-num{font-size:54px;line-height:.85;letter-spacing:0;filter:drop-shadow(0 0 8px rgba(255,106,19,.6));-webkit-text-stroke:2px #FF6A13;}
+html.vis-novo .kz-nvg .kz-gl-card:hover .kz-gl-num{color:#FFC21A;-webkit-text-stroke-color:#0A0606;}
+html.vis-novo .kz-nvg .kz-gl-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:22px;letter-spacing:.01em;text-transform:uppercase;line-height:1.05;color:#FFF4E6;}
+html.vis-novo .kz-nvg .kz-gl-card:hover h3{color:#FFC21A;}
+html.vis-novo .kz-nvg .kz-gl-card p{font-size:14.5px;line-height:1.5;color:#C9B7A6;}
+html.vis-novo .kz-nvg .kz-gl-lock{padding:3px 12px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
+@media (max-width:1300px){ html.vis-novo .kz-nvg .kz-gl-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media (max-width:700px){
+  .kz-nvg-bar{margin:-14px 0 26px;}
+  html.vis-novo .kz-nvg-bar .kz-tab{min-height:44px;padding:0 16px;font-size:16px;}
+  .kz-nvg-find .kz-nv-search.sm{width:100%;}
+  html.vis-novo .kz-nvg .kz-gl-grid{grid-template-columns:minmax(0,1fr);}
+  html.vis-novo .kz-nvg .kz-gl-cover{width:72px;height:130px;}
+  html.vis-novo .kz-nvg .kz-gl-num{font-size:40px;}
+}
