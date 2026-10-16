@@ -4,14 +4,21 @@
 // Rodar de novo (precisa de internet) quando mudar a lista de fontes OU quando o site passar a usar um kanji novo:
 //     node fetch-fonts.js
 //
-// - Nunito, Kaushan Script e JetBrains Mono: só a faixa "latin" (cobre o português inteiro).
-// - Shippori Mincho (usada só nos kanji dos ícones): só as faixas que têm os caracteres japoneses que o index.html usa.
+// - Nunito, Kaushan Script, JetBrains Mono, Barlow e Barlow Condensed: só a faixa "latin" (cobre o português inteiro).
+// - Shippori Mincho (usada só nos kanji dos ícones): só as faixas que têm os kanji que o index.html usa.
+// - Dela Gothic One (onomatopeias em katakana do visual novo, ex.: ワクワク): só as faixas com os katakana que o index.html usa.
+// As famílias novas vão no FIM da URL para os arquivos das antigas manterem o mesmo nome.
 // As fontes são licenciadas sob a SIL Open Font License (uso e redistribuição livres) — ver fonts/LICENSES.txt.
 const fs = require('fs');
 const path = require('path');
 
 const OUT = path.join(__dirname, 'fonts');
-const CSS_URL = 'https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Nunito:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&family=Shippori+Mincho:wght@800&display=swap';
+// Duas consultas separadas: o Google devolve as famílias em ordem alfabética, então juntar tudo numa só
+// renumeraria os arquivos das fontes antigas. Fontes novas entram sempre na última consulta.
+const CSS_URLS = [
+  'https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Nunito:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&family=Shippori+Mincho:wght@800&display=swap',
+  'https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600;700;800&family=Dela+Gothic+One&display=swap',
+];
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 
 function inRange(cp, ur) {
@@ -25,14 +32,18 @@ function inRange(cp, ur) {
 
 (async () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-  const cjk = [...new Set([...html].filter(ch => /[　-ヿ㐀-鿿＀-￯]/.test(ch)))].map(c => c.codePointAt(0));
-  const css = await (await fetch(CSS_URL, { headers: { 'User-Agent': UA } })).text();
+  const used = [...new Set([...html])];
+  const cjk = used.filter(ch => /[　-ヿ㐀-鿿＀-￯]/.test(ch) && !/[゠-ヿ]/.test(ch)).map(c => c.codePointAt(0));   // sem katakana
+  const kana = used.filter(ch => /[゠-ヿ]/.test(ch)).map(c => c.codePointAt(0));
+  let css = '';
+  for (const u of CSS_URLS) css += (await (await fetch(u, { headers: { 'User-Agent': UA } })).text()) + '\n';
   const blocks = [...css.matchAll(/(?:\/\*\s*([^*]*?)\s*\*\/\s*)?@font-face\s*\{([^}]*)\}/g)].map(m => ({ label: m[1] || '', body: m[2] }));
 
   const keep = blocks.filter(b => {
     const fam = (b.body.match(/font-family:\s*'([^']+)'/) || [])[1];
     const ur = (b.body.match(/unicode-range:\s*([^;]+)/) || [])[1] || '';
     if (fam === 'Shippori Mincho') return b.label !== 'latin' && b.label !== 'latin-ext' && cjk.some(cp => inRange(cp, ur));
+    if (fam === 'Dela Gothic One') return b.label !== 'latin' && b.label !== 'latin-ext' && kana.some(cp => inRange(cp, ur));
     return b.label === 'latin';
   });
 
@@ -43,6 +54,7 @@ function inRange(cp, ur) {
     const url = (b.body.match(/url\(([^)]+)\)/) || [])[1];
     const fam = (b.body.match(/font-family:\s*'([^']+)'/) || [])[1];
     const weight = (b.body.match(/font-weight:\s*([^;]+)/) || [])[1];
+    const style = (b.body.match(/font-style:\s*([^;]+)/) || [])[1] || 'normal';
     const ur = (b.body.match(/unicode-range:\s*([^;]+)/) || [])[1];
     if (!files.has(url)) {
       const idx = [...files.keys()].length + 1;
@@ -52,7 +64,7 @@ function inRange(cp, ur) {
       total += buf.length;
       files.set(url, name);
     }
-    out += `@font-face{font-family:'${fam}';font-style:normal;font-weight:${weight};font-display:swap;src:url(${files.get(url)}) format('woff2');unicode-range:${ur};}\n`;
+    out += `@font-face{font-family:'${fam}';font-style:${style};font-weight:${weight};font-display:swap;src:url(${files.get(url)}) format('woff2');unicode-range:${ur};}\n`;
   }
   fs.writeFileSync(path.join(OUT, 'fonts.css'), out, 'utf8');
   console.log(`${keep.length} faixas, ${files.size} arquivos, ${(total / 1024).toFixed(0)} KB em fonts/ (${cjk.length} kanji usados no site)`);

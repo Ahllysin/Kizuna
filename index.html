@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-3Cdsv26nOTaQHiVvPdyjRPVjv9+gt+wmc92ovzhMewI=' 'sha256-Nug/MIp6w44ZYAke+MXOn5ZI0QztLtPMsaCFh0GeYRM='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Fjj+iS7k/PyPP8XL+f91JZYufhkMoqBfYhHcEqMC8GI=' 'sha256-Vx0v2QoqCNkrvoQoGoOGATLkRdtJ9AG+Yd0nnx6Mj+Q='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -23,6 +23,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23ff6a4a'/%3E%3Cstop offset='70%25' stop-color='%23c2261a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='29' fill='url(%23g)' stroke='%23ffc54a' stroke-width='3'/%3E%3Ctext x='32' y='43' font-size='30' text-anchor='middle' fill='%23fff3e0' font-family='serif' font-weight='800'%3E%E8%A1%93%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="fonts/fonts.css">
+<script id="kzVisual">/* Visual novo (energia) ligado para todos. ?visual=antigo volta ao anterior neste navegador (para comparar ou se algo quebrar); ?visual=novo desfaz. */try{var kzVis=new URLSearchParams(location.search).get('visual');if(kzVis==='antigo')localStorage.setItem('kiai_visual','antigo');else if(kzVis==='novo')localStorage.removeItem('kiai_visual');if(localStorage.getItem('kiai_visual')!=='antigo')document.documentElement.classList.add('vis-novo');}catch(e){document.documentElement.classList.add('vis-novo');}</script>
 <style>
 /* ======================= TOKENS ======================= */
 :root{
@@ -1358,6 +1359,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
   .kz-brand{padding-right:6px;}
 }
 </style>
+<link rel="stylesheet" href="visual-novo.css">
 </head>
 <body>
 <div class="kz-app" id="kzApp">
@@ -1371,7 +1373,7 @@ label.field-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;col
       </button>
       <div class="kz-brand" id="brandHome" title="Ir para Personagens">
         <div class="kz-brand-seal">術</div>
-        <div class="kz-brand-name">Zenkyo</div>
+        <div class="kz-brand-name" data-text="Zenkyo">Zenkyo</div>
       </div>
       <button class="kz-header-donate-btn" id="headerDonateBtn" title="Doar">
         <span aria-hidden="true">援</span><span class="kz-lbl-full">Doar</span>
@@ -1672,6 +1674,14 @@ document.addEventListener('error', e => {
     case 'hide': t.style.visibility = 'hidden'; break;
     case 'remove': t.remove(); break;
     case 'remove-parent': if(t.parentNode) t.parentNode.remove(); break;
+    case 'card':   // arte de corpo inteiro que não existe: mostra a carta do personagem no lugar
+      if(t.dataset.card && !t.src.endsWith(t.dataset.card)){ const box = t.closest('.kz-nv-char, .kz-nv-dchar'); if(box) box.classList.add('is-card'); t.src = t.dataset.card; }
+      else t.style.visibility = 'hidden';
+      break;
+    case 'cut':    // faixa do time que não existe: usa a carta recortada no mesmo formato
+      if(t.dataset.card && !t.src.endsWith(t.dataset.card)){ t.classList.add('cut'); t.src = t.dataset.card; }
+      else t.style.visibility = 'hidden';
+      break;
   }
 }, true);
 document.addEventListener('load', e => {
@@ -4722,6 +4732,7 @@ async function loadState(){
   state.favs = (Array.isArray(state.favs) ? state.favs : []).filter(id=>allIds.has(id));
   ensureTierListIntegrity();
   await loadHeroFrames();
+  await loadNvArts();
   applyGuideHash();
   loaded = true;
   render();
@@ -5298,6 +5309,151 @@ function effPillHtml(eff){
 }
 function ballSrc(n){ return `assets/balls/esfera-${n}.webp`; }
 function portraitSrc(c){ return `portraits/${slug(c.name)}.webp`; }
+/* ---------- Visual novo (prévia ligada por ?visual=novo; ver o <script> do <head> e visual-novo.css) ---------- */
+function visualNovo(){ try{ return document.documentElement.classList.contains('vis-novo') === true; }catch(e){ return false; } }
+function renderSrc(c){ return `renders/${slug(c.name)}.webp`; }   // arte de corpo inteiro (fundo transparente)
+// Artes do "Em destaque" (pasta Destaques/<personagem>, convertidas por gerar-artes.py): o topo de Personagens
+// alterna entre elas. Sem arte na lista, usa o corpo inteiro de renders/.
+let nvArts = {};
+const NV_ART_RE = /^destaques\/[a-z0-9-]+\/[a-z0-9-]+\.webp(\?v=[a-z0-9]+)?$/;
+async function loadNvArts(){
+  if(!visualNovo() || typeof fetch !== 'function') return;
+  try{
+    const r = await fetch('destaques/destaques.json', { cache:'no-cache' });
+    if(r.ok){
+      const d = await r.json(), ok = {};
+      Object.keys(d || {}).forEach(k=>{
+        const l = Array.isArray(d[k]) ? d[k].filter(u=>typeof u === 'string' && NV_ART_RE.test(u)).slice(0, 12) : [];
+        if(/^[a-z0-9-]+$/.test(k) && l.length) ok[k] = l;
+      });
+      nvArts = ok;
+    }
+  }catch(e){}
+  try{
+    const r = await fetch('destaques/posicoes.json', { cache:'no-cache' });
+    if(r.ok) nvPosFile = nvCleanPos(await r.json());
+  }catch(e){}
+  try{ // salvo só neste navegador quando não deu pra gravar no arquivo nem na conta
+    const l = await window.storage.get(NV_POS_LOCAL);
+    if(l && l.value) nvPosLocal = nvCleanPos(JSON.parse(l.value));
+    await window.storage.set('destaques_pos_local', '');   // posições da área antiga (antes de subir acima do cartão do nome)
+  }catch(e){}
+  nvRecomputePos();
+}
+function nvArtsOf(c){
+  const s = slug(c.name);
+  return Object.prototype.hasOwnProperty.call(nvArts, s) ? nvArts[s] : [renderSrc(c)];
+}
+// Posição e tamanho de cada arte do destaque (botão "Ajustar arte", só o dono): {"<slug>/<arquivo>": {x, y, z}}.
+// x e y = deslocamento em % da área da arte (uns 480×590 no computador); z = tamanho, crescendo a partir dos pés.
+// Grava como os retratos: destaques/posicoes.json pelo servidor local (iniciar-local.bat), a linha "destaques"
+// da tabela site_frames (conta de administrador) ou, sem nenhum dos dois, só neste navegador.
+const NV_POS_PADRAO = { x:0, y:0, z:1 };
+const NV_POS_LOCAL = 'destaques_pos_local2';   // chave deste navegador (a "2" descartou as da área antiga)
+let nvPos = {}, nvPosFile = {}, nvPosRemote = null, nvPosLocal = null;
+let nvEdit = null;   // { id, key, pend:{ chave:{x,y,z} } } enquanto o dono ajusta as artes do destaque
+function nvCleanPos(o){
+  const out = {}, lim = (v, a, b)=>Math.min(b, Math.max(a, v));
+  if(o && typeof o === 'object') Object.keys(o).forEach(k=>{
+    const a = o[k];
+    if(/^[a-z0-9-]{1,60}\/[a-z0-9-]{1,60}$/.test(k) && a && [a.x, a.y, a.z].every(n=>typeof n === 'number' && isFinite(n)))
+      out[k] = { x:lim(a.x, -100, 100), y:lim(a.y, -100, 100), z:lim(a.z, .3, 3) };
+  });
+  return out;
+}
+function nvRecomputePos(){ nvPos = Object.assign({}, nvPosFile, nvPosRemote, isHeroAdmin() ? nvPosLocal : null); }
+function nvArtKey(src){ const m = /^destaques\/([a-z0-9-]+\/[a-z0-9-]+)\.webp/.exec(src || ''); return m ? m[1] : null; }
+function nvPosOf(src){
+  const k = nvArtKey(src);
+  return (k && nvEdit && nvEdit.pend[k]) || (k && nvPos[k]) || NV_POS_PADRAO;
+}
+function nvPosCss(p){ return `translate(${+p.x}%, ${+p.y}%) scale(${+p.z})`; }
+async function nvLoadPosRemote(){
+  if(!visualNovo() || !isSupabaseConfigured()) return;
+  try{
+    const { data, error } = await window.__sb.client.from('site_frames').select('data').eq('id', 'destaques').maybeSingle();
+    if(!error) nvPosRemote = data && data.data ? nvCleanPos(data.data) : null;
+  }catch(e){}
+  nvRecomputePos();
+}
+async function nvSavePos(){
+  const dados = nvCleanPos(nvPos), body = JSON.stringify(dados);
+  const limpa = async ()=>{ nvPosLocal = null; try{ await window.storage.set(NV_POS_LOCAL, ''); }catch(e){} };
+  const host = (typeof location !== 'undefined' && location.hostname) || '';
+  if(host === 'localhost' || host === '127.0.0.1'){
+    try{
+      const r = await fetch('/api/destaques-posicoes', { method:'POST', headers:{ 'Content-Type':'application/json' }, body });
+      if(r.ok){ nvPosFile = dados; await limpa(); return 'arquivo'; }
+    }catch(e){}
+  }
+  if(isHeroAdmin() && isSupabaseConfigured() && state.discordUser){
+    try{
+      const { error } = await window.__sb.client.from('site_frames').upsert({ id:'destaques', data:dados, updated_at:new Date().toISOString() });
+      if(!error){ nvPosRemote = dados; await limpa(); return 'conta'; }
+      console.error('Não consegui gravar site_frames', error);
+    }catch(e){ console.error(e); }
+  }
+  nvPosLocal = dados;
+  try{ await window.storage.set(NV_POS_LOCAL, body); }catch(e){}
+  return 'local';
+}
+const NV_TYPE_COLOR = { Ataque:'#e8806c', Defesa:'#82a3d1', Habilidade:'#7cd29f' };
+function nvDotHtml(aff){ const r = PILL_RGB[aff]; return r ? `<i class="kz-nv-dot" style="background:rgb(${r[0]});color:rgb(${r[0]})"></i>` : ''; }
+function nvMetaHtml(c){
+  const rar = rarityLabel(c.rarity);
+  return `<b class="kz-nv-rar ${rar === 'SR' ? 'sr' : rar === 'R' ? 'r' : ''}">${rar}${isLimitedChar(c) ? ' ★' : ''}</b>`
+    + `<span style="color:${NV_TYPE_COLOR[c.type] || '#E9D9C8'}">${escapeHtml(c.type || '—')}</span>`
+    + nvDotHtml(c.affinity) + `<span>${escapeHtml(c.affinity || '—')}</span>`;
+}
+// Título em pincel: 3 camadas (contorno laranja com brilho, contorno preto, letra branca).
+function nvTtl(text, attrs){
+  const t = escapeHtml(text);
+  return `<span class="kz-nv-ttl"${attrs || ''}><span class="o" aria-hidden="true">${t}</span><span class="k" aria-hidden="true">${t}</span><span class="w">${t}</span></span>`;
+}
+// Formação do time em faixas (casa 1 a 6). Faixas em faixas/<slug>.webp (gerar-artes.py); sem faixa, entra a carta recortada.
+function nvLineupHtml(team, small){
+  const names = (team || []).map(id => (getChar(id) || {}).name).filter(Boolean);
+  return `<div class="kz-nv-lineup${small ? ' sm' : ''}" role="img" aria-label="Formação: ${escapeAttr(names.join(', ') || 'vazia')}">${[0,1,2,3,4,5].map(i => {
+    const c = team && team[i] && getChar(team[i]);
+    return c ? `<span class="ln"><img src="faixas/${slug(c.name)}.webp" alt="" draggable="false" data-onerr="cut" data-card="${portraitSrc(c)}"><b>${i+1}</b></span>`
+             : `<span class="ln empty"><i>+</i><b>${i+1}</b></span>`;
+  }).join('')}</div>`;
+}
+// Depois de cada render, com a prévia ligada: título em pincel (data-text alimenta as camadas do CSS), topo com fogo
+// e kanji em cada aba, e a arte de corpo inteiro na ficha. Personagens (lista) já vem pronto de renderCharsTabNovo.
+const NV_TAB_DECOR = { collection:['集','Sua coleção'], combos:['連','Equipe de 6'], guias:['書','Como o jogo funciona'], tierlist:['番','Seu ranking'],
+  comunidade:['社','Feito por quem joga'], favs:['★','Guardados por você'], perfil:['印','Sua conta'], doar:['援','Apoie o site'] };
+function nvBgHtml(kanji){
+  const embers = NV_EMBERS.slice(0, 6).map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l + 8}%;bottom:${Math.round(b / 2)}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
+  return `<div class="kz-nv-ph-bg" aria-hidden="true"><div class="kz-nv-fire"></div><div class="kz-nv-rays"></div><div class="kz-nv-tone"></div><div class="kz-nv-vig"></div>${kanji ? `<span class="kz-nv-kbig">${kanji}</span>` : ''}${embers}</div>`;
+}
+function nvDecorate(view){
+  if(!visualNovo() || !view) return;
+  view.querySelectorAll('.kz-title, .kz-panel-title, .kz-name-band h1').forEach(el=>{ el.dataset.text = el.textContent.trim(); });
+  if(state.tab === 'chars'){
+    const c = state.viewingCharId && getChar(state.viewingCharId);
+    const hero = c && view.querySelector('.kz-detail-hero');
+    if(hero){
+      hero.insertAdjacentHTML('afterbegin', nvBgHtml('戦'));
+      const card = hero.querySelector('.kz-detail-card');
+      if(card) card.insertAdjacentHTML('afterbegin', `<div class="kz-nv-dchar" aria-hidden="true"><img class="a1" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="a2" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="main" src="${renderSrc(c)}" alt="" data-onerr="card" data-card="${portraitSrc(c)}"></div>`);
+    }
+    return;
+  }
+  const deco = NV_TAB_DECOR[state.tab];
+  const h1 = deco && view.querySelector('h1.kz-title');
+  if(!h1 || h1.closest('.kz-gr')) return;
+  let head = h1.closest('.kz-page-head') || h1.parentElement;
+  if(head.classList.contains('kz-page')){   // título solto na seção: junta título e subtítulo num bloco
+    const w = document.createElement('div');
+    h1.before(w); w.append(h1);
+    if(w.nextElementSibling && w.nextElementSibling.classList.contains('kz-subtitle')) w.append(w.nextElementSibling);
+    head = w;
+  }
+  head.classList.add('kz-nv-pagehead');
+  head.insertAdjacentHTML('afterbegin', nvBgHtml(deco[0]));
+  h1.insertAdjacentHTML('beforebegin', `<span class="kz-nv-tag"><span class="kj">${deco[0]}</span>${deco[1]}</span>`);
+}
 function isFav(id){ return state.favs.includes(id); }
 function isNarrowLayout(){ return (window.innerWidth || 1200) <= 700; }
 function applyNavState(){
@@ -5327,6 +5483,7 @@ function render(){
     : tab === 'perfil' ? renderPerfilTab()
     : tab === 'doar' ? renderDoarTab()
     : renderCombosTab();
+  nvDecorate(view);
   attachCharsHandlers();
   attachCollectionHandlers();
   attachTierListHandlers();
@@ -5426,6 +5583,7 @@ function renderCharsTab(){
   const chars = getFilteredChars();
   const hero = getChar(state.heroCharId) || defaultHeroChar();
   const f = state.filters;
+  if(visualNovo()) return renderCharsTabNovo(chars, hero);
   return `
   <section class="kz-page">
     <div class="kz-hero ${state.heroEdit && state.heroEdit.scope === 'list' ? 'editing' : ''}">
@@ -5469,7 +5627,7 @@ function renderCharsGrid(chars){
   if(!chars.length){
     return `<div class="kz-empty">${state.characters.length ? 'Nenhum personagem corresponde aos filtros.' : 'Nenhum personagem cadastrado ainda. Adicione o primeiro lutador.'}</div>`;
   }
-  return `<div class="kz-grid">${chars.map(renderCharCard).join('')}</div>`;
+  return `<div class="kz-grid">${chars.map(visualNovo() ? renderCharCardNovo : renderCharCard).join('')}</div>`;
 }
 
 function renderCharCard(c){
@@ -5489,9 +5647,10 @@ function renderCharCard(c){
 
 // Troca a arte do topo pro personagem em hover — só mexe na <img>, sem re-render.
 function setHeroChar(id){
-  if(state.heroCharId === id || state.heroEdit) return;
+  if(state.heroCharId === id || state.heroEdit || nvEdit) return;
   state.heroCharId = id;
   const c = getChar(id);
+  if(c && visualNovo() && document.getElementById('heroChar')){ setHeroNovo(c); return; }
   const img = document.getElementById('heroImg');
   const nm = document.getElementById('heroName');
   if(!c) return;
@@ -5537,6 +5696,17 @@ function attachCharsHandlers(){
   view.querySelectorAll('[data-hero-step]').forEach(b=>b.addEventListener('click', ()=> stepHeroChar(parseInt(b.dataset.heroStep, 10))));
   const heroAdj = document.getElementById('heroAdjustBtn');
   if(heroAdj) heroAdj.addEventListener('click', ()=>{ const hc = getChar(state.heroCharId) || defaultHeroChar(); if(hc) startHeroEdit('list', hc.id); });
+  const heroPips = document.getElementById('heroPips');
+  if(heroPips){   // visual novo: artes do destaque alternando
+    const hc = getChar(nvHeroRot.id);
+    if(hc) nvHeroQueue(hc);
+    heroPips.addEventListener('click', e=>{
+      const b = e.target.closest('[data-art]'), c = getChar(nvHeroRot.id);
+      const i = b ? parseInt(b.dataset.art, 10) : -1;
+      if(c && i >= 0 && i !== nvHeroRot.i) nvHeroGo(c, i);
+    });
+  }
+  attachNvEdit();
   attachHeroAdjust();
   const addBtn = document.getElementById('addCharBtn');
   if(addBtn) addBtn.addEventListener('click', ()=>{ if(!isHeroAdmin()) return; state.editingChar = blankChar(); state.editingIsNew = true; render(); });
@@ -5552,9 +5722,361 @@ function softRerenderChars(){
   const wrap = document.getElementById('charsGridWrap');
   if(wrap){ wrap.innerHTML = renderCharsGrid(chars); attachCharCardHandlers(wrap); }
   const count = document.getElementById('charsCount');
-  if(count) count.textContent = `${chars.length} de ${state.characters.length} guerreiros`;
+  if(count) count.textContent = visualNovo() ? `de ${state.characters.length} guerreiros · escolha o seu` : `${chars.length} de ${state.characters.length} guerreiros`;
+  ['charsCountNum', 'charsCountBadge'].forEach(k=>{ const el = document.getElementById(k); if(el) el.textContent = chars.length; });
   const clearBtn = document.getElementById('clearFilters');
   if(clearBtn) clearBtn.hidden = !hasActiveFilters();
+}
+
+/* ---------- Personagens no visual novo (só com a prévia ligada) ----------
+   Usa os mesmos ids da versão atual (searchInput, charsCount, clearFilters, heroImg, charsGridWrap, data-filter,
+   data-hero-step, data-fav), então attachCharsHandlers/softRerenderChars/stepHeroChar servem para as duas. */
+const NV_EMBERS = [[58,60,6,4.2,0],[63,220,4,3.4,.8],[67,120,7,5,1.6],[71,330,5,3.8,.4],[75,40,6,4.6,2.2],[79,260,4,3.2,1.1],[83,150,8,5.4,.2],[87,380,5,4,1.9],[91,90,6,4.4,2.8],[95,210,4,3.6,.6],[52,300,4,3.9,3],[85,470,5,4.8,1.4]];
+let nvSlamDone = false;   // a entrada do título só toca na primeira vez (filtros refazem a aba a cada clique)
+function renderCharsTabNovo(chars, hero){
+  const f = state.filters, total = state.characters.length;
+  const slam = !nvSlamDone; nvSlamDone = true;
+  const embers = NV_EMBERS.map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l}%;bottom:${b}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
+  const chipLabel = (key, v) => (key === 'affinity' ? nvDotHtml(v) : '') + escapeHtml(v);
+  const bandA = `<span>Combos</span><span class="kj">連</span><span>Tier list</span><span class="kj">番</span><span>Coleção</span><span class="kj">集</span><span>Guias</span><span class="kj">書</span><span>Comunidade</span><span class="kj">社</span>`.repeat(4);
+  const bandB = `<span class="jp">ワクワク</span><span>✦</span><span>${total} guerreiros</span><span>✦</span><span>Monte seu combo</span><span>✦</span><span>Suba na tier list</span><span>✦</span><span>Zenkyo</span><span>✦</span>`.repeat(4);
+  let heroSrc = '';
+  if(hero){   // refazer a aba (filtros) mantém a arte que estava na tela
+    const arts = nvArtsOf(hero);
+    if(nvHeroRot.id !== hero.id){ clearTimeout(nvHeroRot.t); nvHeroRot = { id:hero.id, i:0, t:0 }; }
+    nvHeroRot.i = Math.min(nvHeroRot.i, arts.length - 1);
+    heroSrc = arts[nvHeroRot.i];
+  }
+  return `
+  <section class="kz-page kz-nv">
+    <div class="kz-nv-hero${nvEdit ? ' nv-editing' : ''}">
+      <div class="kz-nv-fire" aria-hidden="true"></div>
+      <div class="kz-nv-rays" aria-hidden="true"></div>
+      <svg class="kz-nv-rings" aria-hidden="true" viewBox="-550 -550 1100 1100">
+        <g class="r1"><ellipse cx="0" cy="0" rx="430" ry="300" transform="rotate(-18)" fill="none" stroke="#E8261B" stroke-width="14" stroke-dasharray="520 140 90 160" stroke-linecap="round" opacity=".7"/><ellipse cx="0" cy="0" rx="330" ry="230" transform="rotate(-24)" fill="none" stroke="#FF6A13" stroke-width="5" stroke-dasharray="300 90 40 120" stroke-linecap="round" opacity=".75"/></g>
+        <g class="r2"><ellipse cx="0" cy="0" rx="520" ry="370" transform="rotate(-12)" fill="none" stroke="#FFC21A" stroke-width="3" stroke-dasharray="180 220 60 260" stroke-linecap="round" opacity=".55"/><ellipse cx="0" cy="0" rx="250" ry="170" transform="rotate(-30)" fill="none" stroke="#FFE27A" stroke-width="2.5" stroke-dasharray="120 160" stroke-linecap="round" opacity=".6"/></g>
+      </svg>
+      <div class="kz-nv-tone" aria-hidden="true"></div>
+      <div class="kz-nv-vig" aria-hidden="true"></div>
+      <svg class="kz-nv-bolts" aria-hidden="true" viewBox="0 0 1440 820" preserveAspectRatio="none">
+        <polyline class="kz-nv-bolt b1" points="1010,30 980,120 1012,138 968,240 1004,262 944,392"/>
+        <polyline class="kz-nv-bolt b2" points="1400,90 1372,170 1398,186 1352,300 1384,318 1330,430"/>
+        <polyline class="kz-nv-bolt b3" points="830,520 858,600 832,612 870,700"/>
+      </svg>
+      <div aria-hidden="true">${embers}</div>
+      <span class="kz-nv-sfx" aria-hidden="true" style="right:1.5%;top:110px;font-size:54px;writing-mode:vertical-rl;transform:rotate(12deg);opacity:.85">ゴゴゴ</span>
+      ${hero ? `<div class="kz-nv-char" id="heroChar" aria-hidden="true">
+        <div class="kz-nv-char-in"><div class="kz-nv-char-fr" style="transform:${nvPosCss(nvPosOf(heroSrc))}">
+          <img class="a1" src="${heroSrc}" alt="" data-onerr="hide">
+          <img class="a2" src="${heroSrc}" alt="" data-onerr="hide">
+          <img class="main" id="heroImg" src="${heroSrc}" alt="" data-onerr="card" data-card="${portraitSrc(hero)}">
+        </div></div>
+        <span class="kz-nv-burst"></span>
+        ${nvEdit ? `<span class="kz-nv-guide-box"><b id="nvGuideBoxLbl"></b></span>
+        <span class="kz-nv-guide-cut" id="nvGuideCut"><b>Escondido pela faixa</b></span>
+        <span class="kz-nv-guide-mid"></span>
+        <span class="kz-nv-guide-png" id="nvGuidePng"><b id="nvGuidePngLbl"></b></span>` : ''}
+      </div>
+      ${nvEdit ? nvEditBarHtml() : ''}
+      <div class="kz-nv-plate">
+        ${isHeroAdmin() && !nvEdit ? `<button type="button" class="kz-nv-adjbtn" id="nvAdjBtn" title="Mudar a posição e o tamanho desta arte">✎ Ajustar arte</button>` : ''}
+        <span class="kz-nv-lb">Em destaque</span>
+        ${nvTtl(hero.name, ' id="heroNameStack"')}
+        <div class="kz-nv-pips" id="heroPips">${nvHeroPipsHtml(hero)}</div>
+        <div class="kz-nv-plate-row">
+          <span class="kz-nv-meta" id="heroMeta">${nvMetaHtml(hero)}</span>
+          <div class="kz-hero-nav">
+            <button type="button" class="kz-hero-navbtn" data-hero-step="-1" title="Personagem anterior" aria-label="Personagem anterior">‹</button>
+            <button type="button" class="kz-hero-navbtn" data-hero-step="1" title="Próximo personagem" aria-label="Próximo personagem">›</button>
+          </div>
+        </div>
+      </div>` : ''}
+      <div class="kz-nv-content">
+        <span class="kz-nv-tag"><span class="kj">戦</span>Wiki de guerreiros</span>
+        <div class="kz-nv-titlewrap">
+          <h1 class="kz-nv-h1${slam ? ' slam' : ''}">${nvTtl('Personagens')}</h1>
+          <span class="kz-nv-sfx" aria-hidden="true">ドドド</span>
+        </div>
+        <p class="kz-nv-count"><b id="charsCountNum">${chars.length}</b><span id="charsCount">de ${total} guerreiros · escolha o seu</span></p>
+        <div>
+          <label class="kz-nv-lb" for="searchInput" style="display:block;margin-bottom:10px">Buscar</label>
+          <div class="kz-nv-search"><span class="kz-nv-scan" aria-hidden="true"></span><div>
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFC21A" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+            <input type="text" id="searchInput" placeholder="Nome, tag ou habilidade…" value="${escapeAttr(f.search)}" autocomplete="off">
+          </div></div>
+        </div>
+        <div class="kz-filter-groups">
+          ${LIST_FILTER_GROUPS.map(([label,key,vals])=>`
+          <div class="kz-filter-row">
+            <span class="kz-filter-label">${label}</span>
+            ${vals.map(v=>`<button type="button" class="kz-fchip ${f[key]===v?'active':''}" data-filter="${key}" data-val="${escapeAttr(v)}" aria-pressed="${f[key]===v}">${chipLabel(key, v)}</button>`).join('')}
+          </div>`).join('')}
+        </div>
+        ${renderSF('chars')}
+        <button class="kz-link-btn" id="clearFilters" ${hasActiveFilters()?'':'hidden'}>Limpar filtros</button>
+      </div>
+    </div>
+    <div class="kz-nv-bands" aria-hidden="true">
+      <div class="kz-nv-band b1"><div class="kz-nv-track">${bandA}</div></div>
+      <div class="kz-nv-band b2"><div class="kz-nv-track">${bandB}</div></div>
+    </div>
+    ${isHeroAdmin() ? `<div class="kz-list-tools">
+      <button class="kz-btn kz-btn-sm" id="ioBtn">Importar / Exportar</button>
+      <button class="kz-btn kz-btn-sm" id="addCharBtn">+ Adicionar personagem</button>
+    </div>` : ''}
+    <div class="kz-nv-gridhead">
+      <h2>${nvTtl('Guerreiros')}</h2>
+      <span class="kz-nv-badge" id="charsCountBadge">${chars.length}</span>
+      <svg aria-hidden="true" viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M2 12 C 60 4, 120 16, 180 9 S 270 6, 298 10" fill="none" stroke="#FF6A13" stroke-width="5" stroke-linecap="round"/></svg>
+    </div>
+    <div id="charsGridWrap">${renderCharsGrid(chars)}</div>
+  </section>`;
+}
+function renderCharCardNovo(c){
+  const fav = isFav(c.id);
+  return `
+  <div class="kz-card" data-id="${c.id}" title="Ver ficha completa">
+    <div class="kz-card-art">
+      ${portraitInner(c)}
+      <button class="kz-fav-btn ${fav?'on':''}" data-fav="${c.id}" title="${fav?'Remover dos favoritos':'Favoritar'}" aria-label="Favoritar ${escapeAttr(c.name)}">★</button>
+    </div>
+    <div class="kz-card-body">
+      <div class="kz-card-name">${escapeHtml(c.name)||'(sem nome)'}</div>
+      <div class="kz-card-meta">${nvMetaHtml(c)}</div>
+    </div>
+  </div>`;
+}
+// Troca o personagem em destaque do topo (hover nas cartas e setas ‹ ›) sem refazer a aba.
+function setHeroNovo(c){
+  const box = document.getElementById('heroChar');
+  box.classList.remove('nv-swap');
+  clearTimeout(nvHeroRot.t);
+  nvHeroRot = { id:c.id, i:0, t:0 };
+  nvHeroSetSrc(box, nvArtsOf(c)[0]);
+  const main = document.getElementById('heroImg');
+  if(main) main.dataset.card = portraitSrc(c);
+  document.querySelectorAll('#heroNameStack > span').forEach(s=>{ s.textContent = c.name; });
+  const meta = document.getElementById('heroMeta');
+  if(meta) meta.innerHTML = nvMetaHtml(c);
+  nvHeroStart(c);
+}
+// Põe uma arte no destaque já com a posição e o tamanho dela.
+function nvHeroSetSrc(box, src){
+  box.classList.remove('is-card');
+  const fr = box.querySelector('.kz-nv-char-fr');
+  if(fr) fr.style.transform = nvPosCss(nvPosOf(src));
+  box.querySelectorAll('img').forEach(img=>{ img.style.visibility = ''; img.src = src; });
+}
+// Alterna sozinho entre as artes do mesmo guerreiro (pasta com 2 ou mais), com clarão e anel de energia na troca.
+// Os tracinhos embaixo do nome mostram quantas artes há, a do momento e o tempo até a próxima; clicar pula pra ela.
+const NV_ART_MS = 5200;   // mesmo tempo do kzNvPip em visual-novo.css
+let nvHeroRot = { id:null, i:0, t:0 };
+function nvReduceMotion(){
+  try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches === true; }catch(e){ return false; }
+}
+function nvHeroPipsHtml(c){
+  const n = nvArtsOf(c).length;
+  if(n < 2) return '';
+  const auto = !nvReduceMotion() && !nvEdit;
+  return Array.from({ length:n }, (_, i)=>{
+    const on = i === nvHeroRot.i;
+    return `<button type="button" class="kz-nv-pip${on ? ' on' : ''}" data-art="${i}" aria-label="Arte ${i + 1} de ${n}"${on ? ' aria-current="true"' : ''}>${on && auto ? '<i></i>' : ''}</button>`;
+  }).join('');
+}
+function nvHeroStart(c){
+  const pips = document.getElementById('heroPips');
+  if(pips) pips.innerHTML = nvHeroPipsHtml(c);
+  nvHeroQueue(c);
+}
+function nvHeroQueue(c){
+  clearTimeout(nvHeroRot.t);
+  if(nvEdit || nvArtsOf(c).length < 2 || nvReduceMotion()) return;
+  nvHeroRot.t = setTimeout(()=> nvHeroGo(c, nvHeroRot.i + 1), NV_ART_MS);
+}
+function nvHeroGo(c, i){
+  const box = document.getElementById('heroChar');
+  if(!box || nvHeroRot.id !== c.id) return;                 // saiu da aba ou trocou de guerreiro
+  if(nvEdit){ nvEditSwitch(i); return; }                     // ajustando: troca na hora, sem animação
+  if(document.hidden){ nvHeroQueue(c); return; }            // aba do navegador escondida: espera
+  const arts = nvArtsOf(c);
+  i = (i + arts.length) % arts.length;
+  const src = arts[i];
+  const pre = new Image();                                   // só troca depois que a arte nova carregou
+  pre.onerror = ()=>{ nvHeroRot.i = i; nvHeroQueue(c); };
+  pre.onload = ()=>{
+    const b = document.getElementById('heroChar');           // a aba pode ter sido refeita (filtros) enquanto carregava
+    if(nvHeroRot.id !== c.id || !b || nvEdit) return;
+    nvHeroRot.i = i;
+    b.classList.remove('nv-swap'); void b.offsetWidth; b.classList.add('nv-swap');
+    setTimeout(()=>{                                         // troca no meio do clarão
+      const b2 = document.getElementById('heroChar');
+      if(nvHeroRot.id !== c.id || !b2 || nvEdit) return;
+      nvHeroSetSrc(b2, nvArtsOf(c)[nvHeroRot.i]);
+    }, 300);
+    nvHeroStart(c);
+  };
+  pre.src = src;
+}
+
+/* ---------- Ajustar arte do destaque (só o dono) ----------
+   Para a troca automática e mostra os guias: a área da arte (igual para todas), a linha do meio, o pedaço que a
+   faixa animada esconde e o contorno do PNG (já sem as bordas vazias). Arrastar move, a roda do mouse muda o tamanho,
+   ‹ › e os tracinhos passam para a próxima arte do mesmo guerreiro; "Salvar" grava todas as artes mexidas de uma vez. */
+function nvEditStart(){
+  if(!isHeroAdmin()) return;
+  const c = getChar(nvHeroRot.id);
+  if(!c) return;
+  const src = nvArtsOf(c)[nvHeroRot.i], key = nvArtKey(src);
+  if(!key){ showToast(`Para ajustar, ponha um PNG em Destaques/${c.name}/ e rode o gerar-artes.py`); return; }
+  clearTimeout(nvHeroRot.t);
+  nvEdit = { id:c.id, key, pend:{ [key]:{ ...nvPosOf(src) } } };
+  render();
+}
+function nvEditSwitch(i){
+  const c = getChar(nvEdit.id), box = document.getElementById('heroChar');
+  if(!c || !box) return;
+  const arts = nvArtsOf(c);
+  i = (i + arts.length) % arts.length;
+  const src = arts[i], key = nvArtKey(src);
+  nvHeroRot.i = i;
+  if(key && !nvEdit.pend[key]) nvEdit.pend[key] = { ...nvPosOf(src) };
+  nvEdit.key = key;
+  nvHeroSetSrc(box, src);
+  nvHeroStart(c);
+  nvEditApply();
+}
+function nvEditBarHtml(){
+  const ctl = (k, label, min, max, step) => `<div class="ctl"><label for="nvEd_${k}">${label}<span data-nv-val="${k}"></span></label><input type="range" id="nvEd_${k}" data-nv-ed="${k}" min="${min}" max="${max}" step="${step}"></div>`;
+  return `
+      <div class="kz-nv-artedit" id="nvArtEdit">
+        <div class="hd"><b>Ajustar arte</b><span id="nvEditWhich"></span></div>
+        <p class="tip">Arraste a arte para mover · roda do mouse muda o tamanho · ‹ › e os tracinhos trocam de arte</p>
+        ${ctl('z', 'Tamanho', 0.3, 3, 0.01)}${ctl('x', 'Horizontal', -60, 60, 0.5)}${ctl('y', 'Vertical', -60, 60, 0.5)}
+        <p class="info" id="nvEditInfo"></p>
+        <div class="btns">
+          <button type="button" class="kz-btn kz-btn-sm kz-nv-edall" id="nvEdResetAll" title="Volta a posição e o tamanho de todas as artes de todos os guerreiros">Todas ao padrão</button>
+          <button type="button" class="kz-btn kz-btn-sm" id="nvEdReset" title="Volta só esta arte">Padrão</button>
+          <button type="button" class="kz-btn kz-btn-sm" id="nvEdCancel">Cancelar</button>
+          <button type="button" class="kz-btn kz-btn-primary kz-btn-sm" id="nvEdSave">Salvar</button>
+        </div>
+      </div>`;
+}
+function nvEditApply(){
+  if(!nvEdit) return;
+  const p = nvEdit.pend[nvEdit.key], box = document.getElementById('heroChar');
+  if(!p || !box) return;
+  const fr = box.querySelector('.kz-nv-char-fr');
+  if(fr) fr.style.transform = nvPosCss(p);
+  document.querySelectorAll('input[data-nv-ed]').forEach(r=>{ const v = p[r.dataset.nvEd]; if(+r.value !== v) r.value = v; });
+  document.querySelectorAll('[data-nv-val]').forEach(s=>{ const k = s.dataset.nvVal; s.textContent = k === 'z' ? p.z.toFixed(2) + '×' : (p[k] > 0 ? '+' : '') + p[k].toFixed(1) + '%'; });
+  const c = getChar(nvEdit.id), n = c ? nvArtsOf(c).length : 1;
+  const which = document.getElementById('nvEditWhich');
+  if(which && c) which.textContent = `${c.name} · arte ${nvHeroRot.i + 1} de ${n}`;
+  nvEditGuide();
+}
+// Onde a figura está dentro do PNG (pixels não transparentes), medido uma vez por arte.
+const nvFigCache = {};
+function nvFigBox(img){
+  const k = img.getAttribute('src'), w = img.naturalWidth, h = img.naturalHeight;
+  if(nvFigCache[k]) return nvFigCache[k];
+  let r = { x0:0, y0:0, x1:w, y1:h };
+  try{
+    const cv = document.createElement('canvas');
+    cv.width = w; cv.height = h;
+    const cx = cv.getContext('2d');
+    cx.drawImage(img, 0, 0);
+    const d = cx.getImageData(0, 0, w, h).data;
+    let x0 = w, y0 = h, x1 = -1, y1 = -1;
+    for(let y = 0; y < h; y++){
+      for(let x = 0, i = y * w * 4 + 3; x < w; x++, i += 4){
+        if(d[i] > 12){ if(x < x0) x0 = x; if(x > x1) x1 = x; if(y < y0) y0 = y; y1 = y; }
+      }
+    }
+    if(x1 >= 0) r = { x0, y0, x1:x1 + 1, y1:y1 + 1 };
+  }catch(e){}
+  return (nvFigCache[k] = r);
+}
+// Guias: a área (igual para todas as artes: PNG 1040×1280, acima do cartão do nome) e o contorno da figura,
+// já com a posição e o tamanho do ajuste. As medidas aparecem na escala do PNG para dar para padronizar entre artes.
+function nvEditGuide(){
+  const box = document.getElementById('heroChar'), img = document.getElementById('heroImg');
+  const g = document.getElementById('nvGuidePng'), lbl = document.getElementById('nvGuidePngLbl');
+  if(!nvEdit || !box || !img || !g) return;
+  const W = box.offsetWidth, H = box.offsetHeight, nw = img.naturalWidth, nh = img.naturalHeight;
+  const boxLbl = document.getElementById('nvGuideBoxLbl');
+  if(boxLbl) boxLbl.textContent = `Área da arte · PNG 1040 × 1280 · ${W} × ${H} px na tela`;
+  const bands = document.querySelector('.kz-nv-bands'), cut = document.getElementById('nvGuideCut');
+  if(bands && cut){
+    const top = bands.getBoundingClientRect().top - box.getBoundingClientRect().top;
+    cut.style.top = Math.max(0, Math.min(H, top)) + 'px';
+    cut.hidden = top >= H;
+  }
+  if(!nw || !nh || !img.complete){ g.hidden = true; img.addEventListener('load', nvEditGuide, { once:true }); return; }
+  g.hidden = false;
+  const p = nvEdit.pend[nvEdit.key] || NV_POS_PADRAO, f = nvFigBox(img);
+  const s = Math.min(W / nw, H / nh), il = (W - nw * s) / 2, it = H - nh * s;          // PNG encaixado na área
+  const tx = X => W / 2 + p.z * (il + X * s - W / 2) + p.x / 100 * W;                  // + ajuste (cresce a partir dos pés)
+  const ty = Y => H + p.z * (it + Y * s - H) + p.y / 100 * H;
+  const L = tx(f.x0), T = ty(f.y0), R = tx(f.x1), B = ty(f.y1);
+  g.style.left = L + 'px'; g.style.top = T + 'px'; g.style.width = (R - L) + 'px'; g.style.height = (B - T) + 'px';
+  const ux = 1040 / W, uy = 1280 / H;                                                  // de px da tela para px do PNG padrão
+  const fw = Math.round((R - L) * ux), fh = Math.round((B - T) * uy), topo = Math.round(T * uy);
+  if(lbl) lbl.textContent = `Figura ${fw} × ${fh} px`;
+  const info = document.getElementById('nvEditInfo');
+  if(info) info.textContent = `Na escala do PNG 1040 × 1280: figura com ${fw} × ${fh} px e o topo dela ${topo >= 0 ? 'a ' + topo + ' px do topo da área' : Math.abs(topo) + ' px acima da área (cortado)'}.`
+    + (nw === 1040 && nh === 1280 ? '' : ` Este PNG tem ${nw} × ${nh}: rode o gerar-artes.py para padronizar.`);
+}
+async function nvEditClose(save){
+  const e = nvEdit;
+  nvEdit = null;
+  if(e && save){
+    Object.keys(e.pend).forEach(k=>{
+      const p = e.pend[k];
+      if(Math.abs(p.x) < .05 && Math.abs(p.y) < .05 && Math.abs(p.z - 1) < .005) delete nvPos[k];
+      else nvPos[k] = { x:+p.x.toFixed(1), y:+p.y.toFixed(1), z:+p.z.toFixed(3) };
+    });
+    render();
+    const how = await nvSavePos();
+    showToast(how === 'arquivo' ? 'Posição salva no site (destaques/posicoes.json) — vale para todos quando publicar'
+      : how === 'conta' ? 'Posição salva na sua conta — já vale para todos os visitantes'
+      : 'Posição salva só neste navegador — abra pelo iniciar-local.bat para gravar no site');
+    return;
+  }
+  render();
+}
+function attachNvEdit(){
+  const adj = document.getElementById('nvAdjBtn');
+  if(adj) adj.addEventListener('click', nvEditStart);
+  if(!nvEdit) return;
+  const lim = (v, a, b)=>Math.min(b, Math.max(a, v));
+  const cur = ()=> nvEdit && nvEdit.pend[nvEdit.key];
+  document.querySelectorAll('input[data-nv-ed]').forEach(r=>r.addEventListener('input', ()=>{ const p = cur(); if(p){ p[r.dataset.nvEd] = parseFloat(r.value); nvEditApply(); } }));
+  document.getElementById('nvEdReset').addEventListener('click', ()=>{ const p = cur(); if(p){ Object.assign(p, NV_POS_PADRAO); nvEditApply(); } });
+  document.getElementById('nvEdResetAll').addEventListener('click', ()=> customConfirm('Voltar TODAS as artes de todos os guerreiros para a posição e o tamanho padrão?', async ()=>{
+    nvEdit = null;
+    nvPos = {};
+    render();
+    const how = await nvSavePos();
+    showToast(how === 'local' ? 'Todas as artes voltaram ao padrão (neste navegador)' : 'Todas as artes voltaram ao padrão');
+  }));
+  document.getElementById('nvEdCancel').addEventListener('click', ()=> nvEditClose(false));
+  document.getElementById('nvEdSave').addEventListener('click', ()=> nvEditClose(true));
+  const box = document.getElementById('heroChar');
+  if(!box) return;
+  let last = null;
+  box.addEventListener('pointerdown', ev=>{ last = { x:ev.clientX, y:ev.clientY }; box.classList.add('drag'); try{ box.setPointerCapture(ev.pointerId); }catch(e){} });
+  box.addEventListener('pointermove', ev=>{
+    const p = cur();
+    if(!last || !p) return;
+    p.x = lim(p.x + (ev.clientX - last.x) / box.offsetWidth * 100, -100, 100);
+    p.y = lim(p.y + (ev.clientY - last.y) / box.offsetHeight * 100, -100, 100);
+    last = { x:ev.clientX, y:ev.clientY };
+    nvEditApply();
+  });
+  const end = ()=>{ last = null; box.classList.remove('drag'); };
+  box.addEventListener('pointerup', end); box.addEventListener('pointercancel', end);
+  box.addEventListener('wheel', ev=>{ const p = cur(); if(!p) return; ev.preventDefault(); p.z = lim(+(p.z + (ev.deltaY < 0 ? .03 : -.03)).toFixed(2), .3, 3); nvEditApply(); }, { passive:false });
+  nvEditApply();
 }
 
 /* ======================= PERSONAGENS: FICHA ======================= */
@@ -5826,6 +6348,7 @@ function attachHeroAdjust(){
 // Passa o retrato do topo da aba Personagens pro anterior/próximo da lista (respeita os filtros).
 function stepHeroChar(dir){
   if(state.heroEdit) return;
+  if(nvEdit){ nvEditSwitch(nvHeroRot.i + dir); return; }   // ajustando arte: ‹ › passam pelas artes do mesmo guerreiro
   const list = getFilteredChars();
   if(!list.length) return;
   const cur = state.heroCharId || (defaultHeroChar() || {}).id;
@@ -7345,6 +7868,7 @@ function renderCommunityTeamBody(p){
     return slotCardHtml(c || null, i, { ro: true, attrs: '', draggable: false, stars: c ? communityStarsHtml(lvs[id]) : '', hint: 'Vazia' });
   }).join('');
   return `${comboCountHtml(s.team)}${compositionHtml(s.team)}
+    ${visualNovo() ? nvLineupHtml(p.data.team) : ''}
     <div class="kz-slots kz-com-slotsview">${slots}</div>
     ${s.missingChars ? `<div class="kz-muted" style="font-size:12px;">${s.missingChars} guerreiro(s) dessa equipe não existem no seu site (personagem criado por quem postou).${''}</div>` : ''}`;
 }
@@ -7362,6 +7886,7 @@ function communityDonorOf(userId){
 }
 // Prévia curta pra lista: 6 retratos na ordem das casas (time) ou os ranks com quantos guerreiros cada um tem (tier list).
 function renderCommunityPreview(p){
+  if(p.kind === 'team' && visualNovo()) return nvLineupHtml(p.data.team, true);
   if(p.kind === 'team'){
     return `<div class="kz-com-pv-team">${p.data.team.map(id => { const c = id && getChar(id); return c ? `<span class="kz-com-thumb big" title="${escapeAttr(c.name)}">${portraitInner(c)}</span>` : `<span class="kz-com-thumb big empty"></span>`; }).join('')}</div>`;
   }
@@ -7924,6 +8449,7 @@ function renderCombosTab(){
           ${comboCountHtml()}
           ${compositionHtml()}
           ${state.optInfo && canUndoOptimize() ? `<div class="kz-opt-info">${state.optInfo}</div>` : ''}
+          ${visualNovo() ? nvLineupHtml(state.team) : ''}
           <div class="kz-slots">${SLOT_VISUAL_ORDER.map(renderSlot).join('')}</div>
           ${renderRecommendations()}
         </div>
@@ -8734,7 +9260,7 @@ function renderFavsTab(){
       <h1 class="kz-title">Favoritos</h1>
       <div class="kz-subtitle">${n} ${n===1?'guerreiro guardado':'guerreiros guardados'}</div>
     </div>
-    ${n ? `<div class="kz-grid">${favChars.map(renderCharCard).join('')}</div>` : `
+    ${n ? `<div class="kz-grid">${favChars.map(visualNovo() ? renderCharCardNovo : renderCharCard).join('')}</div>` : `
     <div class="kz-fav-empty">
       <img src="${ballSrc(5)}" alt="">
       <div class="txt">
@@ -8852,12 +9378,14 @@ window.addEventListener('supabase-ready', async ()=>{
     if(!session) state.myDonationTotal = null;
     refreshCharacters();
     recomputeHeroFrames();
+    nvRecomputePos();
     if(session && isHeroAdmin()) loadHeroFramesRemote();
     render();
   });
   await refreshDonorsRemote();
   await refreshProfilesRemote();
   await loadHeroFramesRemote();
+  await nvLoadPosRemote();
   if(loaded) render();
 });
 

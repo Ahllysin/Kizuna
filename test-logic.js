@@ -1198,7 +1198,7 @@ async function main(){
     assert.ok(/object-src 'none'/.test(have) && /base-uri 'self'/.test(have) && /form-action 'self'/.test(have));
     const connect = (have.match(/connect-src ([^;]*)/) || [])[1] || '';
     assert.ok(!/\*|https:\s|https:$/.test(connect), 'connect-src só pode ter o próprio site e o Supabase (' + connect + ')');
-    assert.strictEqual(csp.inlineScripts(html).length, 2, 'esperava 2 scripts inline (Supabase e site); se mudou, confira a CSP');
+    assert.strictEqual(csp.inlineScripts(html).length, 3, 'esperava 3 scripts inline (chave da prévia do visual novo, Supabase e site); se mudou, confira a CSP');
   });
 
   await test('não existe handler inline (onerror, onclick, onload…) no HTML — a CSP bloquearia', () => {
@@ -1233,7 +1233,10 @@ async function main(){
       return cp === parseInt(r, 16);
     });
     const ranges = [...css.matchAll(/font-family:'Shippori Mincho'[^}]*unicode-range:([^;]+);/g)].map(m => m[1]);
-    const faltando = cjk.filter(cp => !ranges.some(r => inRange(cp, r))).map(cp => String.fromCodePoint(cp));
+    // katakana (onomatopeias do visual novo, ex.: ワクワク) vêm da Dela Gothic One, não da Shippori
+    const kanaRanges = [...css.matchAll(/font-family:'Dela Gothic One'[^}]*unicode-range:([^;]+);/g)].map(m => m[1]);
+    const isKana = cp => cp >= 0x30A0 && cp <= 0x30FF;
+    const faltando = cjk.filter(cp => !(isKana(cp) ? kanaRanges : ranges).some(r => inRange(cp, r))).map(cp => String.fromCodePoint(cp));
     assert.deepStrictEqual(faltando, [], 'kanji sem fonte local (rode "node fetch-fonts.js"): ' + faltando.join(' '));
     const arquivos = [...css.matchAll(/url\(([^)]+\.woff2)\)/g)].map(m => m[1]);
     arquivos.forEach(f => assert.ok(fs.existsSync(path.join(__dirname, 'fonts', f)), 'arquivo de fonte ausente: ' + f));
