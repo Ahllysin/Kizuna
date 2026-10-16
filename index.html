@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-SqZ7iru0JSOfIOxt0aF41lMe+fFzNKECXpBiopr396c=' 'sha256-XazxIiv/qoOtTPhFGtdmVvlC46LbI7YpqzE4IC44GkA='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-ie1H8YykbmIjAp1ETlbdSwjJvnQmsc4fQ8SVyJVfupg=' 'sha256-DRGFPR95pM0+s85XBZB6HQ7c4uMeDs1IWsKx7cyJECY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -5399,13 +5399,36 @@ function nvLineupHtml(team, small){
 // e kanji em cada aba, e a arte de corpo inteiro na ficha. Personagens (lista) já vem pronto de renderCharsTabNovo.
 const NV_TAB_DECOR = { collection:['集','Sua coleção'], combos:['連','Equipe de 6'], guias:['書','Como o jogo funciona'], tierlist:['番','Seu ranking'],
   comunidade:['社','Feito por quem joga'], favs:['★','Guardados por você'], perfil:['印','Sua conta'], doar:['援','Apoie o site'] };
-function nvBgHtml(kanji){
+function nvBgHtml(kanji, kanjiStyle){
   const embers = NV_EMBERS.slice(0, 6).map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l + 8}%;bottom:${Math.round(b / 2)}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
-  return `<div class="kz-nv-ph-bg" aria-hidden="true"><div class="kz-nv-fire"></div><div class="kz-nv-rays"></div><div class="kz-nv-tone"></div><div class="kz-nv-vig"></div>${kanji ? `<span class="kz-nv-kbig">${kanji}</span>` : ''}${embers}</div>`;
+  return `<div class="kz-nv-ph-bg" aria-hidden="true"><div class="kz-nv-fire"></div><div class="kz-nv-rays"></div><div class="kz-nv-tone"></div><div class="kz-nv-vig"></div>${kanji ? `<span class="kz-nv-kbig"${kanjiStyle ? ` style="${kanjiStyle}"` : ''}>${kanji}</span>` : ''}${embers}</div>`;
+}
+// Topo das abas no formato do canvas: etiqueta, título em pincel (bate na tela só na primeira visita à aba), texto e,
+// à direita, o que a aba quiser (botões, contador, esferas). o = { key, kanji, tag, title, size, sub, side, kanjiStyle }
+const nvSlamSeen = new Set();
+function nvPageHeadHtml(o){
+  const slam = !nvSlamSeen.has(o.key); nvSlamSeen.add(o.key);
+  return `
+    <div class="kz-nv-pagehead kz-nv-ph">
+      ${nvBgHtml(o.kanji, o.kanjiStyle)}
+      <div class="kz-nv-ph-in">
+        <div class="kz-nv-ph-main">
+          <span class="kz-nv-tag"><span class="kj">${o.tagKanji || o.kanji}</span>${escapeHtml(o.tag)}</span>
+          <h1 class="kz-nv-ph-h1${slam ? ' slam' : ''}" style="--fs:${o.size || 116}px">${nvTtl(o.title)}</h1>
+          ${o.sub ? `<p class="kz-nv-ph-sub">${o.sub}</p>` : ''}${o.after || ''}
+        </div>
+        ${o.side ? `<div class="kz-nv-ph-side">${o.side}</div>` : ''}
+      </div>
+    </div>`;
+}
+// Número grande em degradê + legenda (contador do topo das abas).
+function nvCountHtml(n, label, ids){
+  return `<p class="kz-nv-count"><b${ids && ids[0] ? ` id="${ids[0]}"` : ''}>${n}</b><span${ids && ids[1] ? ` id="${ids[1]}"` : ''}>${escapeHtml(label)}</span></p>`;
 }
 function nvDecorate(view){
   if(!visualNovo() || !view) return;
   view.querySelectorAll('.kz-title, .kz-panel-title, .kz-name-band h1').forEach(el=>{ el.dataset.text = el.textContent.trim(); });
+  if(view.querySelector('.kz-nv-ph')) return;   // a aba já veio com o topo novo (nvPageHeadHtml)
   if(state.tab === 'chars'){
     const c = state.viewingCharId && getChar(state.viewingCharId);
     const hero = c && view.querySelector('.kz-detail-hero');
@@ -9232,7 +9255,51 @@ function attachGuiasHandlers(){
 }
 
 /* ======================= FAVORITOS ======================= */
+// Ordem dos Favoritos no visual novo: 'recentes' (guardados por último primeiro), 'raridade' ou 'nome'. Fica só neste navegador.
+const FAV_SORTS = [['recentes','Guardados por último'],['raridade','Raridade'],['nome','Nome']];
+function favSortKey(){
+  try{ const v = localStorage.getItem('kiai_favs_ordem'); if(FAV_SORTS.some(s=>s[0] === v)) return v; }catch(e){}
+  return 'recentes';
+}
+function sortedFavChars(){
+  const favs = state.characters.filter(c=>isFav(c.id));
+  const k = favSortKey();
+  if(k === 'raridade') return sortByRarity(favs);
+  if(k === 'nome') return favs.slice().sort((a, b)=> a.name.localeCompare(b.name, 'pt-BR'));
+  const pos = new Map(state.favs.map((id, i)=>[id, i]));
+  return favs.slice().sort((a, b)=> pos.get(b.id) - pos.get(a.id));
+}
+function renderFavCardNovo(c){
+  return `
+  <div class="kz-card kz-nvfav" data-id="${c.id}" title="Ver ficha completa">
+    <div class="kz-card-art">${portraitInner(c)}</div>
+    <div class="kz-card-body">
+      <div class="kz-card-name">${escapeHtml(c.name)||'(sem nome)'}</div>
+      <div class="kz-nvfav-row">
+        <span class="kz-card-meta">${nvMetaHtml(c)}</span>
+        <button type="button" class="kz-nvfav-btn" data-fav="${c.id}" aria-pressed="true" aria-label="Tirar ${escapeAttr(c.name)} dos favoritos" title="Tirar dos favoritos"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="#FFC21A"><path d="M12 2.8l2.8 6 6.5.7-4.9 4.4 1.4 6.5L12 17l-5.8 3.4 1.4-6.5-4.9-4.4 6.5-.7z"/></svg></button>
+      </div>
+    </div>
+  </div>`;
+}
+function renderFavsTabNovo(){
+  const favChars = sortedFavChars(), n = favChars.length, k = favSortKey();
+  const ordenar = n > 1 ? `<label class="kz-nv-lb kz-nvfav-sort">Ordenar<select id="favSort">${FAV_SORTS.map(([v, l])=>`<option value="${v}"${v === k ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` : '';
+  const mais = `
+      <button type="button" class="kz-nvfav-more" id="favGoChars">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FFC21A" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.8l2.8 6 6.5.7-4.9 4.4 1.4 6.5L12 17l-5.8 3.4 1.4-6.5-4.9-4.4 6.5-.7z"/></svg>
+        <b>${n ? 'Guardar mais' : 'Nenhum favorito ainda'}</b>
+        <span>Toque na estrela de um guerreiro em Personagens.</span>
+      </button>`;
+  return `
+  <section class="kz-page kz-nvp">
+    ${nvPageHeadHtml({ key:'favs', kanji:'星', tagKanji:'★', tag:'Guardados por você', title:'Favoritos',
+      after: nvCountHtml(n, n === 1 ? 'guerreiro guardado' : 'guerreiros guardados'), side: ordenar, kanjiStyle:'right:8%;top:-50px' })}
+    <div class="kz-grid kz-nvfav-grid">${favChars.map(renderFavCardNovo).join('')}${mais}</div>
+  </section>`;
+}
 function renderFavsTab(){
+  if(visualNovo()) return renderFavsTabNovo();
   const favChars = sortByRarity(state.characters.filter(c=>isFav(c.id)));
   const n = favChars.length;
   return `
@@ -9258,6 +9325,11 @@ function attachFavsHandlers(){
   attachCharCardHandlers(view);
   const go = document.getElementById('favGoChars');
   if(go) go.addEventListener('click', ()=> goTab('chars'));
+  const sort = document.getElementById('favSort');
+  if(sort) sort.addEventListener('change', ()=>{
+    try{ localStorage.setItem('kiai_favs_ordem', sort.value); }catch(e){}
+    render();
+  });
 }
 
 /* ======================= DOAR ======================= */
