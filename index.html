@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-Zemq/EwNqL+6Ju+jV0skQnG3pO4Zb3sY4cVmCez7lmI=' 'sha256-SJ4RCVSedvkng01hrb8se3Tf/s33b4b32l8F9jn0DyY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-SqZ7iru0JSOfIOxt0aF41lMe+fFzNKECXpBiopr396c=' 'sha256-XazxIiv/qoOtTPhFGtdmVvlC46LbI7YpqzE4IC44GkA='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -5313,7 +5313,12 @@ function portraitSrc(c){ return `portraits/${slug(c.name)}.webp`; }
 function visualNovo(){ try{ return document.documentElement.classList.contains('vis-novo') === true; }catch(e){ return false; } }
 // Arte da ficha (pasta Fichas/<personagem>) e faixa do time (pasta Faixas/<personagem>), convertidas por
 // gerar-artes.py; ?v= muda quando a arte muda, então a troca aparece sem esperar o cache.
-let nvFichaVer = {}, nvFaixaVer = {};
+let nvFichaVer = {}, nvFaixaVer = {}, nvIconeVer = {};
+// Ícone pequeno (pasta Icones/<personagem>): só existe no visual novo e depois de carregar icones/versoes.json.
+function iconeSrc(c){
+  const s = slug(c.name);
+  return Object.prototype.hasOwnProperty.call(nvIconeVer, s) ? `icones/${s}.webp?v=${nvIconeVer[s]}` : null;
+}
 function faixaSrc(c){
   const s = slug(c.name), v = Object.prototype.hasOwnProperty.call(nvFaixaVer, s) ? nvFaixaVer[s] : '';
   return `faixas/${s}.webp${v ? '?v=' + v : ''}`;
@@ -5353,6 +5358,14 @@ async function loadNvArts(){
       const d = await r.json(), ok = {};
       Object.keys(d || {}).forEach(k=>{ if(/^[a-z0-9-]+$/.test(k) && /^[a-z0-9]{1,16}$/.test(d[k])) ok[k] = d[k]; });
       nvFaixaVer = ok;
+    }
+  }catch(e){}
+  try{
+    const r = await fetch('icones/versoes.json', { cache:'no-cache' });
+    if(r.ok){
+      const d = await r.json(), ok = {};
+      Object.keys(d || {}).forEach(k=>{ if(/^[a-z0-9-]+$/.test(k) && /^[a-z0-9]{1,16}$/.test(d[k])) ok[k] = d[k]; });
+      nvIconeVer = ok;
     }
   }catch(e){}
 }
@@ -6470,8 +6483,10 @@ function affinityPopHtml(giftSlug, atual){
   const av = n=>{
     const o = state.characters.find(x=>x.name === n);
     if(!o) return `<span class="cdp-pop-av fora" title="${escapeAttr(n)} (ainda não está no site)"><span class="face"><span class="ini">${escapeHtml(initials(n))}</span></span><span class="nm">${escapeHtml(n)}</span></span>`;
-    const fr = heroFrame('detail', o.id);
-    return `<button type="button" class="cdp-pop-av${n === atual ? ' eu' : ''}" ${n === atual ? '' : `data-open-char="${escapeAttr(o.id)}"`} title="${escapeAttr(n)}"><span class="face"><img src="portraits/mini/${slug(o.name)}.webp" alt="" loading="lazy" style="${heroStyleOf(fr)}" data-onerr="hide"></span><span class="nm">${escapeHtml(n)}</span></button>`;
+    const ico = iconeSrc(o);   // ícone da pasta Icones; sem ele, o rosto recortado da carta
+    const img = ico ? `<img src="${ico}" alt="" loading="lazy" data-onerr="hide">`
+      : `<img src="portraits/mini/${slug(o.name)}.webp" alt="" loading="lazy" style="${heroStyleOf(heroFrame('detail', o.id))}" data-onerr="hide">`;
+    return `<button type="button" class="cdp-pop-av${n === atual ? ' eu' : ''}" ${n === atual ? '' : `data-open-char="${escapeAttr(o.id)}"`} title="${escapeAttr(n)}"><span class="face">${img}</span><span class="nm">${escapeHtml(n)}</span></button>`;
   };
   return `<div class="cdp-food-pop" role="tooltip"><span class="t">Quem usa este presente</span><div class="cdp-food-pop-grid">${users.map(av).join('')}</div></div>`;
 }
