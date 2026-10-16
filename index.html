@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-R1z3LHnMN4HVUjiVna5ZuALxMGhI39TDGyyaqhnFpfQ=' 'sha256-99i3KBq+N+NKT+5yiWhHB3MPrexlb/n5zI4LnKlxacY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-WH2wqtIadZeRrCBn5jVwluTdRE3kts51fzHEdkPvgOg=' 'sha256-Ei4UK/YEbOtD/DIEL2oHrGIjlOOAD/52wizZX2Cnca4='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -997,11 +997,21 @@ input::placeholder,textarea::placeholder{color:var(--text-faint);}
 .kz-donate-layout{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:22px;align-items:start;}
 .kz-donate-card{padding:24px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
 .kz-donate-card img{width:100%;max-width:220px;border-radius:12px;display:block;background:#fff;padding:10px;}
-/* O embed da LivePix vem com uma faixa de texto em cima e embaixo do QR (fixas, 220x280) —
-   corta essas faixas escondendo o iframe atrás de uma janela do tamanho só do QR (220x220)
-   e deslocando ele pra cima, em vez de mostrar o widget inteiro. */
-.kz-qr-crop{width:100%;max-width:220px;height:220px;overflow:hidden;border-radius:12px;position:relative;background:#fff;}
-.kz-qr-crop iframe{position:absolute;top:-24px;left:0;width:100%;height:280px;border:none;}
+/* doação pelo Mercado Pago (aba Doar) */
+.kz-mp-valores{display:flex;flex-wrap:wrap;gap:8px;}
+.kz-mp-campo{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--text-soft);}
+.kz-mp-campo input{padding:10px 12px;border-radius:8px;border:1px solid rgba(255,170,70,.4);background:rgba(8,7,14,.85);color:var(--text);font-size:15px;}
+.kz-mp-campo input:disabled{opacity:.45;}
+.kz-mp-total{margin:0;font-size:15px;color:var(--text-soft);}
+.kz-mp-total strong{font-size:22px;color:var(--gold-light);}
+.kz-mp-metodos,.kz-mp-dica,.kz-mp-quem{margin:0;font-size:13px;line-height:1.5;color:var(--text-dim);}
+.kz-mp-retorno,.kz-mp-status{padding:10px 14px;border-radius:10px;font-size:14px;font-weight:700;line-height:1.45;}
+.kz-mp-retorno.ok{background:rgba(47,158,79,.18);border:1px solid #2f9e4f;color:#bff0cc;}
+.kz-mp-retorno.wait{background:rgba(201,162,55,.15);border:1px solid #c9a237;color:#f3e2a8;}
+.kz-mp-retorno.err,.kz-mp-status.err{background:rgba(216,54,26,.15);border:1px solid #d8361a;color:#ffc2b5;}
+.kz-mp-status:empty{display:none;}
+.kz-donate-cta:disabled{opacity:.65;cursor:wait;}
+.kz-donate-card .kz-label{align-self:flex-start;}
 .kz-donate-cta{
   display:flex;align-items:center;gap:10px;padding:13px 26px;border-radius:8px;border:1.5px solid var(--gold);
   background:var(--grad-primary);color:#fff;font-size:16px;font-weight:700;box-shadow:0 0 16px rgba(255,90,30,.4);width:100%;justify-content:center;
@@ -4643,6 +4653,8 @@ let state = {
   donors: [],                       // [{id, number, name, amount, quote, discord, link, honras:[], active}] — Aliança Z (aba Doar + widget flutuante)
   nextDonorNumber: 1,               // próximo número permanente a distribuir (nunca reaproveita número de quem foi removido)
   donorWidgetCollapsed: false,      // widget flutuante "Top 3 apoiadores" recolhido pro canto
+  mpDoacao: { valor:20, outro:false, outroValor:'', nome:'', anonimo:false, estado:'', msg:'' },   // aba Doar (Mercado Pago)
+  mpRetorno: null,                  // 'aprovada' | 'pendente' | 'recusada' ao voltar do Mercado Pago
   myDonationTotal: null,            // soma real das doações do próprio login (null = desconhecido)
   donorProfileId: null,             // id do apoiador com o perfil aberto no popup, ou null
   discordUser: null,                // {id, username, avatarUrl} — sessão Supabase/Discord da Aliança Z, ou null
@@ -4741,6 +4753,7 @@ async function loadState(){
   await loadHeroFrames();
   await loadNvArts();
   applyGuideHash();
+  applyDoacaoRetorno();
   loaded = true;
   render();
 }
@@ -9665,14 +9678,100 @@ function attachFavsHandlers(){
 }
 
 /* ======================= DOAR ======================= */
-// Widget "QR Code" gerado na conta LivePix do site (livepix.gg/ahllysin) — mostra um QR
-// Pix que já leva pro link de doação. A LivePix tem uma API (docs.livepix.gg/api) que lista
-// pagamentos recebidos, mas ela exige OAuth2 com client_secret — não dá pra chamar com
-// segurança direto do navegador (o segredo ficaria visível pra qualquer visitante ver o
-// código-fonte). Por isso o ranking abaixo é mantido à mão pelo dono do site, no painel no
-// fim da lista, em vez de puxado automaticamente da LivePix.
-const LIVEPIX_QR_EMBED_URL = 'https://widget.livepix.gg/embed/a41ca8b4-30b9-493b-997e-a1570b9ab49f';
-const LIVEPIX_DONATE_URL = 'https://livepix.gg/ahllysin';
+// Doações pelo Mercado Pago (Checkout Pro). O site chama a Edge Function "mp-doacao" (Supabase), que cria a
+// preferência com o Access Token guardado só no servidor e devolve o init_point; a pessoa paga na página do Mercado
+// Pago (Pix, cartão ou saldo) e volta com ?doacao=aprovada|pendente|recusada. Quem lança o apoio na Aliança Z é o
+// webhook "mp-webhook", depois de conferir o pagamento no próprio Mercado Pago — a volta para o site só mostra o aviso.
+// Logado com Discord: soma no apoiador ligado ao perfil. Sem login: com nome entra no mural; anônimo fica fora dele.
+const MP_VALORES = [10, 20, 50, 100];
+const MP_VALOR_MIN = 5, MP_VALOR_MAX = 5000;
+const MP_RETORNOS = {
+  aprovada: ['ok', 'Pagamento aprovado! Obrigado pelo apoio — a Aliança Z atualiza em alguns segundos.'],
+  pendente: ['wait', 'Pagamento pendente. Se escolheu Pix, conclua no app do banco: o apoio entra quando o Mercado Pago confirmar.'],
+  recusada: ['err', 'O pagamento não foi concluído e nada foi cobrado. Você pode tentar de novo com outra forma de pagamento.'],
+};
+function mpValorEscolhido(){
+  const d = state.mpDoacao;
+  if(!d.outro) return d.valor;
+  const v = Number(String(d.outroValor || '').replace(',', '.'));
+  return Number.isFinite(v) ? Math.round(v * 100) / 100 : NaN;
+}
+function mpValorValido(v){ return Number.isFinite(v) && v >= MP_VALOR_MIN && v <= MP_VALOR_MAX; }
+// Bloco de doação (mesmo conteúdo no visual novo e no antigo). O botão leva a marca data-mp-checkout-cta.
+function mpDoacaoHtml(){
+  const d = state.mpDoacao, v = mpValorEscolhido(), ok = mpValorValido(v);
+  const ret = state.mpRetorno && MP_RETORNOS[state.mpRetorno];
+  const quem = state.discordUser
+    ? `<p class="kz-mp-quem">Vai para o seu perfil: <b>${escapeHtml((state.myProfile && state.myProfile.nickname) || state.discordUser.username || 'você')}</b></p>`
+    : `<label class="kz-mp-campo"><span>Seu nome no mural (opcional)</span><input type="text" id="mpNome" maxlength="40" autocomplete="nickname" placeholder="Como quer aparecer na Aliança Z" value="${escapeAttr(d.nome)}"${d.anonimo ? ' disabled' : ''}></label>
+        <p class="kz-mp-dica">Sem nome, a doação fica anônima. Entre com Discord para somar na sua patente.</p>`;
+  const carregando = d.estado === 'carregando';
+  return `
+        ${ret ? `<div class="kz-mp-retorno ${ret[0]}" role="status">${escapeHtml(ret[1])}</div>` : ''}
+        <p class="kz-mp-metodos">Pix, cartão ou saldo do Mercado Pago — você paga na página segura do Mercado Pago e volta pra cá.</p>
+        <div class="kz-mp-valores" role="group" aria-label="Valor da doação">
+          ${MP_VALORES.map(x=>{ const on = !d.outro && d.valor === x; return `<button type="button" class="kz-fchip${on ? ' active' : ''}" data-mp-valor="${x}" aria-pressed="${on}">R$ ${x}</button>`; }).join('')}
+          <button type="button" class="kz-fchip${d.outro ? ' active' : ''}" data-mp-outro aria-pressed="${d.outro}">Outro valor</button>
+        </div>
+        ${d.outro ? `<label class="kz-mp-campo"><span>Outro valor (de R$ ${MP_VALOR_MIN} a R$ ${MP_VALOR_MAX.toLocaleString('pt-BR')})</span><input type="number" id="mpOutroValor" inputmode="decimal" min="${MP_VALOR_MIN}" max="${MP_VALOR_MAX}" step="1" placeholder="Ex.: 30" value="${escapeAttr(d.outroValor)}"></label>` : ''}
+        <p class="kz-mp-total">Total: <strong id="mpTotal">${ok ? formatBRL(v) : '—'}</strong></p>
+        ${quem}
+        <label class="kz-honor-check kz-mp-anon"><input type="checkbox" id="mpAnonimo"${d.anonimo ? ' checked' : ''}> Doar anonimamente (não aparece no mural)</label>
+        <button type="button" class="kz-donate-cta" id="mpDoarBtn" data-mp-checkout-cta="checkout-pro" aria-label="Doar com Mercado Pago"${carregando ? ' disabled aria-busy="true"' : ''}><span>気</span><span>${carregando ? 'Abrindo o Mercado Pago…' : 'Doar com Mercado Pago'}</span></button>
+        <div class="kz-mp-status${d.estado === 'erro' ? ' err' : ''}" id="mpStatus" role="status" aria-live="polite">${d.estado === 'erro' ? escapeHtml(d.msg) : ''}</div>`;
+}
+// Ao voltar do Mercado Pago: abre a aba Doar com o aviso e limpa o endereço (o registro de verdade vem do webhook).
+function applyDoacaoRetorno(){
+  let r = null;
+  try{ r = new URLSearchParams(location.search).get('doacao'); }catch(e){}
+  if(!r || !MP_RETORNOS[r]) return;
+  state.tab = 'doar';
+  state.mpRetorno = r;
+  try{ history.replaceState(null, '', location.pathname + location.hash); }catch(e){}
+  if(r === 'aprovada' && typeof setTimeout === 'function'){
+    [5000, 15000].forEach(ms=> setTimeout(()=>{ Promise.resolve(refreshDonorsRemote()).then(()=>{ if(state.tab === 'doar') render(); }).catch(()=>{}); }, ms));
+  }
+}
+// Pede à Edge Function (Checkout Pro) a preference da doação. Devolve { init_point } ou null (o erro aparece no bloco).
+async function criarPreferenceMP(funcao){
+  const d = state.mpDoacao;
+  if(d.estado === 'carregando') return null;
+  const valor = mpValorEscolhido();
+  const falha = msg => { d.estado = 'erro'; d.msg = msg; render(); return null; };
+  if(!mpValorValido(valor)) return falha(`Escolha um valor entre R$ ${MP_VALOR_MIN} e R$ ${MP_VALOR_MAX.toLocaleString('pt-BR')}.`);
+  if(!isSupabaseConfigured() || !window.__sb || !window.__sb.client) return falha('As doações online não estão disponíveis agora. Tente de novo mais tarde.');
+  d.estado = 'carregando'; d.msg = ''; state.mpRetorno = null; render();
+  try{
+    const { data, error } = await window.__sb.client.functions.invoke(funcao, {
+      body: { valor, nome: state.discordUser || d.anonimo ? '' : String(d.nome || '').trim().slice(0, 40), anonimo: !!d.anonimo },
+    });
+    if(error){
+      let msg = '';
+      try{ msg = (await error.context.json()).erro || ''; }catch(e){}
+      return falha(msg || 'Não consegui abrir o Mercado Pago agora. Tente de novo em instantes.');
+    }
+    const url = data && data.init_point;
+    if(typeof url !== 'string' || !/^https:\/\/([a-z0-9-]+\.)*mercadopago\.com(\.br)?\//i.test(url)) return falha('O Mercado Pago respondeu de um jeito inesperado. Tente de novo.');
+    return { init_point: url };
+  }catch(e){
+    return falha('Não consegui abrir o Mercado Pago agora. Tente de novo em instantes.');
+  }
+}
+function attachMpDoacaoHandlers(view){
+  const d = state.mpDoacao;
+  view.querySelectorAll('[data-mp-valor]').forEach(b=> b.addEventListener('click', ()=>{ d.valor = Number(b.dataset.mpValor); d.outro = false; if(d.estado === 'erro') d.estado = ''; render(); }));
+  const outro = view.querySelector('[data-mp-outro]');
+  if(outro) outro.addEventListener('click', ()=>{ d.outro = true; if(d.estado === 'erro') d.estado = ''; render(); const i = document.getElementById('mpOutroValor'); if(i) i.focus(); });
+  const ov = document.getElementById('mpOutroValor');
+  if(ov) ov.addEventListener('input', ()=>{ d.outroValor = ov.value; const t = document.getElementById('mpTotal'); const v = mpValorEscolhido(); if(t) t.textContent = mpValorValido(v) ? formatBRL(v) : '—'; });
+  const nome = document.getElementById('mpNome');
+  if(nome) nome.addEventListener('input', ()=>{ d.nome = nome.value; });
+  const anon = document.getElementById('mpAnonimo');
+  if(anon) anon.addEventListener('change', ()=>{ d.anonimo = anon.checked; const n = document.getElementById('mpNome'); if(n) n.disabled = d.anonimo; });
+  const btn = view.querySelector('#mpDoarBtn');
+  // Checkout Pro: a função "mp-doacao" cria a preference no servidor; o botão leva para o init_point devolvido
+  if(btn) btn.addEventListener('click', ()=> criarPreferenceMP('mp-doacao').then(pref => { if(pref && pref.init_point) window.location.assign(pref.init_point); }));
+}
 
 // Patentes: sobem conforme o total doado (acumulado), do primeiro apoio até o topo.
 // Inspirado no "Muro dos Aliados" do labninja.com.br, mas com progressão de poder do
@@ -10298,12 +10397,10 @@ function renderDoarTabNovo(){
       sub:'Ajude a manter o Zenkyo no ar. Personagens, Coleção, Montador e guias são de graça e continuam assim — quem apoia ganha lugar na Aliança Z. A doação vai só para o site: não compra itens nem vantagens no jogo.' })}
     <div class="kz-nvd-top">
       <div class="kz-nvd-pn kz-nvd-pix">
-        <span class="kz-nv-lb">Pix</span>
-        <div class="kz-nvd-qr"><div class="kz-qr-crop"><iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div></div>
-        <a class="kz-donate-cta" href="${LIVEPIX_DONATE_URL}" target="_blank" rel="noopener noreferrer"><span>気</span><span>Doar agora</span></a>
+        <span class="kz-nv-lb">Doar com Mercado Pago</span>
+${mpDoacaoHtml()}
         <p class="kz-nvd-note"><b>Bônus de apoiador:</b> quem apoia com R$ 10 ou mais pode manter até 5 times publicados na Comunidade ao mesmo tempo (o padrão são 2).</p>
-        <p class="kz-nvd-note">Escaneie o QR Code com o app do seu banco (Pix) ou clique em “Doar agora” pra pagar direto pelo link. O valor exato nunca aparece publicamente — só a Patente.</p>
-        ${isSupabaseConfigured() && !state.discordUser ? `<p class="kz-nvd-note mut">Entre com Discord (topo da página) pra vincular seu apoio a um perfil na Aliança Z.</p>` : ''}
+        <p class="kz-nvd-note">O valor exato nunca aparece publicamente — só a Patente.</p>
       </div>
       <div class="kz-nvd-pn kz-nvd-ally kz-donor-list">
         <div class="kz-nv-rays" aria-hidden="true"></div>
@@ -10348,7 +10445,7 @@ function renderDonorAdminHtml(){
   return `
         <div class="kz-donor-admin">
           <span class="kz-label" style="font-size:11px;">Painel do dono do site</span>
-          <div class="kz-donate-note">Depois de confirmar o Pix (a LivePix te avisa), adicione o nome e o valor aqui pra atualizar a Patente. Também dá pra conceder uma Honra sem valor nenhum, pra quem ajudou de outro jeito.</div>
+          <div class="kz-donate-note">Doações feitas pelo botão do Mercado Pago entram sozinhas no mural. Use este painel para apoios recebidos por fora (ex.: Pix direto) ou para conceder uma Honra sem valor nenhum, pra quem ajudou de outro jeito.</div>
           <div class="kz-donor-admin-row">
             <input type="text" id="donorNameInput" placeholder="Nome do apoiador">
             <input type="number" id="donorAmountInput" placeholder="Valor (R$)" min="0" step="0.01">
@@ -10384,13 +10481,10 @@ function renderDoarTab(){
     </div>
     <div class="kz-donate-layout">
       <div class="kz-panel kz-donate-card">
-        <div class="kz-qr-crop"><iframe src="${LIVEPIX_QR_EMBED_URL}" title="QR Code para doação via Pix" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
-        <a class="kz-donate-cta" href="${LIVEPIX_DONATE_URL}" target="_blank" rel="noopener noreferrer">
-          <span>気</span><span>Doar agora</span>
-        </a>
+        <span class="kz-label">Doar com Mercado Pago</span>
+${mpDoacaoHtml()}
         <div class="kz-donate-note"><b>Bônus de apoiador:</b> quem apoia com R$ 10 ou mais pode manter até 5 times publicados na Comunidade ao mesmo tempo (o padrão são 2).</div>
-        <div class="kz-donate-note">Escaneie o QR Code com o app do seu banco (Pix) ou clique em "Doar agora" pra pagar direto pelo link. O valor exato nunca aparece publicamente — só a Patente.</div>
-        ${renderDiscordLoginNote()}
+        <div class="kz-donate-note">O valor exato nunca aparece publicamente — só a Patente.</div>
       </div>
       <div class="kz-panel kz-donor-list">
         <div class="kz-donor-list-head">
@@ -10515,6 +10609,7 @@ function removeDonor(id){
 function attachDoarHandlers(){
   const view = document.getElementById('view');
   if(!view || state.tab !== 'doar') return;
+  attachMpDoacaoHandlers(view);
   const addBtn = document.getElementById('addDonorBtn');
   if(addBtn) addBtn.addEventListener('click', ()=>{
     const name = document.getElementById('donorNameInput').value.trim();

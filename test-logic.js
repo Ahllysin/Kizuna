@@ -1278,7 +1278,7 @@ async function main(){
     const pg = fs.readFileSync(path.join(__dirname, 'privacidade.html'), 'utf8');
     assert.ok(!/<script/i.test(pg), 'página de texto não precisa de script');
     assert.ok(/Content-Security-Policy" content="default-src 'none'/.test(pg));
-    ['Supabase', 'Discord', 'LivePix', 'GitHub Pages', 'Apagar meus dados'].forEach(w => assert.ok(pg.includes(w), 'a política precisa citar: ' + w));
+    ['Supabase', 'Discord', 'Mercado Pago', 'GitHub Pages', 'Apagar meus dados'].forEach(w => assert.ok(pg.includes(w), 'a política precisa citar: ' + w));
     const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
     assert.ok((html.match(/href="privacidade\.html"/g) || []).length >= 2, 'link no menu lateral e no Perfil');
   });
@@ -1828,6 +1828,54 @@ async function main(){
     assert.ok(r.norm > 0 && r.norm <= 1);
     assert.ok(r.comVegeta, 'modo Mais sinergias completa o Goku SS4 com o Vegeta SS4');
     assert.ok(r.recVegeta, 'Vegeta SS4 aparece nas sugestões para quem tem o Goku SS4');
+  });
+
+  await test('Doar com Mercado Pago: valores, nome/anônimo, chamada da função mp-doacao e volta do pagamento', async () => {
+    runIn(sandbox, `window.__mpRes = null; (async () => {
+      const antes = { sb: window.__sb, av: supabaseAvailable, loc: window.location, d: JSON.parse(JSON.stringify(state.mpDoacao)) };
+      const chamadas = [];
+      let destino = null;
+      supabaseAvailable = true;
+      window.__sb = { client: { functions: { invoke: (f, o) => { chamadas.push([f, o.body]); return Promise.resolve({ data: { init_point: 'https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=1' }, error: null }); } } } };
+      state.discordUser = null; state.tab = 'doar';
+      const html = renderDoarTab();
+      const temBotao = /data-mp-checkout-cta="checkout-pro"/.test(html) && html.includes('Doar com Mercado Pago');
+      const semLivepix = !/livepix/i.test(html);
+      // valor inválido não chama a função
+      state.mpDoacao = { valor:20, outro:true, outroValor:'2', nome:'', anonimo:false, estado:'', msg:'' };
+      const invalido = await criarPreferenceMP('mp-doacao');
+      const msgInvalido = state.mpDoacao.msg;
+      // valor válido, com nome sem login
+      state.mpDoacao = { valor:50, outro:false, outroValor:'', nome:'  Kuririn  ', anonimo:false, estado:'', msg:'' };
+      const ok = await criarPreferenceMP('mp-doacao');
+      // anônimo não manda o nome
+      state.mpDoacao = { valor:10, outro:false, outroValor:'', nome:'Kuririn', anonimo:true, estado:'', msg:'' };
+      await criarPreferenceMP('mp-doacao');
+      // resposta com endereço estranho é recusada
+      window.__sb.client.functions.invoke = () => Promise.resolve({ data: { init_point: 'https://exemplo.com/pagar' }, error: null });
+      state.mpDoacao = { valor:20, outro:false, outroValor:'', nome:'', anonimo:false, estado:'', msg:'' };
+      const estranho = await criarPreferenceMP('mp-doacao');
+      const out = { temBotao, semLivepix, invalido, msgInvalido, chamadas, ok, estranho, estadoEstranho: state.mpDoacao.estado };
+      supabaseAvailable = antes.av; window.__sb = antes.sb; state.mpDoacao = antes.d; state.mpRetorno = null;
+      return out;
+    })().then(v => { window.__mpRes = v; });`);
+    await new Promise(res => setTimeout(res, 60));
+    const r = evalIn(sandbox, 'window.__mpRes') || {};
+    assert.ok(r.temBotao, 'botão "Doar com Mercado Pago" marcado com data-mp-checkout-cta');
+    assert.ok(r.semLivepix, 'o LivePix saiu da aba Doar');
+    assert.strictEqual(r.invalido, null);
+    assert.ok(/entre R\$ 5/.test(r.msgInvalido), 'valor fora do limite mostra mensagem');
+    assert.strictEqual(r.chamadas.length, 2, 'só os pedidos válidos chamam a função');
+    assert.strictEqual(r.chamadas[0][0], 'mp-doacao');
+    assert.deepStrictEqual(r.chamadas[0][1], { valor: 50, nome: 'Kuririn', anonimo: false });
+    assert.deepStrictEqual(r.chamadas[1][1], { valor: 10, nome: '', anonimo: true });
+    assert.ok(/^https:\/\/www\.mercadopago\.com\.br\//.test(r.ok.init_point));
+    assert.strictEqual(r.estranho, null, 'só aceita init_point do Mercado Pago');
+    assert.strictEqual(r.estadoEstranho, 'erro');
+    const fs = require('fs'), path = require('path');
+    const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+    const csp = (html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/) || [])[1] || '';
+    assert.ok(!/livepix/i.test(csp), 'CSP sem o quadro da LivePix');
   });
 
   console.log(`\n${passed} passaram, ${failed} falharam.`);

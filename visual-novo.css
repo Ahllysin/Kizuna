@@ -1007,8 +1007,6 @@ html.vis-novo .kz-donor-card.kz-nvpf-card{display:flex;flex-direction:column;ali
 html.vis-novo .kz-nvd-pn{position:relative;padding:28px;border:0;border-radius:0;background:linear-gradient(160deg,#1A0D0A,#0E0707 70%);box-shadow:inset 0 0 0 1.5px #3A1E16;}
 .kz-nvd-pn::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:1;background:linear-gradient(90deg,#E8261B,#FF6A13,#FFC21A);}
 .kz-nvd-pix{display:flex;flex-direction:column;gap:18px;}
-.kz-nvd-qr{align-self:center;width:236px;height:236px;display:grid;place-items:center;background:#FFF4E6;box-shadow:0 0 0 4px #0A0606,0 0 0 7px #FF6A13,0 0 34px rgba(255,106,19,.6);}
-html.vis-novo .kz-nvd-qr .kz-qr-crop{max-width:220px;border-radius:0;}
 html.vis-novo .kz-nvd-pix .kz-donate-cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;margin-top:12px;font-size:22px;text-decoration:none;}
 html.vis-novo .kz-nvd-pix .kz-donate-cta span:first-child{font-family:"Shippori Mincho",serif;font-style:normal;}
 .kz-nvd-note{margin:0;font-size:15px;line-height:1.6;color:#E2D2C2;}
@@ -1251,3 +1249,24 @@ html.vis-novo .kz-nvcb-sug > .kz-btn{min-height:46px;padding:0 20px;font-size:15
   .kz-nv.filters-open .kz-nv-ftoggle{color:#0A0606;}
   .kz-nv.filters-open .kz-nv-ftoggle::before{background:linear-gradient(180deg,#FFE27A,#FFC21A 45%,#FF6A13);box-shadow:0 0 16px rgba(255,140,30,.7);}
 }
+
+/* ---------- Doar: bloco do Mercado Pago ---------- */
+html.vis-novo .kz-mp-metodos,html.vis-novo .kz-mp-dica,html.vis-novo .kz-mp-quem{font-size:15px;line-height:1.55;color:#E2D2C2;}
+html.vis-novo .kz-mp-dica{font-size:13.5px;color:#C9B7A6;}
+html.vis-novo .kz-mp-quem b{color:#FFC21A;}
+html.vis-novo .kz-mp-valores{gap:10px;}
+html.vis-novo .kz-mp-valores .kz-fchip{min-height:46px;padding:0 18px;font-size:18px;font-weight:900;}
+html.vis-novo .kz-mp-campo{gap:8px;}
+html.vis-novo .kz-mp-campo span{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-style:italic;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#E9D9C8;}
+html.vis-novo .kz-mp-campo input{min-height:50px;padding:0 16px;border:0;border-radius:0;background:#0A0606;box-shadow:inset 0 0 0 1.5px #4A2418;color:#FFF4E6;font-family:"Barlow",sans-serif;font-size:16px;outline:none;}
+html.vis-novo .kz-mp-campo input:focus{box-shadow:inset 0 0 0 2px #FF6A13,0 0 20px rgba(255,106,19,.45);}
+html.vis-novo .kz-mp-campo input::placeholder{color:#7E6B5E;}
+html.vis-novo .kz-mp-total{display:flex;align-items:baseline;gap:10px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-style:italic;font-size:18px;text-transform:uppercase;color:#E9D9C8;}
+html.vis-novo .kz-mp-total strong{font-size:38px;font-weight:900;line-height:1;background:linear-gradient(180deg,#FFE27A,#FFC21A 45%,#FF6A13);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 2px 0 #0A0606);}
+html.vis-novo .kz-mp-anon{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.45;color:#E2D2C2;cursor:pointer;}
+html.vis-novo .kz-mp-anon input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:#FF6A13;}
+html.vis-novo .kz-mp-retorno,html.vis-novo .kz-mp-status{border:0;border-radius:0;padding:12px 18px;font-family:"Barlow",sans-serif;font-weight:600;font-size:15px;color:#FFF4E6;box-shadow:inset 4px 0 0 currentColor;}
+html.vis-novo .kz-mp-retorno.ok{background:rgba(47,158,79,.2);color:#9FF0B8;}
+html.vis-novo .kz-mp-retorno.wait{background:rgba(255,194,26,.12);color:#FFE27A;}
+html.vis-novo .kz-mp-retorno.err,html.vis-novo .kz-mp-status.err{background:rgba(232,38,27,.16);color:#FF9A8A;}
+html.vis-novo .kz-nvd-pix .kz-donate-cta:disabled{filter:grayscale(.3) brightness(.85);}

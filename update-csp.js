@@ -47,7 +47,7 @@ function buildPolicy(html) {
     "img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net",
     // chamadas de rede: só o próprio site e o Supabase — um script malicioso não consegue mandar dados pra outro lugar
     `connect-src 'self' ${SUPABASE}`,
-    "frame-src https://widget.livepix.gg",
+    // sem frame-src: nenhum quadro de terceiros (o Mercado Pago abre como página própria)
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
