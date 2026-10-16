@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-2QZmh/QoH4AbAw6VUqpuFEDV4Hw/aopmx3pQ4dU/GVs=' 'sha256-8r4MYwJC09DJTAeNxDJU4PRKSEriDHI2QjMFWVJ2U3w='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-TM8hrrFQLLQmLtdFhNwiC/YgNRn/M7PUUz9vGQ0otxA=' 'sha256-NrxhMxFGMmn3TOJlETEqTYPO241zR2fLMo8KteXIQPc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -5311,8 +5311,13 @@ function ballSrc(n){ return `assets/balls/esfera-${n}.webp`; }
 function portraitSrc(c){ return `portraits/${slug(c.name)}.webp`; }
 /* ---------- Visual novo (prévia ligada por ?visual=novo; ver o <script> do <head> e visual-novo.css) ---------- */
 function visualNovo(){ try{ return document.documentElement.classList.contains('vis-novo') === true; }catch(e){ return false; } }
-// Arte da ficha (pasta Fichas/<personagem>, convertida por gerar-artes.py); ?v= muda quando a arte muda.
-let nvFichaVer = {};
+// Arte da ficha (pasta Fichas/<personagem>) e faixa do time (pasta Faixas/<personagem>), convertidas por
+// gerar-artes.py; ?v= muda quando a arte muda, então a troca aparece sem esperar o cache.
+let nvFichaVer = {}, nvFaixaVer = {};
+function faixaSrc(c){
+  const s = slug(c.name), v = Object.prototype.hasOwnProperty.call(nvFaixaVer, s) ? nvFaixaVer[s] : '';
+  return `faixas/${s}.webp${v ? '?v=' + v : ''}`;
+}
 function renderSrc(c){
   const s = slug(c.name), v = Object.prototype.hasOwnProperty.call(nvFichaVer, s) ? nvFichaVer[s] : '';
   return `renders/${s}.webp${v ? '?v=' + v : ''}`;
@@ -5343,72 +5348,17 @@ async function loadNvArts(){
     }
   }catch(e){}
   try{
-    const r = await fetch('destaques/posicoes.json', { cache:'no-cache' });
-    if(r.ok) nvPosFile = nvCleanPos(await r.json());
+    const r = await fetch('faixas/versoes.json', { cache:'no-cache' });
+    if(r.ok){
+      const d = await r.json(), ok = {};
+      Object.keys(d || {}).forEach(k=>{ if(/^[a-z0-9-]+$/.test(k) && /^[a-z0-9]{1,16}$/.test(d[k])) ok[k] = d[k]; });
+      nvFaixaVer = ok;
+    }
   }catch(e){}
-  try{ // salvo só neste navegador quando não deu pra gravar no arquivo nem na conta
-    const l = await window.storage.get(NV_POS_LOCAL);
-    if(l && l.value) nvPosLocal = nvCleanPos(JSON.parse(l.value));
-    await window.storage.set('destaques_pos_local', '');   // posições da área antiga (antes de subir acima do cartão do nome)
-  }catch(e){}
-  nvRecomputePos();
 }
 function nvArtsOf(c){
   const s = slug(c.name);
   return Object.prototype.hasOwnProperty.call(nvArts, s) ? nvArts[s] : [renderSrc(c)];
-}
-// Posição e tamanho de cada arte do destaque (botão "Ajustar arte", só o dono): {"<slug>/<arquivo>": {x, y, z}}.
-// x e y = deslocamento em % da área da arte (uns 480×590 no computador); z = tamanho, crescendo a partir dos pés.
-// Grava como os retratos: destaques/posicoes.json pelo servidor local (iniciar-local.bat), a linha "destaques"
-// da tabela site_frames (conta de administrador) ou, sem nenhum dos dois, só neste navegador.
-const NV_POS_PADRAO = { x:0, y:0, z:1 };
-const NV_POS_LOCAL = 'destaques_pos_local2';   // chave deste navegador (a "2" descartou as da área antiga)
-let nvPos = {}, nvPosFile = {}, nvPosRemote = null, nvPosLocal = null;
-let nvEdit = null;   // { id, key, pend:{ chave:{x,y,z} } } enquanto o dono ajusta as artes do destaque
-function nvCleanPos(o){
-  const out = {}, lim = (v, a, b)=>Math.min(b, Math.max(a, v));
-  if(o && typeof o === 'object') Object.keys(o).forEach(k=>{
-    const a = o[k];
-    if(/^[a-z0-9-]{1,60}\/[a-z0-9-]{1,60}$/.test(k) && a && [a.x, a.y, a.z].every(n=>typeof n === 'number' && isFinite(n)))
-      out[k] = { x:lim(a.x, -100, 100), y:lim(a.y, -100, 100), z:lim(a.z, .3, 3) };
-  });
-  return out;
-}
-function nvRecomputePos(){ nvPos = Object.assign({}, nvPosFile, nvPosRemote, isHeroAdmin() ? nvPosLocal : null); }
-function nvArtKey(src){ const m = /^destaques\/([a-z0-9-]+\/[a-z0-9-]+)\.webp/.exec(src || ''); return m ? m[1] : null; }
-function nvPosOf(src){
-  const k = nvArtKey(src);
-  return (k && nvEdit && nvEdit.pend[k]) || (k && nvPos[k]) || NV_POS_PADRAO;
-}
-function nvPosCss(p){ return `translate(${+p.x}%, ${+p.y}%) scale(${+p.z})`; }
-async function nvLoadPosRemote(){
-  if(!visualNovo() || !isSupabaseConfigured()) return;
-  try{
-    const { data, error } = await window.__sb.client.from('site_frames').select('data').eq('id', 'destaques').maybeSingle();
-    if(!error) nvPosRemote = data && data.data ? nvCleanPos(data.data) : null;
-  }catch(e){}
-  nvRecomputePos();
-}
-async function nvSavePos(){
-  const dados = nvCleanPos(nvPos), body = JSON.stringify(dados);
-  const limpa = async ()=>{ nvPosLocal = null; try{ await window.storage.set(NV_POS_LOCAL, ''); }catch(e){} };
-  const host = (typeof location !== 'undefined' && location.hostname) || '';
-  if(host === 'localhost' || host === '127.0.0.1'){
-    try{
-      const r = await fetch('/api/destaques-posicoes', { method:'POST', headers:{ 'Content-Type':'application/json' }, body });
-      if(r.ok){ nvPosFile = dados; await limpa(); return 'arquivo'; }
-    }catch(e){}
-  }
-  if(isHeroAdmin() && isSupabaseConfigured() && state.discordUser){
-    try{
-      const { error } = await window.__sb.client.from('site_frames').upsert({ id:'destaques', data:dados, updated_at:new Date().toISOString() });
-      if(!error){ nvPosRemote = dados; await limpa(); return 'conta'; }
-      console.error('Não consegui gravar site_frames', error);
-    }catch(e){ console.error(e); }
-  }
-  nvPosLocal = dados;
-  try{ await window.storage.set(NV_POS_LOCAL, body); }catch(e){}
-  return 'local';
 }
 const NV_TYPE_COLOR = { Ataque:'#e8806c', Defesa:'#82a3d1', Habilidade:'#7cd29f' };
 function nvDotHtml(aff){ const r = PILL_RGB[aff]; return r ? `<i class="kz-nv-dot" style="background:rgb(${r[0]});color:rgb(${r[0]})"></i>` : ''; }
@@ -5428,7 +5378,7 @@ function nvLineupHtml(team, small){
   const names = (team || []).map(id => (getChar(id) || {}).name).filter(Boolean);
   return `<div class="kz-nv-lineup${small ? ' sm' : ''}" role="img" aria-label="Formação: ${escapeAttr(names.join(', ') || 'vazia')}">${[0,1,2,3,4,5].map(i => {
     const c = team && team[i] && getChar(team[i]);
-    return c ? `<span class="ln"><img src="faixas/${slug(c.name)}.webp" alt="" draggable="false" data-onerr="cut" data-card="${portraitSrc(c)}"><b>${i+1}</b></span>`
+    return c ? `<span class="ln"><img src="${faixaSrc(c)}" alt="" draggable="false" data-onerr="cut" data-card="${portraitSrc(c)}"><b>${i+1}</b></span>`
              : `<span class="ln empty"><i>+</i><b>${i+1}</b></span>`;
   }).join('')}</div>`;
 }
@@ -5660,7 +5610,7 @@ function renderCharCard(c){
 
 // Troca a arte do topo pro personagem em hover — só mexe na <img>, sem re-render.
 function setHeroChar(id){
-  if(state.heroCharId === id || state.heroEdit || nvEdit) return;
+  if(state.heroCharId === id || state.heroEdit) return;
   state.heroCharId = id;
   const c = getChar(id);
   if(c && visualNovo() && document.getElementById('heroChar')){ setHeroNovo(c); return; }
@@ -5719,7 +5669,6 @@ function attachCharsHandlers(){
       if(c && i >= 0 && i !== nvHeroRot.i) nvHeroGo(c, i);
     });
   }
-  attachNvEdit();
   attachHeroAdjust();
   const addBtn = document.getElementById('addCharBtn');
   if(addBtn) addBtn.addEventListener('click', ()=>{ if(!isHeroAdmin()) return; state.editingChar = blankChar(); state.editingIsNew = true; render(); });
@@ -5762,7 +5711,7 @@ function renderCharsTabNovo(chars, hero){
   }
   return `
   <section class="kz-page kz-nv">
-    <div class="kz-nv-hero${nvEdit ? ' nv-editing' : ''}">
+    <div class="kz-nv-hero">
       <div class="kz-nv-fire" aria-hidden="true"></div>
       <div class="kz-nv-rays" aria-hidden="true"></div>
       <svg class="kz-nv-rings" aria-hidden="true" viewBox="-550 -550 1100 1100">
@@ -5779,20 +5728,14 @@ function renderCharsTabNovo(chars, hero){
       <div aria-hidden="true">${embers}</div>
       <span class="kz-nv-sfx" aria-hidden="true" style="right:1.5%;top:110px;font-size:54px;writing-mode:vertical-rl;transform:rotate(12deg);opacity:.85">ゴゴゴ</span>
       ${hero ? `<div class="kz-nv-char" id="heroChar" aria-hidden="true">
-        <div class="kz-nv-char-in"><div class="kz-nv-char-fr" style="transform:${nvPosCss(nvPosOf(heroSrc))}">
+        <div class="kz-nv-char-in">
           <img class="a1" src="${heroSrc}" alt="" data-onerr="hide">
           <img class="a2" src="${heroSrc}" alt="" data-onerr="hide">
           <img class="main" id="heroImg" src="${heroSrc}" alt="" data-onerr="card" data-card="${portraitSrc(hero)}">
-        </div></div>
+        </div>
         <span class="kz-nv-burst"></span>
-        ${nvEdit ? `<span class="kz-nv-guide-box"><b id="nvGuideBoxLbl"></b></span>
-        <span class="kz-nv-guide-cut" id="nvGuideCut"><b>Escondido pela faixa</b></span>
-        <span class="kz-nv-guide-mid"></span>
-        <span class="kz-nv-guide-png" id="nvGuidePng"><b id="nvGuidePngLbl"></b></span>` : ''}
       </div>
-      ${nvEdit ? nvEditBarHtml() : ''}
       <div class="kz-nv-plate">
-        ${isHeroAdmin() && !nvEdit ? `<button type="button" class="kz-nv-adjbtn" id="nvAdjBtn" title="Mudar a posição e o tamanho desta arte">✎ Ajustar arte</button>` : ''}
         <span class="kz-nv-lb">Em destaque</span>
         ${nvTtl(hero.name, ' id="heroNameStack"')}
         <div class="kz-nv-pips" id="heroPips">${nvHeroPipsHtml(hero)}</div>
@@ -5873,11 +5816,9 @@ function setHeroNovo(c){
   if(meta) meta.innerHTML = nvMetaHtml(c);
   nvHeroStart(c);
 }
-// Põe uma arte no destaque já com a posição e o tamanho dela.
+// Põe uma arte no destaque (as três camadas: aura, contorno e a arte).
 function nvHeroSetSrc(box, src){
   box.classList.remove('is-card');
-  const fr = box.querySelector('.kz-nv-char-fr');
-  if(fr) fr.style.transform = nvPosCss(nvPosOf(src));
   box.querySelectorAll('img').forEach(img=>{ img.style.visibility = ''; img.src = src; });
 }
 // Alterna sozinho entre as artes do mesmo guerreiro (pasta com 2 ou mais), com clarão e anel de energia na troca.
@@ -5890,7 +5831,7 @@ function nvReduceMotion(){
 function nvHeroPipsHtml(c){
   const n = nvArtsOf(c).length;
   if(n < 2) return '';
-  const auto = !nvReduceMotion() && !nvEdit;
+  const auto = !nvReduceMotion();
   return Array.from({ length:n }, (_, i)=>{
     const on = i === nvHeroRot.i;
     return `<button type="button" class="kz-nv-pip${on ? ' on' : ''}" data-art="${i}" aria-label="Arte ${i + 1} de ${n}"${on ? ' aria-current="true"' : ''}>${on && auto ? '<i></i>' : ''}</button>`;
@@ -5903,13 +5844,12 @@ function nvHeroStart(c){
 }
 function nvHeroQueue(c){
   clearTimeout(nvHeroRot.t);
-  if(nvEdit || nvArtsOf(c).length < 2 || nvReduceMotion()) return;
+  if(nvArtsOf(c).length < 2 || nvReduceMotion()) return;
   nvHeroRot.t = setTimeout(()=> nvHeroGo(c, nvHeroRot.i + 1), NV_ART_MS);
 }
 function nvHeroGo(c, i){
   const box = document.getElementById('heroChar');
   if(!box || nvHeroRot.id !== c.id) return;                 // saiu da aba ou trocou de guerreiro
-  if(nvEdit){ nvEditSwitch(i); return; }                     // ajustando: troca na hora, sem animação
   if(document.hidden){ nvHeroQueue(c); return; }            // aba do navegador escondida: espera
   const arts = nvArtsOf(c);
   i = (i + arts.length) % arts.length;
@@ -5918,178 +5858,17 @@ function nvHeroGo(c, i){
   pre.onerror = ()=>{ nvHeroRot.i = i; nvHeroQueue(c); };
   pre.onload = ()=>{
     const b = document.getElementById('heroChar');           // a aba pode ter sido refeita (filtros) enquanto carregava
-    if(nvHeroRot.id !== c.id || !b || nvEdit) return;
+    if(nvHeroRot.id !== c.id || !b) return;
     nvHeroRot.i = i;
     b.classList.remove('nv-swap'); void b.offsetWidth; b.classList.add('nv-swap');
     setTimeout(()=>{                                         // troca no meio do clarão
       const b2 = document.getElementById('heroChar');
-      if(nvHeroRot.id !== c.id || !b2 || nvEdit) return;
+      if(nvHeroRot.id !== c.id || !b2) return;
       nvHeroSetSrc(b2, nvArtsOf(c)[nvHeroRot.i]);
     }, 300);
     nvHeroStart(c);
   };
   pre.src = src;
-}
-
-/* ---------- Ajustar arte do destaque (só o dono) ----------
-   Para a troca automática e mostra os guias: a área da arte (igual para todas), a linha do meio, o pedaço que a
-   faixa animada esconde e o contorno do PNG (já sem as bordas vazias). Arrastar move, a roda do mouse muda o tamanho,
-   ‹ › e os tracinhos passam para a próxima arte do mesmo guerreiro; "Salvar" grava todas as artes mexidas de uma vez. */
-function nvEditStart(){
-  if(!isHeroAdmin()) return;
-  const c = getChar(nvHeroRot.id);
-  if(!c) return;
-  const src = nvArtsOf(c)[nvHeroRot.i], key = nvArtKey(src);
-  if(!key){ showToast(`Para ajustar, ponha um PNG em Destaques/${c.name}/ e rode o gerar-artes.py`); return; }
-  clearTimeout(nvHeroRot.t);
-  nvEdit = { id:c.id, key, pend:{ [key]:{ ...nvPosOf(src) } } };
-  render();
-}
-function nvEditSwitch(i){
-  const c = getChar(nvEdit.id), box = document.getElementById('heroChar');
-  if(!c || !box) return;
-  const arts = nvArtsOf(c);
-  i = (i + arts.length) % arts.length;
-  const src = arts[i], key = nvArtKey(src);
-  nvHeroRot.i = i;
-  if(key && !nvEdit.pend[key]) nvEdit.pend[key] = { ...nvPosOf(src) };
-  nvEdit.key = key;
-  nvHeroSetSrc(box, src);
-  nvHeroStart(c);
-  nvEditApply();
-}
-function nvEditBarHtml(){
-  const ctl = (k, label, min, max, step) => `<div class="ctl"><label for="nvEd_${k}">${label}<span data-nv-val="${k}"></span></label><input type="range" id="nvEd_${k}" data-nv-ed="${k}" min="${min}" max="${max}" step="${step}"></div>`;
-  return `
-      <div class="kz-nv-artedit" id="nvArtEdit">
-        <div class="hd"><b>Ajustar arte</b><span id="nvEditWhich"></span></div>
-        <p class="tip">Arraste a arte para mover · roda do mouse muda o tamanho · ‹ › e os tracinhos trocam de arte</p>
-        ${ctl('z', 'Tamanho', 0.3, 3, 0.01)}${ctl('x', 'Horizontal', -60, 60, 0.5)}${ctl('y', 'Vertical', -60, 60, 0.5)}
-        <p class="info" id="nvEditInfo"></p>
-        <div class="btns">
-          <button type="button" class="kz-btn kz-btn-sm kz-nv-edall" id="nvEdResetAll" title="Volta a posição e o tamanho de todas as artes de todos os guerreiros">Todas ao padrão</button>
-          <button type="button" class="kz-btn kz-btn-sm" id="nvEdReset" title="Volta só esta arte">Padrão</button>
-          <button type="button" class="kz-btn kz-btn-sm" id="nvEdCancel">Cancelar</button>
-          <button type="button" class="kz-btn kz-btn-primary kz-btn-sm" id="nvEdSave">Salvar</button>
-        </div>
-      </div>`;
-}
-function nvEditApply(){
-  if(!nvEdit) return;
-  const p = nvEdit.pend[nvEdit.key], box = document.getElementById('heroChar');
-  if(!p || !box) return;
-  const fr = box.querySelector('.kz-nv-char-fr');
-  if(fr) fr.style.transform = nvPosCss(p);
-  document.querySelectorAll('input[data-nv-ed]').forEach(r=>{ const v = p[r.dataset.nvEd]; if(+r.value !== v) r.value = v; });
-  document.querySelectorAll('[data-nv-val]').forEach(s=>{ const k = s.dataset.nvVal; s.textContent = k === 'z' ? p.z.toFixed(2) + '×' : (p[k] > 0 ? '+' : '') + p[k].toFixed(1) + '%'; });
-  const c = getChar(nvEdit.id), n = c ? nvArtsOf(c).length : 1;
-  const which = document.getElementById('nvEditWhich');
-  if(which && c) which.textContent = `${c.name} · arte ${nvHeroRot.i + 1} de ${n}`;
-  nvEditGuide();
-}
-// Onde a figura está dentro do PNG (pixels não transparentes), medido uma vez por arte.
-const nvFigCache = {};
-function nvFigBox(img){
-  const k = img.getAttribute('src'), w = img.naturalWidth, h = img.naturalHeight;
-  if(nvFigCache[k]) return nvFigCache[k];
-  let r = { x0:0, y0:0, x1:w, y1:h };
-  try{
-    const cv = document.createElement('canvas');
-    cv.width = w; cv.height = h;
-    const cx = cv.getContext('2d');
-    cx.drawImage(img, 0, 0);
-    const d = cx.getImageData(0, 0, w, h).data;
-    let x0 = w, y0 = h, x1 = -1, y1 = -1;
-    for(let y = 0; y < h; y++){
-      for(let x = 0, i = y * w * 4 + 3; x < w; x++, i += 4){
-        if(d[i] > 12){ if(x < x0) x0 = x; if(x > x1) x1 = x; if(y < y0) y0 = y; y1 = y; }
-      }
-    }
-    if(x1 >= 0) r = { x0, y0, x1:x1 + 1, y1:y1 + 1 };
-  }catch(e){}
-  return (nvFigCache[k] = r);
-}
-// Guias: a área (igual para todas as artes: PNG 1040×1280, acima do cartão do nome) e o contorno da figura,
-// já com a posição e o tamanho do ajuste. As medidas aparecem na escala do PNG para dar para padronizar entre artes.
-function nvEditGuide(){
-  const box = document.getElementById('heroChar'), img = document.getElementById('heroImg');
-  const g = document.getElementById('nvGuidePng'), lbl = document.getElementById('nvGuidePngLbl');
-  if(!nvEdit || !box || !img || !g) return;
-  const W = box.offsetWidth, H = box.offsetHeight, nw = img.naturalWidth, nh = img.naturalHeight;
-  const boxLbl = document.getElementById('nvGuideBoxLbl');
-  if(boxLbl) boxLbl.textContent = `Área da arte · PNG 1040 × 1280 · ${W} × ${H} px na tela`;
-  const bands = document.querySelector('.kz-nv-bands'), cut = document.getElementById('nvGuideCut');
-  if(bands && cut){
-    const top = bands.getBoundingClientRect().top - box.getBoundingClientRect().top;
-    cut.style.top = Math.max(0, Math.min(H, top)) + 'px';
-    cut.hidden = top >= H;
-  }
-  if(!nw || !nh || !img.complete){ g.hidden = true; img.addEventListener('load', nvEditGuide, { once:true }); return; }
-  g.hidden = false;
-  const p = nvEdit.pend[nvEdit.key] || NV_POS_PADRAO, f = nvFigBox(img);
-  const s = Math.min(W / nw, H / nh), il = (W - nw * s) / 2, it = H - nh * s;          // PNG encaixado na área
-  const tx = X => W / 2 + p.z * (il + X * s - W / 2) + p.x / 100 * W;                  // + ajuste (cresce a partir dos pés)
-  const ty = Y => H + p.z * (it + Y * s - H) + p.y / 100 * H;
-  const L = tx(f.x0), T = ty(f.y0), R = tx(f.x1), B = ty(f.y1);
-  g.style.left = L + 'px'; g.style.top = T + 'px'; g.style.width = (R - L) + 'px'; g.style.height = (B - T) + 'px';
-  const ux = 1040 / W, uy = 1280 / H;                                                  // de px da tela para px do PNG padrão
-  const fw = Math.round((R - L) * ux), fh = Math.round((B - T) * uy), topo = Math.round(T * uy);
-  if(lbl) lbl.textContent = `Figura ${fw} × ${fh} px`;
-  const info = document.getElementById('nvEditInfo');
-  if(info) info.textContent = `Na escala do PNG 1040 × 1280: figura com ${fw} × ${fh} px e o topo dela ${topo >= 0 ? 'a ' + topo + ' px do topo da área' : Math.abs(topo) + ' px acima da área (cortado)'}.`
-    + (nw === 1040 && nh === 1280 ? '' : ` Este PNG tem ${nw} × ${nh}: rode o gerar-artes.py para padronizar.`);
-}
-async function nvEditClose(save){
-  const e = nvEdit;
-  nvEdit = null;
-  if(e && save){
-    Object.keys(e.pend).forEach(k=>{
-      const p = e.pend[k];
-      if(Math.abs(p.x) < .05 && Math.abs(p.y) < .05 && Math.abs(p.z - 1) < .005) delete nvPos[k];
-      else nvPos[k] = { x:+p.x.toFixed(1), y:+p.y.toFixed(1), z:+p.z.toFixed(3) };
-    });
-    render();
-    const how = await nvSavePos();
-    showToast(how === 'arquivo' ? 'Posição salva no site (destaques/posicoes.json) — vale para todos quando publicar'
-      : how === 'conta' ? 'Posição salva na sua conta — já vale para todos os visitantes'
-      : 'Posição salva só neste navegador — abra pelo iniciar-local.bat para gravar no site');
-    return;
-  }
-  render();
-}
-function attachNvEdit(){
-  const adj = document.getElementById('nvAdjBtn');
-  if(adj) adj.addEventListener('click', nvEditStart);
-  if(!nvEdit) return;
-  const lim = (v, a, b)=>Math.min(b, Math.max(a, v));
-  const cur = ()=> nvEdit && nvEdit.pend[nvEdit.key];
-  document.querySelectorAll('input[data-nv-ed]').forEach(r=>r.addEventListener('input', ()=>{ const p = cur(); if(p){ p[r.dataset.nvEd] = parseFloat(r.value); nvEditApply(); } }));
-  document.getElementById('nvEdReset').addEventListener('click', ()=>{ const p = cur(); if(p){ Object.assign(p, NV_POS_PADRAO); nvEditApply(); } });
-  document.getElementById('nvEdResetAll').addEventListener('click', ()=> customConfirm('Voltar TODAS as artes de todos os guerreiros para a posição e o tamanho padrão?', async ()=>{
-    nvEdit = null;
-    nvPos = {};
-    render();
-    const how = await nvSavePos();
-    showToast(how === 'local' ? 'Todas as artes voltaram ao padrão (neste navegador)' : 'Todas as artes voltaram ao padrão');
-  }));
-  document.getElementById('nvEdCancel').addEventListener('click', ()=> nvEditClose(false));
-  document.getElementById('nvEdSave').addEventListener('click', ()=> nvEditClose(true));
-  const box = document.getElementById('heroChar');
-  if(!box) return;
-  let last = null;
-  box.addEventListener('pointerdown', ev=>{ last = { x:ev.clientX, y:ev.clientY }; box.classList.add('drag'); try{ box.setPointerCapture(ev.pointerId); }catch(e){} });
-  box.addEventListener('pointermove', ev=>{
-    const p = cur();
-    if(!last || !p) return;
-    p.x = lim(p.x + (ev.clientX - last.x) / box.offsetWidth * 100, -100, 100);
-    p.y = lim(p.y + (ev.clientY - last.y) / box.offsetHeight * 100, -100, 100);
-    last = { x:ev.clientX, y:ev.clientY };
-    nvEditApply();
-  });
-  const end = ()=>{ last = null; box.classList.remove('drag'); };
-  box.addEventListener('pointerup', end); box.addEventListener('pointercancel', end);
-  box.addEventListener('wheel', ev=>{ const p = cur(); if(!p) return; ev.preventDefault(); p.z = lim(+(p.z + (ev.deltaY < 0 ? .03 : -.03)).toFixed(2), .3, 3); nvEditApply(); }, { passive:false });
-  nvEditApply();
 }
 
 /* ======================= PERSONAGENS: FICHA ======================= */
@@ -6361,7 +6140,6 @@ function attachHeroAdjust(){
 // Passa o retrato do topo da aba Personagens pro anterior/próximo da lista (respeita os filtros).
 function stepHeroChar(dir){
   if(state.heroEdit) return;
-  if(nvEdit){ nvEditSwitch(nvHeroRot.i + dir); return; }   // ajustando arte: ‹ › passam pelas artes do mesmo guerreiro
   const list = getFilteredChars();
   if(!list.length) return;
   const cur = state.heroCharId || (defaultHeroChar() || {}).id;
@@ -9391,14 +9169,12 @@ window.addEventListener('supabase-ready', async ()=>{
     if(!session) state.myDonationTotal = null;
     refreshCharacters();
     recomputeHeroFrames();
-    nvRecomputePos();
     if(session && isHeroAdmin()) loadHeroFramesRemote();
     render();
   });
   await refreshDonorsRemote();
   await refreshProfilesRemote();
   await loadHeroFramesRemote();
-  await nvLoadPosRemote();
   if(loaded) render();
 });
 
