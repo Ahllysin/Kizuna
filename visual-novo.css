@@ -822,3 +822,42 @@ html.vis-novo .kz-nvc-acq{min-height:42px;font-size:16px;font-weight:900;}
   .kz-nvc-nm{font-size:17px;}
 }
 @media (prefers-reduced-motion:reduce){ .kz-nvc-ball.lit,.kz-nvc:hover .kz-nvc-fr{animation:none;} }
+
+/* ---------- TIER LIST (canvas) ---------- */
+.kz-nv-ph-side .kz-btn{min-height:46px;padding:0 22px;display:inline-flex;align-items:center;gap:8px;}
+html.vis-novo .kz-nvt .kz-tier-rows{margin-top:24px;gap:12px;border:0;border-radius:0;box-shadow:none;overflow:visible;}
+html.vis-novo .kz-nvt .tier-row{min-height:130px;border:0;border-radius:0;background:linear-gradient(90deg,#1A0D0A,#0E0707 60%);box-shadow:inset 0 0 0 1.5px #3A1E16;overflow:hidden;}
+html.vis-novo .kz-nvt .tier-row.drop-before{box-shadow:inset 0 0 0 1.5px #3A1E16,inset 0 4px 0 #FFC21A;}
+html.vis-novo .kz-nvt .tier-row.drop-after{box-shadow:inset 0 0 0 1.5px #3A1E16,inset 0 -4px 0 #FFC21A;}
+html.vis-novo .kz-nvt .tier-label{position:relative;isolation:isolate;overflow:hidden;width:136px;border-radius:0;color:#FFFFFF;
+  background:linear-gradient(160deg,var(--tc,#E8261B),color-mix(in srgb,var(--tc,#E8261B) 48%,#0A0606));
+  -webkit-text-stroke:.11em #0A0606;paint-order:stroke fill;text-shadow:0 0 18px rgba(255,80,19,.85),3px 4px 0 rgba(10,6,6,.45);}
+html.vis-novo .kz-nvt .tier-label::before{content:'';position:absolute;left:-60%;top:-60%;width:220%;height:220%;z-index:-1;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.14) 0deg 3deg,transparent 3deg 12deg);}
+html.vis-novo .kz-nvt .tier-row:first-child .tier-label::before{animation:kzNvSpin 30s linear infinite;}
+html.vis-novo .kz-nvt .tier-label:focus{box-shadow:inset 0 0 0 3px #FFF4E6;}
+html.vis-novo .kz-nvt .tier-items{padding:14px;gap:10px;min-height:130px;}
+html.vis-novo .kz-nvt .tier-items.drag-over,html.vis-novo .kz-nvt .tier-pool-items.drag-over{background:rgba(255,106,19,.1);box-shadow:inset 0 0 0 2px #FF6A13;}
+html.vis-novo .kz-nvt .tier-item{width:74px;height:98px;aspect-ratio:auto;background:#0A0606;box-shadow:0 0 0 2px #0A0606,0 0 0 3.5px #4A2418;}
+html.vis-novo .kz-nvt .tier-item:hover{filter:none;transform:translateY(-4px) scale(1.05);box-shadow:0 0 0 2px #0A0606,0 0 0 4px #FFC21A,0 0 18px rgba(255,106,19,.8);}
+html.vis-novo .kz-nvt .tier-ctrl{width:56px;border-left:0;box-shadow:inset 1.5px 0 0 #3A1E16;justify-content:center;align-items:center;gap:2px;padding:6px 0;}
+html.vis-novo .kz-nvt .tier-ctrl > *{flex:none;width:40px;min-height:0;height:30px;border:0;background:none;color:#9C8574;font-size:14px;}
+html.vis-novo .kz-nvt .tier-ctrl > *:hover{color:#FFC21A;background:none;}
+html.vis-novo .kz-nvt .tier-handle{font-size:18px;}
+html.vis-novo .kz-nvt .tier-remove-btn:hover{color:#FF6B5A;}
+html.vis-novo .kz-nvt-add{width:100%;min-height:54px;margin-top:20px;font-size:17px;font-weight:900;}
+html.vis-novo .kz-nvt .tier-pool{position:relative;margin-top:26px;padding:22px;border:0;border-radius:0;background:#120A08;box-shadow:inset 0 0 0 1.5px #3A1E16;}
+html.vis-novo .kz-nvt .tier-pool::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#E8261B,#FF6A13,#FFC21A);}
+.kz-nvt-poolhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+html.vis-novo .kz-nvt-poolhead .kz-label{font-size:16px;}
+.kz-nvt-hint{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:15px;text-transform:uppercase;color:#C9B7A6;}
+html.vis-novo .kz-nvt .tier-pool-items{gap:10px;}
+@media (max-width:700px){
+  html.vis-novo .kz-nvt .tier-row{min-height:104px;}
+  html.vis-novo .kz-nvt .tier-label{width:78px;}
+  html.vis-novo .kz-nvt .tier-ctrl{width:44px;}
+  html.vis-novo .kz-nvt .tier-ctrl > *{width:34px;}
+  html.vis-novo .kz-nvt .tier-items{padding:10px;gap:8px;min-height:104px;}
+  html.vis-novo .kz-nvt .tier-item{width:58px;height:77px;}
+}
+@media (prefers-reduced-motion:reduce){ html.vis-novo .kz-nvt .tier-label::before{animation:none;} }

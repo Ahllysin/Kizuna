@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-IZ5aKXEjODERptevCBDGYXFGD1cWhECWlboTTcEp4MY=' 'sha256-GBSoMysNFx+DGZel+54I737sqieQlsRPfdERMRknqOs='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-tFq55X11Q1rSwGXA+z1rHRYNXjeyPQFWREaV8hHob8E=' 'sha256-KaPxvNsPjlIiIl2RGbpCARaRy6KwhA2R3VcnHlgPrCQ='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -6909,7 +6909,7 @@ function renderTierRow(t, i, all){
   const n = (all || state.tierList.tiers).length;
   return `
   <div class="tier-row" data-tier-row="${t.id}">
-    <div class="tier-label" contenteditable="true" spellcheck="false" lang="pt-BR" data-tier="${t.id}" style="background:${t.color};">${escapeHtml(t.label)}</div>
+    <div class="tier-label" contenteditable="true" spellcheck="false" lang="pt-BR" data-tier="${t.id}" style="${visualNovo() ? `--tc:${t.color}` : `background:${t.color}`};">${escapeHtml(t.label)}</div>
     <div class="tier-items" data-tier="${t.id}">${chars.map(renderTierItem).join('')}</div>
     <div class="tier-ctrl">
       <span class="tier-handle" draggable="true" data-tier="${t.id}" title="Arraste para reordenar este rank" aria-label="Reordenar rank">⋮⋮</span>
@@ -6919,7 +6919,26 @@ function renderTierRow(t, i, all){
     </div>
   </div>`;
 }
+// Tier List no formato do canvas: topo novo, ranks com degradê e raios na cor de cada rank, controles em coluna,
+// "+ Adicionar rank" largo e o bloco "Sem tier". Mantém os ids/data-* que attachTierListHandlers usa.
+function renderTierListTabNovo(){
+  const unrankedChars = (state.tierList.unranked||[]).map(getChar).filter(Boolean);
+  const dl = `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>`;
+  return `
+  <section class="kz-page kz-nvp kz-nvt">
+    ${nvPageHeadHtml({ key:'tierlist', kanji:'番', tag:'Seu ranking', title:'Tier List', kanjiStyle:'right:22%;top:-60px;font-size:380px',
+      sub:`Arraste os guerreiros entre os ranks. Reorganize os ranks pela alça ⋮⋮ ou pelas setas e clique no nome de um rank pra renomear. ${state.discordUser ? 'Sincronizado com a sua conta.' : 'Fica salvo neste aparelho.'}`,
+      side:`<button class="kz-btn" id="tierSuggestBtn">Sugestão por raridade</button><button class="kz-btn" id="tierListResetBtn">Esvaziar</button><button class="kz-btn kz-btn-primary" id="tierListExportBtn">${dl}Exportar imagem</button>` })}
+    <div class="kz-tier-rows">${state.tierList.tiers.map((t,i,a)=>renderTierRow(t,i,a)).join('')}</div>
+    <button class="kz-btn kz-nvt-add" id="tierAddBtn">+ Adicionar rank</button>
+    <div class="tier-pool">
+      <div class="kz-nvt-poolhead"><span class="kz-label">Sem tier (${unrankedChars.length})</span><span class="kz-nvt-hint">Arraste daqui pra um rank</span></div>
+      <div class="tier-pool-items" data-tier="unranked">${unrankedChars.map(renderTierItem).join('')}</div>
+    </div>
+  </section>`;
+}
 function renderTierListTab(){
+  if(visualNovo()) return renderTierListTabNovo();
   const unrankedChars = (state.tierList.unranked||[]).map(getChar).filter(Boolean);
   return `
   <section class="kz-page">
@@ -6983,7 +7002,7 @@ function fitTierLabelFont(el){
   const mctx = document.createElement('canvas').getContext('2d');
   const widestWord = size => { mctx.font = `${size}px 'Kaushan Script', cursive`; return Math.max(0, ...words.map(wd=>mctx.measureText(wd).width)); };
   const fits = ()=> probe.scrollHeight <= TIER_LABEL_MAX_HEIGHT && widestWord(fontSize) <= contentW - 1;
-  let fontSize = TIER_LABEL_MAX_FONT;
+  let fontSize = visualNovo() ? 84 : TIER_LABEL_MAX_FONT;   // visual novo: letra grande como no canvas
   probe.style.fontSize = fontSize + 'px';
   while(!fits() && fontSize > TIER_LABEL_MIN_FONT){
     fontSize -= 1;
