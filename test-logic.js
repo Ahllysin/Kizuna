@@ -1830,6 +1830,32 @@ async function main(){
     assert.ok(r.recVegeta, 'Vegeta SS4 aparece nas sugestões para quem tem o Goku SS4');
   });
 
+  await test('Efeitos leves: no celular/aparelho fraco a arte não troca sozinha e perde as camadas extras; no computador fica completo', () => {
+    const fs = require('fs'), path = require('path');
+    const r = evalIn(sandbox, `(() => {
+      const antes = globalThis.document;
+      const com = cls => { globalThis.document = { documentElement: { classList: { contains: c => cls.includes(c) } } }; };
+      com([]);
+      const completo = { semAuto: nvReduceMotion(), aura: nvAuraImgs('x.webp').includes('class="a1"') && nvAuraImgs('x.webp').includes('class="a2"') };
+      com(['nv-lite']);
+      const leve = { semAuto: nvReduceMotion(), aura: nvAuraImgs('x.webp'), eco: nvEco() };
+      com(['nv-lite', 'nv-eco']);
+      const eco = { eco: nvEco() };
+      globalThis.document = antes;
+      return { completo, leve, eco };
+    })()`);
+    assert.strictEqual(r.completo.semAuto, false, 'no computador a arte continua trocando sozinha');
+    assert.ok(r.completo.aura, 'no computador a arte tem as camadas de aura e contorno');
+    assert.strictEqual(r.leve.semAuto, true, 'no modo leve a troca automática fica desligada');
+    assert.strictEqual(r.leve.aura, '', 'no modo leve a arte não carrega as camadas extras');
+    assert.strictEqual(r.leve.eco, false);
+    assert.strictEqual(r.eco.eco, true);
+    const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+    const css = fs.readFileSync(path.join(__dirname, 'visual-novo.css'), 'utf8');
+    assert.ok(/classList\.toggle\('nv-lite'/.test(html) && /max-width:700px/.test(html.slice(html.indexOf('id="kzVisual"'), html.indexOf('</script>', html.indexOf('id="kzVisual"')))), 'o <head> liga nv-lite no celular');
+    ['html.nv-lite .kz-nv-rays{animation:none', 'html.nv-eco .kz-nv-em{display:none', '.nv-paused *::after{animation-play-state:paused'].forEach(t => assert.ok(css.replace(/\s+/g, ' ').includes(t.replace(/\s+/g, ' ')) || css.includes(t), 'CSS leve precisa conter: ' + t));
+  });
+
   console.log(`\n${passed} passaram, ${failed} falharam.`);
   if(failed > 0) process.exit(1);
 }

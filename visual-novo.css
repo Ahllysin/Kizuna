@@ -1251,3 +1251,31 @@ html.vis-novo .kz-nvcb-sug > .kz-btn{min-height:46px;padding:0 20px;font-size:15
   .kz-nv.filters-open .kz-nv-ftoggle{color:#0A0606;}
   .kz-nv.filters-open .kz-nv-ftoggle::before{background:linear-gradient(180deg,#FFE27A,#FFC21A 45%,#FF6A13);box-shadow:0 0 16px rgba(255,140,30,.7);}
 }
+
+/* =====================================================================================
+   EFEITOS LEVES — celular (até 700px) e aparelhos fracos. As classes vêm do <script id="kzVisual">:
+   nv-lite = celular ou aparelho fraco · nv-eco = aparelho fraco / economia de dados.
+   Fica o visual (fogo, raios parados, títulos em pincel, botões inclinados, faixas que correm); saem as animações
+   caras: camadas enormes girando, desfoque animado, sombra animada e a arte flutuando.
+   ===================================================================================== */
+/* pausa o que saiu da tela (nvWatchPause põe .nv-paused nos blocos fora de vista) */
+.nv-paused,.nv-paused *,.nv-paused *::before,.nv-paused *::after{animation-play-state:paused!important;}
+
+html.nv-lite .kz-nv-rays{animation:none;will-change:auto;}
+html.nv-lite .kz-nv-rings g{animation:none;}
+html.nv-lite .kz-nv-char,html.nv-lite .kz-nvf-art{animation:none;}
+html.nv-lite .kz-nv-char .a1,html.nv-lite .kz-nv-char .a2,html.nv-lite .kz-nv-dchar .a1,html.nv-lite .kz-nv-dchar .a2{display:none;}
+html.nv-lite .kz-nv-char:not(.is-card) .main,html.nv-lite .kz-nv-dchar:not(.is-card) .main{filter:drop-shadow(0 0 2px #FFF4E6) drop-shadow(0 0 14px rgba(255,106,19,.9));}
+html.nv-lite .kz-nv-bolt.b2,html.nv-lite .kz-nv-bolt.b3{animation:none;opacity:0;}
+/* brilhos que animavam sombra (repintam a cada quadro) ficam fixos */
+html.nv-lite :is(.kz-nvfav-more,.kz-nvd-free,.kz-nvco-cta,.kz-nvc-ball.lit,.kz-nvcb .kz-slot:not(.filled)){animation:none;}
+html.nv-lite :is(.kz-nvpf-av::before,.kz-nvd-pat .aura,.kz-nvd-pat .ch,.kz-nvd-ball,.kz-nvco-like.on svg,.kz-nvcb-chain .zap){animation:none;}
+html.nv-lite .kz-nvt .tier-label::before{animation:none;}
+/* no toque não existe "passar o mouse": sem o pulso de brilho das cartas */
+@media (hover:none){
+  html.vis-novo .kz-card:hover .kz-card-art,html.vis-novo .kz-nvc:hover .kz-nvc-fr{animation:none;}
+}
+/* aparelho fraco: também param a faixa que corre, o brilho da busca, os raios elétricos, as centelhas e as entradas */
+html.nv-eco .kz-nv-track,html.nv-eco .kz-nv-scan,html.nv-eco .kz-nv-bolt,html.nv-eco .kz-nv-h1.slam,html.nv-eco .kz-nv-ph-h1.slam,html.nv-eco .kz-nvcb-big{animation:none;}
+html.nv-eco .kz-nv-bolt{opacity:0;}
+html.nv-eco .kz-nv-em{display:none;}

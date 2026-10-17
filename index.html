@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6rwsxXU+Y+gstGbrN16mz4PfImVdGGrBhyl1er2V1QA=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-R1z3LHnMN4HVUjiVna5ZuALxMGhI39TDGyyaqhnFpfQ=' 'sha256-99i3KBq+N+NKT+5yiWhHB3MPrexlb/n5zI4LnKlxacY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-SBSYxeS6xWExluapZd82fEpdgIVMPBIb0DZg6NIBnZo=' 'sha256-rTtUF03kCyjLWChCnMqHRv396f448ub7zBfphVFh+3k=' 'sha256-xOxCGXhi2Wi1KxU/2jpDXfoYJz2olYXuUBL7owFU018=' 'sha256-3tQz2cjH8FkTsL77tCrJGStw1sNMZWRGvH+cPHcst3U=' 'sha256-bNG0qZ7BniS/oy//TlZ2HvKOf3hDda2BYB1XUrjIT6c='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://cdn.discordapp.com https://media.discordapp.net; connect-src 'self' https://luyuprliobxtxnppdohw.supabase.co; frame-src https://widget.livepix.gg; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zenkyo — guerreiros, combos e tier list</title>
@@ -23,7 +23,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%23ff6a4a'/%3E%3Cstop offset='70%25' stop-color='%23c2261a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='29' fill='url(%23g)' stroke='%23ffc54a' stroke-width='3'/%3E%3Ctext x='32' y='43' font-size='30' text-anchor='middle' fill='%23fff3e0' font-family='serif' font-weight='800'%3E%E8%A1%93%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="fonts/fonts.css">
-<script id="kzVisual">/* Visual novo (energia) ligado para todos. ?visual=antigo volta ao anterior neste navegador (para comparar ou se algo quebrar); ?visual=novo desfaz. */try{var kzVis=new URLSearchParams(location.search).get('visual');if(kzVis==='antigo')localStorage.setItem('kiai_visual','antigo');else if(kzVis==='novo')localStorage.removeItem('kiai_visual');if(localStorage.getItem('kiai_visual')!=='antigo')document.documentElement.classList.add('vis-novo');}catch(e){document.documentElement.classList.add('vis-novo');}</script>
+<script id="kzVisual">/* Visual novo (energia) ligado para todos. ?visual=antigo volta ao anterior neste navegador (para comparar ou se algo quebrar); ?visual=novo desfaz. */try{var kzVis=new URLSearchParams(location.search).get('visual');if(kzVis==='antigo')localStorage.setItem('kiai_visual','antigo');else if(kzVis==='novo')localStorage.removeItem('kiai_visual');if(localStorage.getItem('kiai_visual')!=='antigo')document.documentElement.classList.add('vis-novo');}catch(e){document.documentElement.classList.add('vis-novo');}/* Efeitos leves: nv-lite = tela de celular (até 700px) ou aparelho fraco; nv-eco = aparelho fraco (pouca memória/CPU) ou economia de dados. ?efeitos=leve força, ?efeitos=total desfaz (fica salvo neste navegador). */try{var kzH=document.documentElement,kzN=navigator,kzC=kzN.connection||{},kzE=new URLSearchParams(location.search).get('efeitos');if(kzE==='leve'||kzE==='total')localStorage.setItem('kiai_efeitos',kzE);var kzF=localStorage.getItem('kiai_efeitos');var kzFraco=kzF==='leve'||(kzF!=='total'&&(kzC.saveData===true||(kzN.deviceMemory&&kzN.deviceMemory<=2)||(kzN.hardwareConcurrency&&kzN.hardwareConcurrency<=2)));var kzMq=window.matchMedia('(max-width:700px)');var kzSet=function(){kzH.classList.toggle('nv-eco',!!kzFraco);kzH.classList.toggle('nv-lite',kzF==='leve'||(kzF!=='total'&&(kzMq.matches||!!kzFraco)));};kzSet();if(kzMq.addEventListener)kzMq.addEventListener('change',kzSet);}catch(e){}</script>
 <style>
 /* ======================= TOKENS ======================= */
 :root{
@@ -5407,7 +5407,7 @@ function nvLineupHtml(team, small){
 const NV_TAB_DECOR = { collection:['集','Sua coleção'], combos:['連','Equipe de 6'], guias:['書','Como o jogo funciona'], tierlist:['番','Seu ranking'],
   comunidade:['社','Feito por quem joga'], favs:['★','Guardados por você'], perfil:['印','Sua conta'], doar:['援','Apoie o site'] };
 function nvBgHtml(kanji, kanjiStyle){
-  const embers = NV_EMBERS.slice(0, 6).map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l + 8}%;bottom:${Math.round(b / 2)}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
+  const embers = NV_EMBERS.slice(0, nvEco() ? 0 : nvLite() ? 3 : 6).map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l + 8}%;bottom:${Math.round(b / 2)}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
   return `<div class="kz-nv-ph-bg" aria-hidden="true"><div class="kz-nv-fire"></div><div class="kz-nv-rays"></div><div class="kz-nv-tone"></div><div class="kz-nv-vig"></div>${kanji ? `<span class="kz-nv-kbig"${kanjiStyle ? ` style="${kanjiStyle}"` : ''}>${kanji}</span>` : ''}${embers}</div>`;
 }
 // Topo das abas no formato do canvas: etiqueta, título em pincel (bate na tela só na primeira visita à aba), texto e,
@@ -5442,7 +5442,7 @@ function nvDecorate(view){
     if(hero){
       hero.insertAdjacentHTML('afterbegin', nvBgHtml('戦'));
       const card = hero.querySelector('.kz-detail-card');
-      if(card) card.insertAdjacentHTML('afterbegin', `<div class="kz-nv-dchar" aria-hidden="true"><img class="a1" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="a2" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="main" src="${renderSrc(c)}" alt="" data-onerr="card" data-card="${portraitSrc(c)}"></div>`);
+      if(card) card.insertAdjacentHTML('afterbegin', `<div class="kz-nv-dchar" aria-hidden="true">${nvAuraImgs(renderSrc(c))}<img class="main" src="${renderSrc(c)}" alt="" data-onerr="card" data-card="${portraitSrc(c)}"></div>`);
     }
     return;
   }
@@ -5495,6 +5495,7 @@ function render(){
     : tab === 'doar' ? renderDoarTab()
     : renderCombosTab();
   nvDecorate(view);
+  nvWatchPause(view);
   attachCharsHandlers();
   attachCollectionHandlers();
   attachTierListHandlers();
@@ -5761,7 +5762,7 @@ let nvSlamDone = false;   // a entrada do título só toca na primeira vez (filt
 function renderCharsTabNovo(chars, hero){
   const f = state.filters, total = state.characters.length;
   const slam = !nvSlamDone; nvSlamDone = true;
-  const embers = NV_EMBERS.map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l}%;bottom:${b}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
+  const embers = NV_EMBERS.slice(0, nvEco() ? 0 : nvLite() ? 3 : NV_EMBERS.length).map(([l,b,s,d,dl])=>`<span class="kz-nv-em" style="left:${l}%;bottom:${b}px;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${dl}s"></span>`).join('');
   const chipLabel = (key, v) => (key === 'affinity' ? nvDotHtml(v) : '') + escapeHtml(v);
   const bandA = `<span>Combos</span><span class="kj">連</span><span>Tier list</span><span class="kj">番</span><span>Coleção</span><span class="kj">集</span><span>Guias</span><span class="kj">書</span><span>Comunidade</span><span class="kj">社</span>`.repeat(4);
   const bandB = `<span class="jp">ワクワク</span><span>✦</span><span>${total} guerreiros</span><span>✦</span><span>Monte seu combo</span><span>✦</span><span>Suba na tier list</span><span>✦</span><span>Zenkyo</span><span>✦</span>`.repeat(4);
@@ -5792,8 +5793,7 @@ function renderCharsTabNovo(chars, hero){
       <span class="kz-nv-sfx" aria-hidden="true" style="right:1.5%;top:110px;font-size:54px;writing-mode:vertical-rl;transform:rotate(12deg);opacity:.85">ゴゴゴ</span>
       ${hero ? `<div class="kz-nv-char" id="heroChar" aria-hidden="true" title="Ver a ficha de ${escapeAttr(hero.name)}">
         <div class="kz-nv-char-in">
-          <img class="a1" src="${heroSrc}" alt="" data-onerr="hide">
-          <img class="a2" src="${heroSrc}" alt="" data-onerr="hide">
+          ${nvAuraImgs(heroSrc)}
           <img class="main" id="heroImg" src="${heroSrc}" alt="" data-onerr="card" data-card="${portraitSrc(hero)}">
         </div>
         <span class="kz-nv-burst"></span>
@@ -5895,8 +5895,25 @@ function nvHeroSetSrc(box, src){
 // Os tracinhos embaixo do nome mostram quantas artes há, a do momento e o tempo até a próxima; clicar pula pra ela.
 const NV_ART_MS = 5200;   // mesmo tempo do kzNvPip em visual-novo.css
 let nvHeroRot = { id:null, i:0, t:0 };
+// Modo leve (celular ou aparelho fraco): classes que o <script id="kzVisual"> do <head> põe no <html>.
+function nvLite(){ try{ return document.documentElement.classList.contains('nv-lite'); }catch(e){ return false; } }
+function nvEco(){ try{ return document.documentElement.classList.contains('nv-eco'); }catch(e){ return false; } }
+// Camadas extras da arte (aura e contorno, com desfoque): só no modo completo; no leve a arte ganha um brilho fixo.
+function nvAuraImgs(src){ return nvLite() ? '' : `<img class="a1" src="${src}" alt="" data-onerr="hide"><img class="a2" src="${src}" alt="" data-onerr="hide">`; }
+// Pausa as animações dos blocos que saíram da tela (o fundo de fogo do topo, as patentes, o pódio...).
+let nvIO = null;
+function nvWatchPause(view){
+  if(typeof IntersectionObserver !== 'function' || !view) return;
+  try{
+    if(nvIO) nvIO.disconnect();
+    nvIO = new IntersectionObserver(es=> es.forEach(e=> e.target.classList.toggle('nv-paused', !e.isIntersecting)), { rootMargin:'120px' });
+    view.querySelectorAll('.kz-nv-hero, .kz-nv-ph, .kz-nvf-hero, .kz-nv-bands, .kz-nvd-ally, .kz-nvd-pats, .kz-nvpf-prev, .kz-nvfav-more, .kz-nvco-cta, .kz-nvc-counter').forEach(el=> nvIO.observe(el));
+  }catch(e){}
+}
+// Troca automática de arte: desligada com "reduzir movimento" e no modo leve (os tracinhos continuam trocando ao tocar).
 function nvReduceMotion(){
-  try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches === true; }catch(e){ return false; }
+  try{ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches === true) return true; }catch(e){}
+  return nvLite();
 }
 function nvHeroPipsHtml(c){
   const n = nvArtsOf(c).length;
@@ -6382,7 +6399,7 @@ function renderCharDetailNovo(c){
       </div>
       <div class="kz-nvf-grid">
         <div class="kz-nvf-art">
-          <div class="kz-nv-dchar" aria-hidden="true"><img class="a1" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="a2" src="${renderSrc(c)}" alt="" data-onerr="hide"><img class="main" src="${renderSrc(c)}" alt="" data-onerr="card" data-card="${portraitSrc(c)}"></div>
+          <div class="kz-nv-dchar" aria-hidden="true">${nvAuraImgs(renderSrc(c))}<img class="main" src="${renderSrc(c)}" alt="" data-onerr="card" data-card="${portraitSrc(c)}"></div>
           <img class="kz-nvf-mini" src="${portraitSrc(c)}" alt="Carta de ${escapeAttr(nome)}" data-onerr="hide">
         </div>
         <div class="kz-nvf-info">
